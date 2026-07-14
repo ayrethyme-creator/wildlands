@@ -35,13 +35,62 @@
 <div id="root">
   <div id="loading">
     <h1>WILDLANDS</h1>
-    <p>Waking the savanna...</p>
+    <p id="status">Waking the savanna...</p>
   </div>
 </div>
 
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
-<script type="text/babel" data-presets="react" src="game.jsx"></script>
+<script>
+/* The game source is split across several .jsx parts purely for ease of
+   editing and committing. They are concatenated in order, transpiled in the
+   browser, and run as one program - identical to a single source file. */
+var GAME_PARTS = [
+  "game.part1.jsx",
+  "game.part2.jsx",
+  "game.part3.jsx",
+  "game.part4.jsx",
+  "game.part5.jsx"
+];
+
+(function () {
+  var statusEl = document.getElementById("status");
+  function fail(msg, err) {
+    if (statusEl) statusEl.textContent = msg;
+    if (err) console.error(err);
+  }
+  if (typeof React === "undefined" || typeof ReactDOM === "undefined" || typeof Babel === "undefined") {
+    fail("Could not reach the CDN. Check your connection and reload.");
+    return;
+  }
+  var texts = new Array(GAME_PARTS.length);
+  var done = 0;
+  GAME_PARTS.forEach(function (name, i) {
+    fetch(name)
+      .then(function (r) {
+        if (!r.ok) throw new Error(name + " -> HTTP " + r.status);
+        return r.text();
+      })
+      .then(function (t) {
+        texts[i] = t;
+        done++;
+        if (statusEl) statusEl.textContent = "Loading... " + done + "/" + GAME_PARTS.length;
+        if (done === GAME_PARTS.length) {
+          try {
+            var code = texts.join("");
+            var out = Babel.transform(code, { presets: ["react"] }).code;
+            (0, eval)(out);
+          } catch (e) {
+            fail("The game failed to start: " + e.message, e);
+          }
+        }
+      })
+      .catch(function (e) {
+        fail("Could not load " + name + ". Reload to try again.", e);
+      });
+  });
+})();
+</script>
 </body>
 </html>
