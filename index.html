@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#231f1a" />
+<meta name="description" content="Wildlands: Safari Saga - a creature-collecting RPG featuring real animals across eight biomes." />
+<title>Wildlands: Safari Saga</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #231f1a;
+    color: #f2e8d5;
+    font-family: 'Courier New', ui-monospace, monospace;
+    overscroll-behavior: none;
+  }
+  * { -webkit-tap-highlight-color: transparent; }
+  button { touch-action: manipulation; }
+  #loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 10px;
+    text-align: center;
+    padding: 20px;
+  }
+  #loading h1 { color: #e8c547; letter-spacing: 3px; margin: 0; font-size: 30px; }
+  #loading p { color: #8a7f68; font-size: 12px; margin: 0; }
+</style>
+</head>
+<body>
+<div id="root">
+  <div id="loading">
+    <h1>WILDLANDS</h1>
+    <p>Waking the savanna...</p>
+  </div>
+</div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<script type="text/babel" data-presets="react" src="game.jsx"></script>
+</body>
+</html>
