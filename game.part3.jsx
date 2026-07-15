@@ -96,7 +96,7 @@ const DEX = {
 // ---------- ZONE PALETTES ----------
 const PALS = {
   savanna: { ground: "#c9a86a", grass: "#74a857", grass2: "#8fbc6f", tree: { bg: "#2d6a4f", em: "🌳" }, mount: { bg: "#77746e", em: "⛰️" }, water: "#3b7dc4", flower: "🌼" },
-  wetland: { ground: "#9aa86b", grass: "#5c9a6b", grass2: "#7db088", tree: { bg: "#2e5c4a", em: "🌾" }, mount: { bg: "#6b7460", em: "⛰️" }, water: "#2e86ab", flower: "🧷" },
+  wetland: { ground: "#9aa86b", grass: "#5c9a6b", grass2: "#7db088", tree: { bg: "#2e5c4a", em: "🌾" }, mount: { bg: "#6b7460", em: "⛰️" }, water: "#2e86ab", flower: "🪷" },
   jungle: { ground: "#6b7d4a", grass: "#3c7a3c", grass2: "#4f9a4f", tree: { bg: "#1e4a2e", em: "🌴" }, mount: { bg: "#4a5c44", em: "⛰️" }, water: "#2e7d6b", flower: "🌺" },
   desert: { ground: "#e8d0a3", grass: "#d4b96a", grass2: "#e0c987", tree: { bg: "#c9a868", em: "🌵" }, mount: { bg: "#c0975c", em: "🏜️" }, water: "#4a9ac9", flower: "🌵" },
   highveld: { ground: "#b5a488", grass: "#8a9a5c", grass2: "#a3b070", tree: { bg: "#6b6b60", em: "🪨" }, mount: { bg: "#77746e", em: "⛰️" }, water: "#3b7dc4", flower: "🌾" },
