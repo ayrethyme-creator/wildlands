@@ -376,7 +376,7 @@
                 <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 8 }}>
                   Seen {Object.values(S.dex).filter((v) => v >= 1).length} · Befriended {Object.values(S.dex).filter((v) => v === 2).length} of {Object.keys(DEX).length}
                 </div>
-                {[["🌍 Wildlands", (sp) => !DEX[sp].t.includes("Fossil") && !DEX[sp].t.includes("Mythic")], ["🦴 Fossils", (sp) => DEX[sp].t.includes("Fossil")], ["🌀 Myths", (sp) => DEX[sp].t.includes("Mythic")]].map(([label, fits]) => {
+                {[["🌍 Wildlands", (sp) => !DEX[sp].t.includes("Fossil") && !DEX[sp].t.includes("Mythic") && !DEX[sp].mem], ["🦴 Fossils", (sp) => DEX[sp].t.includes("Fossil")], ["🌀 Myths", (sp) => DEX[sp].t.includes("Mythic")], ["🕯️ The Vigil", (sp) => DEX[sp].mem]].map(([label, fits]) => {
                   const keys = Object.keys(DEX).filter(fits);
                   if (!keys.length) return null;
                   return (
