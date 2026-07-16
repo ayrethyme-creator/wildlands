@@ -12,7 +12,7 @@ function Wildlands() {
     screen: "title",
     map: "town1", x: 7, y: 8, swimming: false,
     party: [], box: [],
-    items: { treats: 8, berries: 4, bigberries: 0, coins: 120, lantern: 0 },
+    items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0 },
     badges: 0, profGift: false, houseIdx: 0,
     legends: {}, dex: {}, objects: {}, visited: { town1: true }, trainersBeaten: {}, rival: "otter_j",
     dialog: null, menu: null, battle: null, pick: null,
@@ -77,7 +77,7 @@ function Wildlands() {
     setS((s) => ({
       ...s, screen: "world", map, x, y, swimming,
       party, box,
-      items: { treats: 8, berries: 4, bigberries: 0, coins: 120, lantern: 0, ...(p.items || {}) },
+      items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, ...(p.items || {}) },
       badges, profGift: !!p.profGift, houseIdx: p.houseIdx || 0,
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
@@ -492,7 +492,7 @@ function Wildlands() {
         return;
       }
       snapBusy(`${foeName()} fainted!`, {}, "faint");
-      const gain = Math.floor(en.lvl * 20 * (b.kind === "trainer" ? 1.5 : b.kind === "legend" ? 1.6 : 1));
+      const gain = Math.floor(en.lvl * 13 * (b.kind === "trainer" ? 1.5 : b.kind === "legend" ? 1.6 : 1));
       my.xp += gain;
       const logs = [];
       applyLevelUps(my, logs);
@@ -524,6 +524,7 @@ function Wildlands() {
             badges = Math.max(badges, b.gym.id);
             const c = 200 + b.gym.id * 100;
             items.coins = (items.coins ?? 0) + c; items.treats += 5; items.berries += 3;
+            items.revives = (items.revives ?? 0) + 1; items.balms = (items.balms ?? 0) + 2; items.honeycombs = (items.honeycombs ?? 0) + 1;
             snapBusy(`${b.gym.leader}: "${b.gym.quote}"`, {}, "badge");
             snapEnd(`🏅 BADGE ${b.gym.id} of 8 earned! (+₡${c}, +5 Treats, +3 Berries)${b.gym.perk ? " " + b.gym.perk : ""}`);
           } else if (b.champion) {
@@ -557,11 +558,13 @@ function Wildlands() {
           battle: { ...prev.battle, enemy: { ...en }, phase: "switch", mode: "main" },
         } : prev);
       } else {
-        party.forEach((a) => { a.hp = a.maxHp; a.pp = a.moves.map((k) => maxPP(MOVES[k])); a.psn = false; });
+        party.forEach((a) => { a.hp = a.maxHp; a.pp = a.moves.map((k) => maxPP(MOVES[k])); a.psn = false; a.slp = 0; a.fear = 0; a.chill = 0; });
         my.hp = my.maxHp;
         my.pp = my.moves.map((k) => maxPP(MOVES[k]));
-        my.psn = false;
-        snapEnd("You blacked out and woke at Baobab Base. Your team has been fully healed.", { blackout: true });
+        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0;
+        const lost = Math.floor((items.coins ?? 0) * 0.25);
+        items.coins = (items.coins ?? 0) - lost;
+        snapEnd(`You blacked out and woke at Baobab Base. Your team was healed, but you dropped ₡${lost} on the trail.`, { blackout: true });
       }
     };
 
@@ -615,6 +618,37 @@ function Wildlands() {
       my.hp = Math.min(my.maxHp, my.hp + 30);
       snapBusy(`You fed ${DEX[my.sp].n} a Berry Snack. (+30 HP)`, {}, "heal");
       if (!enemyActs()) finishRound();
+    } else if (action.kind === "goldberry") {
+      if ((items.goldberries ?? 0) <= 0) return;
+      items.goldberries -= 1;
+      my.hp = Math.min(my.maxHp, my.hp + 150);
+      snapBusy(`You fed ${DEX[my.sp].n} a Golden Berry. (+150 HP)`, {}, "heal");
+      if (!enemyActs()) finishRound();
+    } else if (action.kind === "balm") {
+      if ((items.balms ?? 0) <= 0) return;
+      if (!my.psn && !my.slp && !my.fear && !my.chill) { snapBusy(`${DEX[my.sp].n} is already feeling fine.`); backToChoose(); }
+      else {
+        items.balms -= 1;
+        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0;
+        snapBusy(`You rubbed Soothe Balm on ${DEX[my.sp].n}. It shook everything off!`, {}, "heal");
+        if (!enemyActs()) finishRound();
+      }
+    } else if (action.kind === "honeycomb") {
+      if ((items.honeycombs ?? 0) <= 0) return;
+      items.honeycombs -= 1;
+      my.pp = my.moves.map((k) => maxPP(MOVES[k]));
+      snapBusy(`${DEX[my.sp].n} ate the Honeycomb — every move is fresh again!`, {}, "heal");
+      if (!enemyActs()) finishRound();
+    } else if (action.kind === "revive") {
+      if ((items.revives ?? 0) <= 0) return;
+      const fi = party.findIndex((a, i) => i !== 0 && a.hp <= 0);
+      if (fi < 0) { snapBusy("Nobody on your bench needs reviving."); backToChoose(); }
+      else {
+        items.revives -= 1;
+        party[fi] = { ...party[fi], hp: Math.floor(party[fi].maxHp / 2), psn: false, slp: 0, fear: 0, chill: 0 };
+        snapBusy(`✨ You revived ${DEX[party[fi].sp].n}! (half HP)`, {}, "grow");
+        if (!enemyActs()) finishRound();
+      }
     } else if (action.kind === "bigberry") {
       if ((items.bigberries ?? 0) <= 0) return;
       items.bigberries -= 1;
