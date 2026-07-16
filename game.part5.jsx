@@ -40,9 +40,9 @@
         </div>
         <h1 style={{ fontSize: 34, margin: "6px 0 2px", letterSpacing: 3, color: "#e8c547" }}>WILDLANDS</h1>
         <div style={{ fontSize: 14, color: "#c9b88a", marginBottom: 2 }}>— Safari Saga —</div>
-        <div style={{ fontSize: 11, color: "#8a7f68", marginBottom: 6 }}>Chapter III: The Long Trail</div>
+        <div style={{ fontSize: 11, color: "#8a7f68", marginBottom: 6 }}>Chapter V: Beyond the Summit</div>
         <p style={{ fontSize: 12, color: "#b8ab90", maxWidth: 320, lineHeight: 1.6 }}>
-          Eight arenas across eight wild lands. The Elite Four at the Summit. And behind ancient seals — three guardians, waiting for a ranger worth waking for.
+          Eight arenas across eight wild lands. The Elite Four at the Summit. Behind ancient seals, three guardians wait. And beyond the Summit — fossil canyons and myth-rifts, for Champions only.
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 14, alignItems: "center" }}>
           {hasSave && (
@@ -117,7 +117,7 @@
         <div style={{ background: arenaBg, borderRadius: 14, border: "3px solid #5c5344", padding: 12, position: "relative", minHeight: 230 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <div style={{ ...panel, padding: 8, width: "58%" }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>{foeLabel}{DEX[en.sp].n} <span style={{ color: "#c9b88a" }}>Lv {en.lvl}</span>{en.psn ? " ☠️" : ""}</div>
+              <div style={{ fontSize: 13, fontWeight: 700 }}>{foeLabel}{DEX[en.sp].n} <span style={{ color: "#c9b88a" }}>Lv {en.lvl}</span>{en.psn ? " ☠️" : ""}{en.slp ? " 💤" : ""}{en.fear ? " 😨" : ""}{en.chill ? " 🧊" : ""}</div>
               <div style={{ margin: "3px 0" }}>{DEX[en.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
               <HPBar hp={en.hp} max={en.maxHp} />
             </div>
@@ -126,7 +126,7 @@
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: 14 }}>
             <Sprite sp={my.sp} size={86} flip anim="bobY" />
             <div style={{ ...panel, padding: 8, width: "58%" }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>{DEX[my.sp].n} <span style={{ color: "#c9b88a" }}>Lv {my.lvl}</span>{my.psn ? " ☠️" : ""}</div>
+              <div style={{ fontSize: 13, fontWeight: 700 }}>{DEX[my.sp].n} <span style={{ color: "#c9b88a" }}>Lv {my.lvl}</span>{my.psn ? " ☠️" : ""}{my.slp ? " 💤" : ""}{my.fear ? " 😨" : ""}{my.chill ? " 🧊" : ""}</div>
               <div style={{ margin: "3px 0" }}>{DEX[my.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
               <HPBar hp={my.hp} max={my.maxHp} />
               <div style={{ fontSize: 10, color: "#c9b88a", marginTop: 2 }}>{my.hp}/{my.maxHp} HP · XP {my.xp}/{xpNeed(my.lvl)}</div>
@@ -368,21 +368,33 @@
                 <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 8 }}>
                   Seen {Object.values(S.dex).filter((v) => v >= 1).length} · Befriended {Object.values(S.dex).filter((v) => v === 2).length} of {Object.keys(DEX).length}
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
-                  {Object.keys(DEX).map((sp) => {
-                    const v = S.dex[sp] || 0;
-                    return (
-                      <div key={sp} style={{ background: "#2e2921", borderRadius: 8, padding: "6px 2px", textAlign: "center", border: `1px solid ${DEX[sp].legend && v > 0 ? "#e8c547" : v === 2 ? TYPE_COLORS[DEX[sp].t[0]] : "#4a4438"}` }}>
-                        {v === 0
-                          ? <div style={{ fontSize: 22, height: 38, display: "flex", alignItems: "center", justifyContent: "center", color: "#5c5344" }}>?</div>
-                          : <div style={{ filter: v === 1 ? "grayscale(1) brightness(.8)" : "none", display: "flex", justifyContent: "center" }}><Sprite sp={sp} size={38} /></div>}
-                        <div style={{ fontSize: 8.5, color: v === 0 ? "#5c5344" : "#c9b88a", marginTop: 2 }}>
-                          {v === 0 ? "???" : DEX[sp].n}{v === 2 ? " ★" : ""}
-                        </div>
+                {[["🌍 Wildlands", (sp) => !DEX[sp].t.includes("Fossil") && !DEX[sp].t.includes("Mythic")], ["🦴 Fossils", (sp) => DEX[sp].t.includes("Fossil")], ["🌀 Myths", (sp) => DEX[sp].t.includes("Mythic")]].map(([label, fits]) => {
+                  const keys = Object.keys(DEX).filter(fits);
+                  if (!keys.length) return null;
+                  return (
+                    <div key={label} style={{ marginBottom: 10 }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: "#e8c547", margin: "6px 0 4px" }}>
+                        {label} <span style={{ color: "#c9b88a", fontWeight: 400 }}>· seen {keys.filter((sp) => (S.dex[sp] || 0) >= 1).length} · ★ {keys.filter((sp) => S.dex[sp] === 2).length} / {keys.length}</span>
                       </div>
-                    );
-                  })}
-                </div>
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6 }}>
+                        {keys.map((sp) => {
+                          const v = S.dex[sp] || 0;
+                          return (
+                            <div key={sp} style={{ background: "#2e2921", borderRadius: 8, padding: "6px 2px", textAlign: "center", border: `1px solid ${DEX[sp].legend && v > 0 ? "#e8c547" : v === 2 ? TYPE_COLORS[DEX[sp].t[0]] : "#4a4438"}` }}>
+                              {v === 0
+                                ? <div style={{ fontSize: 22, height: 38, display: "flex", alignItems: "center", justifyContent: "center", color: "#5c5344" }}>?</div>
+                                : <div style={{ filter: v === 1 ? "grayscale(1) brightness(.8)" : "none", display: "flex", justifyContent: "center" }}><Sprite sp={sp} size={38} /></div>}
+                              <div style={{ fontSize: 8.5, color: v === 0 ? "#5c5344" : "#c9b88a", marginTop: 2 }}>
+                                {v === 0 ? "???" : DEX[sp].n}{v === 2 ? " ★" : ""}
+                              </div>
+                              {v > 0 && DEX[sp].org && <div style={{ fontSize: 7, color: "#8a7f68" }}>{DEX[sp].org}</div>}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
             {S.menu === "soar" && (

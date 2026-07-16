@@ -4,7 +4,7 @@ const canSwim = (st) => st.badges >= 1 && st.party.some((a) => a.hp > 0 && DEX[a
 const canSoar = (st) => st.badges >= 3 && st.party.some((a) => a.hp > 0 && DEX[a.sp].t.includes("Aerial"));
 const canPush = (st) => st.badges >= 5 && st.party.some((a) => a.hp > 0 && (DEX[a.sp].t.includes("Armor") || DEX[a.sp].t.includes("Predator")));
 const legendsDone = (st) => ["qilin", "thunderbird", "phoenix"].filter((k) => st.legends[k]).length;
-const TOWN_LIST = [["town1", "Baobab Base"], ["town2", "Marula Town"], ["town3", "Delta Town"], ["town4", "Canopy Town"], ["town5", "Dune Town"], ["town6", "Crag Town"], ["town7", "Frost Town"], ["town8", "Cinder Town"], ["town9", "Gloam Town"]];
+const TOWN_LIST = [["town1", "Baobab Base"], ["town2", "Marula Town"], ["town3", "Delta Town"], ["town4", "Canopy Town"], ["town5", "Dune Town"], ["town6", "Crag Town"], ["town7", "Frost Town"], ["town8", "Cinder Town"], ["town9", "Gloam Town"], ["digsite", "Fossil Rift Camp"], ["mythhub", "Rift Crossroads"]];
 
 // ---------- COMPONENT ----------
 function Wildlands() {
@@ -165,9 +165,13 @@ function Wildlands() {
     if (o.boulders.some((bb) => bb.x === nx && bb.y === ny)) { tryPush(st, m, o, nx, ny, dx, dy); return; }
     const exit = m.exits?.[`${nx},${ny}`];
     if (exit && "nsec".includes(ch)) {
+      if (exit.req === "champion" && !st.trainersBeaten["summit:7,1"]) {
+        say(exit.reqMsg || "🚧 A ranger barricade blocks the way. \"Champions only past this point!\"");
+        return;
+      }
       setS((p) => ({
         ...p, map: exit.map, x: exit.x, y: exit.y, swimming: false,
-        visited: exit.map.startsWith("town") ? { ...p.visited, [exit.map]: true } : p.visited,
+        visited: (exit.map.startsWith("town") || TOWN_LIST.some(([k]) => k === exit.map)) ? { ...p.visited, [exit.map]: true } : p.visited,
       }));
       return;
     }
@@ -239,8 +243,8 @@ function Wildlands() {
         }));
       } else if (st.trainersBeaten["summit:7,1"]) {
         say(done === 3
-          ? "⛺ Prof. Acacia: \"Champion — and peacemaker to all three guardians. The tablets will need a whole new chapter for you.\""
-          : `⛺ Prof. Acacia: "Champion of the Wildlands! But the old unrest lingers — ${3 - done} guardian${done === 2 ? "" : "s"} still stir${done === 2 ? "s" : ""} behind their seals. A champion could settle them."`);
+          ? "⛺ Prof. Acacia: \"Champion — and peacemaker to all three guardians. And since your victory, the land itself has opened: a fossil canyon east of the Singing Dunes, and shimmering rifts above the Summit. Old bones and older stories are walking, ranger. Go see.\""
+          : `⛺ Prof. Acacia: "Champion of the Wildlands! But the old unrest lingers — ${3 - done} guardian${done === 2 ? "" : "s"} still stir${done === 2 ? "s" : ""} behind their seals. A champion could settle them. Oh — and rangers report a fossil canyon east of the Singing Dunes, and strange rifts above the Summit. Champions only."`);
       } else if (st.badges >= 8) {
         say("⛺ Prof. Acacia: \"Eight badges. The Summit Citadel is open to you — the Elite Four, and whoever waits above them. Rest, stock up, and climb, ranger.\"");
       } else {
@@ -255,7 +259,7 @@ function Wildlands() {
       const g = GYMS[st.map];
       say(`💂 Guard: "The road north opens for Badge ${g ? g.id : 8} holders. ${g ? g.leader + "'s arena is right here in town — prove yourself there first." : ""}"`);
     } else if (ch === "!") {
-      say(SIGNS[st.map] || "🪧 The letters have long worn away.");
+      say(SIGNS[st.map + ":" + nx + "," + ny] || SIGNS[st.map] || "🪧 The letters have long worn away.");
     } else if (ch === "Y") {
       const g = GYMS[st.map];
       if (!g) return;
@@ -341,6 +345,8 @@ function Wildlands() {
     timers.current.push(t);
   };
 
+  const effSpd = (x) => x.spd * (1 + 0.25 * (x.stg?.s || 0)) * (x.chill ? 0.5 : 1);
+
   const dmgCalc = (att, dfn, mv) => {
     const aS = 1 + 0.25 * (att.stg?.a || 0);
     const dS = 1 + 0.25 * (dfn.stg?.d || 0);
@@ -381,8 +387,8 @@ function Wildlands() {
     const st = SR.current;
     if (!st.battle || st.battle.phase !== "choose") return;
     const b = st.battle;
-    const my = { ...st.party[0], stg: { ...(st.party[0].stg || { a: 0, d: 0 }) } };
-    const en = { ...b.enemy, stg: { ...(b.enemy.stg || { a: 0, d: 0 }) } };
+    const my = { ...st.party[0], stg: { ...(st.party[0].stg || { a: 0, d: 0, s: 0 }) } };
+    const en = { ...b.enemy, stg: { ...(b.enemy.stg || { a: 0, d: 0, s: 0 }) } };
     const party = st.party.map((a) => ({ ...a }));
     const items = { ...st.items };
     const box = [...st.box];
@@ -392,7 +398,7 @@ function Wildlands() {
     const dex = { ...st.dex };
     const steps = [];
     const foeName = () => (b.kind === "wild" ? "Wild " : b.kind === "legend" ? "Guardian " : "") + DEX[en.sp].n;
-    const clean = (a) => { const { stg, psn, ...r } = a; return { ...r }; };
+    const clean = (a) => { const { stg, psn, slp, fear, chill, ...r } = a; return { ...r }; };
 
     const snapBusy = (text, extras = {}, snd) => {
       const P = party.map((a) => ({ ...a })); P[0] = { ...my };
@@ -427,7 +433,7 @@ function Wildlands() {
     const enemyMove = () => {
       const all = en.moves.map((k) => MOVES[k]);
       const dmgOpts = all.filter((m2) => m2.p > 0).sort((a2, b2) => eff(b2.t, DEX[my.sp].t) - eff(a2.t, DEX[my.sp].t));
-      const status = all.filter((m2) => m2.p <= 0);
+      const status = all.filter((m2) => m2.p <= 0 && !((m2.fx === "sleep" && my.slp) || (m2.fx === "fear" && my.fear) || (m2.fx === "chill" && my.chill) || (m2.fx === "poison" && my.psn)));
       if (status.length && Math.random() < 0.18) return status[rnd(0, status.length - 1)];
       if (dmgOpts.length === 0) return all[0];
       return Math.random() < 0.75 ? dmgOpts[0] : dmgOpts[rnd(0, dmgOpts.length - 1)];
@@ -437,12 +443,26 @@ function Wildlands() {
       const att = attIsMe ? my : en, dfn = attIsMe ? en : my;
       const who = attIsMe ? DEX[my.sp].n : foeName();
       const tgt = attIsMe ? foeName() : DEX[my.sp].n;
+      if (att.slp > 0) {
+        att.slp -= 1;
+        if (att.slp > 0) { snapBusy(`${who} is fast asleep!`, {}, "sleep"); return false; }
+        snapBusy(`${who} woke up!`);
+      }
+      if (att.fear > 0) {
+        att.fear -= 1;
+        if (Math.random() < 0.4) { snapBusy(`${who} is too shaken to move!`, {}, "fear"); return false; }
+      }
       if (Math.random() * 100 > mv.acc) { snapBusy(`${who} used ${mv.n}... but it missed!`, {}, "miss"); return false; }
       if (mv.p <= 0) {
         let txt = `${who} used ${mv.n}!`;
         if (mv.fx === "heal") { const h = Math.floor(att.maxHp * 0.45); att.hp = Math.min(att.maxHp, att.hp + h); txt += ` It recovered ${h} HP!`; snapBusy(txt, {}, "heal"); }
         else if (mv.fx === "raiseDef") { att.stg.d = Math.min(2, att.stg.d + 1); txt += " Its defense rose!"; snapBusy(txt, {}, "learn"); }
         else if (mv.fx === "lowerAtk") { dfn.stg.a = Math.max(-2, dfn.stg.a - 1); txt += ` ${tgt}'s attack fell!`; snapBusy(txt, {}, "weak"); }
+        else if (mv.fx === "raiseSpd") { att.stg.s = Math.min(2, (att.stg.s || 0) + 1); txt += " Its speed rose!"; snapBusy(txt, {}, "learn"); }
+        else if (mv.fx === "lowerSpd") { dfn.stg.s = Math.max(-2, (dfn.stg.s || 0) - 1); txt += ` ${tgt}'s speed fell!`; snapBusy(txt, {}, "weak"); }
+        else if (mv.fx === "chill") { if (dfn.chill) txt += ` But ${tgt} is already chilled!`; else { dfn.chill = 3; txt += ` ${tgt} was chilled — its speed halves!`; } snapBusy(txt, {}, "weak"); }
+        else if (mv.fx === "sleep") { if (dfn.slp) txt += ` But ${tgt} is already asleep!`; else { dfn.slp = rnd(2, 3); txt += ` ${tgt} drifted off to sleep!`; } snapBusy(txt, {}, "sleep"); }
+        else if (mv.fx === "fear") { if (dfn.fear) txt += ` But ${tgt} is already shaken!`; else { dfn.fear = 2; txt += ` ${tgt} shudders with dread!`; } snapBusy(txt, {}, "fear"); }
         else if (mv.fx === "poison") {
           if (dfn.psn) txt += ` But ${tgt} is already poisoned!`;
           else { dfn.psn = true; txt += ` ${tgt} was poisoned!`; }
@@ -458,6 +478,8 @@ function Wildlands() {
       if (mv.fx === "poison" && dfn.hp > 0 && !dfn.psn && Math.random() < (mv.fxc || 0)) {
         dfn.psn = true; txt += ` ${tgt} was poisoned!`;
       }
+      if (mv.fx === "chill" && dfn.hp > 0 && !dfn.chill && Math.random() < (mv.fxc || 0)) { dfn.chill = 3; txt += ` ${tgt} was chilled!`; }
+      if (mv.fx === "sleep" && dfn.hp > 0 && !dfn.slp && Math.random() < (mv.fxc || 0)) { dfn.slp = rnd(2, 3); txt += ` ${tgt} fell asleep!`; }
       snapBusy(txt, {}, mult > 1 ? "super" : mult < 1 ? "weak" : "hit");
       return dfn.hp <= 0;
     };
@@ -562,6 +584,8 @@ function Wildlands() {
         snapBusy(`${DEX[my.sp].n} is hurt by poison! (-${d})`, {}, "poison");
         if (my.hp <= 0) { onMyFaint(); return; }
       }
+      if (en.chill > 0 && en.hp > 0) { en.chill -= 1; if (!en.chill) snapBusy(`${foeName()} shook off the chill.`); }
+      if (my.chill > 0 && my.hp > 0) { my.chill -= 1; if (!my.chill) snapBusy(`${DEX[my.sp].n} shook off the chill.`); }
       backToChoose();
     };
 
@@ -575,7 +599,7 @@ function Wildlands() {
         mv = MOVES[my.moves[action.i]];
       }
       const eMv = enemyMove();
-      const meFirst = (mv.pri || 0) !== (eMv.pri || 0) ? (mv.pri || 0) > (eMv.pri || 0) : my.spd >= en.spd;
+      const meFirst = (mv.pri || 0) !== (eMv.pri || 0) ? (mv.pri || 0) > (eMv.pri || 0) : effSpd(my) >= effSpd(en);
       if (meFirst) {
         if (doAttack(true, mv)) onEnemyFaint();
         else if (!enemyActs(eMv)) finishRound();
@@ -621,7 +645,7 @@ function Wildlands() {
     } else if (action.kind === "run") {
       if (b.kind === "trainer") { snapBusy("No backing out of this match!"); backToChoose(); }
       else {
-        const ok = Math.random() < (my.spd >= en.spd ? 0.9 : 0.55);
+        const ok = Math.random() < (effSpd(my) >= effSpd(en) ? 0.9 : 0.55);
         if (ok) { snapBusy(b.kind === "legend" ? "You back away slowly. The Guardian watches you go — it will wait." : "You slipped away safely!", {}, "run"); snapEnd(null); }
         else { snapBusy("Couldn't get away!"); if (!enemyActs()) finishRound(); }
       }
@@ -631,7 +655,7 @@ function Wildlands() {
       const tmp = party[action.idx];
       party[action.idx] = { ...my };
       Object.assign(my, tmp);
-      my.stg = { a: 0, d: 0 };
+      my.stg = { a: 0, d: 0, s: 0 };
       if (!enemyActs()) finishRound();
     }
 

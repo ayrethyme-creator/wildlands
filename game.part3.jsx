@@ -173,8 +173,8 @@ const MAPS = {
   route1: {
     name: "Acacia Trail", zone: "savanna", music: "route", rows: ROWS_RV,
     exits: { "7,0": { map: "town2", x: 7, y: 10 }, "7,15": { map: "town1", x: 7, y: 1 } },
-    pool: [["gecko", 18], ["rabbit_j", 16], ["lovebird_j", 14], ["hedgehog_j", 12], ["meerkat", 10], ["dartfrog_j", 6], ["rabbit", 5], ["hedgehog", 4], ["lovebird", 4]],
-    poolN: [["rabbit_j", 18], ["hedgehog_j", 16], ["bat", 14], ["gecko", 10], ["dartfrog_j", 8], ["rabbit", 6], ["hedgehog", 5]],
+    pool: [["gecko", 18], ["rabbit_j", 16], ["lovebird_j", 14], ["hedgehog_j", 12], ["meerkat", 10], ["dartfrog_j", 6], ["rabbit", 5], ["hedgehog", 4], ["lovebird", 4], ["lion_j", 3], ["cheetah_j", 3]],
+    poolN: [["rabbit_j", 18], ["hedgehog_j", 16], ["bat", 14], ["gecko", 10], ["dartfrog_j", 8], ["rabbit", 6], ["hedgehog", 5], ["leopard_j", 3]],
     lvl: [3, 6],
   },
   town2: {
@@ -204,8 +204,8 @@ const MAPS = {
     exits: { "7,0": { map: "route4", x: 7, y: 14 }, "7,11": { map: "route3", x: 7, y: 2 } },
   },
   route4: {
-    name: "Singing Dunes", zone: "desert", music: "route", rows: ROWS_STD,
-    exits: { "7,0": { map: "town5", x: 7, y: 10 }, "7,15": { map: "town4", x: 7, y: 2 } },
+    name: "Singing Dunes", zone: "desert", music: "route", rows: withRow(ROWS_STD, 7, "T..............e"),
+    exits: { "7,0": { map: "town5", x: 7, y: 10 }, "7,15": { map: "town4", x: 7, y: 2 }, "15,7": { map: "digsite", x: 1, y: 6, req: "champion", reqMsg: "🚧 Ranger barricade: \"The Fossil Rift canyon is champions-only. Earn the title first!\"" } },
     pool: [["sandcat", 14], ["meerkat", 12], ["jackal", 12], ["camel", 10], ["tortoise", 10], ["cobra_j", 8], ["caracal", 8], ["scorpion", 8], ["fennec_j", 6]],
     poolN: [["fennec_j", 14], ["sandcat", 12], ["scorpion", 14], ["cobra", 10], ["jackal", 10], ["caracal", 8], ["bat", 10]],
     lvl: [21, 25],
@@ -217,8 +217,8 @@ const MAPS = {
   route5: {
     name: "Highveld Steps", zone: "highveld", music: "route", rows: ROWS_RV,
     exits: { "7,0": { map: "town6", x: 7, y: 10 }, "7,15": { map: "town5", x: 7, y: 2 } },
-    pool: [["ibex", 14], ["boar", 12], ["hyena_j", 12], ["wilddog_j", 12], ["pangolin", 10], ["badger", 10], ["serval", 10], ["hyena", 5], ["wilddog", 5]],
-    poolN: [["aardvark", 16], ["hyena", 12], ["owl", 12], ["badger", 10], ["hyena_j", 10], ["wilddog_j", 8]],
+    pool: [["ibex", 14], ["boar", 12], ["hyena_j", 12], ["wilddog_j", 12], ["pangolin", 10], ["badger", 10], ["serval", 10], ["hyena", 5], ["wilddog", 5], ["boar_j", 8], ["badger_j", 8]],
+    poolN: [["aardvark", 16], ["hyena", 12], ["owl", 12], ["badger", 10], ["hyena_j", 10], ["wilddog_j", 8], ["wolf_j", 8]],
     lvl: [26, 30],
   },
   town6: {
@@ -293,7 +293,7 @@ const MAPS = {
   summit: {
     name: "Summit Citadel", zone: "summit", music: "elite",
     rows: [
-      "^^^^^^^^^^^^^^^^",
+      "^^^^^^^n^^^^^^^^",
       "^^^^^^^V^^^^^^^^",
       "^^^^^^^.^^^^^^^^",
       "^^^^^^^R^^^^^^^^",
@@ -309,7 +309,7 @@ const MAPS = {
       "^..............^",
       "^^^^^^^s^^^^^^^^",
     ],
-    exits: { "7,14": { map: "route9", x: 7, y: 1 } },
+    exits: { "7,14": { map: "route9", x: 7, y: 1 }, "7,0": { map: "mythhub", x: 7, y: 10, req: "champion", reqMsg: "🌀 A shimmering veil seals the pass. Only a Champion may part it." } },
   },
   cave1: {
     name: "Whispering Cave", zone: "cavezone", music: "cave", dark: true,
