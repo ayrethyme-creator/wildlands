@@ -552,7 +552,7 @@ const mk = (sp, lvl) => {
   const d = DEX[sp];
   const moves = [...d.m, ...(d.l || []).filter(([L]) => L <= lvl).map(([, k]) => k)].slice(-4);
   const maxHp = statAt(d.b.h, lvl, true);
-  return { uid: UID++, sp, lvl, xp: 0, maxHp, hp: maxHp,
+  return { uid: UID++, sp, lvl, xp: 0, maxHp, hp: maxHp, sex: Math.random() < 0.5 ? "M" : "F",
     moves, pp: moves.map((k) => maxPP(MOVES[k])),
     atk: statAt(d.b.a, lvl), def: statAt(d.b.d, lvl), spd: statAt(d.b.s, lvl) };
 };

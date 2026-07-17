@@ -370,11 +370,15 @@ function Wildlands() {
       (DEX[my.sp].l || []).filter(([L]) => L === my.lvl).forEach(([, k]) => learnMove(my, k, logs));
       const st = DEX[my.sp];
       if (st.grows && my.lvl >= st.grows.at) {
-        const to = st.grows.to;
-        logs.push(`✨ ${st.n} grew up into ${DEX[to].n}!`);
+        const g = st.grows;
+        const to = g.to || (my.sex === "M" ? g.toM : g.toF);
+        const gated = g.needs === "night" && !isNight();
+        if (to && to !== my.sp && !gated) {
+        logs.push(`✨ ${st.n} ${DEX[to].meta || "grew up into"} ${DEX[to].n}!`);
         my.sp = to;
         DEX[to].m.forEach((k) => learnMove(my, k, logs));
         (DEX[to].l || []).filter(([L]) => L <= my.lvl).forEach(([, k]) => learnMove(my, k, logs));
+        }
       }
       const d = DEX[my.sp];
       const nm = statAt(d.b.h, my.lvl, true);
