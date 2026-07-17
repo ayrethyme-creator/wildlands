@@ -5,38 +5,52 @@ const wh = (o, er) => o.iris || "#3a2e22";
 // --- cetaceans & sirenians ---
 const cetA = (o) => (er) => (
   <g>
-    <path d="M6,50 Q2,40 10,36 L20,44 Z" fill={o.fluke || o.hide} />
-    {o.dorsal && <path d={o.tall ? "M30,22 L34,2 L38,24 Z" : "M30,22 Q34,12 40,24 Z"} fill={o.dorsalC || o.hide} />}
-    <path d="M14,38 Q30,24 52,32 Q60,36 52,44 Q34,54 16,48 Z" fill={o.hide} />
-    {o.belly && <path d="M18,47 Q34,53 52,44 Q40,50 20,50 Z" fill={o.belly} />}
-    {o.pleats && <g stroke={o.pleatC || "#5c6b74"} strokeWidth="1.2" fill="none"><path d="M30,46 L32,52 M36,45 L38,51 M42,43 L44,49" /></g>}
-    {o.spots && <g fill={o.markC || "#f2ede0"} opacity=".8"><circle cx="30" cy="36" r="2" /><circle cx="40" cy="34" r="1.6" /><circle cx="24" cy="42" r="1.6" /></g>}
-    {o.patch && <ellipse cx="46" cy="33" rx="5" ry="3" fill={o.patch} transform="rotate(-12 46 33)" />}
-    <path d="M52,32 Q62,34 62,38 Q62,42 52,44" fill={o.rostrum || o.hide} />
-    {o.tusk && <path d="M60,38 L74,26 L62,40 Z" fill="#f5efdf" />}
-    {o.melon && <ellipse cx="46" cy="31" rx="9" ry="6" fill={o.melonC || o.hide} />}
-    {o.blow && <g stroke={o.blowC || "#a8ccd9"} strokeWidth="1.4" fill="none" strokeLinecap="round" opacity=".7"><path d="M38,26 Q37,18 34,14" /><path d="M40,26 Q42,18 45,14" /></g>}
-    <path d="M50,41 Q56,42 60,40" stroke={o.mouth || "#3c4c54"} strokeWidth="1.4" fill="none" strokeLinecap="round" />
-    {o.baleen && teethRow(40.5, 50, 3, 3.4, "#d9cfc0")}
-    <Eye x={47} y={36} r={2.2 * er} iris={wh(o)} />
+    {/* body: one path from tail stock to rostrum, so nothing floats */}
+    <path d={o.melon
+      ? "M9,42 Q13,40 17,39 Q26,30 38,28 Q52,26 58,33 Q61,37 59,40 Q56,46 44,49 Q28,52 16,47 Q11,45 9,42 Z"
+      : "M9,42 Q13,40 17,39 Q26,29 38,28 Q50,27 56,32 Q62,36 61,39 Q58,45 44,49 Q28,52 16,47 Q11,45 9,42 Z"} fill={o.hide} />
+    {/* fluke: swept crescent growing out of the stock */}
+    <path d="M12,41 Q7,34 2,27 Q6,28 10,33 Q13,37 15,40 Z" fill={o.fluke || o.hide} />
+    <path d="M12,44 Q7,51 3,58 Q7,56 11,51 Q14,47 15,44 Z" fill={o.fluke || o.hide} />
+    {o.belly && <path d="M12,44 Q8,49 5,54 Q9,50 13,45 Z" fill={o.belly} opacity=".75" />}
+    {/* ventral field riding high on the flank */}
+    {o.belly && <path d="M16,46 Q28,51 44,49 Q54,46 59,40 Q60,43 57,45 Q47,51 33,52 Q23,52 16,46 Z" fill={o.belly} />}
+    {o.pleats && <g stroke={o.pleatC || "#5c6b74"} strokeWidth="1" fill="none" opacity=".7"><path d="M34,47 Q35,50 36,52 M40,46 Q41,49 42,51 M46,44 Q47,47 48,49" /></g>}
+    {o.spots && <g fill={o.markC || "#f2ede0"} opacity=".7"><circle cx="30" cy="35" r="1.9" /><circle cx="40" cy="33" r="1.5" /><circle cx="24" cy="41" r="1.5" /><circle cx="47" cy="37" r="1.3" /></g>}
+    {o.patch && <ellipse cx="50" cy="34" rx="4.6" ry="2.5" fill={o.patch} transform="rotate(-18 50 34)" />}
+    {/* dorsal, raked back, rooted in the spine */}
+    {o.dorsal && <path d={o.tall ? "M28,30 Q31,11 34,7 Q36,17 38,31 Z" : "M29,31 Q33,22 39,30 Q36,32 29,33 Z"} fill={o.dorsalC || o.hide} />}
+    {/* pectoral paddle, attached at the chest */}
+    <path d="M39,46 Q40,53 34,58 Q31,52 33,45 Q36,44 39,46 Z" fill={o.flipC || o.hide} opacity=".92" />
+    {o.tusk && <path d="M60,37 Q68,31 76,25 Q68,34 61,39 Z" fill="#f5efdf" />}
+    {o.blow && <g stroke={o.blowC || "#a8ccd9"} strokeWidth="1.3" fill="none" strokeLinecap="round" opacity=".5"><path d="M40,27 Q39,20 36,16" /><path d="M42,27 Q44,20 47,16" /></g>}
+    <path d={o.melon ? "M50,42 Q55,43 59,40" : "M48,41 Q54,42 60,39"} stroke={o.mouth || "#3c4c54"} strokeWidth="1.2" fill="none" strokeLinecap="round" />
+    {o.baleen && <g stroke="#d9cfc0" strokeWidth=".7" fill="none" opacity=".8"><path d="M50,42 L50,45 M53,42 L53,45 M56,41 L56,44" /></g>}
+    <Eye x={47.5} y={35.5} r={2 * er} iris={wh(o)} />
   </g>
 );
-// --- pinnipeds ---
 const pinA = (o) => (er) => (
   <g>
-    <path d="M8,52 Q2,44 10,40 L20,48 Z" fill={o.flip || o.fur} />
-    <path d="M52,50 Q60,52 56,58 L46,54 Z" fill={o.flip || o.fur} />
-    <ellipse cx="34" cy="42" rx="18" ry="13" fill={o.fur} />
-    {o.spots && <g fill={o.markC || "#4c4438"} opacity=".7"><circle cx="26" cy="40" r="1.8" /><circle cx="36" cy="37" r="1.8" /><circle cx="44" cy="42" r="1.6" /><circle cx="30" cy="47" r="1.5" /></g>}
-    <ellipse cx="32" cy="28" rx="12" ry="11" fill={o.head || o.fur} />
-    {o.mane && <path d="M20,26 Q32,12 44,26 Q44,34 32,34 Q20,34 20,26 Z" fill={o.maneC || "#7a5c3c"} />}
-    {o.earFlap && <g fill={o.fur}><ellipse cx="22" cy="24" rx="2" ry="4" /><ellipse cx="42" cy="24" rx="2" ry="4" /></g>}
-    <ellipse cx="32" cy="34" rx="6.5" ry="4.5" fill={o.muzzle || "#d9cfc0"} />
-    {o.tusks && <g fill="#f5efdf"><path d="M28,36 L26,50 L31,38 Z" /><path d="M36,36 L38,50 L33,38 Z" /></g>}
-    <ellipse cx="32" cy="32" rx="2" ry="1.6" fill="#2a2018" />
-    <g stroke={o.whisk || "#e8e0d0"} strokeWidth=".7" strokeLinecap="round"><path d="M27,34 L18,33 M27,36 L18,38 M37,34 L46,33 M37,36 L46,38" /></g>
-    <Eye x={26} y={26} r={2.8 * er} iris={o.iris || "#2a2018"} />
-    <Eye x={38} y={26} r={2.8 * er} iris={o.iris || "#2a2018"} />
+    {/* hind flippers, fanned and trailing — the pinniped tell */}
+    <path d="M14,46 Q7,42 2,36 Q8,38 13,42 Z" fill={o.flip || o.fur} />
+    <path d="M14,48 Q7,53 3,59 Q9,55 14,49 Z" fill={o.flip || o.fur} />
+    {/* body: heavy chest, tapering to the hips, neck rising at the right */}
+    <path d="M13,44 Q17,34 28,32 Q40,30 46,26 Q49,20 54,20 Q60,21 61,27 Q61,33 57,36 Q52,40 46,44 Q34,52 20,51 Q14,49 13,44 Z" fill={o.fur} />
+    {o.spots && <g fill={o.markC || "#4c4438"} opacity=".6"><circle cx="24" cy="41" r="1.9" /><circle cx="33" cy="38" r="1.7" /><circle cx="41" cy="41" r="1.5" /><circle cx="28" cy="47" r="1.5" /></g>}
+    {/* fore flipper, broad and rooted at the chest */}
+    <path d="M40,42 Q43,50 37,56 Q32,50 35,41 Q38,40 40,42 Z" fill={o.flip || o.fur} opacity=".95" />
+    {o.mane && <path d="M44,26 Q50,17 58,22 Q60,28 55,32 Q47,33 44,30 Z" fill={o.maneC || "#7a5c3c"} />}
+    {/* head: blunt, low forehead */}
+    <ellipse cx="55" cy="26" rx="7" ry="6" fill={o.head || o.fur} />
+    {o.earFlap && <ellipse cx="50" cy="22" rx="1.6" ry="3.2" fill={o.fur} transform="rotate(-25 50 22)" />}
+    {/* muzzle */}
+    <ellipse cx="60" cy="28" rx="4" ry="3.2" fill={o.muzzle || "#d9cfc0"} />
+    <ellipse cx="62" cy="27" rx="1.4" ry="1.1" fill="#2a2018" />
+    {o.tusks && <g fill="#f5efdf"><path d="M59,30 Q58,40 57,46 Q61,38 61,30 Z" /><path d="M62,30 Q63,39 63,45 Q65,37 64,30 Z" /></g>}
+    <g stroke={o.whisk || "#e8e0d0"} strokeWidth=".6" strokeLinecap="round" opacity=".85">
+      <path d="M59,29 L66,28 M59,30 L66,32 M58,31 L64,35" />
+    </g>
+    <Eye x={53} y={25} r={2.2 * er} iris={o.iris || "#2a2018"} />
   </g>
 );
 // --- bears ---
@@ -187,17 +201,26 @@ const platyA = (o) => (er) => (
 // --- sharks & rays ---
 const sharkA = (o) => (er) => (
   <g>
-    <path d="M4,48 Q0,38 8,34 L18,42 Z" fill={o.hide} />
-    <path d={o.tallFin ? "M30,20 L34,2 L40,24 Z" : "M30,22 Q34,10 42,26 Z"} fill={o.finC || o.hide} />
-    <path d="M14,36 Q30,22 54,30 Q62,34 54,44 Q34,54 16,48 Z" fill={o.hide} />
-    <path d="M18,48 Q34,54 54,44 Q40,50 20,50 Z" fill={o.belly || "#e8e4dc"} />
-    {o.hammer && <path d="M46,24 Q64,26 64,34 Q64,42 46,42 Z" fill={o.hide} />}
-    {o.stripes && <g stroke={o.markC || "#3c3226"} strokeWidth="2" fill="none"><path d="M28,28 L26,46 M36,26 L34,48 M44,28 L43,46" /></g>}
-    {o.spots && <g fill={o.markC || "#e8e4dc"}><circle cx="28" cy="34" r="1.6" /><circle cx="36" cy="32" r="1.6" /><circle cx="44" cy="34" r="1.4" /><circle cx="32" cy="42" r="1.4" /></g>}
-    <g stroke={o.gill || "#3c4c54"} strokeWidth="1.1" fill="none"><path d="M40,32 L39,44 M44,32 L43,44 M48,33 L47,43" /></g>
-    <path d="M48,42 Q56,44 60,40" stroke="#3c3226" strokeWidth="1.4" fill="none" strokeLinecap="round" />
-    {o.teeth && teethRow(41.5, 49, 3, 3.6)}
-    <Eye x={o.hammer ? 62 : 50} y={o.hammer ? 33 : 36} r={2 * er} iris={o.iris || "#2a2018"} />
+    {/* caudal fin: heterocercal — the upper lobe is longer. That asymmetry is
+        the single most shark-shaped thing about a shark. */}
+    <path d="M13,40 Q7,30 3,18 Q9,24 15,36 Z" fill={o.finC || o.hide} />
+    <path d="M13,43 Q9,50 6,57 Q11,52 15,45 Z" fill={o.finC || o.hide} />
+    {/* body: one fusiform path, tail stock into pointed snout */}
+    <path d="M11,42 Q15,40 19,39 Q28,29 40,28 Q52,28 58,32 Q63,35 63,38 Q60,44 46,48 Q28,52 18,47 Q13,45 11,42 Z" fill={o.hide} />
+    {o.belly && <path d="M18,46 Q30,51 46,48 Q57,45 62,39 Q62,42 58,45 Q48,50 34,51 Q24,51 18,46 Z" fill={o.belly} />}
+    {/* first dorsal, raked */}
+    <path d={o.tallFin ? "M28,29 Q31,10 34,6 Q36,16 39,30 Z" : "M29,30 Q33,20 40,29 Q36,31 29,32 Z"} fill={o.finC || o.hide} />
+    {/* pectoral: long swept blade, rooted behind the gills */}
+    <path d="M42,44 Q44,53 36,59 Q32,52 36,43 Q39,42 42,44 Z" fill={o.finC || o.hide} opacity=".92" />
+    {o.hammer && <path d="M54,28 Q66,26 67,33 Q66,40 54,42 Q57,35 54,28 Z" fill={o.hide} />}
+    {o.stripes && <g stroke={o.markC || "#3c3226"} strokeWidth="1.8" fill="none" opacity=".75"><path d="M28,32 Q27,40 27,47 M36,30 Q35,39 35,48 M44,31 Q44,39 44,47" /></g>}
+    {o.spots && <g fill={o.markC || "#e8e4dc"} opacity=".8"><circle cx="28" cy="35" r="1.6" /><circle cx="37" cy="33" r="1.5" /><circle cx="45" cy="36" r="1.3" /><circle cx="33" cy="43" r="1.3" /></g>}
+    {/* gill slits, curved, on the flank behind the head */}
+    <g stroke={o.gill || "#3c4c54"} strokeWidth="1" fill="none" opacity=".8"><path d="M46,33 Q45,39 46,45 M49,33 Q48,39 49,45 M52,34 Q51,39 52,44" /></g>
+    {/* the mouth sits UNDER the snout on most sharks */}
+    <path d="M52,44 Q57,45 62,40" stroke="#2a2018" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+    {o.teeth && <g fill="#f7f5ee"><path d="M54,44 L55,46.6 L56,44 Z" /><path d="M57,44 L58,46.6 L59,44 Z" /><path d="M60,43 L61,45.4 L62,42.8 Z" /></g>}
+    <Eye x={o.hammer ? 65 : 55} y={o.hammer ? 33 : 35} r={1.9 * er} iris={o.iris || "#2a2018"} />
   </g>
 );
 const rayA = (o) => (er) => (
