@@ -275,7 +275,7 @@
       {KEYFRAMES}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px" }}>
         <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {night ? "🌙" : "☀️"}</div>
-        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have befriended">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/8 ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}</div>
+        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have befriended">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}</div>
       </div>
 
       <div style={{ padding: "0 10px" }}>
@@ -283,11 +283,13 @@
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
             const idKey = `${S.map}:${x},${y}`;
-            if (ch === "X" && S.badges >= (GYMS[S.map]?.id ?? 8)) ch2 = ".";
+            if (ch === "X" && S.badges >= (GYMS[S.map]?.id ?? GYM_COUNT)) ch2 = ".";
             if ((ch === "R" || ch === "V") && S.trainersBeaten[idKey]) ch2 = ".";
             if (ch === "D" && o.solved) ch2 = ".";
             const t = TILE_STYLE(ch2, pal);
             let em = t.em, bg = t.bg;
+            if (ch2 === "R" || ch2 === "V") { const tr = TRAINERS[idKey]; if (tr && tr.em) em = tr.em; }
+            if (ch2 === "X") { const g = GYMS[S.map]; if (g && g.em) em = g.em; }
             if (ch2 === "t") {
               const ti = (m.torches || []).findIndex((tt) => tt.x === x && tt.y === y);
               em = o.lit.includes(ti) || o.solved ? "🔥" : "🪔";

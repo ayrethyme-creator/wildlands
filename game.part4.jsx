@@ -1,8 +1,8 @@
 const objsFor = (st, mapKey) =>
   st.objects[mapKey] || { boulders: (MAPS[mapKey].boulders || []).map((b) => ({ ...b })), lit: [], solved: false };
-const canSwim = (st) => st.badges >= 1 && st.party.some((a) => a.hp > 0 && DEX[a.sp].t.includes("Aquatic"));
-const canSoar = (st) => st.badges >= 3 && st.party.some((a) => a.hp > 0 && DEX[a.sp].t.includes("Aerial"));
-const canPush = (st) => st.badges >= 5 && st.party.some((a) => a.hp > 0 && (DEX[a.sp].t.includes("Armor") || DEX[a.sp].t.includes("Predator")));
+const canSwim = (st) => st.badges >= SWIM_AT && st.party.some((a) => a.hp > 0 && DEX[a.sp].t.includes("Aquatic"));
+const canSoar = (st) => st.badges >= SOAR_AT && st.party.some((a) => a.hp > 0 && DEX[a.sp].t.includes("Aerial"));
+const canPush = (st) => st.badges >= PUSH_AT && st.party.some((a) => a.hp > 0 && (DEX[a.sp].t.includes("Armor") || DEX[a.sp].t.includes("Predator")));
 const legendsDone = (st) => ["qilin", "thunderbird", "phoenix"].filter((k) => st.legends[k]).length;
 const TOWN_LIST = [["town1", "Baobab Base"], ["town2", "Marula Town"], ["town3", "Delta Town"], ["town4", "Canopy Town"], ["town5", "Dune Town"], ["town6", "Crag Town"], ["town7", "Frost Town"], ["town8", "Cinder Town"], ["town9", "Gloam Town"], ["digsite", "Fossil Rift Camp"], ["mythhub", "Rift Crossroads"]];
 
@@ -178,7 +178,7 @@ function Wildlands() {
     const idKey = `${st.map}:${nx},${ny}`;
     const walk =
       ch === "." || ch === "g" || ch === "G" || ch === "p" || ch === "*" ||
-      (ch === "X" && st.badges >= (GYMS[st.map]?.id ?? 8)) ||
+      (ch === "X" && st.badges >= (GYMS[st.map]?.id ?? GYM_COUNT)) ||
       (ch === "D" && o.solved) ||
       ((ch === "R" || ch === "V") && st.trainersBeaten[idKey]) ||
       (ch === "W" && st.swimming);
@@ -239,14 +239,14 @@ function Wildlands() {
         setS((p) => ({
           ...p, profGift: true,
           items: { ...p.items, treats: p.items.treats + 5 },
-          dialog: { text: "⛺ Prof. Acacia: \"Good, you're here. Something is wrong with the Wildlands — grass dying in rings, storms knotted over the peaks, embers rising off the water. The old tablets speak of three guardians, and of a ranger proven by eight arenas. Walk the whole trail: eight badges, then the Summit Citadel. And take these 5 Trail Treats — you'll need friends out there.\"" },
+          dialog: { text: "⛺ Prof. Acacia: \"Good, you're here. Something is wrong with the Wildlands — grass dying in rings, storms knotted over the peaks, embers rising off the water. The old tablets speak of three guardians, and of a ranger proven in the arenas. There are twelve now — the old eight, and four the Wildlands grew into. Walk the whole trail: twelve badges, then the Summit Citadel. And take these 5 Trail Treats — you'll need friends out there.\"" },
         }));
       } else if (st.trainersBeaten["summit:7,1"]) {
         say(done === 3
           ? "⛺ Prof. Acacia: \"Champion — and peacemaker to all three guardians. And since your victory, the land itself has opened: a fossil canyon east of the Singing Dunes, and shimmering rifts above the Summit. Old bones and older stories are walking, ranger. Go see.\""
           : `⛺ Prof. Acacia: "Champion of the Wildlands! But the old unrest lingers — ${3 - done} guardian${done === 2 ? "" : "s"} still stir${done === 2 ? "s" : ""} behind their seals. A champion could settle them. Oh — and rangers report a fossil canyon east of the Singing Dunes, and strange rifts above the Summit. Champions only."`);
       } else if (st.badges >= 8) {
-        say("⛺ Prof. Acacia: \"Eight badges. The Summit Citadel is open to you — the Elite Four, and whoever waits above them. Rest, stock up, and climb, ranger.\"");
+        say("⛺ Prof. Acacia: \"Twelve badges. The Summit Citadel is open to you — the Elite Four, and whoever waits above them. Rest, stock up, and climb, ranger.\"");
       } else {
         const nextTown = Object.keys(GYMS).find((k) => GYMS[k].id === st.badges + 1);
         say(`⛺ Prof. Acacia: "Badge ${st.badges + 1} waits with ${GYMS[nextTown].leader} in ${MAPS[nextTown].name}. ${done > 0 ? `${done} of 3 guardians settled — the land breathes easier. ` : "The guardians' shrines will only answer a proven ranger — badges first. "}Keep walking the trail."`);
@@ -307,7 +307,8 @@ function Wildlands() {
     } else if (ch === "R") {
       const tr = TRAINERS[idKey];
       if (!tr) return;
-      say(`${tr.elite ? "⚜️ " : ""}${tr.name}: "${tr.line}"`, [
+      if (tr.chat || !tr.team) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
+      say(`${tr.elite ? "⚜️ " : ""}${tr.specialist ? "🌿 " : ""}${tr.name}${tr.homage ? ` (${tr.homage})` : ""}: "${tr.line}"`, [
         { label: "Battle!", act: () => startBattle({ kind: "trainer", trainerName: tr.name, elite: !!tr.elite, team: tr.team(), ti: 0, enemy: null, tid: idKey, prize: tr.prize }) },
         { label: "Later", act: () => setS((p) => ({ ...p, dialog: null })) },
       ]);
@@ -532,7 +533,7 @@ function Wildlands() {
             items.coins = (items.coins ?? 0) + c; items.treats += 5; items.berries += 3;
             items.revives = (items.revives ?? 0) + 1; items.balms = (items.balms ?? 0) + 2; items.honeycombs = (items.honeycombs ?? 0) + 1;
             snapBusy(`${b.gym.leader}: "${b.gym.quote}"`, {}, "badge");
-            snapEnd(`🏅 BADGE ${b.gym.id} of 8 earned! (+₡${c}, +5 Treats, +3 Berries)${b.gym.perk ? " " + b.gym.perk : ""}`);
+            snapEnd(`🏅 BADGE ${b.gym.id} of ${GYM_COUNT} earned! (+₡${c}, +5 Treats, +3 Berries)${b.gym.perk ? " " + b.gym.perk : ""}`);
           } else if (b.champion) {
             items.coins = (items.coins ?? 0) + 5000;
             snapBusy("Zuri: \"...Okay. Okay! Champion. Say it out loud. SAY IT!\"", {}, "victory");
