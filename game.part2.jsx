@@ -556,7 +556,7 @@ const mk = (sp, lvl) => {
     moves, pp: moves.map((k) => maxPP(MOVES[k])),
     atk: statAt(d.b.a, lvl), def: statAt(d.b.d, lvl), spd: statAt(d.b.s, lvl) };
 };
-const xpNeed = (lvl) => Math.floor(lvl * 26 + lvl * lvl * 0.5);
+const xpNeed = (lvl) => Math.floor(lvl * 24 + lvl * lvl * 0.3);
 
 const learnMove = (my, k, logs) => {
   if (my.moves.includes(k) || (my.pending || []).includes(k)) return;

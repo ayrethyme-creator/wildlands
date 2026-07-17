@@ -496,7 +496,7 @@ function Wildlands() {
         return;
       }
       snapBusy(`${foeName()} fainted!`, {}, "faint");
-      const gain = Math.floor(en.lvl * 13 * (b.kind === "trainer" ? 1.5 : b.kind === "legend" ? 1.6 : 1));
+      const gain = Math.floor(en.lvl * 15 * (b.kind === "trainer" ? 1.5 : b.kind === "legend" ? 1.6 : 1));
       my.xp += gain;
       const logs = [];
       applyLevelUps(my, logs);
