@@ -298,7 +298,7 @@
             const isPlayer = x === S.x && y === S.y;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
-              <div key={x + "," + y} style={{ background: bg, aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "min(4.2vw, 17px)", lineHeight: 1, color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined }}>
+              <div key={x + "," + y} style={{ background: bg, aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1, color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined }}>
                 {isPlayer ? (S.swimming ? "🏊" : "🚶") : em}
               </div>
             );
