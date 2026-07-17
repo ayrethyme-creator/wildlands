@@ -24,7 +24,20 @@ const cetA = (o) => (er) => (
     <path d="M39,46 Q40,53 34,58 Q31,52 33,45 Q36,44 39,46 Z" fill={o.flipC || o.hide} opacity=".92" />
     {o.tusk && <path d="M60,37 Q68,31 76,25 Q68,34 61,39 Z" fill="#f5efdf" />}
     {o.blow && <g stroke={o.blowC || "#a8ccd9"} strokeWidth="1.3" fill="none" strokeLinecap="round" opacity=".5"><path d="M40,27 Q39,20 36,16" /><path d="M42,27 Q44,20 47,16" /></g>}
-    <path d={o.melon ? "M50,42 Q55,43 59,40" : "M48,41 Q54,42 60,39"} stroke={o.mouth || "#3c4c54"} strokeWidth="1.2" fill="none" strokeLinecap="round" />
+    {/* melon: the fatty forehead lens a toothed whale focuses sound with */}
+    {o.melon && <ellipse cx="52" cy="32.5" rx="8" ry="6.5" fill={o.melonC || o.hide} />}
+    {/* beak. This is not decoration: a beak is how you tell a dolphin from a
+        porpoise. Porpoises have none — vaquita, harbour porpoise, Dall's. */}
+    {(o.beak || o.longBeak) && (
+      <g>
+        <path d={o.longBeak
+          ? "M54,36.5 Q64,35.5 72,37.5 Q64,41 54,41 Z"
+          : "M54,36.5 Q61,36 66,38.5 Q61,41 54,41 Z"} fill={o.rostrum || o.hide} />
+        <path d={o.longBeak ? "M55,39.4 Q63,39.2 71,37.8" : "M55,39.4 Q60,39.4 65,38.4"}
+          stroke={o.mouth || "#3c4c54"} strokeWidth=".9" fill="none" strokeLinecap="round" />
+      </g>
+    )}
+    {!(o.beak || o.longBeak) && <path d={o.melon ? "M50,42 Q55,43 59,40" : "M48,41 Q54,42 60,39"} stroke={o.mouth || "#3c4c54"} strokeWidth="1.2" fill="none" strokeLinecap="round" />}
     {o.baleen && <g stroke="#d9cfc0" strokeWidth=".7" fill="none" opacity=".8"><path d="M50,42 L50,45 M53,42 L53,45 M56,41 L56,44" /></g>}
     <Eye x={47.5} y={35.5} r={2 * er} iris={wh(o)} />
   </g>
@@ -499,18 +512,18 @@ Object.assign(ART, {
   melonhead: cetA({ hide: "#4c4c54", belly: "#8a8a90", dorsal: true, melon: true, melonC: "#54545c" }),
   beluga: cetA({ hide: "#f2ede0", belly: "#f8f4ea", melon: true, melonC: "#f5f2e8", blow: true, iris: "#26221c" }),
   narwhal: cetA({ hide: "#8a8fa3", belly: "#c9cdd9", tusk: true, melon: true, melonC: "#9a9fb0", spots: true, markC: "#5c6070" }),
-  bottlenose: cetA({ hide: "#7a8a94", belly: "#c9d4d9", dorsal: true, melon: true, melonC: "#8a9aa3", blow: true }),
-  spinnerdolphin: cetA({ hide: "#5c6b7a", belly: "#c4d0d9", dorsal: true, melon: true, melonC: "#6b7a8a" }),
-  duskydolphin: cetA({ hide: "#3c4c5c", belly: "#e8e4d8", dorsal: true, melon: true, melonC: "#4c5c6b", patch: "#c9bda3" }),
-  hectorsdolphin: cetA({ hide: "#8a8578", belly: "#f2ede0", dorsal: true, melon: true, melonC: "#26292e", patch: "#26292e" }),
-  commersons: cetA({ hide: "#26292e", belly: "#f5f2e8", dorsal: true, melon: true, melonC: "#26292e", patch: "#f5f2e8" }),
+  bottlenose: cetA({ hide: "#7a8a94", belly: "#c9d4d9", dorsal: true, melon: true, melonC: "#8a9aa3", blow: true, beak: true }),
+  spinnerdolphin: cetA({ hide: "#5c6b7a", belly: "#c4d0d9", dorsal: true, melon: true, melonC: "#6b7a8a", beak: true }),
+  duskydolphin: cetA({ hide: "#3c4c5c", belly: "#e8e4d8", dorsal: true, melon: true, melonC: "#4c5c6b", patch: "#c9bda3", beak: true }),
+  hectorsdolphin: cetA({ hide: "#8a8578", belly: "#f2ede0", dorsal: true, melon: true, melonC: "#26292e", patch: "#26292e", beak: true }),
+  commersons: cetA({ hide: "#26292e", belly: "#f5f2e8", dorsal: true, melon: true, melonC: "#26292e", patch: "#f5f2e8", beak: true }),
   rissos: cetA({ hide: "#a8a89a", belly: "#d9d4c4", dorsal: true, tall: true, melon: true, melonC: "#b5b5a3", spots: true, markC: "#f2ede0" }),
   irrawaddy: cetA({ hide: "#8a9099", belly: "#c4cad0", dorsal: true, melon: true, melonC: "#99a0a8" }),
-  amazonriverdolphin: cetA({ hide: "#d9a5b5", belly: "#e8c9d4", melon: true, melonC: "#e8b5c4", rostrum: "#d9a5b5" }),
-  gangesdolphin: cetA({ hide: "#8a8578", belly: "#b5b0a0", rostrum: "#8a8578", melon: true, melonC: "#8a8578" }),
+  amazonriverdolphin: cetA({ hide: "#d9a5b5", belly: "#e8c9d4", melon: true, melonC: "#e8b5c4", rostrum: "#d9a5b5", longBeak: true }),
+  gangesdolphin: cetA({ hide: "#8a8578", belly: "#b5b0a0", rostrum: "#8a8578", melon: true, melonC: "#8a8578", longBeak: true }),
   vaquita: cetA({ hide: "#8a8a90", belly: "#e8e4d8", dorsal: true, patch: "#26292e", melon: true, melonC: "#8a8a90" }),
   harborporpoise: cetA({ hide: "#5c6068", belly: "#c9c9c4", dorsal: true, melon: true, melonC: "#6b6f78" }),
-  cuvierbeaked: cetA({ hide: "#8a8578", belly: "#c4c0b0", dorsal: true, melon: true, melonC: "#9a958a", spots: true, markC: "#e8e4d8" }),
+  cuvierbeaked: cetA({ hide: "#8a8578", belly: "#c4c0b0", dorsal: true, melon: true, melonC: "#9a958a", spots: true, markC: "#e8e4d8", beak: true }),
   // sirenians
   manatee: cetA({ hide: "#8a8578", belly: "#a8a396", melon: true, melonC: "#8a8578", fluke: "#7a7568", iris: "#3c3226" }),
   dugong: cetA({ hide: "#a3988a", belly: "#c4bcae", melon: true, melonC: "#a3988a", fluke: "#8a8078", iris: "#3c3226" }),
@@ -542,8 +555,7 @@ Object.assign(ART, {
   silkyanteater: xenA({ fur: "#e8d4a5", snout: true, iris: "#26221c" }),
   // monotremes
   platypus: platyA({ fur: "#6b5442", bill: true, billC: "#4c3c30", iris: "#2a2018" }),
-  echidna: platyA({ fur: "#5c4c3c", spines: true, spineC: "#e8c547", beakLong: true, billC: "#3c3226", iris: "#2a2018" }),
-});
+  echidna: platyA({ fur: "#5c4c3c", spines: true, spineC: "#e8c547", beakLong: true, billC: "#3c3226", iris: "#2a2018" }) });
 
 // ---------------- MAMMAL DEX ----------------
 const A = (n, art, t, b, m, c, ex) => ({ n, art, t, b, m, l: [], c, ...(ex || {}) });
@@ -783,5 +795,4 @@ Object.assign(DEX, {
   silkyanteater: A("Silky Anteater", "silkyanteater", ["Bug", "Canopy"], B(28, 36, 30, 48), MV.bug, 0.4),
   // monotremes
   platypus: A("Platypus", "platypus", ["Aquatic", "Venom"], B(44, 46, 42, 50), MV.ven, 0.3),
-  echidna: A("Echidna", "echidna", ["Armor", "Bug"], B(48, 42, 62, 24), ["quillguard", "buzzrush", "ironhide"], 0.32),
-});
+  echidna: A("Echidna", "echidna", ["Armor", "Bug"], B(48, 42, 62, 24), ["quillguard", "buzzrush", "ironhide"], 0.32) });

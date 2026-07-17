@@ -77,3 +77,61 @@ ART.otter = (er) => (
 if (typeof INFO !== "undefined" && INFO.seaotter) {
   INFO.seaotter.f = "It has up to a million hairs per square inch — the densest fur on earth, and it needs every one, because unlike a seal it has no blubber at all. It is a weasel, not a pinniped: the largest of the mustelids, and the only one to take to open sea. It uses a rock as an anvil to crack urchins on its chest, and keeps a favourite under a loose pocket of skin in its armpit. Remove otters and urchins eat the kelp forest down to a desert. That actually happened, and it reversed when they came back.";
 }
+
+// ---------- THE WHALE SHARK, FROM ABOVE ----------
+// Every other shark in the game is drawn in profile, and that's right for them.
+// It's wrong for this one. A whale shark's whole shape is its width: a flat
+// slab of an animal with a head like a shovel, and you cannot see that side-on.
+//
+// The diagnostic detail is the mouth. Almost every shark has an underslung jaw
+// set back beneath a pointed snout — because they bite things. A whale shark's
+// mouth is TERMINAL: a metre and a half wide, straight across the very front of
+// the head, because it doesn't bite anything. It swims forward with its mouth
+// open and filters. From above, that flat leading edge is the entire animal.
+//
+// The spots are individual, like a fingerprint. Researchers identify them with
+// software originally written to match star fields in Hubble images.
+ART.whaleshark = (er) => (
+  <g>
+    {/* caudal fin — vertical in life, so from directly above it's a narrow blade */}
+    <path d="M3,26 Q9,30 13,31.5 Q9,33 3,38 Q6,32 3,26 Z" fill="#2e4254" />
+    {/* pelvic + second dorsal, small, well back */}
+    <path d="M22,24 Q18,18 15,15 Q21,19 25,24 Z" fill="#2e4254" />
+    <path d="M22,40 Q18,46 15,49 Q21,45 25,40 Z" fill="#2e4254" />
+    {/* pectorals — long, swept, held out wide. This is the silhouette. */}
+    <path d="M40,25 Q33,13 21,3 Q30,12 38,24 Z" fill="#33485c" />
+    <path d="M40,39 Q33,51 21,61 Q30,52 38,40 Z" fill="#33485c" />
+    {/* body: broad shovel head at the right, tapering the whole way to the stock */}
+    <path d="M11,32 Q18,23 30,20.5 Q44,18 54,21 Q60,23 61,27 Q62,32 61,37 Q60,41 54,43 Q44,46 30,43.5 Q18,41 11,32 Z" fill="#3c5468" />
+    {/* the terminal mouth: straight across the front, not underneath */}
+    <path d="M58,23.5 Q61.5,32 58,40.5 Q60.5,32 58,23.5 Z" fill="#2a3a48" />
+    <path d="M59.5,24 Q62.5,32 59.5,40" stroke="#1e2c38" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+    {/* gill slits, five, raking back from behind the head */}
+    <g stroke="#2a3a48" strokeWidth=".9" fill="none" opacity=".85">
+      <path d="M52,22.5 Q50,26 50,29 M49,21.8 Q47,25.5 47,29 M46,21.3 Q44,25 44,29" />
+      <path d="M52,41.5 Q50,38 50,35 M49,42.2 Q47,38.5 47,35 M46,42.7 Q44,39 44,35" />
+    </g>
+    {/* the checkerboard: pale spots in rows between pale ridges. Individual to
+        every animal — this pattern is how they're told apart. */}
+    <g stroke="#8aa3b5" strokeWidth=".7" fill="none" opacity=".5">
+      <path d="M16,28 Q30,25 50,25 M16,36 Q30,39 50,39 M14,32 Q32,31 54,32" />
+    </g>
+    <g fill="#dce6ec" opacity=".85">
+      <circle cx="22" cy="29" r="1.3" /><circle cx="28" cy="26.5" r="1.4" /><circle cx="35" cy="25" r="1.4" />
+      <circle cx="42" cy="24.5" r="1.3" /><circle cx="48" cy="25.5" r="1.2" />
+      <circle cx="25" cy="32" r="1.4" /><circle cx="32" cy="31.5" r="1.5" /><circle cx="39" cy="31" r="1.4" />
+      <circle cx="46" cy="31.5" r="1.3" /><circle cx="52" cy="32" r="1.1" />
+      <circle cx="22" cy="35" r="1.3" /><circle cx="28" cy="37.5" r="1.4" /><circle cx="35" cy="39" r="1.4" />
+      <circle cx="42" cy="39.5" r="1.3" /><circle cx="48" cy="38.5" r="1.2" />
+      <circle cx="18" cy="31" r="1" /><circle cx="16" cy="34" r="1" />
+    </g>
+    {/* eyes: on the CORNERS of the head, which is where they are, and why a
+        whale shark can watch you from beside its own mouth */}
+    <Eye x={56} y={22.5} r={1.5 * er} iris="#1e2c38" />
+    <Eye x={56} y={41.5} r={1.5 * er} iris="#1e2c38" />
+  </g>
+);
+
+if (typeof INFO !== "undefined" && INFO.whaleshark) {
+  INFO.whaleshark.f = "The biggest fish alive, and it eats plankton. Its mouth is a metre and a half wide and sits straight across the front of its head rather than underneath, because it filters instead of biting. The pattern of spots is individual — researchers identify them with software originally written to match star fields in Hubble photographs.";
+}
