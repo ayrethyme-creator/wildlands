@@ -117,7 +117,7 @@
         <div style={{ background: arenaBg, borderRadius: 14, border: "3px solid #5c5344", padding: 12, position: "relative", minHeight: 230 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <div style={{ ...panel, padding: 8, width: "58%" }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>{foeLabel}{DEX[en.sp].n} <span style={{ color: "#c9b88a" }}>Lv {en.lvl}</span>{en.psn ? " ☠️" : ""}{en.slp ? " 💤" : ""}{en.fear ? " 😨" : ""}{en.chill ? " 🧊" : ""}</div>
+              <div style={{ fontSize: 13, fontWeight: 700 }}>{foeLabel}{DEX[en.sp].n}{b.kind === "wild" && S.dex[en.sp] === 2 ? <span title="You've already befriended one of these"> 🍖</span> : null} <span style={{ color: "#c9b88a" }}>Lv {en.lvl}</span>{en.psn ? " ☠️" : ""}{en.slp ? " 💤" : ""}{en.fear ? " 😨" : ""}{en.chill ? " 🧊" : ""}</div>
               <div style={{ margin: "3px 0" }}>{DEX[en.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
               <HPBar hp={en.hp} max={en.maxHp} />
             </div>
@@ -184,9 +184,42 @@
               <button disabled={busy || (S.items.honeycombs ?? 0) <= 0} style={{ ...btn("#d4880b"), opacity: busy || (S.items.honeycombs ?? 0) <= 0 ? 0.45 : 1 }}
                 onClick={() => takeTurn({ kind: "honeycomb" })}>🍯 Honeycomb ({S.items.honeycombs ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>Restores all PP</div></button>
               <button disabled={busy || (S.items.revives ?? 0) <= 0 || !S.party.some((a, i) => i !== 0 && a.hp <= 0)} style={{ ...btn("#c9457a"), opacity: busy || (S.items.revives ?? 0) <= 0 || !S.party.some((a, i) => i !== 0 && a.hp <= 0) ? 0.45 : 1 }}
-                onClick={() => takeTurn({ kind: "revive" })}>✨ Revive ({S.items.revives ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>Bench friend, ½ HP</div></button>
+                onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "reviveAsk" } }))}>✨ Revive ({S.items.revives ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>Choose who wakes</div></button>
               <button disabled={busy} style={{ ...btn("#7d735f"), opacity: busy ? 0.5 : 1, gridColumn: "1 / -1" }}
                 onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "main" } }))}>← Back</button>
+            </div>
+          ) : b.mode === "reviveAsk" ? (
+            <div>
+              <div style={{ fontSize: 12, marginBottom: 6 }}>✨ Revive which friend? <span style={{ color: "#c9b88a" }}>(returns at ½ HP)</span></div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                {S.party.map((a, i) => (a.hp > 0 || i === 0) ? null : (
+                  <button key={a.uid} disabled={busy} style={{ ...btn("#c9457a"), opacity: busy ? 0.5 : 1 }}
+                    onClick={() => takeTurn({ kind: "revive", idx: i })}>
+                    {DEX[a.sp].n} Lv {a.lvl}<div style={{ fontSize: 10, fontWeight: 400 }}>→ {Math.floor(a.maxHp / 2)} HP</div>
+                  </button>
+                ))}
+                <button disabled={busy} style={{ ...btn("#7d735f"), gridColumn: "1 / -1" }}
+                  onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "bag" } }))}>← Back</button>
+              </div>
+            </div>
+          ) : b.mode === "switchAsk" ? (
+            <div>
+              <div style={{ fontSize: 12, marginBottom: 6 }}>
+                {b.trainerName} sent out <b>{DEX[b.enemy.sp].n}</b> (Lv {b.enemy.lvl} · {DEX[b.enemy.sp].t.join("/")}). Switch first? <span style={{ color: "#8fd94a" }}>This one's free.</span>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                {S.party.map((a, i) => (
+                  <button key={a.uid} disabled={busy || i === 0 || a.hp <= 0}
+                    style={{ ...btn("#2471a3"), opacity: busy || i === 0 || a.hp <= 0 ? 0.45 : 1 }}
+                    onClick={() => takeTurn({ kind: "freeSwitch", idx: i })}>
+                    {DEX[a.sp].n} Lv {a.lvl} · {a.hp}/{a.maxHp}
+                  </button>
+                ))}
+                <button disabled={busy} style={{ ...btn("#7d735f"), gridColumn: "1 / -1" }}
+                  onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "main" } }))}>
+                  Stay with {DEX[S.party[0].sp].n} →
+                </button>
+              </div>
             </div>
           ) : b.mode === "party" ? (
             <div>
@@ -223,6 +256,14 @@
   // ---------- WORLD ----------
   const m = MAPS[S.map];
   const pal = PALS[m.zone] || PALS.savanna;
+  // how many species live here, and how many have you befriended?
+  const areaDex = (() => {
+    const here = new Set();
+    ["pool", "poolN", "poolWater"].forEach((p) => (m[p] || []).forEach(([sp, w]) => { if (w > 0 && DEX[sp]) here.add(sp); }));
+    if (m.legend) here.add(m.legend);
+    if (!here.size) return null;
+    return { tot: here.size, got: [...here].filter((sp) => S.dex[sp] === 2).length };
+  })();
   const W = m.rows[0].length;
   const o = objsFor(S, S.map);
   const night = isNight();
@@ -234,7 +275,7 @@
       {KEYFRAMES}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px" }}>
         <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {night ? "🌙" : "☀️"}</div>
-        <div style={{ fontSize: 12 }}>🏅{S.badges}/8 ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}</div>
+        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have befriended">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/8 ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}</div>
       </div>
 
       <div style={{ padding: "0 10px" }}>

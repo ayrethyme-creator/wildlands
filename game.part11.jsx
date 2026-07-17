@@ -5,22 +5,22 @@
 
 // --- terrain templates (12 rows x 16 cols; north exit 7,0 / south exit 7,11) ---
 const SEG_T = [
-  // 0: open with rock spine
-  ["^^^^^^^n^^^^^^^^", "^..GG.....GG...^", "^.GGGG...GGGG..^", "^..GG..R..GG...^", "^R....VVV.....R^", "^...GGG.GGG....^", "^..GGGGGGGGG...^", "^...GG.R.GG....^", "^.R.........R..^", "^..GGG...GGG...^", "^..............^", "^^^^^^^s^^^^^^^^"],
-  // 1: switchback ledges
-  ["^^^^^^^n^^^^^^^^", "^....GGGGG.....^", "^TT..GGGGG...TT^", "^..VVVV........^", "^.....GGGG.....^", "^GG..GGGGG...GG^", "^........VVVV..^", "^..GGGG...GGGG.^", "^TT..R.....R.TT^", "^...GGG..GGG...^", "^..............^", "^^^^^^^s^^^^^^^^"],
-  // 2: wooded corridor
-  ["^^^^^^^n^^^^^^^^", "^TT.GGG..GGG.TT^", "^T..GGG..GGG..T^", "^....R.....R...^", "^TT.GGGGGGGG.TT^", "^T..GGGGGGGG..T^", "^..............^", "^TT.GGG..GGG.TT^", "^T...R...R....T^", "^TT.GGG..GGG.TT^", "^..............^", "^^^^^^^s^^^^^^^^"],
-  // 3: boulder field
-  ["^^^^^^^n^^^^^^^^", "^..R.......R...^", "^.GGG.GGG.GGG..^", "^..R.......R...^", "^VVV.GGGGG.VVV.^", "^..R...R...R...^", "^.GGG.GGG.GGG..^", "^......R.......^", "^R..GGGGGGG..R.^", "^..R.......R...^", "^..............^", "^^^^^^^s^^^^^^^^"],
-  // 4: water crossing
-  ["^^^^^^^n^^^^^^^^", "^..GGG...GGG...^", "^.GGGGG.GGGGG..^", "^..............^", "^WWWWW..WWWWWWW^", "^WWWWW..WWWWWWW^", "^..............^", "^.GGGGG.GGGGG..^", "^..GGG.R.GGG...^", "^..............^", "^..R.......R...^", "^^^^^^^s^^^^^^^^"],
-  // 5: high shelf
-  ["^^^^^^^n^^^^^^^^", "^GGGG.....GGGG.^", "^GGGG..R..GGGG.^", "^....VVVVV.....^", "^..GG.....GG...^", "^R..GG...GG..R.^", "^....VVVVV.....^", "^GGGG.....GGGG.^", "^GGGG..R..GGGG.^", "^..............^", "^..............^", "^^^^^^^s^^^^^^^^"],
-  // 6: narrow pass
-  ["^^^^^^^n^^^^^^^^", "^TTTT.....TTTT.^", "^TT..GGGGG..TT.^", "^T...GGGGG...T.^", "^....R...R.....^", "^..GGG...GGG...^", "^..GGG...GGG...^", "^....R...R.....^", "^T...GGGGG...T.^", "^TT..GGGGG..TT.^", "^TTTT.....TTTT.^", "^^^^^^^s^^^^^^^^"],
-  // 7: broad basin
-  ["^^^^^^^n^^^^^^^^", "^..............^", "^.GGGGGGGGGGG..^", "^.GGGGGGGGGGG..^", "^..R.........R.^", "^.GGGGGGGGGGG..^", "^.GGGGGGGGGGG..^", "^..VVVVVVVVV...^", "^.GGGGGGGGGGG..^", "^.GGGGGGGGGGG..^", "^..............^", "^^^^^^^s^^^^^^^^"],
+  // 0: rock spine + a wayside pond
+  ["^^^^^^^n^^^^^^^^", "^..GG.....GG..T^", "^TGGGG...GGGG..^", "^..GG..R..GG..T^", "^R....VVV.....R^", "^..WW..........^", "^..WW..GGGGG..T^", "^T..GG.R.GG....^", "^.R.........R..^", "^..GGG..T.GGG..^", "^..............^", "^^^^^^^s^^^^^^^^"],
+  // 1: switchback ledges over a creek
+  ["^^^^^^^n^^^^^^^^", "^T...GGGGG....T^", "^TT..GGGGG...TT^", "^..VVVV........^", "^.WWW.....GGG..^", "^GG.WW..GGGG.GG^", "^........VVVV..^", "^T.GGGG...GGGG.^", "^TT..R.....R.TT^", "^...GGG..GGG..T^", "^..............^", "^^^^^^^s^^^^^^^^"],
+  // 2: wooded corridor, mossy pools
+  ["^^^^^^^n^^^^^^^^", "^TT.GGG..GGG.TT^", "^T..GGG..GGG..T^", "^....R.....R...^", "^TT.GGGG.WW..TT^", "^T..GGGG.WW...T^", "^.....T........^", "^TT.GGG..GGG.TT^", "^T...R...R....T^", "^TT.GGG.T.GGG.T^", "^..............^", "^^^^^^^s^^^^^^^^"],
+  // 3: boulder field with a seep
+  ["^^^^^^^n^^^^^^^^", "^..R.......R..T^", "^.GGG.GGG.GGG..^", "^..R..T....R...^", "^VVV.GGGGG.VVV.^", "^..R...R...R...^", "^.GGG.GGG.GGG..^", "^...WW.R.......^", "^R..WW.GGGG..R.^", "^..R..T....R...^", "^..............^", "^^^^^^^s^^^^^^^^"],
+  // 4: the ford — a real water crossing
+  ["^^^^^^^n^^^^^^^^", "^T.GGG...GGG..T^", "^.GGGGG.GGGGG..^", "^..............^", "^WWWWW..WWWWWWW^", "^WWWWW..WWWWWWW^", "^..............^", "^.GGGGG.GGGGG.T^", "^T.GGG.R.GGG...^", "^..............^", "^..R.......R..T^", "^^^^^^^s^^^^^^^^"],
+  // 5: high shelf above a tarn
+  ["^^^^^^^n^^^^^^^^", "^GGGG.....GGGG.^", "^GGGG..R..GGGG.^", "^....VVVVV....T^", "^..GG.....GG...^", "^R..GG...GG..R.^", "^..WWW...VVVV..^", "^GGWWW....GGGG.^", "^GGGG.TR..GGGG.^", "^..............^", "^..............^", "^^^^^^^s^^^^^^^^"],
+  // 6: narrow pass, snowmelt
+  ["^^^^^^^n^^^^^^^^", "^TTTT.....TTTT.^", "^TT..GGGGG..TT.^", "^T...GGGGG...T.^", "^....R...R.....^", "^..GGG.WW.GGG..^", "^..GGG.WW.GGG..^", "^....R...R.....^", "^T...GGGGG...T.^", "^TT..GGGGG..TT.^", "^TTTT.....TTTT.^", "^^^^^^^s^^^^^^^^"],
+  // 7: broad basin, braided channels
+  ["^^^^^^^n^^^^^^^^", "^..T........T..^", "^.GGGGGGGGGGG..^", "^.GGGGGGGGGGG..^", "^..R.WW....R...^", "^....WW.....T..^", "^.GGGGGGGGGGG..^", "^..VVVVVVVVV...^", "^.GGGGG.GGGGG..^", "^.GGGGG.GGGGG.T^", "^..T.........T.^", "^^^^^^^s^^^^^^^^"],
 ];
 
 // pick n entries from a candidate list, rotated by seed, with jittered weights
@@ -90,48 +90,38 @@ Object.keys(C).forEach((k) => { C[k] = C[k].filter(([sp]) => DEX[sp]); N[k] = N[
 // --- the eight long roads ---
 const mkSeg = (k, n, lvl, biome, seed) => ({ k, n, lvl, pool: segPool(C[biome], seed, 14), poolN: segPool(N[biome], seed, 8) });
 const ROADS = [
+  // gap totals are 6: the route, any side region, plus these segments
   ["route1", "town2", "meadow", [
-    ["m1", "Fernhollow Path", [4, 6]], ["m2", "Sunmote Meadow", [5, 7]], ["m3", "The Old Fence Line", [5, 8]],
-    ["m4", "Chittering Hedge", [6, 8]], ["m5", "Beeloud Clearing", [6, 9]], ["m6", "Stonewall Rise", [7, 9]],
-    ["m7", "Mossy Steps", [7, 10]], ["m8", "Hare's Common", [8, 10]], ["m9", "Marula Approach", [8, 11]],
+    ["m1", "Fernhollow Path", [4, 6]], ["m2", "Sunmote Meadow", [5, 8]], ["m3", "The Old Fence Line", [6, 9]],
+    ["m4", "Beeloud Clearing", [7, 10]], ["m5", "Marula Approach", [8, 11]],
   ]],
   ["route2", "town3", "wetland", [
-    ["w1", "Reedwater Crossing", [12, 14]], ["w2", "The Sunken Boardwalk", [12, 15]], ["w3", "Heron Flats", [13, 15]],
-    ["w4", "Cattail Maze", [13, 16]], ["w5", "Otter Bend", [14, 16]], ["w6", "Frogsong Shallows", [14, 17]],
-    ["w7", "Duckweed Pools", [15, 17]], ["w8", "Delta Approach", [15, 18]],
+    ["w1", "Reedwater Crossing", [12, 14]], ["w2", "The Sunken Boardwalk", [13, 16]],
+    ["w3", "Otter Bend", [14, 17]], ["w4", "Delta Approach", [15, 18]],
   ]],
   ["route3", "town4", "jungle", [
-    ["j1", "The Vine Curtain", [19, 21]], ["j2", "Buttress Roots", [19, 22]], ["j3", "Cicada Hollow", [20, 22]],
-    ["j4", "Liana Bridge", [20, 23]], ["j5", "Orchid Terrace", [21, 23]], ["j6", "Howler Ridge", [21, 24]],
-    ["j7", "Canopy Approach", [22, 25]],
+    ["j1", "The Vine Curtain", [19, 21]], ["j2", "Liana Bridge", [20, 23]], ["j3", "Canopy Approach", [22, 25]],
   ]],
   ["route4", "town5", "desert", [
-    ["d1", "Scorpion Wash", [26, 28]], ["d2", "Saltpan Glare", [26, 29]], ["d3", "Wind-Carved Arches", [27, 29]],
-    ["d4", "The Cactus Maze", [27, 30]], ["d5", "Dry Riverbed", [28, 30]], ["d6", "Mirage Flats", [28, 31]],
-    ["d7", "Sandstone Steps", [29, 31]], ["d8", "Dune Approach", [29, 32]],
+    ["d1", "Scorpion Wash", [26, 28]], ["d2", "Wind-Carved Arches", [27, 30]],
+    ["d3", "Dry Riverbed", [28, 31]], ["d4", "Dune Approach", [29, 32]],
   ]],
   ["route5", "town6", "savanna", [
-    ["s1", "The Acacia Line", [33, 35]], ["s2", "Termite Cathedral", [33, 36]], ["s3", "The Watering Hole", [34, 36]],
-    ["s4", "Thornscrub", [34, 37]], ["s5", "Kopje Rocks", [35, 37]], ["s6", "The Grass Sea", [35, 38]],
-    ["s7", "Baobab Stand", [36, 38]], ["s8", "Crag Approach", [36, 39]],
+    ["s1", "The Acacia Line", [33, 35]], ["s2", "Termite Cathedral", [34, 37]],
+    ["s3", "The Watering Hole", [35, 38]], ["s4", "Crag Approach", [36, 39]],
   ]],
   ["route6", "town7", "alpine", [
-    ["a1", "Scree Slope", [40, 42]], ["a2", "The Chimney Climb", [40, 43]], ["a3", "Glacier Tongue", [41, 43]],
-    ["a4", "Cornice Path", [41, 44]], ["a5", "Windscoured Bench", [42, 44]], ["a6", "Whiteout Basin", [42, 45]],
-    ["a7", "Frost Approach", [43, 46]],
+    ["a1", "Scree Slope", [40, 42]], ["a2", "Glacier Tongue", [41, 44]], ["a3", "Frost Approach", [43, 46]],
   ]],
   ["route7", "town8", "volcanic", [
-    ["v1", "Ash Fall", [47, 49]], ["v2", "The Obsidian Field", [47, 50]], ["v3", "Steam Vents", [48, 50]],
-    ["v4", "Basalt Columns", [48, 51]], ["v5", "Cinder Cone", [49, 51]], ["v6", "The Lava Tube", [49, 52]],
-    ["v7", "Sulfur Pools", [50, 52]], ["v8", "Blackglass Ridge", [50, 53]], ["v9", "Cinder Approach", [51, 53]],
+    ["v1", "Ash Fall", [47, 49]], ["v2", "The Obsidian Field", [48, 51]], ["v3", "Steam Vents", [49, 52]],
+    ["v4", "The Lava Tube", [50, 53]], ["v5", "Cinder Approach", [51, 54]],
   ]],
   ["route8", "town9", "grove", [
-    ["g1", "Lantern Grove", [54, 56]], ["g2", "Fogbound Track", [54, 57]], ["g3", "The Old Growth", [55, 57]],
-    ["g4", "Fallen Giants", [55, 58]], ["g5", "Fungal Hollow", [56, 58]], ["g6", "Moonlit Glade", [56, 59]],
-    ["g7", "Whisper Marsh", [57, 59]], ["g8", "Gloam Approach", [57, 60]],
+    ["g1", "Lantern Grove", [54, 56]], ["g2", "The Old Growth", [55, 58]],
+    ["g3", "Moonlit Glade", [56, 59]], ["g4", "Gloam Approach", [57, 60]],
   ]],
 ];
-
 ROADS.forEach(([routeKey, townKey, biome, segs]) => {
   const zone = MAPS[routeKey].zone;
   const defs = segs.map(([k, n, lvl], i) => ({ ...mkSeg("seg_" + k, n, lvl, biome, i + 1), z: zone }));
@@ -142,28 +132,16 @@ ROADS.forEach(([routeKey, townKey, biome, segs]) => {
 const ROAD_SIGNS = {
   seg_m2: "🪧 'A meadow is not empty land. It is the loudest place you will ever mistake for quiet.'",
   seg_m5: "🪧 'Count the bees. Then count what they feed. Then count what eats that. This is the whole trick of ecology.'",
-  seg_m8: "🪧 'Hares are born furred, eyes open, running. Rabbits are born naked and blind underground. Same order — opposite bets.'",
   seg_w2: "🪧 'The boardwalk sank because the wetland kept working. Wetlands filter, absorb floods, and store carbon. We paved a lot of them anyway.'",
-  seg_w5: "🪧 'An otter keeps a favourite rock in a pocket of loose skin under its arm. It is a tool user and a hoarder and it is not sorry.'",
-  seg_w7: "🪧 'Amphibian skin drinks the world. That is why they are the first to vanish when the world goes wrong.'",
   seg_j2: "🪧 'These roots flare like walls because rainforest soil is thin and poor. Everything alive here is standing on borrowed ground.'",
-  seg_j5: "🪧 'Some orchids mimic a female wasp so exactly that males try to mate with them. That is not romance; that is a delivery contract.'",
-  seg_j6: "🪧 'A howler chorus carries three miles. They are not fighting. They are saying: this grove is spoken for, no one needs to bleed.'",
   seg_d1: "🪧 'Scorpions glow under ultraviolet light. Nobody is certain why. Some questions just wait.'",
   seg_d4: "🪧 'A saguaro grows its first arm at around 75 years old. You are walking through someone else's slow century.'",
-  seg_d6: "🪧 'Fennec ears are radiators. Jerboa legs are pogo sticks. The desert does not reward strength; it rewards cleverness with heat.'",
   seg_s2: "🪧 'Termite mounds are air-conditioned to within a degree. Architects study them. The termites have not published.'",
   seg_s3: "🪧 'At the waterhole, the truce is real but temporary. Everyone drinks. Then the rules come back.'",
-  seg_s6: "🪧 'Grasslands and grazers invented each other. Grass grows from its base so it can be eaten and live. It planned for you.'",
   seg_a1: "🪧 'Scree moves under you because the mountain is still coming apart. Everything here is temporary, including the mountain.'",
   seg_a3: "🪧 'A glacier is a river that forgot to hurry. Most of these are leaving now.'",
-  seg_a6: "🪧 'In a whiteout, ptarmigan sit still and vanish. Sometimes the correct move is to not move.'",
   seg_v2: "🪧 'Obsidian is glass made by a mountain in a hurry. It can hold an edge three nanometres wide — sharper than surgical steel.'",
   seg_v3: "🪧 'Life started somewhere like this: hot, chemical, lightless. Everything you have befriended is a cousin of a vent.'",
-  seg_v7: "🪧 'Sulfur pools look dead and are not. Extremophiles thrive here. \"Uninhabitable\" usually just means \"not by us.\"'",
   seg_g1: "🪧 'The lanterns are fungi. A third of this forest is fungus, and the trees are talking through it.'",
-  seg_g3: "🪧 'Old growth is not just old trees. It is a structure that takes centuries and cannot be replanted, only waited for.'",
-  seg_g5: "🪧 'A fallen giant feeds this forest for three hundred years. Death here is a very long, very generous meal.'",
-  seg_g6: "🪧 'You are nearly at Gloam. Look back down the road. You walked every step of that.'",
-};
+  seg_g3: "🪧 'Old growth is not just old trees. It is a structure that takes centuries and cannot be replanted, only waited for.'",};
 Object.entries(ROAD_SIGNS).forEach(([k, txt]) => { SIGNS[k + ":7,4"] = txt; SIGNS[k] = txt; });

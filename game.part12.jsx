@@ -93,35 +93,81 @@ Object.assign(BEFRIEND_LEGEND, {
   verdanmane: "Verdanmane extends one arm over the course of a minute and hooks it, gently, through yours. It will take a while to get anywhere. That's fine. That was always fine.",
 });
 
-// ---- placement: where each warden sleeps, and how many badges it will answer to ----
-const WARDENS = [
-  ["bramwold", "seg_m8", 1, 20], ["myrmedon", "seg_m5", 2, 22],
-  ["cetarch", "seg_w5", 2, 24], ["solenn", "seg_j4", 3, 28],
-  ["verdanmane", "seg_j5", 3, 30], ["bathynax", "seg_d5", 4, 34],
-  ["glyptor", "seg_d7", 4, 36], ["sarkoth", "seg_s5", 5, 40],
-  ["velissa", "seg_s6", 5, 42], ["nycterion", "seg_a4", 6, 46],
-  ["rimehorn", "seg_a6", 6, 48], ["pyrelynx", "seg_v5", 7, 54],
-  ["nyxfang", "seg_g6", 8, 58],
+// ---- placement: every Warden sits behind a puzzle, and none will answer
+// ---- until you carry all eight badges.
+const WARDEN_CHAMBER = [
+  "^^^^^^^^^^^^^^^^",
+  "^......L.......^",
+  "^^^^^^^D^^^^^^^^",
+  "^..............^",
+  "^..p.......p...^",
+  "^..............^",
+  "^..............^",
+  "^..............^",
+  "^..............^",
+  "^^^^^^^s^^^^^^^^",
 ];
-WARDENS.forEach(([key, mapKey, req, lvl]) => {
+// warden, host segment, chamber name, level
+const WARDENS = [
+  ["bramwold", "seg_m2", "The Trampled Round", 58],
+  ["myrmedon", "seg_m4", "The Hollow Mound", 58],
+  ["cetarch", "seg_w2", "The Still Water", 59],
+  ["solenn", "seg_j1", "The Quiet Leaf", 59],
+  ["verdanmane", "seg_j3", "The Slow Bough", 60],
+  ["bathynax", "seg_d2", "The Turned Earth", 60],
+  ["glyptor", "seg_d4", "The Shield Wall", 60],
+  ["sarkoth", "seg_s2", "The Old Kill", 61],
+  ["velissa", "seg_s4", "The Unsettled Dust", 61],
+  ["nycterion", "seg_a1", "The Folded Dusk", 62],
+  ["rimehorn", "seg_a3", "The Kept Winter", 62],
+  ["pyrelynx", "seg_v3", "The Banked Hearth", 63],
+  ["nyxfang", "seg_g3", "The Long Shadow", 64],
+];
+WARDENS.forEach(([key, hostKey, chamberName, lvl], i) => {
   LEGEND_LVL[key] = lvl;
-  LEGEND_REQ[key] = req;
-  const m = MAPS[mapKey];
-  if (!m) { console.warn("warden host missing:", mapKey); return; }
-  // drop the altar on a free tile away from the central corridor so the road stays walkable
-  let placed = false;
-  for (let y = 4; y <= 7 && !placed; y++) {
-    for (const x of [4, 10, 3, 11, 5, 9]) {
-      if (m.rows[y][x] === ".") {
-        m.rows = withRow(m.rows, y, m.rows[y].slice(0, x) + "L" + m.rows[y].slice(x + 1));
-        m.legend = key;
-        placed = true;
-        break;
-      }
-    }
+  LEGEND_REQ[key] = 8; // all eight badges, every one of them
+  const host = MAPS[hostKey];
+  if (!host) { console.warn("warden host missing:", hostKey); return; }
+  const ck = "shrine_" + key;
+  // a side door out of the host segment, on a row whose inner tile is walkable
+  let doorY = null;
+  for (const y of [6, 5, 7, 4, 8, 3]) {
+    if (".gG".includes(host.rows[y][1])) { doorY = y; break; }
   }
-  if (!placed) console.warn("no altar tile for", key, "in", mapKey);
+  if (doorY === null) { console.warn("no door row for", key, "in", hostKey); return; }
+  host.rows = withRow(host.rows, doorY, "e" + host.rows[doorY].slice(1));
+  host.exits = { ...host.exits, ["0," + doorY]: { map: ck, x: 7, y: 8 } };
+  MAPS[ck] = {
+    name: chamberName, zone: host.zone, music: "legend",
+    rows: WARDEN_CHAMBER,
+    exits: { "7,9": { map: hostKey, x: 1, y: doorY } },
+    boulders: [{ x: 3, y: 6 }, { x: 11, y: 6 }],
+    plates: [{ x: 3, y: 4 }, { x: 11, y: 4 }],
+    legend: key,
+  };
+  SIGNS[ck] = "🗿 Two stones, two hollows. The altar will not speak across an unfinished floor.";
 });
+// the original three guardians answer to eight badges now too
+["qilin", "thunderbird", "phoenix"].forEach((k) => { LEGEND_REQ[k] = 8; });
+// The Phoenix already answers to a torch puzzle and the Thunderbird to a boulder
+// floor. The Qilin's cave is a dark maze with no room for either -- its only
+// dead-ends are the altar step and the door -- so the Qilin gets a chamber of
+// its own, reached through a crack in the west wall.
+if (MAPS.cave1 && MAPS.cave1.legend === "qilin") {
+  MAPS.cave1.rows = withRow(MAPS.cave1.rows, 1, "^......^.......^"); // old altar step -> plain floor
+  MAPS.cave1.rows = withRow(MAPS.cave1.rows, 5, "e..^!.....^....^");
+  delete MAPS.cave1.legend;
+  MAPS.cave1.exits = { ...MAPS.cave1.exits, "0,5": { map: "shrine_qilin", x: 7, y: 8 } };
+  MAPS.shrine_qilin = {
+    name: "The Balanced Floor", zone: "cavezone", music: "legend", dark: true,
+    rows: WARDEN_CHAMBER,
+    exits: { "7,9": { map: "cave1", x: 1, y: 5 } },
+    boulders: [{ x: 3, y: 6 }, { x: 11, y: 6 }],
+    plates: [{ x: 3, y: 4 }, { x: 11, y: 4 }],
+    legend: "qilin",
+  };
+  SIGNS.shrine_qilin = "🗿 Two stones, two hollows. The Qilin walks where balance holds — so balance the floor, and it will come.";
+}
 
 // ---------- THE FOSSIL RIFT: 3 areas -> 10 ----------
 const DIG_MID = ["^^^^^^^n^^^^^^^^", "^..GGG....GGG..^", "^.GGGGG..GGGGG.^", "^......!.......^", "^GGGG......GGGG^", "^GGGG..R...GGGG^", "^..............^", "^..GGG....GGG..^", "^..GGG....GGG..^", "^^^^^^^s^^^^^^^^"];

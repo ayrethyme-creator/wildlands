@@ -516,7 +516,9 @@ function Wildlands() {
           steps.push((prev) => prev.battle ? {
             ...prev, party: P,
             dex: { ...prev.dex, [next.sp]: Math.max(prev.dex[next.sp] || 0, 1) },
-            battle: { ...prev.battle, ti: ni, enemy: next, phase: "choose", mode: "main", log: [...prev.battle.log, `${b.trainerName} sends out ${DEX[next.sp].n}!`].slice(-4) },
+            battle: { ...prev.battle, ti: ni, enemy: next, phase: "choose",
+              mode: P.filter((a) => a.hp > 0).length > 1 ? "switchAsk" : "main",
+              log: [...prev.battle.log, `${b.trainerName} sends out ${DEX[next.sp].n}!`].slice(-4) },
           } : prev);
         } else {
           if (b.tid) tb[b.tid] = true;
@@ -641,8 +643,8 @@ function Wildlands() {
       if (!enemyActs()) finishRound();
     } else if (action.kind === "revive") {
       if ((items.revives ?? 0) <= 0) return;
-      const fi = party.findIndex((a, i) => i !== 0 && a.hp <= 0);
-      if (fi < 0) { snapBusy("Nobody on your bench needs reviving."); backToChoose(); }
+      const fi = typeof action.idx === "number" ? action.idx : party.findIndex((a, i) => i !== 0 && a.hp <= 0);
+      if (fi < 0 || !party[fi] || party[fi].hp > 0) { snapBusy("Nobody on your bench needs reviving."); backToChoose(); }
       else {
         items.revives -= 1;
         party[fi] = { ...party[fi], hp: Math.floor(party[fi].maxHp / 2), psn: false, slp: 0, fear: 0, chill: 0 };
@@ -661,7 +663,9 @@ function Wildlands() {
       else {
         items.treats -= 1;
         snapBusy(`You offered a Trail Treat to the ${b.kind === "legend" ? "Guardian" : "wild " + DEX[en.sp].n}...`, {}, "treat");
-        const chance = Math.min(0.93, DEX[en.sp].c * (1.6 - en.hp / en.maxHp));
+        const isLeg = !!DEX[en.sp].legend;
+        const eased = isLeg ? DEX[en.sp].c * 1.3 : DEX[en.sp].c * 1.8 + 0.12;
+        const chance = Math.min(isLeg ? 0.6 : 0.95, eased * (1.7 - en.hp / en.maxHp));
         if (Math.random() < chance) {
           const friend = clean({ ...en, hp: Math.max(1, en.hp) });
           dex[en.sp] = 2;
@@ -683,6 +687,14 @@ function Wildlands() {
         if (ok) { snapBusy(b.kind === "legend" ? "You back away slowly. The Guardian watches you go — it will wait." : "You slipped away safely!", {}, "run"); snapEnd(null); }
         else { snapBusy("Couldn't get away!"); if (!enemyActs()) finishRound(); }
       }
+    } else if (action.kind === "freeSwitch") {
+      const t = party[action.idx];
+      snapBusy(`Come back, ${DEX[my.sp].n}! Go, ${DEX[t.sp].n}!`);
+      const tmp = party[action.idx];
+      party[action.idx] = { ...my };
+      Object.assign(my, tmp);
+      my.stg = { a: 0, d: 0, s: 0 };
+      backToChoose();
     } else if (action.kind === "switch") {
       const t = party[action.idx];
       snapBusy(`Come back, ${DEX[my.sp].n}! Go, ${DEX[t.sp].n}!`);
