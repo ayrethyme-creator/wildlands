@@ -417,6 +417,57 @@
                 <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 8 }}>
                   Seen {Object.values(S.dex).filter((v) => v >= 1).length} · Befriended {Object.values(S.dex).filter((v) => v === 2).length} of {Object.keys(DEX).length}
                 </div>
+                {S.guideSel && (() => {
+                  const sp = S.guideSel, d = DEX[sp], nfo = INFO[sp], seen = S.dex[sp] || 0;
+                  const spots = (WHERE[sp] || []).filter((w) => !w.k.startsWith("shrine_"));
+                  const zones = [...new Set(spots.map((w) => ZONE_NAME[w.z] || w.z))];
+                  const st = nfo?.s || (d.mem ? (String(d.org).startsWith("†") ? "EX" : String(d.org).startsWith("EW") ? "EW" : "CR") : d.dom || d.breed ? "DOM" : null);
+                  const iu = st && IUCN[st];
+                  return (
+                    <div onClick={() => setS((p) => ({ ...p, guideSel: null }))}
+                      style={{ position: "fixed", inset: 0, background: "rgba(12,10,8,.88)", zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
+                      <div onClick={(e) => e.stopPropagation()} style={{ background: "#241f19", border: "2px solid #5c5344", borderRadius: 14, padding: 14, maxWidth: 430, width: "100%", maxHeight: "88vh", overflowY: "auto" }}>
+                        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                          <div style={{ background: "#2e2921", borderRadius: 10, padding: 4 }}><Sprite sp={sp} size={72} /></div>
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontSize: 17, fontWeight: 700, color: "#f2ede0" }}>{d.n}</div>
+                            <div style={{ margin: "4px 0" }}>{d.t.map((t) => <Chip key={t} t={t} small />)}</div>
+                            {iu && <div style={{ display: "inline-block", fontSize: 10, fontWeight: 700, color: "#1a1713", background: iu[1], borderRadius: 4, padding: "1px 6px" }}>{st} · {iu[0]}</div>}
+                          </div>
+                        </div>
+                        {nfo ? (
+                          <div style={{ marginTop: 10, fontSize: 12, lineHeight: 1.5, color: "#d9cfc0" }}>
+                            <div style={{ marginBottom: 6 }}><b style={{ color: "#e8c547" }}>Eats </b>{nfo.d}</div>
+                            <div style={{ marginBottom: 6 }}><b style={{ color: "#e8c547" }}>Lives </b>{nfo.h}</div>
+                            <div style={{ background: "#2e2921", borderLeft: "3px solid #8fb35c", borderRadius: 4, padding: "6px 8px", marginTop: 8, fontStyle: "italic" }}>{nfo.f}</div>
+                          </div>
+                        ) : (
+                          <div style={{ marginTop: 10, fontSize: 11.5, color: "#8a7f68", lineHeight: 1.5, background: "#2e2921", borderRadius: 6, padding: 8 }}>
+                            📓 Field notes for this one haven't been written yet — and I'd rather leave the page blank than make something up. What's below is measured from the world itself, so it's true.
+                          </div>
+                        )}
+                        {d.legend && LORE[sp] && <div style={{ marginTop: 8, fontSize: 11.5, color: "#c9b88a", lineHeight: 1.5 }}>{LORE[sp]}</div>}
+                        <div style={{ marginTop: 12, fontSize: 11, fontWeight: 700, color: "#e8c547" }}>🗺️ WHERE TO FIND IT</div>
+                        {spots.length ? (
+                          <>
+                            <div style={{ margin: "5px 0 6px" }}>{zones.map((z) => (
+                              <span key={z} style={{ display: "inline-block", fontSize: 10, background: "#3c4c34", color: "#c9e8a8", borderRadius: 4, padding: "2px 6px", margin: "0 4px 4px 0" }}>{z}</span>
+                            ))}</div>
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
+                              {spots.map((w) => (
+                                <div key={w.k} style={{ fontSize: 10, background: S.map === w.k ? "#4c6b3c" : "#2e2921", color: S.map === w.k ? "#f2ede0" : "#c9b88a", borderRadius: 4, padding: "3px 6px" }}>
+                                  {S.map === w.k ? "📍 " : ""}{w.n}{w.lvl ? <span style={{ color: "#8a7f68" }}> · Lv{w.lvl[0]}–{w.lvl[1]}</span> : null}
+                                </div>
+                              ))}
+                            </div>
+                          </>
+                        ) : <div style={{ fontSize: 11, color: "#8a7f68", marginTop: 4 }}>Not found in the wild — this one is given, bred, or hatched.</div>}
+                        {seen === 1 && <div style={{ marginTop: 10, fontSize: 11, color: "#e8853a" }}>You've seen this animal but haven't befriended one yet.</div>}
+                        <button style={{ ...btn("#7d735f"), width: "100%", marginTop: 12 }} onClick={() => setS((p) => ({ ...p, guideSel: null }))}>Close</button>
+                      </div>
+                    </div>
+                  );
+                })()}
                 {[["🌍 Wildlands", (sp) => !DEX[sp].t.includes("Fossil") && !DEX[sp].t.includes("Mythic") && !DEX[sp].mem], ["🦴 Fossils", (sp) => DEX[sp].t.includes("Fossil")], ["🌀 Myths", (sp) => DEX[sp].t.includes("Mythic")], ["🕯️ The Vigil", (sp) => DEX[sp].mem]].map(([label, fits]) => {
                   const keys = Object.keys(DEX).filter(fits);
                   if (!keys.length) return null;
@@ -429,7 +480,8 @@
                         {keys.map((sp) => {
                           const v = S.dex[sp] || 0;
                           return (
-                            <div key={sp} style={{ background: "#2e2921", borderRadius: 8, padding: "6px 2px", textAlign: "center", border: `1px solid ${DEX[sp].legend && v > 0 ? "#e8c547" : v === 2 ? TYPE_COLORS[DEX[sp].t[0]] : "#4a4438"}` }}>
+                            <div key={sp} onClick={() => v > 0 && setS((p) => ({ ...p, guideSel: sp }))}
+                              style={{ background: "#2e2921", borderRadius: 8, padding: "6px 2px", textAlign: "center", cursor: v > 0 ? "pointer" : "default", border: `1px solid ${DEX[sp].legend && v > 0 ? "#e8c547" : v === 2 ? TYPE_COLORS[DEX[sp].t[0]] : "#4a4438"}` }}>
                               {v === 0
                                 ? <div style={{ fontSize: 22, height: 38, display: "flex", alignItems: "center", justifyContent: "center", color: "#5c5344" }}>?</div>
                                 : <div style={{ filter: v === 1 ? "grayscale(1) brightness(.8)" : "none", display: "flex", justifyContent: "center" }}><Sprite sp={sp} size={38} /></div>}
