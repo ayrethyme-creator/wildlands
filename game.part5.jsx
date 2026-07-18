@@ -442,6 +442,10 @@
                             <div style={{ marginBottom: 6 }}><b style={{ color: "#e8c547" }}>Eats </b>{nfo.d}</div>
                             <div style={{ marginBottom: 6 }}><b style={{ color: "#e8c547" }}>Lives </b>{nfo.h}</div>
                             <div style={{ background: "#2e2921", borderLeft: "3px solid #8fb35c", borderRadius: 4, padding: "6px 8px", marginTop: 8, fontStyle: "italic" }}>{nfo.f}</div>
+                            {nfo.lost && <div style={{ marginTop: 10 }}><b style={{ color: "#c98a5c" }}>🕯️ Lost </b>{nfo.lost}</div>}
+                            {nfo.cause && <div style={{ marginTop: 6 }}><b style={{ color: "#c98a5c" }}>Root cause </b>{nfo.cause}</div>}
+                            {nfo.better && <div style={{ marginTop: 6, color: "#c9b88a" }}><b style={{ color: "#e8c547" }}>What we could have done </b>{nfo.better}</div>}
+                            {nfo.back && <div style={{ marginTop: 10, background: "#1e2a1c", borderLeft: "3px solid #4c9a3c", borderRadius: 4, padding: "6px 8px" }}><b style={{ color: "#8fe85c" }}>🧬 Bringing it back </b>{nfo.back}</div>}
                           </div>
                         ) : (
                           <div style={{ marginTop: 10, fontSize: 11.5, color: "#8a7f68", lineHeight: 1.5, background: "#2e2921", borderRadius: 6, padding: 8 }}>
