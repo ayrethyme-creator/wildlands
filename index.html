@@ -79,7 +79,7 @@ var GAME_PARTS = [
         if (done === GAME_PARTS.length) {
           try {
             var code = texts.join("");
-            var out = Babel.transform(code, { presets: ["react"] }).code;
+            var out = Babel.transform(code, { presets: [["react", { runtime: "classic" }]] }).code;
             (0, eval)(out);
           } catch (e) {
             fail("The game failed to start: " + e.message, e);
