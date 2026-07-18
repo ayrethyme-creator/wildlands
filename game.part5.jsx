@@ -267,6 +267,8 @@
   const W = m.rows[0].length;
   const o = objsFor(S, S.map);
   const night = isNight();
+  const phase = (typeof dayPhase === "function") ? dayPhase() : (night ? "night" : "day");
+  const lit = phase === "night" || phase === "dusk" || phase === "dawn";
   const dark = m.dark && !(S.items.lantern > 0);
   const learner = S.party.find((a) => a.pending?.length);
 
@@ -274,12 +276,12 @@
     <div style={frame}>
       {KEYFRAMES}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px" }}>
-        <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {night ? "🌙" : "☀️"}</div>
+        <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {phase === "night" ? "🌙" : phase === "dusk" ? "🌆" : phase === "dawn" ? "🌅" : "☀️"}</div>
         <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have befriended">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}</div>
       </div>
 
       <div style={{ padding: "0 10px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "3px solid #5c5344", borderRadius: 10, overflow: "hidden", filter: night && !m.dark ? "brightness(.74) saturate(.85)" : undefined }}>
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "3px solid #5c5344", borderRadius: 10, overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : undefined), transition: "filter 1.2s ease" }}>
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
             const idKey = `${S.map}:${x},${y}`;
@@ -295,10 +297,13 @@
               em = o.lit.includes(ti) || o.solved ? "🔥" : "🪔";
             }
             if (o.boulders.some((bb) => bb.x === x && bb.y === y)) em = "🪨";
+            let glow = false;
+            if (ch2 === "¦") { em = lit ? "🏮" : "🔦"; glow = lit; }         // town lamp post
+            else if (ch2 === "¡") { em = lit ? "🏮" : "🪵"; glow = lit; }    // wild lantern
             const isPlayer = x === S.x && y === S.y;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
-              <div key={x + "," + y} style={{ background: bg, aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1, color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined }}>
+              <div key={x + "," + y} style={{ background: glow ? "radial-gradient(circle, #6b5a2e 0%, " + bg + " 78%)" : bg, aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1, color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined, boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined, position: glow ? "relative" : undefined, zIndex: glow ? 2 : undefined }}>
                 {isPlayer ? (S.swimming ? "🏊" : "🚶") : em}
               </div>
             );

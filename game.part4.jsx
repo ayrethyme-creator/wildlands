@@ -67,7 +67,7 @@ function Wildlands() {
     let map = MAPS[p.map] && typeof p.badges === "number" ? p.map : "town1";
     let x = p.x ?? 7, y = p.y ?? 8, swimming = !!p.swimming;
     const ch = MAPS[map].rows[y]?.[x];
-    const ok = ch && ("gGp.nsecXRVD*".includes(ch) || (ch === "W" && swimming));
+    const ok = ch && ("gGp.nsecXRVD*¦¡".includes(ch) || (ch === "W" && swimming));
     if (!ok) { map = "town1"; x = 7; y = 8; swimming = false; }
     const party = (p.party || []).filter((a) => DEX[a.sp]);
     const box = (p.box || []).filter((a) => DEX[a.sp]);
