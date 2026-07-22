@@ -12,7 +12,7 @@ function Wildlands() {
     screen: "title",
     map: "town1", x: 7, y: 8, swimming: false,
     party: [], box: [],
-    items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0 },
+    items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0 },
     badges: 0, profGift: false, houseIdx: 0,
     legends: {}, dex: {}, objects: {}, visited: { town1: true }, trainersBeaten: {}, rival: "otter_j",
     dialog: null, menu: null, battle: null, pick: null,
@@ -77,7 +77,7 @@ function Wildlands() {
     setS((s) => ({
       ...s, screen: "world", map, x, y, swimming,
       party, box,
-      items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, ...(p.items || {}) },
+      items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, ...(p.items || {}) },
       badges, profGift: !!p.profGift, houseIdx: p.houseIdx || 0,
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
@@ -706,6 +706,42 @@ function Wildlands() {
       my.hp = Math.min(my.maxHp, my.hp + 150);
       snapBusy(`You fed ${DEX[my.sp].n} a Golden Berry. (+150 HP)`, {}, "heal");
       if (!enemyActs()) finishRound();
+    } else if (action.kind === "prismberry") {
+      if ((items.prismberries ?? 0) <= 0) return;
+      items.prismberries -= 1;
+      my.hp = Math.min(my.maxHp, my.hp + 200);
+      snapBusy(`You fed ${DEX[my.sp].n} a Prism Berry. (+200 HP)`, {}, "heal");
+      if (!enemyActs()) finishRound();
+    } else if (action.kind === "antidote") {
+      if ((items.antidote ?? 0) <= 0) return;
+      if (!my.psn) { snapBusy(`${DEX[my.sp].n} isn't poisoned.`); backToChoose(); }
+      else { items.antidote -= 1; my.psn = false;
+        snapBusy(`You gave ${DEX[my.sp].n} an Antidote. The poison is gone!`, {}, "heal");
+        if (!enemyActs()) finishRound(); }
+    } else if (action.kind === "freshair") {
+      if ((items.freshair ?? 0) <= 0) return;
+      if (!my.brn) { snapBusy(`${DEX[my.sp].n} isn't burned.`); backToChoose(); }
+      else { items.freshair -= 1; my.brn = 0;
+        snapBusy(`You dressed ${DEX[my.sp].n}'s burn with Burn Salve. The searing stops!`, {}, "heal");
+        if (!enemyActs()) finishRound(); }
+    } else if (action.kind === "coolbalm") {
+      if ((items.coolbalm ?? 0) <= 0) return;
+      if (!my.chill) { snapBusy(`${DEX[my.sp].n} isn't chilled.`); backToChoose(); }
+      else { items.coolbalm -= 1; my.chill = 0;
+        snapBusy(`You warmed ${DEX[my.sp].n} with a Warm Wrap. The chill lifts!`, {}, "heal");
+        if (!enemyActs()) finishRound(); }
+    } else if (action.kind === "calmbalm") {
+      if ((items.calmbalm ?? 0) <= 0) return;
+      if (!my.fear) { snapBusy(`${DEX[my.sp].n} isn't shaken.`); backToChoose(); }
+      else { items.calmbalm -= 1; my.fear = 0;
+        snapBusy(`You soothed ${DEX[my.sp].n} with a Calming Herb. Its nerve returns!`, {}, "heal");
+        if (!enemyActs()) finishRound(); }
+    } else if (action.kind === "wakeberry") {
+      if ((items.wakeberry ?? 0) <= 0) return;
+      if (!my.slp) { snapBusy(`${DEX[my.sp].n} is wide awake.`); backToChoose(); }
+      else { items.wakeberry -= 1; my.slp = 0;
+        snapBusy(`You woke ${DEX[my.sp].n} with a Rouse Berry. It's alert again!`, {}, "heal");
+        if (!enemyActs()) finishRound(); }
     } else if (action.kind === "balm") {
       if ((items.balms ?? 0) <= 0) return;
       if (!my.psn && !my.slp && !my.fear && !my.chill) { snapBusy(`${DEX[my.sp].n} is already feeling fine.`); backToChoose(); }

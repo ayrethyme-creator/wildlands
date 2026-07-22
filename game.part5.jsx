@@ -215,8 +215,20 @@
                 onClick={() => takeTurn({ kind: "bigberry" })}>🍇 Big Berry ({S.items.bigberries ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>+70 HP</div></button>
               <button disabled={busy || (S.items.goldberries ?? 0) <= 0} style={{ ...btn("#b7950b"), opacity: busy || (S.items.goldberries ?? 0) <= 0 ? 0.45 : 1 }}
                 onClick={() => takeTurn({ kind: "goldberry" })}>🍯 Golden Berry ({S.items.goldberries ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>+150 HP</div></button>
+              <button disabled={busy || (S.items.prismberries ?? 0) <= 0} style={{ ...btn("#8e44ad"), opacity: busy || (S.items.prismberries ?? 0) <= 0 ? 0.45 : 1 }}
+                onClick={() => takeTurn({ kind: "prismberry" })}>💎 Prism Berry ({S.items.prismberries ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>+200 HP</div></button>
               <button disabled={busy || (S.items.balms ?? 0) <= 0} style={{ ...btn("#2e8b57"), opacity: busy || (S.items.balms ?? 0) <= 0 ? 0.45 : 1 }}
-                onClick={() => takeTurn({ kind: "balm" })}>🌿 Soothe Balm ({S.items.balms ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>Cures ☠️💤😨🧊</div></button>
+                onClick={() => takeTurn({ kind: "balm" })}>🌿 Soothe Balm ({S.items.balms ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>Cures all</div></button>
+              {(S.items.antidote ?? 0) > 0 && <button disabled={busy} style={{ ...btn("#7d3c98"), opacity: busy ? 0.45 : 1 }}
+                onClick={() => takeTurn({ kind: "antidote" })}>🧪 Antidote ({S.items.antidote})<div style={{ fontSize: 10, fontWeight: 400 }}>Cures ☠️</div></button>}
+              {(S.items.freshair ?? 0) > 0 && <button disabled={busy} style={{ ...btn("#c0651a"), opacity: busy ? 0.45 : 1 }}
+                onClick={() => takeTurn({ kind: "freshair" })}>🩹 Burn Salve ({S.items.freshair})<div style={{ fontSize: 10, fontWeight: 400 }}>Cures 🔥</div></button>}
+              {(S.items.coolbalm ?? 0) > 0 && <button disabled={busy} style={{ ...btn("#2980b9"), opacity: busy ? 0.45 : 1 }}
+                onClick={() => takeTurn({ kind: "coolbalm" })}>🧣 Warm Wrap ({S.items.coolbalm})<div style={{ fontSize: 10, fontWeight: 400 }}>Cures 🧊</div></button>}
+              {(S.items.calmbalm ?? 0) > 0 && <button disabled={busy} style={{ ...btn("#16a085"), opacity: busy ? 0.45 : 1 }}
+                onClick={() => takeTurn({ kind: "calmbalm" })}>🍵 Calming Herb ({S.items.calmbalm})<div style={{ fontSize: 10, fontWeight: 400 }}>Cures 😨</div></button>}
+              {(S.items.wakeberry ?? 0) > 0 && <button disabled={busy} style={{ ...btn("#d68910"), opacity: busy ? 0.45 : 1 }}
+                onClick={() => takeTurn({ kind: "wakeberry" })}>⏰ Rouse Berry ({S.items.wakeberry})<div style={{ fontSize: 10, fontWeight: 400 }}>Cures 💤</div></button>}
               <button disabled={busy || (S.items.honeycombs ?? 0) <= 0} style={{ ...btn("#d4880b"), opacity: busy || (S.items.honeycombs ?? 0) <= 0 ? 0.45 : 1 }}
                 onClick={() => takeTurn({ kind: "honeycomb" })}>🍯 Honeycomb ({S.items.honeycombs ?? 0})<div style={{ fontSize: 10, fontWeight: 400 }}>Restores all PP</div></button>
               <button disabled={busy || (S.items.revives ?? 0) <= 0 || !S.party.some((a, i) => i !== 0 && a.hp <= 0)} style={{ ...btn("#c9457a"), opacity: busy || (S.items.revives ?? 0) <= 0 || !S.party.some((a, i) => i !== 0 && a.hp <= 0) ? 0.45 : 1 }}
@@ -663,7 +675,13 @@
                   { key: "berries", n: "🫐 Berry Snack", price: 15, desc: "+30 HP in battle" },
                   { key: "bigberries", n: "🍇 Big Berry", price: 40, desc: "+70 HP in battle" },
                   { key: "goldberries", n: "🍯 Golden Berry", price: 90, desc: "+150 HP in battle" },
-                  { key: "balms", n: "🌿 Soothe Balm", price: 50, desc: "Cures poison, sleep, fear and chill" },
+                  { key: "prismberries", n: "💎 Prism Berry", price: 140, desc: "+200 HP in battle" },
+                  { key: "balms", n: "🌿 Soothe Balm", price: 50, desc: "Cures every condition at once" },
+                  { key: "antidote", n: "🧪 Antidote", price: 25, desc: "Cures poison ☠️" },
+                  { key: "freshair", n: "🩹 Burn Salve", price: 25, desc: "Cures burn 🔥" },
+                  { key: "coolbalm", n: "🧣 Warm Wrap", price: 25, desc: "Cures chill 🧊" },
+                  { key: "calmbalm", n: "🍵 Calming Herb", price: 25, desc: "Cures fear 😨" },
+                  { key: "wakeberry", n: "⏰ Rouse Berry", price: 25, desc: "Cures sleep 💤" },
                   { key: "honeycombs", n: "🍯 Honeycomb", price: 70, desc: "Restores all PP of your active friend" },
                   { key: "revives", n: "✨ Revive", price: 200, desc: "Wakes a fainted bench friend at half HP" },
                   ...(S.items.lantern ? [] : [{ key: "lantern", n: "🏮 Lantern", price: 150, desc: "Lights dark caves — permanent" }]),
