@@ -529,16 +529,29 @@ const ART = {
   ),
 };
 
+// ---------- PHOTO ART OVERRIDES ----------
+// Any species listed here renders from art/<species>.png instead of its drawn
+// SVG. Everything not listed falls back to the generator, so the game works
+// identically whether there is one photo in here or nine hundred. Add a file to
+// art/ and a line here, and that species switches over. Nothing else changes.
+const PHOTO_ART = { leopard: 1 };
+
 // ---------- SPRITE COMPONENT ----------
 function Sprite({ sp, size = 48, flip, anim }) {
   const d = DEX[sp];
   const er = d.juv ? 1.35 : 1;
+  const shadow = "drop-shadow(1px 2px 2px rgba(0,0,0,.3))";
   return (
     <div style={{ animation: anim ? `${anim} ${anim === "floatY" ? 2.6 : 1.8}s ease-in-out infinite` : undefined, display: "inline-flex", flexShrink: 0 }}>
-      <svg width={size} height={size} viewBox="0 0 64 64"
-        style={{ filter: "drop-shadow(1px 2px 2px rgba(0,0,0,.3))", transform: flip ? "scaleX(-1)" : undefined, flexShrink: 0 }}>
-        {d.juv ? <g transform="translate(6.4, 9) scale(.8)">{ART[d.art](er)}</g> : ART[d.art](er)}
-      </svg>
+      {PHOTO_ART[sp] ? (
+        <img src={`art/${sp}.png`} width={size} height={size} alt=""
+          style={{ filter: shadow, transform: flip ? "scaleX(-1)" : undefined, objectFit: "contain", flexShrink: 0 }} />
+      ) : (
+        <svg width={size} height={size} viewBox="0 0 64 64"
+          style={{ filter: shadow, transform: flip ? "scaleX(-1)" : undefined, flexShrink: 0 }}>
+          {d.juv ? <g transform="translate(6.4, 9) scale(.8)">{ART[d.art](er)}</g> : ART[d.art](er)}
+        </svg>
+      )}
     </div>
   );
 }
