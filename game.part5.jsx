@@ -24,18 +24,53 @@
     display: "flex", flexDirection: "column",
   };
   const panel = { background: "#3a342b", border: "3px solid #5c5344", borderRadius: 12, padding: 12 };
-  // hold a direction to keep moving; release (or slide off the button) to stop
-  const dpad = (dx, dy) => ({
-    onPointerDown: (e) => { e.preventDefault(); holdStart(dx, dy); },
-    onPointerUp: holdEnd,
-    onPointerLeave: holdEnd,
-    onPointerCancel: holdEnd,
-    onContextMenu: (e) => e.preventDefault(),
-  });
+  // Hold a direction to keep moving; release (or slide off) to stop.
+  // Mobile browsers vary a lot here, so this is deliberately belt-and-braces:
+  //  - where PointerEvent exists we drive it from pointer events and only use
+  //    touchstart to suppress iOS text selection and the long-press callout
+  //  - where it does not, touch events drive it directly
+  //  - onClick is a last-resort fallback so a tap always moves at least one
+  //    tile even if neither of the above fires; it self-suppresses if a
+  //    pointer or touch already handled the press
+  const lastTouch = useRef(0);
+  const dpad = (dx, dy) => {
+    const hasPointer = typeof window !== "undefined" && "PointerEvent" in window;
+    const start = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      lastTouch.current = Date.now();
+      holdStart(dx, dy);
+    };
+    const end = (e) => { if (e && e.preventDefault) e.preventDefault(); holdEnd(); };
+    const common = {
+      onContextMenu: (e) => e.preventDefault(),
+      draggable: false,
+      onClick: () => { if (Date.now() - lastTouch.current > 600) move(dx, dy); },
+    };
+    return hasPointer
+      ? {
+          ...common,
+          onPointerDown: start,
+          onPointerUp: end,
+          onPointerLeave: end,
+          onPointerCancel: end,
+          onTouchStart: (e) => e.preventDefault(),   // kills the iOS selection UI
+          onTouchEnd: (e) => e.preventDefault(),
+        }
+      : {
+          ...common,
+          onTouchStart: start,
+          onTouchEnd: end,
+          onTouchCancel: end,
+          onMouseDown: start,
+          onMouseUp: end,
+          onMouseLeave: end,
+        };
+  };
   const btn = (bg = "#5c8a3a") => ({
     background: bg, color: "#fff", border: "none", borderRadius: 10, padding: "12px 14px",
     fontFamily: "inherit", fontWeight: 700, fontSize: 14, cursor: "pointer", boxShadow: "0 3px 0 rgba(0,0,0,.35)",
-    touchAction: "none", userSelect: "none", WebkitUserSelect: "none",
+    touchAction: "none", userSelect: "none", WebkitUserSelect: "none", MozUserSelect: "none", msUserSelect: "none",
+    WebkitTouchCallout: "none", WebkitTapHighlightColor: "transparent",
   });
   const btnS = (bg) => ({ ...btn(bg), padding: "8px 10px", fontSize: 12 });
 
@@ -332,15 +367,15 @@
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 16px 18px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 52px)", gridTemplateRows: "repeat(3, 52px)", gap: 4 }}>
           <div />
-          <button style={btn("#5c5344")} {...dpad(0, -1)}>▲</button>
+          <button style={btn("#5c5344")} {...dpad(0, -1)}><span style={{ pointerEvents: "none" }}>▲</span></button>
           <div />
-          <button style={btn("#5c5344")} {...dpad(-1, 0)}>◀</button>
+          <button style={btn("#5c5344")} {...dpad(-1, 0)}><span style={{ pointerEvents: "none" }}>◀</span></button>
           <div style={{ background: "#3a342b", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
             {S.run ? "🏃" : "🚶"}
           </div>
-          <button style={btn("#5c5344")} {...dpad(1, 0)}>▶</button>
+          <button style={btn("#5c5344")} {...dpad(1, 0)}><span style={{ pointerEvents: "none" }}>▶</span></button>
           <div />
-          <button style={btn("#5c5344")} {...dpad(0, 1)}>▼</button>
+          <button style={btn("#5c5344")} {...dpad(0, 1)}><span style={{ pointerEvents: "none" }}>▼</span></button>
           <div />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
