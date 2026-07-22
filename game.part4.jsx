@@ -732,7 +732,11 @@ function Wildlands() {
           if (b.kind === "legend") legends[en.sp] = "befriended";
           let dest;
           if (party.length < 6) { party.push(friend); dest = "It joined your team!"; }
-          else { box.push(friend); dest = "Your team is full — it headed to the Sanctuary."; }
+          else {
+            friend.box = firstOpenBox(box);
+            box.push(friend);
+            dest = `Your team is full — it headed to the Sanctuary (${boxNameAt(friend.box)}).`;
+          }
           snapBusy(b.kind === "legend" ? `🌟 ${BEFRIEND_LEGEND[en.sp]}` : `🎉 The ${DEX[en.sp].n} nuzzles your hand!`, {}, "befriend");
           snapEnd(`You befriended ${DEX[en.sp].n} (Lv ${en.lvl})! ${dest}` + (b.kind === "legend" ? " The land settles — the guardian chose you." : ""));
         } else {

@@ -373,6 +373,7 @@
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
           <button style={btnS("#2471a3")} onClick={() => setS((p) => ({ ...p, menu: "party" }))}>👥 Team</button>
           <button style={btnS("#27ae60")} onClick={() => setS((p) => ({ ...p, menu: "guide" }))}>📖 Guide</button>
+          <button style={btnS("#2d7d5a")} onClick={() => setS((p) => ({ ...p, menu: "sanctuary", boxSel: null, relConfirm: null }))}>🏞️ Sanctuary</button>
           <button style={btnS("#5dade2")} onClick={() => {
             const st = SR.current;
             if (!canSoar(st)) say("🪽 To soar between towns you need Badge 3 and an Aerial teammate in your party.");
@@ -428,35 +429,120 @@
                   </div>
                 ))}
                 {S.box.length > 0 && (
-                  <div style={{ marginTop: 10 }}>
-                    <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 4 }}>
-                      🏞️ Sanctuary — tap an animal to {S.party.length < 6 ? "add it to your team" : "swap it onto your team"}:
-                    </div>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                      {S.box.map((a, bi) => (
-                        <div key={a.uid} onClick={() => setS((p) => {
-                          const animal = p.box[bi];
-                          if (!animal) return p;
-                          if (p.party.length < 6) {
-                            const box = [...p.box]; box.splice(bi, 1);
-                            return { ...p, box, party: [...p.party, animal], pick: null };
-                          }
-                          return { ...p, pick: bi };
-                        })}
-                          style={{ ...panel, padding: "4px 8px", fontSize: 11, display: "flex", alignItems: "center", gap: 5, cursor: "pointer", borderColor: S.pick === bi ? "#e8c547" : "#5c5344" }}>
-                          <Sprite sp={a.sp} size={22} />
-                          {DEX[a.sp].n} Lv{a.lvl}
-                        </div>
-                      ))}
-                    </div>
-                    {S.pick != null && (
-                      <button style={{ ...btn("#7d735f"), marginTop: 8, fontSize: 12, padding: "6px 10px" }}
-                        onClick={() => setS((p) => ({ ...p, pick: null }))}>Cancel swap</button>
-                    )}
+                  <div style={{ marginTop: 12, borderTop: "1px solid #5c5344", paddingTop: 10 }}>
+                    <button style={{ ...btn("#2d7d5a"), width: "100%", fontSize: 13 }}
+                      onClick={() => setS((p) => ({ ...p, menu: "sanctuary", boxSel: null }))}>
+                      🏞️ Sanctuary — {S.box.length} in care
+                    </button>
+                  </div>
+                )}
+                {S.party.length > 1 && (
+                  <div style={{ fontSize: 10, color: "#a89a7d", marginTop: 8 }}>
+                    Send a teammate to the Sanctuary from inside it.
                   </div>
                 )}
               </div>
             )}
+            {S.menu === "sanctuary" && (() => {
+              const page = S.boxPage || 0;
+              const nBoxes = boxCount(S.box);
+              const here = S.box.filter((a) => boxOf(a) === page);
+              const sel = S.box.find((a) => a.uid === S.boxSel);
+              const go = (d) => setS((p) => ({ ...p, boxPage: (((p.boxPage || 0) + d) % nBoxes + nBoxes) % nBoxes, boxSel: null, relConfirm: null }));
+              const moveTo = (dest) => setS((p) => ({
+                ...p, relConfirm: null,
+                box: p.box.map((a) => (a.uid === sel.uid ? { ...a, box: dest } : a)),
+              }));
+              return (
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <b>🏞️ Sanctuary</b>
+                    <span style={{ fontSize: 11, color: "#c9b88a" }}>{S.box.length} in care</span>
+                  </div>
+
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "10px 0 8px" }}>
+                    <button style={{ ...btn("#5c5344"), padding: "6px 12px", fontSize: 13 }} onClick={() => go(-1)}>◀</button>
+                    <div style={{ flex: 1, textAlign: "center" }}>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>{boxNameAt(page)}</div>
+                      <div style={{ fontSize: 10, color: "#c9b88a" }}>{here.length}/{BOX_SIZE} · enclosure {page + 1} of {nBoxes}</div>
+                    </div>
+                    <button style={{ ...btn("#5c5344"), padding: "6px 12px", fontSize: 13 }} onClick={() => go(1)}>▶</button>
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 4 }}>
+                    {Array.from({ length: BOX_SIZE }).map((_, i) => {
+                      const a = here[i];
+                      const on = a && a.uid === S.boxSel;
+                      return (
+                        <div key={i} onClick={() => a && setS((p) => ({ ...p, boxSel: a.uid, relConfirm: null }))}
+                          style={{ aspectRatio: "1", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
+                            border: on ? "2px solid #e8c547" : "1px dashed #5c5344",
+                            background: a ? "rgba(255,255,255,.06)" : "transparent", cursor: a ? "pointer" : "default" }}>
+                          {a && <Sprite sp={a.sp} size={30} />}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {sel && (
+                    <div style={{ ...panel, marginTop: 10, padding: 10 }}>
+                      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                        <Sprite sp={sel.sp} size={44} />
+                        <div style={{ flex: 1 }}>
+                          <div style={{ fontSize: 13, fontWeight: 700 }}>{DEX[sel.sp].n} <span style={{ color: "#c9b88a" }}>Lv {sel.lvl}</span> {sel.sex === "F" ? "♀" : "♂"}</div>
+                          <div style={{ margin: "3px 0" }}>{DEX[sel.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
+                          <div style={{ fontSize: 10, color: "#c9b88a" }}>{sel.hp}/{sel.maxHp} HP · ATK {sel.atk} DEF {sel.def} SPD {sel.spd}</div>
+                          <div style={{ fontSize: 10, color: "#a89a7d" }}>{sel.moves.map((k) => MOVES[k].n).join(" · ")}</div>
+                        </div>
+                      </div>
+
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginTop: 8 }}>
+                        <button style={{ ...btnS(S.party.length < 6 ? "#27ae60" : "#5c5344"), opacity: S.party.length < 6 ? 1 : .5 }}
+                          onClick={() => { if (S.party.length >= 6) return;
+                            setS((p) => ({ ...p, party: [...p.party, p.box.find((a) => a.uid === sel.uid)],
+                              box: p.box.filter((a) => a.uid !== sel.uid), boxSel: null, relConfirm: null })); }}>
+                          {S.party.length < 6 ? "➕ To Team" : "Team full"}
+                        </button>
+                        <button style={btnS("#7d735f")} onClick={() => moveTo((page + 1) % nBoxes)}>📦 Move on ▶</button>
+                      </div>
+
+                      {S.relConfirm === sel.uid ? (
+                        <div style={{ marginTop: 8 }}>
+                          <div style={{ fontSize: 11, color: "#e8c547", marginBottom: 6 }}>
+                            Release {DEX[sel.sp].n} back to the wild? It leaves your care for good — the Field Guide entry stays.
+                          </div>
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+                            <button style={btnS("#c0392b")} onClick={() => setS((p) => ({
+                              ...p, box: p.box.filter((a) => a.uid !== sel.uid), boxSel: null, relConfirm: null }))}>🕊️ Release</button>
+                            <button style={btnS("#7d735f")} onClick={() => setS((p) => ({ ...p, relConfirm: null }))}>Keep</button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button style={{ ...btnS("#8a4b3a"), width: "100%", marginTop: 6 }}
+                          onClick={() => setS((p) => ({ ...p, relConfirm: sel.uid }))}>🕊️ Release…</button>
+                      )}
+                    </div>
+                  )}
+
+                  <div style={{ marginTop: 12, borderTop: "1px solid #5c5344", paddingTop: 8 }}>
+                    <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 5 }}>
+                      Your team {S.party.length > 1 ? "— tap to send one here" : "— you must keep at least one companion"}
+                    </div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                      {S.party.map((a) => (
+                        <div key={a.uid} onClick={() => { if (S.party.length <= 1) return;
+                          setS((p) => ({ ...p, party: p.party.filter((x) => x.uid !== a.uid),
+                            box: [...p.box, { ...a, box: inBox(p.box, page).length < BOX_SIZE ? page : firstOpenBox(p.box) }] })); }}
+                          style={{ ...panel, padding: "4px 7px", fontSize: 11, display: "flex", alignItems: "center", gap: 5,
+                            cursor: S.party.length > 1 ? "pointer" : "default", opacity: S.party.length > 1 ? 1 : .5 }}>
+                          <Sprite sp={a.sp} size={20} /> {DEX[a.sp].n} Lv{a.lvl}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
             {S.menu === "guide" && (
               <div>
                 <b>📖 Field Guide</b>
