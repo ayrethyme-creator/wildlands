@@ -25,47 +25,39 @@
   };
   const panel = { background: "#3a342b", border: "3px solid #5c5344", borderRadius: 12, padding: 12 };
   // Hold a direction to keep moving; release (or slide off) to stop.
-  // Mobile browsers vary a lot here, so this is deliberately belt-and-braces:
-  //  - where PointerEvent exists we drive it from pointer events and only use
-  //    touchstart to suppress iOS text selection and the long-press callout
-  //  - where it does not, touch events drive it directly
-  //  - onClick is a last-resort fallback so a tap always moves at least one
-  //    tile even if neither of the above fires; it self-suppresses if a
-  //    pointer or touch already handled the press
-  const lastTouch = useRef(0);
-  const dpad = (dx, dy) => {
-    const hasPointer = typeof window !== "undefined" && "PointerEvent" in window;
-    const start = (e) => {
-      if (e && e.preventDefault) e.preventDefault();
-      lastTouch.current = Date.now();
-      holdStart(dx, dy);
-    };
-    const end = (e) => { if (e && e.preventDefault) e.preventDefault(); holdEnd(); };
-    const common = {
-      onContextMenu: (e) => e.preventDefault(),
-      draggable: false,
-      onClick: () => { if (Date.now() - lastTouch.current > 600) move(dx, dy); },
-    };
-    return hasPointer
-      ? {
-          ...common,
-          onPointerDown: start,
-          onPointerUp: end,
-          onPointerLeave: end,
-          onPointerCancel: end,
-          onTouchStart: (e) => e.preventDefault(),   // kills the iOS selection UI
-          onTouchEnd: (e) => e.preventDefault(),
-        }
-      : {
-          ...common,
-          onTouchStart: start,
-          onTouchEnd: end,
-          onTouchCancel: end,
-          onMouseDown: start,
-          onMouseUp: end,
-          onMouseLeave: end,
-        };
+  //
+  // This deliberately does NOT use React's synthetic touch events: React
+  // registers touchstart passively, so preventDefault() inside onTouchStart is
+  // silently ignored, and on Chrome for Android that is what lets the long-press
+  // text-selection UI appear. Native listeners registered with {passive:false}
+  // are the only reliable way to suppress it.
+  //
+  // Preventing the default on touchstart also stops the browser synthesising
+  // mouse events afterwards, so there is no double-firing between the two.
+  const dpadRef = (dx, dy) => (el) => {
+    if (!el || el.__wired) return;
+    el.__wired = true;
+    const start = (e) => { e.preventDefault(); e.stopPropagation(); holdStart(dx, dy); };
+    const end = (e) => { if (e.cancelable) e.preventDefault(); holdEnd(); };
+    el.addEventListener("touchstart", start, { passive: false });
+    el.addEventListener("touchend", end, { passive: false });
+    el.addEventListener("touchcancel", end, { passive: false });
+    el.addEventListener("contextmenu", (e) => e.preventDefault());
+    el.addEventListener("mousedown", start);
+    el.addEventListener("mouseup", end);
+    el.addEventListener("mouseleave", end);
   };
+
+  // Arrows are drawn as SVG rather than written as ▲ ◀ ▶ ▼, because a text
+  // glyph is selectable and an SVG path is not. No text node, nothing to select.
+  const ARROW = { up: "M12 5 L20 18 L4 18 Z", down: "M12 19 L4 6 L20 6 Z",
+                  left: "M5 12 L18 4 L18 20 Z", right: "M19 12 L6 20 L6 4 Z" };
+  const tri = (dir) => (
+    <svg width="20" height="20" viewBox="0 0 24 24" style={{ pointerEvents: "none", display: "block", margin: "0 auto" }}>
+      <path d={ARROW[dir]} fill="#fff" />
+    </svg>
+  );
+
   const btn = (bg = "#5c8a3a") => ({
     background: bg, color: "#fff", border: "none", borderRadius: 10, padding: "12px 14px",
     fontFamily: "inherit", fontWeight: 700, fontSize: 14, cursor: "pointer", boxShadow: "0 3px 0 rgba(0,0,0,.35)",
@@ -367,15 +359,15 @@
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 16px 18px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 52px)", gridTemplateRows: "repeat(3, 52px)", gap: 4 }}>
           <div />
-          <button style={btn("#5c5344")} {...dpad(0, -1)}><span style={{ pointerEvents: "none" }}>▲</span></button>
+          <button style={btn("#5c5344")} ref={dpadRef(0, -1)}>{tri("up")}</button>
           <div />
-          <button style={btn("#5c5344")} {...dpad(-1, 0)}><span style={{ pointerEvents: "none" }}>◀</span></button>
+          <button style={btn("#5c5344")} ref={dpadRef(-1, 0)}>{tri("left")}</button>
           <div style={{ background: "#3a342b", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
             {S.run ? "🏃" : "🚶"}
           </div>
-          <button style={btn("#5c5344")} {...dpad(1, 0)}><span style={{ pointerEvents: "none" }}>▶</span></button>
+          <button style={btn("#5c5344")} ref={dpadRef(1, 0)}>{tri("right")}</button>
           <div />
-          <button style={btn("#5c5344")} {...dpad(0, 1)}><span style={{ pointerEvents: "none" }}>▼</span></button>
+          <button style={btn("#5c5344")} ref={dpadRef(0, 1)}>{tri("down")}</button>
           <div />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>

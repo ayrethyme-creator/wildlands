@@ -71,7 +71,7 @@ var GAME_PARTS = [
   var texts = new Array(GAME_PARTS.length);
   var done = 0;
   GAME_PARTS.forEach(function (name, i) {
-    fetch(name)
+    fetch(name, { cache: "no-cache" })
       .then(function (r) {
         if (!r.ok) throw new Error(name + " -> HTTP " + r.status);
         return r.text();
