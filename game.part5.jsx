@@ -24,9 +24,18 @@
     display: "flex", flexDirection: "column",
   };
   const panel = { background: "#3a342b", border: "3px solid #5c5344", borderRadius: 12, padding: 12 };
+  // hold a direction to keep moving; release (or slide off the button) to stop
+  const dpad = (dx, dy) => ({
+    onPointerDown: (e) => { e.preventDefault(); holdStart(dx, dy); },
+    onPointerUp: holdEnd,
+    onPointerLeave: holdEnd,
+    onPointerCancel: holdEnd,
+    onContextMenu: (e) => e.preventDefault(),
+  });
   const btn = (bg = "#5c8a3a") => ({
     background: bg, color: "#fff", border: "none", borderRadius: 10, padding: "12px 14px",
     fontFamily: "inherit", fontWeight: 700, fontSize: 14, cursor: "pointer", boxShadow: "0 3px 0 rgba(0,0,0,.35)",
+    touchAction: "none", userSelect: "none", WebkitUserSelect: "none",
   });
   const btnS = (bg) => ({ ...btn(bg), padding: "8px 10px", fontSize: 12 });
 
@@ -323,13 +332,15 @@
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 16px 18px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 52px)", gridTemplateRows: "repeat(3, 52px)", gap: 4 }}>
           <div />
-          <button style={btn("#5c5344")} onClick={() => move(0, -1)}>▲</button>
+          <button style={btn("#5c5344")} {...dpad(0, -1)}>▲</button>
           <div />
-          <button style={btn("#5c5344")} onClick={() => move(-1, 0)}>◀</button>
-          <div style={{ background: "#3a342b", borderRadius: 8 }} />
-          <button style={btn("#5c5344")} onClick={() => move(1, 0)}>▶</button>
+          <button style={btn("#5c5344")} {...dpad(-1, 0)}>◀</button>
+          <div style={{ background: "#3a342b", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
+            {S.run ? "🏃" : "🚶"}
+          </div>
+          <button style={btn("#5c5344")} {...dpad(1, 0)}>▶</button>
           <div />
-          <button style={btn("#5c5344")} onClick={() => move(0, 1)}>▼</button>
+          <button style={btn("#5c5344")} {...dpad(0, 1)}>▼</button>
           <div />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
@@ -343,6 +354,7 @@
           <button style={btnS("#b7950b")} onClick={() => saveGame(false)}>💾 Save</button>
           <button style={btnS("#8e44ad")} onClick={() => setS((p) => ({ ...p, menu: "types" }))}>⚖️ Types</button>
           <button style={btnS("#7d735f")} onClick={() => setS((p) => ({ ...p, sound: !p.sound }))}>{S.sound ? "🔊 On" : "🔇 Off"}</button>
+          <button style={btnS(S.run ? "#c0651a" : "#7d735f")} onClick={() => setS((p) => ({ ...p, run: !p.run }))}>{S.run ? "🏃 Run" : "🚶 Walk"}</button>
         </div>
       </div>
 

@@ -16,7 +16,7 @@ function Wildlands() {
     badges: 0, profGift: false, houseIdx: 0,
     legends: {}, dex: {}, objects: {}, visited: { town1: true }, trainersBeaten: {}, rival: "otter_j",
     dialog: null, menu: null, battle: null, pick: null,
-    sound: true, soundReady: false,
+    sound: true, soundReady: false, run: true,
   });
   const SR = useRef(S);
   useEffect(() => { SR.current = S; }, [S]);
@@ -85,22 +85,77 @@ function Wildlands() {
       trainersBeaten: typeof p.badges === "number" ? (p.trainersBeaten || {}) : {},
       rival: p.rival || COUNTER[party[0]?.sp] || "otter_j",
       sound: p.sound !== false,
+      run: p.run !== false,
     }));
   };
 
+  // ----- hold-to-move -----
+  // A tap still steps one tile, but holding a direction now repeats. Walking
+  // and running are just two repeat cadences; nothing about the step itself
+  // changes, so encounters, exits and boulder pushes behave exactly as before.
+  const HELD = useRef(null);        // {dx,dy} while a direction is held
+  const SHIFT = useRef(false);      // shift = run for as long as it is held
+  const TIMER = useRef(null);
+
+  const stepDelay = () => {
+    const running = SHIFT.current || SR.current.run;
+    return running ? 85 : 165;
+  };
+  const stepLoop = () => {
+    const d = HELD.current;
+    const st = SR.current;
+    // an encounter, dialog or menu ends the run rather than letting it idle
+    if (!d || st.screen !== "world" || st.dialog || st.menu || st.battle) {
+      HELD.current = null; TIMER.current = null; return;
+    }
+    move(d.dx, d.dy);
+    TIMER.current = setTimeout(stepLoop, stepDelay());
+  };
+  const holdStart = (dx, dy) => {
+    HELD.current = { dx, dy };
+    move(dx, dy);                                     // first step is immediate
+    if (TIMER.current) clearTimeout(TIMER.current);
+    TIMER.current = setTimeout(stepLoop, 250);        // pause before it repeats
+  };
+  const holdEnd = () => {
+    HELD.current = null;
+    if (TIMER.current) { clearTimeout(TIMER.current); TIMER.current = null; }
+  };
+  useEffect(() => () => { if (TIMER.current) clearTimeout(TIMER.current); }, []);
+
   // ----- keyboard -----
   useEffect(() => {
-    const h = (e) => {
+    const dirOf = (k) =>
+      (k === "arrowup" || k === "w") ? [0, -1] :
+      (k === "arrowdown" || k === "s") ? [0, 1] :
+      (k === "arrowleft" || k === "a") ? [-1, 0] :
+      (k === "arrowright" || k === "d") ? [1, 0] : null;
+    const down = (e) => {
+      if (e.key === "Shift") { SHIFT.current = true; return; }
       const st = SR.current;
       if (st.screen !== "world" || st.dialog || st.menu || st.battle) return;
-      const k = e.key.toLowerCase();
-      if (k === "arrowup" || k === "w") move(0, -1);
-      else if (k === "arrowdown" || k === "s") move(0, 1);
-      else if (k === "arrowleft" || k === "a") move(-1, 0);
-      else if (k === "arrowright" || k === "d") move(1, 0);
+      const d = dirOf(e.key.toLowerCase());
+      if (!d) return;
+      e.preventDefault();
+      if (e.repeat) return;                           // our loop handles repeats
+      holdStart(d[0], d[1]);
     };
-    window.addEventListener("keydown", h);
-    return () => window.removeEventListener("keydown", h);
+    const up = (e) => {
+      if (e.key === "Shift") { SHIFT.current = false; return; }
+      const d = dirOf(e.key.toLowerCase());
+      if (!d) return;
+      const h = HELD.current;
+      if (h && h.dx === d[0] && h.dy === d[1]) holdEnd();
+    };
+    const blur = () => { holdEnd(); SHIFT.current = false; };
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    window.addEventListener("blur", blur);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+      window.removeEventListener("blur", blur);
+    };
   }, []);
 
   // ----- audio wiring -----
