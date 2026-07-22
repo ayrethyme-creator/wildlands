@@ -733,7 +733,7 @@ function Wildlands() {
           let dest;
           if (party.length < 6) { party.push(friend); dest = "It joined your team!"; }
           else {
-            friend.box = firstOpenBox(box);
+            friend.box = placeFor(friend.sp, box);
             box.push(friend);
             dest = `Your team is full — it headed to the Sanctuary (${boxNameAt(friend.box)}).`;
           }

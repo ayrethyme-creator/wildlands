@@ -459,12 +459,20 @@
                     <b>🏞️ Sanctuary</b>
                     <span style={{ fontSize: 11, color: "#c9b88a" }}>{S.box.length} in care</span>
                   </div>
+                  {S.box.some((a) => boxOf(a) !== homeBoxFor(a.sp)) && (
+                    <button style={{ ...btnS("#2d7d5a"), width: "100%", marginTop: 8 }}
+                      onClick={() => setS((p) => ({ ...p, box: sortByHabitat(p.box), boxSel: null, relConfirm: null }))}>
+                      🧭 Rehouse everyone by habitat
+                    </button>
+                  )}
 
                   <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "10px 0 8px" }}>
                     <button style={{ ...btn("#5c5344"), padding: "6px 12px", fontSize: 13 }} onClick={() => go(-1)}>◀</button>
                     <div style={{ flex: 1, textAlign: "center" }}>
                       <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>{boxNameAt(page)}</div>
-                      <div style={{ fontSize: 10, color: "#c9b88a" }}>{here.length}/{BOX_SIZE} · enclosure {page + 1} of {nBoxes}</div>
+                      <div style={{ fontSize: 10, color: "#c9b88a" }}>
+                        {page < BOX_TYPES.length ? `${BOX_TYPES[page]} · ` : ""}{here.length}/{BOX_SIZE}
+                      </div>
                     </div>
                     <button style={{ ...btn("#5c5344"), padding: "6px 12px", fontSize: 13 }} onClick={() => go(1)}>▶</button>
                   </div>
@@ -532,7 +540,7 @@
                       {S.party.map((a) => (
                         <div key={a.uid} onClick={() => { if (S.party.length <= 1) return;
                           setS((p) => ({ ...p, party: p.party.filter((x) => x.uid !== a.uid),
-                            box: [...p.box, { ...a, box: inBox(p.box, page).length < BOX_SIZE ? page : firstOpenBox(p.box) }] })); }}
+                            box: [...p.box, { ...a, box: placeFor(a.sp, p.box) }] })); }}
                           style={{ ...panel, padding: "4px 7px", fontSize: 11, display: "flex", alignItems: "center", gap: 5,
                             cursor: S.party.length > 1 ? "pointer" : "default", opacity: S.party.length > 1 ? 1 : .5 }}>
                           <Sprite sp={a.sp} size={20} /> {DEX[a.sp].n} Lv{a.lvl}

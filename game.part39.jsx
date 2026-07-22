@@ -10,15 +10,37 @@
 
 const BOX_SIZE = 30;
 
-// Enclosures are named for habitats rather than numbered, which suits a
-// sanctuary better than "BOX 1". They cycle if a player ever fills all twelve.
-const BOX_NAMES = ["Meadow", "Woodland", "Wetland", "Highland", "Coast", "Drylands",
-                   "Tundra", "Canopy", "Reef", "Cavern", "Delta", "Reserve"];
+// There is one enclosure per type, so the names mean something: an animal's
+// habitat is decided by what it actually is, not by the order you caught it in.
+// Overflow past the nine goes to numbered annexes.
+const BOX_TYPES = ["Predator", "Aerial", "Aquatic", "Burrow", "Venom", "Armor", "Swift", "Wild", "Ember"];
+const BOX_NAMES = ["Hunters' Ridge", "The Aviary", "The Waters", "The Warren", "The Vivarium",
+                   "The Bulwark", "Running Grounds", "The Wildwood", "The Ashlands"];
 
-const boxNameAt = (i) => {
-  const base = BOX_NAMES[i % BOX_NAMES.length];
-  const lap = Math.floor(i / BOX_NAMES.length);
-  return lap ? `${base} ${lap + 1}` : base;
+const boxNameAt = (i) => (i < BOX_NAMES.length ? BOX_NAMES[i] : `Annex ${i - BOX_NAMES.length + 1}`);
+
+// the enclosure an animal belongs in by its primary type; Wild takes anything
+// that does not match, and a full enclosure spills into the next with room
+const homeBoxFor = (sp) => {
+  const t = (DEX[sp] && DEX[sp].t && DEX[sp].t[0]) || "Wild";
+  const i = BOX_TYPES.indexOf(t);
+  return i >= 0 ? i : BOX_TYPES.indexOf("Wild");
+};
+const placeFor = (sp, box) => {
+  const want = homeBoxFor(sp);
+  return inBox(box, want).length < BOX_SIZE ? want : firstOpenBox(box);
+};
+
+// reassign everything to its habitat, spilling into the next enclosure with
+// room when one fills. Used by the Sort button.
+const sortByHabitat = (box) => {
+  const counts = {};
+  return (box || []).map((a) => {
+    let want = homeBoxFor(a.sp);
+    while ((counts[want] || 0) >= BOX_SIZE) want++;
+    counts[want] = (counts[want] || 0) + 1;
+    return { ...a, box: want };
+  });
 };
 
 // which enclosure an animal is in; older saves have no .box at all
@@ -32,7 +54,7 @@ const inBox = (box, i) => (box || []).filter((a) => boxOf(a) === i);
 const boxCount = (box) => {
   let hi = 0;
   (box || []).forEach((a) => { if (boxOf(a) > hi) hi = boxOf(a); });
-  return Math.max(8, hi + 2);
+  return Math.max(BOX_NAMES.length, hi + 2);
 };
 
 // first enclosure with room, so a caught animal never lands somewhere full
@@ -41,4 +63,4 @@ const firstOpenBox = (box) => {
   return 0;
 };
 
-console.log("[part39] sanctuary:", BOX_SIZE, "per enclosure |", BOX_NAMES.length, "named enclosures");
+console.log("[part39] sanctuary:", BOX_SIZE, "per enclosure |", BOX_NAMES.length, "habitat enclosures, one per type");
