@@ -518,11 +518,14 @@ function Wildlands() {
         if (mv.fx === "heal") { const h = Math.floor(att.maxHp * 0.45); att.hp = Math.min(att.maxHp, att.hp + h); txt += ` It recovered ${h} HP!`; snapBusy(txt, {}, "heal"); }
         else if (mv.fx === "raiseDef") { att.stg.d = Math.min(2, att.stg.d + 1); txt += " Its defense rose!"; snapBusy(txt, {}, "learn"); }
         else if (mv.fx === "lowerAtk") { dfn.stg.a = Math.max(-2, dfn.stg.a - 1); txt += ` ${tgt}'s attack fell!`; snapBusy(txt, {}, "weak"); }
+        else if (mv.fx === "lowerDef") { dfn.stg.d = Math.max(-2, dfn.stg.d - 1); txt += ` ${tgt}'s defense fell!`; snapBusy(txt, {}, "weak"); }
+        else if (mv.fx === "raiseAtk") { att.stg.a = Math.min(2, att.stg.a + 1); txt += " Its attack rose!"; snapBusy(txt, {}, "learn"); }
         else if (mv.fx === "raiseSpd") { att.stg.s = Math.min(2, (att.stg.s || 0) + 1); txt += " Its speed rose!"; snapBusy(txt, {}, "learn"); }
         else if (mv.fx === "lowerSpd") { dfn.stg.s = Math.max(-2, (dfn.stg.s || 0) - 1); txt += ` ${tgt}'s speed fell!`; snapBusy(txt, {}, "weak"); }
         else if (mv.fx === "chill") { if (dfn.chill) txt += ` But ${tgt} is already chilled!`; else { dfn.chill = 3; txt += ` ${tgt} was chilled — its speed halves!`; } snapBusy(txt, {}, "weak"); }
         else if (mv.fx === "sleep") { if (dfn.slp) txt += ` But ${tgt} is already asleep!`; else { dfn.slp = rnd(2, 3); txt += ` ${tgt} drifted off to sleep!`; } snapBusy(txt, {}, "sleep"); }
         else if (mv.fx === "fear") { if (dfn.fear) txt += ` But ${tgt} is already shaken!`; else { dfn.fear = 2; txt += ` ${tgt} shudders with dread!`; } snapBusy(txt, {}, "fear"); }
+        else if (mv.fx === "burn") { if (dfn.brn) txt += ` But ${tgt} is already burned!`; else { dfn.brn = 1; txt += ` ${tgt} was burned!`; } snapBusy(txt, {}, "weak"); }
         else if (mv.fx === "poison") {
           if (dfn.psn) txt += ` But ${tgt} is already poisoned!`;
           else { dfn.psn = true; txt += ` ${tgt} was poisoned!`; }
@@ -540,6 +543,11 @@ function Wildlands() {
       }
       if (mv.fx === "chill" && dfn.hp > 0 && !dfn.chill && Math.random() < (mv.fxc || 0)) { dfn.chill = 3; txt += ` ${tgt} was chilled!`; }
       if (mv.fx === "sleep" && dfn.hp > 0 && !dfn.slp && Math.random() < (mv.fxc || 0)) { dfn.slp = rnd(2, 3); txt += ` ${tgt} fell asleep!`; }
+      if (mv.fx === "burn" && dfn.hp > 0 && !dfn.brn && Math.random() < (mv.fxc || 0)) { dfn.brn = 1; txt += ` ${tgt} was burned!`; }
+      if (mv.fx === "fear" && dfn.hp > 0 && !dfn.fear && Math.random() < (mv.fxc || 0)) { dfn.fear = 2; txt += ` ${tgt} flinched!`; }
+      if (mv.fx === "lowerDef" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.d = Math.max(-2, dfn.stg.d - 1); txt += ` ${tgt}'s defense fell!`; }
+      if (mv.fx === "lowerSpd" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.s = Math.max(-2, (dfn.stg.s || 0) - 1); txt += ` ${tgt}'s speed fell!`; }
+      if (mv.fx === "raiseAtk" && Math.random() < (mv.fxc || 0)) { att.stg.a = Math.min(2, att.stg.a + 1); txt += ` ${who}'s attack rose!`; }
       snapBusy(txt, {}, mult > 1 ? "super" : mult < 1 ? "weak" : "hit");
       return dfn.hp <= 0;
     };
@@ -620,10 +628,10 @@ function Wildlands() {
           battle: { ...prev.battle, enemy: { ...en }, phase: "switch", mode: "main" },
         } : prev);
       } else {
-        party.forEach((a) => { a.hp = a.maxHp; a.pp = a.moves.map((k) => maxPP(MOVES[k])); a.psn = false; a.slp = 0; a.fear = 0; a.chill = 0; });
+        party.forEach((a) => { a.hp = a.maxHp; a.pp = a.moves.map((k) => maxPP(MOVES[k])); a.psn = false; a.slp = 0; a.fear = 0; a.chill = 0; a.brn = 0; });
         my.hp = my.maxHp;
         my.pp = my.moves.map((k) => maxPP(MOVES[k]));
-        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0;
+        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0; my.brn = 0;
         const lost = Math.floor((items.coins ?? 0) * 0.25);
         items.coins = (items.coins ?? 0) - lost;
         snapEnd(`You blacked out and woke at Baobab Base. Your team was healed, but you dropped ₡${lost} on the trail.`, { blackout: true });
@@ -647,6 +655,18 @@ function Wildlands() {
         const d = Math.max(1, Math.floor(my.maxHp / 8));
         my.hp = Math.max(0, my.hp - d);
         snapBusy(`${DEX[my.sp].n} is hurt by poison! (-${d})`, {}, "poison");
+        if (my.hp <= 0) { onMyFaint(); return; }
+      }
+      if (en.hp > 0 && en.brn) {
+        const d = Math.max(1, Math.floor(en.maxHp / 10));
+        en.hp = Math.max(0, en.hp - d);
+        snapBusy(`${foeName()} is seared by its burn! (-${d})`, {}, "poison");
+        if (en.hp <= 0) { onEnemyFaint(); return; }
+      }
+      if (my.hp > 0 && my.brn) {
+        const d = Math.max(1, Math.floor(my.maxHp / 10));
+        my.hp = Math.max(0, my.hp - d);
+        snapBusy(`${DEX[my.sp].n} is seared by its burn! (-${d})`, {}, "poison");
         if (my.hp <= 0) { onMyFaint(); return; }
       }
       if (en.chill > 0 && en.hp > 0) { en.chill -= 1; if (!en.chill) snapBusy(`${foeName()} shook off the chill.`); }
@@ -691,7 +711,7 @@ function Wildlands() {
       if (!my.psn && !my.slp && !my.fear && !my.chill) { snapBusy(`${DEX[my.sp].n} is already feeling fine.`); backToChoose(); }
       else {
         items.balms -= 1;
-        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0;
+        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0; my.brn = 0;
         snapBusy(`You rubbed Soothe Balm on ${DEX[my.sp].n}. It shook everything off!`, {}, "heal");
         if (!enemyActs()) finishRound();
       }
