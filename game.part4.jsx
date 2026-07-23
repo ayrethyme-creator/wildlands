@@ -424,16 +424,45 @@ function Wildlands() {
       my.lvl += 1;
       logs.push(`${DEX[my.sp].n} grew to Lv ${my.lvl}!`);
       (DEX[my.sp].l || []).filter(([L]) => L === my.lvl).forEach(([, k]) => learnMove(my, k, logs));
+      // moves deferred from an earlier evolution come due one milestone at a time
+      if (my.catchup && my.catchup.length) {
+        my.catchup = my.catchup.filter(([L, k]) => {
+          if (L > my.lvl) return true;
+          learnMove(my, k, logs);
+          return false;
+        });
+        if (!my.catchup.length) delete my.catchup;
+      }
       const st = DEX[my.sp];
       if (st.grows && my.lvl >= st.grows.at) {
         const g = st.grows;
         const to = g.to || (my.sex === "M" ? g.toM : g.toF);
         const gated = g.needs === "night" && !isNight();
         if (to && to !== my.sp && !gated) {
-        logs.push(`✨ ${st.n} ${DEX[to].meta || "grew up into"} ${DEX[to].n}!`);
-        my.sp = to;
-        DEX[to].m.forEach((k) => learnMove(my, k, logs));
-        (DEX[to].l || []).filter(([L]) => L <= my.lvl).forEach(([, k]) => learnMove(my, k, logs));
+          logs.push(`✨ ${st.n} ${DEX[to].meta || "grew up into"} ${DEX[to].n}!`);
+          my.sp = to;
+          // An evolving animal used to be handed every starting move of its new
+          // form plus every level-up move it had "missed" — up to nine at once,
+          // which buried the moment under a stack of prompts and churned a
+          // carefully chosen moveset. It now learns the single best new move on
+          // the spot, and grows into the rest over the levels that follow.
+          const known = new Set([...my.moves, ...(my.pending || [])]);
+          const fresh = [...new Set([
+            ...(DEX[to].m || []),
+            ...(DEX[to].l || []).filter(([L]) => L <= my.lvl).map(([, k]) => k),
+          ])].filter((k) => MOVES[k] && !known.has(k));
+          // strongest first, so the transformation itself feels like a step up
+          fresh.sort((a, b) => (MOVES[b].p || 0) - (MOVES[a].p || 0));
+          if (fresh.length) {
+            learnMove(my, fresh[0], logs);
+            const rest = fresh.slice(1, 5);   // at most four more, spaced out
+            if (rest.length) {
+              my.catchup = [
+                ...(my.catchup || []),
+                ...rest.map((k, i) => [my.lvl + (i + 1) * 3, k]),
+              ];
+            }
+          }
         }
       }
       const d = DEX[my.sp];
