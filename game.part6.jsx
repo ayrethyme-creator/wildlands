@@ -128,7 +128,7 @@ const sauroA = (o) => (er) => {
     <path d="M9,30.6 Q5,28.6 1.6,26" stroke={sh(H, -0.24)} strokeWidth="2.6" fill="none" strokeLinecap="round" />
     {/* far pillar legs */}
     <g stroke={`url(#${g2})`} strokeWidth="4.4" fill="none" strokeLinecap="round" opacity=".7">
-      <polyline points="38,40 38,54" /><polyline points="23,39 23,54" />
+      <polyline points="38,40 38.8,47 38.2,54" /><polyline points="23,39 22.2,46 22.8,54" />
     </g>
     {/* barrel body */}
     <ellipse cx="30" cy="36" rx="16" ry="9.6" fill={`url(#${g1})`} />
@@ -143,7 +143,7 @@ const sauroA = (o) => (er) => {
     )}
     {/* near pillar legs, thick as tree trunks */}
     <g stroke={`url(#${g2})`} strokeWidth="5.2" fill="none" strokeLinecap="round">
-      <polyline points="41,39 41,55.4" /><polyline points="20,38 20,55.4" />
+      <polyline points="41,39 41.9,47 41.2,55.4" /><polyline points="20,38 19.1,46 19.8,55.4" />
     </g>
     <g fill={sh(H, -0.4)}>
       <ellipse cx="41" cy="55.8" rx="3" ry="1.4" /><ellipse cx="20" cy="55.8" rx="3" ry="1.4" />
@@ -241,7 +241,7 @@ const armorA = (o) => (er) => {
     <path d="M14,38 Q9,40 8,44" stroke={sh(H, -0.1)} strokeWidth="3.2" fill="none" strokeLinecap="round" />
     {/* far pair of column legs */}
     <g stroke={`url(#${g2})`} strokeWidth="4" fill="none" strokeLinecap="round" opacity=".7">
-      <polyline points="38,40 38,48" /><polyline points="22,40 22,48" />
+      <polyline points="38,40 38.7,44 38.2,48" /><polyline points="22,40 21.3,44 21.8,48" />
     </g>
     {/* the shell: a high dome, which is the whole animal */}
     <path d="M13.6,38 Q13,24 30,21.4 Q47,19.6 49.6,32 Q50.6,38.8 46,40.4 Q30,43.4 17.6,41.4 Z"
@@ -267,7 +267,7 @@ const armorA = (o) => (er) => {
     )}
     {/* near legs, then the head reaching out of the shell */}
     <g stroke={`url(#${g2})`} strokeWidth="4.6" fill="none" strokeLinecap="round">
-      <polyline points="42,40 42,50" /><polyline points="19,40 19,50" />
+      <polyline points="42,40 42.8,45 42.2,50" /><polyline points="19,40 18.2,45 18.8,50" />
     </g>
     <path d="M46.6,30.6 Q54,27.4 58.6,29.4 Q61.6,31 61,34.2 Q60,37.2 55.6,37.4
              Q49,37.4 46,34.6 Z" fill={H} />

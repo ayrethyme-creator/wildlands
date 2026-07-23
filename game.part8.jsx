@@ -553,7 +553,7 @@ const elephA = (o) => (er) => {
     <path d="M11,34 Q7,38 8,43" stroke={sh(H, -0.12)} strokeWidth="2.2" fill="none" strokeLinecap="round" />
     {/* far column legs */}
     <g stroke={`url(#${g2})`} strokeWidth="5.4" fill="none" strokeLinecap="round" opacity=".7">
-      <polyline points="36,42 36,54" /><polyline points="19,41 19,54" />
+      <polyline points="36,42 36.8,48 36.2,54" /><polyline points="19,41 18.2,47 18.8,54" />
     </g>
     {/* the great domed body */}
     <path d="M40,25 Q48,29 47.6,37 Q47.4,45 41,48 Q28,52 17,48
@@ -565,7 +565,7 @@ const elephA = (o) => (er) => {
     )}
     {/* near column legs with toenails */}
     <g stroke={`url(#${g2})`} strokeWidth="6.2" fill="none" strokeLinecap="round">
-      <polyline points="40,41 40,55.4" /><polyline points="16,40 16,55.4" />
+      <polyline points="40,41 40.9,48 40.2,55.4" /><polyline points="16,40 15.1,47 15.8,55.4" />
     </g>
     <g fill={sh(H, -0.34)}>
       <ellipse cx="40" cy="55.8" rx="3.6" ry="1.5" /><ellipse cx="16" cy="55.8" rx="3.6" ry="1.5" />
