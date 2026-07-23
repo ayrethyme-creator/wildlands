@@ -235,21 +235,76 @@ const serpentM = (o) => (er) => {
   </g>
   );
 };
-const hoofM = (o) => (er) => (
+const hoofM = (o) => (er) => {
+  const C = o.coat || "#f2ede0";
+  const M = o.maneC || sh(C, -0.24);
+  const g1 = gid("hmc", C), g2 = gid("hml", C);
+  return (
   <g>
-    {o.wings && <g fill={o.wingC || "#f2ede0"}><path d="M8,34 Q-2,18 16,18 L24,28 Z" /><path d="M56,34 Q66,18 48,18 L40,28 Z" /></g>}
-    {o.horn && <path d="M29,17 L32,2 L35,17 Z" fill={o.hornC || "#e8c547"} />}
-    {o.antlers && <g stroke={o.hornC || "#c9a86a"} strokeWidth="2.4" fill="none" strokeLinecap="round"><path d="M23,16 L19,5 M19,10 L14,7" /><path d="M41,16 L45,5 M45,10 L50,7" /></g>}
-    <path d="M20,22 L16,8 L27,18 Z" fill={o.coat} /><path d="M44,22 L48,8 L37,18 Z" fill={o.coat} />
-    <path d="M26,16 Q32,10 38,16 L40,30 L24,30 Z" fill={o.maneC || "#8a7a5c"} />
-    <path d="M24,26 Q32,18 40,26 L42,42 Q40,50 32,52 Q24,50 22,42 Z" fill={o.coat} />
-    {o.kelp && <g stroke="#3c7a5c" strokeWidth="2" fill="none" strokeLinecap="round"><path d="M22,26 Q18,32 22,38" /><path d="M42,26 Q46,32 42,38" /></g>}
-    <ellipse cx="32" cy="47" rx="7" ry="5" fill={o.muzzle || "#d9cfc0"} />
-    <circle cx="29" cy="47" r="1.1" fill="#2a2018" /><circle cx="35" cy="47" r="1.1" fill="#2a2018" />
-    <Eye x={26} y={35} r={2.5 * er} iris={o.iris || "#6b4c9a"} />
-    <Eye x={38} y={35} r={2.5 * er} iris={o.iris || "#6b4c9a"} />
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(C, -0.18)} /><stop offset=".55" stopColor={C} />
+        <stop offset="1" stopColor={sh(C, 0.24)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(C, -0.14)} /><stop offset="1" stopColor={sh(C, 0.12)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="31" cy="57.4" rx="19" ry="2.3" fill="#000" opacity=".15" />
+    {o.wings && (
+      <g fill={sh(C, 0.1)} opacity=".9">
+        <path d="M30,26 Q18,6 2,6 Q14,16 18,30 Q24,30 30,26 Z" />
+        <g stroke={sh(C, -0.3)} strokeWidth=".7" fill="none" opacity=".6">
+          <path d="M28,25 Q18,12 5,7" /><path d="M25,28 Q17,18 5,12" />
+        </g>
+      </g>
+    )}
+    {/* flowing tail */}
+    <path d="M14,31 Q6,36 4,46" stroke={M} strokeWidth="3.4" fill="none" strokeLinecap="round" />
+    <path d="M14,32 Q8,38 7,47" stroke={sh(M, 0.3)} strokeWidth="2" fill="none" strokeLinecap="round" />
+    {o.kelp && (
+      <g fill={o.leafC || "#4a8a5c"} opacity=".85">
+        <path d="M12,34 q-8,-3 -10,4 q6,0 9,2 Z" /><path d="M18,44 q-7,3 -6,9 q4,-5 8,-6 Z" />
+      </g>
+    )}
+    <g stroke={`url(#${g2})`} strokeWidth="2.6" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity=".7">
+      <polyline points="37.5,36 36.6,45 38.2,51 38.2,55.4" />
+      <polyline points="20.5,35 22.6,44 19.4,50 19.8,55.4" />
+    </g>
+    <path d="M42.5,26.4 Q48.4,28.6 48.8,33.6 Q48.8,39.4 44.4,42.4 L36,43.8
+             Q26,45.8 19.6,43.6 Q13.6,41.4 13.2,34.4 Q13,28 18.8,26 Q30,22.8 42.5,26.4 Z"
+      fill={`url(#${g1})`} />
+    <g stroke={`url(#${g2})`} strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="42,34.6 41,44 42.8,50 42.8,55.6" />
+      <polyline points="19.4,33.6 21.8,43.6 18.4,50 18.8,55.6" />
+    </g>
+    <g fill={sh(C, -0.5)}>
+      <ellipse cx="42.8" cy="56" rx="1.7" ry="1.3" /><ellipse cx="18.8" cy="56" rx="1.7" ry="1.3" />
+    </g>
+    <path d="M41.4,28.6 Q44.4,21.6 48.6,17.4 L53.6,20.6 Q50.4,24.8 48.4,31 Z" fill={`url(#${g1})`} />
+    <path d="M42.6,27.4 Q45.6,20.4 49.8,16.2 Q51.4,17.2 51.8,18.6 Q47.6,22.6 45.2,29 Z" fill={M} />
+    <path d="M48.8,17.4 Q54,13.4 58.6,14.6 Q61.6,16 61,19.6 Q60.2,22.8 56.6,23.4
+             Q52,24 49.6,21.6 Q48,19.8 48.8,17.4 Z" fill={C} />
+    <ellipse cx="59" cy="20.4" rx="3.2" ry="2.4" fill={o.muzzle || sh(C, -0.12)} />
+    <path d="M50.2,15.6 Q47.6,12.4 46.4,11.8 Q48.6,11.4 51.4,13.8 Z" fill={sh(C, -0.2)} />
+    {o.horn && (
+      <g>
+        <path d="M54,13.6 L57.4,1.6 L58.6,13 Z" fill={o.hornC || "#e8dcc3"} />
+        <g stroke={sh(o.hornC || "#e8dcc3", -0.3)} strokeWidth=".7" fill="none" opacity=".7">
+          <path d="M55,10.6 L58,10 M55.6,7.6 L57.8,7.2 M56.4,4.6 L57.6,4.4" />
+        </g>
+      </g>
+    )}
+    {o.antlers && (
+      <g fill="none" stroke={o.hornC || "#c9b88a"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M52.6,13.4 L50.4,7.6 M50.4,7.6 L47.2,5.4 M50.4,7.6 L49.4,3" />
+        <path d="M56.8,13.4 L58.8,7.4 M58.8,7.4 L61.8,5 M58.8,7.4 L59.6,2.8" />
+      </g>
+    )}
+    <Eye x={53.6} y={17.8} r={1.85 * er} iris={o.iris || "#4a3320"} />
   </g>
-);
+  );
+};
 const giantM = (o) => (er) => {
   const F = o.fur || "#a8a396";
   const SK = o.skin || sh(F, -0.3);
@@ -326,45 +381,95 @@ const giantM = (o) => (er) => {
   </g>
   );
 };
-const bugM = (o) => (er) => (
+const bugM = (o) => (er) => {
+  const B = o.body || "#5c4a7a";
+  const LG = o.legC || sh(B, -0.3);
+  const g1 = gid("bgc", B);
+  return (
   <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(B, 0.3)} /><stop offset=".6" stopColor={B} />
+        <stop offset="1" stopColor={sh(B, -0.3)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="32" cy="56" rx="15" ry="2" fill="#000" opacity=".14" />
     {o.moth ? (
-      <g>
-        <g fill={o.wingC || "#8a7a9c"}><path d="M4,28 Q2,10 24,20 L26,34 L8,40 Z" /><path d="M60,28 Q62,10 40,20 L38,34 L56,40 Z" /></g>
-        <g stroke="#4c4438" strokeWidth="1.6" fill="none" strokeLinecap="round"><path d="M27,18 Q24,10 19,8" /><path d="M37,18 Q40,10 45,8" /></g>
-        <ellipse cx="32" cy="34" rx="9" ry="12" fill={o.body} />
-        <Eye x={28} y={28} r={3 * er} iris={o.iris || "#d94a3a"} />
-        <Eye x={36} y={28} r={3 * er} iris={o.iris || "#d94a3a"} />
+      <g fill={o.wingC || sh(B, 0.34)} opacity=".82">
+        <path d="M30,28 Q12,10 4,24 Q14,32 28,34 Z" /><path d="M34,28 Q52,10 60,24 Q50,32 36,34 Z" />
+        <path d="M30,34 Q18,44 12,56 Q24,46 31,38 Z" /><path d="M34,34 Q46,44 52,56 Q40,46 33,38 Z" />
       </g>
     ) : (
-      <g>
-        <g stroke={o.legC || o.body} strokeWidth="2.4" fill="none" strokeLinecap="round">
-          <path d="M20,30 Q8,24 4,14" /><path d="M20,36 Q6,34 2,26" /><path d="M20,42 Q8,46 6,56" /><path d="M22,46 Q14,54 14,60" />
-          <path d="M44,30 Q56,24 60,14" /><path d="M44,36 Q58,34 62,26" /><path d="M44,42 Q56,46 58,56" /><path d="M42,46 Q50,54 50,60" />
-        </g>
-        <ellipse cx="32" cy="38" rx="13" ry="12" fill={o.body} />
-        <g fill="#1e1611"><circle cx="27" cy="42" r="1.6" /><circle cx="37" cy="42" r="1.6" /><circle cx="24" cy="38" r="1.2" /><circle cx="40" cy="38" r="1.2" /></g>
-        <Eye x={27} y={33} r={2.6 * er} iris={o.iris || "#d9a43a"} />
-        <Eye x={37} y={33} r={2.6 * er} iris={o.iris || "#d9a43a"} />
+      <g fill={o.wingC || "#cfd8e4"} opacity=".55">
+        <path d="M30,26 Q14,16 8,28 Q18,33 28,32 Z" /><path d="M34,26 Q50,16 56,28 Q46,33 36,32 Z" />
       </g>
     )}
+    <g fill={`url(#${g1})`}>
+      <ellipse cx="32" cy="40" rx="7" ry="10" />
+      <ellipse cx="32" cy="28" rx="6.4" ry="7" />
+      <ellipse cx="32" cy="18" rx="6" ry="5.6" />
+    </g>
+    <g stroke={LG} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="26,28 18,32 16,40" /><polyline points="38,28 46,32 48,40" />
+      <polyline points="27,36 20,42 22,50" /><polyline points="37,36 44,42 42,50" />
+    </g>
+    <g stroke={sh(B, -0.4)} strokeWidth="1.1" fill="none" strokeLinecap="round">
+      <path d="M29,14 Q26,7 21,4" /><path d="M35,14 Q38,7 43,4" />
+    </g>
+    <Eye x={29} y={17} r={2 * er} iris={o.iris || "#e8c547"} />
+    <Eye x={35} y={17} r={2 * er} iris={o.iris || "#e8c547"} />
   </g>
-);
-const multiM = (o) => (er) => (
+  );
+};
+const multiM = (o) => (er) => {
+  const H = o.hide || "#5c6a4a";
+  const g1 = gid("mlc", H), g2 = gid("mll", H);
+  return (
   <g>
-    <path d="M14,30 Q14,52 32,54 Q50,52 50,30" stroke={o.hide} strokeWidth="8" fill="none" strokeLinecap="round" />
-    {[[13, 24, 0.8], [51, 24, 0.8], [32, 30, 1.1]].map(([cx, cy, s], i) => (
-      <g key={i}>
-        <ellipse cx={cx} cy={cy} rx={10 * s} ry={9 * s} fill={o.hide} />
-        {o.serpent
-          ? <path d={`M${cx - 3 * s},${cy + 6 * s} L${cx},${cy + 10 * s} L${cx + 3 * s},${cy + 6 * s} Z`} fill={o.snout || "#c9704a"} />
-          : <ellipse cx={cx} cy={cy + 5 * s} rx={5 * s} ry={3.6 * s} fill={o.snout || "#c9b98a"} />}
-        <Eye x={cx - 4 * s} y={cy - 2 * s} r={2 * s * er} iris={o.iris || "#d94a3a"} />
-        <Eye x={cx + 4 * s} y={cy - 2 * s} r={2 * s * er} iris={o.iris || "#d94a3a"} />
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.24)} /><stop offset=".55" stopColor={H} />
+        <stop offset="1" stopColor={sh(H, 0.3)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.16)} /><stop offset="1" stopColor={sh(H, 0.14)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="30" cy="57.4" rx="20" ry="2.4" fill="#000" opacity=".16" />
+    <path d="M14,36 Q6,34 2,28" stroke={sh(H, -0.1)} strokeWidth="4" fill="none" strokeLinecap="round" />
+    <g stroke={`url(#${g2})`} strokeWidth="3.6" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity=".7">
+      <polyline points="36,42 34,48 37,53" /><polyline points="21,41 23,47 20,53" />
+    </g>
+    <path d="M40,28 Q47,31 46.6,37 Q46.4,43 40,46 Q29,49.6 20,46.6
+             Q13,43.6 13,36.6 Q13,30 20,27.6 Q31,24.6 40,28 Z" fill={`url(#${g1})`} />
+    <g stroke={`url(#${g2})`} strokeWidth="4.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="39,42 37,49 41,54" /><polyline points="18,41 20.6,48 17,54" />
+    </g>
+    {/* three necks and three heads, which is the entire point */}
+    {[[-1, 42, 14], [0, 52, 10], [1, 60, 16]].map(([i, hx, hy], k) => (
+      <g key={k}>
+        <path d={`M${38 + i * 3},29 Q${(38 + i * 3 + hx) / 2},${(29 + hy) / 2} ${hx},${hy + 4}
+                  L${hx + 5},${hy + 6} Q${(43 + i * 3 + hx) / 2},${(31 + hy) / 2} ${41 + i * 3},32 Z`}
+          fill={`url(#${g1})`} />
+        {o.serpent ? (
+          <g>
+            <ellipse cx={hx + 2} cy={hy} rx="6" ry="4.2" fill={H} transform={`rotate(${i * 12} ${hx + 2} ${hy})`} />
+            <path d={`M${hx + 6},${hy - 1.4} Q${hx + 12},${hy - 1} ${hx + 13},${hy + 1.6} Q${hx + 8},${hy + 2.6} ${hx + 5},${hy + 2} Z`}
+              fill={sh(H, -0.16)} />
+          </g>
+        ) : (
+          <g>
+            <ellipse cx={hx + 2} cy={hy} rx="6.4" ry="5.4" fill={H} />
+            <ellipse cx={hx + 6} cy={hy + 2.4} rx="3.6" ry="2.6" fill={o.snout || sh(H, 0.34)} />
+            <path d={`M${hx - 2},${hy - 4} Q${hx - 4},${hy - 9} ${hx + 1},${hy - 6} Z`} fill={sh(H, -0.2)} />
+          </g>
+        )}
+        <Eye x={hx + 3} y={hy - 1.4} r={1.5 * er} iris={o.iris || "#e8c547"} />
       </g>
     ))}
   </g>
-);
+  );
+};
 
 Object.assign(ART, {
   // Olympus Rift — Greek & Roman

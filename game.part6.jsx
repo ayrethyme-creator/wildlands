@@ -329,19 +329,44 @@ const pteroA = (o) => (er) => {
   </g>
   );
 };
-const marineA = (o) => (er) => (
+const marineA = (o) => (er) => {
+  const H = o.hide || "#4a6a7a";
+  const BE = o.belly || sh(H, 0.46);
+  const g1 = gid("mrc", H);
+  return (
   <g>
-    <path d="M8,42 Q2,33 12,31 L21,38 Z" fill={o.finC || o.hide} />
-    <path d="M56,42 Q62,33 52,31 L43,38 Z" fill={o.finC || o.hide} />
-    {o.tents && <g stroke={o.hide} strokeWidth="4" strokeLinecap="round" fill="none"><path d="M22,46 Q18,56 12,55" /><path d="M32,48 Q32,58 28,60" /><path d="M42,46 Q46,56 52,55" /></g>}
-    <ellipse cx="32" cy="34" rx="15" ry="12" fill={o.hide} />
-    {o.belly && <ellipse cx="32" cy="40" rx="10" ry="6" fill={o.belly} />}
-    {o.bigEye ? <g><Eye x={24} y={33} r={4.2 * er} iris={o.iris || "#7ab4d9"} /><Eye x={40} y={33} r={4.2 * er} iris={o.iris || "#7ab4d9"} /></g>
-      : <g><Eye x={24} y={32} r={2.6 * er} iris={o.iris || "#7ab4d9"} /><Eye x={40} y={32} r={2.6 * er} iris={o.iris || "#7ab4d9"} /></g>}
-    <path d="M21,42 Q32,49 43,42 L43,46 Q32,53 21,46 Z" fill={o.jaw || "#48657a"} />
-    {o.teeth && teethRow(42.4, 22, 6, 3.6)}
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.24)} /><stop offset=".5" stopColor={H} />
+        <stop offset="1" stopColor={BE} />
+      </linearGradient>
+    </defs>
+    {/* marine reptiles: paddle limbs, long jaws, a tail that drives them */}
+    <path d="M14,34 Q6,28 2,22 Q7,28 8,34 Q7,40 2,46 Q6,40 14,36 Z" fill={sh(H, -0.16)} />
+    {o.tents ? (
+      <g stroke={H} strokeWidth="2" fill="none" strokeLinecap="round">
+        <path d="M22,42 Q16,52 10,58" /><path d="M30,44 Q28,54 26,60" /><path d="M38,43 Q42,53 46,59" />
+      </g>
+    ) : null}
+    <path d="M48,28 Q56,31 55.6,35 Q55,39.6 47,42 Q33,46 22,42 Q14,39 14,35
+             Q14,31 22,28 Q34,24 48,28 Z" fill={`url(#${g1})`} />
+    {/* four paddles, which is what a plesiosaur swims with */}
+    <path d="M38,40 Q34,50 26,54 Q31,45 34,39 Z" fill={o.finC || sh(H, -0.14)} />
+    <path d="M24,40 Q18,49 10,51 Q16,43 20,38.6 Z" fill={o.finC || sh(H, -0.14)} />
+    <path d="M38,30 Q34,20 26,17 Q31,26 34,31 Z" fill={o.finC || sh(H, -0.18)} opacity=".85" />
+    {/* neck and long jaw */}
+    <path d="M46,30 Q54,26 58,22 L61,26 Q56,29 52,34 Z" fill={`url(#${g1})`} />
+    <path d="M56,22 Q64,22 66,26 Q60,28 54,27.6 Z" fill={o.jaw || sh(H, -0.1)} />
+    {o.teeth && (
+      <g fill="#f4ecd8">
+        <path d="M58,26.6 L59,26.6 L58.5,28.6 Z" /><path d="M60.4,26.6 L61.4,26.6 L60.9,28.4 Z" />
+        <path d="M62.6,26.4 L63.6,26.4 L63.1,28 Z" />
+      </g>
+    )}
+    <Eye x={57} y={23.6} r={(o.bigEye ? 2.6 : 1.7) * er} iris={o.iris || "#c9a43a"} />
   </g>
-);
+  );
+};
 
 Object.assign(ART, {
   // Triassic
