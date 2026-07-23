@@ -1,70 +1,87 @@
 // ---------- CHAPTER VI — Part 9: THE MENAGERIE (sea, sky, small) ----------
 
 // --- birds ---
+// Parrots. Same principle as the songbirds - no neck, but a clearly separate
+// head mass. A parrot's outline is a big round skull, a heavy hooked bill under
+// it, a short upright body, and a long tail dropping behind the perch.
 const parrA = (o) => (er) => {
   const B = o.body || "#3a9a4a";
-  const W = o.wingC || sh(B, -0.2);
+  const W = o.wingC || sh(B, -0.22);
   const HD = o.head || B;
   const g1 = gid("prc", B), g2 = gid("prw", W);
+  const TC = o.tailC || sh(W, -0.08);
   return (
   <g>
     <defs>
       <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor={sh(B, -0.16)} /><stop offset=".6" stopColor={B} />
-        <stop offset="1" stopColor={sh(B, 0.28)} />
+        <stop offset="0" stopColor={sh(B, -0.18)} /><stop offset=".55" stopColor={B} />
+        <stop offset="1" stopColor={sh(B, 0.3)} />
       </linearGradient>
       <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor={sh(W, 0.12)} /><stop offset="1" stopColor={sh(W, -0.24)} />
+        <stop offset="0" stopColor={sh(W, 0.14)} /><stop offset="1" stopColor={sh(W, -0.26)} />
       </linearGradient>
     </defs>
-    <ellipse cx="30" cy="57.6" rx="13" ry="2" fill="#000" opacity=".14" />
-    {/* the long tail a parrot trails behind the perch */}
+    <ellipse cx="30" cy="57.6" rx="12" ry="2" fill="#000" opacity=".14" />
+
+    {/* long tail, drawn as overlapping feathers of different lengths */}
     {o.longTail ? (
       <g>
-        <path d="M22,40 Q13,50 7,62 L12,63 Q20,51 27,43 Z" fill={o.tailC || `url(#${g2})`} />
-        <path d="M25,41 Q17,51 12,62 L15,62.6 Q22,51 29,44 Z" fill={sh(o.tailC || W, -0.18)} opacity=".7" />
+        <path d="M24,42 L8,60 L12,62 L28,46 Z" fill={TC} />
+        <path d="M26,43 L13,62 L17,63 L29,47 Z" fill={sh(TC, -0.16)} />
+        <path d="M28,44 L18,63 L22,63 L30,48 Z" fill={sh(TC, 0.12)} />
       </g>
     ) : (
-      <path d="M20,38 Q10,44 5,52 L11,53 Q19,46 25,42 Z" fill={o.tailC || `url(#${g2})`} />
+      <g>
+        <path d="M22,40 L7,50 L10,53 L25,44 Z" fill={TC} />
+        <path d="M24,41 L11,53 L15,55 L26,45.6 Z" fill={sh(TC, -0.14)} />
+      </g>
     )}
-    {/* short gripping feet */}
+
+    {/* short gripping feet, two toes forward two back */}
     <g stroke={o.footC || sh(B, -0.5)} strokeWidth="2.2" fill="none" strokeLinecap="round">
-      <path d="M27,45 L26.6,48.6" /><path d="M34,45 L34.4,48.6" />
+      <path d="M30,46 L29.6,49.6" /><path d="M37,45 L37.4,48.6" />
     </g>
     <g stroke={o.footC || sh(B, -0.5)} strokeWidth="1.4" fill="none" strokeLinecap="round">
-      <path d="M26.6,48.6 L23.6,50 M26.6,48.6 L29.6,50" />
-      <path d="M34.4,48.6 L31.4,50 M34.4,48.6 L37.4,50" />
+      <path d="M29.6,49.6 L26.6,51 M29.6,49.6 L32.6,51" />
+      <path d="M37.4,48.6 L34.4,50 M37.4,48.6 L40.4,50" />
     </g>
-    {/* Head and body are one mass. A parrot has no visible neck - the skull
-        sits straight onto the shoulders, which is most of its silhouette. */}
-    <path d="M46,20 Q55,25 53,34 Q51,45 38,48 Q24,50 17,42 Q12,35 18,27 Q28,16 46,20 Z"
-      fill={`url(#${g1})`} />
+
+    {/* body: upright, with a deep chest and a rump that tapers to the tail */}
+    <path d="M40,24 Q29,22 23,30 Q19,37 22,43 Q28,49 37,48.6 Q46,47.6 49,39
+             Q51,31 46,26 Z" fill={`url(#${g1})`} />
+    {o.belly && <path d="M25,42 Q33,49 44,45.6 Q34,50.6 25,45 Z" fill={o.belly} />}
     {o.stripes && (
-      <g stroke={o.markC || sh(B, -0.45)} strokeWidth=".9" fill="none" opacity=".7">
-        <path d="M21,30 q7,1.8 14,.4 M20,35 q7,1.8 14,.4 M21,40 q7,1.8 13,.4" />
+      <g stroke={o.markC || sh(B, -0.44)} strokeWidth=".9" fill="none" opacity=".6">
+        <path d="M24,32 q7,2 13,.6 M23,37 q7.4,2 14,.6 M24,42 q7,1.8 13,.4" />
       </g>
     )}
-    {o.belly && <path d="M22,42 Q33,48 45,44 Q33,50 22,45 Z" fill={o.belly} />}
-    {/* folded wing */}
-    <path d="M19,29 Q32,25 42,32 Q38,42 25,43 Q15,39 19,29 Z" fill={`url(#${g2})`} />
-    <path d="M23,32 Q32,31 39,35" stroke={sh(W, -0.32)} strokeWidth="1" fill="none"
-      opacity=".6" strokeLinecap="round" />
-    {/* the head, same mass, different colour */}
-    <path d="M46,20 Q55,25 53,33 Q47,35 42,29 Q39,23 46,20 Z" fill={HD} />
-    {o.face && <ellipse cx="49" cy="27" rx="4.6" ry="4.4" fill={o.face} />}
-    {o.cheek && <ellipse cx="47.4" cy="31" rx="2.8" ry="2.2" fill={o.cheekC || "#e8734a"} />}
+
+    {/* wing blade along the flank */}
+    <path d="M42,29 Q32,25.6 24,31 Q20,36 24,41 Q34,43 42,35 Z" fill={`url(#${g2})`} />
+    <g stroke={sh(W, -0.4)} strokeWidth=".9" fill="none" opacity=".6" strokeLinecap="round">
+      <path d="M25,37 Q33,38 41,33" /><path d="M24.6,40 Q32,40.6 38.6,36" />
+    </g>
+
+    {/* crest, behind the skull */}
     {o.crest && (
       <g fill={o.crestC || sh(HD, 0.3)}>
-        <path d="M42,15 Q39,4 46,9 Q42.6,11.6 43.4,17 Z" />
-        <path d="M47,14 Q46,3 53,8 Q48.6,10.6 49,15 Z" />
+        <path d="M41,14 Q37,2 46,8 Q41.6,10.6 42.4,16 Z" />
+        <path d="M46,12.6 Q44,1 53,6.6 Q47.6,9 48,14 Z" />
       </g>
     )}
-    {/* the deep hooked bill, with the lower mandible showing */}
-    <path d="M52,22 Q60,22 60.4,27 Q60,33 55,29.6 Q53.6,25.6 51,23.6 Z"
+    {/* the skull: large and round, sitting straight on the shoulders */}
+    <path d="M39,25 Q38,16 45,12.6 Q53,10.6 56,17 Q58,24 52,28.4 Q43,30.4 39,25 Z" fill={HD} />
+    {o.face && <ellipse cx="50" cy="21" rx="4.6" ry="4.6" fill={o.face} />}
+    {o.cap && <path d="M40,18 Q46,11.6 54,15.6 Q46.6,16.4 40.6,20.4 Z" fill={o.cap} />}
+    {o.cheek && <ellipse cx="48.6" cy="25.6" rx="2.8" ry="2.2" fill={o.cheekC || "#e8734a"} />}
+
+    {/* the bill: deep, hooked, with the lower mandible visible under it */}
+    <path d="M54,18.6 Q61.4,19.6 61.4,24.4 Q61,30 56.4,27 Q55,22.6 52.6,20.6 Z"
       fill={o.beakC || "#3c3630"} />
-    <path d="M52.6,26.6 Q56.4,28 58,30.4 Q54.6,31.4 52.4,29 Z"
-      fill={sh(o.beakC || "#3c3630", 0.3)} />
-    <Eye x={48.6} y={24} r={2.1 * er} iris={o.iris || "#e8dcc3"} />
+    <path d="M54.6,24 Q58.6,25.4 60,27.6 Q56.4,28.6 54.4,26.4 Z"
+      fill={sh(o.beakC || "#3c3630", 0.28)} />
+    <ellipse cx="55.4" cy="20.4" rx=".8" ry=".7" fill={sh(o.beakC || "#3c3630", 0.5)} />
+    <Eye x={50} y={19.6} r={2.1 * er} iris={o.iris || "#e8dcc3"} />
   </g>
   );
 };
@@ -418,70 +435,106 @@ const fowlA = (o) => (er) => {
 };
 
 // --- songbirds and corvids: compact, side-on, and emphatically no neck ---
+// Songbirds and corvids. No neck, but emphatically not one round blob either:
+// a bird has a distinct head mass sitting straight on the shoulders with a dip
+// at the nape, a full breast, a back that tapers to the rump, and a tail built
+// from separate feathers. Those four edges are the whole silhouette.
 const songA = (o) => (er) => {
   const B = o.body || "#7a6a4a";
-  const W = o.wingC || sh(B, -0.22);
+  const W = o.wingC || sh(B, -0.24);
   const HD = o.head || B;
   const g1 = gid("sgc", B), g2 = gid("sgw", W);
+  const TC = o.tailC || sh(W, -0.1);
   return (
   <g>
     <defs>
       <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor={sh(B, -0.16)} /><stop offset=".6" stopColor={B} />
-        <stop offset="1" stopColor={sh(B, 0.28)} />
+        <stop offset="0" stopColor={sh(B, -0.18)} /><stop offset=".55" stopColor={B} />
+        <stop offset="1" stopColor={sh(B, 0.3)} />
       </linearGradient>
       <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor={sh(W, 0.12)} /><stop offset="1" stopColor={sh(W, -0.24)} />
+        <stop offset="0" stopColor={sh(W, 0.14)} /><stop offset="1" stopColor={sh(W, -0.26)} />
       </linearGradient>
     </defs>
-    <ellipse cx="31" cy="57.6" rx="13" ry="2" fill="#000" opacity=".14" />
-    {/* tail: short and pointed, or streaming for the showy ones */}
+    <ellipse cx="30" cy="57.4" rx="12" ry="2" fill="#000" opacity=".14" />
+
+    {/* tail as separate feathers, so it reads as a tail and not a paddle */}
     {o.longTail ? (
-      <path d="M18,38 Q8,48 3,61 L9,62 Q17,50 24,42 Z" fill={o.tailC || `url(#${g2})`} />
+      <g fill={TC}>
+        <path d="M22,40 L5,58 L9,60 L26,44 Z" />
+        <path d="M23,41 L9,60 L13,61 L27,45 Z" fill={sh(TC, -0.14)} />
+        <path d="M25,42 L14,61 L18,61 L28,46 Z" fill={sh(TC, 0.1)} />
+      </g>
     ) : (
-      <path d="M17,34 Q7,36 2,42 Q10,42 19,39 Z" fill={o.tailC || `url(#${g2})`} />
+      <g fill={TC}>
+        <path d="M20,38 L2,44 L4,47 L21,43 Z" />
+        <path d="M20,40 L3,47 L6,50 L22,45 Z" fill={sh(TC, -0.14)} />
+        <path d="M21,42 L7,50 L11,52 L23,46.6 Z" fill={sh(TC, 0.1)} />
+      </g>
     )}
-    {/* tiny legs, barely there */}
+
+    {/* legs */}
     <g stroke={o.footC || sh(B, -0.5)} strokeWidth="1.8" fill="none" strokeLinecap="round">
-      <path d="M27,48 L26.6,51.6" /><path d="M34,48 L34.4,51.6" />
+      <path d="M31,47 L30.4,51.4" /><path d="M38,46 L38.6,50.6" />
     </g>
     <g stroke={o.footC || sh(B, -0.5)} strokeWidth="1.2" fill="none" strokeLinecap="round">
-      <path d="M26.6,51.6 L24,53 M26.6,51.6 L27,53.6 M26.6,51.6 L29.2,53" />
-      <path d="M34.4,51.6 L31.8,53 M34.4,51.6 L34.8,53.6 M34.4,51.6 L37,53" />
+      <path d="M30.4,51.4 L27.6,52.8 M30.4,51.4 L30.6,53.6 M30.4,51.4 L33,52.8" />
+      <path d="M38.6,50.6 L35.8,52 M38.6,50.6 L38.8,52.8 M38.6,50.6 L41.2,52" />
     </g>
-    {/* one continuous teardrop from crown to tail - no neck at all, which is
-        what makes a sparrow read as a sparrow */}
-    <path d="M45,22 Q52,26 51,34 Q50,44 38,47 Q24,49 17,42 Q13,36 18,29 Q28,19 45,22 Z"
-      fill={`url(#${g1})`} />
-    {o.bib && <path d="M40,38 Q47,40 48.6,33 Q46.6,44 38,44.4 Z" fill={o.bib} />}
-    {o.belly && <path d="M22,42 Q32,47 43,44 Q32,49 22,44 Z" fill={o.belly} />}
-    {/* folded wing */}
-    <path d="M20,30 Q32,26 41,32 Q37,41 25,42 Q16,39 20,30 Z" fill={`url(#${g2})`} />
-    <path d="M23,33 Q31,32 38,35" stroke={sh(W, -0.32)} strokeWidth="1" fill="none"
-      opacity=".6" strokeLinecap="round" />
+
+    {/* BODY. Read the outline clockwise from the nape: back sweeping down to a
+        tapered rump, belly tucked under, then a full rounded breast rising to
+        the throat. That breast is what stops it looking like a ball. */}
+    <path d="M42,25 Q31,21 23,28 Q17,34 19,40 Q24,47 34,47.6 Q45,47 49,38
+             Q52,31 48,27 Z" fill={`url(#${g1})`} />
+    {o.belly && <path d="M25,41 Q33,48 44,45 Q35,49.6 25,44 Z" fill={o.belly} />}
+    {o.bib && <path d="M42,36 Q49,38 50.6,31 Q48.6,43 41.6,43.6 Z" fill={o.bib} />}
+    {o.streaks && (
+      <g stroke={o.markC || sh(B, -0.44)} strokeWidth=".9" fill="none" opacity=".65"
+        strokeLinecap="round">
+        <path d="M27,30 L25,35 M32,28.6 L30,34 M37,29 L35,34.4 M42,31 L40.6,36" />
+      </g>
+    )}
+
+    {/* folded wing: a pointed blade lying along the flank, tip toward the tail */}
+    <path d="M43,29 Q33,25.6 25,30 Q20,34 23,39 Q33,41.4 42,34 Z" fill={`url(#${g2})`} />
+    <g stroke={sh(W, -0.4)} strokeWidth=".85" fill="none" opacity=".65" strokeLinecap="round">
+      <path d="M24,36 Q32,36.6 40,32.6" /><path d="M23.6,38.4 Q31,38.6 37.4,35.4" />
+    </g>
+    <path d="M23,39 Q30,40.6 38,36.6" stroke={sh(W, -0.5)} strokeWidth="1" fill="none"
+      opacity=".5" strokeLinecap="round" />
+
+    {/* HEAD: its own rounded mass set on the shoulders, sitting a little
+        forward and high so the nape shows a dip rather than a smooth curve */}
     {o.crest && (
-      <path d="M42,17 Q40,7 48,12 Q44,14 44.6,19 Z" fill={o.crestC || sh(HD, -0.24)} />
+      <path d="M43,16 Q40,5 49,10 Q44.6,12.6 45.4,18 Z" fill={o.crestC || sh(HD, -0.24)} />
     )}
-    {/* the head is part of the same mass, only tinted differently */}
-    <path d="M45,22 Q52,26 51,33 Q46,34 42,29 Q40,24 45,22 Z" fill={HD} />
-    {o.mask && <path d="M44,24 Q50,24 52,28.6 Q47,29 43.6,27.4 Z" fill={o.mask} />}
-    {o.cheek && <ellipse cx="47" cy="30" rx="2.6" ry="2" fill={o.cheekC || "#e8734a"} />}
-    {/* small beak, sized to the bird */}
+    <path d="M41,26 Q40,18 46,15 Q53,13 55.4,19 Q57,25 52,29 Q45,31 41,26 Z" fill={HD} />
+    {o.cap && <path d="M42,20 Q47,14.4 54,17.6 Q47.4,18 42.6,22 Z" fill={o.cap} />}
+    {o.mask && <path d="M45,22 Q51,21 55,24.6 Q50,26.4 45.4,25.4 Z" fill={o.mask} />}
+    {o.cheek && <ellipse cx="48" cy="27" rx="2.6" ry="2" fill={o.cheekC || "#e8734a"} />}
+    {o.throat && <path d="M48,29.4 Q53,29 54.6,26 Q54,32.4 48.6,32.6 Z" fill={o.throat} />}
+
+    {/* bill */}
     {o.bill === "dagger" ? (
-      <path d="M50,25 L63,28 L50,30.6 Z" fill={o.beakC || "#3c3630"} />
+      <path d="M54,21.6 L64,25 L54,27.4 Z" fill={o.beakC || "#3c3630"} />
     ) : o.bill === "chisel" ? (
-      <path d="M50.4,25.4 L60,27.6 L50.4,30 Z" fill={o.beakC || "#3c3630"} />
+      <path d="M54.4,22 L62,24.6 L54.4,27 Z" fill={o.beakC || "#3c3630"} />
     ) : o.bill === "stout" ? (
-      <path d="M50,25 Q57,26.4 56.6,28.4 Q55,30.6 50,30.4 Z" fill={o.beakC || "#3c3630"} />
+      <g fill={o.beakC || "#3c3630"}>
+        <path d="M54,21.4 Q60.4,23 60,25.4 L54,25.6 Z" />
+        <path d="M54,25.6 L60,25.4 Q59,27.6 54.4,27.4 Z" fill={sh(o.beakC || "#3c3630", 0.22)} />
+      </g>
+    ) : o.bill === "hooked" ? (
+      <path d="M54,21.6 Q60,22.4 60.4,25 Q60,28.6 57.4,26.6 Q56.6,24.6 54,25.6 Z"
+        fill={o.beakC || "#3c3630"} />
     ) : (
-      <path d="M50.4,25.8 L57.4,28 L50.4,30 Z" fill={o.beakC || "#3c3630"} />
+      <path d="M54.4,22.4 L60.6,24.6 L54.4,26.8 Z" fill={o.beakC || "#3c3630"} />
     )}
-    <Eye x={46.6} y={26.4} r={2 * er} iris={o.iris || "#26221c"} />
+    <Eye x={49.6} y={22} r={2 * er} iris={o.iris || "#26221c"} />
   </g>
   );
 };
-
-// --- the hummingbird gets its own model, because nothing else hovers ---
 const hummA = (o) => (er) => {
   const B = o.body || "#2e9a6a";
   const W = o.wingC || "#c9d4e8";
