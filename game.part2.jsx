@@ -601,16 +601,6 @@ const ART = {
       <Eye x={28.5} y={21} r={2.1 * er} iris="#c9a63a" /><Eye x={35.5} y={21} r={2.1 * er} iris="#c9a63a" />
     </g>
   ),
-  penguin: (er) => (
-    <g>
-      <ellipse cx="32" cy="36" rx="15" ry="17" fill="#2e2b28" />
-      <path d="M22,30 Q32,24 42,30 Q42,44 32,48 Q22,44 22,30 Z" fill="#f4f6f8" />
-      <path d="M23,36 Q32,32 41,36 Q41,44 32,47 Q23,44 23,36 Z" fill="none" stroke="#2e2b28" strokeWidth="2.4" />
-      <circle cx="32" cy="21" r="1.4" fill="#f08a9b" />
-      <path d="M32,26 q3.4,0 2.8,4 q-2.8,1.8 -5.6,0 q-0.6,-4 2.8,-4 z" fill="#3c3833" />
-      <Eye x={26} y={24} r={2.3 * er} /><Eye x={38} y={24} r={2.3 * er} />
-    </g>
-  ),
   seal: (er) => (
     <g>
       <circle cx="32" cy="36" r="16" fill="#8a93a3" />
