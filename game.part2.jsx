@@ -534,7 +534,15 @@ const ART = {
 // SVG. Everything not listed falls back to the generator, so the game works
 // identically whether there is one photo in here or nine hundred. Add a file to
 // art/ and a line here, and that species switches over. Nothing else changes.
-const PHOTO_ART = { leopard: 1 };
+const PHOTO_ART = {
+  // Grok-generated photo art
+  leopard: 1,
+  // PhyloPic silhouettes, tinted to each species' own palette. All CC0 or
+  // public domain, and each one verified to match the exact species rather
+  // than whatever the name search returned first - the search is a loose
+  // match and will happily hand back a different animal in the same genus.
+  africanelephant: 1, baldeagle: 1, beaver: 1, cheetah: 1, croc: 1, gorilla: 1, hippo: 1, moose: 1, orca: 1, otter: 1, owl: 1, panda: 1, penguin: 1, polarbear: 1, redfox: 1, tiger: 1, whiterhino: 1, wolf: 1, zebra: 1,
+};
 
 // ---------- SPRITE COMPONENT ----------
 function Sprite({ sp, size = 48, flip, anim }) {
