@@ -111,21 +111,78 @@ const dragonE = (o) => (er) => {
   </g>
   );
 };
-const birdM = (o) => (er) => (
+const birdM = (o) => (er) => {
+  const B = o.body || "#c94a2e";
+  const W = o.wingC || sh(B, -0.16);
+  const HD = o.head || B;
+  const g1 = gid("bmc", B), g2 = gid("bmw", W);
+  return (
   <g>
-    {o.halo && <circle cx="32" cy="13" r="7.5" fill="none" stroke="#e8c547" strokeWidth="2.5" opacity=".85" />}
-    {o.flame && <g fill={o.flameC || "#e8853a"}><path d="M22,16 Q24,4 28,13 Q30,6 33,13 Q36,5 39,13 Q41,6 43,16 Z" /></g>}
-    {o.plume && <g fill={o.plumeC || "#c0392b"}><path d="M26,17 Q28,6 31,15 Z" /><path d="M31,15 Q33,4 36,14 Z" /><path d="M36,15 Q39,7 40,17 Z" /></g>}
-    {o.batWings ? <g fill={o.wingC || "#3c3244"}><path d="M6,30 L22,26 L18,40 L12,34 Z" /><path d="M58,30 L42,26 L46,40 L52,34 Z" /></g>
-      : <g fill={o.wingC || o.body}><path d="M8,32 L22,27 L20,40 Z" /><path d="M56,32 L42,27 L44,40 Z" /></g>}
-    <circle cx="32" cy="33" r="14" fill={o.body} />
-    <path d="M18,33 A14,14 0 0 1 46,33 Z" fill={o.head || o.body} />
-    {o.mask && <path d="M20,30 Q32,22 44,30 L44,36 Q32,29 20,36 Z" fill={o.mask} />}
-    <path d="M27,37 L32,48 L37,37 Z" fill={o.beakC || "#e8a53a"} />
-    <Eye x={25} y={31} r={2.7 * er} iris={o.iris || "#d9a43a"} />
-    <Eye x={39} y={31} r={2.7 * er} iris={o.iris || "#d9a43a"} />
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(B, 0.3)} /><stop offset=".55" stopColor={B} />
+        <stop offset="1" stopColor={sh(B, -0.24)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(W, 0.3)} /><stop offset="1" stopColor={sh(W, -0.3)} />
+      </linearGradient>
+    </defs>
+    {o.halo && (
+      <circle cx="46" cy="18" r="12" fill="none" stroke={o.plumeC || "#e8c547"}
+        strokeWidth="1.4" opacity=".8" />
+    )}
+    {o.flame && (
+      <g fill={o.flameC || "#e8a53a"} opacity=".85">
+        <path d="M14,42 Q6,32 12,22 Q12,32 18,38 Z" />
+        <path d="M46,46 Q54,38 50,28 Q50,38 44,42 Z" />
+      </g>
+    )}
+    {/* far wing, raised */}
+    {o.batWings ? (
+      <path d="M28,28 Q16,14 4,16 Q12,22 14,32 Q20,32 28,28 Z" fill={`url(#${g2})`} opacity=".7" />
+    ) : (
+      <path d="M28,28 Q16,12 3,12 Q13,20 15,32 Q21,32 28,28 Z" fill={`url(#${g2})`} opacity=".7" />
+    )}
+    {/* long streaming tail plumes */}
+    <g fill={o.plumeC || sh(B, -0.2)}>
+      <path d="M22,40 Q10,50 3,62 L8,62.6 Q17,51 26,44 Z" />
+      <path d="M24,41 Q14,52 9,62.6 L12,63 Q20,52 27,44.6 Z" opacity=".75" />
+      {o.plume && <path d="M20,39 Q6,46 1,56 L5,57.6 Q13,48 24,42.6 Z" opacity=".6" />}
+    </g>
+    <g stroke={o.beakC || "#e8c547"} strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="28,44 27.4,49 28.4,54" />
+      <polyline points="34,44 34.6,49 33.6,54" />
+    </g>
+    <g stroke={o.beakC || "#e8c547"} strokeWidth="1.3" fill="none" strokeLinecap="round">
+      <path d="M28.4,54 L25.4,55.8 M28.4,54 L31.4,55.8" />
+      <path d="M33.6,54 L30.6,55.8 M33.6,54 L36.6,55.8" />
+    </g>
+    <ellipse cx="30" cy="35" rx="12" ry="10.4" fill={`url(#${g1})`} transform="rotate(-10 30 35)" />
+    {/* near wing, spread wide - these are display birds */}
+    {o.batWings ? (
+      <path d="M32,30 Q22,10 6,6 Q14,16 16,32 Q24,34 32,30 Z" fill={`url(#${g2})`} />
+    ) : (
+      <g>
+        <path d="M32,29 Q22,8 4,4 Q14,14 17,32 Q25,33 32,29 Z" fill={`url(#${g2})`} />
+        <g stroke={sh(W, -0.4)} strokeWidth=".8" fill="none" opacity=".6">
+          <path d="M30,28 Q22,16 8,7" /><path d="M26,30 Q20,20 7,11" />
+        </g>
+      </g>
+    )}
+    <path d="M37,30 Q42,24 46,19 L51,23 Q46,27 42,33 Z" fill={`url(#${g1})`} />
+    {o.plume && (
+      <g fill={o.plumeC || "#e8c547"}>
+        <path d="M44,13 Q40,2 48,7 Q44.6,9.6 45.4,14 Z" />
+        <path d="M49,12 Q48,1 55,6 Q50.6,8.6 51,13 Z" />
+      </g>
+    )}
+    <ellipse cx="48" cy="19" rx="7" ry="6.2" fill={HD} />
+    {o.mask && <path d="M43,17 Q49,14 54,17.6 Q49,19.4 43.4,20 Z" fill={o.mask} />}
+    <path d="M53,17 Q60,17.6 59.4,21 Q57,24.6 53.4,21.4 Z" fill={o.beakC || "#e8c547"} />
+    <Eye x={50} y={17.4} r={2 * er} iris={o.iris || "#e8c547"} />
   </g>
-);
+  );
+};
 const serpentM = (o) => (er) => {
   const H = o.hide || "#5d8a4a";
   const BC = o.bandC || sh(H, -0.36);
