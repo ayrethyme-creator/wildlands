@@ -257,18 +257,27 @@ const canArt = (o) => (er) => {
         <circle cx="57.4" cy="18.8" r="3.9" fill={F} />
         <circle cx="57.7" cy="19" r="2.1" fill={o.inner || "#7d5b3a"} />
       </g>
-    ) : o.earTall ? (
+    ) : o.earDrop ? (
       <g>
-        <path d="M47,20.2 Q45.6,11.4 44.6,9.4 Q49,12.2 51.4,17.2 Z" fill={sh(F, -0.24)} />
-        <path d="M56.6,19.2 Q58,10.2 59.4,8.4 Q60.8,13.6 60.4,19.2 Z" fill={F} />
-        <path d="M57.4,18.4 Q58.4,12.2 59.4,10.8 Q60,14.8 59.6,18.6 Z" fill={o.inner || "#7d5b3a"} />
-      </g>
-    ) : (
-      <g>
-        {/* folded drop ear */}
+        {/* folded drop ear, for the hounds */}
         <path d="M47.6,19 Q45,20.4 44.6,25 Q44.4,28.6 46.8,29.6 Q47.2,24.4 48.6,20.8 Z"
           fill={sh(F, -0.24)} />
         <path d="M57.2,18.4 Q60.6,19.6 61.2,24.4 Q61.6,28.4 59,29.6 Q58.8,24 57,20.4 Z" fill={F} />
+        <path d="M58,19.6 Q60.4,20.8 60.8,24.6 Q61,27.6 59.2,28.4 Q59,24 57.8,21 Z"
+          fill={o.inner || "#7d5b3a"} opacity=".55" />
+      </g>
+    ) : (
+      <g>
+        {/* upright pointed ear - the default for canids, and taller when asked */}
+        <path d={o.earTall ? "M47,20.2 Q45.6,11.4 44.6,9.4 Q49,12.2 51.4,17.2 Z"
+                           : "M47.2,20 Q46,13.4 45.2,11.8 Q49.2,14 51.2,17.8 Z"}
+          fill={sh(F, -0.24)} />
+        <path d={o.earTall ? "M56.6,19.2 Q58,10.2 59.4,8.4 Q60.8,13.6 60.4,19.2 Z"
+                           : "M56.8,19.2 Q58,12.6 59.2,11 Q60.4,15.2 60.2,19.4 Z"}
+          fill={F} />
+        <path d={o.earTall ? "M57.4,18.4 Q58.4,12.2 59.4,10.8 Q60,14.8 59.6,18.6 Z"
+                           : "M57.5,18.6 Q58.3,13.9 59.2,12.8 Q59.9,16.2 59.6,18.8 Z"}
+          fill={o.inner || "#7d5b3a"} />
       </g>
     )}
 
@@ -297,16 +306,9 @@ const canArt = (o) => (er) => {
 };
 
 const ART = {
-  fennec: (er) => (
-    <g>
-      <path d="M13,32 L19,3 L30,27 Z" fill="#e3cba3" /><path d="M17,28 L20,10 L26,24 Z" fill="#efb69e" />
-      <path d="M51,32 L45,3 L34,27 Z" fill="#e3cba3" /><path d="M47,28 L44,10 L38,24 Z" fill="#efb69e" />
-      <ellipse cx="32" cy="41" rx="17" ry="15" fill="#ecd9b5" />
-      <ellipse cx="32" cy="48" rx="8" ry="6" fill="#f8efdc" />
-      <circle cx="32" cy="45.5" r="2.5" fill="#3a2d24" />
-      <Eye x={25} y={38} r={3.1 * er} /><Eye x={39} y={38} r={3.1 * er} />
-    </g>
-  ),
+  // Also hand-drawn and head-only. It is a desert fox whose defining feature is
+  // the size of its ears, so it goes through the canid body with earTall set.
+  fennec: canArt({ fur: "#e8cfa3", inner: "#f2e2c0", muzzle: "#f8f2e4", iris: "#8a6b3a", earTall: true }),
   otter: (er) => (
     <g>
       <circle cx="19" cy="24" r="4.5" fill="#8b6748" /><circle cx="45" cy="24" r="4.5" fill="#8b6748" />
@@ -430,17 +432,10 @@ const ART = {
   ),
   leopard: felArt({ fur: "#d9a44a", rosettes: 1, iris: "#caa23a" }),
   serval: felArt({ fur: "#d9b060", earTall: 1, spots: 1, iris: "#caa23a" }),
-  lion: (er) => (
-    <g>
-      <circle cx="20" cy="24" r="5.5" fill="#c9974d" /><circle cx="44" cy="24" r="5.5" fill="#c9974d" />
-      <circle cx="20" cy="24" r="2.4" fill="#8a5f2c" /><circle cx="44" cy="24" r="2.4" fill="#8a5f2c" />
-      <circle cx="32" cy="37" r="15" fill="#c9974d" />
-      <ellipse cx="32" cy="45" rx="9" ry="7" fill="#ecd9b5" />
-      <path d="M28,41.5 L36,41.5 L32,46 Z" fill="#7a4a35" />
-      <path d="M32,46 L32,49 M32,49 Q28,52 25,50 M32,49 Q36,52 39,50" stroke="#7a4a35" strokeWidth="1.3" fill="none" strokeLinecap="round" />
-      <Eye x={25} y={34} r={2.9 * er} iris="#b57e2e" /><Eye x={39} y={34} r={2.9 * er} iris="#b57e2e" />
-    </g>
-  ),
+  // The lioness was one of the original hand-drawn heads. She now uses the
+  // shared feline body like every other cat - tawny, no mane, since the maned
+  // male is a separate species entry.
+  lion: felArt({ fur: "#c9a05c", inner: "#a8763c", muzzle: "#e8dcc3", iris: "#c9a43a", big: true }),
   owl: (er) => (
     <g>
       <path d="M19,23 L13,7 L27,17 Z" fill="#6e563c" /><path d="M45,23 L51,7 L37,17 Z" fill="#6e563c" />
