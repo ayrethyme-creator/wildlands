@@ -28,13 +28,13 @@ const parrA = (o) => (er) => {
       <path d="M21,38 Q11,44 5,52 L11,53 Q19,46 25,42 Z" fill={o.tailC || `url(#${g2})`} />
     )}
     {/* zygodactyl feet, gripping */}
-    <g stroke={sh(B, -0.5)} strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="27,44 26.4,49 27.4,54" />
-      <polyline points="33,44 33.6,49 32.6,54" />
+    {/* parrots perch on short zygodactyl feet, two toes forward two back */}
+    <g stroke={sh(B, -0.5)} strokeWidth="2.4" fill="none" strokeLinecap="round">
+      <path d="M27,44 L26.6,47.6" /><path d="M33,44 L33.4,47.6" />
     </g>
-    <g stroke={sh(B, -0.5)} strokeWidth="1.3" fill="none" strokeLinecap="round">
-      <path d="M27.4,54 L24.4,55.6 M27.4,54 L30.4,55.6" />
-      <path d="M32.6,54 L29.6,55.6 M32.6,54 L35.6,55.6" />
+    <g stroke={sh(B, -0.5)} strokeWidth="1.5" fill="none" strokeLinecap="round">
+      <path d="M26.6,47.6 L23.6,49 M26.6,47.6 L29.6,49" />
+      <path d="M33.4,47.6 L30.4,49 M33.4,47.6 L36.4,49" />
     </g>
     <ellipse cx="29" cy="35" rx="12" ry="10" fill={`url(#${g1})`} transform="rotate(-12 29 35)" />
     {o.stripes && (
@@ -88,15 +88,30 @@ const rapA = (o) => (er) => {
     <g stroke={sh(W, -0.4)} strokeWidth=".8" fill="none" opacity=".6">
       <path d="M9,49 Q16,44 22,40" /><path d="M11,52 Q18,47 24,42" />
     </g>
-    {/* heavy feathered legs and talons */}
-    <g stroke={sh(B, -0.14)} strokeWidth="3.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="28,44 27.4,48 28.4,51" />
-      <polyline points="34,44 34.6,48 33.6,51" />
-    </g>
-    <g stroke={o.beakC || "#e8b03a"} strokeWidth="1.5" fill="none" strokeLinecap="round">
-      <path d="M28.4,51 L25,54 M28.4,51 L29,55 M28.4,51 L31.6,54" />
-      <path d="M33.6,51 L30.2,54 M33.6,51 L34.2,55 M33.6,51 L36.8,54" />
-    </g>
+    {/* Short feathered legs and talons. Raptors are compact - only the
+        secretary bird stands tall, and it opts in with longLegs. */}
+    {o.longLegs ? (
+      <g>
+        <g stroke={sh(B, -0.14)} strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="28,44 27.4,50 28.4,55" />
+          <polyline points="34,44 34.6,50 33.6,55" />
+        </g>
+        <g stroke={o.beakC || "#e8b03a"} strokeWidth="1.4" fill="none" strokeLinecap="round">
+          <path d="M28.4,55 L25.4,56.4 M28.4,55 L29,57 M28.4,55 L31.4,56.4" />
+          <path d="M33.6,55 L30.6,56.4 M33.6,55 L34.2,57 M33.6,55 L36.6,56.4" />
+        </g>
+      </g>
+    ) : (
+      <g>
+        <g stroke={sh(B, -0.14)} strokeWidth="3.6" fill="none" strokeLinecap="round">
+          <path d="M28,44 L27.6,47.6" /><path d="M34,44 L34.4,47.6" />
+        </g>
+        <g stroke={o.beakC || "#e8b03a"} strokeWidth="1.6" fill="none" strokeLinecap="round">
+          <path d="M27.6,47.6 L24.4,49.4 M27.6,47.6 L28.2,50 M27.6,47.6 L30.8,49.4" />
+          <path d="M34.4,47.6 L31.2,49.4 M34.4,47.6 L35,50 M34.4,47.6 L38.2,49.4" />
+        </g>
+      </g>
+    )}
     {/* upright, broad-chested body */}
     <ellipse cx="30" cy="35" rx="12.4" ry="11" fill={`url(#${g1})`} transform="rotate(-8 30 35)" />
     {o.mottle && (
@@ -149,115 +164,141 @@ const rapA = (o) => (er) => {
   </g>
   );
 };
+// Birds in the shape the emoji get right: a plump rounded body that fills the
+// frame, a big clear eye, bold simple masses, and feet that just peek out
+// underneath. Long legs are the exception, not the rule - waders, ratites and
+// the secretary bird opt in with longLegs. Everything else stands on stubs.
 const birdA = (o) => (er) => {
   const B = o.body || "#8a7a5c";
-  const W = o.wingC || sh(B, -0.2);
+  const W = o.wingC || sh(B, -0.22);
   const HD = o.head || B;
+  const FT = o.beakC || "#e8a53a";
   const g1 = gid("bdc", B), g2 = gid("bdw", W);
+  const LL = o.longLegs;
+  // body sits higher when the bird is standing on stilts
+  const by = LL ? 30 : 36;
+  const hx = o.neck ? 46 : 47, hy = o.neck ? (LL ? 9 : 13) : (LL ? 16 : 21);
   return (
   <g>
     <defs>
       <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor={sh(B, -0.22)} /><stop offset=".55" stopColor={B} />
-        <stop offset="1" stopColor={sh(B, 0.34)} />
+        <stop offset="0" stopColor={sh(B, -0.16)} /><stop offset=".6" stopColor={B} />
+        <stop offset="1" stopColor={sh(B, 0.28)} />
       </linearGradient>
       <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor={sh(W, 0.16)} /><stop offset="1" stopColor={sh(W, -0.26)} />
+        <stop offset="0" stopColor={sh(W, 0.12)} /><stop offset="1" stopColor={sh(W, -0.22)} />
       </linearGradient>
     </defs>
-    <ellipse cx="30" cy="57.4" rx="15" ry="2.2" fill="#000" opacity=".15" />
+    <ellipse cx="30" cy="58" rx="15" ry="2.2" fill="#000" opacity=".14" />
 
     {o.fan && (
-      <g fill={o.fanC || "#3a7ad9"}>
-        {[-30, -16, 0, 15, 29].map((d, i) => (
+      <g>
+        {[-32, -17, 0, 16, 31].map((d, i) => (
           <g key={i}>
-            <path d={`M26,34 Q${26 + d},${16 + Math.abs(d) * 0.22} ${28 + d},${8 + Math.abs(d) * 0.3}`}
-              stroke={o.fanC || "#3a7ad9"} strokeWidth="2.4" fill="none" strokeLinecap="round" />
-            <circle cx={28 + d} cy={8 + Math.abs(d) * 0.3} r="3" fill={o.eyeSpot || "#e8c547"} />
+            <path d={`M28,36 Q${28 + d * 0.7},${18 + Math.abs(d) * 0.18} ${28 + d},${9 + Math.abs(d) * 0.26}`}
+              stroke={o.fanC || "#3a7ad9"} strokeWidth="2.6" fill="none" strokeLinecap="round" />
+            <circle cx={28 + d} cy={9 + Math.abs(d) * 0.26} r="3.2" fill={o.eyeSpot || "#e8c547"} />
           </g>
         ))}
       </g>
     )}
 
-    {/* tail, swept back and down behind the body */}
+    {/* tail: short and blunt unless the species streams one */}
     {o.longTail ? (
-      <path d="M20,38 Q8,48 2,60 L8,61 Q16,50 24,42 Z" fill={o.tailC || `url(#${g2})`} />
+      <path d={`M18,${by + 4} Q7,${by + 15} 2,${by + 26} L8,${by + 27} Q16,${by + 15} 24,${by + 7} Z`}
+        fill={o.tailC || `url(#${g2})`} />
     ) : (
-      <path d="M20,36 Q9,40 3,47 Q10,48 18,44 Z" fill={o.tailC || `url(#${g2})`} />
+      <path d={`M17,${by} Q7,${by + 3} 4,${by + 9} Q12,${by + 9} 19,${by + 5} Z`}
+        fill={o.tailC || `url(#${g2})`} />
     )}
 
-    {/* legs - deliberately bent, since a perfectly vertical stroke has a
-        zero-width bounding box and a gradient stroke on it will not render */}
-    <g stroke={o.beakC || sh(B, -0.5)} strokeWidth="1.7" fill="none" strokeLinecap="round"
-      strokeLinejoin="round">
-      <polyline points="27,45 26.4,50 27.4,55" />
-      <polyline points="33,45 33.6,50 32.6,55" />
-    </g>
-    <g stroke={o.beakC || sh(B, -0.5)} strokeWidth="1.3" fill="none" strokeLinecap="round">
-      <path d="M27.4,55 L24,56.4 M27.4,55 L28.4,56.8 M27.4,55 L30.4,56" />
-      <path d="M32.6,55 L29.6,56.4 M32.6,55 L33.6,56.8 M32.6,55 L35.6,56" />
-    </g>
-
-    {/* body: an egg tilted breast-forward */}
-    <ellipse cx="29" cy="36" rx="13" ry="10.4" fill={`url(#${g1})`} transform="rotate(-12 29 36)" />
-    {o.bib && <path d="M34,42 Q40,44 41,38 Q39,45.6 33.6,46 Z" fill={o.bib} />}
-    {o.downy && (
-      <g stroke={sh(B, 0.4)} strokeWidth=".7" fill="none" opacity=".7">
-        <path d="M22,32 q3,2 6,0 M24,38 q3,2 6,0 M28,44 q3,1.6 6,0" />
+    {/* LEGS. Short stubs by default - most birds barely show any leg at all,
+        and the previous version put every sparrow on heron stilts. */}
+    {LL ? (
+      <g>
+        <g stroke={FT} strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points={`26,${by + 12} 25.4,${by + 19} 26.4,${by + 26}`} />
+          <polyline points={`33,${by + 12} 33.6,${by + 19} 32.6,${by + 26}`} />
+        </g>
+        <g stroke={FT} strokeWidth="1.3" fill="none" strokeLinecap="round">
+          <path d={`M26.4,${by + 26} L23.4,${by + 27.4} M26.4,${by + 26} L27,${by + 28} M26.4,${by + 26} L29.4,${by + 27.4}`} />
+          <path d={`M32.6,${by + 26} L29.6,${by + 27.4} M32.6,${by + 26} L33.2,${by + 28} M32.6,${by + 26} L35.6,${by + 27.4}`} />
+        </g>
+      </g>
+    ) : (
+      <g>
+        <g stroke={FT} strokeWidth="2.4" fill="none" strokeLinecap="round">
+          <path d={`M26,${by + 11} L25.6,${by + 15}`} />
+          <path d={`M33,${by + 11} L33.4,${by + 15}`} />
+        </g>
+        <g stroke={FT} strokeWidth="1.5" fill="none" strokeLinecap="round">
+          <path d={`M25.6,${by + 15} L22.6,${by + 16.4} M25.6,${by + 15} L26.2,${by + 17} M25.6,${by + 15} L28.4,${by + 16.4}`} />
+          <path d={`M33.4,${by + 15} L30.4,${by + 16.4} M33.4,${by + 15} L34,${by + 17} M33.4,${by + 15} L36.4,${by + 16.4}`} />
+        </g>
       </g>
     )}
 
-    {/* folded wing lying along the flank */}
-    <path d="M20,31 Q31,27 39,33 Q34,42 24,42 Q17,39 20,31 Z" fill={`url(#${g2})`} />
-    <g stroke={sh(W, -0.36)} strokeWidth=".8" fill="none" opacity=".7">
-      <path d="M22,33 Q29,32 36,35" /><path d="M21,36 Q28,35.6 35,38.4" />
-      <path d="M21,39 Q27,39 33,41" />
-    </g>
-
-    {/* neck and head */}
-    {o.neck ? (
-      <path d="M36,33 Q41,26 40,18 Q39.6,11 45,8 L49,11 Q44,13.6 44.4,19
-               Q45,28 40,35 Z" fill={o.neckC || `url(#${g1})`} />
-    ) : (
-      <path d="M36,31 Q41,26 45,21 L50,25 Q45,29 41,34 Z" fill={o.neckC || `url(#${g1})`} />
+    {/* the body: round and full, the way the emoji draw it */}
+    <ellipse cx="29" cy={by} rx="14.6" ry="12.4" fill={`url(#${g1})`} />
+    {o.bib && <path d={`M33,${by + 6} Q40,${by + 8} 41.6,${by + 1} Q39.6,${by + 10} 32.6,${by + 10.4} Z`} fill={o.bib} />}
+    {o.downy && (
+      <g stroke={sh(B, 0.42)} strokeWidth=".8" fill="none" opacity=".65">
+        <path d={`M21,${by - 4} q3.4,2.2 6.6,0 M20,${by + 3} q3.4,2.2 6.6,0 M24,${by + 9} q3.4,1.8 6.6,0`} />
+      </g>
     )}
+
+    {/* one bold folded wing, not a fan of feather lines */}
+    <path d={`M19,${by - 5} Q31,${by - 9} 39,${by - 1} Q35,${by + 8} 24,${by + 8} Q16,${by + 4} 19,${by - 5} Z`}
+      fill={`url(#${g2})`} />
+    <path d={`M22,${by - 2} Q30,${by - 3} 36,${by + 1}`} stroke={sh(W, -0.32)} strokeWidth="1"
+      fill="none" opacity=".65" strokeLinecap="round" />
+
+    {/* neck */}
+    {o.neck ? (
+      <path d={`M36,${by - 4} Q42,${by - 12} 41,${by - 20} Q40.6,${by - 27} ${hx},${hy + 4} L${hx + 5},${hy + 6} Q${hx - 1},${by - 24} ${hx + 1},${by - 18} Q43,${by - 9} 40,${by} Z`}
+        fill={o.neckC || `url(#${g1})`} />
+    ) : (
+      <path d={`M36,${by - 6} Q41,${by - 11} ${hx - 2},${hy + 5} L${hx + 4},${hy + 8} Q42,${by - 6} 40,${by - 1} Z`}
+        fill={o.neckC || `url(#${g1})`} />
+    )}
+
     {o.plume && (
       <g fill={o.plumeC || "#e8c547"}>
-        <path d="M46,14 Q44,4 50,9 Q47,11 47.6,15 Z" />
-        <path d="M50,13 Q50,3 55,8 Q51.6,10 52,14 Z" />
+        <path d={`M${hx - 3},${hy - 7} Q${hx - 5},${hy - 17} ${hx + 1},${hy - 12} Q${hx - 2},${hy - 10} ${hx - 1.4},${hy - 6} Z`} />
+        <path d={`M${hx + 1},${hy - 8} Q${hx + 1},${hy - 18} ${hx + 6},${hy - 13} Q${hx + 2.6},${hy - 11} ${hx + 3},${hy - 7} Z`} />
       </g>
     )}
-    <ellipse cx={o.neck ? 48 : 49} cy={o.neck ? 10 : 21} rx="7" ry="6.2" fill={HD} />
-    {o.mask && (
-      <path d={o.neck ? "M43,8 Q49,5.6 54,9 Q49,11 43.4,11.4 Z"
-                      : "M44,19 Q50,16.6 55,20 Q50,22 44.4,22.4 Z"} fill={o.mask} />
-    )}
-    {o.pouch && (
-      <path d={o.neck ? "M46,14 Q44,22 50,24 Q54,18 52,13 Z"
-                      : "M47,25 Q45,33 51,35 Q55,29 53,24 Z"} fill={o.pouchC || "#e8b03a"} />
+    {o.comb && (
+      <path d={`M${hx - 4},${hy - 6} q2,-4 4,-1 q2,-4 4,-1 q2,-3 3.4,.6 q-5.6,-.6 -11.4,1.4 Z`}
+        fill={o.combC || "#c93a3a"} />
     )}
 
-    {/* the beak, pointing forward */}
+    {/* head: big and round, the emoji proportion */}
+    <ellipse cx={hx} cy={hy} rx="8.2" ry="7.4" fill={HD} />
+    {o.mask && <path d={`M${hx - 6},${hy - 3} Q${hx},${hy - 6} ${hx + 6},${hy - 2} Q${hx},${hy} ${hx - 5.6},${hy + 1} Z`} fill={o.mask} />}
+    {o.pouch && <path d={`M${hx - 1},${hy + 5} Q${hx - 3},${hy + 14} ${hx + 4},${hy + 16} Q${hx + 8},${hy + 9} ${hx + 6},${hy + 4} Z`} fill={o.pouchC || "#e8b03a"} />}
+
+    {/* beak, forward-facing, sized like the emoji do it */}
     {(() => {
-      const hx = o.neck ? 48 : 49, hy = o.neck ? 10 : 21;
-      const C = o.beakC || "#e8a53a";
+      const C = FT;
       if (o.bill === "big")
-        return <path d={`M${hx + 4},${hy - 2} Q${hx + 20},${hy + 1} ${hx + 13},${hy + 7} Q${hx + 5},${hy + 6} ${hx + 3},${hy + 2} Z`} fill={C} />;
+        return <path d={`M${hx + 5},${hy - 3} Q${hx + 22},${hy} ${hx + 14},${hy + 8} Q${hx + 6},${hy + 7} ${hx + 4},${hy + 2} Z`} fill={C} />;
       if (o.bill === "long")
-        return <path d={`M${hx + 5},${hy - 1} L${hx + 22},${hy + 2} L${hx + 5},${hy + 3} Z`} fill={C} />;
+        return <path d={`M${hx + 6},${hy - 1.4} L${hx + 24},${hy + 2} L${hx + 6},${hy + 3.6} Z`} fill={C} />;
       if (o.bill === "spoon")
-        return <g fill={C}><path d={`M${hx + 5},${hy - 1} L${hx + 16},${hy + 1} L${hx + 5},${hy + 3} Z`} /><ellipse cx={hx + 18} cy={hy + 1} rx="4" ry="3" /></g>;
+        return <g fill={C}><path d={`M${hx + 6},${hy - 1} L${hx + 17},${hy + 1} L${hx + 6},${hy + 3} Z`} /><ellipse cx={hx + 19} cy={hy + 1} rx="4.4" ry="3.2" /></g>;
       if (o.bill === "shoe")
-        return <path d={`M${hx + 4},${hy - 3} Q${hx + 15},${hy - 1} ${hx + 14},${hy + 5} Q${hx + 7},${hy + 8} ${hx + 3},${hy + 3} Z`} fill={o.beakC || "#c9b08a"} />;
+        return <path d={`M${hx + 5},${hy - 4} Q${hx + 16},${hy - 2} ${hx + 15},${hy + 5} Q${hx + 8},${hy + 9} ${hx + 4},${hy + 3} Z`} fill={o.beakC || "#c9b08a"} />;
       if (o.bill === "hook")
-        return <path d={`M${hx + 4},${hy - 2} Q${hx + 12},${hy - 1} ${hx + 12},${hy + 3} Q${hx + 11},${hy + 7} ${hx + 8},${hy + 4} Q${hx + 8},${hy + 1} ${hx + 3},${hy + 2} Z`} fill={C} />;
-      return <path d={`M${hx + 4},${hy - 1.6} L${hx + 14},${hy + 1} L${hx + 4},${hy + 3.6} Z`} fill={C} />;
+        return <path d={`M${hx + 5},${hy - 3} Q${hx + 13},${hy - 2} ${hx + 13},${hy + 2} Q${hx + 12},${hy + 7} ${hx + 9},${hy + 4} Q${hx + 9},${hy + 1} ${hx + 4},${hy + 1.6} Z`} fill={C} />;
+      if (o.bill === "flat")
+        return <path d={`M${hx + 5},${hy - 2} Q${hx + 16},${hy - 1} ${hx + 16},${hy + 2.6} Q${hx + 10},${hy + 4.4} ${hx + 5},${hy + 3} Z`} fill={C} />;
+      return <path d={`M${hx + 5},${hy - 2.2} L${hx + 15},${hy + 1} L${hx + 5},${hy + 4} Z`} fill={C} />;
     })()}
     {o.wattleC && (
-      <path d={o.neck ? "M50,15 Q52,20 49,21 Q47.6,17.6 48.4,14.6 Z"
-                      : "M51,26 Q53,31 50,32 Q48.6,28.6 49.4,25.6 Z"} fill={o.wattleC} />
+      <path d={`M${hx + 4},${hy + 4} Q${hx + 6},${hy + 11} ${hx + 2},${hy + 12} Q${hx},${hy + 7} ${hx + 1},${hy + 3} Z`} fill={o.wattleC} />
     )}
-    <Eye x={o.neck ? 50 : 51} y={o.neck ? 8.6 : 19.6} r={2 * er} iris={o.iris || "#3c3226"} />
+    <Eye x={hx + 2.4} y={hy - 1.6} r={2.4 * er} iris={o.iris || "#3c3226"} />
   </g>
   );
 };
@@ -548,7 +589,7 @@ Object.assign(ART, {
   barnowl: rapA({ body: "#c9b894", wingC: "#a89878", disc: true, discC: "#f5f2e8", beakC: "#c9bda3", iris: "#26221c" }),
   greathornedowl: rapA({ body: "#8a7458", wingC: "#5c4c3c", tufts: true, disc: true, discC: "#c9a878", beakC: "#3c3630", iris: "#e8a53a" }),
   condor: rapA({ body: "#26221c", wingC: "#16140f", head: "#e8b5a5", ruff: true, ruffC: "#f5f2e8", beakC: "#c9bda3", wattle: true, wattleC: "#c94a3a" }),
-  secretarybird: rapA({ body: "#a8a8a0", wingC: "#26221c", head: "#e8dcc3", plumes: true, plumeC: "#26221c", beakC: "#e8a53a", iris: "#c9853a" }),
+  secretarybird: rapA({ longLegs: true, body: "#a8a8a0", wingC: "#26221c", head: "#e8dcc3", plumes: true, plumeC: "#26221c", beakC: "#e8a53a", iris: "#c9853a" }),
   caracara: rapA({ body: "#3c3630", wingC: "#26221c", head: "#e8dcc3", beakC: "#8fb3d9", wattle: true, wattleC: "#e8853a" }),
   goshawk: rapA({ body: "#5c6b74", wingC: "#3c4c54", head: "#4c5c68", brow: true, browC: "#f2ede0", beakC: "#3c3630", iris: "#c94a3a" }),
   // other birds
@@ -559,22 +600,22 @@ Object.assign(ART, {
   birdofparadise: birdA({ body: "#e8853a", wingC: "#c9622a", head: "#e8d44a", bib: "#3a8a4c", longTail: true, tailC: "#f2ede0", beakC: "#8fd9e8" }),
   lyrebird: birdA({ body: "#8a7458", wingC: "#5c4c3c", longTail: true, tailC: "#c9b894", beakC: "#3c3630" }),
   hummingbird: birdA({ body: "#3ad9a4", wingC: "#2ab585", head: "#c94a3a", bill: "long", beakC: "#26221c" }),
-  crane: birdA({ body: "#e8e4d8", wingC: "#c4c0b0", head: "#f5f2e8", neck: true, neckC: "#e8e4d8", mask: "#c94a3a", bill: "long", beakC: "#c9bda3" }),
-  heron: birdA({ body: "#8a9aa8", wingC: "#6b7a88", head: "#c9d4dc", neck: true, neckC: "#8a9aa8", plumes: true, bill: "long", beakC: "#e8c547" }),
-  stork: birdA({ body: "#f2ede0", wingC: "#26221c", neck: true, neckC: "#f2ede0", bill: "long", beakC: "#c94a3a" }),
-  shoebill: birdA({ body: "#8a9099", wingC: "#6b7078", head: "#9aa0a8", bill: "shoe", beakC: "#c9b08a", iris: "#e8e4d8" }),
+  crane: birdA({ longLegs: true, body: "#e8e4d8", wingC: "#c4c0b0", head: "#f5f2e8", neck: true, neckC: "#e8e4d8", mask: "#c94a3a", bill: "long", beakC: "#c9bda3" }),
+  heron: birdA({ longLegs: true, body: "#8a9aa8", wingC: "#6b7a88", head: "#c9d4dc", neck: true, neckC: "#8a9aa8", plumes: true, bill: "long", beakC: "#e8c547" }),
+  stork: birdA({ longLegs: true, body: "#f2ede0", wingC: "#26221c", neck: true, neckC: "#f2ede0", bill: "long", beakC: "#c94a3a" }),
+  shoebill: birdA({ longLegs: true, body: "#8a9099", wingC: "#6b7078", head: "#9aa0a8", bill: "shoe", beakC: "#c9b08a", iris: "#e8e4d8" }),
   pelican: birdA({ body: "#e8e4d8", wingC: "#c4c0b0", pouch: true, pouchC: "#e8b03a", bill: "long", beakC: "#e8c547" }),
-  spoonbill: birdA({ body: "#e8a5b5", wingC: "#d9859a", bill: "spoon", beakC: "#8a8578" }),
-  ibis: birdA({ body: "#c94a3a", wingC: "#a33428", neck: true, neckC: "#c94a3a", bill: "long", beakC: "#8a3428" }),
+  spoonbill: birdA({ longLegs: true, body: "#e8a5b5", wingC: "#d9859a", bill: "spoon", beakC: "#8a8578" }),
+  ibis: birdA({ longLegs: true, body: "#c94a3a", wingC: "#a33428", neck: true, neckC: "#c94a3a", bill: "long", beakC: "#8a3428" }),
   albatross: birdA({ body: "#f2ede0", wingC: "#5c6b74", bill: "hook", beakC: "#e8c9a5" }),
   puffin: birdA({ body: "#26221c", wingC: "#16140f", head: "#f5f2e8", bib: "#f5f2e8", bill: "big", beakC: "#e8853a", iris: "#3c3226" }),
   frigatebird: birdA({ body: "#26221c", wingC: "#16140f", pouch: true, pouchC: "#c94a3a", bill: "hook", beakC: "#5c5448" }),
   bluefootedbooby: birdA({ body: "#c9b894", wingC: "#8a7458", head: "#e8dcc3", bill: "long", beakC: "#8fb3d9", iris: "#e8d44a" }),
-  ostrich: birdA({ body: "#3c3630", wingC: "#f5f2e8", head: "#e8b5a5", neck: true, neckC: "#e8b5a5", beakC: "#e8b03a", iris: "#3c3226" }),
-  emu: birdA({ body: "#6b5c4c", wingC: "#5c4c3c", head: "#3c4c5c", neck: true, neckC: "#5c6b7a", beakC: "#3c3630" }),
-  cassowary: birdA({ body: "#26221c", wingC: "#16140f", head: "#3a5cd9", neck: true, neckC: "#3a5cd9", plume: true, plumeC: "#8a6f42", bib: "#c94a3a", beakC: "#5c5448" }),
+  ostrich: birdA({ longLegs: true, body: "#3c3630", wingC: "#f5f2e8", head: "#e8b5a5", neck: true, neckC: "#e8b5a5", beakC: "#e8b03a", iris: "#3c3226" }),
+  emu: birdA({ longLegs: true, body: "#6b5c4c", wingC: "#5c4c3c", head: "#3c4c5c", neck: true, neckC: "#5c6b7a", beakC: "#3c3630" }),
+  cassowary: birdA({ longLegs: true, body: "#26221c", wingC: "#16140f", head: "#3a5cd9", neck: true, neckC: "#3a5cd9", plume: true, plumeC: "#8a6f42", bib: "#c94a3a", beakC: "#5c5448" }),
   kiwi: birdA({ body: "#8a7458", wingC: "#6b5844", bill: "long", beakC: "#c9b08a", iris: "#26221c" }),
-  roadrunner: birdA({ body: "#a8987a", wingC: "#8a7458", head: "#8a7458", plume: true, plumeC: "#5c4c3c", longTail: true, tailC: "#8a7458", beakC: "#3c3630" }),
+  roadrunner: birdA({ longLegs: true, body: "#a8987a", wingC: "#8a7458", head: "#8a7458", plume: true, plumeC: "#5c4c3c", longTail: true, tailC: "#8a7458", beakC: "#3c3630" }),
   hoatzin: birdA({ body: "#8a6f52", wingC: "#5c4436", head: "#3a7ad9", plume: true, plumeC: "#c9853a", bib: "#c9853a", beakC: "#3c3630", iris: "#c94a3a" }),
   kookaburra: birdA({ body: "#c9b894", wingC: "#3a5cd9", head: "#e8dcc3", mask: "#5c4c3c", bill: "long", beakC: "#3c3630" }),
   potoo: birdA({ body: "#8a7a68", wingC: "#6b5c4c", mask: "#5c4c3c", beakC: "#5c4c3c", iris: "#e8c547" }),
@@ -856,4 +897,27 @@ Object.assign(DEX, {
   newt: A("Great Crested Newt", "newt", ["Aquatic", "Venom"], B(30, 36, 32, 40), MV.aqua, 0.44),
   hellbender: A("Hellbender", "hellbender", ["Aquatic", "Night"], B(46, 44, 46, 26), MV.aqua, 0.32),
   olm: A("Olm", "olm", ["Aquatic", "Night"], B(38, 36, 40, 28), MV.night, 0.3),
+});
+
+
+// ---------- bespoke birds folded into the shared bird archetypes ----------
+// These six predated the archetype system and were still hand-drawn heads.
+// They live here rather than in part2 because the bird archetypes they call
+// are defined in this file, and part2 loads first.
+Object.assign(ART, {
+  // Was a hand-drawn head. A flamingo is a wading bird - long legs, long neck,
+  // and the down-kinked bill that lets it filter-feed upside down.
+  flamingo: birdA({ body: "#e88aa8", head: "#f2a8c0", wingC: "#d96f92", beakC: "#3c3630",
+    bill: "hook", neck: true, longLegs: true, iris: "#e8dcc3" }),
+  // Owls go through the raptor build, which carries the facial disc and tufts.
+  owl: rapA({ body: "#8a7458", head: "#a89078", wingC: "#6b5a44", beakC: "#3c3630",
+    disc: true, discC: "#c9b494", tufts: true, iris: "#e8c547" }),
+  vulture: rapA({ body: "#4a423a", head: "#c9a8a0", wingC: "#3a332c", beakC: "#c9b08a",
+    hood: true, wattle: true, wattleC: "#b5645a", iris: "#3c3226" }),
+  hornbill: birdA({ body: "#2e2a26", head: "#f2ede0", wingC: "#4a443c", beakC: "#e8c547",
+    bill: "big", bib: "#f2ede0", iris: "#c94a3a" }),
+  kestrel: rapA({ body: "#c98a4a", head: "#8a9ab5", wingC: "#a86f34", beakC: "#e8b03a",
+    mottle: true, markC: "#5c4432", iris: "#3c3226" }),
+  lovebird: parrA({ body: "#5da84a", head: "#e8734a", wingC: "#4a8a3a", beakC: "#e8a53a",
+    cheek: true, cheekC: "#e8c547", iris: "#e8dcc3" }),
 });

@@ -320,15 +320,6 @@ const ART = {
       <Eye x={25} y={33} r={3 * er} /><Eye x={39} y={33} r={3 * er} />
     </g>
   ),
-  kestrel: (er) => (
-    <g>
-      <circle cx="32" cy="35" r="15" fill="#e8dcc3" />
-      <path d="M17,35 A15,15 0 0 1 47,35 Z" fill="#7d8ca3" />
-      <rect x="23.5" y="38" width="2.6" height="7.5" rx="1.3" fill="#37414f" /><rect x="37.9" y="38" width="2.6" height="7.5" rx="1.3" fill="#37414f" />
-      <path d="M32,39 q4.5,1 3.5,5.5 q-3.5,2.4 -7,0 q-1,-4.5 3.5,-5.5 z" fill="#e8a23c" />
-      <Eye x={25.5} y={34} r={3 * er} /><Eye x={38.5} y={34} r={3 * er} />
-    </g>
-  ),
   hedgehog: (er) => (
     <g>
       <path d="M8,42 L14,20 L20,34 L26,13 L32,30 L38,11 L44,32 L50,17 L56,42 Z" fill="#5d4a36" />
@@ -347,15 +338,6 @@ const ART = {
       <ellipse cx="43" cy="31" rx={1.6 * er} ry={4.2 * er} fill="#1e1611" />
       <path d="M24,45 Q32,49 40,45" stroke="#4c7a24" strokeWidth="1.6" fill="none" strokeLinecap="round" />
       <circle cx="30" cy="24" r="1.2" fill="#5d8f2c" /><circle cx="36" cy="26" r="1.2" fill="#5d8f2c" />
-    </g>
-  ),
-  lovebird: (er) => (
-    <g>
-      <circle cx="32" cy="34" r="15" fill="#6aa84f" />
-      <ellipse cx="32" cy="39" rx="10.5" ry="9.5" fill="#f0956a" />
-      <circle cx="25" cy="32" r="4.3" fill="#fff" /><circle cx="39" cy="32" r="4.3" fill="#fff" />
-      <path d="M32,38 q5,0 4.2,5.2 q-4.2,3 -8.4,0 q-0.8,-5.2 4.2,-5.2 z" fill="#e8e3d0" />
-      <Eye x={25} y={32} r={2.8 * er} /><Eye x={39} y={32} r={2.8 * er} />
     </g>
   ),
   dartfrog: (er) => (
@@ -436,15 +418,6 @@ const ART = {
   // shared feline body like every other cat - tawny, no mane, since the maned
   // male is a separate species entry.
   lion: felArt({ fur: "#c9a05c", inner: "#a8763c", muzzle: "#e8dcc3", iris: "#c9a43a", big: true }),
-  owl: (er) => (
-    <g>
-      <path d="M19,23 L13,7 L27,17 Z" fill="#6e563c" /><path d="M45,23 L51,7 L37,17 Z" fill="#6e563c" />
-      <circle cx="32" cy="37" r="16" fill="#8a6f4d" />
-      <circle cx="24.5" cy="36" r="9.5" fill="#c8b190" /><circle cx="39.5" cy="36" r="9.5" fill="#c8b190" />
-      <path d="M32,39 q3.2,1 2.2,6 q-2.2,1.6 -4.4,0 q-1,-5 2.2,-6 z" fill="#4c4238" />
-      <Eye x={24.5} y={36} r={3 * er} iris="#e8912d" /><Eye x={39.5} y={36} r={3 * er} iris="#e8912d" />
-    </g>
-  ),
   turtle: (er) => (
     <g>
       <path d="M14,40 Q14,17 32,15 Q50,17 50,40 L14,40 Z" fill="#5b6b3a" />
@@ -516,15 +489,6 @@ const ART = {
       <ellipse cx="32" cy="49" rx="5.5" ry="7.5" fill="#c9aba0" />
       <circle cx="30" cy="53" r="1.2" fill="#5c4038" /><circle cx="34" cy="53" r="1.2" fill="#5c4038" />
       <Eye x={26} y={35} r={2.5 * er} /><Eye x={38} y={35} r={2.5 * er} />
-    </g>
-  ),
-  flamingo: (er) => (
-    <g>
-      <path d="M34,38 Q22,42 20,52 Q28,54 34,48 Z" fill="#f08a9b" />
-      <circle cx="36" cy="28" r="11" fill="#f08a9b" />
-      <path d="M44,30 Q52,32 52,38 Q50,43 45,42 Q42,38 43,33 Z" fill="#f2c8ce" />
-      <path d="M46,37 Q52,36 52,38 Q50,43 45,42 Z" fill="#1e1611" />
-      <Eye x={33} y={26} r={2.5 * er} />
     </g>
   ),
   hippo: (er) => (
@@ -623,16 +587,6 @@ const ART = {
       <Eye x={24.5} y={35} r={2.4 * er} /><Eye x={39.5} y={35} r={2.4 * er} />
     </g>
   ),
-  hornbill: (er) => (
-    <g>
-      <path d="M20,20 Q32,10 46,16 Q44,22 38,23 Z" fill="#e8a23c" />
-      <circle cx="32" cy="32" r="14" fill="#2e2b28" />
-      <ellipse cx="24" cy="32" rx="5.5" ry="6.5" fill="#e8e0d0" /><ellipse cx="40" cy="32" rx="5.5" ry="6.5" fill="#e8e0d0" />
-      <path d="M26,38 Q32,36 38,38 L36,52 Q32,56 28,52 Z" fill="#e8a23c" />
-      <path d="M28,44 L36,43" stroke="#c97f1e" strokeWidth="1.3" />
-      <Eye x={24} y={31} r={2.6 * er} iris="#d84b3a" /><Eye x={40} y={31} r={2.6 * er} iris="#d84b3a" />
-    </g>
-  ),
   python: (er) => (
     <g>
       <circle cx="32" cy="38" r="16" fill="#6b4f2e" />
@@ -645,18 +599,6 @@ const ART = {
       <ellipse cx="32" cy="22" rx="8.5" ry="6" fill="#8a6a42" />
       <path d="M32,28 L32,32 M32,32 L29.6,35 M32,32 L34.4,35" stroke="#d84b3a" strokeWidth="1.5" fill="none" strokeLinecap="round" />
       <Eye x={28.5} y={21} r={2.1 * er} iris="#c9a63a" /><Eye x={35.5} y={21} r={2.1 * er} iris="#c9a63a" />
-    </g>
-  ),
-  vulture: (er) => (
-    <g>
-      <path d="M14,44 Q12,30 22,26 Q20,36 24,42 Z" fill="#4c3b2e" />
-      <path d="M50,44 Q52,30 42,26 Q44,36 40,42 Z" fill="#4c3b2e" />
-      <path d="M18,46 Q32,34 46,46 Q46,56 32,58 Q18,56 18,46 Z" fill="#4c3b2e" />
-      <path d="M20,45 Q32,36 44,45" stroke="#6b5a48" strokeWidth="2" fill="none" />
-      <circle cx="32" cy="28" r="9.5" fill="#d9a08a" />
-      <path d="M32,32 q4,0.5 3.2,5 q-3.2,2 -6.4,0 q-0.8,-4.5 3.2,-5 z" fill="#e8dcc3" />
-      <path d="M32,36 q1.4,1.2 0.7,2.8" stroke="#b58a6a" strokeWidth="1.1" fill="none" strokeLinecap="round" />
-      <Eye x={27.5} y={26} r={2.4 * er} iris="#e8912d" /><Eye x={36.5} y={26} r={2.4 * er} iris="#e8912d" />
     </g>
   ),
   penguin: (er) => (
