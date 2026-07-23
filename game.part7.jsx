@@ -14,32 +14,103 @@ const beastM = (base, o = {}) => (er) => (
     {o.flame && <g fill={o.flameC || "#e8853a"} opacity=".9"><path d="M20,14 Q22,5 26,12 Q27,7 30,12 Z" /><path d="M34,12 Q37,6 39,12 Q42,6 44,14 Z" /></g>}
   </g>
 );
-const dragonW = (o) => (er) => (
+const dragonW = (o) => (er) => {
+  const H = o.hide || "#8a4a3a";
+  const g1 = gid("dwc", H), g2 = gid("dww", H);
+  return (
   <g>
-    {o.wings !== false && <g fill={o.wingC || o.hide}><path d="M10,34 Q0,18 18,18 L24,28 Z" /><path d="M54,34 Q64,18 46,18 L40,28 Z" /></g>}
-    <g fill={o.hornC || "#e8dcc3"}><path d="M22,20 L16,4 L28,16 Z" /><path d="M42,20 L48,4 L36,16 Z" /></g>
-    <ellipse cx="32" cy="34" rx="15" ry="13" fill={o.hide} />
-    {o.spikes && <path d="M22,23 L26,16 L29,22 L32,15 L35,22 L38,16 L42,23 Z" fill={o.spikeC || "#5c4a6b"} />}
-    <path d="M24,42 Q32,48 40,42 L40,47 Q32,52 24,47 Z" fill={o.snout || "#c9b98a"} />
-    {teethRow(42.6, 25, 4, 3.6)}
-    <circle cx="28" cy="41" r="1.2" fill="#2a2018" /><circle cx="36" cy="41" r="1.2" fill="#2a2018" />
-    {o.multi && <g><ellipse cx="12" cy="22" rx="7" ry="6" fill={o.hide} /><ellipse cx="52" cy="22" rx="7" ry="6" fill={o.hide} /><Eye x={11} y={21} r={1.8} iris={o.iris} /><Eye x={53} y={21} r={1.8} iris={o.iris} /></g>}
-    <Eye x={25} y={33} r={2.7 * er} iris={o.iris || "#d94a3a"} />
-    <Eye x={39} y={33} r={2.7 * er} iris={o.iris || "#d94a3a"} />
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.26)} /><stop offset=".55" stopColor={H} />
+        <stop offset="1" stopColor={sh(H, 0.34)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, 0.14)} /><stop offset="1" stopColor={sh(H, -0.34)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="32" cy="57" rx="20" ry="2.4" fill="#000" opacity=".16" />
+    {/* far wing */}
+    <path d="M30,26 Q22,10 8,8 Q14,18 16,28 Q23,29 30,26 Z" fill={`url(#${g2})`} opacity=".7" />
+    {/* tail */}
+    <path d="M17,38 Q8,38 3,32" stroke={sh(H, -0.12)} strokeWidth="4" fill="none" strokeLinecap="round" />
+    <path d="M4.6,33.6 L1,29.6 L6.4,30 Z" fill={sh(H, -0.32)} />
+    {/* far legs */}
+    <g stroke={sh(H, -0.16)} strokeWidth="3.6" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity=".7">
+      <polyline points="35,42 32,48 36,52" /><polyline points="22,41 24,47 21,52" />
+    </g>
+    <path d="M40,29 Q46,32 45.6,38 Q45.4,44 40,47 Q30,50 21,47 Q14,44 14,37.6
+             Q14,31.4 21,28.6 Q31,25.6 40,29 Z" fill={`url(#${g1})`} />
+    {o.spikes && (
+      <g fill={sh(H, -0.44)}>
+        <path d="M20,27.6 L22,22.6 L24,27 Z" /><path d="M28,25.6 L30,20.4 L32,25.4 Z" />
+        <path d="M36,26.6 L38,21.8 L40,27 Z" />
+      </g>
+    )}
+    {/* near legs with claws */}
+    <g stroke={sh(H, -0.08)} strokeWidth="4.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="38,42 35,49 39.6,54" /><polyline points="19,41 21.6,48 18,54" />
+    </g>
+    {/* near wing, the big one */}
+    <path d="M34,26 Q26,6 8,3 Q16,15 18,29 Q26,31 34,26 Z" fill={`url(#${g2})`} />
+    <g stroke={sh(H, -0.5)} strokeWidth=".7" fill="none" opacity=".55">
+      <path d="M32,25 Q24,13 10,5" /><path d="M28,28 Q22,18 9,8" />
+    </g>
+    {/* neck and head */}
+    <path d="M42,30 Q48,24 52,19 L56,22 Q51,26.6 47,33 Z" fill={`url(#${g1})`} />
+    <ellipse cx="55" cy="19.6" rx="7.4" ry="5" fill={H} transform="rotate(-12 55 19.6)" />
+    <path d="M58,17.6 Q62.6,17 64.6,19.4 Q62,22 57.6,22.4 Z" fill={sh(H, -0.16)} />
+    <g fill="#f4ecd8">
+      <path d="M59,21.4 L60,21.4 L59.4,23.4 Z" /><path d="M61.4,21 L62.4,21 L61.8,22.8 Z" />
+    </g>
+    <g fill="none" stroke={sh(H, -0.5)} strokeWidth="1.6" strokeLinecap="round">
+      <path d="M52,14.6 Q51,9 55.4,8" /><path d="M56.6,14.4 Q57,9.4 61.4,9.6" />
+    </g>
+    <Eye x={55.4} y={17.6} r={1.6 * er} iris={o.iris || "#e8c547"} />
   </g>
-);
-const dragonE = (o) => (er) => (
+  );
+};
+const dragonE = (o) => (er) => {
+  const H = o.hide || "#4a8a5c";
+  const M = o.maneC || sh(H, -0.34);
+  const g1 = gid("dec", H);
+  return (
   <g>
-    <g stroke={o.hornC || "#d9c9a3"} strokeWidth="2.5" fill="none" strokeLinecap="round"><path d="M23,16 L19,5 M19,9 L14,7" /><path d="M41,16 L45,5 M45,9 L50,7" /></g>
-    <path d="M18,26 Q32,14 46,26 L46,31 Q32,21 18,31 Z" fill={o.maneC || "#e8c547"} />
-    <ellipse cx="32" cy="35" rx="14" ry="12" fill={o.hide} />
-    <ellipse cx="32" cy="43" rx="8.5" ry="5.5" fill={o.snout || "#c9d9c4"} />
-    <circle cx="29" cy="42" r="1.1" fill="#2a2018" /><circle cx="35" cy="42" r="1.1" fill="#2a2018" />
-    <g stroke={o.maneC || "#e8c547"} strokeWidth="1.4" fill="none" strokeLinecap="round"><path d="M24,44 Q14,44 10,50" /><path d="M40,44 Q50,44 54,50" /></g>
-    <Eye x={25} y={33} r={2.6 * er} iris={o.iris || "#d9a43a"} />
-    <Eye x={39} y={33} r={2.6 * er} iris={o.iris || "#d9a43a"} />
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor={sh(H, 0.22)} /><stop offset=".5" stopColor={H} />
+        <stop offset="1" stopColor={sh(H, -0.3)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="32" cy="57.6" rx="17" ry="2.2" fill="#000" opacity=".14" />
+    {/* the eastern dragon is a ribbon: no wings, a long serpentine body */}
+    <path d="M5,48 Q16,52 22,44 Q28,36 21,29 Q15,22 24,17 Q32,12 42,16"
+      stroke={`url(#${g1})`} strokeWidth="7.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M5,48 Q16,52 22,44 Q28,36 21,29 Q15,22 24,17 Q32,12 42,16"
+      stroke={sh(H, 0.42)} strokeWidth="2.6" fill="none" strokeLinecap="round" opacity=".35" />
+    {/* the dorsal mane running the length of it */}
+    <g stroke={M} strokeWidth="1.8" strokeLinecap="round" fill="none">
+      <path d="M10,45 L8.6,41" /><path d="M19,46.6 L21,50.4" /><path d="M25,39 L29,40" />
+      <path d="M21,26 L17.4,25" /><path d="M26,16.4 L25,12.6" /><path d="M35,13.4 L35,9.6" />
+    </g>
+    {/* clawed limbs, small and held clear of the body */}
+    <g stroke={sh(H, -0.14)} strokeWidth="2.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="24,42 29,46 27,50" /><polyline points="23,25 18,21 20,17" />
+    </g>
+    {/* head with whiskers and antlers */}
+    <ellipse cx="47" cy="16.6" rx="8" ry="5.4" fill={H} transform="rotate(-10 47 16.6)" />
+    <path d="M51,14 Q57,13 60,15.4 Q57,18.6 52,19.4 Z" fill={o.snout || sh(H, -0.14)} />
+    <path d="M43,11.6 Q39,8.6 40.6,4.6 Q43.6,7.6 46,11 Z" fill={M} />
+    <g fill="none" stroke={o.hornC || "#c9b88a"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M46,11 L44,5.6 M44,5.6 L41,4 M44,5.6 L45.4,1.6" />
+      <path d="M51,11 L52.6,5.6 M52.6,5.6 L55.6,4.4" />
+    </g>
+    <g stroke={M} strokeWidth=".9" fill="none" strokeLinecap="round">
+      <path d="M57,17.6 Q61,20.6 63.6,26" /><path d="M55,18.6 Q57.6,22.6 58,28" />
+    </g>
+    <Eye x={48.4} y={14.6} r={1.7 * er} iris={"#e8c547"} />
   </g>
-);
+  );
+};
 const birdM = (o) => (er) => (
   <g>
     {o.halo && <circle cx="32" cy="13" r="7.5" fill="none" stroke="#e8c547" strokeWidth="2.5" opacity=".85" />}
@@ -55,21 +126,58 @@ const birdM = (o) => (er) => (
     <Eye x={39} y={31} r={2.7 * er} iris={o.iris || "#d9a43a"} />
   </g>
 );
-const serpentM = (o) => (er) => (
+const serpentM = (o) => (er) => {
+  const H = o.hide || "#5d8a4a";
+  const BC = o.bandC || sh(H, -0.36);
+  const g1 = gid("sec", H);
+  return (
   <g>
-    <path d="M14,58 Q6,50 14,44 Q22,38 32,44 Q42,50 50,44" stroke={o.hide} strokeWidth="7" fill="none" strokeLinecap="round" />
-    {o.hood && <path d="M16,30 Q32,8 48,30 Q48,44 32,46 Q16,44 16,30 Z" fill={o.hoodC || o.hide} />}
-    {o.feathers && <g fill={o.featherC || "#2e8b57"}><path d="M18,22 Q20,10 26,18 Z" /><path d="M26,17 Q30,6 34,16 Z" /><path d="M38,17 Q44,9 46,22 Z" /></g>}
-    {o.horns && <g fill={o.hornC || "#e8dcc3"}><path d="M24,20 L19,8 L29,17 Z" /><path d="M40,20 L45,8 L35,17 Z" /></g>}
-    <ellipse cx="32" cy="32" rx="12" ry="11" fill={o.hide} />
-    {o.crown && <path d="M25,20 L27,14 L30,19 L32,13 L34,19 L37,14 L39,20 Z" fill="#e8c547" />}
-    {o.bands && <g stroke={o.bandC || "#e8c547"} strokeWidth="2.4" fill="none"><path d="M21,36 Q32,42 43,36" /><path d="M23,30 Q32,35 41,30" /></g>}
-    <path d="M29,40 L32,46 L35,40 Z" fill={o.snout || "#c9704a"} />
-    <path d="M32,46 L32,52 M32,49 L29,52 M32,49 L35,52" stroke="#c0392b" strokeWidth="1.3" fill="none" strokeLinecap="round" />
-    <Eye x={26} y={31} r={2.6 * er} iris={o.iris || "#c9d94a"} />
-    <Eye x={38} y={31} r={2.6 * er} iris={o.iris || "#c9d94a"} />
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor={sh(H, 0.2)} /><stop offset=".5" stopColor={H} />
+        <stop offset="1" stopColor={sh(H, -0.28)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="32" cy="57.6" rx="17" ry="2.2" fill="#000" opacity=".14" />
+    {/* one long coiling body rather than a head on its own */}
+    <path d="M6,50 Q18,54 26,46 Q34,38 26,31 Q18,25 26,18 Q33,12 44,15"
+      stroke={`url(#${g1})`} strokeWidth="8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M6,50 Q18,54 26,46 Q34,38 26,31 Q18,25 26,18 Q33,12 44,15"
+      stroke={sh(H, 0.4)} strokeWidth="3" fill="none" strokeLinecap="round" opacity=".35" />
+    {o.bands && (
+      <g stroke={BC} strokeWidth="2.4" strokeLinecap="round" fill="none">
+        <path d="M12,51.6 L14,47.6" /><path d="M23,49 L26,52" />
+        <path d="M29,41 L33,42.4" /><path d="M24,28 L20,29.6" />
+        <path d="M28,20 L26.6,16.2" /><path d="M37,14.4 L38,18.2" />
+      </g>
+    )}
+    {o.feathers && (
+      <g fill={o.featherC || sh(H, 0.35)} opacity=".9">
+        <path d="M24,44 q-5,1.6 -6.4,5.6 q4.6,-1.4 6.4,-5.6 Z" />
+        <path d="M25,26 q-5.4,-.6 -7.4,3 q4.8,.4 7.4,-3 Z" />
+      </g>
+    )}
+    {/* head */}
+    <ellipse cx="49" cy="16.6" rx="8" ry="5.4" fill={H} transform="rotate(-8 49 16.6)" />
+    <path d="M53,14.4 Q58.6,13.6 61.4,16 Q58.6,19 53.6,19.4 Z" fill={sh(H, -0.14)} />
+    {o.crown && (
+      <g fill="#e8c547">
+        <path d="M45,10.6 L47,5.6 L49,10 L51,5 L53,9.6 Z" />
+      </g>
+    )}
+    {o.horns && (
+      <g fill="none" stroke={o.hornC || "#e8dcc3"} strokeWidth="1.8" strokeLinecap="round">
+        <path d="M46,11.6 Q45,5.6 49.6,4.6" /><path d="M52,11.4 Q52.6,5.6 57,5.6" />
+      </g>
+    )}
+    {o.hood && (
+      <path d="M43,12 Q37,17 43,23 Q49,25 53,21 Q48,17 47,12 Z" fill={o.hoodC || sh(H, -0.2)} />
+    )}
+    <Eye x={50} y={14.6} r={1.7 * er} iris={o.iris || "#c9a43a"} />
+    <path d="M61.4,16 Q64,15.4 65.4,14" stroke="#c94a3a" strokeWidth=".8" fill="none" strokeLinecap="round" />
   </g>
-);
+  );
+};
 const hoofM = (o) => (er) => (
   <g>
     {o.wings && <g fill={o.wingC || "#f2ede0"}><path d="M8,34 Q-2,18 16,18 L24,28 Z" /><path d="M56,34 Q66,18 48,18 L40,28 Z" /></g>}
@@ -85,19 +193,82 @@ const hoofM = (o) => (er) => (
     <Eye x={38} y={35} r={2.5 * er} iris={o.iris || "#6b4c9a"} />
   </g>
 );
-const giantM = (o) => (er) => (
+const giantM = (o) => (er) => {
+  const F = o.fur || "#a8a396";
+  const SK = o.skin || sh(F, -0.3);
+  const g1 = gid("gc", F), g2 = gid("gl", F);
+  return (
   <g>
-    {o.horns && <g fill={o.hornC || "#e8dcc3"}><path d="M18,22 L10,8 L26,16 Z" /><path d="M46,22 L54,8 L38,16 Z" /></g>}
-    {o.leaves && <g fill="#4c7a3c"><path d="M20,16 Q24,6 30,14 Z" /><path d="M34,14 Q40,5 44,16 Z" /><circle cx="25" cy="18" r="2.4" /><circle cx="40" cy="17" r="2.4" /></g>}
-    <ellipse cx="32" cy="36" rx="16" ry="15" fill={o.fur} />
-    {o.shag && <g stroke={o.shagC || o.fur} strokeWidth="3" strokeLinecap="round"><path d="M18,46 L15,53 M25,49 L23,57 M32,50 L32,58 M39,49 L41,57 M46,46 L49,53" /></g>}
-    {o.trunk ? <path d="M28,40 Q32,44 32,52 Q32,58 28,58 Q26,52 28,46 Z" fill={o.fur} /> : <ellipse cx="32" cy="44" rx="8.5" ry="6" fill={o.skin || "#c9a88a"} />}
-    {o.tusks && <g fill="#f5efdf"><path d="M23,44 L19,54 L26,47 Z" /><path d="M41,44 L45,54 L38,47 Z" /></g>}
-    {o.cyclops ? <Eye x={32} y={32} r={4.6 * er} iris={o.iris || "#d9a43a"} />
-      : <g><Eye x={25} y={32} r={2.6 * er} iris={o.iris || "#d9a43a"} /><Eye x={39} y={32} r={2.6 * er} iris={o.iris || "#d9a43a"} /></g>}
-    {!o.trunk && <path d="M29,43 L35,43 L32,46 Z" fill="#6b4436" />}
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(F, -0.24)} /><stop offset=".55" stopColor={F} />
+        <stop offset="1" stopColor={sh(F, 0.32)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(F, -0.16)} /><stop offset="1" stopColor={sh(F, 0.14)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="32" cy="58" rx="18" ry="2.4" fill="#000" opacity=".17" />
+    {/* upright and heavy - a standing giant, not a beast on all fours */}
+    <g stroke={`url(#${g2})`} strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity=".72">
+      <polyline points="26,40 22.6,48 25,55.6" />
+    </g>
+    <g stroke={`url(#${g2})`} strokeWidth="4.6" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity=".72">
+      <polyline points="25,26 18,32 19,40" />
+    </g>
+    <path d="M23,42 Q21,30 26,23.6 Q32,19 39,22.4 Q44,26.6 43,38 Q42,45.6 39,48 Q30,50 23,42 Z"
+      fill={`url(#${g1})`} />
+    {o.shag && (
+      <g fill={sh(F, -0.2)} opacity=".7">
+        <path d="M23.6,30 q4,2.4 3,6.4 q-3.4,-2 -3,-6.4 Z" />
+        <path d="M41,29 q-3.6,2.6 -2.6,6.6 q3.2,-2.2 2.6,-6.6 Z" />
+        <path d="M27,44 q3,2.6 7,2.4 q-3.6,3 -7,-2.4 Z" />
+      </g>
+    )}
+    <g stroke={`url(#${g2})`} strokeWidth="5.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="36,42 40,49 37,56" />
+    </g>
+    <ellipse cx="36.6" cy="56.6" rx="3.6" ry="1.8" fill={sh(F, -0.34)} />
+    <g stroke={`url(#${g2})`} strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="40,27 47,33 45.6,41" />
+    </g>
+    <ellipse cx="45.4" cy="43" rx="3" ry="3.4" fill={sh(F, -0.24)} />
+    {o.trunk && (
+      <path d="M33,26 Q35,34 33,42 Q31,45 29.6,42" stroke={SK} strokeWidth="3.4" fill="none"
+        strokeLinecap="round" />
+    )}
+    {/* head sunk between the shoulders */}
+    <ellipse cx="33" cy="17" rx="8" ry="7.4" fill={F} />
+    <ellipse cx="33" cy="18.6" rx="5.6" ry="5.4" fill={SK} />
+    {o.horns && (
+      <g fill="none" stroke={sh(F, -0.5)} strokeWidth="2.2" strokeLinecap="round">
+        <path d="M27,11.6 Q24,5.6 29,3.6" /><path d="M39,11.6 Q42,5.6 37,3.6" />
+      </g>
+    )}
+    {o.leaves && (
+      <g fill="#5d8a4a" opacity=".85">
+        <ellipse cx="27" cy="10" rx="3.4" ry="2" transform="rotate(-30 27 10)" />
+        <ellipse cx="39" cy="10" rx="3.4" ry="2" transform="rotate(30 39 10)" />
+      </g>
+    )}
+    {o.cyclops ? (
+      <Eye x={33} y={16.6} r={3 * er} iris={"#c9a43a"} />
+    ) : (
+      <g>
+        <Eye x={30.2} y={16.6} r={2 * er} iris={"#c9a43a"} />
+        <Eye x={35.8} y={16.6} r={2 * er} iris={"#c9a43a"} />
+      </g>
+    )}
+    {o.tusks && (
+      <g fill="#f2ecd8">
+        <path d="M30,21.6 L31.4,21.6 L30.4,25.6 Z" /><path d="M35,21.6 L36.4,21.6 L35.6,25.6 Z" />
+      </g>
+    )}
+    <path d="M30.4,21.4 Q33,22.8 35.6,21.4" stroke={sh(SK, -0.4)} strokeWidth=".9" fill="none"
+      strokeLinecap="round" />
   </g>
-);
+  );
+};
 const bugM = (o) => (er) => (
   <g>
     {o.moth ? (
