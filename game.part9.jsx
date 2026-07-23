@@ -849,6 +849,8 @@ const flutA = (o) => (er) => {
   );
 };
 // --- reptiles & amphibians ---
+
+
 const lizA = (o) => (er) => {
   const H = o.hide || o.skin || "#6b8a4a";
   const B = o.belly || sh(H, 0.4);
@@ -1208,7 +1210,7 @@ Object.assign(ART, {
   jumpingspider: bugM({ body: "#3c3630", legC: "#26221c", iris: "#3ad9a4" }),
   peacockspider: bugM({ body: "#c94a3a", legC: "#3c3630", iris: "#3a5cd9" }),
   // reptiles
-  gharial: marineA({ hide: "#5c7a5c", teeth: true, jaw: "#4c6b4c", belly: "#c9c4a8", finC: "#4c6b4c" }),
+  gharial: crocA({ hide: "#6b7a5c", belly: "#d9d4b0", scuteC: "#4a5540", narrow: true, ghara: true, armor: true, iris: "#c9a43a" }),
   komododragon: lizA({ hide: "#6b6358", spikes: true, spikeC: "#5c5448", teeth: true, jaw: "#5c5448", iris: "#c9a43a" }),
   greeniguana: lizA({ hide: "#4c9a3c", crest: true, crestC: "#3a7a2c", dewlap: true, dewC: "#8fb35c", iris: "#e8c547" }),
   marineiguana: lizA({ hide: "#3c3630", crest: true, crestC: "#26221c", spikes: true, iris: "#c94a3a" }),
@@ -1220,8 +1222,8 @@ Object.assign(ART, {
   skink: lizA({ hide: "#5c6b74", bands: true, markC: "#3a5cd9", iris: "#3c3226" }),
   hornedlizard: lizA({ hide: "#c9a878", spikes: true, spikeC: "#8a6f52", spots: true, markC: "#5c4436" }),
   tuatara: lizA({ hide: "#6b7a5c", spikes: true, spikeC: "#8a9a6b", iris: "#c9a43a" }),
-  alligator: marineA({ hide: "#3c4438", teeth: true, jaw: "#2e342a", belly: "#c9c4a8" }),
-  caiman: marineA({ hide: "#4c5c44", teeth: true, jaw: "#3a4634", belly: "#c9bda3" }),
+  alligator: crocA({ hide: "#3a4a3c", belly: "#c9c4a8", scuteC: "#26302a", armor: true, bands: true, markC: "#1e2620", iris: "#c9a43a" }),
+  caiman: crocA({ hide: "#2e3830", belly: "#b5b08a", scuteC: "#1e2620", armor: true, bands: true, iris: "#c9a43a" }),
   greenanaconda: snakeA({ hide: "#4c5c3c", diamond: true, markC: "#26292e", iris: "#e8c547" }),
   boaconstrictor: snakeA({ hide: "#c9a878", diamond: true, markC: "#8a5230", iris: "#c9853a" }),
   kingcobra: snakeA({ hide: "#8a6f42", hood: true, hoodC: "#a3855c", hoodMark: true, markC: "#3c3226", iris: "#26221c" }),

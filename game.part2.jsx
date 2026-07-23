@@ -451,15 +451,6 @@ const ART = {
     </g>
   ),
   wolf: canArt({ fur: "#8a8f98", inner: "#5c6068", muzzle: "#d7d9dd", line: "#5c6068", iris: "#d9a43a" }),
-  croc: (er) => (
-    <g>
-      <circle cx="23" cy="24" r="6.5" fill="#5d8a4a" /><circle cx="41" cy="24" r="6.5" fill="#5d8a4a" />
-      <rect x="13" y="27" width="38" height="17" rx="8.5" fill="#5d8a4a" />
-      <rect x="15" y="41" width="34" height="7" rx="3.5" fill="#8fae6a" />
-      <path d="M17,42 L20,38.5 L23,42 L26,38.5 L29,42 L32,38.5 L35,42 L38,38.5 L41,42 L44,38.5 L47,42 Z" fill="#f4f7ee" />
-      <Eye x={23} y={23} r={2.6 * er} iris="#d9c23a" /><Eye x={41} y={23} r={2.6 * er} iris="#d9c23a" />
-    </g>
-  ),
   meerkat: (er) => (
     <g>
       <circle cx="22" cy="26" r="3.5" fill="#b5946a" /><circle cx="42" cy="26" r="3.5" fill="#b5946a" />

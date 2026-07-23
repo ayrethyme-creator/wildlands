@@ -19,6 +19,148 @@ const MV = {
 const teethRow = (y, x0 = 23, n = 5, w = 3.8, c = "#f5efdf") => (
   <path d={Array.from({ length: n }, (_, i) => `M${x0 + i * w},${y} l${w / 2},4.5 l${w / 2},-4.5`).join(" ")} fill={c} />
 );
+// --- crocodilians, and their armoured Triassic relatives ---
+// Alligators, caimans and gharials were on the marine-reptile build, which
+// gives them plesiosaur paddles. A crocodilian is the opposite animal: long and
+// low to the ground on sprawled legs, armoured with scutes down the back, a
+// heavy keeled tail that does the swimming, and eyes and nostrils riding on top
+// of the skull so it can float with the rest submerged.
+//
+// The Triassic croc-line - aetosaurs, rauisuchians - used the same body but
+// stood with the legs under it rather than out to the side, so `erect` switches
+// the stance instead of needing a separate archetype.
+const crocA = (o) => (er) => {
+  const H = o.hide || "#5d7a4a";
+  const BE = o.belly || sh(H, 0.42);
+  const SC = o.scuteC || sh(H, -0.3);
+  const g1 = gid("cdc", H), g2 = gid("cdl", H);
+  const E = o.erect;
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.24)} /><stop offset=".55" stopColor={H} />
+        <stop offset="1" stopColor={BE} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.16)} /><stop offset="1" stopColor={sh(H, 0.14)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="30" cy={E ? 55.4 : 50.6} rx="24" ry="2.2" fill="#000" opacity=".15" />
+
+    {/* the tail: long, thick at the base, laterally flattened, with a raised
+        keel of scutes along the top - it is the animal's whole engine */}
+    <path d={E ? "M22,36 Q12,36 4,32 Q11,40 20,42 Z" : "M20,36 Q10,37 2,33 Q9,42 19,42 Z"}
+      fill={`url(#${g1})`} />
+    <g fill={SC}>
+      {(E ? [[18,33],[13,32.4],[8,31.4]] : [[16,33.6],[11,33],[6,32]]).map(([x,y],i)=>(
+        <path key={i} d={`M${x},${y} l2,-3.4 l2,3.4 Z`} />
+      ))}
+    </g>
+
+    {/* far pair of limbs */}
+    <g stroke={`url(#${g2})`} strokeWidth={E ? 3.6 : 2.8} fill="none" strokeLinecap="round"
+      strokeLinejoin="round" opacity=".7">
+      {E ? (
+        <g><polyline points="36,42 35.4,48 36.6,53" /><polyline points="24,41 24.6,47 23.4,52" /></g>
+      ) : (
+        <g><polyline points="37,42 43,46 41,49" /><polyline points="26,41 20,45 22,48.6" /></g>
+      )}
+    </g>
+
+    {/* long low body */}
+    <path d={E
+      ? "M44,29 Q51,32 50.6,37 Q50,42.6 44,45 Q32,48.6 22,46 Q15,43.4 15,37.4 Q15,31.6 22,29.4 Q33,26.4 44,29 Z"
+      : "M46,33 Q53,35.4 52.6,39 Q52,43 46,45 Q32,48 20,45.6 Q13,43.4 13,39 Q13,35 20,33.4 Q33,30.6 46,33 Z"}
+      fill={`url(#${g1})`} />
+
+    {/* the armour: paired rows of raised scutes down the back */}
+    <g fill={SC}>
+      {(E ? [[26,27],[32,26.2],[38,26.6],[44,28]] : [[24,31.4],[30,30.6],[36,30.8],[42,31.6]])
+        .map(([x,y],i)=>(<path key={i} d={`M${x},${y} l2.2,-3.6 l2.2,3.6 Z`} />))}
+    </g>
+    {o.armor && (
+      <g fill="none" stroke={sh(SC, -0.24)} strokeWidth=".85" opacity=".75">
+        <path d={E ? "M20,34 Q33,31 47,34" : "M18,37.6 Q33,35 49,37.6"} />
+        <path d={E ? "M20,40 Q33,38 47,40" : "M18,42.4 Q33,40.6 49,42.4"} />
+      </g>
+    )}
+    {o.spikes && (
+      <g fill={o.spikeC || sh(SC, -0.2)}>
+        {(E ? [[22,28],[28,27],[34,27],[40,27.6]] : [[22,32],[28,31],[34,31],[40,31.6]])
+          .map(([x,y],i)=>(<path key={i} d={`M${x},${y} l1.6,-7 l3,6.4 Z`} />))}
+        <path d={E ? "M18,31 l-6,-5 l6,-1 Z" : "M16,35 l-6,-5 l6,-1 Z"} />
+      </g>
+    )}
+    {o.bands && (
+      <g stroke={o.markC || sh(H, -0.4)} strokeWidth="2" fill="none" opacity=".6">
+        <path d={E ? "M25,28.6 Q26,37 25,45.4 M33,26.8 Q34,37 33,47 M41,28 Q42,37 41,45.6"
+                   : "M23,32.4 Q24,39 23,46.4 M31,31 Q32,39 31,47.6 M39,31.6 Q40,39 39,46.4"} />
+      </g>
+    )}
+
+    {/* near limbs. Sprawled out to the sides for a modern crocodilian; tucked
+        under the body for the Triassic forms, which walked upright. */}
+    <g stroke={`url(#${g2})`} strokeWidth={E ? 4.2 : 3.2} fill="none" strokeLinecap="round"
+      strokeLinejoin="round">
+      {E ? (
+        <g><polyline points="41,42 40.4,49 41.6,54.6" /><polyline points="21,41 21.6,48 20.4,54.6" /></g>
+      ) : (
+        <g><polyline points="42,43 49,47.6 46,50.6" /><polyline points="22,42 15,46.6 18,49.6" /></g>
+      )}
+    </g>
+    <g stroke={sh(H, -0.5)} strokeWidth="1.1" fill="none" strokeLinecap="round">
+      {E ? (
+        <g><path d="M41.6,54.6 L38.6,56 M41.6,54.6 L42,57 M41.6,54.6 L44.6,56" />
+           <path d="M20.4,54.6 L17.4,56 M20.4,54.6 L20.8,57 M20.4,54.6 L23.4,56" /></g>
+      ) : (
+        <g><path d="M46,50.6 L43,52.4 M46,50.6 L46.6,53 M46,50.6 L49,52" />
+           <path d="M18,49.6 L15,51.4 M18,49.6 L18.6,52 M18,49.6 L21,51" /></g>
+      )}
+    </g>
+
+    {/* skull and snout. Broad for an alligator, needle-thin for a gharial,
+        deep and tall for the rauisuchians. */}
+    {o.deepSkull ? (
+      <g>
+        <path d="M46,29 Q54,25.6 60,28.6 Q64,31.4 62.6,35.6 Q60,39.4 53,39.4
+                 Q46.6,38.6 45,34 Z" fill={H} />
+        <path d="M50,36.6 Q56,39.4 62.6,36.4 Q60.6,41 54.4,41 Q50.6,40.4 50,36.6 Z"
+          fill={o.jaw || sh(H, 0.28)} />
+      </g>
+    ) : (
+      <g>
+        <path d={o.narrow
+          ? "M46,34 Q54,32.6 66,34.4 Q66.4,36.4 65,36.8 Q54,37.6 46,38 Z"
+          : "M46,33.4 Q56,32 63,34.4 Q65.4,36 64.4,38 Q55,39.6 46,39 Z"} fill={H} />
+        {/* the interlocking teeth that show even with the mouth shut */}
+        <g fill="#f4ecd8">
+          {(o.narrow ? [50,54,58,62] : [50,54,58]).map((x,i)=>(
+            <path key={i} d={`M${x},36.6 l1,0 l-.5,2.2 Z`} />
+          ))}
+          {(o.narrow ? [52,56,60] : [52,56,60]).map((x,i)=>(
+            <path key={i} d={`M${x},36 l1,0 l-.5,-2 Z`} />
+          ))}
+        </g>
+        {o.ghara && <ellipse cx="64" cy="33.4" rx="2.6" ry="2" fill={sh(H, 0.3)} />}
+      </g>
+    )}
+
+    {/* eyes and nostrils ride on top of the skull, so the animal can float
+        with everything else underwater */}
+    {!o.deepSkull && (
+      <g>
+        <ellipse cx="49" cy="31.4" rx="3" ry="2.6" fill={H} />
+        <ellipse cx="44.6" cy="31.6" rx="2.6" ry="2.4" fill={H} />
+        <ellipse cx={o.narrow ? 65 : 63.4} cy="34" rx="1.4" ry="1" fill={sh(H, -0.5)} />
+      </g>
+    )}
+    <Eye x={o.deepSkull ? 53 : 49} y={o.deepSkull ? 30.6 : 30.4} r={1.8 * er}
+      iris={o.iris || "#c9a43a"} />
+  </g>
+  );
+};
+
 const theroA = (o) => (er) => {
   const H = o.hide || "#7a6a4a";
   const spine = sh(H, -0.26), belly = sh(H, 0.36), limb = sh(H, -0.12);
@@ -374,8 +516,8 @@ Object.assign(ART, {
   eoraptor: theroA({ hide: "#c9a05c", jaw: "#a3824a" }),
   herrerasaurus: theroA({ hide: "#a3684a", jaw: "#7a4c38", stripes: true }),
   plateosaurus: sauroA({ hide: "#9aa85c", belly: "#c9cf9a" }),
-  postosuchus: theroA({ hide: "#6b7a5c", jaw: "#4c5844", brow: true, hornC: "#5c6b4c" }),
-  desmatosuchus: armorA({ hide: "#8a7a5c", spikes: true, scutes: true }),
+  postosuchus: crocA({ hide: "#7a6450", belly: "#c9b89a", scuteC: "#5c4a38", erect: true, armor: true, deepSkull: true, jaw: "#a89078", iris: "#c9a43a" }),
+  desmatosuchus: crocA({ hide: "#8a7a5c", belly: "#c9bc9a", scuteC: "#6b5c40", erect: true, armor: true, spikes: true, spikeC: "#5c4c34", iris: "#c9a43a" }),
   shonisaurus: marineA({ hide: "#5a768a", belly: "#a3b8c4" }),
   tanystropheus: sauroA({ hide: "#7a9a8a", belly: "#c4d4c4", fins: true }),
   lystrosaurus: armorA({ hide: "#b59a6b", tusks: true, beakC: "#d9c49a" }),
@@ -547,4 +689,12 @@ Object.assign(SIGNS, {
   "dig1:8,3": "🪧 'TRIASSIC: after the Great Dying, life rebuilt itself strange. Croc-cousins like Postosuchus ruled before dinosaurs did.'",
   "dig2:8,3": "🪧 'JURASSIC: sauropod necks like Mamenchisaurus's stretched 9 meters. Listen — you can almost hear the ferns being mowed.'",
   "dig3:8,3": "🪧 'CRETACEOUS: Quetzalcoatlus stood as tall as a giraffe and flew. Then the sky fell, 66 million years ago — but not today.'",
+});
+
+
+// The crocodile was one of the original hand-drawn heads. It goes through the
+// crocodilian build now, alongside the alligator, caiman and gharial.
+Object.assign(ART, {
+  croc: crocA({ hide: "#5d7a4a", belly: "#c9c49a", scuteC: "#3f5433", armor: true,
+    bands: true, markC: "#33452a", iris: "#c9a43a" }),
 });
