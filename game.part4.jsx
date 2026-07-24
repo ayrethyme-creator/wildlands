@@ -17,6 +17,7 @@ function Wildlands() {
     legends: {}, dex: {}, objects: {}, visited: { town1: true }, trainersBeaten: {}, rival: "otter_j",
     dialog: null, menu: null, battle: null, pick: null,
     sound: true, soundReady: false, run: true,
+    slot: null, quiz: {},
   });
   const SR = useRef(S);
   useEffect(() => { SR.current = S; }, [S]);
@@ -24,44 +25,95 @@ function Wildlands() {
   useEffect(() => () => { timers.current.forEach(clearTimeout); stopBGM(); }, []);
 
   // ----- save / load -----
-  const [hasSave, setHasSave] = useState(false);
-  const saveRef = useRef(null);
+  // Three independent slots, so a finished game can sit untouched while another
+  // runs from the start. The original single-slot key is migrated into slot 1
+  // the first time this build loads, so nobody loses a game in progress.
+  const SLOTS = [1, 2, 3];
+  const slotKey = (n) => `wildlands-save-${n}`;
+  const LEGACY_KEY = "wildlands-save";
+
+  const [saves, setSaves] = useState({});          // slot -> payload
   const [saveStatus, setSaveStatus] = useState("checking");
+  const slotRef = useRef(null);                    // which slot this session writes to
+
+  // A short description of a save, so the title screen shows what is in a slot
+  // rather than three identical buttons.
+  const slotSummary = (p) => {
+    if (!p) return null;
+    const lead = (p.party || []).find((a) => DEX[a.sp]);
+    const seen = Object.keys(p.dex || {}).length;
+    const where = (MAPS[p.map] && MAPS[p.map].name) || "the Wildlands";
+    return {
+      lead: lead ? `${DEX[lead.sp].n} Lv${lead.lvl}` : "no companions yet",
+      leadSp: lead ? lead.sp : null,
+      badges: typeof p.badges === "number" ? p.badges : 0,
+      seen, where,
+      legends: Object.keys(p.legends || {}).length,
+      when: p.savedAt ? new Date(p.savedAt).toLocaleDateString() : null,
+    };
+  };
+
   const checkSave = async () => {
     setSaveStatus("checking");
+    const found = {};
+    // migrate the old single save into slot 1 if slot 1 is empty
     try {
-      const r = await storage.get("wildlands-save");
-      if (r?.value) { saveRef.current = JSON.parse(r.value); setHasSave(true); setSaveStatus("found"); return; }
-    } catch (e) { /* key may not exist */ }
-    try {
-      const l = await storage.list("");
-      const keys = l?.keys || [];
-      if (keys.includes("wildlands-save")) setSaveStatus("error");
-      else setSaveStatus("none");
-    } catch (e2) { setSaveStatus("error"); }
+      const legacy = await storage.get(LEGACY_KEY);
+      if (legacy?.value) {
+        let slot1 = null;
+        try { const r1 = await storage.get(slotKey(1)); slot1 = r1?.value || null; } catch (e) {}
+        if (!slot1) {
+          await storage.set(slotKey(1), legacy.value);
+        }
+      }
+    } catch (e) { /* no legacy save, which is fine */ }
+    for (const n of SLOTS) {
+      try {
+        const r = await storage.get(slotKey(n));
+        if (r?.value) found[n] = JSON.parse(r.value);
+      } catch (e) { /* empty slot */ }
+    }
+    setSaves(found);
+    setSaveStatus(Object.keys(found).length ? "found" : "none");
   };
   useEffect(() => { checkSave(); }, []);
 
   const saveGame = async (silent) => {
+    const n = slotRef.current;
+    if (!n) { if (!silent) setS((p) => ({ ...p, dialog: { text: "⚠️ No save slot selected." } })); return; }
     try {
       const st = SR.current;
       const payload = {
-        v: 3, uid: UID, map: st.map, x: st.x, y: st.y, swimming: st.swimming,
+        v: 4, uid: UID, slot: n, savedAt: Date.now(),
+        map: st.map, x: st.x, y: st.y, swimming: st.swimming,
         party: st.party, box: st.box, items: st.items,
         badges: st.badges, profGift: st.profGift, houseIdx: st.houseIdx,
         legends: st.legends, dex: st.dex, objects: st.objects, visited: st.visited,
-        trainersBeaten: st.trainersBeaten, rival: st.rival, sound: st.sound,
+        trainersBeaten: st.trainersBeaten, rival: st.rival, sound: st.sound, run: st.run,
+        quiz: st.quiz,
       };
-      const r = await storage.set("wildlands-save", JSON.stringify(payload));
-      saveRef.current = payload; setHasSave(true);
-      if (!silent) setS((p) => ({ ...p, dialog: { text: r ? "💾 Game saved!" : "⚠️ Save failed — storage unavailable." } }));
+      const r = await storage.set(slotKey(n), JSON.stringify(payload));
+      setSaves((prev) => ({ ...prev, [n]: payload }));
+      if (!silent) setS((p) => ({ ...p, dialog: { text: r ? `💾 Saved to File ${n}.` : "⚠️ Save failed — storage unavailable." } }));
     } catch (e) {
       if (!silent) setS((p) => ({ ...p, dialog: { text: "⚠️ Save failed — storage unavailable." } }));
     }
   };
 
-  const continueGame = () => {
-    const p = saveRef.current; if (!p) return;
+  const eraseSlot = async (n) => {
+    try { await storage.delete(slotKey(n)); } catch (e) {}
+    if (n === 1) { try { await storage.delete(LEGACY_KEY); } catch (e) {} }
+    setSaves((prev) => { const c = { ...prev }; delete c[n]; return c; });
+  };
+
+  const startNewIn = (n) => {
+    slotRef.current = n;
+    setS((p) => ({ ...p, screen: "starter", slot: n }));
+  };
+
+  const continueGame = (n) => {
+    const p = saves[n]; if (!p) return;
+    slotRef.current = n;
     UID = Math.max(UID, p.uid || 1000);
     const badges = typeof p.badges === "number" ? p.badges : (p.badge ? 1 : 0) + (p.badge2 ? 1 : 0);
     let map = MAPS[p.map] && typeof p.badges === "number" ? p.map : "town1";
@@ -86,6 +138,8 @@ function Wildlands() {
       rival: p.rival || COUNTER[party[0]?.sp] || "otter_j",
       sound: p.sound !== false,
       run: p.run !== false,
+      slot: n,
+      quiz: p.quiz || {},
     }));
   };
 

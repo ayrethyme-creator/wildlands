@@ -80,24 +80,64 @@
         <p style={{ fontSize: 12, color: "#b8ab90", maxWidth: 320, lineHeight: 1.6 }}>
           Eight arenas across eight wild lands. The Elite Four at the Summit. Behind ancient seals, three guardians wait. And beyond the Summit — fossil canyons and myth-rifts, for Champions only.
         </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 14, alignItems: "center" }}>
-          {hasSave && (
-            <button style={{ ...btn("#27ae60"), fontSize: 18, padding: "14px 34px" }} onClick={continueGame}>▶ CONTINUE</button>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 14, alignItems: "stretch", width: "100%", maxWidth: 340 }}>
+          {saveStatus === "checking" ? (
+            <div style={{ fontSize: 11, color: "#8a7f68", textAlign: "center", padding: 12 }}>Reading save files…</div>
+          ) : (
+            [1, 2, 3].map((n) => {
+              const sm = slotSummary(saves[n]);
+              return (
+                <div key={n} style={{ ...panel, padding: 10, textAlign: "left" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 38, height: 38, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {sm && sm.leadSp ? <Sprite sp={sm.leadSp} size={34} /> : <span style={{ fontSize: 18, opacity: .4 }}>—</span>}
+                    </div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: "#e8c547" }}>File {n}</div>
+                      {sm ? (
+                        <div style={{ fontSize: 10, color: "#c9b88a", lineHeight: 1.5 }}>
+                          {sm.lead} · {sm.badges} badge{sm.badges === 1 ? "" : "s"}
+                          {sm.legends ? ` · ${sm.legends} guardian${sm.legends === 1 ? "" : "s"}` : ""}
+                          <br />{sm.seen} species seen · {sm.where}
+                        </div>
+                      ) : (
+                        <div style={{ fontSize: 10, color: "#8a7f68" }}>Empty</div>
+                      )}
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
+                    {sm ? (
+                      <>
+                        <button style={{ ...btnS("#27ae60"), flex: 2 }} onClick={() => continueGame(n)}>▶ Continue</button>
+                        <button style={{ ...btnS("#7d735f"), flex: 1 }}
+                          onClick={() => setS((p) => ({ ...p, eraseAsk: p.eraseAsk === n ? null : n }))}>🗑️</button>
+                      </>
+                    ) : (
+                      <button style={{ ...btnS("#c0392b"), flex: 1 }} onClick={() => startNewIn(n)}>✦ New Game</button>
+                    )}
+                  </div>
+                  {S.eraseAsk === n && (
+                    <div style={{ marginTop: 8, borderTop: "1px solid #5c5344", paddingTop: 8 }}>
+                      <div style={{ fontSize: 10, color: "#e8c547", marginBottom: 6 }}>
+                        Erase File {n}? Everything in it is lost for good.
+                      </div>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <button style={{ ...btnS("#c0392b"), flex: 1 }}
+                          onClick={() => { eraseSlot(n); setS((p) => ({ ...p, eraseAsk: null })); }}>Erase</button>
+                        <button style={{ ...btnS("#7d735f"), flex: 1 }}
+                          onClick={() => setS((p) => ({ ...p, eraseAsk: null }))}>Keep</button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })
           )}
-          <button style={{ ...btn("#c0392b"), fontSize: hasSave ? 13 : 18, padding: hasSave ? "10px 24px" : "14px 34px" }}
-            onClick={() => setS((p) => ({ ...p, screen: "starter" }))}>{hasSave ? "NEW GAME" : "▶ START"}</button>
-          {!hasSave && (
-            <div style={{ fontSize: 10, color: "#8a7f68", display: "flex", alignItems: "center", gap: 8 }}>
-              <span>
-                {saveStatus === "checking" ? "Checking for saved game..."
-                  : saveStatus === "none" ? "No saved game found in storage."
-                  : saveStatus === "error" ? "⚠️ Save storage couldn't be read."
-                  : ""}
-              </span>
-              {saveStatus !== "checking" && (
-                <button style={{ background: "#3a342b", color: "#c9b88a", border: "1px solid #5c5344", borderRadius: 6, padding: "4px 8px", fontFamily: "inherit", fontSize: 10, cursor: "pointer" }}
-                  onClick={checkSave}>🔄 Check again</button>
-              )}
+          {saveStatus === "error" && (
+            <div style={{ fontSize: 10, color: "#c9773a", textAlign: "center" }}>
+              ⚠️ Save storage couldn't be read.
+              <button style={{ background: "#3a342b", color: "#c9b88a", border: "1px solid #5c5344", borderRadius: 6, padding: "4px 8px", fontFamily: "inherit", fontSize: 10, cursor: "pointer", marginLeft: 8 }}
+                onClick={checkSave}>🔄 Retry</button>
             </div>
           )}
         </div>
