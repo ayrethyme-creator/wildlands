@@ -386,6 +386,59 @@ const mustA = (o) => (er) => {
     </defs>
     <ellipse cx="32" cy="55.6" rx="21" ry="2.3" fill="#000" opacity=".15" />
 
+    {/* A meerkat on watch is a completely different silhouette from a weasel:
+        bolt upright on its hind legs, propped on the tail like a tripod, with
+        the forepaws tucked at the chest. Drawn as its own figure rather than
+        layered over the horizontal body, which was producing two bodies at
+        once. */}
+    {o.sentinel ? (
+      <g>
+        {/* the tail, braced against the ground behind */}
+        <path d="M28,44 Q22,50 16,55" stroke={limb} strokeWidth="3.2" fill="none" strokeLinecap="round" />
+        {/* hind legs and feet */}
+        <g stroke={`url(#${g2})`} strokeWidth="3.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="30,42 27,49 32,53" />
+        </g>
+        <path d="M30,53 L40,53 Q41.4,55 39.6,55.8 L28.4,55.8 Q26.6,54.4 30,53 Z" fill={sh(F, -0.26)} />
+        {/* the long upright trunk */}
+        <path d="M40,20 Q47,25 46,36 Q45,46 38,50 Q30,52 26,46 Q23,38 26,28 Q30,19 36,18 Z"
+          fill={`url(#${g1})`} />
+        {o.bib && <ellipse cx="40" cy="36" rx="4.6" ry="8.4" fill={o.bib} opacity=".9" />}
+        {o.stripe && (
+          <g stroke={o.stripeC || sh(F, -0.4)} strokeWidth="1.8" fill="none" opacity=".6">
+            <path d="M30,28 Q29,36 30,44" /><path d="M36,26 Q35,36 36,46" />
+          </g>
+        )}
+        {/* the short forepaws held together at the chest */}
+        <g stroke={`url(#${g2})`} strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="42,30 46,34 43,38" />
+        </g>
+        <ellipse cx="43" cy="38.6" rx="2.4" ry="2" fill={sh(F, -0.2)} />
+        {/* small round ears set low and wide on a pointed face */}
+        <g>
+          <circle cx="38" cy="14.6" r="2.8" fill={sh(F, -0.22)} />
+          <circle cx="47" cy="14" r="3" fill={F} />
+          <circle cx="47" cy="14" r="1.7" fill={o.inner || sh(F, 0.4)} />
+        </g>
+        <ellipse cx="43" cy="18" rx="7" ry="6" fill={F} />
+        {o.mask && (
+          <g fill={mark}>
+            <ellipse cx="40.4" cy="16.6" rx="2.4" ry="2.2" />
+            <ellipse cx="46" cy="16.2" rx="2.4" ry="2.2" />
+          </g>
+        )}
+        <ellipse cx="47.6" cy="20.4" rx="3.6" ry="2.6" fill={o.muzzle || sh(F, 0.45)} />
+        <path d="M49.6,19 Q51.5,19.2 51.6,20.4 Q51.4,21.6 50.2,21.6 Q49.2,21.2 49.6,19 Z"
+          fill={sh(F, -0.66)} />
+        <g stroke={sh(F, -0.4)} strokeWidth=".4" fill="none" opacity=".6" strokeLinecap="round">
+          <path d="M49.6,19.4 Q53,18 55,17.4" /><path d="M49.8,21.4 Q53.2,21.4 55.2,21" />
+        </g>
+        <Eye x={40.4} y={16.6} r={2 * er} iris={o.iris || "#26221c"} />
+        <Eye x={46} y={16.2} r={2 * er} iris={o.iris || "#26221c"} />
+      </g>
+    ) : (
+      <g>
+
     {/* Tail: a plume for a skunk, a long prehensile rope for a kinkajou, and
         the ordinary tapering one otherwise. */}
     {o.plumeTail ? (
@@ -400,17 +453,6 @@ const mustA = (o) => (er) => {
     ) : (
       <path d="M11,38.4 Q5,36.4 3.4,30.4" stroke={limb} strokeWidth="3.6" fill="none"
         strokeLinecap="round" />
-    )}
-    {/* a meerkat on watch stands straight up on its hind legs and tail */}
-    {o.sentinel && (
-      <g>
-        <path d="M32,50 Q26,54 22,58" stroke={limb} strokeWidth="3" fill="none" strokeLinecap="round" />
-        <ellipse cx="34" cy="36" rx="9" ry="15" fill={`url(#${g1})`} />
-        {o.bib && <ellipse cx="36" cy="38" rx="4.6" ry="8" fill={o.bib} opacity=".9" />}
-        <g stroke={`url(#${g2})`} strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="30,46 27,53 32,56" /><polyline points="39,34 43,38 40,42" />
-        </g>
-      </g>
     )}
     {o.rings && (
       <g stroke={mark} strokeWidth="2.6" strokeLinecap="round" fill="none">
@@ -482,6 +524,8 @@ const mustA = (o) => (er) => {
     <path d="M61,33 Q62.9,33.2 63,34.4 Q62.8,35.6 61.6,35.6 Q60.6,35.2 61,33 Z"
       fill={sh(F, -0.7)} />
     <Eye x={54.4} y={30.4} r={1.85 * er} iris={o.iris || "#3a2a18"} />
+      </g>
+    )}
   </g>
   );
 };
@@ -613,6 +657,30 @@ const ungA = (o) => (er) => {
         <path d="M52.6,13.4 L50.4,7.6 M50.4,7.6 L47.2,5.4 M50.4,7.6 L49.4,3 M50.4,7.6 L53,4.4" />
         <path d="M56.8,13.4 L58.8,7.4 M58.8,7.4 L61.8,5 M58.8,7.4 L59.6,2.8 M58.8,7.4 L56.4,4.2" />
       </g>
+    )}
+    {/* A moose does not carry branched tines like a deer. Its antlers are
+        palmate: a broad flat blade sweeping out to each side with short points
+        along the outer edge, which is the single thing that identifies the
+        animal at any distance. */}
+    {o.palmate && (
+      <g>
+        <path d="M53,13 Q47,9 40,8.6 Q34,8.4 31,4.6 Q38,4.4 44,3 Q50,2 53.6,4.6 Z" fill={horn} />
+        <path d="M57,13 Q63,9 70,8.6 Q76,8.4 79,4.6 Q72,4.4 66,3 Q60,2 56.4,4.6 Z" fill={horn} />
+        <g fill={sh(horn, -0.2)}>
+          <path d="M31,4.6 l-4.4,-2.6 l4.6,-.4 Z" /><path d="M36,3.6 l-3.4,-3.6 l4.2,.4 Z" />
+          <path d="M42,3 l-2.4,-4 l3.8,1 Z" /><path d="M48,2.4 l-1.4,-4.2 l3.4,1.8 Z" />
+          <path d="M79,4.6 l4.4,-2.6 l-4.6,-.4 Z" /><path d="M74,3.6 l3.4,-3.6 l-4.2,.4 Z" />
+          <path d="M68,3 l2.4,-4 l-3.8,1 Z" /><path d="M62,2.4 l1.4,-4.2 l-3.4,1.8 Z" />
+        </g>
+        {/* the short beam each palm grows off */}
+        <g stroke={sh(horn, -0.16)} strokeWidth="2.2" strokeLinecap="round">
+          <path d="M53.4,13.2 L51.6,9.6" /><path d="M56.6,13.2 L58.4,9.6" />
+        </g>
+      </g>
+    )}
+    {/* the bell: the flap of skin and hair that hangs under a moose's throat */}
+    {o.dewlap && (
+      <path d="M55,23 Q56.6,29 54,31.6 Q51.6,29 52.4,23.4 Z" fill={sh(C, -0.16)} />
     )}
     {o.ossi && (
       <g stroke={horn} strokeWidth="2.2" strokeLinecap="round">
@@ -1555,7 +1623,7 @@ Object.assign(ART, {
   okapi: giraffeA({ coat: "#6b4230", markC: "#3a2a1a", legStripes: true, maneC: "#4a2f22", tuftC: "#26221c", iris: "#3a2a18" }),
   bison: bovA({ coat: "#5c4432", hump: true, shag: true, horns: true, bisonHorn: true, hornC: "#3a342b", tuftC: "#3a2a1a", iris: "#3a2a18" }),
   muskox: ungA({ coat: "#4c3c2e", curved: true, hornC: "#c9b08a", mane: true, maneC: "#3a2c20", muzzle: "#3c3226" }),
-  moose: ungA({ coat: "#5c4432", antler: true, hornC: "#8a6f52", muzzle: "#3c3226", iris: "#3a2e22" }),
+  moose: ungA({ coat: "#4a3728", muzzle: "#2e2620", palmate: true, hornC: "#a89070", dewlap: true, mane: true, maneC: "#3a2c20", iris: "#3a2e22" }),
   elk: ungA({ coat: "#a3784c", antler: true, hornC: "#8a6f52", mane: true, maneC: "#5c4030", muzzle: "#3c3226" }),
   reindeer: ungA({ coat: "#a8987a", antler: true, hornC: "#c9b08a", mane: true, maneC: "#e8dcc3", muzzle: "#5c4c3c" }),
   whitetail: ungA({ coat: "#b5855c", antler: true, hornC: "#c9b08a", muzzle: "#f2ede0", iris: "#3a2e22" }),
