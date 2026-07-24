@@ -935,6 +935,21 @@ const rayA = (o) => (er) => {
         <path d="M54,36.6 Q59.6,38.6 60.6,35.6 Q57,35.2 54.6,34.2 Z" />
       </g>
     )}
+    {/* The sawfish rostrum: a blade of cartilage studded with modified scales
+        down both edges, which it swings sideways through a shoal. */}
+    {o.saw && (
+      <g>
+        <path d="M56,30.6 L78,30 L78,34 L56,34.6 Z" fill={sh(H, 0.16)} />
+        <g fill={sh(H, -0.4)}>
+          {[59, 63, 67, 71, 75].map((x, i) => (
+            <g key={i}>
+              <path d={`M${x},30.4 l1.2,0 l-.6,-2.6 Z`} />
+              <path d={`M${x},34.4 l1.2,0 l-.6,2.6 Z`} />
+            </g>
+          ))}
+        </g>
+      </g>
+    )}
     <Eye x={50} y={28.6} r={1.5 * er} iris={o.iris || "#c9a43a"} />
     <Eye x={50} y={34} r={1.5 * er} iris={o.iris || "#c9a43a"} />
   </g>
