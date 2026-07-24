@@ -371,13 +371,19 @@ const MAPS = {
       "^..............^",
       "^..............^",
       "^..t.......t...^",
-      "^..............^",
-      "^..............^",
       "^......t.......^",
+      "^..............^",
+      "^..............^",
       "^^^^^^^s^^^^^^^^",
     ],
+    // The south torch used to sit at 7,10 - directly on the only tile linking
+    // the arrival point to the exit at 7,11, with row 11 solid wall either side.
+    // Torches are interactive obstacles, so they never become walkable: anyone
+    // who entered Ember Hollow was trapped there permanently, phoenix or no
+    // phoenix. Moved up to 7,8, which keeps it on the north-south axis and
+    // still reads as the southern torch, while leaving the corridor clear.
     exits: { "7,11": { map: "shore", x: 13, y: 1 } },
-    torches: [{ x: 11, y: 7 }, { x: 7, y: 10 }, { x: 3, y: 7 }, { x: 7, y: 4 }],
+    torches: [{ x: 11, y: 7 }, { x: 7, y: 8 }, { x: 3, y: 7 }, { x: 7, y: 4 }],
     legend: "phoenix",
   },
 };
