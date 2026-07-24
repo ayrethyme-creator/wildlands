@@ -29,6 +29,435 @@ const teethRow = (y, x0 = 23, n = 5, w = 3.8, c = "#f5efdf") => (
 // The Triassic croc-line - aetosaurs, rauisuchians - used the same body but
 // stood with the legs under it rather than out to the side, so `erect` switches
 // the stance instead of needing a separate archetype.
+
+// ================= SPECIALISED MAMMAL BUILDS =================
+// Split out of the general hoofed and rodent archetypes, because a giraffe, a
+// rhino, a hippo, a pig and a bison were all sharing one deer-shaped body and
+// only differing by colour. Defined here in part6 so every later file can use
+// them.
+
+// --- rabbits, hares and pikas ---
+const lagoA = (o) => (er) => {
+  const F = o.fur || "#a8906c";
+  const g1 = gid("lgc", F), g2 = gid("lgl", F);
+  const E = o.shortEar;
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(F, -0.2)} /><stop offset=".55" stopColor={F} />
+        <stop offset="1" stopColor={o.belly || sh(F, 0.4)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(F, -0.14)} /><stop offset="1" stopColor={sh(F, 0.14)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="31" cy="55.6" rx="17" ry="2.2" fill="#000" opacity=".14" />
+    {/* the cotton tail */}
+    <circle cx="16" cy="38" r="4.4" fill={o.tailC || sh(F, 0.5)} />
+    {/* the folded hind leg: a lagomorph is mostly haunch */}
+    <g stroke={`url(#${g2})`} strokeWidth="4" fill="none" strokeLinecap="round"
+      strokeLinejoin="round" opacity=".7">
+      <polyline points="27,40 22,47 28,50" />
+    </g>
+    <ellipse cx="26" cy="40" rx="11.4" ry="10" fill={`url(#${g1})`} />
+    <path d="M40,28 Q47,32 46.4,38 Q46,44 40,47 Q30,50 22,47 Q16,44 16,38
+             Q16,32 23,29 Q32,26 40,28 Z" fill={`url(#${g1})`} />
+    {o.bib && <ellipse cx="42" cy="41" rx="4.4" ry="4" fill={o.bib} opacity=".85" />}
+    {/* the long foot it sits back on */}
+    <g stroke={`url(#${g2})`} strokeWidth="4.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="31,42 26,49 33,52" />
+    </g>
+    <path d="M30,52 L41,52 Q42.4,53.8 40.6,54.6 L29.4,54.6 Q27.6,53.4 30,52 Z" fill={sh(F, -0.26)} />
+    {/* short forelimb */}
+    <g stroke={`url(#${g2})`} strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="42,42 45,48 42.6,51.6" />
+    </g>
+    {/* the ears, which are the entire animal */}
+    {E ? (
+      <g>
+        <ellipse cx="45" cy="21" rx="4" ry="4.4" fill={sh(F, -0.16)} />
+        <ellipse cx="54" cy="20.6" rx="4.2" ry="4.6" fill={F} />
+        <ellipse cx="54.2" cy="20.8" rx="2.4" ry="2.8" fill={o.inner || sh(F, 0.4)} />
+      </g>
+    ) : (
+      <g>
+        <ellipse cx="45.4" cy="15" rx="3" ry="9.4" fill={sh(F, -0.18)} transform="rotate(-10 45.4 15)" />
+        <ellipse cx="54" cy="13.6" rx="3.2" ry="10" fill={F} transform="rotate(9 54 13.6)" />
+        <ellipse cx="54" cy="14.4" rx="1.7" ry="7" fill={o.inner || sh(F, 0.42)} transform="rotate(9 54 14.4)" />
+        {o.blackTip && (
+          <g fill={sh(F, -0.7)}>
+            <ellipse cx="46" cy="6.6" rx="2.6" ry="2.6" transform="rotate(-10 46 6.6)" />
+            <ellipse cx="55" cy="5" rx="2.8" ry="2.8" transform="rotate(9 55 5)" />
+          </g>
+        )}
+      </g>
+    )}
+    <ellipse cx="49" cy="29" rx="7.6" ry="6.6" fill={F} />
+    <ellipse cx="54" cy="32" rx="4" ry="2.8" fill={o.muzzle || sh(F, 0.45)} />
+    <path d="M55.6,30.4 Q57.6,30.6 57.7,31.8 Q57.5,33 56.3,33 Q55.2,32.6 55.6,30.4 Z" fill={sh(F, -0.6)} />
+    <path d="M56.5,33 L56.4,34.4 M56.4,34.4 Q55,35.4 54,34.8" stroke={sh(F, -0.6)} strokeWidth=".7"
+      fill="none" strokeLinecap="round" />
+    <g stroke={sh(F, -0.4)} strokeWidth=".4" fill="none" opacity=".6" strokeLinecap="round">
+      <path d="M55.6,31 Q59,29.6 61,29" /><path d="M55.8,32.6 Q59.2,32.4 61.2,32.2" />
+    </g>
+    <Eye x={50} y={27.4} r={2.3 * er} iris={o.iris || "#3c2a1a"} />
+  </g>
+  );
+};
+
+// --- pigs and boar ---
+const suidA = (o) => (er) => {
+  const H = o.hide || "#8a6a5c";
+  const g1 = gid("sdc", H), g2 = gid("sdl", H);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.22)} /><stop offset=".55" stopColor={H} />
+        <stop offset="1" stopColor={sh(H, 0.3)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.14)} /><stop offset="1" stopColor={sh(H, 0.14)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="31" cy="55.6" rx="19" ry="2.3" fill="#000" opacity=".15" />
+    {/* curly tail */}
+    <path d="M14,33 Q9,32 9,36 Q9,39 12,38" stroke={sh(H, -0.1)} strokeWidth="1.8" fill="none"
+      strokeLinecap="round" />
+    <g stroke={`url(#${g2})`} strokeWidth="3.4" fill="none" strokeLinecap="round"
+      strokeLinejoin="round" opacity=".7">
+      <polyline points="37,42 36.4,47 37.4,51" /><polyline points="22,41 22.6,46 21.6,50" />
+    </g>
+    {/* barrel body, high shoulder, low head - a pig carries its head down */}
+    <path d="M44,29 Q51,32 50.6,38 Q50,44 44,46.6 Q32,50 21,47 Q14,44 14,38
+             Q14,32 21,29.6 Q33,26 44,29 Z" fill={`url(#${g1})`} />
+    {o.mane && (
+      <path d="M20,28 Q30,22 44,27 Q32,26 21,31 Z" fill={o.maneC || sh(H, -0.3)} />
+    )}
+    {o.stripes && (
+      <g stroke={o.markC || sh(H, 0.5)} strokeWidth="2" fill="none" opacity=".7" strokeLinecap="round">
+        <path d="M18,34 Q30,31 46,34" /><path d="M18,40 Q30,37.6 46,40" />
+      </g>
+    )}
+    {o.spots && (
+      <g fill={o.markC || sh(H, -0.4)} opacity=".6">
+        <ellipse cx="24" cy="35" rx="4" ry="3" /><ellipse cx="36" cy="40" rx="4.4" ry="3.2" />
+      </g>
+    )}
+    <g stroke={`url(#${g2})`} strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="41,42 40.4,48 41.6,52.6" /><polyline points="20,41 20.6,47 19.4,52.6" />
+    </g>
+    {/* cloven trotters */}
+    <g fill={sh(H, -0.55)}>
+      <path d="M40,52.6 l1.4,0 l.4,2.4 l-1.4,0 Z" /><path d="M42.2,52.6 l1.4,0 l-.4,2.4 l-1.4,0 Z" />
+      <path d="M18,52.6 l1.4,0 l.4,2.4 l-1.4,0 Z" /><path d="M20.2,52.6 l1.4,0 l-.4,2.4 l-1.4,0 Z" />
+    </g>
+    {/* the head runs straight into the body, no neck to speak of */}
+    <path d="M43,30 Q52,27.6 58,32 Q62,35.4 60.4,40 Q57.6,44 51,43.6 Q44,42.6 42,37 Z" fill={H} />
+    {/* ears: floppy on a domestic pig, upright on a boar */}
+    {o.earUp ? (
+      <g>
+        <path d="M46,28 Q44,20 47.6,18.6 Q50,22 50,28 Z" fill={sh(H, -0.2)} />
+        <path d="M53,27.6 Q54,19.6 57.4,19.6 Q58,24.6 56.4,29 Z" fill={H} />
+      </g>
+    ) : (
+      <g>
+        <path d="M46,28.6 Q42,22 45,20 Q50,23 50.6,29.6 Z" fill={sh(H, -0.2)} />
+        <path d="M53,28 Q56,20.6 59.6,22 Q59,28 56,31.6 Z" fill={H} />
+      </g>
+    )}
+    {/* the flat disc snout, which is the whole face */}
+    <ellipse cx="61" cy="38.6" rx="4.4" ry="3.8" fill={o.snoutC || sh(H, 0.3)} />
+    <g fill={sh(H, -0.55)}>
+      <ellipse cx="60" cy="37.6" rx=".9" ry="1.2" /><ellipse cx="62.4" cy="37.6" rx=".9" ry="1.2" />
+    </g>
+    {o.tusks && (
+      <g fill="#f2ecd8">
+        <path d="M56.4,42 Q55,46.6 57.4,47.4 Q58.4,44.6 58.2,41.6 Z" />
+        <path d="M60.4,42.4 Q60,46.4 62.4,46.6 Q62.6,44 62,41.6 Z" />
+      </g>
+    )}
+    <Eye x={52} y={32.6} r={1.7 * er} iris={o.iris || "#3a2a18"} />
+  </g>
+  );
+};
+
+// --- cattle, bison and the heavy bovids ---
+const bovA = (o) => (er) => {
+  const C = o.coat || "#6b5240";
+  const g1 = gid("bvc", C), g2 = gid("bvl", C);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(C, -0.22)} /><stop offset=".55" stopColor={C} />
+        <stop offset="1" stopColor={sh(C, 0.3)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(C, -0.14)} /><stop offset="1" stopColor={sh(C, 0.14)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="30" cy="57.4" rx="20" ry="2.3" fill="#000" opacity=".15" />
+    <path d="M12,32 Q8,38 9,44" stroke={sh(C, -0.1)} strokeWidth="2" fill="none" strokeLinecap="round" />
+    <path d="M9,44 Q7,47 9,50" stroke={o.tuftC || sh(C, -0.4)} strokeWidth="3" fill="none" strokeLinecap="round" />
+    <g stroke={`url(#${g2})`} strokeWidth="3.2" fill="none" strokeLinecap="round"
+      strokeLinejoin="round" opacity=".7">
+      <polyline points="36,40 35.4,47 36.6,53" /><polyline points="20,39 20.6,46 19.4,52" />
+    </g>
+    {/* the shoulder hump a bison carries, and a deep brisket */}
+    {o.hump && (
+      <path d="M30,24 Q38,17 46,26 Q38,24 30,28 Z" fill={sh(C, -0.16)} />
+    )}
+    <path d="M44,27 Q51,30 50.6,36 Q50,43 44,46 Q31,50 19,46.6 Q12,43.6 12,36
+             Q12,29.6 19,27 Q32,23.6 44,27 Z" fill={`url(#${g1})`} />
+    {o.shag && (
+      <g fill={sh(C, -0.2)} opacity=".65">
+        <path d="M16,42 q4,4 9,3 q-4,4 -9,-3 Z" /><path d="M26,45 q4,4 9,2.6 q-4,4 -9,-2.6 Z" />
+        <path d="M14,34 q-4,4 -3,9 q-3,-5 3,-9 Z" />
+      </g>
+    )}
+    {o.patches && (
+      <g fill={o.markC || "#f2ede0"} opacity=".9">
+        <path d="M20,31 q7,-2 11,2 q-2,6 -8,6 q-5,-1 -3,-8 Z" />
+        <path d="M34,38 q7,-1.6 10,2.4 q-2,5 -7,5 q-5,-1 -3,-7.4 Z" />
+      </g>
+    )}
+    <g stroke={`url(#${g2})`} strokeWidth="3.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="40,40 39.4,47.6 40.6,54" /><polyline points="18,39 18.6,46.6 17.4,54" />
+    </g>
+    <g fill={sh(C, -0.6)}>
+      <path d="M39,54 l1.6,0 l.4,2.4 l-1.6,0 Z" /><path d="M41.4,54 l1.6,0 l-.4,2.4 l-1.6,0 Z" />
+      <path d="M16,54 l1.6,0 l.4,2.4 l-1.6,0 Z" /><path d="M18.4,54 l1.6,0 l-.4,2.4 l-1.6,0 Z" />
+    </g>
+    {/* short thick neck, head carried low */}
+    <path d="M43,29 Q49,26 54,24 L57,29 Q52,31 48,35 Z" fill={`url(#${g1})`} />
+    <path d="M52,22 Q60,21 62.6,26 Q64,31 60,33.6 Q54,35 51,31 Q49,26 52,22 Z" fill={C} />
+    {o.woolly && (
+      <path d="M50,20 Q57,15.6 62,20 Q56,20 51,24 Z" fill={sh(C, -0.24)} />
+    )}
+    <ellipse cx="62" cy="30.6" rx="3.4" ry="2.8" fill={o.muzzle || sh(C, 0.4)} />
+    <g fill={sh(C, -0.55)}>
+      <ellipse cx="61" cy="29.8" rx=".8" ry="1" /><ellipse cx="63.2" cy="29.8" rx=".8" ry="1" />
+    </g>
+    <path d="M50,22.6 Q47.4,19.6 46,19.4 Q48.4,18.6 51.4,21 Z" fill={sh(C, -0.2)} />
+    {/* horns: the low sideways curve of a bison, or the tall sweep of cattle */}
+    {o.horns && (
+      <g fill="none" stroke={o.hornC || "#e8dcc3"} strokeWidth="2.2" strokeLinecap="round">
+        {o.bisonHorn ? (
+          <g><path d="M53,21 Q49,16.6 51.6,13.6" /><path d="M59,21.4 Q63,17 60.6,14" /></g>
+        ) : o.longHorn ? (
+          <g><path d="M52.6,21 Q44,15.6 40,18.6" /><path d="M59.4,21.4 Q68,16 71,19" /></g>
+        ) : (
+          <g><path d="M53,20.6 Q50,13.6 54,10.6" /><path d="M59,21 Q62.6,14 59,10.6" /></g>
+        )}
+      </g>
+    )}
+    <Eye x={54.6} y={26} r={1.85 * er} iris={o.iris || "#3a2a18"} />
+  </g>
+  );
+};
+
+// --- rhinoceroses ---
+const rhinoA = (o) => (er) => {
+  const H = o.hide || "#a8a396";
+  const g1 = gid("rhc", H), g2 = gid("rhl", H);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.2)} /><stop offset=".55" stopColor={H} />
+        <stop offset="1" stopColor={sh(H, 0.26)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.14)} /><stop offset="1" stopColor={sh(H, 0.12)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="30" cy="57.4" rx="21" ry="2.4" fill="#000" opacity=".16" />
+    <path d="M11,34 Q6,38 7,43" stroke={sh(H, -0.12)} strokeWidth="2.2" fill="none" strokeLinecap="round" />
+    <g stroke={`url(#${g2})`} strokeWidth="4.6" fill="none" strokeLinecap="round" opacity=".7">
+      <polyline points="36,42 35.6,48 36.4,53" /><polyline points="20,41 20.4,47 19.6,52" />
+    </g>
+    {/* massive barrel, head carried low, back dipped between shoulder and hip */}
+    <path d="M44,28 Q52,31.6 51.6,38 Q51,45 44,48 Q30,52 18,48 Q11,45 11,38
+             Q11,31 18,28 Q31,24 44,28 Z" fill={`url(#${g1})`} />
+    {o.folds && (
+      <g fill="none" stroke={sh(H, -0.28)} strokeWidth="1.4" opacity=".7">
+        <path d="M24,26 Q22,38 25,50" /><path d="M38,26 Q36,38 39,50" />
+      </g>
+    )}
+    {o.hair && (
+      <g fill={o.hairC || sh(H, -0.3)} opacity=".8">
+        <path d="M16,30 q-4,6 -2,12 q-3,-6 2,-12 Z" />
+        <path d="M22,25 q4,-6 10,-4 q-6,1 -9,5 Z" />
+      </g>
+    )}
+    <g stroke={`url(#${g2})`} strokeWidth="5.2" fill="none" strokeLinecap="round">
+      <polyline points="41,42 40.6,48.6 41.4,55" /><polyline points="18,41 18.4,47.6 17.6,55" />
+    </g>
+    <g fill={sh(H, -0.4)}>
+      <ellipse cx="41.4" cy="55.4" rx="3" ry="1.4" /><ellipse cx="17.6" cy="55.4" rx="3" ry="1.4" />
+    </g>
+    <g fill={sh(H, 0.34)} opacity=".7">
+      <circle cx="39.4" cy="55" r=".7" /><circle cx="41.6" cy="55.2" r=".7" /><circle cx="43.6" cy="55" r=".7" />
+      <circle cx="15.6" cy="55" r=".7" /><circle cx="17.8" cy="55.2" r=".7" /><circle cx="19.8" cy="55" r=".7" />
+    </g>
+    {/* the head, held low with the jaw near the ground */}
+    <path d="M44,31 Q53,29 60,34 Q65,38 63,43 Q59,47 52,46 Q45,44.6 43,39 Z" fill={H} />
+    {/* the mouth: square and wide for a grazer, hooked for a browser */}
+    <path d={o.hookLip
+      ? "M62,42 Q65.6,41.6 65.4,44 Q63.6,46 61.4,45 Z"
+      : "M60,44 Q65,43.6 65,46 L59.6,46.4 Z"} fill={sh(H, 0.36)} />
+    {/* the horns, which are keratin rather than bone */}
+    <g fill={o.hornC || "#c9bca8"}>
+      <path d={o.bigHorn
+        ? "M60,33 Q65.6,20 68.6,32 Q65,32 61.6,35 Z"
+        : "M60,33.6 Q64.6,25 66.6,33.4 Q63.6,33.4 61,35.6 Z"} />
+      {o.twoHorn && <path d="M53,30.6 Q56,24.6 58,30.4 Q55.6,30.6 54,32.4 Z" />}
+    </g>
+    {/* small tubular ears set well back */}
+    <g fill={sh(H, -0.2)}>
+      <ellipse cx="46" cy="27.6" rx="2.2" ry="3.4" transform="rotate(-16 46 27.6)" />
+      <ellipse cx="51.6" cy="26.6" rx="2.2" ry="3.4" transform="rotate(10 51.6 26.6)" />
+    </g>
+    <Eye x={53} y={34} r={1.6 * er} iris={o.iris || "#3a2a18"} />
+  </g>
+  );
+};
+
+// --- hippos ---
+const hippoA = (o) => (er) => {
+  const H = o.hide || "#8a6a72";
+  const g1 = gid("hpc", H), g2 = gid("hpl", H);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.2)} /><stop offset=".55" stopColor={H} />
+        <stop offset="1" stopColor={o.belly || sh(H, 0.3)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(H, -0.14)} /><stop offset="1" stopColor={sh(H, 0.12)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="30" cy="55.6" rx="22" ry="2.4" fill="#000" opacity=".16" />
+    <path d="M10,36 Q5,38 5,42" stroke={sh(H, -0.12)} strokeWidth="2" fill="none" strokeLinecap="round" />
+    {/* stubby legs - a hippo is a barrel that barely clears the ground */}
+    <g stroke={`url(#${g2})`} strokeWidth="5" fill="none" strokeLinecap="round" opacity=".7">
+      <polyline points="36,44 35.6,48 36.4,51" /><polyline points="20,43 20.4,47 19.6,50" />
+    </g>
+    <path d="M44,30 Q53,33.6 52.6,40 Q52,47 44,49.6 Q30,53 17,49.6 Q10,46.6 10,40
+             Q10,33.6 17,30.6 Q31,27 44,30 Z" fill={`url(#${g1})`} />
+    <g stroke={`url(#${g2})`} strokeWidth="5.6" fill="none" strokeLinecap="round">
+      <polyline points="40,44 39.6,48.6 40.4,52.6" /><polyline points="17,43 17.4,47.6 16.6,52.6" />
+    </g>
+    <g fill={sh(H, -0.4)}>
+      <ellipse cx="40.4" cy="53" rx="3" ry="1.3" /><ellipse cx="16.6" cy="53" rx="3" ry="1.3" />
+    </g>
+    {/* the enormous square head, most of which is jaw */}
+    <path d="M42,32 Q52,28.6 60,33 Q66,36.6 64,43 Q60,48 51,47.6 Q42,46 41,39 Z" fill={H} />
+    {/* eyes, ears and nostrils all sit on top, so it can submerge everything else */}
+    <g fill={H}>
+      <ellipse cx="49" cy="28.6" rx="3.4" ry="2.8" />
+      <ellipse cx="57" cy="29.4" rx="3.2" ry="2.6" />
+    </g>
+    <g fill={sh(H, -0.28)}>
+      <ellipse cx="45.6" cy="28" rx="2" ry="2.4" /><ellipse cx="53" cy="26.6" rx="2" ry="2.4" />
+    </g>
+    <g fill={sh(H, -0.5)}>
+      <ellipse cx="62.4" cy="35.6" rx="1.4" ry="1.1" /><ellipse cx="65" cy="37.4" rx="1.4" ry="1.1" />
+    </g>
+    {/* the mouth line and the tusk-like canines */}
+    <path d="M50,44 Q58,47.6 64.4,43.6" stroke={sh(H, -0.4)} strokeWidth="1.2" fill="none"
+      strokeLinecap="round" />
+    {o.tusks && (
+      <g fill="#f2ecd8">
+        <path d="M53,45.6 Q52,49.6 54.6,50 Q55.6,47.6 55.4,45.2 Z" />
+        <path d="M60,45.6 Q59.6,49.4 62,49.4 Q62.6,47.2 62,44.8 Z" />
+      </g>
+    )}
+    <Eye x={49} y={28} r={1.9 * er} iris={o.iris || "#3a2a18"} />
+    <Eye x={57} y={28.8} r={1.7 * er} iris={o.iris || "#3a2a18"} />
+  </g>
+  );
+};
+
+// --- giraffe and okapi ---
+const giraffeA = (o) => (er) => {
+  const C = o.coat || "#d9a44a";
+  const g1 = gid("gfc", C), g2 = gid("gfl", C);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(C, -0.18)} /><stop offset=".55" stopColor={C} />
+        <stop offset="1" stopColor={sh(C, 0.3)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(C, -0.12)} /><stop offset="1" stopColor={sh(C, 0.14)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="26" cy="57.6" rx="16" ry="2.2" fill="#000" opacity=".15" />
+    <path d="M11,32 Q7,38 8,44" stroke={sh(C, -0.12)} strokeWidth="1.8" fill="none" strokeLinecap="round" />
+    <path d="M8,44 Q6,47 8,50" stroke={o.tuftC || sh(C, -0.5)} strokeWidth="2.6" fill="none" strokeLinecap="round" />
+    {/* very long legs - a giraffe stands more than half leg */}
+    <g stroke={`url(#${g2})`} strokeWidth="2.6" fill="none" strokeLinecap="round"
+      strokeLinejoin="round" opacity=".7">
+      <polyline points="31,36 30.4,46 31.6,55" /><polyline points="17,35 17.6,45 16.4,55" />
+    </g>
+    {/* short deep body sloping down to the rump */}
+    <path d="M36,26 Q42,29 41.6,34 Q41,39.6 36,42 Q26,45 17,42 Q11,39.4 11,34
+             Q11,29 17,26.6 Q27,23.6 36,26 Z" fill={`url(#${g1})`} />
+    {o.patches && (
+      <g fill={o.markC || "#a8703a"} opacity=".85">
+        <path d="M16,29 q5,-1.6 7.4,1.6 q-1,4 -4.6,4.2 q-3.6,-.4 -2.8,-5.8 Z" />
+        <path d="M26,27.6 q5,-1 7,2 q-1.4,3.6 -5,3.4 q-3.4,-.8 -2,-5.4 Z" />
+        <path d="M18,37 q4.6,-1 6.6,2 q-1.4,3.4 -4.6,3.2 q-3,-.8 -2,-5.2 Z" />
+        <path d="M28,36.6 q4.8,-1 6.8,2 q-1.4,3.4 -4.8,3.2 q-3,-.8 -2,-5.2 Z" />
+        <path d="M36,29 q4,-.8 5.4,2 q-1.2,3 -4,2.8 q-2.6,-.8 -1.4,-4.8 Z" />
+      </g>
+    )}
+    {o.legStripes && (
+      <g stroke={o.markC || "#3a2a1a"} strokeWidth="1.6" fill="none" opacity=".8" strokeLinecap="round">
+        <path d="M30.6,46 L32,46 M30.8,49 L32.2,49 M31,52 L32.4,52" />
+        <path d="M17.4,45 L18.8,45 M17.2,48 L18.6,48 M17,51 L18.4,51" />
+      </g>
+    )}
+    <g stroke={`url(#${g2})`} strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="34,34 33.4,45 34.6,55.6" /><polyline points="15,33 15.6,44 14.4,55.6" />
+    </g>
+    <g fill={sh(C, -0.55)}>
+      <path d="M33.4,55.6 l2.4,0 l0,2 l-2.4,0 Z" /><path d="M13.4,55.6 l2.4,0 l0,2 l-2.4,0 Z" />
+    </g>
+    {/* THE NECK. This is the animal - it should dominate the frame. */}
+    <path d="M35,28 Q44,20 49,8 L56,10 Q50,22 42,32 Z" fill={`url(#${g1})`} />
+    <path d="M36,27 Q45,19 50,7.6 Q52,8 52.6,9 Q47,21 39,30 Z" fill={o.maneC || sh(C, -0.28)} />
+    {o.neckPatches && (
+      <g fill={o.markC || "#a8703a"} opacity=".8">
+        <path d="M41,24 q3.4,-1.4 4.6,1 q-1,2.6 -3.4,2.6 q-2.2,-.6 -1.2,-3.6 Z" />
+        <path d="M45,17 q3.2,-1.2 4.4,1 q-1,2.4 -3.2,2.4 q-2,-.6 -1.2,-3.4 Z" />
+        <path d="M49,10.6 q3,-1 4,1 q-.8,2.2 -3,2.2 q-1.8,-.6 -1,-3.2 Z" />
+      </g>
+    )}
+    {/* small head with the ossicones on top */}
+    <path d="M49,8.6 Q55,4.6 60,6 Q63,8 62,11.4 Q60,14.6 55.6,14.6 Q50.6,14 49,11 Z" fill={C} />
+    <ellipse cx="60.4" cy="11.6" rx="3" ry="2.2" fill={o.muzzle || sh(C, 0.4)} />
+    <g fill={sh(C, -0.5)}>
+      <ellipse cx="59.6" cy="10.8" rx=".7" ry=".9" /><ellipse cx="61.6" cy="11" rx=".7" ry=".9" />
+    </g>
+    {/* ossicones: bone cores under skin, not horns */}
+    <g>
+      <path d="M52,5.6 L51.4,1.6" stroke={C} strokeWidth="2" strokeLinecap="round" fill="none" />
+      <path d="M56.6,5 L57,1" stroke={C} strokeWidth="2" strokeLinecap="round" fill="none" />
+      <circle cx="51.3" cy="0.9" r="1.4" fill={o.tuftC || sh(C, -0.5)} />
+      <circle cx="57.1" cy="0.4" r="1.4" fill={o.tuftC || sh(C, -0.5)} />
+    </g>
+    <path d="M50.6,6.6 Q47.6,4 46.4,3.6 Q49,3 51.6,5.4 Z" fill={sh(C, -0.2)} />
+    <Eye x={54} y={8.6} r={1.7 * er} iris={o.iris || "#3a2a18"} />
+  </g>
+  );
+};
+
 const crocA = (o) => (er) => {
   const H = o.hide || "#5d7a4a";
   const BE = o.belly || sh(H, 0.42);

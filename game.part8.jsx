@@ -44,6 +44,18 @@ const cetA = (o) => (er) => {
     )}
     {o.melon && <path d="M50,26 Q60,25 62,31 Q56,29 50,29.6 Z" fill={o.melonC || sh(H, 0.2)} />}
     {o.beak && <path d="M58,31 Q66,31.6 66,34 Q60,34.6 57,34 Z" fill={o.melonC || sh(H, 0.16)} />}
+    {/* The narwhal's tusk is a single canine tooth erupting through the lip,
+        spiralled anticlockwise, and can run a third of the animal's length.
+        Drawn long, because a narwhal without it is just a small whale. */}
+    {o.tusk && (
+      <g>
+        <path d="M60,33 L86,26.6 L86.4,28.8 L60,34.6 Z" fill={o.tuskC || "#efe6d2"} />
+        <g stroke={sh(o.tuskC || "#efe6d2", -0.28)} strokeWidth=".6" fill="none" opacity=".8">
+          <path d="M64,32.6 L64.8,34" /><path d="M69,31.4 L69.8,32.8" />
+          <path d="M74,30.2 L74.8,31.6" /><path d="M79,29 L79.8,30.4" />
+        </g>
+      </g>
+    )}
     <path d="M50,36 Q57,38.6 62,35" stroke={sh(H, -0.36)} strokeWidth=".9" fill="none"
       strokeLinecap="round" opacity=".8" />
     <Eye x={54} y={31.6} r={1.5 * er} iris={o.iris || "#26221c"} />
@@ -66,8 +78,10 @@ const pinA = (o) => (er) => {
     {/* hind flippers trail behind - a seal cannot walk on them */}
     <path d="M12,42 Q3,38 1,32 Q6,36 11,37 Z" fill={sh(F, -0.18)} />
     <path d="M12,44 Q3,46 1,52 Q7,48 12,48 Z" fill={sh(F, -0.18)} />
-    <path d="M50,28 Q57,31 56.6,36 Q56,42 49,45.6 Q34,51 20,48.6 Q11,46 11,42
-             Q11,37.6 20,35 Q36,30 50,28 Z" fill={`url(#${g1})`} />
+    <path d={o.bulky
+      ? "M52,25 Q61,29 60.6,36.6 Q60,44 51,48 Q33,54 17,50 Q7,46.6 7,40.6 Q7,34.4 17,31 Q35,26 52,25 Z"
+      : "M50,28 Q57,31 56.6,36 Q56,42 49,45.6 Q34,51 20,48.6 Q11,46 11,42 Q11,37.6 20,35 Q36,30 50,28 Z"}
+      fill={`url(#${g1})`} />
     {o.spots && (
       <g fill={o.markC || sh(F, -0.4)} opacity=".6">
         <circle cx="22" cy="40" r="1.5" /><circle cx="30" cy="38" r="1.4" />
@@ -83,12 +97,20 @@ const pinA = (o) => (er) => {
     <ellipse cx="62.4" cy="24" rx="3.4" ry="2.6" fill={o.muzzle || sh(F, 0.4)} />
     <path d="M63.4,22.6 Q65.2,22.8 65.2,24 Q65,25.1 63.9,25.1 Q62.9,24.7 63.4,22.6 Z" fill={sh(F, -0.68)} />
     {o.tusks && (
-      <g fill="#f2ecd8">
-        <path d="M61.6,26 L62.8,26 L62.2,31.6 Z" /><path d="M64,25.6 L65.2,25.6 L64.8,30.6 Z" />
+      /* A walrus carries two long canines that grow downward past the chin all
+         its life, used to haul out on ice and to spar. They should be obvious. */
+      <g>
+        <path d="M59.4,25.6 Q57.6,34 58.6,41.6 Q61,42 61.8,34.4 Q62.2,29 61.6,25.4 Z"
+          fill={o.tuskC || "#efe6d2"} />
+        <path d="M63.6,25.4 Q63,33.6 64.6,40.6 Q66.8,40.4 66.6,33.4 Q66.2,28.4 65.6,25 Z"
+          fill={o.tuskC || "#efe6d2"} />
+        <path d="M59.8,26.4 Q58.4,33.6 59,40" stroke={sh(o.tuskC || "#efe6d2", -0.2)}
+          strokeWidth=".6" fill="none" opacity=".7" />
       </g>
     )}
-    <g stroke={sh(F, -0.4)} strokeWidth=".4" fill="none" opacity=".6" strokeLinecap="round">
+    <g stroke={sh(F, -0.4)} strokeWidth={o.bulky ? 0.55 : 0.4} fill="none" opacity=".65" strokeLinecap="round">
       <path d="M63,23 Q66,21.6 67.4,21" /><path d="M63.4,25 Q66.4,25 67.8,24.6" />
+      {o.bulky && <g><path d="M63.2,26.4 Q66.4,27 68,27.4" /><path d="M63,24 Q66.2,23.4 67.8,23" /></g>}
     </g>
     <Eye x={58.6} y={20.4} r={2.1 * er} iris={o.iris || "#1a1614"} />
   </g>
@@ -1285,9 +1307,9 @@ Object.assign(ART, {
   opossum: marsA({ fur: "#a8a396", inner: "#e8c9c9", muzzle: "#f2ede0", iris: "#26221c", fluff: true, earC: "#3c3630" }),
   // ungulates
   zebra: ungA({ coat: "#f5f2e8", stripes: true, markC: "#26221c", mane: true, maneC: "#26221c", muzzle: "#3c3630" }),
-  giraffe: ungA({ coat: "#e8c98a", patches: true, markC: "#a3683c", ossi: true, muzzle: "#e8dcc3", iris: "#3a2e22" }),
-  okapi: ungA({ coat: "#5c3c2a", ossi: true, hornC: "#3c2a1e", muzzle: "#3c2a1e", iris: "#3a2e22", stripes: false }),
-  bison: ungA({ coat: "#5c4636", curved: true, hornC: "#3c3226", mane: true, maneC: "#3c3226", muzzle: "#3c3226" }),
+  giraffe: giraffeA({ coat: "#e8c47a", markC: "#a8703a", patches: true, neckPatches: true, maneC: "#8a5c2a", tuftC: "#3a2a1a", iris: "#3a2a18" }),
+  okapi: giraffeA({ coat: "#6b4230", markC: "#3a2a1a", legStripes: true, maneC: "#4a2f22", tuftC: "#26221c", iris: "#3a2a18" }),
+  bison: bovA({ coat: "#5c4432", hump: true, shag: true, horns: true, bisonHorn: true, hornC: "#3a342b", tuftC: "#3a2a1a", iris: "#3a2a18" }),
   muskox: ungA({ coat: "#4c3c2e", curved: true, hornC: "#c9b08a", mane: true, maneC: "#3a2c20", muzzle: "#3c3226" }),
   moose: ungA({ coat: "#5c4432", antler: true, hornC: "#8a6f52", muzzle: "#3c3226", iris: "#3a2e22" }),
   elk: ungA({ coat: "#a3784c", antler: true, hornC: "#8a6f52", mane: true, maneC: "#5c4030", muzzle: "#3c3226" }),
@@ -1318,25 +1340,25 @@ Object.assign(ART, {
   bighorn: ungA({ coat: "#a3856b", curved: true, hornC: "#8a7a5c", muzzle: "#e8dcc3", iris: "#3a2e22" }),
   markhor: ungA({ coat: "#c9b08a", spiral: true, hornC: "#8a7a5c", mane: true, maneC: "#e8dcc3", muzzle: "#e8dcc3" }),
   takin: ungA({ coat: "#d9c48a", curved: true, hornC: "#3c3226", muzzle: "#5c4030", iris: "#3a2e22" }),
-  yak: ungA({ coat: "#3c3630", curved: true, hornC: "#c9b08a", mane: true, maneC: "#26221c", muzzle: "#5c5448" }),
+  yak: bovA({ coat: "#3a342b", shag: true, horns: true, bisonHorn: true, hornC: "#c9bca8", tuftC: "#26221c", iris: "#3a2a18" }),
   llama: ungA({ coat: "#e8dcc3", muzzle: "#f2ede0", iris: "#3a2e22" }),
   alpaca: ungA({ coat: "#d9c9a3", mane: true, maneC: "#e8dcc3", muzzle: "#e8dcc3", iris: "#3a2e22" }),
   vicuna: ungA({ coat: "#c9a878", muzzle: "#f2ede0", iris: "#3a2e22" }),
   guanaco: ungA({ coat: "#c9955c", muzzle: "#e8dcc3", iris: "#3a2e22" }),
   tapir: ungA({ coat: "#4c4438", muzzle: "#3c3630", iris: "#3a2e22", blaze: "#a8a396" }),
-  whiterhino: ungA({ coat: "#a8a396", nasal: true, hornC: "#c9bda3", muzzle: "#8a8578", iris: "#3a2e22" }),
-  blackrhino: ungA({ coat: "#6b6860", nasal: true, hornC: "#a8a08a", muzzle: "#5c5850", iris: "#3a2e22" }),
-  babirusa: ungA({ coat: "#a8968a", straight: true, hornC: "#f5efdf", muzzle: "#8a7a70", iris: "#3a2e22" }),
-  peccary: ungA({ coat: "#5c5448", muzzle: "#3c3630", iris: "#3a2e22", mane: true, maneC: "#3c3630" }),
+  whiterhino: rhinoA({ hide: "#a8a396", bigHorn: true, twoHorn: true, folds: true, iris: "#3a2a18" }),
+  blackrhino: rhinoA({ hide: "#6b6860", bigHorn: true, twoHorn: true, hookLip: true, folds: true, iris: "#3a2a18" }),
+  babirusa: suidA({ hide: "#8a7a68", snoutC: "#a89880", earUp: true, tusks: true, iris: "#3a2a18" }),
+  peccary: suidA({ hide: "#5c5344", snoutC: "#7a6a58", mane: true, maneC: "#3a342b", earUp: true, tusks: true, iris: "#3a2a18" }),
   chevrotain: ungA({ coat: "#8a6b4a", muzzle: "#3c3226", iris: "#3a2e22", spots: false }),
   duiker: ungA({ coat: "#a3785c", straight: true, hornC: "#3c3226", muzzle: "#3c3226", iris: "#3a2e22" }),
-  pygmyhippo: ungA({ coat: "#5c4c44", muzzle: "#8a6f5c", iris: "#3a2e22" }),
+  pygmyhippo: hippoA({ hide: "#5c4a4a", belly: "#8a7268", iris: "#3a2a18" }),
   // proboscideans
   africanelephant: elephA({ hide: "#8a8578", bigEar: true, tusks: true, longTusk: true, iris: "#5c4436" }),
   asianelephant: elephA({ hide: "#8a7f78", tusks: true, iris: "#5c4436" }),
   mammoth: elephA({ hide: "#8a5c3c", hair: true, hairC: "#a3683c", tusks: true, longTusk: true, iris: "#5c4436" }),
   // pinnipeds
-  walrus: pinA({ fur: "#a3705c", head: "#b5806b", muzzle: "#c9a888", tusks: true, iris: "#8a4a3a", flip: "#8a5c4a" }),
+  walrus: pinA({ fur: "#a8705c", head: "#b57e68", muzzle: "#c99a80", bulky: true, tusks: true, tuskC: "#efe6d2", iris: "#5c2a1a" }),
   sealion: pinA({ fur: "#6b4c34", head: "#7a5840", muzzle: "#a3785c", earFlap: true, iris: "#3c2a1e" }),
   fursealion: pinA({ fur: "#4c3c2e", head: "#5c4a38", muzzle: "#8a6f52", earFlap: true, mane: true, maneC: "#3a2c20", iris: "#3c2a1e" }),
   elephantseal: pinA({ fur: "#6b6058", head: "#7a7068", muzzle: "#8a8078", iris: "#26221c" }),
@@ -1362,7 +1384,7 @@ Object.assign(ART, {
   falsekiller: cetA({ hide: "#3c3630", belly: "#5c5448", dorsal: true, melon: true, melonC: "#3c3630" }),
   melonhead: cetA({ hide: "#4c4c54", belly: "#8a8a90", dorsal: true, melon: true, melonC: "#54545c" }),
   beluga: cetA({ hide: "#f2ede0", belly: "#f8f4ea", melon: true, melonC: "#f5f2e8", blow: true, iris: "#26221c" }),
-  narwhal: cetA({ hide: "#8a8fa3", belly: "#c9cdd9", tusk: true, melon: true, melonC: "#9a9fb0", spots: true, markC: "#5c6070" }),
+  narwhal: cetA({ hide: "#7a8290", belly: "#d4cec0", spots: true, markC: "#4a5058", melon: true, melonC: "#8a919c", beak: true, tusk: true, tuskC: "#efe6d2", blow: true, iris: "#26221c" }),
   bottlenose: cetA({ hide: "#7a8a94", belly: "#c9d4d9", dorsal: true, melon: true, melonC: "#8a9aa3", blow: true, beak: true }),
   spinnerdolphin: cetA({ hide: "#5c6b7a", belly: "#c4d0d9", dorsal: true, melon: true, melonC: "#6b7a8a", beak: true }),
   duskydolphin: cetA({ hide: "#3c4c5c", belly: "#e8e4d8", dorsal: true, melon: true, melonC: "#4c5c6b", patch: "#c9bda3", beak: true }),
@@ -1395,9 +1417,9 @@ Object.assign(ART, {
   mara: rodA({ fur: "#8a7a68", inner: "#a89885", muzzle: "#c9bda8", longEar: true, iris: "#2a2018", bib: "#f2ede0" }),
   nakedmolerat: rodA({ fur: "#e8b5a5", inner: "#d9a08f", muzzle: "#f2c9bd", iris: "#26221c" }),
   degu: rodA({ fur: "#a3855c", inner: "#c9a878", muzzle: "#d9c4a3", iris: "#2a2018" }),
-  hare: rodA({ fur: "#b5936b", inner: "#e8c9a5", muzzle: "#f2ede0", longEar: true, iris: "#c9a43a" }),
-  arctichare: rodA({ fur: "#f2ede0", inner: "#e8d4d4", muzzle: "#f8f4ea", longEar: true, iris: "#3a5cd9" }),
-  pika: rodA({ fur: "#a8907a", inner: "#c9b096", muzzle: "#d9c9b5", iris: "#2a2018" }),
+  hare: lagoA({ fur: "#a8906c", belly: "#e8dcc3", inner: "#e8b8b0", blackTip: true, iris: "#3c2a1a" }),
+  arctichare: lagoA({ fur: "#f2f0ea", belly: "#ffffff", inner: "#e8c4c0", shortEar: true, iris: "#3c2a1a" }),
+  pika: lagoA({ fur: "#b59a74", belly: "#e0d4bc", inner: "#e0b0a8", shortEar: true, iris: "#26221c" }),
   // xenarthrans
   ninebandarmadillo: xenA({ fur: "#a89078", bands: true, plateC: "#8a7058", iris: "#3a2e22" }),
   giantarmadillo: xenA({ fur: "#8a7058", bands: true, plateC: "#6b5442", iris: "#3a2e22" }),
