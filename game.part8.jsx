@@ -657,11 +657,101 @@ const elephA = (o) => (er) => {
 };
 const rodA = (o) => (er) => {
   const F = o.fur || "#a8825c";
-  const spine = sh(F, -0.24), belly = sh(F, 0.42), limb = sh(F, -0.12);
+  const spine = sh(F, -0.24), belly = o.belly || sh(F, 0.42), limb = sh(F, -0.12);
   const mark = o.markC || sh(F, -0.55);
   const g1 = gid("rc", F), g2 = gid("rl", F);
+  const TOOTH = o.toothC || "#f4ecd8";
+
+  // --- the naked mole rat is its own animal: a hairless tube that digs with
+  // its teeth, which sit outside the lips so it can chew without eating soil ---
+  if (o.naked) {
+    return (
+      <g>
+        <defs>
+          <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor={sh(F, -0.16)} /><stop offset=".55" stopColor={F} />
+            <stop offset="1" stopColor={sh(F, 0.24)} />
+          </linearGradient>
+        </defs>
+        <ellipse cx="32" cy="50.6" rx="20" ry="2.2" fill="#000" opacity=".13" />
+        <path d="M16,38 Q8,40 3,46" stroke={sh(F, -0.14)} strokeWidth="2.2" fill="none" strokeLinecap="round" />
+        <g stroke={sh(F, -0.16)} strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity=".75">
+          <polyline points="38,42 40,46 37,48" /><polyline points="23,41 20,45 23,47.6" />
+        </g>
+        <path d="M44,32 Q52,34 51.6,38 Q51,42.6 44,44.6 Q31,47.6 20,44.6
+                 Q13,42.6 13,38 Q13,33.6 20,31.6 Q32,29 44,32 Z" fill={`url(#${g1})`} />
+        {/* loose wrinkled skin, which is most of what it looks like */}
+        <g fill="none" stroke={sh(F, -0.24)} strokeWidth=".9" opacity=".7">
+          <path d="M22,32 Q23,38 22,44" /><path d="M29,30.6 Q30,38 29,45.6" />
+          <path d="M36,31 Q37,38 36,45" /><path d="M43,32.6 Q44,38 43,43.6" />
+        </g>
+        <g stroke={sh(F, -0.16)} strokeWidth="2.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="41,41 44,46 40.6,49" /><polyline points="20,40 17,45 20.4,48" />
+        </g>
+        <ellipse cx="50" cy="35.6" rx="7" ry="6" fill={F} />
+        {/* the incisors, outside the mouth */}
+        <g fill={TOOTH}>
+          <path d="M54.6,36 L56.4,36 L56,42.6 L54.8,42.6 Z" />
+          <path d="M57,36 L58.8,36 L58.4,42 L57.2,42 Z" />
+        </g>
+        <path d="M54,38.6 Q57,40 60,38.6" stroke={sh(F, -0.4)} strokeWidth=".8" fill="none" strokeLinecap="round" />
+        <g stroke={sh(F, -0.36)} strokeWidth=".4" fill="none" opacity=".7" strokeLinecap="round">
+          <path d="M53,33 Q57,31 59.6,30.4" /><path d="M53.4,40.6 Q57,42.6 59.4,43.6" />
+        </g>
+        {/* the eyes are almost vestigial */}
+        <circle cx="50.4" cy="33.4" r={1 * er} fill="#1a1614" />
+      </g>
+    );
+  }
+
+  // --- the jerboa: a desert biped, all hind leg, ear and tail ---
+  if (o.biped) {
+    return (
+      <g>
+        <defs>
+          <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor={spine} /><stop offset=".55" stopColor={F} />
+            <stop offset="1" stopColor={belly} />
+          </linearGradient>
+          <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor={sh(F, -0.16)} /><stop offset="1" stopColor={sh(F, 0.14)} />
+          </linearGradient>
+        </defs>
+        <ellipse cx="34" cy="56.6" rx="14" ry="2" fill="#000" opacity=".13" />
+        {/* the tail is longer than the animal, with a banner of fur on the end */}
+        <path d="M24,34 Q10,40 4,52" stroke={limb} strokeWidth="2.2" fill="none" strokeLinecap="round" />
+        <ellipse cx="4" cy="53.6" rx="3.4" ry="4.4" fill={o.tuftC || sh(F, 0.5)} transform="rotate(-20 4 53.6)" />
+        {/* enormous hind leg, folded */}
+        <g stroke={`url(#${g2})`} strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="30,36 24,44 32,50" />
+        </g>
+        <path d="M29,50 L41,50 Q42.4,52 40.6,53 L28.4,53 Q26.6,51.6 29,50 Z" fill={sh(F, -0.26)} />
+        <ellipse cx="32" cy="32" rx="10" ry="10.4" fill={`url(#${g1})`} />
+        {/* tiny forelimbs held at the chest */}
+        <g stroke={`url(#${g2})`} strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="40,30 44,33 42,36" />
+        </g>
+        <g>
+          <ellipse cx="44" cy="15.6" rx="3" ry="7.4" fill={sh(F, -0.16)} transform="rotate(-10 44 15.6)" />
+          <ellipse cx="52" cy="14.6" rx="3.2" ry="7.8" fill={F} transform="rotate(9 52 14.6)" />
+          <ellipse cx="52" cy="15.4" rx="1.7" ry="5.4" fill={o.inner || sh(F, 0.42)} transform="rotate(9 52 15.4)" />
+        </g>
+        <ellipse cx="48" cy="27" rx="7.4" ry="6.4" fill={F} />
+        <ellipse cx="53" cy="30" rx="3.6" ry="2.6" fill={o.muzzle || sh(F, 0.45)} />
+        <path d="M54.6,28.6 Q56.4,28.8 56.5,30 Q56.3,31.2 55.1,31.2 Q54.1,30.8 54.6,28.6 Z" fill={sh(F, -0.6)} />
+        <path d="M53.4,32.6 L55,32.6 L55,34.4 L53.4,34.4 Z" fill={TOOTH} />
+        <g stroke={sh(F, -0.4)} strokeWidth=".4" fill="none" opacity=".6" strokeLinecap="round">
+          <path d="M54.6,29 Q58,27.6 60,27" /><path d="M54.8,31 Q58.2,31 60.2,30.6" />
+        </g>
+        <Eye x={49} y={25.4} r={2.8 * er} iris={o.iris || "#1a1614"} />
+      </g>
+    );
+  }
+
+  // --- everything else: a quadruped, or sitting up on its haunches ---
+  const SIT = o.sitting;
   return (
-  <g transform={o.big ? undefined : "translate(6,7) scale(.82)"}>
+  <g>
     <defs>
       <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stopColor={spine} /><stop offset=".55" stopColor={F} />
@@ -671,71 +761,142 @@ const rodA = (o) => (er) => {
         <stop offset="0" stopColor={sh(F, -0.16)} /><stop offset="1" stopColor={sh(F, 0.14)} />
       </linearGradient>
     </defs>
-    <ellipse cx="32" cy="56.4" rx="18" ry="2.2" fill="#000" opacity=".15" />
+    <ellipse cx="32" cy={SIT ? 56.6 : 53.6} rx={o.blocky ? 20 : 16} ry="2.2" fill="#000" opacity=".14" />
 
-    {/* long thin tail, the way a rat or squirrel carries it */}
-    <path d="M15,38 Q6,37 3,29 Q2,23.6 6,21" stroke={limb} strokeWidth="2.2" fill="none"
-      strokeLinecap="round" />
-
-    <g stroke={`url(#${g2})`} strokeWidth="2.8" fill="none" strokeLinecap="round"
-      strokeLinejoin="round" opacity=".72">
-      <polyline points="39,42 38.4,47 40,50.6 40,54.2" />
-      <polyline points="22,41 23.4,46 20.6,50 21,54.2" />
-    </g>
-
-    {/* hunched rounded back - rodents sit compact rather than stretched */}
-    <path d="M45,30 Q51,32.6 51,38.4 Q51,44 46.4,46.4 L36,47.6
-             Q26,49 19.6,46.6 Q14,44.4 14,38 Q14,31.6 20,29.6 Q32,26.4 45,30 Z"
-      fill={`url(#${g1})`} />
-    <path d="M19.6,46.6 Q26,49 36,47.6 L46.4,46.4 Q43,48.8 36,49.4 Q26,50.6 19.6,46.6 Z"
-      fill={sh(F, 0.5)} />
-    {o.stripes && (
-      <g stroke={mark} strokeWidth="1.6" strokeLinecap="round" fill="none" opacity=".85">
-        <path d="M24,29.6 Q25,37 24,46 M31,28 Q32,36.4 31,47 M38,28.6 Q39,36.6 38,46.4" />
-      </g>
-    )}
-    {o.quills && (
-      <g stroke={o.quillC || sh(F, -0.5)} strokeWidth="1.5" strokeLinecap="round">
-        <path d="M22,30 L18.6,23 M28,27.8 L26.4,20.4 M34,27.4 L34,20 M40,28.4 L42,21.2
-                 M45,31 L48.4,25" />
-      </g>
-    )}
-    {o.bib && <ellipse cx="48" cy="38.6" rx="3.8" ry="4.4" fill={sh(F, 0.55)} opacity=".85" />}
-
-    <g stroke={`url(#${g2})`} strokeWidth="3.1" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="43.6,39.6 43,46 44.8,50.4 44.8,54.6" />
-      <polyline points="19.4,39 21,45.6 18.2,50 18.6,54.6" />
-    </g>
-    <g fill={sh(F, -0.4)}>
-      <ellipse cx="44.8" cy="54.9" rx="1.9" ry="1.1" /><ellipse cx="18.6" cy="54.9" rx="1.9" ry="1.1" />
-    </g>
-
-    {/* ears: rodent ears are big relative to the head */}
-    {o.longEar ? (
+    {/* TAIL. The single most useful thing for telling rodents apart: a squirrel
+        plumes it over the back, a rat trails a bare rope, a beaver drags a
+        paddle, and a capybara has none at all. */}
+    {o.bushyTail ? (
       <g>
-        <path d="M48.6,26 Q46.6,16 45.4,13.4 Q49.4,15.6 51.4,24 Z" fill={sh(F, -0.22)} />
-        <path d="M55.6,25.2 Q56.8,15 58.4,12.6 Q60.4,18.4 59.2,25.6 Z" fill={F} />
-        <path d="M56.4,24.4 Q57.2,17.4 58.4,15.4 Q59.4,19.6 58.6,24.8 Z"
-          fill={o.inner || sh(F, 0.35)} />
+        <path d={SIT ? "M22,48 Q6,44 8,22 Q10,10 22,10" : "M18,38 Q4,34 6,16 Q8,6 20,6"}
+          stroke={o.tailC || sh(F, -0.1)} strokeWidth="10" fill="none" strokeLinecap="round" />
+        <path d={SIT ? "M22,48 Q10,44 11,24 Q13,14 22,13" : "M18,38 Q8,34 9,18 Q11,10 20,9"}
+          stroke={o.tailC2 || sh(F, 0.34)} strokeWidth="4" fill="none" strokeLinecap="round" opacity=".7" />
+      </g>
+    ) : o.flatTail ? (
+      <g>
+        <ellipse cx="12" cy="45" rx="11" ry="5.4" fill={o.tailC || sh(F, -0.4)} transform="rotate(-14 12 45)" />
+        <g stroke={sh(F, -0.6)} strokeWidth=".6" fill="none" opacity=".6">
+          <path d="M6,42 L18,46 M5,45 L17,49 M7,39.6 L19,43" />
+        </g>
+      </g>
+    ) : o.stubTail ? (
+      <path d={SIT ? "M23,50 Q17,52 16,56" : "M17,40 Q11,42 10,46"} stroke={limb}
+        strokeWidth="3.4" fill="none" strokeLinecap="round" />
+    ) : o.noTail ? null : (
+      <path d={SIT ? "M23,49 Q10,50 4,42 Q1,36 5,32" : "M17,39 Q6,40 2,32 Q0,26 4,22"}
+        stroke={o.tailC || sh(F, -0.16)} strokeWidth="2" fill="none" strokeLinecap="round" />
+    )}
+
+    {SIT ? (
+      <g>
+        {/* sitting up: haunch on the ground, body vertical, forepaws at the chest */}
+        <g stroke={`url(#${g2})`} strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity=".72">
+          <polyline points="27,44 22,50 28,54" />
+        </g>
+        <ellipse cx="30" cy="44" rx="12" ry="10.4" fill={`url(#${g1})`} />
+        <path d="M38,22 Q46,26 45.4,36 Q45,46 38,50 Q28,53 22,48 Q17,42 19,32
+                 Q22,22 30,20 Z" fill={`url(#${g1})`} />
+        {o.bib && <ellipse cx="40" cy="40" rx="5" ry="7" fill={o.bib} opacity=".9" />}
+        {o.stripes && (
+          <g stroke={mark} strokeWidth="1.8" fill="none" strokeLinecap="round" opacity=".9">
+            <path d="M24,26 Q22,36 24,48" /><path d="M30,22.6 Q28,34 30,50" />
+          </g>
+        )}
+        {o.quills && (
+          <g stroke={o.quillC || sh(F, -0.5)} strokeWidth="1.6" strokeLinecap="round">
+            <path d="M22,30 L14,24 M20,38 L11,35 M21,46 L13,47 M27,22 L23,14 M34,20 L34,11" />
+          </g>
+        )}
+        <g stroke={`url(#${g2})`} strokeWidth="4.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="32,44 27,51 34,55" />
+        </g>
+        <path d="M31,55 L41,55 Q42.4,57 40.6,58 L29.4,58 Q27.6,56.6 31,55 Z" fill={sh(F, -0.26)} />
+        {/* forepaws held together at the chest, the way a squirrel holds a nut */}
+        <g stroke={`url(#${g2})`} strokeWidth="2.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="42,32 46,36 43,40" />
+        </g>
+        <ellipse cx="43.4" cy="40.6" rx="2.6" ry="2.2" fill={sh(F, -0.2)} />
       </g>
     ) : (
       <g>
-        <circle cx="48.6" cy="24.4" r={o.earRound ? 4 : 3.2} fill={sh(F, -0.22)} />
-        <circle cx="57.6" cy="23.8" r={o.earRound ? 4.4 : 3.5} fill={F} />
-        <circle cx="57.8" cy="24" r={o.earRound ? 2.6 : 2} fill={o.inner || sh(F, 0.35)} />
+        {/* on all fours, with the arched back a rodent actually has */}
+        <g stroke={`url(#${g2})`} strokeWidth={o.blocky ? 4 : 2.8} fill="none" strokeLinecap="round"
+          strokeLinejoin="round" opacity=".72">
+          <polyline points="38,42 37.4,47 38.4,51" /><polyline points="23,41 23.6,46 22.6,50" />
+        </g>
+        <path d={o.blocky
+          ? "M46,29 Q54,32 53.6,38 Q53,44.6 46,47 Q32,50.6 20,47 Q12,44 12,38 Q12,31.6 20,29 Q34,25.6 46,29 Z"
+          : "M45,30 Q52,32.6 51.6,38 Q51,43.6 45,46 Q32,49.6 21,46 Q14,43.6 14,38 Q14,31.6 21,29.4 Q33,26.4 45,30 Z"}
+          fill={`url(#${g1})`} />
+        {o.stripes && (
+          <g stroke={mark} strokeWidth="1.6" fill="none" strokeLinecap="round" opacity=".9">
+            <path d="M24,29.6 Q25,37 24,46" /><path d="M31,28 Q32,37 31,47.6" /><path d="M38,28.6 Q39,37 38,46.6" />
+          </g>
+        )}
+        {o.quills && (
+          <g stroke={o.quillC || sh(F, -0.5)} strokeWidth="1.6" strokeLinecap="round">
+            <path d="M20,30 L15,22 M26,28 L24,19 M32,27 L32,18 M38,27.6 L41,19 M44,30 L48,23" />
+          </g>
+        )}
+        {o.glide && (
+          <path d="M42,34 Q30,44 18,42 Q30,38 40,31 Z" fill={sh(F, 0.16)} opacity=".85" />
+        )}
+        {o.bib && <ellipse cx="46" cy="40" rx="4.4" ry="4.6" fill={o.bib} opacity=".9" />}
+        <g stroke={`url(#${g2})`} strokeWidth={o.blocky ? 4.6 : 3.2} fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="42,40 41.4,46 42.6,51.6" /><polyline points="20,39 20.6,45 19.4,51.6" />
+        </g>
+        <g fill={sh(F, -0.4)}>
+          <ellipse cx="42.6" cy="52" rx="2" ry="1.1" /><ellipse cx="19.4" cy="52" rx="2" ry="1.1" />
+        </g>
       </g>
     )}
 
-    <ellipse cx="53.4" cy="31.4" rx="7" ry="5.8" fill={F} />
-    {/* short blunt rodent muzzle with a big front incisor */}
-    <ellipse cx="58.2" cy="33.6" rx="3.8" ry="2.6" fill={o.muzzle || sh(F, 0.45)} />
-    <path d="M60.4,32 Q62.4,32.2 62.5,33.4 Q62.3,34.6 61.1,34.6 Q60,34.2 60.4,32 Z"
-      fill={sh(F, -0.7)} />
-    <path d="M59.6,35.4 L61.4,35.4 L61.4,37.4 L59.6,37.4 Z" fill="#f4ecd8" />
-    <Eye x={54.2} y={29.4} r={2 * er} iris={o.iris || "#26221c"} />
-    <g stroke={sh(F, -0.45)} strokeWidth=".4" fill="none" opacity=".6" strokeLinecap="round">
-      <path d="M59.6,32.6 Q62,31.4 63.4,30.8" /><path d="M59.8,34 Q62.2,33.8 63.6,33.6" />
-    </g>
+    {/* EARS */}
+    {(() => {
+      const ex = SIT ? 38 : 44, ey = SIT ? 18 : 28;
+      if (o.longEar) return (
+        <g>
+          <ellipse cx={ex} cy={ey - 9} rx="2.8" ry="7.4" fill={sh(F, -0.18)} transform={`rotate(-10 ${ex} ${ey - 9})`} />
+          <ellipse cx={ex + 9} cy={ey - 10} rx="3" ry="7.8" fill={F} transform={`rotate(9 ${ex + 9} ${ey - 10})`} />
+          <ellipse cx={ex + 9} cy={ey - 9.4} rx="1.6" ry="5.2" fill={o.inner || sh(F, 0.42)} transform={`rotate(9 ${ex + 9} ${ey - 9.4})`} />
+        </g>
+      );
+      const r = o.bigEar ? 4.6 : 3.4;
+      return (
+        <g>
+          <circle cx={ex} cy={ey - 4} r={r} fill={sh(F, -0.2)} />
+          <circle cx={ex + 9} cy={ey - 4.6} r={r + 0.4} fill={F} />
+          <circle cx={ex + 9} cy={ey - 4.6} r={r - 1.2} fill={o.inner || sh(F, 0.4)} />
+        </g>
+      );
+    })()}
+
+    {/* HEAD. Blunt, with the big incisor showing - the one feature every
+        rodent shares and the reason they gnaw. */}
+    {(() => {
+      const hx = SIT ? 42 : 48, hy = SIT ? 24 : 34;
+      return (
+        <g>
+          <ellipse cx={hx} cy={hy} rx={o.blocky ? 8.4 : 7} ry={o.blocky ? 6.6 : 6} fill={F} />
+          {o.cheekStripe && <path d={`M${hx - 5},${hy - 2} Q${hx},${hy - 4} ${hx + 5},${hy - 1.6} Q${hx},${hy - 1} ${hx - 4.6},${hy} Z`} fill={mark} />}
+          <ellipse cx={hx + (o.blocky ? 6.6 : 5)} cy={hy + 2.6} rx={o.blocky ? 4.6 : 3.6} ry={o.blocky ? 3.2 : 2.6}
+            fill={o.muzzle || sh(F, 0.45)} />
+          <path d={`M${hx + (o.blocky ? 9 : 7)},${hy + 1} Q${hx + (o.blocky ? 11 : 9)},${hy + 1.2} ${hx + (o.blocky ? 11.1 : 9.1)},${hy + 2.4}
+                    Q${hx + (o.blocky ? 10.9 : 8.9)},${hy + 3.6} ${hx + (o.blocky ? 9.7 : 7.7)},${hy + 3.6}
+                    Q${hx + (o.blocky ? 8.7 : 6.7)},${hy + 3.2} ${hx + (o.blocky ? 9 : 7)},${hy + 1} Z`}
+            fill={sh(F, -0.62)} />
+          {/* the incisor */}
+          <path d={`M${hx + (o.blocky ? 6.4 : 5)},${hy + 5} l${o.blocky ? 3 : 2.4},0 l0,${o.blocky ? 3 : 2.4} l-${o.blocky ? 3 : 2.4},0 Z`}
+            fill={TOOTH} />
+          <g stroke={sh(F, -0.4)} strokeWidth=".4" fill="none" opacity=".6" strokeLinecap="round">
+            <path d={`M${hx + 6},${hy + 1.6} Q${hx + 10},${hy} ${hx + 12},${hy - 0.6}`} />
+            <path d={`M${hx + 6.2},${hy + 3.6} Q${hx + 10.2},${hy + 3.6} ${hx + 12.2},${hy + 3.4}`} />
+          </g>
+          <Eye x={hx + 1.4} y={hy - 1.6} r={(o.bigEye ? 2.6 : 2.1) * er} iris={o.iris || "#26221c"} />
+        </g>
+      );
+    })()}
   </g>
   );
 };
@@ -1416,22 +1577,22 @@ Object.assign(ART, {
   manatee: cetA({ hide: "#8a8578", belly: "#a8a396", melon: true, melonC: "#8a8578", fluke: "#7a7568", iris: "#3c3226" }),
   dugong: cetA({ hide: "#a3988a", belly: "#c4bcae", melon: true, melonC: "#a3988a", fluke: "#8a8078", iris: "#3c3226" }),
   // rodents & lagomorphs
-  capybara: rodA({ fur: "#8a6b4a", inner: "#6b5038", muzzle: "#a3856b", iris: "#3a2e22" }),
+  capybara: rodA({ fur: "#8a6b4a", inner: "#6b5038", muzzle: "#a3856b", iris: "#3a2e22" , blocky: true, noTail: true }),
   porcupine: rodA({ fur: "#3c3630", inner: "#2a2620", muzzle: "#5c5448", quills: true, quillC: "#e8dcc3", iris: "#2a2018" }),
-  chinchilla: rodA({ fur: "#a8a8a0", inner: "#e8c9c9", muzzle: "#d9d4c4", iris: "#26221c" }),
-  prairiedog: rodA({ fur: "#c9a878", inner: "#e8c9a5", muzzle: "#e8dcc3", iris: "#2a2018" }),
-  groundhog: rodA({ fur: "#8a6b4a", inner: "#6b5038", muzzle: "#a89078", iris: "#2a2018" }),
-  redsquirrel: rodA({ fur: "#c9703a", inner: "#e8955c", muzzle: "#f2ede0", iris: "#2a2018", bib: "#f2ede0" }),
-  flyingsquirrel: rodA({ fur: "#a89885", inner: "#e8dcc3", muzzle: "#f2ede0", iris: "#26221c" }),
-  chipmunk: rodA({ fur: "#c9955c", inner: "#e8b585", muzzle: "#f2ede0", stripes: true, markC: "#4c3826", iris: "#2a2018" }),
-  dormouse: rodA({ fur: "#d9b884", inner: "#e8cfa5", muzzle: "#f2ede0", iris: "#26221c" }),
-  jerboa: rodA({ fur: "#e8d4a5", inner: "#f2e4c4", muzzle: "#f8f2e4", longEar: true, iris: "#26221c" }),
-  marmot: rodA({ fur: "#a3855c", inner: "#8a6f42", muzzle: "#c9b08a", iris: "#2a2018" }),
-  viscacha: rodA({ fur: "#a8a08a", inner: "#c9c0a8", muzzle: "#d9d0b8", longEar: true, iris: "#26221c" }),
-  agouti: rodA({ fur: "#8a6142", inner: "#6b4830", muzzle: "#a3785c", iris: "#2a2018" }),
-  mara: rodA({ fur: "#8a7a68", inner: "#a89885", muzzle: "#c9bda8", longEar: true, iris: "#2a2018", bib: "#f2ede0" }),
-  nakedmolerat: rodA({ fur: "#e8b5a5", inner: "#d9a08f", muzzle: "#f2c9bd", iris: "#26221c" }),
-  degu: rodA({ fur: "#a3855c", inner: "#c9a878", muzzle: "#d9c4a3", iris: "#2a2018" }),
+  chinchilla: rodA({ fur: "#a8a8a0", inner: "#e8c9c9", muzzle: "#d9d4c4", iris: "#26221c" , sitting: true, bushyTail: true, bigEar: true, bigEye: true }),
+  prairiedog: rodA({ fur: "#c9a878", inner: "#e8c9a5", muzzle: "#e8dcc3", iris: "#2a2018" , sitting: true, stubTail: true }),
+  groundhog: rodA({ fur: "#8a6b4a", inner: "#6b5038", muzzle: "#a89078", iris: "#2a2018" , sitting: true, stubTail: true }),
+  redsquirrel: rodA({ fur: "#c9703a", inner: "#e8955c", muzzle: "#f2ede0", iris: "#2a2018", bib: "#f2ede0" , sitting: true, bushyTail: true, tailC2: "#e8a878", bigEye: true }),
+  flyingsquirrel: rodA({ fur: "#a89885", inner: "#e8dcc3", muzzle: "#f2ede0", iris: "#26221c" , bushyTail: true, glide: true, bigEye: true }),
+  chipmunk: rodA({ fur: "#c9955c", inner: "#e8b585", muzzle: "#f2ede0", stripes: true, markC: "#4c3826", iris: "#2a2018" , sitting: true, bushyTail: true, cheekStripe: true }),
+  dormouse: rodA({ fur: "#d9b884", inner: "#e8cfa5", muzzle: "#f2ede0", iris: "#26221c" , bushyTail: true, bigEye: true }),
+  jerboa: rodA({ fur: "#e8d4a5", inner: "#f2e4c4", muzzle: "#f8f2e4", longEar: true, iris: "#26221c" , biped: true }),
+  marmot: rodA({ fur: "#a3855c", inner: "#8a6f42", muzzle: "#c9b08a", iris: "#2a2018" , sitting: true, stubTail: true }),
+  viscacha: rodA({ fur: "#a8a08a", inner: "#c9c0a8", muzzle: "#d9d0b8", longEar: true, iris: "#26221c" , sitting: true, bushyTail: true }),
+  agouti: rodA({ fur: "#8a6142", inner: "#6b4830", muzzle: "#a3785c", iris: "#2a2018" , stubTail: true }),
+  mara: rodA({ fur: "#8a7a68", inner: "#a89885", muzzle: "#c9bda8", longEar: true, iris: "#2a2018", bib: "#f2ede0" , stubTail: true }),
+  nakedmolerat: rodA({ fur: "#e8b5a5", inner: "#d9a08f", muzzle: "#f2c9bd", iris: "#26221c" , naked: true }),
+  degu: rodA({ fur: "#a3855c", inner: "#c9a878", muzzle: "#d9c4a3", iris: "#2a2018" , sitting: true, tuftTail: true }),
   hare: lagoA({ fur: "#a8906c", belly: "#e8dcc3", inner: "#e8b8b0", blackTip: true, iris: "#3c2a1a" }),
   arctichare: lagoA({ fur: "#f2f0ea", belly: "#ffffff", inner: "#e8c4c0", shortEar: true, iris: "#3c2a1a" }),
   pika: lagoA({ fur: "#b59a74", belly: "#e0d4bc", inner: "#e0b0a8", shortEar: true, iris: "#26221c" }),
