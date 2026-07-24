@@ -1072,10 +1072,12 @@ const frogA = (o) => (er) => {
 };
 
 Object.assign(ART, {
+  tawnyfrogmouth: owlA({ body: "#8a7a64", wingC: "#6b5c48", discC: "#a89078",
+    mottle: true, bars: true, markC: "#4a3f30", brow: true, browC: "#c9b494",
+    beakC: "#6b5a44", iris: "#c9a43a" }),
   // The penguin was hand-drawn and head-only. Penguins face forward and stand
   // upright, so it goes through the dedicated penguin build.
-  penguin: pengA({ body: "#2e3138", front: "#f4efe4", beakC: "#c9762e", footC: "#e8913a",
-    face: "#f4efe4", iris: "#26221c" }),
+  penguin: pengA({ body: "#2e3138", front: "#f4efe4", beakC: "#c9762e", footC: "#e8913a", face: "#f4efe4", iris: "#26221c" }),
   // sharks
   greatwhite: sharkA({ hide: "#8a949a", belly: "#f2ede0", teeth: true, tallFin: true }),
   whaleshark: sharkA({ hide: "#3c5468", belly: "#c4d0d9", spots: true, markC: "#e8e4d8" }),
@@ -1208,7 +1210,7 @@ Object.assign(ART, {
   mandarinduck: waterA({ body: "#e8853a", wingC: "#3a5cd9", head: "#3a8a6b", plume: true, plumeC: "#c94a3a", bib: "#f2ede0", beakC: "#c94a3a" }),
   swan: waterA({ body: "#f8f4ea", wingC: "#e8e4d8", neck: true, neckC: "#f8f4ea", beakC: "#e8853a", mask: "#26221c" }),
   loon: waterA({ body: "#26221c", wingC: "#3c3630", bib: "#f5f2e8", neck: true, neckC: "#26221c", bill: "long", beakC: "#26221c", iris: "#c94a3a" }),
-  emperorpenguin: pengA({ body: "#3c4c54", wingC: "#26343c", head: "#26221c", bib: "#e8d44a", bill: "long", beakC: "#e8853a" }),
+  emperorpenguin: pengA({ body: "#2e3440", front: "#f6f2e8", beakC: "#c9762e", footC: "#3c3630", face: "#f2e08a", bandC: "#e8c547", iris: "#26221c" }),
   woodpecker: songA({ body: "#26221c", wingC: "#f5f2e8", head: "#c94a3a", plume: true, plumeC: "#c94a3a", bill: "long", beakC: "#5c5448" }),
   raven: songA({ body: "#26292e", wingC: "#16181c", head: "#26292e", bill: "hook", beakC: "#16140f", iris: "#3c3226" }),
   // insects & pollinators
@@ -1231,7 +1233,7 @@ Object.assign(ART, {
   orchidmantis: mantidA({ body: "#f2c4d4", head: "#f6d8e2", wings: true, wingC: "#f8e2ea", spineC: "#c98aa4", iris: "#f2ede0" }),
   stickinsect: mantidA({ body: "#8a7a4a", stick: true, legC: "#7a6a3a", iris: "#26221c" }),
   leafinsect: mantidA({ body: "#7aa84a", leaf: true, legC: "#5c8a3a", iris: "#26221c" }),
-  ladybug: insA({ body: "#c94a3a", head: "#26221c", spots: true, markC: "#26221c", wings: true, wingC: "#e8e4d8", clubAnt: true }),
+  ladybug: beetleA({ body: "#1a1a1e", elytra: "#d43a2e", spots: true, markC: "#141418", legC: "#1a1a1e", antC: "#26262c", iris: "#0e0e12" }),
   firefly: beetleA({ body: "#3a2f26", elytra: "#5c4a3a", glow: true, glowC: "#e8f26a", iris: "#1a1614" }),
   herculesbeetle: beetleA({ body: "#3a2f22", elytra: "#c9b06a", horn: true, hornC: "#4a3a26", spots: true, markC: "#2e2620", iris: "#1a1614" }),
   stagbeetle: beetleA({ body: "#3a2a22", elytra: "#5c3a26", mandibles: true, hornC: "#4a2f22", iris: "#1a1614" }),
@@ -1515,16 +1517,16 @@ Object.assign(ART, {
 Object.assign(ART, {
   hedgehog: hogA({ fur: "#c9b08a", spineC: "#6b5540", noseC: "#3a2f2a", iris: "#1a1614" }),
   gecko: lizA({ hide: "#7aa85c", belly: "#d9e0b0", spots: true, markC: "#4a6b38", padded: true, padC: "#c9d4a0", crest: false, iris: "#c9a43a" }),
-  dartfrog: frogA({ skin: "#2ea84a", belly: "#1e7a34", spots: true, markC: "#1a1a1a", toes: true, toeC: "#e8a53a", iris: "#1a1614" }),
+  dartfrog: frogA({ skin: "#2e6ae8", belly: "#1e4ab5", spots: true, markC: "#101426", toes: true, toeC: "#4a8ae8", iris: "#101014" }),
   tadpole: frogA({ skin: "#4a5c3a", belly: "#7a8a5c", tadpole: true, spots: true, markC: "#2e3826", gillC: "#e88aa8", iris: "#26221c" }),
   beaver: rodA({ fur: "#6b4c34", inner: "#4c3424", muzzle: "#a3856b", belly: "#8a6f52", flatTail: true, tailC: "#4a3828", blocky: true, iris: "#2a2018" }),
-  badger: mustA({ fur: "#5c5348", inner: "#3a342b", muzzle: "#c9c0b0", mask: true, markC: "#f2ede0", blaze: true, earRound: true, iris: "#26221c" }),
+  badger: mustA({ fur: "#1e1e22", inner: "#101014", muzzle: "#8a8578", mantle: true, mantleC: "#e2ddd0", earRound: true, iris: "#2a2018" }),
   cobra: snakeA({ hide: "#8a7a4a", markC: "#5c4a2a", hood: true, hoodC: "#a89060", hoodMark: true, bands: true, iris: "#c9a43a" }),
   boar: suidA({ hide: "#4a3c30", snoutC: "#6b5a4a", mane: true, maneC: "#2e2620", earUp: true, tusks: true, iris: "#3a2a18" }),
   turtle: armorA({ hide: "#5d7a4a", scuteC: "#3f5433", scutes: true, beakC: "#4a5c33", iris: "#3a2a18" }),
   scorpion: scorpA({ body: "#8a6a3a", clawC: "#7a5c30", stingC: "#5c4020", legC: "#6b5028", iris: "#1a1614" }),
-  meerkat: mustA({ fur: "#c9a878", inner: "#e8c9a5", muzzle: "#e8dcc3", sentinel: true, bib: "#e8dcc3", mask: true, markC: "#5c4432", earRound: true, iris: "#26221c" }),
-  pangolin: xenA({ fur: "#a8895c", shell: true, plateC: "#8a6f42", bands: true, snout: true, iris: "#3a2a18" }),
+  meerkat: mustA({ fur: "#c9a878", inner: "#e8c9a5", muzzle: "#e8dcc3", sentinel: true, bib: "#efe4cc", mask: true, markC: "#5c4432", earRound: true, iris: "#26221c" }),
+  pangolin: xenA({ fur: "#9a7a4a", plateC: "#7a5c30", scales: true, bands: true, snout: true, curlTail: true, iris: "#3a2a18" }),
   aardvark: xenA({ fur: "#c9a888", snout: true, muzzle: "#d9bda0", iris: "#3a2a18" }),
   hippo: hippoA({ hide: "#8a6a72", belly: "#b59098", tusks: true, iris: "#3a2a18" }),
   camel: ungA({ coat: "#d9b884", muzzle: "#e8d4a5", humps: 1, mane: true, maneC: "#c9a06a", iris: "#3a2a18" }),

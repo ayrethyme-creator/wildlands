@@ -48,7 +48,7 @@ Object.assign(ART, {
   pyreneanibex: ungA({ coat: "#a8907a", curved: true, hornC: "#5c4436", muzzle: "#d9c9b5", iris: "#3a2e22" }),
   // — extinct birds —
   dodo: birdA({ body: "#8a8578", wingC: "#6b6858", head: "#a8a396", bill: "hook", beakC: "#c9b08a", iris: "#3c3226" }),
-  greatauk: pengA({ body: "#26221c", wingC: "#16140f", bib: "#f5f2e8", mask: "#f5f2e8", bill: "long", beakC: "#26221c" }),
+  greatauk: pengA({ body: "#26292e", front: "#f4efe4", beakC: "#1a1a1e", footC: "#26292e", face: "#f4efe4", iris: "#26221c" }),
   passengerpigeon: songA({ body: "#5c6b8a", wingC: "#48566b", head: "#5c6b8a", bib: "#c9704a", beakC: "#26221c", iris: "#c94a3a" }),
   carolinaparakeet: parrA({ body: "#4c9a3c", wingC: "#3a7a2c", head: "#e8c547", cheek: true, cheekC: "#e8853a", beakC: "#e8dcc3" }),
   moa: birdA({ longLegs: true, body: "#6b5c4c", wingC: "#5c4c3c", neck: true, neckC: "#6b5c4c", head: "#8a7458", bill: "cone", beakC: "#c9b08a", iris: "#3c3226" }),
@@ -110,6 +110,12 @@ Object.assign(ART, {
 // n, art, types, stats, moves, status tag, note
 const V = (n, art, t, b, m, st) => ({ n, art, t, b, m, l: [], c: 0.18, mem: true, org: st });
 Object.assign(DEX, {
+  // Not an owl, though nearly everyone assumes so: frogmouths are nightjars.
+  // The huge wide gape is for catching insects, where an owl grips with talons.
+  // It gets the owl build because the forward-facing posture is the same.
+  tawnyfrogmouth: { n: "Tawny Frogmouth", art: "tawnyfrogmouth", t: ["Aerial", "Night"],
+    b: { h: 52, a: 46, d: 48, s: 44 }, m: ["peck", "gust", "shadowslip"],
+    l: [[24, "gloombite"], [32, "nightterror"], [40, "voidpounce"]], c: 0.4 },
   // ---- extinct mammals ----
   thylacine: V("Thylacine", "thylacine", ["Predator", "Night"], B(58, 64, 48, 58), MV.pred, "† 1936"),
   quagga: V("Quagga", "quagga", ["Swift", "Wild"], B(58, 54, 46, 66), MV.swi, "† 1883"),

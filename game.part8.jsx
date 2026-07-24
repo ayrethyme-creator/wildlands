@@ -428,6 +428,19 @@ const mustA = (o) => (er) => {
     <path d="M17.4,46 Q24,48.2 36,46.6 L47.6,45.4 Q44,47.8 36,48.4 Q24,49.6 17.4,46 Z"
       fill={sh(F, 0.5)} />
     {o.bib && <ellipse cx="49" cy="38.6" rx="4" ry="4.4" fill={sh(F, 0.55)} opacity=".85" />}
+    {/* A honey badger is black underneath with a broad pale mantle laid over
+        the crown, back and tail - that two-tone split is the whole animal. */}
+    {o.mantle && (
+      <path d="M12,36 Q14,29 30,30.4 Q46,31.6 52,35 Q46,38 30,36.4 Q16,35.4 12,36 Z"
+        fill={o.mantleC || "#e2ddd0"} />
+    )}
+    {/* the skunk's twin stripes, running from the crown to the tail */}
+    {o.stripe && (
+      <g fill={o.stripeC || "#f4f0e8"}>
+        <path d="M14,34 Q30,31 50,33.6 Q30,34.6 14,36.4 Z" />
+        <path d="M16,39.6 Q32,38 48,40 Q32,41 16,41.6 Z" />
+      </g>
+    )}
 
     <g stroke={`url(#${g2})`} strokeWidth="3.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="44.6,40.4 44,46 45.8,50 45.8,54" />
@@ -966,6 +979,29 @@ const xenA = (o) => (er) => {
       <path d="M15,36 Q16,26.6 31,25.6 Q46,25.6 47,35.6 Q31,31.6 15,36 Z"
         fill={o.plateC || sh(F, -0.28)} />
     )}
+    {/* A pangolin is not shelled - it is shingled, in rows of overlapping
+        keratin scales, the same stuff as a fingernail. Drawing them as
+        individual plates is what separates it from an armadillo. */}
+    {o.scales && (
+      <g fill={o.plateC || sh(F, -0.3)} stroke={sh(F, -0.5)} strokeWidth=".4">
+        {[[20,31],[27,29.6],[34,29.4],[41,30.4],[46,32.4],
+          [18,36],[25,34.8],[32,34.6],[39,35.4],[45,37],
+          [20,41],[27,40],[34,40],[41,40.8]].map(([x,y],i)=>(
+          <path key={i} d={`M${x},${y} q3.6,-2.4 6.6,.4 q-3,2.6 -6.6,-.4 Z`} />
+        ))}
+      </g>
+    )}
+    {o.curlTail && (
+      <g>
+        <path d="M16,36 Q6,34 2,26 Q1,19 8,19" stroke={o.plateC || sh(F, -0.24)}
+          strokeWidth="4.6" fill="none" strokeLinecap="round" />
+        <g fill={sh(F, -0.42)}>
+          {[[10,32],[5,27],[4,21]].map(([x,y],i)=>(
+            <path key={i} d={`M${x},${y} q2.6,-1.8 4.6,.4 q-2.2,1.8 -4.6,-.4 Z`} />
+          ))}
+        </g>
+      </g>
+    )}
     {o.stripe && (
       <path d="M44,32 Q34,38 20,44" stroke={mark} strokeWidth="3.4" fill="none" strokeLinecap="round" opacity=".8" />
     )}
@@ -1455,11 +1491,10 @@ Object.assign(ART, {
   raccoon: mustA({ fur: "#8a8578", inner: "#a8a396", muzzle: "#e8e4d8", iris: "#2a2018", mask: "#26292e", earRound: true, rings: true }),
   redpanda: mustA({ fur: "#c9703a", inner: "#f2ede0", muzzle: "#f8f4ea", iris: "#3c2a1e", earRound: true, cheeks: true, cheekC: "#f2ede0", rings: true, markC: "#8a5230" }),
   coati: mustA({ fur: "#8a6b4a", inner: "#a88a68", muzzle: "#d9c4a3", iris: "#3c3226", rings: true }),
-  kinkajou: mustA({ fur: "#c9955c", inner: "#e8b585", muzzle: "#e8d4b5", iris: "#3c2a1e", earRound: true }),
+  kinkajou: primA({ fur: "#c98a4a", face: "#e0a86a", muzzle: "#e8c9a0", cheeks: true, cheekC: "#d99a5c", iris: "#3a2a18" }),
   ringtail: mustA({ fur: "#c9b894", inner: "#e0d4b0", muzzle: "#f2ede0", iris: "#2a2018", earRound: true, rings: true }),
   giantotter: mustA({ fur: "#5c4030", inner: "#7a5a44", muzzle: "#c9b08a", iris: "#3c3226", bib: "#e8dcc3", earRound: true }),
   seaotter: mustA({ fur: "#7a5c44", inner: "#9a7a5c", muzzle: "#e8dcc3", iris: "#2a2018", earRound: true, cheeks: true, cheekC: "#d9cfc0" }),
-  honeybadger: mustA({ fur: "#26292e", inner: "#16181c", muzzle: "#8a8578", iris: "#2a2018", blaze: "#e8e4d8", earRound: true }),
   wolverine: mustA({ fur: "#4c3c2e", inner: "#3a2c20", muzzle: "#8a6f52", iris: "#8a6b3a", cheeks: true, cheekC: "#c9a878", earRound: true }),
   marten: mustA({ fur: "#6b4c34", inner: "#8a6448", muzzle: "#c9a878", iris: "#3c2a1e", bib: "#e8c547" }),
   fisher: mustA({ fur: "#3c3026", inner: "#2a2118", muzzle: "#8a7058", iris: "#3c2a1e" }),
@@ -1468,7 +1503,7 @@ Object.assign(ART, {
   ferret: mustA({ fur: "#d9c9a3", inner: "#e8dcc0", muzzle: "#f2ede0", iris: "#c94a3a", mask: "#5c4436" }),
   mink: mustA({ fur: "#4c3428", inner: "#3a2620", muzzle: "#6b5040", iris: "#2a2018" }),
   tayra: mustA({ fur: "#2e2921", inner: "#1e1a14", muzzle: "#8a7058", iris: "#3c2a1e", bib: "#c9a878" }),
-  skunk: mustA({ fur: "#26292e", inner: "#16181c", muzzle: "#3c3630", iris: "#2a2018", blaze: "#f5f2e8" }),
+  skunk: mustA({ fur: "#1a1a1e", inner: "#0e0e12", muzzle: "#5c5348", stripe: true, stripeC: "#f6f2ea", blaze: true, plumeTail: true, tailC: "#1a1a1e", tailC2: "#f6f2ea", earRound: true, iris: "#26221c" }),
   // primates — apes
   gorilla: primA({ fur: "#3c3630", face: "#26221e", crest: true, crestC: "#2a2620", brow: true, browC: "#26221e", iris: "#5c4436" }),
   chimpanzee: primA({ fur: "#3c322a", face: "#c9a888", bigEar: true, inner: "#b59878", iris: "#5c4436" }),
@@ -1627,7 +1662,7 @@ Object.assign(ART, {
   nakedmolerat: rodA({ fur: "#e8b5a5", inner: "#d9a08f", muzzle: "#f2c9bd", iris: "#26221c" , naked: true }),
   degu: rodA({ fur: "#a3855c", inner: "#c9a878", muzzle: "#d9c4a3", iris: "#2a2018" , sitting: true, tuftTail: true }),
   hare: lagoA({ fur: "#a8906c", belly: "#e8dcc3", inner: "#e8b8b0", blackTip: true, iris: "#3c2a1a" }),
-  arctichare: lagoA({ fur: "#f2f0ea", belly: "#ffffff", inner: "#e8c4c0", shortEar: true, iris: "#3c2a1a" }),
+  arctichare: lagoA({ fur: "#f4f2ec", belly: "#ffffff", inner: "#e8c4c0", blackTip: true, tailC: "#ffffff", iris: "#3c2a1a" }),
   pika: lagoA({ fur: "#b59a74", belly: "#e0d4bc", inner: "#e0b0a8", shortEar: true, iris: "#26221c" }),
   // xenarthrans
   ninebandarmadillo: xenA({ fur: "#a89078", bands: true, plateC: "#8a7058", iris: "#3a2e22" }),
@@ -1699,7 +1734,6 @@ Object.assign(DEX, {
   ringtail: A("Ringtail", "ringtail", ["Night", "Swift"], B(38, 46, 36, 64), MV.night, 0.36),
   giantotter: A("Giant Otter", "giantotter", ["Aquatic", "Predator"], B(62, 64, 50, 54), MV.aqua, 0.22),
   seaotter: A("Sea Otter", "seaotter", ["Aquatic", "Armor"], B(56, 50, 56, 44), MV.aqua, 0.28),
-  honeybadger: A("Honey Badger", "honeybadger", ["Armor", "Venom"], B(56, 68, 58, 44), ["ironhide", "crunch", "siegehorn"], 0.24),
   wolverine: A("Wolverine", "wolverine", ["Ice", "Predator"], B(60, 70, 54, 44), MV.ice, 0.2),
   marten: A("Pine Marten", "marten", ["Canopy", "Swift"], B(42, 52, 38, 62), MV.can, 0.34),
   fisher: A("Fisher", "fisher", ["Canopy", "Predator"], B(48, 58, 42, 58), MV.pred, 0.3),

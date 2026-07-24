@@ -62,8 +62,6 @@ note("tayra", "Omnivore — fruit, rodents, birds", "Forests from Mexico to Arge
   "A large tree-climbing weasel, and one of the very few animals known to plan ahead with food: it has been seen picking unripe plantains, hiding them, and coming back days later once they have ripened. That is future planning, which we used to think only primates did.");
 note("skunk", "Omnivore — insects, grubs, eggs, fruit", "North America, common in suburbs", "LC",
   "The spray is sulphur compounds fired from two nozzles it can aim, accurately, to about three metres. It gives every warning it can first — stamping, hissing, a full handstand — because refilling takes over a week and leaves it defenceless. It also eats a lot of wasps and yellowjacket nests.");
-note("honeybadger", "Omnivore — snakes, honey, larvae, tortoises, anything", "Africa, the Middle East and India", "LC",
-  "Its skin is loose enough that when something grabs it, it can turn round inside its own hide and bite back. It has some resistance to snake venom and will eat a puff adder, sleep off the bite, and wake up to finish it. It has been recorded using tools and unpicking latches.");
 
 // ===== primates =====
 note("gelada", "Grazer — grass, over 90% of the diet", "High grassland of the Ethiopian plateau", "LC",
