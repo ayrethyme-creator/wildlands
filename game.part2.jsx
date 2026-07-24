@@ -373,7 +373,11 @@ const mk = (sp, lvl) => {
     moves, pp: moves.map((k) => maxPP(MOVES[k])),
     atk: statAt(d.b.a, lvl), def: statAt(d.b.d, lvl), spd: statAt(d.b.s, lvl) };
 };
-const xpNeed = (lvl) => Math.floor(lvl * 24 + lvl * lvl * 0.3);
+// Levelling curve. The quadratic term is what makes later levels cost more than
+// earlier ones; raising it slightly stretches the back half of the game without
+// making the first few levels feel slow, which is where a flat multiplier would
+// have hurt. Roughly +12% at level 10, +17% at 30, +20% at 50.
+const xpNeed = (lvl) => Math.floor(lvl * 26 + lvl * lvl * 0.42);
 
 const learnMove = (my, k, logs) => {
   if (my.moves.includes(k) || (my.pending || []).includes(k)) return;
