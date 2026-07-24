@@ -751,16 +751,19 @@ function Wildlands() {
             snapBusy("Zuri: \"...Okay. Okay! Champion. Say it out loud. SAY IT!\"", {}, "victory");
             snapEnd("🏆 " + EPILOGUE);
           } else {
-            items.coins = (items.coins ?? 0) + (b.prize || 100);
+            const won = trainerPrize(b.team, b.prize);
+            items.coins = (items.coins ?? 0) + won;
             snapBusy(`${b.trainerName}: "Well fought, ranger!"`, {}, "victory");
-            snapEnd(`You won ₡${b.prize || 100}!`);
+            snapEnd(`You won ₡${won}!`);
           }
         }
       } else if (b.kind === "legend") {
         legends[en.sp] = "calmed";
         snapEnd(CALM[en.sp]);
       } else {
-        const c = en.lvl * 3;
+        // A wild animal has no purse. What you pick up is whatever the scuffle
+        // shook loose, which keeps grinding grass from being an income.
+        const c = Math.max(1, Math.floor(en.lvl / 3));
         items.coins = (items.coins ?? 0) + c;
         snapBusy(`Picked up ₡${c} in trade shells.`, {}, "buy");
         snapEnd(null);
@@ -781,7 +784,7 @@ function Wildlands() {
         my.hp = my.maxHp;
         my.pp = my.moves.map((k) => maxPP(MOVES[k]));
         my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0; my.brn = 0;
-        const lost = Math.floor((items.coins ?? 0) * 0.25);
+        const lost = blackoutLoss(items.coins, badges);
         items.coins = (items.coins ?? 0) - lost;
         snapEnd(`You blacked out and woke at Baobab Base. Your team was healed, but you dropped ₡${lost} on the trail.`, { blackout: true });
       }

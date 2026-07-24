@@ -772,22 +772,19 @@
             {S.menu === "shop" && (
               <div>
                 <b>🛒 Trading Post</b> <span style={{ fontSize: 11, color: "#c9b88a" }}>— you have ₡{S.items.coins ?? 0}</span>
-                {[
-                  { key: "treats", n: "🍖 Trail Treat", price: 25, desc: "Befriend wild animals" },
-                  { key: "berries", n: "🫐 Berry Snack", price: 15, desc: "+30 HP in battle" },
-                  { key: "bigberries", n: "🍇 Big Berry", price: 40, desc: "+70 HP in battle" },
-                  { key: "goldberries", n: "🍯 Golden Berry", price: 90, desc: "+150 HP in battle" },
-                  { key: "prismberries", n: "💎 Prism Berry", price: 140, desc: "+200 HP in battle" },
-                  { key: "balms", n: "🌿 Soothe Balm", price: 50, desc: "Cures every condition at once" },
-                  { key: "antidote", n: "🧪 Antidote", price: 25, desc: "Cures poison ☠️" },
-                  { key: "freshair", n: "🩹 Burn Salve", price: 25, desc: "Cures burn 🔥" },
-                  { key: "coolbalm", n: "🧣 Warm Wrap", price: 25, desc: "Cures chill 🧊" },
-                  { key: "calmbalm", n: "🍵 Calming Herb", price: 25, desc: "Cures fear 😨" },
-                  { key: "wakeberry", n: "⏰ Rouse Berry", price: 25, desc: "Cures sleep 💤" },
-                  { key: "honeycombs", n: "🍯 Honeycomb", price: 70, desc: "Restores all PP of your active friend" },
-                  { key: "revives", n: "✨ Revive", price: 200, desc: "Wakes a fainted bench friend at half HP" },
-                  ...(S.items.lantern ? [] : [{ key: "lantern", n: "🏮 Lantern", price: 150, desc: "Lights dark caves — permanent" }]),
-                ].map((it) => (
+                {(() => {
+                  const locked = SHOP_STOCK.filter((it) => (S.badges ?? 0) < it.badge);
+                  if (!locked.length) return null;
+                  const next = locked.reduce((a2, b2) => (a2.badge <= b2.badge ? a2 : b2));
+                  return (
+                    <div style={{ fontSize: 10, color: "#8a7f68", marginTop: 3 }}>
+                      The good stock travels with the badges — {next.n} arrives at Badge {next.badge}.
+                    </div>
+                  );
+                })()}
+                {SHOP_STOCK.filter((it) => (S.badges ?? 0) >= it.badge)
+                  .concat(S.items.lantern ? [] : [{ key: "lantern", n: "🏮 Lantern", price: LANTERN_PRICE, badge: 0, desc: "Lights dark caves — permanent" }])
+                  .map((it) => (
                   <div key={it.key} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 4px", borderBottom: "1px solid #5c5344", fontSize: 12 }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontWeight: 700 }}>{it.n} <span style={{ color: "#c9b88a" }}>(own {S.items[it.key] ?? 0})</span></div>
@@ -799,6 +796,11 @@
                       onClick={() => { SFX.buy(); setS((p) => ({ ...p, items: { ...p.items, coins: (p.items.coins ?? 0) - it.price, [it.key]: (p.items[it.key] ?? 0) + 1 } })); }}>
                       Buy ₡{it.price}
                     </button>
+                    <button
+                      disabled={(S.items[it.key] ?? 0) <= 0}
+                      style={{ ...btn("#7d735f"), padding: "8px 10px", fontSize: 11, opacity: (S.items[it.key] ?? 0) <= 0 ? 0.35 : 1 }}
+                      onClick={() => { SFX.buy(); setS((p) => ({ ...p, items: { ...p.items, coins: (p.items.coins ?? 0) + sellPrice(it.key), [it.key]: Math.max(0, (p.items[it.key] ?? 0) - 1) } })); }}>
+                      Sell ₡{sellPrice(it.key)}</button>
                   </div>
                 ))}
                 <div style={{ fontSize: 10, color: "#c9b88a", marginTop: 8 }}>Earn ₡ by winning battles — wild animals drop trade shells, and rangers pay up when they lose.</div>
