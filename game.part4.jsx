@@ -143,6 +143,48 @@ function Wildlands() {
     }));
   };
 
+  // ----- field exams -----
+  // Five questions, drawn only from the ground between the last gym and this
+  // one. One wrong answer ends the attempt; retrying reshuffles both the
+  // questions and the order of the options, so the exam rewards having read the
+  // guide rather than having failed it once.
+  const startExam = (kind, gymId, key, title, legendKey) => {
+    const seed = (Date.now() ^ (gymId * 7919)) >>> 0;
+    const qs = buildExam(gymId, seed);
+    if (!qs.length) {
+      // Never let a missing question pool block progress.
+      setS((p) => ({ ...p, dialog: null, quiz: { ...(p.quiz || {}), [key]: true } }));
+      return;
+    }
+    setS((p) => ({ ...p, dialog: null, exam: { kind, key, title, legendKey, qs, i: 0, wrong: null } }));
+  };
+
+  const answerExam = (idx) => {
+    const st = SR.current;
+    const ex = st.exam; if (!ex || ex.wrong !== null) return;
+    const q = ex.qs[ex.i];
+    const chosen = q.opts[idx];
+    if (chosen !== q.a) { SFX.miss(); setS((p) => ({ ...p, exam: { ...p.exam, wrong: idx } })); return; }
+    if (ex.i + 1 >= ex.qs.length) {
+      SFX.puzzle();
+      setS((p) => ({
+        ...p, exam: null,
+        quiz: { ...(p.quiz || {}), [ex.key]: true },
+        dialog: { text: "✅ Five for five. \"Then you have been looking after all. Let's begin.\"" },
+      }));
+      return;
+    }
+    SFX.learn();
+    setS((p) => ({ ...p, exam: { ...p.exam, i: p.exam.i + 1 } }));
+  };
+
+  const closeExam = () => setS((p) => ({ ...p, exam: null }));
+  const retryExam = () => {
+    const ex = SR.current.exam; if (!ex) return;
+    const gymId = ex.kind === "gym" ? Number(ex.key.replace("gym", "")) : GYM_COUNT;
+    startExam(ex.kind, gymId, ex.key, ex.title, ex.legendKey);
+  };
+
   // ----- hold-to-move -----
   // A tap still steps one tile, but holding a direction now repeats. Walking
   // and running are just two repeat cadences; nothing about the step itself
@@ -373,6 +415,14 @@ function Wildlands() {
       const g = GYMS[st.map];
       if (!g) return;
       if (st.badges >= g.id) say(`🏟️ ${g.leader} salutes you from the stands. Badge ${g.id} shines on your collar.`);
+      else if (!(st.quiz || {})[`gym${g.id}`]) {
+        // The leader will not fight a ranger who has not been paying attention
+        // to the ground they walked in on.
+        say(`🏟️ ${g.leader} looks up. "Before we battle — five questions about the country between here and the last arena. I want to know you've been looking, not just walking."`, [
+          { label: "I'm ready", act: () => startExam("gym", g.id, `gym${g.id}`, `${g.leader}'s Field Exam`) },
+          { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+      }
       else say(`🏟️ ${m.name} Arena — ${g.leader}'s ${g.type}-type gauntlet awaits. Challenge?`, [
         { label: "Challenge!", act: () => startBattle({ kind: "trainer", trainerName: g.leader, gym: g, team: g.team(), ti: 0, enemy: null }) },
         { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
@@ -386,7 +436,16 @@ function Wildlands() {
         return;
       }
       say(LORE[key], [
-        { label: "Approach!", act: () => startBattle({ kind: "legend", enemy: mk(key, LEGEND_LVL[key]) }) },
+        { label: "Approach!", act: () => {
+            if ((SR.current.quiz || {})[`legend_${key}`]) {
+              startBattle({ kind: "legend", enemy: mk(key, LEGEND_LVL[key]) }); return;
+            }
+            // The guardians ask before they answer.
+            say("🗿 The altar does not warm to your hand. A voice that is not quite a voice asks five things of you — about the land you crossed to stand here.", [
+              { label: "Answer", act: () => startExam("legend", GYM_COUNT, `legend_${key}`, "The Altar's Question", key) },
+              { label: "Step back", act: () => setS((p) => ({ ...p, dialog: null })) },
+            ]);
+          } },
         { label: "Step back", act: () => setS((p) => ({ ...p, dialog: null })) },
       ]);
     } else if (ch === "t") {
@@ -417,6 +476,13 @@ function Wildlands() {
       const tr = TRAINERS[idKey];
       if (!tr) return;
       if (tr.chat || !tr.team) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
+      if (tr.elite && !(st.quiz || {})[`elite_${idKey}`]) {
+        say(`⚜️ ${tr.name}: "${tr.line}" — but first, five questions. The Summit does not seat a ranger who cannot name what they have walked past.`, [
+          { label: "Answer", act: () => startExam("elite", GYM_COUNT, `elite_${idKey}`, `${tr.name}'s Examination`) },
+          { label: "Later", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+        return;
+      }
       say(`${tr.elite ? "⚜️ " : ""}${tr.specialist ? "🌿 " : ""}${tr.name}${tr.homage ? ` (${tr.homage})` : ""}: "${tr.line}"`, [
         { label: "Battle!", act: () => startBattle({ kind: "trainer", trainerName: tr.name, elite: !!tr.elite, team: tr.team(), ti: 0, enemy: null, tid: idKey, prize: tr.prize }) },
         { label: "Later", act: () => setS((p) => ({ ...p, dialog: null })) },

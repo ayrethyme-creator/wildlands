@@ -438,6 +438,68 @@
         </div>
       </div>
 
+      {S.exam && (() => {
+        const ex = S.exam, q = ex.qs[ex.i], failed = ex.wrong !== null;
+        return (
+          <div style={{ position: "fixed", inset: 0, background: "rgba(20,17,13,.92)", zIndex: 60,
+            display: "flex", alignItems: "center", justifyContent: "center", padding: 14 }}>
+            <div style={{ ...panel, maxWidth: 420, width: "100%", padding: 14 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
+                <b style={{ fontSize: 13, color: "#e8c547" }}>{ex.title}</b>
+                <span style={{ fontSize: 11, color: "#c9b88a" }}>{ex.i + 1} / {ex.qs.length}</span>
+              </div>
+              {/* progress pips, so five questions feel finite */}
+              <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
+                {ex.qs.map((_, i) => (
+                  <div key={i} style={{ flex: 1, height: 4, borderRadius: 2,
+                    background: i < ex.i ? "#27ae60" : i === ex.i ? (failed ? "#c0392b" : "#e8c547") : "#3a342b" }} />
+                ))}
+              </div>
+
+              {q.sp && DEX[q.sp] && (
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                  <Sprite sp={q.sp} size={40} />
+                  <span style={{ fontSize: 11, color: "#c9b88a" }}>{DEX[q.sp].n}</span>
+                </div>
+              )}
+              <div style={{ fontSize: 13, lineHeight: 1.5, marginBottom: 10 }}>{q.q}</div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {q.opts.map((o, i) => {
+                  const isWrong = failed && i === ex.wrong;
+                  const isRight = failed && o === q.a;
+                  return (
+                    <button key={i} disabled={failed}
+                      style={{ ...btn(isWrong ? "#c0392b" : isRight ? "#27ae60" : "#5c5344"),
+                        textAlign: "left", fontSize: q.long ? 11 : 12, lineHeight: 1.45,
+                        padding: "9px 11px", fontWeight: 400,
+                        opacity: failed && !isWrong && !isRight ? .45 : 1 }}
+                      onClick={() => answerExam(i)}>{o}</button>
+                  );
+                })}
+              </div>
+
+              {failed ? (
+                <div style={{ marginTop: 10, borderTop: "1px solid #5c5344", paddingTop: 9 }}>
+                  <div style={{ fontSize: 11, color: "#e8c547", marginBottom: 8 }}>
+                    Not quite — the exam ends here. Everything asked is in your Field Guide, under the
+                    animals of this stretch of country. Read up and come back; the questions will be different.
+                  </div>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    <button style={{ ...btnS("#27ae60"), flex: 1 }} onClick={retryExam}>🔄 Try again</button>
+                    <button style={{ ...btnS("#7d735f"), flex: 1 }} onClick={closeExam}>📖 Go read</button>
+                  </div>
+                </div>
+              ) : (
+                <button style={{ ...btnS("#7d735f"), width: "100%", marginTop: 10 }} onClick={closeExam}>
+                  Step away
+                </button>
+              )}
+            </div>
+          </div>
+        );
+      })()}
+
       {S.dialog && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.55)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 10 }}
           onClick={() => !S.dialog.options && setS((p) => ({ ...p, dialog: null }))}>
