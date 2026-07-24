@@ -50,6 +50,299 @@ const teethRow = (y, x0 = 23, n = 5, w = 3.8, c = "#f5efdf") => (
 // These are the shapes that need their own drawing.
 
 // --- eels and morays ---
+
+// ================= THE LAST OF THE ONE-OFFS =================
+// Shapes that nothing else in the game shares.
+
+// --- hedgehogs and tenrecs ---
+const hogA = (o) => (er) => {
+  const F = o.fur || "#a8906c";
+  const SP = o.spineC || "#5c4a34";
+  const g1 = gid("hgc", SP);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(SP, 0.22)} /><stop offset=".6" stopColor={SP} />
+        <stop offset="1" stopColor={sh(SP, -0.26)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="32" cy="51.6" rx="19" ry="2.2" fill="#000" opacity=".14" />
+    {o.curled ? (
+      /* rolled into a ball, which is the whole defence */
+      <g>
+        <circle cx="32" cy="34" r="19" fill={`url(#${g1})`} />
+        <g stroke={sh(SP, -0.4)} strokeWidth="1.3" strokeLinecap="round">
+          {Array.from({ length: 20 }).map((_, i) => {
+            const a = (i / 20) * Math.PI * 2;
+            return <path key={i} d={`M${32 + Math.cos(a) * 15},${34 + Math.sin(a) * 15}
+              L${32 + Math.cos(a) * 22},${34 + Math.sin(a) * 22}`} />;
+          })}
+        </g>
+      </g>
+    ) : (
+      <g>
+        <g stroke={sh(F, -0.24)} strokeWidth="2.4" fill="none" strokeLinecap="round">
+          <path d="M38,44 L38.4,49" /><path d="M24,43 L23.6,48" />
+        </g>
+        {/* the spiny mantle sits over the back like a cape, and stops well
+            short of the face, which stays soft and furred */}
+        <path d="M14,38 Q14,24 30,22 Q46,22 48,34 Q48,44 36,46 Q20,47 14,38 Z"
+          fill={`url(#${g1})`} />
+        <g stroke={sh(SP, -0.44)} strokeWidth="1.2" strokeLinecap="round">
+          <path d="M17,32 L11,26 M22,27 L18,20 M28,24 L26,17 M35,23 L36,16
+                   M42,25 L45,18 M46,30 L52,25 M47,37 L54,35 M44,43 L50,46
+                   M36,46 L38,52 M27,46.6 L26,52.6 M19,43 L14,47" />
+        </g>
+        {/* the soft face poking out at the front */}
+        <path d="M44,34 Q54,31 60,36 Q62,40 58,43 Q50,45 45,41 Z" fill={F} />
+        <ellipse cx="59.6" cy="39.6" rx="2.4" ry="2" fill={o.noseC || "#3a2f2a"} />
+        <circle cx="47.6" cy="32.6" r="2.6" fill={sh(F, -0.16)} />
+        <g stroke={sh(F, -0.4)} strokeWidth=".4" fill="none" opacity=".6" strokeLinecap="round">
+          <path d="M57,37 Q60.6,35 62.6,34.4" /><path d="M57.4,42 Q61,43 62.8,43.6" />
+        </g>
+        <Eye x={52} y={36.4} r={2 * er} iris={o.iris || "#1a1614"} />
+      </g>
+    )}
+  </g>
+  );
+};
+
+// --- scorpions ---
+const scorpA = (o) => (er) => {
+  const B = o.body || "#8a6a3a";
+  const g1 = gid("scc", B);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(B, 0.26)} /><stop offset=".6" stopColor={B} />
+        <stop offset="1" stopColor={sh(B, -0.28)} />
+      </linearGradient>
+    </defs>
+    <ellipse cx="32" cy="52.6" rx="20" ry="2.2" fill="#000" opacity=".14" />
+    {/* the tail arched forward over the back, ending in the sting */}
+    <path d="M18,42 Q8,40 6,30 Q5,20 14,16" stroke={`url(#${g1})`} strokeWidth="5"
+      fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    <g fill={sh(B, -0.2)}>
+      {[[8.6,35],[6.6,28],[7.6,22],[11,17.6]].map(([x,y],i)=>(
+        <circle key={i} cx={x} cy={y} r="2.8" />
+      ))}
+    </g>
+    <path d="M14,16 Q19,13 20,17 Q18,20 14.6,19 Z" fill={o.stingC || sh(B, -0.34)} />
+    {/* eight walking legs */}
+    <g stroke={o.legC || sh(B, -0.24)} strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="28,44 20,50 22,54" /><polyline points="33,45 28,51 31,55" />
+      <polyline points="38,45 40,51 37,55" /><polyline points="43,44 50,50 47,54" />
+      <polyline points="28,38 18,36 14,30" /><polyline points="43,38 53,36 57,30" />
+    </g>
+    {/* the segmented body */}
+    <g fill={`url(#${g1})`}>
+      <ellipse cx="24" cy="42" rx="6" ry="5.4" /><ellipse cx="33" cy="42" rx="7" ry="6" />
+      <ellipse cx="43" cy="40" rx="8" ry="6.6" />
+    </g>
+    <g stroke={sh(B, -0.36)} strokeWidth=".8" fill="none" opacity=".6">
+      <path d="M28.6,38 Q28.6,42 28.6,46" /><path d="M38,37 Q38,41.6 38,45.6" />
+    </g>
+    {/* the pincers held out in front - a scorpion leads with these */}
+    <g fill={o.clawC || sh(B, -0.12)}>
+      <path d="M50,34 Q58,26 62,32 Q57,34 55,38 Q50,38 50,34 Z" />
+      <path d="M55,29 Q61,25 63,30 Q58,30 56,33 Z" fill={sh(B, 0.24)} />
+      <path d="M50,44 Q58,50 62,45 Q57,43 55,39.6 Q50,40 50,44 Z" />
+      <path d="M55,48 Q61,51 63,46.6 Q58,46.6 56,44 Z" fill={sh(B, 0.24)} />
+    </g>
+    <Eye x={42} y={36} r={1.4 * er} iris={o.iris || "#1a1614"} />
+    <Eye x={45.6} y={36.6} r={1.2 * er} iris={o.iris || "#1a1614"} />
+  </g>
+  );
+};
+
+// --- bats ---
+// Membrane stretched between elongated finger bones, not feathers. Drawn
+// hanging, because that is how a roosting bat is seen.
+const batA = (o) => (er) => {
+  const F = o.fur || "#5c4436";
+  const W = o.wingC || sh(F, -0.14);
+  const g1 = gid("bxc", F), g2 = gid("bxw", W);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(F, 0.2)} /><stop offset="1" stopColor={sh(F, -0.24)} />
+      </linearGradient>
+      <linearGradient id={g2} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(W, 0.14)} /><stop offset="1" stopColor={sh(W, -0.3)} />
+      </linearGradient>
+    </defs>
+    {o.hanging ? (
+      <g>
+        {/* the branch it hangs from, and the feet gripping it */}
+        <path d="M6,7 L58,7" stroke={o.perchC || "#5c4a34"} strokeWidth="3" strokeLinecap="round" />
+        <g stroke={sh(F, -0.3)} strokeWidth="2" fill="none" strokeLinecap="round">
+          <path d="M28,8 Q26,12 28,14" /><path d="M36,8 Q38,12 36,14" />
+        </g>
+        {/* wings furled around the body like a folded cloak */}
+        <path d="M28,14 Q14,22 16,42 Q22,50 30,52 Q26,36 28,18 Z" fill={`url(#${g2})`} />
+        <path d="M36,14 Q50,22 48,42 Q42,50 34,52 Q38,36 36,18 Z" fill={`url(#${g2})`} />
+        <g stroke={sh(W, -0.4)} strokeWidth=".7" fill="none" opacity=".55">
+          <path d="M27,20 Q19,28 19,40" /><path d="M37,20 Q45,28 45,40" />
+        </g>
+        <path d="M28,14 Q32,12 36,14 Q38,30 34,46 Q32,48 30,46 Q26,30 28,14 Z" fill={`url(#${g1})`} />
+        {/* the head, upside down */}
+        <ellipse cx="32" cy="50" rx="7" ry="6" fill={F} />
+        <path d={o.bigEar
+          ? "M27,52 Q22,60 25,62 Q28,57 29,53 Z" : "M27.6,52.6 Q24,58 26,59.4 Q28.6,56 29.4,53.6 Z"}
+          fill={sh(F, -0.2)} />
+        <path d={o.bigEar
+          ? "M37,52 Q42,60 39,62 Q36,57 35,53 Z" : "M36.4,52.6 Q40,58 38,59.4 Q35.4,56 34.6,53.6 Z"}
+          fill={sh(F, -0.2)} />
+        {o.fox
+          ? <path d="M32,54 Q37,55 38,50 Q36,58 32,58.6 Q28,58 26,50 Q27,55 32,54 Z" fill={o.muzzle || sh(F, 0.24)} />
+          : <ellipse cx="32" cy="54.4" rx="3.4" ry="2.6" fill={o.muzzle || sh(F, 0.24)} />}
+        <Eye x={29.4} y={49.4} r={(o.fox ? 2.2 : 1.6) * er} iris={o.iris || "#3a2a18"} />
+        <Eye x={34.6} y={49.4} r={(o.fox ? 2.2 : 1.6) * er} iris={o.iris || "#3a2a18"} />
+      </g>
+    ) : (
+      <g>
+        {/* in flight, wings spread, with the finger bones showing through */}
+        <path d="M30,28 Q16,16 2,20 Q10,26 12,36 Q20,34 30,32 Z" fill={`url(#${g2})`} />
+        <path d="M34,28 Q48,16 62,20 Q54,26 52,36 Q44,34 34,32 Z" fill={`url(#${g2})`} />
+        <g stroke={sh(W, -0.44)} strokeWidth=".8" fill="none" opacity=".7">
+          <path d="M29,28 Q18,20 4,21" /><path d="M29,30 Q18,26 8,30" /><path d="M29,32 Q20,32 12,35" />
+          <path d="M35,28 Q46,20 60,21" /><path d="M35,30 Q46,26 56,30" /><path d="M35,32 Q44,32 52,35" />
+        </g>
+        <ellipse cx="32" cy="34" rx="6" ry="10" fill={`url(#${g1})`} />
+        <ellipse cx="32" cy="21" rx="6.6" ry="5.6" fill={F} />
+        <path d="M27,17 Q24,9 28,10 Q29,14 30,17 Z" fill={sh(F, -0.2)} />
+        <path d="M37,17 Q40,9 36,10 Q35,14 34,17 Z" fill={sh(F, -0.2)} />
+        <ellipse cx="32" cy="24.4" rx="3.2" ry="2.4" fill={o.muzzle || sh(F, 0.24)} />
+        <Eye x={29.6} y={20.4} r={1.6 * er} iris={o.iris || "#3a2a18"} />
+        <Eye x={34.4} y={20.4} r={1.6 * er} iris={o.iris || "#3a2a18"} />
+      </g>
+    )}
+  </g>
+  );
+};
+
+// --- chameleons ---
+const chamA = (o) => (er) => {
+  const S = o.skin || "#6b9a4a";
+  const g1 = gid("chc", S);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(S, -0.22)} /><stop offset=".55" stopColor={S} />
+        <stop offset="1" stopColor={o.belly || sh(S, 0.36)} />
+      </linearGradient>
+    </defs>
+    {/* the branch, since a chameleon is always gripping one */}
+    <path d="M4,50 Q30,46 60,50" stroke={o.perchC || "#6b5238"} strokeWidth="3.4"
+      fill="none" strokeLinecap="round" />
+    {/* the prehensile tail, coiled */}
+    <path d="M20,38 Q10,40 8,32 Q7,25 14,25 Q19,26 18,31"
+      stroke={`url(#${g1})`} strokeWidth="4.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    {/* mitten feet - two toes opposing three, which is how it grips */}
+    <g stroke={sh(S, -0.2)} strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="38,42 40,47 38,50" /><polyline points="26,41 24,46 26,50" />
+    </g>
+    <g stroke={sh(S, -0.34)} strokeWidth="1.6" fill="none" strokeLinecap="round">
+      <path d="M38,50 L35.6,52 M38,50 L40.6,52" /><path d="M26,50 L23.6,52 M26,50 L28.6,52" />
+    </g>
+    {/* the body: tall and flattened side to side, with a serrated crest */}
+    <path d="M44,28 Q50,32 49,38 Q47,44 40,45 Q30,47 24,44 Q18,40 19,33
+             Q21,27 30,26 Q38,25 44,28 Z" fill={`url(#${g1})`} />
+    <g fill={o.crestC || sh(S, -0.28)}>
+      {[22,27,32,37,42].map((x,i)=>(<path key={i} d={`M${x},27 l1.6,-3.4 l1.6,3.4 Z`} />))}
+    </g>
+    {o.bands && (
+      <g stroke={o.markC || sh(S, -0.36)} strokeWidth="2.2" fill="none" opacity=".7">
+        <path d="M26,28 Q27,36 26,44" /><path d="M33,26.6 Q34,36 33,46" /><path d="M40,27 Q41,36 40,45" />
+      </g>
+    )}
+    {/* the casque on the back of the head */}
+    <path d="M44,28 Q48,14 56,20 Q52,24 50,30 Z" fill={o.casqueC || sh(S, -0.2)} />
+    <path d="M46,29 Q56,26 61,31 Q63,35 59,38 Q50,40 45,35 Z" fill={S} />
+    {/* the turret eye, which swivels independently of the other */}
+    <circle cx="52" cy="32.6" r="4.4" fill={sh(S, -0.14)} />
+    <g fill={o.markC || sh(S, -0.34)}>
+      {Array.from({length:8}).map((_,i)=>{
+        const a=(i/8)*Math.PI*2;
+        return <circle key={i} cx={52+Math.cos(a)*3.2} cy={32.6+Math.sin(a)*3.2} r=".6" />;
+      })}
+    </g>
+    <Eye x={53} y={32.6} r={2 * er} iris={o.iris || "#c9a43a"} />
+    {/* the tongue, if it is hunting */}
+    {o.tongue && (
+      <g>
+        <path d="M61,35 Q68,33 74,34" stroke={o.tongueC || "#e88aa8"} strokeWidth="1.8"
+          fill="none" strokeLinecap="round" />
+        <circle cx="75" cy="34" r="2.6" fill={o.tongueC || "#e88aa8"} />
+      </g>
+    )}
+  </g>
+  );
+};
+
+// --- sloths ---
+const slothA = (o) => (er) => {
+  const F = o.fur || "#a89478";
+  const FACE = o.face || sh(F, 0.24);
+  const g1 = gid("stc", F);
+  return (
+  <g>
+    <defs>
+      <linearGradient id={g1} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={sh(F, -0.2)} /><stop offset=".55" stopColor={F} />
+        <stop offset="1" stopColor={sh(F, 0.24)} />
+      </linearGradient>
+    </defs>
+    {/* the branch it hangs beneath, upside down, which is how it lives */}
+    <path d="M2,10 Q32,6 62,10" stroke={o.perchC || "#5c4a34"} strokeWidth="4"
+      fill="none" strokeLinecap="round" />
+    {/* the long arms, hooked over the branch by the claws */}
+    <g stroke={`url(#${g1})`} strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20,12 18,26 26,34" /><polyline points="44,12 46,26 38,34" />
+    </g>
+    <g stroke={o.clawC || "#6b5a44"} strokeWidth="2" fill="none" strokeLinecap="round">
+      <path d="M18,12 Q14,8 16,5" /><path d="M22,12 Q19,7 21,4.6" />
+      <path d="M46,12 Q50,8 48,5" /><path d="M42,12 Q45,7 43,4.6" />
+    </g>
+    {/* the body slung below */}
+    <ellipse cx="32" cy="36" rx="13" ry="12" fill={`url(#${g1})`} />
+    {o.shaggy && (
+      <g stroke={sh(F, -0.2)} strokeWidth="1" fill="none" opacity=".6" strokeLinecap="round">
+        <path d="M22,30 L18,34 M22,38 L18,42 M42,30 L46,34 M42,38 L46,42 M28,46 L26,50 M36,46 L38,50" />
+      </g>
+    )}
+    {o.algae && (
+      <g fill={o.algaeC || "#6b8a4a"} opacity=".45">
+        <ellipse cx="26" cy="32" rx="4" ry="2.6" transform="rotate(-20 26 32)" />
+        <ellipse cx="38" cy="40" rx="4.4" ry="2.4" transform="rotate(16 38 40)" />
+      </g>
+    )}
+    {/* hind legs, also hooked up */}
+    <g stroke={`url(#${g1})`} strokeWidth="5.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="26,44 22,52 30,54" /><polyline points="38,44 42,52 34,54" />
+    </g>
+    {/* the head, upside down, with the fixed sloth expression */}
+    <circle cx="32" cy="24" r="8.4" fill={F} />
+    <ellipse cx="32" cy="25.6" rx="6.2" ry="5.6" fill={FACE} />
+    {o.mask && (
+      <g fill={o.maskC || sh(FACE, -0.34)}>
+        <path d="M27,22 Q29,26 27.6,30 Q25.4,26 27,22 Z" />
+        <path d="M37,22 Q35,26 36.4,30 Q38.6,26 37,22 Z" />
+      </g>
+    )}
+    <ellipse cx="32" cy="28.6" rx="2.4" ry="1.8" fill={sh(FACE, -0.5)} />
+    <path d="M29,23.6 Q32,22 35,23.6" stroke={sh(FACE, -0.4)} strokeWidth=".9" fill="none"
+      strokeLinecap="round" />
+    <Eye x={29} y={26} r={1.6 * er} iris={o.iris || "#3a2a18"} />
+    <Eye x={35} y={26} r={1.6 * er} iris={o.iris || "#3a2a18"} />
+  </g>
+  );
+};
+
 const eelA = (o) => (er) => {
   const B = o.body || "#5c6a4a";
   const g1 = gid("elc", B);
@@ -1835,4 +2128,15 @@ Object.assign(SIGNS, {
 Object.assign(ART, {
   croc: crocA({ hide: "#5d7a4a", belly: "#c9c49a", scuteC: "#3f5433", armor: true,
     bands: true, markC: "#33452a", iris: "#c9a43a" }),
+});
+
+
+// ---------- two conversions that other species are built from ----------
+// part7 defines camazotz and the jackalope as variations on ART.bat and
+// ART.rabbit, and part12 and part13 do the same for two more bats. Those read
+// the entry at definition time, so these two have to exist before part7 runs -
+// hence here rather than with the rest of the converted species in part9.
+Object.assign(ART, {
+  bat: batA({ fur: "#5c4436", wingC: "#4a3830", muzzle: "#8a6f5c", hanging: true, bigEar: true, iris: "#3a2a18" }),
+  rabbit: lagoA({ fur: "#b59a74", belly: "#f2ede0", inner: "#e8b8b0", tailC: "#f6f0e4", iris: "#5c3a2a" }),
 });

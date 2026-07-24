@@ -898,6 +898,14 @@ const lizA = (o) => (er) => {
       <path d="M43.4,47 L46,48.6 M43.4,47 L44,49.6 M43.4,47 L41.4,49" />
       <path d="M18,46.4 L15.4,48 M18,46.4 L17.4,49 M18,46.4 L20,48.6" />
     </g>
+    {/* gecko toe pads: the splayed discs of setae it climbs glass with */}
+    {o.padded && (
+      <g fill={o.padC || sh(H, 0.42)}>
+        {[[46,48.6],[44,49.6],[41.4,49],[15.4,48],[17.4,49],[20,48.6]].map(([x,y],i)=>(
+          <ellipse key={i} cx={x} cy={y} rx="1.9" ry="1.5" />
+        ))}
+      </g>
+    )}
     {/* head, low and wedge-shaped */}
     <path d="M45,31.6 Q52,28.6 58,30.6 Q62,32.4 61.6,35.6 Q60.6,38.6 55,39
              Q48,39 45.6,36 Z" fill={H} />
@@ -989,16 +997,39 @@ const frogA = (o) => (er) => {
       </linearGradient>
     </defs>
     <ellipse cx="32" cy="53.6" rx="19" ry="2.2" fill="#000" opacity=".14" />
-    {o.tail && <path d="M14,36 Q4,38 1,44 Q8,42 15,40 Z" fill={sh(S, -0.16)} />}
-    {o.gills && (
+    {/* A tadpole is all head and tail, with no legs at all yet - the whole
+        point of it is that it does not look like the adult. */}
+    {o.tadpole && (
+      <g>
+        <path d="M26,34 Q12,26 4,32 Q10,34 10,36 Q10,38 4,44 Q12,48 26,38 Z" fill={sh(S, -0.14)} />
+        <ellipse cx="38" cy="35" rx="15" ry="12" fill={`url(#${g1})`} />
+        {o.spots && (
+          <g fill={mark} opacity=".7">
+            <circle cx="34" cy="30" r="1.6" /><circle cx="42" cy="32" r="1.5" />
+            <circle cx="38" cy="40" r="1.4" />
+          </g>
+        )}
+        <g stroke={o.gillC || "#e88aa8"} strokeWidth="1.4" fill="none" strokeLinecap="round" opacity=".85">
+          <path d="M48,28 Q54,24 58,24" /><path d="M50,32 Q56,30 60,30" />
+        </g>
+        <path d="M44,40 Q50,42.6 54,40" stroke={sh(S, -0.4)} strokeWidth="1" fill="none" strokeLinecap="round" />
+        <Eye x={44} y={31} r={2.4 * er} iris={o.iris || "#26221c"} />
+      </g>
+    )}
+    {!o.tadpole && o.tail && <path d="M14,36 Q4,38 1,44 Q8,42 15,40 Z" fill={sh(S, -0.16)} />}
+    {o.gills && !o.tadpole && (
       <g stroke={o.gillC || "#e88aa8"} strokeWidth="1.6" fill="none" strokeLinecap="round">
         <path d="M46,26 Q52,20 58,20" /><path d="M47,29 Q54,25 60,26" />
       </g>
     )}
     {/* folded hind legs, the big Z that makes a frog a frog */}
-    <g stroke={sh(S, -0.14)} strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="24,34 14,40 22,45 18,50" />
-    </g>
+    {!o.tadpole && (
+      <g stroke={sh(S, -0.14)} strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="24,34 14,40 22,45 18,50" />
+      </g>
+    )}
+    {!o.tadpole && (
+      <g>
     {/* squat wide body */}
     <ellipse cx="34" cy="38" rx="17" ry="12" fill={`url(#${g1})`} />
     {o.spots && (
@@ -1033,6 +1064,8 @@ const frogA = (o) => (er) => {
     <circle cx="45" cy="26" r={4 * er} fill={sh(S, 0.16)} />
     <circle cx="54" cy="28" r={3.6 * er} fill={sh(S, 0.16)} />
     <Eye x={45} y={26} r={3 * er} iris={o.iris || "#e8c547"} />
+      </g>
+    )}
     <Eye x={54} y={28} r={2.6 * er} iris={o.iris || "#e8c547"} />
   </g>
   );
@@ -1473,4 +1506,37 @@ Object.assign(ART, {
     mottle: true, markC: "#5c4432", iris: "#3c3226" }),
   lovebird: parrA({ body: "#5da84a", head: "#e8734a", wingC: "#4a8a3a", beakC: "#e8a53a",
     cheek: true, cheekC: "#e8c547", iris: "#e8dcc3" }),
+});
+
+
+// ---------- the last hand-drawn species, folded into archetypes ----------
+// These 29 predated the archetype system. Attached here because part9 is the
+// last art file, so every build they call is defined by this point.
+Object.assign(ART, {
+  hedgehog: hogA({ fur: "#c9b08a", spineC: "#6b5540", noseC: "#3a2f2a", iris: "#1a1614" }),
+  gecko: lizA({ hide: "#7aa85c", belly: "#d9e0b0", spots: true, markC: "#4a6b38", padded: true, padC: "#c9d4a0", crest: false, iris: "#c9a43a" }),
+  dartfrog: frogA({ skin: "#2ea84a", belly: "#1e7a34", spots: true, markC: "#1a1a1a", toes: true, toeC: "#e8a53a", iris: "#1a1614" }),
+  tadpole: frogA({ skin: "#4a5c3a", belly: "#7a8a5c", tadpole: true, spots: true, markC: "#2e3826", gillC: "#e88aa8", iris: "#26221c" }),
+  beaver: rodA({ fur: "#6b4c34", inner: "#4c3424", muzzle: "#a3856b", belly: "#8a6f52", flatTail: true, tailC: "#4a3828", blocky: true, iris: "#2a2018" }),
+  badger: mustA({ fur: "#5c5348", inner: "#3a342b", muzzle: "#c9c0b0", mask: true, markC: "#f2ede0", blaze: true, earRound: true, iris: "#26221c" }),
+  cobra: snakeA({ hide: "#8a7a4a", markC: "#5c4a2a", hood: true, hoodC: "#a89060", hoodMark: true, bands: true, iris: "#c9a43a" }),
+  boar: suidA({ hide: "#4a3c30", snoutC: "#6b5a4a", mane: true, maneC: "#2e2620", earUp: true, tusks: true, iris: "#3a2a18" }),
+  turtle: armorA({ hide: "#5d7a4a", scuteC: "#3f5433", scutes: true, beakC: "#4a5c33", iris: "#3a2a18" }),
+  scorpion: scorpA({ body: "#8a6a3a", clawC: "#7a5c30", stingC: "#5c4020", legC: "#6b5028", iris: "#1a1614" }),
+  meerkat: mustA({ fur: "#c9a878", inner: "#e8c9a5", muzzle: "#e8dcc3", sentinel: true, bib: "#e8dcc3", mask: true, markC: "#5c4432", earRound: true, iris: "#26221c" }),
+  pangolin: xenA({ fur: "#a8895c", shell: true, plateC: "#8a6f42", bands: true, snout: true, iris: "#3a2a18" }),
+  aardvark: xenA({ fur: "#c9a888", snout: true, muzzle: "#d9bda0", iris: "#3a2a18" }),
+  hippo: hippoA({ hide: "#8a6a72", belly: "#b59098", tusks: true, iris: "#3a2a18" }),
+  camel: ungA({ coat: "#d9b884", muzzle: "#e8d4a5", humps: 1, mane: true, maneC: "#c9a06a", iris: "#3a2a18" }),
+  ibex: ungA({ coat: "#a8906c", muzzle: "#c9b08a", curved: true, hornC: "#5c4a34", mane: true, maneC: "#6b5540", iris: "#3a2a18" }),
+  monitor: lizA({ hide: "#5c5c48", belly: "#a8a884", spots: true, markC: "#e8dcc3", crest: false, iris: "#c9a43a" }),
+  tortoise: armorA({ hide: "#8a7a5c", scuteC: "#6b5c40", scutes: true, plates: true, plateC: "#a8905c", beakC: "#7a6a4a", iris: "#3a2a18" }),
+  chameleon: chamA({ skin: "#6b9a4a", belly: "#c9d99a", bands: true, markC: "#4a7a34", crestC: "#5c8a3a", casqueC: "#5c8a3a", perchC: "#6b5238", iris: "#c9a43a" }),
+  sloth: slothA({ fur: "#a89478", face: "#d9c9a8", mask: true, maskC: "#8a7458", shaggy: true, algae: true, clawC: "#6b5a44", iris: "#3a2a18" }),
+  python: snakeA({ hide: "#c9a878", markC: "#6b4a2a", diamond: true, pits: true, iris: "#c9a43a" }),
+  seal: pinA({ fur: "#5c5348", head: "#6b6154", muzzle: "#a89880", spots: true, markC: "#3a342b", earFlap: true, mane: true, maneC: "#4a423a", iris: "#1a1614" }),
+  galago: primA({ fur: "#a89078", face: "#c9b49a", bigEar: true, inner: "#e8c9b5", iris: "#c9822a" }),
+  qilin: hoofM({ coat: "#e8d4a5", maneC: "#c9a04a", horn: true, hornC: "#e8c547", muzzle: "#f2e4c4", iris: "#c9a43a" }),
+  thunderbird: birdM({ body: "#4a5c7a", head: "#3a4a68", wingC: "#5c6f8a", beakC: "#e8c547", plume: true, plumeC: "#8ab5d9", mask: "#2e3a52", iris: "#e8c547" }),
+  phoenix: birdM({ body: "#e8642e", head: "#f2a53a", wingC: "#c94a2e", beakC: "#e8c547", plume: true, plumeC: "#e8c547", flame: true, flameC: "#f2a53a", halo: true, iris: "#f2ede0" }),
 });

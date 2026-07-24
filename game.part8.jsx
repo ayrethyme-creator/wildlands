@@ -386,9 +386,32 @@ const mustA = (o) => (er) => {
     </defs>
     <ellipse cx="32" cy="55.6" rx="21" ry="2.3" fill="#000" opacity=".15" />
 
-    {/* mustelids are long and low: a tube of an animal on short legs */}
-    <path d="M11,38.4 Q5,36.4 3.4,30.4" stroke={limb} strokeWidth="3.6" fill="none"
-      strokeLinecap="round" />
+    {/* Tail: a plume for a skunk, a long prehensile rope for a kinkajou, and
+        the ordinary tapering one otherwise. */}
+    {o.plumeTail ? (
+      <g>
+        <path d="M12,38 Q4,30 6,16" stroke={o.tailC || limb} strokeWidth="9" fill="none" strokeLinecap="round" />
+        <path d="M12,38 Q6,30 8,18" stroke={o.tailC2 || sh(F, 0.55)} strokeWidth="3.6" fill="none"
+          strokeLinecap="round" opacity=".85" />
+      </g>
+    ) : o.prehensile ? (
+      <path d="M11,38 Q2,36 2,26 Q2,18 9,17 Q14,17 13,22" stroke={limb} strokeWidth="3.4"
+        fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    ) : (
+      <path d="M11,38.4 Q5,36.4 3.4,30.4" stroke={limb} strokeWidth="3.6" fill="none"
+        strokeLinecap="round" />
+    )}
+    {/* a meerkat on watch stands straight up on its hind legs and tail */}
+    {o.sentinel && (
+      <g>
+        <path d="M32,50 Q26,54 22,58" stroke={limb} strokeWidth="3" fill="none" strokeLinecap="round" />
+        <ellipse cx="34" cy="36" rx="9" ry="15" fill={`url(#${g1})`} />
+        {o.bib && <ellipse cx="36" cy="38" rx="4.6" ry="8" fill={o.bib} opacity=".9" />}
+        <g stroke={`url(#${g2})`} strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="30,46 27,53 32,56" /><polyline points="39,34 43,38 40,42" />
+        </g>
+      </g>
+    )}
     {o.rings && (
       <g stroke={mark} strokeWidth="2.6" strokeLinecap="round" fill="none">
         <path d="M9.4,37.6 L8,35 M6,35 L4.6,32.2" />
@@ -486,6 +509,16 @@ const ungA = (o) => (er) => {
       fill={`url(#${g1})`} />
     <path d="M19.6,43.6 Q26,45.8 36,43.8 L44.4,42.4 Q41,45 36,45.8 Q26,47.2 19.6,43.6 Z"
       fill={sh(C, 0.5)} />
+    {/* camel humps: fat stores, not water, and they slump when the animal is
+        run down rather than staying pert */}
+    {o.humps === 2 ? (
+      <g fill={sh(C, -0.12)}>
+        <path d="M22,26 Q27,15 33,25.4 Q27,23.6 22,26 Z" />
+        <path d="M34,25.4 Q39,14 45,25.4 Q39,23 34,25.4 Z" />
+      </g>
+    ) : o.humps === 1 ? (
+      <path d="M25,26 Q33,12 42,26 Q33,22.6 25,26 Z" fill={sh(C, -0.12)} />
+    ) : null}
 
     {o.stripes && (
       <g stroke={mark} strokeWidth="2" strokeLinecap="round" fill="none" opacity=".9">
