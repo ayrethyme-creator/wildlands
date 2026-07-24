@@ -70,28 +70,54 @@ var GAME_PARTS = [
   }
   var texts = new Array(GAME_PARTS.length);
   var done = 0;
+  var failed = false;
+
+  // Report the first failure and then stop touching the status line. The old
+  // loader let a later successful fetch overwrite the error message, so a file
+  // that failed showed up as the counter simply stopping - which says nothing
+  // about what went wrong.
+  function hardFail(msg, err) {
+    if (failed) return;
+    failed = true;
+    if (statusEl) statusEl.textContent = msg;
+    if (err) console.error(err);
+  }
+
+  // One flaky fetch used to end the load permanently. On a phone that is a
+  // normal thing to happen - a dropped packet, a switch between wifi and data,
+  // a CDN edge still catching up with a fresh deploy. Each part now gets three
+  // attempts with a short backoff before it is treated as fatal.
+  function grab(name, attempt) {
+    return fetch(name, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) throw new Error(name + " -> HTTP " + r.status);
+      return r.text();
+    }).catch(function (e) {
+      if (attempt >= 3) throw e;
+      if (statusEl && !failed) statusEl.textContent = "Retrying " + name + "...";
+      return new Promise(function (res) { setTimeout(res, 400 * attempt); })
+        .then(function () { return grab(name, attempt + 1); });
+    });
+  }
+
   GAME_PARTS.forEach(function (name, i) {
-    fetch(name, { cache: "no-cache" })
-      .then(function (r) {
-        if (!r.ok) throw new Error(name + " -> HTTP " + r.status);
-        return r.text();
-      })
+    grab(name, 1)
       .then(function (t) {
+        if (failed) return;
         texts[i] = t;
         done++;
         if (statusEl) statusEl.textContent = "Loading... " + done + "/" + GAME_PARTS.length;
         if (done === GAME_PARTS.length) {
           try {
-            var code = texts.join("");
+            var code = texts.join("\n");
             var out = Babel.transform(code, { presets: [["react", { runtime: "classic" }]] }).code;
             (0, eval)(out);
           } catch (e) {
-            fail("The game failed to start: " + e.message, e);
+            hardFail("The game failed to start: " + e.message, e);
           }
         }
       })
       .catch(function (e) {
-        fail("Could not load " + name + ". Reload to try again.", e);
+        hardFail("Could not load " + name + " after 3 tries. Check your connection and reload.", e);
       });
   });
 })();
