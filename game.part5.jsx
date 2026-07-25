@@ -15,6 +15,15 @@
     <style>{`
       @keyframes bobY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
       @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+      /* The resting breath every animal gets, everywhere it appears. Two pixels
+         over two and a half seconds - small enough that you do not watch it,
+         large enough that a screen full of creatures stops looking like a
+         printed page. */
+      @keyframes idleY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+      /* Anyone who has asked not to be animated is left alone. */
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; }
+      }
     `}</style>
   );
 

@@ -341,12 +341,30 @@ const ART = {
 const PHOTO_ART = {};
 
 // ---------- SPRITE COMPONENT ----------
-function Sprite({ sp, size = 48, flip, anim }) {
+function Sprite({ sp, size = 48, flip, anim, still }) {
   const d = DEX[sp];
   const er = d.juv ? 1.35 : 1;
   const shadow = "drop-shadow(1px 2px 2px rgba(0,0,0,.3))";
+
+  // Every animal breathes now, not just the two in a battle. A page of static
+  // sprites reads as a printed chart; the same page with everything gently
+  // moving reads as a room full of animals, and it costs one CSS animation.
+  //
+  // The delay is derived from the species name so it is stable across redraws
+  // and spread across the cycle. Without that, thirty sprites in the field
+  // guide rise and fall in perfect unison, which looks like a rendering fault
+  // rather than like life.
+  let stagger = 0;
+  for (let i = 0; i < sp.length; i++) stagger = (stagger * 31 + sp.charCodeAt(i)) >>> 0;
+  const delay = -((stagger % 250) / 100).toFixed(2);   // 0 to -2.5s into the cycle
+
+  const motion = anim
+    ? `${anim} ${anim === "floatY" ? 2.6 : 1.8}s ease-in-out infinite`
+    : still ? undefined
+    : `idleY 2.5s ease-in-out ${delay}s infinite`;
+
   return (
-    <div style={{ animation: anim ? `${anim} ${anim === "floatY" ? 2.6 : 1.8}s ease-in-out infinite` : undefined, display: "inline-flex", flexShrink: 0 }}>
+    <div style={{ animation: motion, display: "inline-flex", flexShrink: 0 }}>
       {PHOTO_ART[sp] ? (
         <img src={`art/${sp}.png`} width={size} height={size} alt=""
           style={{ filter: shadow, transform: flip ? "scaleX(-1)" : undefined, objectFit: "contain", flexShrink: 0 }} />
