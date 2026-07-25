@@ -20,7 +20,8 @@
 
   const frame = {
     maxWidth: 430, margin: "0 auto", minHeight: "100vh", background: "#231f1a",
-    fontFamily: "'Courier New', ui-monospace, monospace", color: "#f2e8d5",
+    fontFamily: "'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+    color: "#f2e8d5",
     display: "flex", flexDirection: "column",
   };
   const panel = { background: "#3a342b", border: "3px solid #5c5344", borderRadius: 12, padding: 12 };
