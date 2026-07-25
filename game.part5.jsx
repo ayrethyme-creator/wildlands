@@ -390,8 +390,24 @@
             else if (ch2 === "¡") { em = lit ? "🏮" : "🪵"; glow = lit; }    // wild lantern
             const isPlayer = x === S.x && y === S.y;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
+            // Texture and edge-rounding are computed per tile from its
+            // neighbours, so terrain draws as shapes rather than as squares.
+            const fam = TILE_FAMILY(ch2);
+            const surface = dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4
+              ? { background: bg }
+              : TILE_SURFACE(fam, bg);
+            const radius = TILE_CORNERS(m.rows, x, y, fam, 7);
+            const edge = TILE_EDGE_SHADOW(m.rows, x, y, fam);
             return (
-              <div key={x + "," + y} style={{ background: glow ? "radial-gradient(circle, #6b5a2e 0%, " + bg + " 78%)" : bg, aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1, color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined, boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined, position: glow ? "relative" : undefined, zIndex: glow ? 2 : undefined }}>
+              <div key={x + "," + y} style={{
+                backgroundColor: bg,
+                ...(glow ? { backgroundImage: "radial-gradient(circle, #6b5a2e 0%, " + bg + " 78%)" } : surface),
+                borderRadius: radius,
+                aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
+                color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
+                boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : (edge || undefined),
+                position: glow ? "relative" : undefined, zIndex: glow ? 2 : undefined }}>
                 {isPlayer ? (S.swimming ? "🏊" : "🚶") : em}
               </div>
             );
