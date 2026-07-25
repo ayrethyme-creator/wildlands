@@ -404,10 +404,22 @@
                 fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
                 boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined,
-                position: glow ? "relative" : undefined, zIndex: glow ? 2 : undefined }}>
+                position: (glow || isPlayer) ? "relative" : undefined,
+                zIndex: glow ? 2 : isPlayer ? 3 : undefined }}>
                 {isPlayer
                   ? (typeof Avatar !== "undefined"
-                      ? <Avatar dir={S.dir || "down"} swimming={S.swimming} size="145%" />
+                      // Absolutely positioned, so the sprite cannot affect
+                      // layout. As a normal flex child at over 100% it made its
+                      // grid row taller than one cell, and every other cell in
+                      // that row - still square, sized by width - left the dark
+                      // container showing through as a black band across the
+                      // map. Anchored to the bottom of the tile so the ranger
+                      // stands on it and the head overhangs upward, which is
+                      // how a character sprite sits on a tile grid.
+                      ? <div style={{ position: "absolute", left: "-14%", right: "-14%",
+                          bottom: "-6%", pointerEvents: "none" }}>
+                          <Avatar dir={S.dir || "down"} swimming={S.swimming} size="100%" />
+                        </div>
                       : (S.swimming ? "🏊" : "🚶"))
                   : (grassBgImg ? "" : em)}
               </div>

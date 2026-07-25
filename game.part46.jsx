@@ -106,10 +106,11 @@ const Avatar = ({ dir, swimming, size }) => {
     : (dir === "left" || dir === "right") ? avSide(er)
     : avDown(er);
   return (
-    <svg viewBox="0 0 32 30" width={size} height={size}
-      style={{ display: "block", overflow: "visible",
-        transform: dir === "left" ? "scaleX(-1)" : undefined,
-        filter: "drop-shadow(0 0 1.5px rgba(0,0,0,.55))" }}>
+    // width only, with the height following the viewBox, so the sprite scales
+    // with the tile instead of being squashed into a square.
+    <svg viewBox="0 0 32 30" width={size} style={{ display: "block",
+      transform: dir === "left" ? "scaleX(-1)" : undefined,
+      filter: "drop-shadow(0 0 1.5px rgba(0,0,0,.6))" }}>
       {inner}
     </svg>
   );
