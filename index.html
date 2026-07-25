@@ -87,11 +87,29 @@ var GAME_PARTS = [
   // normal thing to happen - a dropped packet, a switch between wifi and data,
   // a CDN edge still catching up with a fresh deploy. Each part now gets three
   // attempts with a short backoff before it is treated as fatal.
+  // A 404 means this page is asking for a file that no longer exists, which can
+  // only mean the browser is running a cached index.html from an older build.
+  // Retrying will never fix that, so bypass the cache and reload the page once.
+  // The sessionStorage flag makes it impossible to loop.
+  function staleShell(name) {
+    try {
+      if (!sessionStorage.getItem("wl-reloaded")) {
+        sessionStorage.setItem("wl-reloaded", "1");
+        if (statusEl) statusEl.textContent = "Updating to the latest version...";
+        location.replace(location.pathname + "?v=" + Date.now());
+        return true;
+      }
+    } catch (e) { /* private mode, fall through to the normal error */ }
+    return false;
+  }
+
   function grab(name, attempt) {
     return fetch(name, { cache: "no-cache" }).then(function (r) {
+      if (r.status === 404) { var err = new Error(name + " -> 404"); err.gone = true; throw err; }
       if (!r.ok) throw new Error(name + " -> HTTP " + r.status);
       return r.text();
     }).catch(function (e) {
+      if (e && e.gone) throw e;   // do not retry a file that is simply not there
       if (attempt >= 3) throw e;
       if (statusEl && !failed) statusEl.textContent = "Retrying " + name + "...";
       return new Promise(function (res) { setTimeout(res, 400 * attempt); })
@@ -110,6 +128,7 @@ var GAME_PARTS = [
           try {
             var code = texts.join("\n");
             var out = Babel.transform(code, { presets: [["react", { runtime: "classic" }]] }).code;
+            try { sessionStorage.removeItem("wl-reloaded"); } catch (e2) {}
             (0, eval)(out);
           } catch (e) {
             hardFail("The game failed to start: " + e.message, e);
@@ -117,7 +136,8 @@ var GAME_PARTS = [
         }
       })
       .catch(function (e) {
-        hardFail("Could not load " + name + " after 3 tries. Check your connection and reload.", e);
+        if (e && e.gone && staleShell(name)) return;
+        hardFail("Could not load " + name + ". Try clearing the site data and reloading.", e);
       });
   });
 })();
