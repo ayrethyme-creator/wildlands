@@ -51,10 +51,16 @@ console.log("[part36] decorative obstacle people removed:", cleared);
 // make them walkable in the engine's movement check + the exit scan is untouched
 if (typeof WALK_EXTRA === "undefined") { globalThis.WALK_EXTRA = "¦¡"; }
 
-// The night wash. Instead of a flat brightness cut, tint toward deep blue and
-// drop saturation and brightness harder, so night reads instantly.
-const NIGHT_FILTER = "brightness(.52) saturate(.7) hue-rotate(205deg) contrast(1.05)";
-const DUSK_FILTER = "brightness(.72) saturate(.85) hue-rotate(210deg)";
+// The night wash.
+//
+// This used to be hue-rotate(205deg), which was simply wrong. Rotating the hue
+// wheel by 205 degrees takes green - around 120 - to about 325, which is
+// magenta. Grass turned maroon, trees turned pink, and the whole world looked
+// diseased rather than dark. Night does not rotate hue: it drops brightness,
+// drains saturation, and leans what is left slightly toward blue. Doing that
+// honestly keeps greens green while still reading as moonlight.
+const NIGHT_FILTER = "brightness(.58) saturate(.42) hue-rotate(-8deg) contrast(1.06)";
+const DUSK_FILTER = "brightness(.78) saturate(.72) hue-rotate(-5deg)";
 // expose for the renderer
 globalThis.NIGHT_FILTER = NIGHT_FILTER;
 globalThis.DUSK_FILTER = DUSK_FILTER;

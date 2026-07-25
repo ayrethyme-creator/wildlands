@@ -389,10 +389,23 @@
             if (ch2 === "¦") { em = lit ? "🏮" : "🔦"; glow = lit; }         // town lamp post
             else if (ch2 === "¡") { em = lit ? "🏮" : "🪵"; glow = lit; }    // wild lantern
             const isPlayer = x === S.x && y === S.y;
+            // Grass draws as a background filling the whole cell, so adjacent
+            // grass tiles run together into one field instead of each being a
+            // square with a character stamped in the middle of it.
+            const grassBgImg = (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4)
+              ? null : (typeof GRASS_TILE !== "undefined" ? GRASS_TILE(ch2, x, y, bg) : null);
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
-              <div key={x + "," + y} style={{ background: glow ? "radial-gradient(circle, #6b5a2e 0%, " + bg + " 78%)" : bg, aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1, color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined, boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined, position: glow ? "relative" : undefined, zIndex: glow ? 2 : undefined }}>
-                {isPlayer ? (S.swimming ? "🏊" : "🚶") : em}
+              <div key={x + "," + y} style={{
+                background: glow ? "radial-gradient(circle, #6b5a2e 0%, " + bg + " 78%)" : bg,
+                backgroundImage: (!glow && grassBgImg) ? grassBgImg : undefined,
+                backgroundSize: grassBgImg ? "100% 100%" : undefined,
+                aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
+                color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
+                boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined,
+                position: glow ? "relative" : undefined, zIndex: glow ? 2 : undefined }}>
+                {isPlayer ? (S.swimming ? "🏊" : "🚶") : (grassBgImg ? "" : em)}
               </div>
             );
           }))}
