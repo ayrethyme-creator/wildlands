@@ -405,7 +405,11 @@
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
                 boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined,
                 position: glow ? "relative" : undefined, zIndex: glow ? 2 : undefined }}>
-                {isPlayer ? (S.swimming ? "🏊" : "🚶") : (grassBgImg ? "" : em)}
+                {isPlayer
+                  ? (typeof Avatar !== "undefined"
+                      ? <Avatar dir={S.dir || "down"} swimming={S.swimming} size="145%" />
+                      : (S.swimming ? "🏊" : "🚶"))
+                  : (grassBgImg ? "" : em)}
               </div>
             );
           }))}

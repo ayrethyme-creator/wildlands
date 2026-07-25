@@ -17,7 +17,7 @@ function Wildlands() {
     legends: {}, dex: {}, objects: {}, visited: { town1: true }, trainersBeaten: {}, rival: "otter_j",
     dialog: null, menu: null, battle: null, pick: null,
     sound: true, soundReady: false, run: true,
-    slot: null, quiz: {},
+    slot: null, quiz: {}, dir: "down",
   });
   const SR = useRef(S);
   useEffect(() => { SR.current = S; }, [S]);
@@ -308,6 +308,11 @@ function Wildlands() {
   const move = (dx, dy) => {
     const st = SR.current;
     if (st.screen !== "world" || st.dialog || st.menu || st.battle) return;
+    // Face the way we are trying to go, even if the step is blocked - walking
+    // into a wall should still turn you toward it, the way it does in every
+    // game of this shape.
+    const facing = dy < 0 ? "up" : dy > 0 ? "down" : dx < 0 ? "left" : "right";
+    if (st.dir !== facing) setS((p) => ({ ...p, dir: facing }));
     const m = MAPS[st.map];
     const nx = st.x + dx, ny = st.y + dy;
     if (ny < 0 || ny >= m.rows.length || nx < 0 || nx >= m.rows[0].length) return;
