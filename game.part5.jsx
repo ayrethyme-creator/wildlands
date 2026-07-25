@@ -485,13 +485,19 @@
                 ))}
               </div>
 
+              {failed && q.subject && DEX[q.subject] && (
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                  <Sprite sp={q.subject} size={40} />
+                  <span style={{ fontSize: 11, color: "#c9b88a" }}>It was the {DEX[q.subject].n}.</span>
+                </div>
+              )}
               {q.sp && DEX[q.sp] && (
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                   <Sprite sp={q.sp} size={40} />
                   <span style={{ fontSize: 11, color: "#c9b88a" }}>{DEX[q.sp].n}</span>
                 </div>
               )}
-              <div style={{ fontSize: 13, lineHeight: 1.5, marginBottom: 10 }}>{q.q}</div>
+              <div style={{ fontSize: 13, lineHeight: 1.5, marginBottom: 10, whiteSpace: "pre-line" }}>{q.q}</div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                 {q.opts.map((o, i) => {

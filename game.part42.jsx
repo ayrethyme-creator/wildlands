@@ -66,7 +66,7 @@ const regionSpecies = (n, minWeight) => {
     });
   });
   return Object.keys(best).filter((sp) =>
-    best[sp] >= minWeight && DEX[sp] && INFO[sp] && INFO[sp].f && INFO[sp].d && INFO[sp].h);
+    best[sp] >= minWeight && DEX[sp] && INFO[sp] && INFO[sp].h && USABLE_FACT(sp));
 };
 
 // ---- 3. deterministic shuffling, seeded per attempt ----
@@ -88,6 +88,15 @@ const STATUS_NAME = {
 
 // Trim a field note down to its first sentence, so a fact question is readable
 // on a phone without losing what makes the answer distinctive.
+// A fact has to be substantial enough to be a believable wrong answer. "It
+// sprays." next to three full sentences gives the question away.
+const USABLE_FACT = (sp) => {
+  const f = INFO[sp] && INFO[sp].f;
+  if (!f) return false;
+  const one = String(f).match(/^.*?[.!?](?=\s|$)/);
+  return ((one ? one[0] : f).trim().length) >= 44;
+};
+
 const firstSentence = (s) => {
   const m = String(s).match(/^.*?[.!?](?=\s|$)/);
   let t = (m ? m[0] : String(s)).trim();
@@ -96,94 +105,153 @@ const firstSentence = (s) => {
 };
 
 // ---- 4. build one exam ----
-// Difficulty climbs three ways: the questions start with what an animal eats
-// and where it lives, then add conservation status, then the field notes
-// themselves; and the spawn weight required to be asked about drops, so later
-// exams reach further down the list of things you had to look at.
+// The first version asked what an animal ate and where it lived. Both are
+// lookups, both are dull, and both are harder than they look, because half the
+// range strings in the guide differ by one country. "Africa, Europe and Asia"
+// against "Africa and Asia" is not a test of whether you were paying attention.
+//
+// What is worth asking about is the thing you actually remember: that a vulture
+// can eat anthrax and not die, that a skunk aims. So the exam is now built out
+// of the field notes and the signs, and mostly in the direction that makes a
+// quiz fun - here is a remarkable thing, whose is it?
+
+// Pull a sign's text down to the claim inside it, dropping the pictogram and
+// the quote marks the world writes them with.
+const signClaim = (raw) => {
+  let t = String(raw).replace(/^\s*🪧\s*/, "").trim();
+  t = t.replace(/\\(['"])/g, "$1");   // the world writes \' inside quoted sign text
+  t = t.replace(/^[A-Za-z ,']+:\s*/, "");
+  t = t.replace(/^['"‘’“”]+/, "").replace(/['"‘’“”]+$/, "");
+  const m = t.match(/^.*?[.!?](?=\s|$)/);
+  let out = (m ? m[0] : t).trim();
+  if (out.length > 116) out = out.slice(0, 113).replace(/\s+\S*$/, "") + "…";
+  return out;
+};
+
+// The signs standing in a given stretch of country, and the ones standing
+// somewhere else - which is where the wrong answers come from.
+const regionSigns = (n) => {
+  const set = new Set(QUIZ_MAPS[n] || []);
+  return Object.keys(SIGNS || {})
+    .filter((k) => set.has(String(k).split(":")[0]))
+    .map((k) => signClaim(SIGNS[k]))
+    .filter((t) => t.length > 34 && t.length < 118);
+};
+const otherSigns = (n) => {
+  const set = new Set(QUIZ_MAPS[n] || []);
+  return Object.keys(SIGNS || {})
+    .filter((k) => !set.has(String(k).split(":")[0]))
+    .map((k) => signClaim(SIGNS[k]))
+    .filter((t) => t.length > 34 && t.length < 118);
+};
+
 const buildExam = (gymId, seed) => {
   const rnd = qRand(seed);
   const tier = gymId <= 4 ? 1 : gymId <= 8 ? 2 : 3;
-  const minW = tier === 1 ? 10 : tier === 2 ? 8 : 6;
+  const minW = tier === 1 ? 8 : tier === 2 ? 6 : 5;
   let species = regionSpecies(gymId, minW);
-  if (species.length < 8) species = regionSpecies(gymId, 4);
-  if (species.length < 8) species = regionSpecies(gymId, 1);
-  if (species.length < 4) return [];
+  if (species.length < 10) species = regionSpecies(gymId, 3);
+  if (species.length < 10) species = regionSpecies(gymId, 1);
+  if (species.length < 5) return [];
 
-  const kinds = tier === 1 ? ["diet", "home"]
-              : tier === 2 ? ["diet", "home", "status", "fact"]
-              : ["home", "status", "fact", "fact"];
+  const mySigns = regionSigns(gymId);
+  const elseSigns = otherSigns(gymId);
 
-  const picked = qShuffle(species, rnd).slice(0, 14);
+  // Weighted toward the interesting formats. "Whose fact is this?" is the
+  // backbone - it reads like a quiz question instead of a form field, and it
+  // is easier as well as better, because four animal names are far easier to
+  // tell apart than four almost-identical range strings.
+  const kinds = [];
+  for (let i = 0; i < 4; i++) kinds.push("whoAmI");
+  for (let i = 0; i < 2; i++) kinds.push("factTrue");
+  if (mySigns.length >= 1 && elseSigns.length >= 3) kinds.push("sign");
+  if (tier >= 2) kinds.push("status");
+  if (tier === 1) kinds.push("home");          // one gentle lookup early on
+
+  const picked = qShuffle(species, rnd);
   const used = new Set();
   const out = [];
+  let guard = 0;
 
-  for (const sp of picked) {
-    if (out.length >= 5) break;
+  while (out.length < 5 && guard++ < 60) {
     const kind = kinds[Math.floor(rnd() * kinds.length)];
-    const info = INFO[sp];
-    const name = DEX[sp].n;
     let q = null;
 
-    // Distractors have to differ from the answer AND from each other. Plenty of
-    // animals share a diet or a range, so picking three at random produced
-    // repeated options - which either gives the answer away or makes the
-    // question unanswerable.
-    const distinct = (field, right, n) => {
-      const out = [];
-      for (const o of qShuffle(species.filter((x) => x !== sp), rnd)) {
-        const v = INFO[o][field];
-        if (!v || v === right || out.includes(v)) continue;
-        out.push(v);
-        if (out.length === n) break;
-      }
-      return out;
-    };
-
-    if (kind === "diet") {
-      const right = info.d;
-      const wrong = distinct("d", right, 3);
-      if (wrong.length === 3) q = { q: `What does the ${name} eat?`, a: right, w: wrong };
-    } else if (kind === "home") {
-      const right = info.h;
-      const wrong = distinct("h", right, 3);
-      if (wrong.length === 3) q = { q: `Where does the ${name} live?`, a: right, w: wrong };
-    } else if (kind === "status") {
-      const right = STATUS_NAME[info.s];
-      const pool = ["Least Concern", "Near Threatened", "Vulnerable", "Endangered", "Critically Endangered"];
-      const wrong = qShuffle(pool.filter((x) => x !== right), rnd).slice(0, 3);
-      if (right && wrong.length === 3)
-        q = { q: `How is the ${name} listed on the IUCN Red List?`, a: right, w: wrong };
-    } else {
-      const right = firstSentence(info.f);
+    if (kind === "sign") {
+      const right = qShuffle(mySigns, rnd)[0];
       const wrong = [];
-      for (const o of qShuffle(species.filter((x) => x !== sp), rnd)) {
-        const v = firstSentence(INFO[o].f);
-        if (v === right || wrong.includes(v)) continue;
-        wrong.push(v);
+      for (const t2 of qShuffle(elseSigns, rnd)) {
+        if (t2 === right || wrong.includes(t2)) continue;
+        wrong.push(t2);
         if (wrong.length === 3) break;
       }
       if (wrong.length === 3)
-        q = { q: `Which of these is true of the ${name}?`, a: right, w: wrong, long: true };
+        q = { q: "Which of these is written on a sign in this part of the country?",
+              a: right, w: wrong, long: true };
+    } else {
+      const sp = picked[Math.floor(rnd() * picked.length)];
+      if (!sp || !INFO[sp]) continue;
+      const info = INFO[sp], name = DEX[sp].n;
+
+      if (kind === "whoAmI") {
+        // A remarkable thing, and four animals it could belong to. The wrong
+        // three are drawn from animals that share a type with the right one
+        // wherever possible - offering a poison frog against three dog breeds
+        // is not a question, it is a giveaway.
+        const right = name;
+        const myTypes = new Set(DEX[sp].t || []);
+        const kin = species.filter((o) =>
+          o !== sp && DEX[o] && (DEX[o].t || []).some((ty) => myTypes.has(ty)));
+        const wrong = [];
+        for (const o of qShuffle(kin, rnd).concat(qShuffle(species, rnd))) {
+          if (o === sp || !DEX[o] || wrong.includes(DEX[o].n) || DEX[o].n === right) continue;
+          wrong.push(DEX[o].n);
+          if (wrong.length === 3) break;
+        }
+        if (wrong.length === 3)
+          q = { q: `Which animal is this true of?\n\n“${firstSentence(info.f)}”`,
+                a: right, w: wrong, sp: null, subject: sp };
+      } else if (kind === "factTrue") {
+        const right = firstSentence(info.f);
+        const wrong = [];
+        for (const o of qShuffle(species, rnd)) {
+          if (o === sp) continue;
+          const v = firstSentence(INFO[o].f);
+          if (v === right || wrong.includes(v)) continue;
+          wrong.push(v);
+          if (wrong.length === 3) break;
+        }
+        if (wrong.length === 3)
+          q = { q: `Which of these is true of the ${name}?`, a: right, w: wrong, sp, long: true };
+      } else if (kind === "status") {
+        const right = STATUS_NAME[info.s];
+        const pool = ["Least Concern", "Near Threatened", "Vulnerable", "Endangered", "Critically Endangered"];
+        const wrong = qShuffle(pool.filter((x) => x !== right), rnd).slice(0, 3);
+        if (right && wrong.length === 3)
+          q = { q: `How is the ${name} listed on the IUCN Red List?`, a: right, w: wrong, sp };
+      } else {
+        const right = info.h;
+        const wrong = [];
+        for (const o of qShuffle(species, rnd)) {
+          if (o === sp) continue;
+          const v = INFO[o].h;
+          if (!v || v === right || wrong.includes(v)) continue;
+          wrong.push(v);
+          if (wrong.length === 3) break;
+        }
+        if (wrong.length === 3)
+          q = { q: `Where does the ${name} live?`, a: right, w: wrong, sp };
+      }
     }
 
     if (!q || used.has(q.q)) continue;
-    if (new Set([q.a, ...q.w]).size !== 4) continue;   // belt and braces
+    if (new Set([q.a, ...q.w]).size !== 4) continue;
     used.add(q.q);
     q.opts = qShuffle([q.a, ...q.w], rnd);
-    q.sp = sp;
     out.push(q);
   }
   return out;
 };
-
-// Exams are keyed so a gym, an altar and an Elite seat each track separately.
-// Passing is remembered in the save, so a leader never asks twice.
-const EXAM_LABEL = {
-  gym: "Field Exam", legend: "The Altar's Question", elite: "The Summit Examination",
-};
-
-console.log("[part42] field exams ready |",
-  Object.keys(QUIZ_MAPS).map((n) => `g${n}:${regionSpecies(n, 6).length}sp`).join(" "));
 
 // ---- 5. the trainers become the reading ----
 // Every ordinary trainer carries a piece of natural history about an animal
