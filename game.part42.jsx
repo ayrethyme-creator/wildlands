@@ -186,14 +186,19 @@ console.log("[part42] field exams ready |",
   Object.keys(QUIZ_MAPS).map((n) => `g${n}:${regionSpecies(n, 6).length}sp`).join(" "));
 
 // ---- 5. the trainers become the reading ----
-// Every ordinary trainer now adds a line of natural history about an animal
-// common in the ground they are standing on. That makes the exams fair without
-// adding a single new sign: the questions are drawn from the same regional
-// animals these people are talking about, so a player who stops and listens on
-// the way to the gym has already met most of the answers.
+// Every ordinary trainer carries a piece of natural history about an animal
+// common in the ground they are standing on. That is what makes the exams fair
+// without adding a single new sign.
 //
-// Gym leaders, the Elite Four, the rival and the professor are left alone -
-// their lines are doing story work, and an appended fact would flatten them.
+// The fact is stored separately rather than glued onto the end of what they
+// already say. Appending it ran two unrelated sentences together in one breath
+// and made every trainer sound like they were reciting; kept apart, the battle
+// line stays theirs and the field note reads as a second beat.
+//
+// Left alone entirely: gym leaders, the Elite Four, the champion, the rival,
+// the professor, and the specialists. The specialists already exist to teach -
+// their lines are written natural history - so bolting another fact on was
+// redundant at best and contradicted them at worst.
 (() => {
   const mapOf = (k) => String(k).split(":")[0];
   const regionOf = {};
@@ -201,22 +206,23 @@ console.log("[part42] field exams ready |",
     if (regionOf[m] === undefined) regionOf[m] = Number(n);
   }));
 
-  // a stable per-region list of animals worth talking about
   const talkable = {};
   for (let n = 1; n <= 12; n++) {
     talkable[n] = regionSpecies(n, 6).filter((sp) => INFO[sp] && INFO[sp].f);
     if (talkable[n].length < 4) talkable[n] = regionSpecies(n, 1).filter((sp) => INFO[sp] && INFO[sp].f);
   }
 
+  // Short openers, so the note sounds like someone mentioning it rather than
+  // quoting a book at you.
   const LEAD = [
-    (n, f) => `Seen a ${n} out here? ${f}`,
-    (n, f) => `Ask me about the ${n}. ${f}`,
-    (n, f) => `People walk past the ${n} without looking twice. ${f}`,
-    (n, f) => `My notes on the ${n}: ${f}`,
-    (n, f) => `If you catch a ${n}, read its entry. ${f}`,
-    (n, f) => `The ${n} is the one that surprised me. ${f}`,
-    (n, f) => `Field note, ${n}: ${f}`,
-    (n, f) => `You want to know the ${n}? ${f}`,
+    (n) => `Seen a ${n} out here?`,
+    (n) => `Ask me about the ${n}.`,
+    (n) => `Most people walk past the ${n}.`,
+    (n) => `My notes on the ${n}:`,
+    (n) => `Catch a ${n} and read its entry.`,
+    (n) => `The ${n} surprised me.`,
+    (n) => `Worth knowing about the ${n}:`,
+    (n) => `You want to know the ${n}?`,
   ];
 
   let touched = 0, skipped = 0;
@@ -224,26 +230,22 @@ console.log("[part42] field exams ready |",
   Object.keys(TRAINERS).forEach((key) => {
     const t = TRAINERS[key];
     if (!t || !t.line) return;
-    if (t.elite || t.champion || t.gym) { skipped++; return; }
+    if (t.elite || t.champion || t.gym || t.specialist) { skipped++; return; }
     if (/^Prof\.|Zuri/.test(t.name || "")) { skipped++; return; }
-    if (t.factAdded) return;
+    if (t.fact) return;
 
     const n = regionOf[mapOf(key)];
     const pool = talkable[n] || [];
     if (!pool.length) { skipped++; return; }
 
-    // deterministic pick, so the same trainer always says the same thing
     let h = 0;
     for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
     counter[n] = (counter[n] || 0) + 1;
     const sp = pool[(h + counter[n] * 7) % pool.length];
-    const fact = firstSentence(INFO[sp].f);
-    const lead = LEAD[h % LEAD.length];
 
-    t.line = `${t.line} ${lead(DEX[sp].n, fact)}`;
-    t.factAdded = true;
+    t.fact = `${LEAD[h % LEAD.length](DEX[sp].n)} ${firstSentence(INFO[sp].f)}`;
     t.factSp = sp;
     touched++;
   });
-  console.log("[part42] trainers given a field fact:", touched, "| left alone:", skipped);
+  console.log("[part42] trainers carrying a field note:", touched, "| left alone:", skipped);
 })();

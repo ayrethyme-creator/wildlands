@@ -483,7 +483,11 @@ function Wildlands() {
         ]);
         return;
       }
-      say(`${tr.elite ? "⚜️ " : ""}${tr.specialist ? "🌿 " : ""}${tr.name}${tr.homage ? ` (${tr.homage})` : ""}: "${tr.line}"`, [
+      // The battle line is theirs; a field note, if they carry one, is a
+      // separate beat underneath rather than a second clause of the same
+      // sentence.
+      say(`${tr.elite ? "⚜️ " : ""}${tr.specialist ? "🌿 " : ""}${tr.name}${tr.homage ? ` (${tr.homage})` : ""}: "${tr.line}"`
+        + (tr.fact ? `\n\n📓 ${tr.fact}` : ""), [
         { label: "Battle!", act: () => startBattle({ kind: "trainer", trainerName: tr.name, elite: !!tr.elite, team: tr.team(), ti: 0, enemy: null, tid: idKey, prize: tr.prize }) },
         { label: "Later", act: () => setS((p) => ({ ...p, dialog: null })) },
       ]);

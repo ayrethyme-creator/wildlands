@@ -377,7 +377,7 @@ const mk = (sp, lvl) => {
 // earlier ones; raising it slightly stretches the back half of the game without
 // making the first few levels feel slow, which is where a flat multiplier would
 // have hurt. Roughly +12% at level 10, +17% at 30, +20% at 50.
-const xpNeed = (lvl) => Math.floor(lvl * 26 + lvl * lvl * 0.42);
+const xpNeed = (lvl) => Math.floor(lvl * 28 + lvl * lvl * 0.62);
 
 const learnMove = (my, k, logs) => {
   if (my.moves.includes(k) || (my.pending || []).includes(k)) return;
