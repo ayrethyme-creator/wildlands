@@ -537,6 +537,42 @@ function Wildlands() {
       const tr = TRAINERS[idKey];
       if (!tr) return;
       if (tr.chat || !tr.team) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
+      // Story people and examinable things. A finding is recorded once; after
+      // that they say the same thing without re-announcing it, so the clearing
+      // does not shout at you every time you cross it.
+      if (tr.learns) {
+        // Once Amara has funded something, the person who has the problem is
+        // where you go to put it in.
+        const cur = tr.arc ? arcState(st, tr.arc) : null;
+        if (cur && cur.stage === "build" && tr.name === "Thabo Sithole") {
+          say(`🧑🏿‍🌾 Thabo: "You came back with something. Alright. Show me."`, [
+            { label: "Build it with him", act: () => buildSolution(tr.arc) },
+            { label: "Soon", act: () => setS((p) => ({ ...p, dialog: null })) },
+          ]);
+          return;
+        }
+        const already = arcFound(st, tr.arc, tr.learns.key);
+        if (already) { say(`${tr.em || "📓"} ${tr.name}: "${tr.line}"`); return; }
+        say(`${tr.em || "📓"} ${tr.line}`, [
+          { label: "Write it down", act: () => learn(tr.arc, tr.learns.key, tr.learns.text) },
+          { label: "Leave it", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+        return;
+      }
+      if (tr.pitchArc) {
+        const A = ARCS[tr.pitchArc];
+        const cur = arcState(st, tr.pitchArc);
+        if (cur.stage === "done") { say(`👩🏿‍🏫 ${tr.name}: "The hives are holding. Write down what you did and when — in three years neither of us will remember."`); return; }
+        if (cur.stage === "build") {
+          say(`👩🏿‍🏫 ${tr.name}: "It is funded. Go and put it in — I do not pay people to plan things."`);
+          return;
+        }
+        say(`👩🏿‍🏫 ${tr.name}: "${tr.line}"`, [
+          { label: `Pitch: ${A.title}`, act: () => openPitch(tr.pitchArc) },
+          { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+        return;
+      }
       if (tr.elite && !(st.quiz || {})[`elite_${idKey}`]) {
         say(`⚜️ ${tr.name}: "${tr.line}" — but first, five questions. The Summit does not seat a ranger who cannot name what they have walked past.`, [
           { label: "Answer", act: () => startExam("elite", GYM_COUNT, `elite_${idKey}`, `${tr.name}'s Examination`) },
