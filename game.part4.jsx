@@ -17,7 +17,7 @@ function Wildlands() {
     legends: {}, dex: {}, objects: {}, visited: { town1: true }, trainersBeaten: {}, rival: "otter_j",
     dialog: null, menu: null, battle: null, pick: null,
     sound: true, soundReady: false, run: true,
-    slot: null, quiz: {}, dir: "down",
+    slot: null, quiz: {}, dir: "down", arcs: {},
   });
   const SR = useRef(S);
   useEffect(() => { SR.current = S; }, [S]);
@@ -90,7 +90,7 @@ function Wildlands() {
         badges: st.badges, profGift: st.profGift, houseIdx: st.houseIdx,
         legends: st.legends, dex: st.dex, objects: st.objects, visited: st.visited,
         trainersBeaten: st.trainersBeaten, rival: st.rival, sound: st.sound, run: st.run,
-        quiz: st.quiz,
+        quiz: st.quiz, arcs: st.arcs,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
       setSaves((prev) => ({ ...prev, [n]: payload }));
@@ -140,7 +140,63 @@ function Wildlands() {
       run: p.run !== false,
       slot: n,
       quiz: p.quiz || {},
+      arcs: p.arcs || {},
     }));
+  };
+
+  // ----- conservation arcs -----
+  // A finding is recorded once and stays recorded. There is no way to lose
+  // evidence, because the point is understanding a place, and you do not
+  // un-understand it.
+  const learn = (arcId, key, text) => {
+    const st = SR.current;
+    if (arcFound(st, arcId, key)) { if (text) say(text); return; }
+    setS((p) => {
+      const cur = (p.arcs && p.arcs[arcId]) || { stage: "listen", found: {}, tried: [] };
+      return { ...p, dialog: text ? { text } : null,
+        arcs: { ...(p.arcs || {}), [arcId]: { ...cur, found: { ...cur.found, [key]: true } } } };
+    });
+    SFX.learn?.();
+  };
+
+  const openPitch = (arcId) => setS((p) => ({ ...p, dialog: null, pitch: { arc: arcId, choice: null, verdict: null } }));
+  const closePitch = () => setS((p) => ({ ...p, pitch: null }));
+
+  const makePitch = (arcId, propKey) => {
+    const st = SR.current;
+    const v = amaraVerdict(st, arcId, propKey);
+    setS((p) => {
+      const cur = (p.arcs && p.arcs[arcId]) || { stage: "listen", found: {}, tried: [] };
+      return {
+        ...p,
+        pitch: { ...p.pitch, choice: propKey, verdict: v },
+        arcs: v.funded
+          ? { ...(p.arcs || {}), [arcId]: { ...cur, stage: "build", funded: propKey,
+              tried: [...(cur.tried || []), propKey] } }
+          : p.arcs,
+      };
+    });
+    SFX[v.funded ? "puzzle" : "miss"]?.();
+  };
+
+  // Building it, and finding out. A proposal that does not work does not end
+  // the arc - it closes one door and the arc stays open with one fewer thing
+  // left to try.
+  const buildSolution = (arcId) => {
+    const st = SR.current;
+    const cur = arcState(st, arcId);
+    const A = ARCS[arcId];
+    const p = A.proposals[cur.funded];
+    if (!p) return;
+    if (p.works) {
+      setS((prev) => ({ ...prev, dialog: { text: `📗 ${A.outcome.good}` },
+        arcs: { ...(prev.arcs || {}), [arcId]: { ...cur, stage: "done", solved: true } } }));
+      SFX.badge?.();
+    } else {
+      setS((prev) => ({ ...prev, dialog: { text: `📕 ${p.why}\n\n${A.outcome.bad}` },
+        arcs: { ...(prev.arcs || {}), [arcId]: { ...cur, stage: "listen", funded: null } } }));
+      SFX.miss?.();
+    }
   };
 
   // ----- field exams -----

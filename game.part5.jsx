@@ -512,6 +512,75 @@
         </div>
       </div>
 
+      {S.pitch && (() => {
+        const A = ARCS[S.pitch.arc], st = S;
+        const ev = Object.keys(A.evidence);
+        const v = S.pitch.verdict;
+        return (
+          <div style={{ position: "fixed", inset: 0, background: "rgba(20,17,13,.93)", zIndex: 62,
+            display: "flex", alignItems: "center", justifyContent: "center", padding: 14, overflowY: "auto" }}>
+            <div style={{ ...panel, maxWidth: 440, width: "100%", padding: 14 }}>
+              <div style={{ fontSize: 13, fontWeight: 800, color: "#e8c547", marginBottom: 2 }}>
+                Prof. Amara Okonjo-Reyes
+              </div>
+              <div style={{ fontSize: 10, color: "#8a7f68", marginBottom: 10 }}>{A.title}</div>
+
+              {/* What you actually found out. The point of showing this is that
+                  the player can see the shape of their own ignorance. */}
+              <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 6 }}>
+                What you can tell her ({arcEvidenceCount(st, S.pitch.arc)} of {ev.length}):
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 12 }}>
+                {ev.map((k) => {
+                  const got = arcFound(st, S.pitch.arc, k);
+                  return (
+                    <div key={k} style={{ display: "flex", gap: 7, alignItems: "flex-start",
+                      fontSize: 11, lineHeight: 1.45, opacity: got ? 1 : .45 }}>
+                      <span>{got ? "✔" : "○"}</span>
+                      <span>
+                        <b style={{ color: got ? "#e8dcc3" : "#8a7f68" }}>{A.evidence[k].label}</b>
+                        {got ? <><br /><span style={{ color: "#a89880" }}>{A.evidence[k].detail}</span></>
+                             : <><br /><span style={{ color: "#7d735f", fontStyle: "italic" }}>{A.evidence[k].how}</span></>}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {!v ? (
+                <>
+                  <div style={{ fontSize: 12, lineHeight: 1.5, marginBottom: 9 }}>
+                    “I have been pitched forty-one projects this year and funded six. What are you asking me to buy?”
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    {Object.entries(A.proposals).map(([k, p]) => (
+                      <button key={k} style={{ ...btn("#5c5344"), textAlign: "left", fontSize: 11.5,
+                        lineHeight: 1.45, padding: "9px 11px", fontWeight: 400 }}
+                        onClick={() => makePitch(S.pitch.arc, k)}>
+                        <b style={{ color: "#e8dcc3" }}>{p.label}</b><br />
+                        <span style={{ color: "#a89880" }}>{p.pitch}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <button style={{ ...btnS("#7d735f"), width: "100%", marginTop: 10 }} onClick={closePitch}>
+                    Not yet — go back out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <div style={{ fontSize: 12, lineHeight: 1.55, marginBottom: 10,
+                    color: v.funded ? "#8fd694" : "#e8c547" }}>“{v.line}”</div>
+                  <button style={{ ...btnS(v.funded ? "#27ae60" : "#7d735f"), width: "100%" }}
+                    onClick={closePitch}>
+                    {v.funded ? "Go and build it" : "Go and find out"}
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        );
+      })()}
+
       {S.exam && (() => {
         const ex = S.exam, q = ex.qs[ex.i], failed = ex.wrong !== null;
         return (
