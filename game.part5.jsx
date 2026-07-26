@@ -180,38 +180,70 @@
     );
   }
 
-  // ---------- STARTER ----------
+  // ---------- FIRST MORNING ----------
+  // This used to be a lineup of wild juveniles offered like pets, which was the
+  // single loudest thing in the game arguing against everything after it. It is
+  // now the station's own animals — the same three, the same stats, the same
+  // growth at sixteen — introduced as what they actually are.
   if (S.screen === "starter") {
-    const starters = ["fennec_j", "otter_j", "kestrel_j"];
+    const orphans = ["fennec_j", "otter_j", "kestrel_j"];
     return (
-      <div style={{ ...frame, padding: 16, justifyContent: "center" }}>
+      <div style={{ ...frame, padding: 16, overflowY: "auto" }}>
         {KEYFRAMES}
         <div style={{ ...panel, marginBottom: 12 }}>
-          <b>⛺ Prof. Acacia:</b> "Welcome to the Wildlands — though I wish the timing were better. Every ranger raises their first companion from a youngster. Choose, and choose well. Eight arenas stand between you and the Summit."
+          <b>👩🏾‍🌾 Keeper Ruth:</b> "You're the new ranger. Good — I've got eleven animals and two hands.
+          <br /><br />
+          Before anything else: everything here is here because it can't be anywhere else. Not one of them
+          was taken. They were dug out, knocked down, found alone, or handed over by somebody who'd
+          stopped coping. We don't collect animals. We end up with them.
+          <br /><br />
+          These three came in as babies. Reared by people, which means they'll never be wild — a fox that
+          comes when the kitchen door opens doesn't last a week out there.
+          <br /><br />
+          Pick one to work with. Not the one you like the look of. The one you think you can do the job with."
         </div>
-        {starters.map((sp) => {
+        {orphans.map((sp) => {
           const d = DEX[sp];
           const adult = DEX[d.grows.to];
+          const ind = individualOf(sp);
           return (
-            <button key={sp} style={{ ...panel, display: "flex", alignItems: "center", gap: 12, marginBottom: 10, cursor: "pointer", width: "100%", textAlign: "left", fontFamily: "inherit", color: "#f2e8d5" }}
-              onClick={() => setS((p) => ({
-                ...p, party: [mk(sp, 5)], rival: COUNTER[sp],
-                dex: { ...p.dex, [sp]: 2 }, visited: { ...p.visited, town1: true },
-                screen: "world",
-                dialog: { text: `⛺ Prof. Acacia: "A fine choice — ${d.n} suits you. Bump into my tent before you leave; the Wildlands are unwell, and you should hear the whole story. The Acacia Trail is north. Oh — and Zuri's around town somewhere, probably itching to test you."` },
-              }))}>
-              <Sprite sp={sp} size={52} />
-              <span>
-                <div style={{ fontWeight: 700, fontSize: 16 }}>{d.n} <span style={{ color: "#c9b88a", fontSize: 12 }}>Lv 5</span></div>
-                <div style={{ margin: "4px 0" }}>{d.t.map((t) => <Chip key={t} t={t} />)}</div>
-                <div style={{ fontSize: 10, color: "#c9b88a" }}>Grows into {adult.n} at Lv {d.grows.at}</div>
-              </span>
-            </button>
+            <div key={sp} style={{ ...panel, marginBottom: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+                <Sprite sp={sp} size={64} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: "#e8c547" }}>{ind.name}</div>
+                  <div style={{ fontSize: 11, color: "#c9b88a" }}>
+                    {d.n}{ind.sex ? ` · ${ind.sex === "F" ? "female" : "male"}` : ""} · {d.t.join(" / ")}
+                  </div>
+                  <div style={{ fontSize: 10, color: "#8a7f68" }}>
+                    {ind.since} · grows into {adult.n} at 16
+                  </div>
+                </div>
+              </div>
+              <div style={{ fontSize: 11.5, lineHeight: 1.55, color: "#d9cbb0", whiteSpace: "pre-line",
+                marginBottom: 9 }}>{ind.story}</div>
+              <button style={{ ...btn("#27ae60"), width: "100%" }}
+                onClick={() => setS((p) => {
+                  const a2 = mk(sp, 5);
+                  a2.indiv = ind.name;
+                  return {
+                    ...p, screen: "world", party: [a2],
+                    rival: COUNTER[sp] || "otter_j",
+                    dialog: { text: `🤝 ${ind.name} is yours to work with.\n\n👩🏾‍🌾 Ruth: "Right. Somebody's been waiting to meet you — she funds all of this, and she does not wait long."` },
+                  };
+                })}>
+                Work with {ind.name}
+              </button>
+            </div>
           );
         })}
+        <p style={{ fontSize: 10, color: "#7d735f", marginTop: 6, textAlign: "center" }}>
+          None of them can be released. That is not a rule of this game — it is what hand-rearing does.
+        </p>
       </div>
     );
   }
+
 
   // ---------- BATTLE ----------
   if (S.battle) {

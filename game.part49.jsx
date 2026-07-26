@@ -14,6 +14,42 @@
 // Everything else gets a name and a one-line reason so nothing is ever blank.
 
 const INDIVIDUALS = {
+  // ---- the three at the station on your first morning ----
+  // Kept as juveniles because that is what they were when they came in, and
+  // because a hand-reared orphan is the most honest non-releasable animal there
+  // is. Nothing mechanical changes: these are the same three the game always
+  // started with, and they still grow up at sixteen.
+  fennec_j: {
+    name: "Ziza",
+    sex: "F",
+    story: "Somebody dug out the den to sell the kits. Four went. She was the one left in the hole, "
+         + "too small that week to be worth carrying.\n\n"
+         + "She has never met another fennec and does not know she is one. She sleeps against the warm "
+         + "side of the generator housing and comes when the kitchen door opens.\n\n"
+         + "She cannot be put back. There is nothing to put her back into.",
+    since: "Eleven weeks at the station",
+  },
+  otter_j: {
+    name: "Mbeko",
+    sex: "M",
+    story: "Found alone on a sandbank three days after the river came up. Somebody waited two nights "
+         + "to see if his mother would come back for him. She did not.\n\n"
+         + "An otter learns to fish from its mother and he did not get that far, so he has been taught "
+         + "by people, badly, with a bucket. He is getting there. He is very pleased with himself "
+         + "every single time.",
+    since: "Since the floods, four months",
+  },
+  kestrel_j: {
+    name: "Anele",
+    sex: "F",
+    story: "The nest came down with the ledge when they widened the road. Two chicks; she was the one "
+         + "still breathing when somebody thought to look.\n\n"
+         + "A raptor reared by hand does not learn to hunt, and a raptor that does not hunt does not go "
+         + "back. She is not sorry about any of this. She screams at the kettle.",
+    since: "Since the roadworks, spring",
+  },
+
+
   badger: {
     name: "Amandla",
     sex: "F",

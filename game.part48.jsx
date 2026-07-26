@@ -93,13 +93,21 @@
   });
 
   // ---- Amara, at the base ----
-  put("town1:6,4", {
+  // The exit north is at 10,0 and the tile you arrive on coming back from
+  // Route 1 is 10,2 — standing there means the player lands on top of her,
+  // which the harness caught. One tile to the side: still directly beside the
+  // road out, still impossible to miss, and nobody arrives inside her.
+  put("town1:9,2", {
     name: "Prof. Amara Okonjo-Reyes",
     em: "👩🏿‍🏫",
-    line: "I funded this station, I fund your boots, and I will fund whatever you can argue for. "
-        + "Argue, mind. I have been pitched forty-one projects this year and I funded six. "
-        + "The other thirty-five were people who loved animals very much and had no idea what they were asking me to buy. "
-        + "Love them on your own time. In here, show your working.",
+    line: "So you're the new one. I fund this station — the boots, the feed, the roof, you. "
+        + "I made it in freight and I would rather spend it on this, and that is the whole of my qualification.\n\n"
+        + "Here is how I work. I have been pitched forty-one projects this year and I funded six. The other "
+        + "thirty-five were people who loved animals very much and had no idea what they were asking me to buy. "
+        + "Love them on your own time. In here, show your working.\n\n"
+        + "Go out to Beeloud Clearing. Thabo Sithole has been losing beehives for a month and telling anyone "
+        + "who will listen, and not one person from this station has asked him a single useful question. "
+        + "Go and ask him something useful. Then come back and tell me what it costs.",
     pitchArc: "beeloud",
   });
 
