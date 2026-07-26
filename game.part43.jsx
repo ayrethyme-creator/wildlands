@@ -66,7 +66,7 @@
 // cannot skip ahead to the good healing, so early fights have to be won with
 // the cheap stuff.
 const SHOP_STOCK = [
-  { key: "treats",      n: "🍖 Trail Treat",   price: 30,  badge: 0,  desc: "Befriend wild animals" },
+  { key: "treats",      n: "🍖 Trail Treat",   price: 30,  badge: 0,  desc: "Earn a wild animal's trust long enough to study it" },
   { key: "berries",     n: "🫐 Berry Snack",   price: 20,  badge: 0,  desc: "+30 HP in battle" },
   { key: "antidote",    n: "🧪 Antidote",      price: 30,  badge: 0,  desc: "Cures poison ☠️" },
   { key: "wakeberry",   n: "⏰ Rouse Berry",   price: 30,  badge: 0,  desc: "Cures sleep 💤" },

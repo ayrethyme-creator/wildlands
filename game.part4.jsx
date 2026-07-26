@@ -519,7 +519,7 @@ function Wildlands() {
     let intro;
     if (cfg.kind === "trainer") { enemy = cfg.team[0]; intro = `${cfg.trainerName} wants to battle! ${DEX[enemy.sp].n} steps up!`; }
     else if (cfg.kind === "legend") { intro = `⚡ The ${DEX[enemy.sp].n} descends! The air itself trembles!`; }
-    else intro = `A wild ${DEX[enemy.sp].n} (Lv ${enemy.lvl}) appeared!`;
+    else intro = `A ${DEX[enemy.sp].n} breaks cover — Lv ${enemy.lvl}. Hold still.`;
     if (cfg.kind === "legend") SFX.legend(); else SFX.encounter();
     setS((p) => ({
       ...p, dialog: null, menu: null,
@@ -723,7 +723,7 @@ function Wildlands() {
         backToChoose();
         return;
       }
-      snapBusy(`${foeName()} fainted!`, {}, "faint");
+      snapBusy(`${foeName()} has had enough and withdraws.`, {}, "faint");
       const gain = Math.floor(en.lvl * 15 * (b.kind === "trainer" ? 1.5 : b.kind === "legend" ? 1.6 : 1));
       my.xp += gain;
       const logs = [];
@@ -786,7 +786,7 @@ function Wildlands() {
     };
 
     const onMyFaint = () => {
-      snapBusy(`${DEX[my.sp].n} fainted!`, {}, "faint");
+      snapBusy(`${DEX[my.sp].n} is worn out and needs to rest.`, {}, "faint");
       const alive = party.some((a, i) => i !== 0 && a.hp > 0);
       if (alive) {
         const P = party.map((a) => ({ ...a })); P[0] = { ...my };
@@ -941,7 +941,7 @@ function Wildlands() {
       snapBusy(`You fed ${DEX[my.sp].n} a Big Berry. (+70 HP)`, {}, "heal");
       if (!enemyActs()) finishRound();
     } else if (action.kind === "treat") {
-      if (b.kind === "trainer") { snapBusy("You can't befriend another ranger's partner!"); backToChoose(); }
+      if (b.kind === "trainer") { snapBusy("That animal is already someone's partner — study it another time."); backToChoose(); }
       else if (items.treats <= 0) { snapBusy("You're out of Trail Treats!"); backToChoose(); }
       else {
         items.treats -= 1;
@@ -960,8 +960,8 @@ function Wildlands() {
             box.push(friend);
             dest = `Your team is full — it headed to the Sanctuary (${boxNameAt(friend.box)}).`;
           }
-          snapBusy(b.kind === "legend" ? `🌟 ${BEFRIEND_LEGEND[en.sp]}` : `🎉 The ${DEX[en.sp].n} nuzzles your hand!`, {}, "befriend");
-          snapEnd(`You befriended ${DEX[en.sp].n} (Lv ${en.lvl})! ${dest}` + (b.kind === "legend" ? " The land settles — the guardian chose you." : ""));
+          snapBusy(b.kind === "legend" ? `🌟 ${BEFRIEND_LEGEND[en.sp]}` : `📖 The ${DEX[en.sp].n} lets you close enough. Notes taken, photographs made — it goes back to what it was doing.`, {}, "befriend");
+          snapEnd(`Field study complete — ${DEX[en.sp].n} (Lv ${en.lvl}) logged in the Guide. ${dest}` + (b.kind === "legend" ? " The land settles — the guardian chose you." : ""));
         } else {
           snapBusy(b.kind === "legend" ? "The Guardian regards the treat... and you. Not yet, its eyes say." : "It sniffed the treat... and darted back, wary!", {}, "miss");
           if (!enemyActs()) finishRound();

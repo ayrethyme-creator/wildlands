@@ -219,7 +219,7 @@
     const my = S.party[0];
     const en = b.enemy;
     const busy = b.phase === "busy";
-    const foeLabel = b.kind === "wild" ? "Wild " : b.kind === "legend" ? "Guardian " : "";
+    const foeLabel = b.kind === "legend" ? "Guardian " : "";
     const arenaBg = b.kind === "legend" ? "linear-gradient(#4a3f6b,#8a7a5c)" : (ARENA[MAPS[S.map].zone] || ARENA.savanna);
     // Keying on the hit counter remounts the wrapper, which is what makes the
     // shake replay on every blow rather than only the first.
@@ -230,7 +230,7 @@
         <div style={{ background: arenaBg, borderRadius: 14, border: "3px solid #5c5344", padding: 12, position: "relative", minHeight: 230 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <div style={{ ...panel, padding: 8, width: "58%" }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>{foeLabel}{DEX[en.sp].n}{en.sex ? <span style={{ color: en.sex === "M" ? "#5dade2" : "#e88ab5" }}> {en.sex === "M" ? "♂" : "♀"}</span> : null}{b.kind === "wild" && S.dex[en.sp] === 2 ? <span title="You've already befriended one of these"> 🍖</span> : null} <span style={{ color: "#c9b88a" }}>Lv {en.lvl}</span>{en.psn ? " ☠️" : ""}{en.slp ? " 💤" : ""}{en.fear ? " 😨" : ""}{en.chill ? " 🧊" : ""}</div>
+              <div style={{ fontSize: 13, fontWeight: 700 }}>{foeLabel}{DEX[en.sp].n}{b.kind === "wild" ? <span style={{ color: "#8a9a6a", fontWeight: 400, fontSize: 11 }}> · wild</span> : null}{en.sex ? <span style={{ color: en.sex === "M" ? "#5dade2" : "#e88ab5" }}> {en.sex === "M" ? "♂" : "♀"}</span> : null}{b.kind === "wild" && S.dex[en.sp] === 2 ? <span title="Already logged in your Guide"> 🍖</span> : null} <span style={{ color: "#c9b88a" }}>Lv {en.lvl}</span>{en.psn ? " ☠️" : ""}{en.slp ? " 💤" : ""}{en.fear ? " 😨" : ""}{en.chill ? " 🧊" : ""}</div>
               <div style={{ margin: "3px 0" }}>{DEX[en.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
               <HPBar hp={en.hp} max={en.maxHp} />
             </div>
@@ -369,7 +369,7 @@
               <button disabled={busy}
                 style={{ ...btn(b.confirmRun ? "#e67e22" : "#7d735f"), opacity: busy ? 0.5 : 1 }}
                 onClick={() => b.confirmRun ? takeTurn({ kind: "run" }) : setS((p) => ({ ...p, battle: { ...p.battle, confirmRun: true } }))}>
-                {b.confirmRun ? "🏃 Tap to confirm!" : "🏃 Run"}
+                {b.confirmRun ? "🏃 Tap to confirm!" : "🏃 Withdraw"}
               </button>
             </div>
           )}
@@ -402,7 +402,7 @@
       {KEYFRAMES}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px" }}>
         <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {phase === "night" ? "🌙" : phase === "dusk" ? "🌆" : phase === "dawn" ? "🌅" : "☀️"}</div>
-        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have befriended">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}</div>
+        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have studied">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}</div>
       </div>
 
       <div style={{ padding: "0 10px" }}>
@@ -508,7 +508,7 @@
           <button style={btnS("#b7950b")} onClick={() => saveGame(false)}>💾 Save</button>
           <button style={btnS("#8e44ad")} onClick={() => setS((p) => ({ ...p, menu: "types" }))}>⚖️ Types</button>
           <button style={btnS("#7d735f")} onClick={() => setS((p) => ({ ...p, sound: !p.sound }))}>{S.sound ? "🔊 On" : "🔇 Off"}</button>
-          <button style={btnS(S.run ? "#c0651a" : "#7d735f")} onClick={() => setS((p) => ({ ...p, run: !p.run }))}>{S.run ? "🏃 Run" : "🚶 Walk"}</button>
+          <button style={btnS(S.run ? "#c0651a" : "#7d735f")} onClick={() => setS((p) => ({ ...p, run: !p.run }))}>{S.run ? "🏃 Withdraw" : "🚶 Walk"}</button>
         </div>
       </div>
 
