@@ -154,7 +154,9 @@ const FALLBACK_NAMES = [
 ];
 
 // Deterministic, so an animal is always the same animal.
-const individualOf = (sp) => {
+// Declared with let, because part50 replaces this with a version that reads
+// the species. The parts share one scope, so a const here cannot be overridden.
+let individualOf = (sp) => {
   if (INDIVIDUALS[sp]) return INDIVIDUALS[sp];
   let h = 0;
   for (let i = 0; i < sp.length; i++) h = (h * 31 + sp.charCodeAt(i)) >>> 0;
