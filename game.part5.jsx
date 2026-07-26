@@ -271,7 +271,7 @@
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: 14 }}>
             <Sprite sp={my.sp} size={86} flip anim="bobY" />
             <div style={{ ...panel, padding: 8, width: "58%" }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>{DEX[my.sp].n} <span style={{ color: "#c9b88a" }}>Lv {my.lvl}</span>{my.psn ? " ☠️" : ""}{my.slp ? " 💤" : ""}{my.fear ? " 😨" : ""}{my.chill ? " 🧊" : ""}</div>
+              <div style={{ fontSize: 13, fontWeight: 700 }}>{my.indiv || DEX[my.sp].n}{my.indiv ? <span style={{ fontWeight: 400, fontSize: 10, color: "#8a9a6a" }}> · {DEX[my.sp].n}</span> : null} <span style={{ color: "#c9b88a" }}>Lv {my.lvl}</span>{my.psn ? " ☠️" : ""}{my.slp ? " 💤" : ""}{my.fear ? " 😨" : ""}{my.chill ? " 🧊" : ""}</div>
               <div style={{ margin: "3px 0" }}>{DEX[my.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
               <HPBar hp={my.hp} max={my.maxHp} />
               <div style={{ fontSize: 10, color: "#c9b88a", marginTop: 2 }}>{my.hp}/{my.maxHp} HP · XP {my.xp}/{xpNeed(my.lvl)}</div>
@@ -290,7 +290,7 @@
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {S.party.map((a, i) => i !== 0 && a.hp > 0 ? (
                   <button key={a.uid} style={btn("#2471a3")} onClick={() => forcedSwitch(i)}>
-                    {DEX[a.sp].n} Lv {a.lvl}
+                    {a.indiv || DEX[a.sp].n} Lv {a.lvl}
                   </button>
                 ) : null)}
               </div>
@@ -352,7 +352,7 @@
                 {S.party.map((a, i) => (a.hp > 0 || i === 0) ? null : (
                   <button key={a.uid} disabled={busy} style={{ ...btn("#c9457a"), opacity: busy ? 0.5 : 1 }}
                     onClick={() => takeTurn({ kind: "revive", idx: i })}>
-                    {DEX[a.sp].n} Lv {a.lvl}<div style={{ fontSize: 10, fontWeight: 400 }}>→ {Math.floor(a.maxHp / 2)} HP</div>
+                    {a.indiv || DEX[a.sp].n} Lv {a.lvl}<div style={{ fontSize: 10, fontWeight: 400 }}>→ {Math.floor(a.maxHp / 2)} HP</div>
                   </button>
                 ))}
                 <button disabled={busy} style={{ ...btn("#7d735f"), gridColumn: "1 / -1" }}
@@ -369,7 +369,7 @@
                   <button key={a.uid} disabled={busy || i === 0 || a.hp <= 0}
                     style={{ ...btn("#2471a3"), opacity: busy || i === 0 || a.hp <= 0 ? 0.45 : 1 }}
                     onClick={() => takeTurn({ kind: "freeSwitch", idx: i })}>
-                    {DEX[a.sp].n} Lv {a.lvl} · {a.hp}/{a.maxHp}
+                    {a.indiv || DEX[a.sp].n} Lv {a.lvl} · {a.hp}/{a.maxHp}
                   </button>
                 ))}
                 <button disabled={busy} style={{ ...btn("#7d735f"), gridColumn: "1 / -1" }}
@@ -386,7 +386,7 @@
                   <button key={a.uid} disabled={busy || i === 0 || a.hp <= 0}
                     style={{ ...btn("#2471a3"), opacity: busy || i === 0 || a.hp <= 0 ? 0.45 : 1 }}
                     onClick={() => takeTurn({ kind: "switch", idx: i })}>
-                    {DEX[a.sp].n} Lv {a.lvl} · {a.hp}/{a.maxHp}
+                    {a.indiv || DEX[a.sp].n} Lv {a.lvl} · {a.hp}/{a.maxHp}
                   </button>
                 ))}
                 <button disabled={busy} style={btn("#7d735f")} onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "main" } }))}>← Back</button>
@@ -552,6 +552,47 @@
           <button style={btnS(S.run ? "#c0651a" : "#7d735f")} onClick={() => setS((p) => ({ ...p, run: !p.run }))}>{S.run ? "🏃 Withdraw" : "🚶 Walk"}</button>
         </div>
       </div>
+
+      {S.storyOf && (() => {
+        const a = [...S.party, ...(S.box || [])].find((x) => x.uid === S.storyOf);
+        if (!a) return null;
+        const ind = individualOf(a.sp);
+        const info = INFO[a.sp];
+        return (
+          <div style={{ position: "fixed", inset: 0, background: "rgba(20,17,13,.93)", zIndex: 63,
+            display: "flex", alignItems: "center", justifyContent: "center", padding: 14, overflowY: "auto" }}>
+            <div style={{ ...panel, maxWidth: 430, width: "100%", padding: 14 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                <Sprite sp={a.sp} size={64} />
+                <div>
+                  <div style={{ fontSize: 16, fontWeight: 800, color: "#e8c547" }}>{a.indiv || ind.name}</div>
+                  <div style={{ fontSize: 11, color: "#c9b88a" }}>
+                    {DEX[a.sp].n}{ind.sex ? ` · ${ind.sex === "F" ? "female" : "male"}` : ""}
+                  </div>
+                  <div style={{ fontSize: 10, color: "#8a7f68" }}>{ind.since}</div>
+                </div>
+              </div>
+              <div style={{ fontSize: 12, lineHeight: 1.6, color: "#e0d4bb", whiteSpace: "pre-line",
+                borderLeft: "3px solid #5c5344", paddingLeft: 10, marginBottom: 12 }}>{ind.story}</div>
+              {info && (
+                <>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: "#e8c547", marginBottom: 5 }}>
+                    About {DEX[a.sp].n}s
+                  </div>
+                  <div style={{ fontSize: 11, lineHeight: 1.55, color: "#c9b88a" }}>
+                    {info.h ? <div>🌍 {info.h}</div> : null}
+                    {info.d ? <div>🍽️ {info.d}</div> : null}
+                    {info.s && STATUS_NAME[info.s] ? <div>📊 {STATUS_NAME[info.s]}</div> : null}
+                    {info.f ? <div style={{ marginTop: 6, color: "#e0d4bb" }}>{info.f}</div> : null}
+                  </div>
+                </>
+              )}
+              <button style={{ ...btnS("#7d735f"), width: "100%", marginTop: 12 }}
+                onClick={() => setS((p) => ({ ...p, storyOf: null }))}>Close</button>
+            </div>
+          </div>
+        );
+      })()}
 
       {S.pitch && (() => {
         const A = ARCS[S.pitch.arc], st = S;
@@ -724,11 +765,24 @@
                     style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 6px", borderBottom: "1px solid #5c5344", cursor: "pointer", background: i === 0 ? "rgba(232,197,71,.12)" : "none" }}>
                     <Sprite sp={a.sp} size={40} />
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 13, fontWeight: 700 }}>{DEX[a.sp].n} <span style={{ color: "#c9b88a" }}>Lv {a.lvl}</span> {i === 0 ? "⭐" : ""}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700 }}>
+                        {a.indiv || DEX[a.sp].n}
+                        {a.indiv ? <span style={{ fontWeight: 400, fontSize: 10, color: "#8a9a6a" }}> · {DEX[a.sp].n}</span> : null}
+                        <span style={{ color: "#c9b88a" }}> Lv {a.lvl}</span> {i === 0 ? "⭐" : ""}
+                      </div>
                       <div style={{ margin: "3px 0" }}>{DEX[a.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
                       <HPBar hp={a.hp} max={a.maxHp} />
                       <div style={{ fontSize: 10, color: "#c9b88a" }}>{a.hp}/{a.maxHp} HP · ATK {a.atk} DEF {a.def} SPD {a.spd}{DEX[a.sp].grows ? ` · grows up at Lv ${DEX[a.sp].grows.at}` : ""}</div>
                       <div style={{ fontSize: 10, color: "#a89a7d" }}>{a.moves.map((k) => MOVES[k].n).join(" · ")}</div>
+                      {/* Their history was written and then had nowhere to be
+                          read. Every animal you work with can now be asked
+                          about, from the screen where you already look at them. */}
+                      <button style={{ background: "#3a342b", color: "#c9b88a", border: "1px solid #5c5344",
+                        borderRadius: 9, padding: "4px 9px", fontFamily: "inherit", fontSize: 10,
+                        cursor: "pointer", marginTop: 5 }}
+                        onClick={() => setS((p) => ({ ...p, storyOf: a.uid }))}>
+                        📖 Their story
+                      </button>
                     </div>
                   </div>
                 ))}

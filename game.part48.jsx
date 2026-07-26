@@ -121,6 +121,19 @@
         + "the first bad season and leaves nothing at all. Prove me wrong. Genuinely. I would like to be wrong.",
   });
 
+  // ---- the station clinic ----
+  // There was no way to rest a team in the town the game starts in, so a first
+  // encounter that went badly meant walking all the way to Marula. The station
+  // treats animals; of course it has a clinic.
+  (() => {
+    const M = MAPS.town1;
+    // 5,9 is open ground on the walkable side of the pond
+    const y = 9, x = 5;
+    if (M.rows[y] && M.rows[y][x] !== "C") {
+      M.rows[y] = M.rows[y].slice(0, x) + "C" + M.rows[y].slice(x + 1);
+    }
+  })();
+
   // ---- the station's own animals ----
   // Every one of these is here because it cannot be anywhere else. Studying the
   // species in the field is what qualifies you to work with them.

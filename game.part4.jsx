@@ -1116,15 +1116,35 @@ function Wildlands() {
           const friend = clean({ ...en, hp: Math.max(1, en.hp) });
           dex[en.sp] = 2;
           if (b.kind === "legend") legends[en.sp] = "befriended";
+          // The wild animal goes back to what it was doing. What joins you is
+          // the station's own non-releasable animal of that species, who has a
+          // name and a history — so the party carries a person, not a specimen.
+          const ind = (typeof individualOf !== "undefined" && b.kind !== "legend")
+            ? individualOf(en.sp) : null;
+          if (ind) friend.indiv = ind.name;
           let dest;
-          if (party.length < 6) { party.push(friend); dest = "It joined your team!"; }
-          else {
+          if (party.length < 6) {
+            party.push(friend);
+            dest = ind ? `${ind.name} will work with you.` : "It joined your team!";
+          } else {
             friend.box = placeFor(friend.sp, box);
             box.push(friend);
-            dest = `Your team is full — it headed to the Sanctuary (${boxNameAt(friend.box)}).`;
+            dest = ind
+              ? `${ind.name} is waiting at the Sanctuary (${boxNameAt(friend.box)}) — your six are full.`
+              : `Your team is full — it headed to the Sanctuary (${boxNameAt(friend.box)}).`;
           }
-          snapBusy(b.kind === "legend" ? `🌟 ${BEFRIEND_LEGEND[en.sp]}` : `📖 The ${DEX[en.sp].n} lets you close enough. Notes taken, photographs made — it goes back to what it was doing.`, {}, "befriend");
-          snapEnd(`Field study complete — ${DEX[en.sp].n} (Lv ${en.lvl}) logged in the Guide. ${dest}` + (b.kind === "legend" ? " The land settles — the guardian chose you." : ""));
+          // Three separate beats, so none of them scrolls past before it can be
+          // read. The middle one is the whole thesis of the game and it was
+          // going by too fast to notice.
+          snapBusy(b.kind === "legend" ? `🌟 ${BEFRIEND_LEGEND[en.sp]}` : `📖 The ${DEX[en.sp].n} lets you close enough. Notes, measurements, photographs.`, {}, "befriend");
+          if (b.kind !== "legend") {
+            snapBusy(`🌿 It goes back to what it was doing. Nothing wild leaves this place with you.`);
+            snapBusy(`📔 ${DEX[en.sp].n} logged in your Field Guide — open it to read what you now know about them.`);
+            if (ind) snapBusy(`🏠 At the station there is a ${DEX[en.sp].n} who cannot go back.\n\n${ind.name} — ${ind.since}`);
+          }
+          snapEnd(b.kind === "legend"
+            ? `Field study complete — ${DEX[en.sp].n} logged. The land settles; the guardian chose you.`
+            : dest);
         } else {
           snapBusy(b.kind === "legend" ? "The Guardian regards the treat... and you. Not yet, its eyes say." : "It sniffed the treat... and darted back, wary!", {}, "miss");
           if (!enemyActs()) finishRound();
