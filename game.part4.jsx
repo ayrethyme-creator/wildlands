@@ -159,6 +159,43 @@ function Wildlands() {
     SFX.learn?.();
   };
 
+  // Studying a species in the field is what qualifies you to work with an
+  // animal of that species who is already here and cannot go back. The wild one
+  // you studied is still out there; this is a different animal entirely, and
+  // the game says so.
+  const meetIndividual = (sp) => {
+    const st = SR.current;
+    const ind = individualOf(sp);
+    if (!st.dex[sp]) {
+      say(`📋 "${ind.name}? Not yet. Go and study a wild ${DEX[sp].n} first — properly, in the field. `
+        + `I am not handing an animal to somebody who has only seen one in a book."`);
+      return;
+    }
+    if (st.party.some((a) => a.sp === sp) || (st.box || []).some((a) => a.sp === sp)) {
+      say(`🏠 ${ind.name} is already with you.`);
+      return;
+    }
+    say(`🏠 ${ind.name} — ${DEX[sp].n}${ind.sex ? `, ${ind.sex === "F" ? "female" : "male"}` : ""}\n${ind.since}\n\n${ind.story}`, [
+      { label: `Work with ${ind.name}`, act: () => {
+          const a = mk(sp, Math.max(5, Math.floor((SR.current.party[0]?.lvl || 5) * 0.85)));
+          a.indiv = ind.name;
+          setS((p) => {
+            const full = p.party.length >= 6;
+            return {
+              ...p,
+              party: full ? p.party : [...p.party, a],
+              box: full ? [...(p.box || []), a] : (p.box || []),
+              dialog: { text: full
+                ? `🏞️ ${ind.name} goes to the Sanctuary — your six are full.`
+                : `🤝 ${ind.name} joins you.` },
+            };
+          });
+          SFX.befriend?.();
+        } },
+      { label: "Not today", act: () => setS((p) => ({ ...p, dialog: null })) },
+    ]);
+  };
+
   const openPitch = (arcId) => setS((p) => ({ ...p, dialog: null, pitch: { arc: arcId, choice: null, verdict: null } }));
   const closePitch = () => setS((p) => ({ ...p, pitch: null }));
 
@@ -537,6 +574,16 @@ function Wildlands() {
       const tr = TRAINERS[idKey];
       if (!tr) return;
       if (tr.chat || !tr.team) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
+      // Once an arc is solved its people and places change what they say, and
+      // the emoji on the tile changes with them. The payoff has to be visible
+      // from the map rather than buried in a menu.
+      if (typeof beeloudSolvedText !== "undefined" && beeloudSolvedText[idKey]
+          && arcState(st, "beeloud").solved) {
+        const after = beeloudSolvedText[idKey];
+        say(`${after.em} ${after.name}: "${after.line}"`);
+        return;
+      }
+
       // Story people and examinable things. A finding is recorded once; after
       // that they say the same thing without re-announcing it, so the clearing
       // does not shout at you every time you cross it.
@@ -557,6 +604,18 @@ function Wildlands() {
           { label: "Write it down", act: () => learn(tr.arc, tr.learns.key, tr.learns.text) },
           { label: "Leave it", act: () => setS((p) => ({ ...p, dialog: null })) },
         ]);
+        return;
+      }
+      // The station keeper lists who is living here.
+      if (tr.station) {
+        const st2 = SR.current;
+        say(`👩🏾‍🌾 ${tr.name}: "${tr.line}"`,
+          tr.station.filter((sp) => DEX[sp]).slice(0, 8).map((sp) => {
+            const ind = individualOf(sp);
+            const known = !!st2.dex[sp];
+            return { label: `${known ? "" : "🔒 "}${ind.name} — ${DEX[sp].n}`,
+                     act: () => meetIndividual(sp) };
+          }).concat([{ label: "Another time", act: () => setS((p) => ({ ...p, dialog: null })) }]));
         return;
       }
       if (tr.pitchArc) {

@@ -415,7 +415,16 @@
             if (ch === "D" && o.solved) ch2 = ".";
             const t = TILE_STYLE(ch2, pal);
             let em = t.em, bg = t.bg;
-            if (ch2 === "R" || ch2 === "V") { const tr = TRAINERS[idKey]; if (tr && tr.em) em = tr.em; }
+            if (ch2 === "R" || ch2 === "V") {
+              const tr = TRAINERS[idKey];
+              if (tr && tr.em) em = tr.em;
+              // A solved arc redresses its own tiles, so the payoff is visible
+              // from the map rather than only inside a dialogue box.
+              if (typeof beeloudSolvedText !== "undefined" && beeloudSolvedText[idKey]
+                  && (S.arcs || {}).beeloud && S.arcs.beeloud.solved) {
+                em = beeloudSolvedText[idKey].em;
+              }
+            }
             if (ch2 === "X") { const g = GYMS[S.map]; if (g && g.em) em = g.em; }
             if (ch2 === "t") {
               const ti = (m.torches || []).findIndex((tt) => tt.x === x && tt.y === y);

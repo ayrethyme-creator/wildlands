@@ -100,5 +100,18 @@
         + "the first bad season and leaves nothing at all. Prove me wrong. Genuinely. I would like to be wrong.",
   });
 
-  console.log("[part48] Beeloud Clearing placed: 5 findings, Amara, Zuri");
+  // ---- the station's own animals ----
+  // Every one of these is here because it cannot be anywhere else. Studying the
+  // species in the field is what qualifies you to work with them.
+  put("town1:3,8", {
+    name: "Keeper Ruth",
+    em: "👩🏾‍🌾",
+    line: "These are the ones who cannot go back. Every single one of them is here because a person "
+        + "did something — took a cub, kept a fox in a bedroom, put up a window a bird could not see.\n\n"
+        + "You want to work with one of them, go and study a wild one first. Properly. In the field. "
+        + "I am not handing an animal to somebody who has only ever seen one in a book.",
+    station: ["badger", "dog", "barnowl", "cow", "meerkat", "redfox", "hedgehog", "stoat"],
+  });
+
+  console.log("[part48] Beeloud Clearing placed: 5 findings, Amara, Zuri, Keeper Ruth");
 })();
