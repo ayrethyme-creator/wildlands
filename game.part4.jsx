@@ -618,10 +618,16 @@ function Wildlands() {
     const foeName = () => (b.kind === "wild" ? "Wild " : b.kind === "legend" ? "Guardian " : "") + DEX[en.sp].n;
     const clean = (a) => { const { stg, psn, slp, fear, chill, ...r } = a; return { ...r }; };
 
+    // A landed blow bumps a counter the battle screen watches, and the counter
+    // doubles as a React key so a second hit restarts the shake instead of
+    // being swallowed by the animation already running.
+    const HITSOUNDS = new Set(["hit", "crit", "super", "weak"]);
+
     const snapBusy = (text, extras = {}, snd) => {
       const P = party.map((a) => ({ ...a })); P[0] = { ...my };
       const E = { ...en };
       steps.push((prev) => { if (snd) SFX[snd]?.(); return prev.battle ? {
+        hitFlash: HITSOUNDS.has(snd) ? (prev.hitFlash || 0) + 1 : (prev.hitFlash || 0),
         ...prev, party: P, items: { ...items }, box: [...box], badges,
         legends: { ...legends }, trainersBeaten: { ...tb }, dex: { ...dex },
         battle: { ...prev.battle, enemy: E, phase: "busy", log: [...prev.battle.log, text].slice(-4), mode: "main", ...extras },

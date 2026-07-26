@@ -6,7 +6,7 @@
     const pct = Math.max(0, (hp / max) * 100);
     const col = pct > 50 ? "#2ecc71" : pct > 20 ? "#f1c40f" : "#e74c3c";
     return (
-      <div style={{ background: "#33302a", borderRadius: 6, height: 10, overflow: "hidden", border: "1px solid #1e1c18" }}>
+      <div style={{ background: "#33302a", borderRadius: 11, height: 10, overflow: "hidden", border: "1px solid #1e1c18" }}>
         <div style={{ width: pct + "%", background: col, height: "100%", transition: "width .5s" }} />
       </div>
     );
@@ -20,6 +20,30 @@
          large enough that a screen full of creatures stops looking like a
          printed page. */
       @keyframes idleY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+
+      /* Every button acknowledges being pressed. On a touchscreen there is no
+         cursor and no hover, so without this a tap gives no sign it registered
+         until the game reacts - which reads as lag even when it is instant. */
+      button { transition: transform .09s ease, filter .09s ease; }
+      button:active:not(:disabled) { transform: scale(.955); filter: brightness(1.12); }
+
+      /* A hit you can feel. Two frames of shake is the whole trick - long
+         enough to register, short enough that it never gets in the way. */
+      @keyframes hitShake {
+        0%,100% { transform: translate(0,0); }
+        20% { transform: translate(-3px, 1px); }
+        40% { transform: translate(3px, -1px); }
+        60% { transform: translate(-2px, -1px); }
+        80% { transform: translate(2px, 1px); }
+      }
+      .shake { animation: hitShake .26s ease-in-out; }
+
+      /* Damage numbers rise and fade rather than simply appearing. */
+      @keyframes popUp {
+        0% { transform: translateY(6px) scale(.8); opacity: 0; }
+        30% { transform: translateY(-2px) scale(1.08); opacity: 1; }
+        100% { transform: translateY(-14px) scale(1); opacity: 0; }
+      }
       /* Anyone who has asked not to be animated is left alone. */
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
@@ -33,7 +57,7 @@
     color: "#f2e8d5",
     display: "flex", flexDirection: "column",
   };
-  const panel = { background: "#3a342b", border: "3px solid #5c5344", borderRadius: 12, padding: 12 };
+  const panel = { background: "#3a342b", border: "3px solid #5c5344", borderRadius: 16, padding: 12 };
   // Hold a direction to keep moving; release (or slide off) to stop.
   //
   // This deliberately does NOT use React's synthetic touch events: React
@@ -69,8 +93,8 @@
   );
 
   const btn = (bg = "#5c8a3a") => ({
-    background: bg, color: "#fff", border: "none", borderRadius: 10, padding: "12px 14px",
-    fontFamily: "inherit", fontWeight: 700, fontSize: 14, cursor: "pointer", boxShadow: "0 3px 0 rgba(0,0,0,.35)",
+    background: bg, color: "#fff", border: "none", borderRadius: 15, padding: "12px 14px",
+    fontFamily: "inherit", fontWeight: 700, fontSize: 14, cursor: "pointer", boxShadow: "0 3px 10px rgba(0,0,0,.34), 0 1px 0 rgba(255,255,255,.05) inset",
     touchAction: "none", userSelect: "none", WebkitUserSelect: "none", MozUserSelect: "none", msUserSelect: "none",
     WebkitTouchCallout: "none", WebkitTapHighlightColor: "transparent",
   });
@@ -146,7 +170,7 @@
           {saveStatus === "error" && (
             <div style={{ fontSize: 10, color: "#c9773a", textAlign: "center" }}>
               ⚠️ Save storage couldn't be read.
-              <button style={{ background: "#3a342b", color: "#c9b88a", border: "1px solid #5c5344", borderRadius: 6, padding: "4px 8px", fontFamily: "inherit", fontSize: 10, cursor: "pointer", marginLeft: 8 }}
+              <button style={{ background: "#3a342b", color: "#c9b88a", border: "1px solid #5c5344", borderRadius: 11, padding: "4px 8px", fontFamily: "inherit", fontSize: 10, cursor: "pointer", marginLeft: 8 }}
                 onClick={checkSave}>🔄 Retry</button>
             </div>
           )}
@@ -197,8 +221,11 @@
     const busy = b.phase === "busy";
     const foeLabel = b.kind === "wild" ? "Wild " : b.kind === "legend" ? "Guardian " : "";
     const arenaBg = b.kind === "legend" ? "linear-gradient(#4a3f6b,#8a7a5c)" : (ARENA[MAPS[S.map].zone] || ARENA.savanna);
+    // Keying on the hit counter remounts the wrapper, which is what makes the
+    // shake replay on every blow rather than only the first.
+    const shakeKey = S.hitFlash || 0;
     return (
-      <div style={{ ...frame, padding: 10 }}>
+      <div key={shakeKey} className={shakeKey ? "shake" : undefined} style={{ ...frame, padding: 10 }}>
         {KEYFRAMES}
         <div style={{ background: arenaBg, borderRadius: 14, border: "3px solid #5c5344", padding: 12, position: "relative", minHeight: 230 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -379,7 +406,7 @@
       </div>
 
       <div style={{ padding: "0 10px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "3px solid #5c5344", borderRadius: 10, overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : undefined), transition: "filter 1.2s ease" }}>
+        <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "3px solid #5c5344", borderRadius: 15, overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : undefined), transition: "filter 1.2s ease" }}>
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
             const idKey = `${S.map}:${x},${y}`;
@@ -416,25 +443,33 @@
                 boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined,
                 position: (glow || isPlayer) ? "relative" : undefined,
                 zIndex: glow ? 2 : isPlayer ? 3 : undefined }}>
-                {isPlayer
-                  ? (typeof Avatar !== "undefined"
-                      // Absolutely positioned, so the sprite cannot affect
-                      // layout. As a normal flex child at over 100% it made its
-                      // grid row taller than one cell, and every other cell in
-                      // that row - still square, sized by width - left the dark
-                      // container showing through as a black band across the
-                      // map. Anchored to the bottom of the tile so the ranger
-                      // stands on it and the head overhangs upward, which is
-                      // how a character sprite sits on a tile grid.
-                      ? <div style={{ position: "absolute", left: "-14%", right: "-14%",
-                          bottom: "-6%", pointerEvents: "none" }}>
-                          <Avatar dir={S.dir || "down"} swimming={S.swimming} size="100%" />
-                        </div>
-                      : (S.swimming ? "🏊" : "🚶"))
-                  : (grassBgImg ? "" : em)}
+                {grassBgImg ? "" : em}
               </div>
             );
           }))}
+
+          {/* The ranger lives above the grid rather than inside a cell.
+              Rendered into a tile it had to be destroyed and recreated in a
+              different cell on every step, so there was nothing for the browser
+              to animate and the character teleported. As a single element
+              positioned by transform, one CSS transition carries it between
+              tiles and the walk becomes continuous. The duration matches the
+              step timer, so running looks like running rather than like the
+              same walk played twice. */}
+          {typeof Avatar !== "undefined" && (
+            <div style={{
+              position: "absolute", left: 0, top: 0,
+              width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
+              transform: `translate(${S.x * 100}%, ${S.y * 100}%)`,
+              transition: `transform ${S.run === false ? 165 : 100}ms linear`,
+              pointerEvents: "none", zIndex: 4,
+              display: "flex", alignItems: "flex-end", justifyContent: "center",
+            }}>
+              <div style={{ width: "128%", marginBottom: "-6%" }}>
+                <Avatar dir={S.dir || "down"} swimming={S.swimming} size="100%" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -453,7 +488,7 @@
           <button style={btn("#5c5344")} ref={dpadRef(0, -1)}>{tri("up")}</button>
           <div />
           <button style={btn("#5c5344")} ref={dpadRef(-1, 0)}>{tri("left")}</button>
-          <div style={{ background: "#3a342b", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
+          <div style={{ background: "#3a342b", borderRadius: 13, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>
             {S.run ? "🏃" : "🚶"}
           </div>
           <button style={btn("#5c5344")} ref={dpadRef(1, 0)}>{tri("right")}</button>
@@ -642,7 +677,7 @@
                       const on = a && a.uid === S.boxSel;
                       return (
                         <div key={i} onClick={() => a && setS((p) => ({ ...p, boxSel: a.uid, relConfirm: null }))}
-                          style={{ aspectRatio: "1", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
+                          style={{ aspectRatio: "1", borderRadius: 13, display: "flex", alignItems: "center", justifyContent: "center",
                             border: on ? "2px solid #e8c547" : "1px dashed #5c5344",
                             background: a ? "rgba(255,255,255,.06)" : "transparent", cursor: a ? "pointer" : "default" }}>
                           {a && <Sprite sp={a.sp} size={30} />}
@@ -727,7 +762,7 @@
                       style={{ position: "fixed", inset: 0, background: "rgba(12,10,8,.88)", zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
                       <div onClick={(e) => e.stopPropagation()} style={{ background: "#241f19", border: "2px solid #5c5344", borderRadius: 14, padding: 14, maxWidth: 430, width: "100%", maxHeight: "88vh", overflowY: "auto" }}>
                         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                          <div style={{ background: "#2e2921", borderRadius: 10, padding: 4 }}><Sprite sp={sp} size={72} /></div>
+                          <div style={{ background: "#2e2921", borderRadius: 15, padding: 4 }}><Sprite sp={sp} size={72} /></div>
                           <div style={{ flex: 1 }}>
                             <div style={{ fontSize: 17, fontWeight: 700, color: "#f2ede0" }}>{d.n}</div>
                             <div style={{ margin: "4px 0" }}>{d.t.map((t) => <Chip key={t} t={t} small />)}</div>
@@ -745,7 +780,7 @@
                             {nfo.back && <div style={{ marginTop: 10, background: "#1e2a1c", borderLeft: "3px solid #4c9a3c", borderRadius: 4, padding: "6px 8px" }}><b style={{ color: "#8fe85c" }}>🧬 Bringing it back </b>{nfo.back}</div>}
                           </div>
                         ) : (
-                          <div style={{ marginTop: 10, fontSize: 11.5, color: "#8a7f68", lineHeight: 1.5, background: "#2e2921", borderRadius: 6, padding: 8 }}>
+                          <div style={{ marginTop: 10, fontSize: 11.5, color: "#8a7f68", lineHeight: 1.5, background: "#2e2921", borderRadius: 11, padding: 8 }}>
                             📓 Field notes for this one haven't been written yet — and I'd rather leave the page blank than make something up. What's below is measured from the world itself, so it's true.
                           </div>
                         )}
@@ -784,7 +819,7 @@
                           const v = S.dex[sp] || 0;
                           return (
                             <div key={sp} onClick={() => v > 0 && setS((p) => ({ ...p, guideSel: sp }))}
-                              style={{ background: "#2e2921", borderRadius: 8, padding: "6px 2px", textAlign: "center", cursor: v > 0 ? "pointer" : "default", border: `1px solid ${DEX[sp].legend && v > 0 ? "#e8c547" : v === 2 ? TYPE_COLORS[DEX[sp].t[0]] : "#4a4438"}` }}>
+                              style={{ background: "#2e2921", borderRadius: 13, padding: "6px 2px", textAlign: "center", cursor: v > 0 ? "pointer" : "default", border: `1px solid ${DEX[sp].legend && v > 0 ? "#e8c547" : v === 2 ? TYPE_COLORS[DEX[sp].t[0]] : "#4a4438"}` }}>
                               {v === 0
                                 ? <div style={{ fontSize: 22, height: 38, display: "flex", alignItems: "center", justifyContent: "center", color: "#5c5344" }}>?</div>
                                 : <div style={{ filter: v === 1 ? "grayscale(1) brightness(.8)" : "none", display: "flex", justifyContent: "center" }}><Sprite sp={sp} size={38} /></div>}
