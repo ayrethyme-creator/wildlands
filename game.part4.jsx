@@ -512,17 +512,24 @@ function Wildlands() {
     } else if (ch === "Y") {
       const g = GYMS[st.map];
       if (!g) return;
-      if (st.badges >= g.id) say(`🏟️ ${g.leader} salutes you from the stands. Badge ${g.id} shines on your collar.`);
+      if (st.badges >= g.id) {
+        const c2 = (typeof CERTS !== "undefined" && CERTS[g.id]) || null;
+        say(`📋 ${g.leader}: "You're signed off for ${c2 ? c2.title.toLowerCase() : "this district"}. `
+          + `${c2 ? c2.grants : ""} Don't make me regret it."`);
+      }
       else if (!(st.quiz || {})[`gym${g.id}`]) {
         // The leader will not fight a ranger who has not been paying attention
         // to the ground they walked in on.
-        say(`🏟️ ${g.leader} looks up. "Before we battle — five questions about the country between here and the last arena. I want to know you've been looking, not just walking."`, [
-          { label: "I'm ready", act: () => startExam("gym", g.id, `gym${g.id}`, `${g.leader}'s Field Exam`) },
+        const c = (typeof CERTS !== "undefined" && CERTS[g.id]) || null;
+        say(`📋 ${g.leader}: "You're here for ${c ? c.title.toLowerCase() : "assessment"}. Two parts — written, then practical.\n\n`
+          + `The written is five questions about the country between here and the last station. I want to know you've been looking, not just walking.\n\n`
+          + `${c ? c.note : ""}"`, [
+          { label: "Sit the written", act: () => startExam("gym", g.id, `gym${g.id}`, `${g.leader}'s Field Exam`) },
           { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
         ]);
       }
-      else say(`🏟️ ${m.name} Arena — ${g.leader}'s ${g.type}-type gauntlet awaits. Challenge?`, [
-        { label: "Challenge!", act: () => startBattle({ kind: "trainer", trainerName: g.leader, gym: g, team: g.team(), ti: 0, enemy: null }) },
+      else say(`📋 ${g.leader}: "Written's done. Practical now — ${g.type} work, four animals, and I want to see how you handle a bad matchup as much as a good one.\n\nReady when you are."`, [
+        { label: "Begin the practical", act: () => startBattle({ kind: "trainer", trainerName: g.leader, gym: g, team: g.team(), ti: 0, enemy: null }) },
         { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
       ]);
     } else if (ch === "L") {
