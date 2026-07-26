@@ -5,7 +5,20 @@
 // Thabo had a problem, which is its own quiet point.
 
 (() => {
-  const put = (key, def) => { TRAINERS[key] = { chat: true, ...def }; };
+  // An NPC is only drawn and only triggered on an "R" tile. Placing one on
+  // plain ground puts an invisible, unreachable person there - which is exactly
+  // what happened first time round, because "walkable" and "can hold a person"
+  // are not the same test. Stamp the tile as we place them.
+  const put = (key, def) => {
+    const [map, xy] = key.split(":");
+    const [x, y] = xy.split(",").map(Number);
+    const M = MAPS[map];
+    if (M && M.rows[y] && M.rows[y][x] !== "R" && M.rows[y][x] !== "V") {
+      const row = M.rows[y];
+      M.rows[y] = row.slice(0, x) + "R" + row.slice(x + 1);
+    }
+    TRAINERS[key] = { chat: true, ...def };
+  };
 
   // ---- Thabo Sithole, on the south edge of the clearing ----
   // He is not angry at the animal and the game should establish that in his

@@ -573,7 +573,12 @@ function Wildlands() {
     } else if (ch === "R") {
       const tr = TRAINERS[idKey];
       if (!tr) return;
-      if (tr.chat || !tr.team) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
+      // Story people are chat NPCs too, so they have to be handled BEFORE the
+      // generic chat line - otherwise every one of them just recites its
+      // opening speech forever and nothing can be learned, pitched or built.
+      const isStory = tr.learns || tr.pitchArc || tr.station
+        || (typeof beeloudSolvedText !== "undefined" && beeloudSolvedText[idKey]);
+      if (!isStory && (tr.chat || !tr.team)) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
       // Once an arc is solved its people and places change what they say, and
       // the emoji on the tile changes with them. The payoff has to be visible
       // from the map rather than buried in a menu.
