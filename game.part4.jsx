@@ -631,15 +631,19 @@ function Wildlands() {
         return;
       }
       if (tr.pitchArc) {
-        const A = ARCS[tr.pitchArc];
-        const cur = arcState(st, tr.pitchArc);
+        // She works whichever arc is still open, in order — so one benefactor
+        // serves all twelve regions without needing twelve copies of her.
+        const list = tr.pitchArcs || [tr.pitchArc];
+        const live = list.find((id) => ARCS[id] && arcState(st, id).stage !== "done") || list[list.length - 1];
+        const A = ARCS[live];
+        const cur = arcState(st, live);
         if (cur.stage === "done") { say(`👩🏿‍🏫 ${tr.name}: "The hives are holding. Write down what you did and when — in three years neither of us will remember."`); return; }
         if (cur.stage === "build") {
           say(`👩🏿‍🏫 ${tr.name}: "It is funded. Go and put it in — I do not pay people to plan things."`);
           return;
         }
         say(`👩🏿‍🏫 ${tr.name}: "${tr.line}"`, [
-          { label: `Pitch: ${A.title}`, act: () => openPitch(tr.pitchArc) },
+          { label: `Pitch: ${A.title}`, act: () => openPitch(live) },
           { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
         ]);
         return;

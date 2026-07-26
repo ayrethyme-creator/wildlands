@@ -109,6 +109,8 @@
         + "who will listen, and not one person from this station has asked him a single useful question. "
         + "Go and ask him something useful. Then come back and tell me what it costs.",
     pitchArc: "beeloud",
+    // She takes whichever arc is live. Once Beeloud is solved she has the fen.
+    pitchArcs: ["beeloud", "reedwater"],
   });
 
   // ---- Zuri, at the end of the region ----
