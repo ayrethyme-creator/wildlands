@@ -97,6 +97,20 @@ const USABLE_FACT = (sp) => {
   return ((one ? one[0] : f).trim().length) >= 44;
 };
 
+// Take whole sentences up to a limit rather than cutting one in half.
+const sentenceFor = (raw, limit) => {
+  const parts = String(raw).match(/[^.!?]+[.!?]+/g) || [String(raw)];
+  let out = "";
+  for (const p of parts) {
+    if (out && (out + p).trim().length > limit) break;
+    out += p;
+    if (out.trim().length >= limit * 0.55) break;   // one good sentence is plenty
+  }
+  out = out.trim() || parts[0].trim();
+  if (out.length > limit) out = out.slice(0, limit - 1).replace(/\s+\S*$/, "") + "…";
+  return out;
+};
+
 const firstSentence = (s) => {
   const m = String(s).match(/^.*?[.!?](?=\s|$)/);
   let t = (m ? m[0] : String(s)).trim();
@@ -280,17 +294,41 @@ const buildExam = (gymId, seed) => {
     if (talkable[n].length < 4) talkable[n] = regionSpecies(n, 1).filter((sp) => INFO[sp] && INFO[sp].f);
   }
 
-  // Short openers, so the note sounds like someone mentioning it rather than
-  // quoting a book at you.
-  const LEAD = [
-    (n) => `Seen a ${n} out here?`,
-    (n) => `Ask me about the ${n}.`,
-    (n) => `Most people walk past the ${n}.`,
-    (n) => `My notes on the ${n}:`,
-    (n) => `Catch a ${n} and read its entry.`,
-    (n) => `The ${n} surprised me.`,
-    (n) => `Worth knowing about the ${n}:`,
-    (n) => `You want to know the ${n}?`,
+  // The trainer says ONE thing, and it is the interesting one. Their old line
+  // was generic filler - "The tall grass taught me everything!" - and keeping
+  // it meant every trainer recited a platitude and then a fact, which read as
+  // two people talking.
+  //
+  // Twenty-four shapes, and they are structurally different rather than
+  // differently worded. Some ask, some assert, some put the fact first and
+  // attribute it afterwards, some are a person remembering something. A
+  // template that always opens "[Something] about the [animal]:" is still one
+  // template however many ways you phrase it.
+  const SAY = [
+    (n, f) => `Seen a ${n} out here? ${f}`,
+    (n, f) => `${f} That's the ${n} for you.`,
+    (n, f) => `Ask me about the ${n} — ${f.charAt(0).toLowerCase() + f.slice(1)}`,
+    (n, f) => `Everyone walks past the ${n}. ${f}`,
+    (n, f) => `${f} Nobody believes me about the ${n} until they see it.`,
+    (n, f) => `I keep notes. ${n}: ${f}`,
+    (n, f) => `You know what got me about the ${n}? ${f}`,
+    (n, f) => `${f} Look it up. ${n}.`,
+    (n, f) => `Catch a ${n} sometime and read the entry. ${f}`,
+    (n, f) => `The ${n} surprised me. ${f}`,
+    (n, f) => `Right — ${n}. ${f} Now you know.`,
+    (n, f) => `${f} I had to read that twice. It's the ${n}.`,
+    (n, f) => `My grandmother told me about the ${n} before any book did. ${f}`,
+    (n, f) => `Here's one. ${f} ${n}.`,
+    (n, f) => `Nobody teaches you this. ${f} The ${n} does.`,
+    (n, f) => `${n}. ${f} That's the whole of it.`,
+    (n, f) => `I've watched ${n}s for years. ${f}`,
+    (n, f) => `Bet you didn't know — ${f.charAt(0).toLowerCase() + f.slice(1)} That's a ${n}.`,
+    (n, f) => `${f} Every ${n} out here is doing that right now.`,
+    (n, f) => `The thing about a ${n} is this. ${f}`,
+    (n, f) => `Somebody asked me last week what a ${n} does. ${f}`,
+    (n, f) => `${f} I still think about that. ${n}.`,
+    (n, f) => `Field note, ${n}. ${f}`,
+    (n, f) => `You'll meet a ${n} soon enough. When you do — ${f.charAt(0).toLowerCase() + f.slice(1)}`,
   ];
 
   let touched = 0, skipped = 0;
@@ -311,7 +349,16 @@ const buildExam = (gymId, seed) => {
     counter[n] = (counter[n] || 0) + 1;
     const sp = pool[(h + counter[n] * 7) % pool.length];
 
-    t.fact = `${LEAD[h % LEAD.length](DEX[sp].n)} ${firstSentence(INFO[sp].f)}`;
+    // The fact becomes what they say. Their old line is kept on the object in
+    // case it is ever wanted, but it is no longer spoken - a trainer says one
+    // interesting thing instead of one dull thing followed by an interesting one.
+    t.oldLine = t.line;
+    // A quiz option has to fit one of four buttons; a line of dialogue has a
+    // whole box. Using the quiz's 116-character cap here was cutting facts off
+    // mid-thought with an ellipsis, which reads as a fault rather than a person
+    // trailing off.
+    t.line = SAY[h % SAY.length](DEX[sp].n, sentenceFor(INFO[sp].f, 210));
+    t.fact = t.line;
     t.factSp = sp;
     touched++;
   });
