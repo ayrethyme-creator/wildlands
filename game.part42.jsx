@@ -12,10 +12,10 @@
 // answer. Reading your own guide entries is the intended way to pass.
 
 // ---- 1. carve the world into the ground before each gym ----
-const GYM_ORDER = ["town2", "apiary", "town3", "town4", "highstation", "town5",
+let GYM_ORDER = ["town2", "apiary", "town3", "town4", "highstation", "town5",
                    "town6", "town7", "frostwatch", "town8", "eyrie", "town9"];
 
-const REGION_MAPS = (() => {
+let REGION_MAPS = (() => {
   const nbrs = (k) => Object.values(MAPS[k].exits || {}).map((e) => e.map).filter((m) => MAPS[m]);
   const claimed = new Set();
   const out = {};
@@ -44,7 +44,7 @@ const REGION_MAPS = (() => {
 // share the same approach, and so do a few later pairs - so their own stretch
 // comes out empty. Those inherit the previous gym's ground, which is honest:
 // it is the same walk, and the player has seen exactly the same signs.
-const QUIZ_MAPS = (() => {
+let QUIZ_MAPS = (() => {
   const out = {};
   for (let n = 1; n <= 12; n++) {
     let ms = REGION_MAPS[n] || [];
@@ -54,6 +54,44 @@ const QUIZ_MAPS = (() => {
   }
   return out;
 })();
+
+// Rebuilt on demand, because the gym ladder can change after this file loads -
+// part53 splices a thirteenth gym into the middle of it, and the exam regions
+// have to be recut around the new road or the last gym has no country to ask
+// about.
+const rebuildRegions = () => {
+  const nbrs = (k) => Object.values(MAPS[k].exits || {}).map((e) => e.map).filter((m) => MAPS[m]);
+  const claimed = new Set();
+  const out = {};
+  let start = "town1";
+  GYM_ORDER.forEach((gm, i) => {
+    const later = new Set(GYM_ORDER.slice(i));
+    const seen = new Set([start]);
+    const q = [start];
+    while (q.length) {
+      const cur = q.shift();
+      nbrs(cur).forEach((n) => {
+        if (seen.has(n) || claimed.has(n)) return;
+        seen.add(n);
+        if (!later.has(n)) q.push(n);
+      });
+    }
+    const region = [...seen].filter((m) => !claimed.has(m));
+    region.forEach((m) => claimed.add(m));
+    out[i + 1] = region;
+    start = gm;
+  });
+  REGION_MAPS = out;
+  const qm = {};
+  for (let n = 1; n <= GYM_ORDER.length; n++) {
+    let ms = REGION_MAPS[n] || [];
+    let back = n;
+    while (ms.length < 3 && back > 1) { back--; ms = ms.concat(REGION_MAPS[back] || []); }
+    qm[n] = ms;
+  }
+  QUIZ_MAPS = qm;
+  return qm;
+};
 
 // ---- 2. what lives, stands and walks in each stretch ----
 // "Common" means the grass will actually offer it. Rare spawns are excluded, so

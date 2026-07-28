@@ -172,9 +172,13 @@ OUTPOSTS.forEach(([host, key, name, sign]) => {
 
 // ---- engine: eight badges become twelve, and the perks move with the ladder ----
 // The perk gyms shifted: Venom (Soar) 3 -> 4, Armor (Push) 5 -> 7.
-const GYM_COUNT = LADDER.length;
+// let, not const: part53 adds a thirteenth gym and everything that counts them
+// - legendary requirements, exam regions - has to see the new number.
+let GYM_COUNT = LADDER.length;
 const SOAR_AT = LADDER.find((g) => g[3] === "Venom")[1];
-const PUSH_AT = LADDER.find((g) => g[3] === "Armor")[1];
+// let, not const: part53 inserts a fifth gym and every badge after it moves up
+// by one, so the badge this unlock hangs off has to move with it.
+let PUSH_AT = LADDER.find((g) => g[3] === "Armor")[1];
 const SWIM_AT = LADDER.find((g) => g[3] === "Predator")[1];
 
 // every guardian now waits for the full ladder
