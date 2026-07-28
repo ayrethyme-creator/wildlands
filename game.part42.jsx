@@ -304,35 +304,49 @@ const buildExam = (gymId, seed) => {
   // attribute it afterwards, some are a person remembering something. A
   // template that always opens "[Something] about the [animal]:" is still one
   // template however many ways you phrase it.
+  // Every line names the animal in its first few words.
+  //
+  // The previous set led with the fact and revealed the animal at the end,
+  // which was a mistake even though the templates were well distributed: you
+  // read a striking fact with no idea what it is about, and only find out
+  // afterwards. Thirty-five percent of lines did not name the animal until
+  // their last two-fifths, and several of them closed on the same move — "…
+  // That's the Ringtail for you." Different words, same trick, and it read as
+  // one trainer repeated a hundred times.
+  //
+  // So: subject first, always. The variety lives in what surrounds it — who is
+  // speaking, why they are telling you, what they think of it — not in
+  // withholding what they are talking about.
   const SAY = [
     (n, f) => `Seen a ${n} out here? ${f}`,
-    (n, f) => `${f} That's the ${n} for you.`,
-    (n, f) => `Ask me about the ${n} — ${f.charAt(0).toLowerCase() + f.slice(1)}`,
-    (n, f) => `Everyone walks past the ${n}. ${f}`,
-    (n, f) => `${f} Nobody believes me about the ${n} until they see it.`,
-    (n, f) => `I keep notes. ${n}: ${f}`,
+    (n, f) => `${n}s. ${f}`,
+    (n, f) => `Ask me about the ${n}. ${f}`,
+    (n, f) => `Everyone walks straight past the ${n}. ${f}`,
+    (n, f) => `The ${n} — and I mean this — ${f.charAt(0).toLowerCase() + f.slice(1)}`,
+    (n, f) => `I keep notes on the ${n}. ${f}`,
     (n, f) => `You know what got me about the ${n}? ${f}`,
-    (n, f) => `${f} Look it up. ${n}.`,
-    (n, f) => `Catch a ${n} sometime and read the entry. ${f}`,
+    (n, f) => `Look up the ${n} sometime. ${f}`,
+    (n, f) => `Catch a ${n} and read the entry. ${f}`,
     (n, f) => `The ${n} surprised me. ${f}`,
-    (n, f) => `Right — ${n}. ${f} Now you know.`,
-    (n, f) => `${f} I had to read that twice. It's the ${n}.`,
-    (n, f) => `My grandmother told me about the ${n} before any book did. ${f}`,
-    (n, f) => `Here's one. ${f} ${n}.`,
-    (n, f) => `Nobody teaches you this. ${f} The ${n} does.`,
-    (n, f) => `${n}. ${f} That's the whole of it.`,
+    (n, f) => `Right — the ${n}. ${f}`,
+    (n, f) => `I had to read the ${n} entry twice. ${f}`,
+    (n, f) => `My grandmother told me about ${n}s before any book did. ${f}`,
+    (n, f) => `Here's one about the ${n}. ${f}`,
+    (n, f) => `Nobody teaches you about the ${n}. ${f}`,
+    (n, f) => `The ${n} is the one I'd tell you about. ${f}`,
     (n, f) => `I've watched ${n}s for years. ${f}`,
-    (n, f) => `Bet you didn't know — ${f.charAt(0).toLowerCase() + f.slice(1)} That's a ${n}.`,
-    (n, f) => `${f} Every ${n} out here is doing that right now.`,
+    (n, f) => `Bet you didn't know this about the ${n}. ${f}`,
+    (n, f) => `There's a ${n} out here doing this right now. ${f}`,
     (n, f) => `The thing about a ${n} is this. ${f}`,
     (n, f) => `Somebody asked me last week what a ${n} does. ${f}`,
-    (n, f) => `${f} I still think about that. ${n}.`,
+    (n, f) => `I still think about the ${n}. ${f}`,
     (n, f) => `Field note, ${n}. ${f}`,
-    (n, f) => `You'll meet a ${n} soon enough. When you do — ${f.charAt(0).toLowerCase() + f.slice(1)}`,
+    (n, f) => `You'll meet a ${n} soon enough. ${f}`,
   ];
 
+
   let touched = 0, skipped = 0;
-  const counter = {};
+  const used = {};
   Object.keys(TRAINERS).forEach((key) => {
     const t = TRAINERS[key];
     if (!t || !t.line) return;
@@ -346,8 +360,22 @@ const buildExam = (gymId, seed) => {
 
     let h = 0;
     for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
-    counter[n] = (counter[n] || 0) + 1;
-    const sp = pool[(h + counter[n] * 7) % pool.length];
+
+    // Hashing into the pool let two trainers in the same region land on the
+    // same animal - four of them ended up on the farm dog, and a player walking
+    // one route heard the same fact twice. Walk the pool in order instead,
+    // offset by the region, so a region exhausts its animals before repeating
+    // any. The offset keeps the assignment stable rather than dependent on
+    // which trainer happens to be processed first.
+    used[n] = used[n] || new Set();
+    const start = (h + n * 13) % pool.length;
+    let sp = null;
+    for (let step = 0; step < pool.length; step++) {
+      const cand = pool[(start + step) % pool.length];
+      if (!used[n].has(cand)) { sp = cand; break; }
+    }
+    if (!sp) sp = pool[start];        // pool smaller than the region's trainers
+    used[n].add(sp);
 
     // The fact becomes what they say. Their old line is kept on the object in
     // case it is ever wanted, but it is no longer spoken - a trainer says one
