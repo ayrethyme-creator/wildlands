@@ -534,7 +534,95 @@ Object.assign(ART, {
   nian: giantM({ fur: "#c94a3a", horns: true, shag: true, skin: "#e8853a" }),
   bixi: armorA({ hide: "#6b8a5c", scutes: true, beakC: "#c9b98a" }),
   taotie: giantM({ fur: "#5c4c6b", horns: true, tusks: true }),
-  kitsune: beastM(canArt({ fur: "#f2ede0", inner: "#e8a5a5", muzzle: "#fff8ec", iris: "#d9a43a" }), { tails: true, tailC: "#f2ede0", aura: "#e8c547" }),
+  // The kitsune was a side-profile dog with three squiggly lines added beside
+  // it, because it was built from the generic canid art plus a "tails" flag.
+  // A nine-tailed fox is a front-on animal — the whole image of it is the fan
+  // behind the shoulders — so it gets its own drawing.
+  kitsune: (er) => {
+    const FUR = "#f4efe2", RED = "#d9663a", TIP = "#fffdf6";
+    const gB = gid("ksb", FUR), gT = gid("kst", FUR);
+    // Nine tails on an arc behind the shoulders, base at the hips, tips
+    // spread from lower-left round to lower-right. Drawn back-to-front from
+    // the outside in, so the near tails overlap the far ones.
+    const tails = [];
+    const N = 9, cx = 32, cy = 45;
+    for (let i = 0; i < N; i++) {
+      const a = (172 - i * 20.5) * Math.PI / 180;    // 172° down to 8°, a wider sweep
+      const len = 26 + (i % 2 ? 0 : 3);              // alternate lengths so the fan is not a rainbow
+      const tx = cx + Math.cos(a) * len;
+      const ty = cy - Math.sin(a) * len;
+      const mx = cx + Math.cos(a) * len * 0.55 - Math.sin(a) * 3.4;
+      const my = cy - Math.sin(a) * len * 0.55 - Math.cos(a) * 3.4;
+      const w = 2.25;                                // narrow enough that nine read as nine
+      const px = -Math.sin(a) * w, py = -Math.cos(a) * w;
+      tails.push(
+        <g key={i}>
+          <path d={`M${cx + px},${cy + py} Q${mx},${my} ${tx},${ty} Q${mx - px * 1.5},${my - py * 1.5} ${cx - px},${cy - py} Z`}
+            fill={`url(#${gT})`} stroke={sh(FUR, -0.52)} strokeWidth="1" strokeLinejoin="round" />
+          {/* every kitsune tail ends white */}
+          <path d={`M${tx},${ty} Q${mx + (tx - mx) * 0.45},${my + (ty - my) * 0.45} ${tx - px * 0.8},${ty - py * 0.8}`}
+            stroke={TIP} strokeWidth="2.1" strokeLinecap="round" fill="none" opacity=".95" />
+        </g>
+      );
+    }
+    return (
+      <g>
+        <defs>
+          <linearGradient id={gT} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor={TIP} />
+            <stop offset=".45" stopColor={FUR} />
+            <stop offset="1" stopColor={sh(FUR, -0.16)} />
+          </linearGradient>
+          <radialGradient id={gB} cx=".38" cy=".3" r=".8">
+            <stop offset="0" stopColor={sh(FUR, 0.1)} />
+            <stop offset="1" stopColor={sh(FUR, -0.2)} />
+          </radialGradient>
+        </defs>
+
+        {/* foxfire, which is the other half of the legend */}
+        <circle cx="12" cy="20" r="2.6" fill="#ffd964" opacity=".85" />
+        <circle cx="52" cy="17" r="2" fill="#ffd964" opacity=".7" />
+        <circle cx="12" cy="20" r="5" fill="#ffd964" opacity=".18" />
+        <circle cx="52" cy="17" r="4" fill="#ffd964" opacity=".15" />
+
+        {tails}
+
+        {/* sitting body, front on */}
+        <path d="M22,58 Q21,42 32,40 Q43,42 42,58 Z" fill={`url(#${gB})`}
+          stroke={sh(FUR, -0.32)} strokeWidth=".9" strokeLinejoin="round" />
+        <path d="M27,58 Q26,47 32,45 Q38,47 37,58 Z" fill={TIP} opacity=".8" />
+        {/* forepaws */}
+        <ellipse cx="26" cy="57.5" rx="4" ry="2.6" fill={TIP} stroke={sh(FUR, -0.3)} strokeWidth=".7" />
+        <ellipse cx="38" cy="57.5" rx="4" ry="2.6" fill={TIP} stroke={sh(FUR, -0.3)} strokeWidth=".7" />
+
+        {/* ears — large, upright, set wide */}
+        <path d="M20,30 L16,11 L30,23 Z" fill={`url(#${gB})`} stroke={sh(FUR, -0.32)} strokeWidth=".9" strokeLinejoin="round" />
+        <path d="M44,30 L48,11 L34,23 Z" fill={`url(#${gB})`} stroke={sh(FUR, -0.32)} strokeWidth=".9" strokeLinejoin="round" />
+        <path d="M21.5,28 L19,16 L27.5,23.5 Z" fill={RED} opacity=".85" />
+        <path d="M42.5,28 L45,16 L36.5,23.5 Z" fill={RED} opacity=".85" />
+
+        {/* head */}
+        <path d="M32,17 Q45,19 44,31 Q43,42 32,44 Q21,42 20,31 Q19,19 32,17 Z"
+          fill={`url(#${gB})`} stroke={sh(FUR, -0.32)} strokeWidth="1" strokeLinejoin="round" />
+        {/* the cheek marks, which are what makes a fox read as a kitsune */}
+        <path d="M22,29 Q19,33 21,37 Q24,35 24.5,30 Z" fill={RED} opacity=".7" />
+        <path d="M42,29 Q45,33 43,37 Q40,35 39.5,30 Z" fill={RED} opacity=".7" />
+        <path d="M32,20 Q35,25 32,27 Q29,25 32,20 Z" fill={RED} opacity=".55" />
+        {/* muzzle */}
+        <path d="M26,36 Q32,33 38,36 Q37,43 32,44.5 Q27,43 26,36 Z" fill={TIP} />
+        <path d="M32,38.5 L29.6,36.6 L34.4,36.6 Z" fill="#3a2a24" />
+        <path d="M32,38.5 L32,41 M32,41 Q29.6,42.4 28.4,40.8 M32,41 Q34.4,42.4 35.6,40.8"
+          stroke="#3a2a24" strokeWidth=".8" fill="none" strokeLinecap="round" />
+        {/* eyes — narrow, golden, knowing */}
+        <path d="M23.5,29.5 Q26.5,26.5 29.5,29.5 Q26.5,32 23.5,29.5 Z" fill="#e8b13a" stroke="#3a2a24" strokeWidth=".7" />
+        <path d="M34.5,29.5 Q37.5,26.5 40.5,29.5 Q37.5,32 34.5,29.5 Z" fill="#e8b13a" stroke="#3a2a24" strokeWidth=".7" />
+        <ellipse cx="26.5" cy="29.4" rx={1.15 * er} ry={1.7 * er} fill="#2a1f1a" />
+        <ellipse cx="37.5" cy="29.4" rx={1.15 * er} ry={1.7 * er} fill="#2a1f1a" />
+        <circle cx="26.1" cy="28.7" r=".45" fill="#fff" opacity=".9" />
+        <circle cx="37.1" cy="28.7" r=".45" fill="#fff" opacity=".9" />
+      </g>
+    );
+  },
   tanuki: canArt({ fur: "#8a745c", earRound: true, mask: "#4c4038", muzzle: "#c9b59a" }),
   kappa: ceratoA({ hide: "#5c8a5c", frill: "#4c7a4c", frillIn: "#5c8a5c", dome: true, domeC: "#8fd9e8", beakC: "#e8c547" }),
   tengu: birdM({ body: "#c94a3a", mask: "#a33428", plume: true, plumeC: "#26292e", beakC: "#8a3428" }),
