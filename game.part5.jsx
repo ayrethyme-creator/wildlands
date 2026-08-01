@@ -143,13 +143,91 @@
                     {sm ? (
                       <>
                         <button style={{ ...btnS("#27ae60"), flex: 2 }} onClick={() => continueGame(n)}>▶ Continue</button>
+                        <button style={{ ...btnS("#4a7ba7"), flex: 1 }} onClick={() => exportSlot(n)}>⇪ Code</button>
                         <button style={{ ...btnS("#7d735f"), flex: 1 }}
                           onClick={() => setS((p) => ({ ...p, eraseAsk: p.eraseAsk === n ? null : n }))}>🗑️</button>
                       </>
                     ) : (
-                      <button style={{ ...btnS("#c0392b"), flex: 1 }} onClick={() => startNewIn(n)}>✦ New Game</button>
+                      <>
+                        <button style={{ ...btnS("#c0392b"), flex: 2 }} onClick={() => startNewIn(n)}>✦ New Game</button>
+                        <button style={{ ...btnS("#4a7ba7"), flex: 1 }} onClick={() => openImport(n)}>⇩ Code</button>
+                      </>
                     )}
                   </div>
+                  {S.codePanel && S.codePanel.slot === n && (
+                    <div style={{ marginTop: 8, borderTop: "1px solid #5c5344", paddingTop: 8 }}>
+                      {S.codePanel.mode === "export" && (
+                        <>
+                          <div style={{ fontSize: 10, color: "#e8c547", marginBottom: 6, lineHeight: 1.5 }}>
+                            This is File {n} written out as text. Keep it somewhere safe — pasting it
+                            back restores this game on any device.
+                          </div>
+                          {S.codePanel.busy ? (
+                            <div style={{ fontSize: 10, color: "#8a7f68", padding: "10px 0" }}>Building code…</div>
+                          ) : (
+                            <textarea readOnly value={S.codePanel.text}
+                              onFocus={(e) => e.target.select()}
+                              style={{ width: "100%", height: 76, resize: "vertical", background: "#241f19",
+                                color: "#c9b88a", border: "1px solid #5c5344", borderRadius: 4,
+                                fontSize: 9, fontFamily: "ui-monospace, Menlo, monospace",
+                                padding: 6, lineHeight: 1.35, wordBreak: "break-all" }} />
+                          )}
+                          <div style={{ fontSize: 9, color: "#8a7f68", margin: "4px 0 6px" }}>
+                            {S.codePanel.text ? `${S.codePanel.text.length.toLocaleString()} characters — copy all of it` : ""}
+                          </div>
+                          <div style={{ display: "flex", gap: 6 }}>
+                            <button style={{ ...btnS("#4a7ba7"), flex: 2 }}
+                              disabled={!S.codePanel.text}
+                              onClick={() => {
+                                const code = S.codePanel.text;
+                                if (navigator.clipboard && navigator.clipboard.writeText) {
+                                  navigator.clipboard.writeText(code)
+                                    .then(() => setS((p) => ({ ...p, codePanel: { ...p.codePanel, copied: true } })))
+                                    .catch(() => setS((p) => ({ ...p, codePanel: { ...p.codePanel,
+                                      err: "Could not copy automatically — select the text and copy it by hand." } })));
+                                } else {
+                                  setS((p) => ({ ...p, codePanel: { ...p.codePanel,
+                                    err: "Select the text above and copy it by hand." } }));
+                                }
+                              }}>{S.codePanel.copied ? "✓ Copied" : "Copy"}</button>
+                            <button style={{ ...btnS("#7d735f"), flex: 1 }} onClick={closeCodePanel}>Done</button>
+                          </div>
+                        </>
+                      )}
+                      {S.codePanel.mode === "import" && (
+                        <>
+                          <div style={{ fontSize: 10, color: "#e8c547", marginBottom: 6, lineHeight: 1.5 }}>
+                            Paste a save code to load it into File {n}.
+                          </div>
+                          <textarea value={S.codePanel.text || ""}
+                            onChange={(e) => setCodeText(e.target.value)}
+                            placeholder="WLD1.…"
+                            style={{ width: "100%", height: 76, resize: "vertical", background: "#241f19",
+                              color: "#c9b88a", border: "1px solid #5c5344", borderRadius: 4,
+                              fontSize: 9, fontFamily: "ui-monospace, Menlo, monospace",
+                              padding: 6, lineHeight: 1.35, wordBreak: "break-all" }} />
+                          <div style={{ display: "flex", gap: 6, marginTop: 6 }}>
+                            <button style={{ ...btnS("#27ae60"), flex: 2 }}
+                              onClick={() => importIntoSlot(n, S.codePanel.text)}>Load into File {n}</button>
+                            <button style={{ ...btnS("#7d735f"), flex: 1 }} onClick={closeCodePanel}>Cancel</button>
+                          </div>
+                        </>
+                      )}
+                      {S.codePanel.mode === "done" && (
+                        <>
+                          <div style={{ fontSize: 10, color: "#8fce77", marginBottom: 6 }}>
+                            Loaded into File {n}. Press Continue to pick it up.
+                          </div>
+                          <button style={{ ...btnS("#7d735f"), width: "100%" }} onClick={closeCodePanel}>OK</button>
+                        </>
+                      )}
+                      {S.codePanel.err && (
+                        <div style={{ fontSize: 10, color: "#e08e78", marginTop: 6, lineHeight: 1.5 }}>
+                          {S.codePanel.err}
+                        </div>
+                      )}
+                    </div>
+                  )}
                   {S.eraseAsk === n && (
                     <div style={{ marginTop: 8, borderTop: "1px solid #5c5344", paddingTop: 8 }}>
                       <div style={{ fontSize: 10, color: "#e8c547", marginBottom: 6 }}>
