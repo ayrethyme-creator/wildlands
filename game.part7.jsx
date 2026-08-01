@@ -251,10 +251,13 @@ const hoofM = (o) => (er) => {
       </linearGradient>
     </defs>
     <ellipse cx="31" cy="57.4" rx="19" ry="2.3" fill="#000" opacity=".15" />
+    {/* The wing takes its own colour when one is given. Left to default it is
+        sh(C, 0.1), which on a pale coat is within ~3% luminance of the body and
+        reads as a lump on the shoulder rather than as a wing. */}
     {o.wings && (
-      <g fill={sh(C, 0.1)} opacity=".9">
+      <g fill={o.wingC || sh(C, 0.1)} opacity=".9">
         <path d="M30,26 Q18,6 2,6 Q14,16 18,30 Q24,30 30,26 Z" />
-        <g stroke={sh(C, -0.3)} strokeWidth=".7" fill="none" opacity=".6">
+        <g stroke={sh(o.wingC || C, -0.3)} strokeWidth=".7" fill="none" opacity=".6">
           <path d="M28,25 Q18,12 5,7" /><path d="M25,28 Q17,18 5,12" />
         </g>
       </g>
@@ -473,7 +476,7 @@ const multiM = (o) => (er) => {
 
 Object.assign(ART, {
   // Olympus Rift — Greek & Roman
-  pegasus: hoofM({ coat: "#f2ede0", wings: true, maneC: "#c9d4e8" }),
+  pegasus: hoofM({ coat: "#f2ede0", wings: true, maneC: "#c9d4e8", wingC: "#9fb0cc" }),
   cerberus: multiM({ hide: "#3c3244", snout: "#6b5868" }),
   hydra: multiM({ hide: "#4c7a5c", serpent: true }),
   chimera: beastM(felArt({ fur: "#c98a3a", ruff: true, ruffC: "#8a5c2a" }), { flame: true, horns: true }),
@@ -508,7 +511,10 @@ Object.assign(ART, {
   alkonost: birdM({ body: "#c9a0b5", halo: true, plume: true, plumeC: "#8a5c7a" }),
   leshy: giantM({ fur: "#5c6b44", leaves: true, shag: true, skin: "#8a9a6b" }),
   // Hearth Rift — Egyptian, Middle Eastern & African
-  sphinx: felArt({ fur: "#d9b06a", ruff: true, ruffC: "#e8c547", iris: "#3a7ad9" }),
+  // The Greek sphinx is winged; the Giza one is not. This is the Greek one —
+  // wings added through beastM exactly as pixiu already does it, so felArt is
+  // untouched and no other cat changes.
+  sphinx: beastM(felArt({ fur: "#d9b06a", ruff: true, ruffC: "#e8c547", iris: "#3a7ad9" }), { wings: true, wingC: "#3f5c8a" }),
   bennu: birdM({ body: "#c95c3a", halo: true, plume: true, plumeC: "#e8c547" }),
   ammit: marineA({ hide: "#6b8a5c", teeth: true, jaw: "#4c6b44", belly: "#c9a88a" }),
   serpopard: beastM(felArt({ fur: "#c9a05c", spots: true, earTall: true }), {}),
