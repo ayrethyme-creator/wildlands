@@ -224,3 +224,100 @@ const playBGM = (name) => {
   }, tr.step * 1000);
 };
 
+/* ---------- SAVE CODES ----------
+   A save lives in this browser's localStorage, which is tied to the exact
+   origin the game was opened from. Open the game from somewhere else, clear
+   site data, or move to another device, and the save is not there. A save code
+   is the same payload written as text you can carry: copy it out, paste it in.
+
+   Format: WLD<v>.<checksum>.<base64>
+   v=1 is gzip-compressed, v=0 is plain, chosen by what the browser supports.
+   The checksum covers the JSON, so a half-copied code is rejected outright
+   instead of loading half a game. */
+
+const SAVE_CODE_RE = /^WLD([01])\.([0-9a-f]{8})\.([A-Za-z0-9+/=]+)$/;
+
+// FNV-1a. Not cryptography — this only needs to catch truncation and typos.
+const saveChecksum = (str) => {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+  }
+  return h.toString(16).padStart(8, "0");
+};
+
+// A finished game runs to six figures of JSON, so this converts in chunks;
+// String.fromCharCode(...bytes) on the whole array overflows the call stack.
+const bytesToB64 = (bytes) => {
+  let s = "";
+  const CH = 0x8000;
+  for (let i = 0; i < bytes.length; i += CH) {
+    s += String.fromCharCode.apply(null, bytes.subarray(i, i + CH));
+  }
+  return btoa(s);
+};
+
+const b64ToBytes = (b64) => {
+  const bin = atob(b64);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+};
+
+const gzipBytes = async (bytes) =>
+  new Uint8Array(await new Response(
+    new Blob([bytes]).stream().pipeThrough(new CompressionStream("gzip"))
+  ).arrayBuffer());
+
+const gunzipBytes = async (bytes) =>
+  new Uint8Array(await new Response(
+    new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"))
+  ).arrayBuffer());
+
+const encodeSaveCode = async (payload) => {
+  const json = JSON.stringify(payload);
+  const sum = saveChecksum(json);
+  const raw = new TextEncoder().encode(json);
+  let ver = "0", bytes = raw;
+  if (typeof CompressionStream !== "undefined") {
+    try { bytes = await gzipBytes(raw); ver = "1"; }
+    catch (e) { bytes = raw; ver = "0"; }
+  }
+  return "WLD" + ver + "." + sum + "." + bytesToB64(bytes);
+};
+
+const decodeSaveCode = async (text) => {
+  const code = String(text || "").replace(/\s+/g, "");
+  if (!code) throw new Error("Paste a save code first.");
+  const m = SAVE_CODE_RE.exec(code);
+  if (!m) throw new Error("That does not look like a Wildlands save code. It should begin with WLD.");
+  const ver = m[1], sum = m[2], b64 = m[3];
+
+  let bytes;
+  try { bytes = b64ToBytes(b64); }
+  catch (e) { throw new Error("The code is damaged — some characters are missing or altered."); }
+
+  if (ver === "1") {
+    if (typeof DecompressionStream === "undefined") {
+      throw new Error("This browser cannot read compressed save codes. Export again from this browser.");
+    }
+    try { bytes = await gunzipBytes(bytes); }
+    catch (e) { throw new Error("The code is incomplete. Copy the whole thing, including the very end."); }
+  }
+
+  const json = new TextDecoder().decode(bytes);
+  if (saveChecksum(json) !== sum) {
+    throw new Error("The code did not survive the trip — part of it is missing or altered.");
+  }
+
+  let payload;
+  try { payload = JSON.parse(json); }
+  catch (e) { throw new Error("The code is damaged and could not be read."); }
+
+  if (!payload || typeof payload !== "object" ||
+      !Array.isArray(payload.party) || typeof payload.map !== "string") {
+    throw new Error("That code is not a Wildlands save file.");
+  }
+  return payload;
+};
