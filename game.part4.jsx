@@ -111,6 +111,52 @@ function Wildlands() {
     setS((p) => ({ ...p, screen: "starter", slot: n }));
   };
 
+  // ----- save codes -----
+  // The panel lives in game state so the title screen can show it under the
+  // slot it belongs to, the same way the erase confirmation does.
+  const closeCodePanel = () => setS((p) => ({ ...p, codePanel: null }));
+
+  const exportSlot = async (n) => {
+    const p = saves[n];
+    if (!p) return;
+    setS((s) => ({ ...s, codePanel: { slot: n, mode: "export", text: "", busy: true, err: null } }));
+    try {
+      const code = await encodeSaveCode(p);
+      setS((s) => ({ ...s, codePanel: { slot: n, mode: "export", text: code, busy: false, err: null } }));
+    } catch (e) {
+      setS((s) => ({ ...s, codePanel: { slot: n, mode: "export", text: "", busy: false,
+        err: "Could not build a code for this file." } }));
+    }
+  };
+
+  const openImport = (n) =>
+    setS((s) => ({ ...s, codePanel: { slot: n, mode: "import", text: "", busy: false, err: null } }));
+
+  const setCodeText = (t) =>
+    setS((s) => ({ ...s, codePanel: { ...(s.codePanel || {}), text: t, err: null } }));
+
+  const importIntoSlot = async (n, text) => {
+    let payload;
+    try {
+      payload = await decodeSaveCode(text);
+    } catch (e) {
+      setS((s) => ({ ...s, codePanel: { ...(s.codePanel || {}), slot: n, mode: "import",
+        busy: false, err: e.message } }));
+      return;
+    }
+    // The code remembers which slot it came from; where it lands is this
+    // player's choice, so the slot is rewritten rather than trusted.
+    payload.slot = n;
+    try {
+      await storage.set(slotKey(n), JSON.stringify(payload));
+      setSaves((prev) => ({ ...prev, [n]: payload }));
+      setS((s) => ({ ...s, codePanel: { slot: n, mode: "done", text: "", busy: false, err: null } }));
+    } catch (e) {
+      setS((s) => ({ ...s, codePanel: { ...(s.codePanel || {}), slot: n, mode: "import", busy: false,
+        err: `Could not write to File ${n} — storage is full or unavailable.` } }));
+    }
+  };
+
   const continueGame = (n) => {
     const p = saves[n]; if (!p) return;
     slotRef.current = n;
