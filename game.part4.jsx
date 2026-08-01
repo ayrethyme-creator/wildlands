@@ -123,6 +123,18 @@ function Wildlands() {
     if (!ok) { map = "town1"; x = 7; y = 8; swimming = false; }
     const party = (p.party || []).filter((a) => DEX[a.sp]);
     const box = (p.box || []).filter((a) => DEX[a.sp]);
+    // Animals recruited before the naming change were stored without an
+    // individual name, so the roster fell back to the species name and a save
+    // in progress looked like a list of animals rather than a list of someone.
+    // individualOf is a pure function of the species key, so backfilling gives
+    // each of them exactly the name they would have had. Legends are skipped on
+    // purpose: they are not station animals and have never carried a name.
+    [...party, ...box].forEach((a) => {
+      if (!a.indiv && !BEFRIEND_LEGEND[a.sp] && typeof individualOf !== "undefined") {
+        const ind = individualOf(a.sp);
+        if (ind && ind.name) a.indiv = ind.name;
+      }
+    });
     let dex = {};
     Object.entries(p.dex || {}).forEach(([k, v]) => { if (DEX[k]) dex[k] = v; });
     [...party, ...box].forEach((a) => { dex[a.sp] = 2; });
