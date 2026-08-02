@@ -34,9 +34,11 @@ const dragonW = (o) => (er) => {
     {/* tail */}
     <path d="M17,38 Q8,38 3,32" stroke={sh(H, -0.12)} strokeWidth="4" fill="none" strokeLinecap="round" />
     <path d="M4.6,33.6 L1,29.6 L6.4,30 Z" fill={sh(H, -0.32)} />
-    {/* far legs */}
+    {/* far legs. A wyvern's forelimbs are its wings — it stands on the hind
+        pair alone — so twoLegged drops the front leg from each pair rather
+        than changing the shared build for every dragon that reads this. */}
     <g stroke={sh(H, -0.16)} strokeWidth="3.6" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity=".7">
-      <polyline points="35,42 32,48 36,52" /><polyline points="22,41 24,47 21,52" />
+      {!o.twoLegged && <polyline points="35,42 32,48 36,52" />}<polyline points="22,41 24,47 21,52" />
     </g>
     <path d="M40,29 Q46,32 45.6,38 Q45.4,44 40,47 Q30,50 21,47 Q14,44 14,37.6
              Q14,31.4 21,28.6 Q31,25.6 40,29 Z" fill={`url(#${g1})`} />
@@ -48,7 +50,7 @@ const dragonW = (o) => (er) => {
     )}
     {/* near legs with claws */}
     <g stroke={sh(H, -0.08)} strokeWidth="4.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="38,42 35,49 39.6,54" /><polyline points="19,41 21.6,48 18,54" />
+      {!o.twoLegged && <polyline points="38,42 35,49 39.6,54" />}<polyline points="19,41 21.6,48 18,54" />
     </g>
     {/* near wing, the big one */}
     <path d="M34,26 Q26,6 8,3 Q16,15 18,29 Q26,31 34,26 Z" fill={`url(#${g2})`} />
@@ -505,7 +507,10 @@ Object.assign(ART, {
   caitsith: felArt({ fur: "#26292e", muzzle: "#e8e0d0", iris: "#3ad9a4", earTall: true }),
   puca: hoofM({ coat: "#2e2921", maneC: "#0f0d0a", iris: "#e8c547" }),
   questingbeast: dragonE({ hide: "#6b8a5c", maneC: "#c9704a" }),
-  wyvern: dragonW({ hide: "#8a4a3c", spikes: true }),
+  // A wyvern is defined by having two legs, not four — the forelimbs are the
+  // wings. That is the whole distinction from a dragon, and the sprite was
+  // drawing four. The other dragonW species keep all four.
+  wyvern: dragonW({ hide: "#8a4a3c", spikes: true, twoLegged: true }),
   firebird: birdM({ body: "#e8853a", flame: true, wingC: "#d95c2a", iris: "#e8c547" }),
   zmey: dragonW({ hide: "#5c8a3a", multi: true, spikes: true }),
   alkonost: birdM({ body: "#c9a0b5", halo: true, plume: true, plumeC: "#8a5c7a" }),
