@@ -210,6 +210,53 @@ Object.assign(DEX, {
   franklinsbumblebee: V("Franklin's Bumblebee", "franklinsbumblebee", ["Bug", "Aerial"], B(26, 38, 26, 56), MV.bug, "CR"),
 });
 
+// ---- later additions ----
+// Five cats, because the cat losses are unusually well documented and unusually
+// recent, and because two of them are cheetahs — a species everyone assumes is
+// merely threatened, which is true only if you do not look at it subspecies by
+// subspecies. The rest fill gaps: an island tortoise whose last individual had
+// a name and a global audience, two birds whose endings are still argued about,
+// a desert antelope losing to a map redrawn around an oil field, and three
+// animals that went extinct in the wild and were put back.
+Object.assign(ART, {
+  asiaticcheetah: felArt({ fur: "#e8d4a5", inner: "#c9b078", muzzle: "#f8f4ea", iris: "#c9853a", spots: 1, tear: 1 }),
+  saharancheetah: felArt({ fur: "#f0e6cc", inner: "#d9cba8", muzzle: "#f8f4ea", iris: "#c9a43a", spots: 1, tear: 1 }),
+  barbarylion: felArt({ fur: "#c9954c", inner: "#a3763c", muzzle: "#e8d4b5", iris: "#c9853a", ruff: true, ruffC: "#4c3420" }),
+  formosancloudedleopard: felArt({ fur: "#c9b078", inner: "#a89060", muzzle: "#f2ede0", iris: "#7a9a4a", rosettes: true, markC: "#4c3c2e", tufts: true }),
+  zanzibarleopard: felArt({ fur: "#d9b06a", inner: "#b58f4c", muzzle: "#f2ede0", iris: "#c9a43a", rosettes: true, markC: "#3c2a1e" }),
+  pintatortoise: armorA({ hide: "#9a8663", scutes: true, scuteC: "#6b5c40", plates: true, plateC: "#c9b083", beakC: "#8a7458", iris: "#3a2a18" }),
+  ivorybilledwoodpecker: songA({ body: "#26221c", wingC: "#f5f2e8", head: "#26221c", plume: true, plumeC: "#c94a3a", bill: "long", beakC: "#f2ede0" }),
+  slenderbilledcurlew: birdA({ longLegs: true, body: "#c9bda3", wingC: "#a8997c", head: "#e0d5bd", neck: true, neckC: "#d9cbb0", bill: "long", beakC: "#3c3226", iris: "#3c3226" }),
+  greatindianbustard: birdA({ longLegs: true, body: "#c9a878", wingC: "#a3855c", head: "#f8f4ea", neck: true, neckC: "#f2ede0", bill: "cone", beakC: "#5c4c3c", iris: "#3c3226" }),
+  kihansispraytoad: frogA({ skin: "#e8c547", belly: "#f2e0a0", iris: "#26221c", toes: true, toeC: "#e8c547" }),
+  guamrail: birdA({ longLegs: true, body: "#9a7c58", wingC: "#6b5238", head: "#c9b08a", neck: true, neckC: "#a8895f", mask: "#3c3226", bill: "cone", beakC: "#3c3226", iris: "#c94a3a" }),
+  mauritiuskestrel: rapA({ body: "#c9a878", wingC: "#a3784c", head: "#e8dcc3", hood: "#8a6f52", beakC: "#3c3226", iris: "#3c3226" }),
+});
+
+Object.assign(DEX, {
+  // The cheetah is one animal in the field guide and four subspecies in the
+  // world. Two of those subspecies are down to numbers you can count.
+  asiaticcheetah: V("Asiatic Cheetah", "asiaticcheetah", ["Swift", "Predator"], B(50, 62, 40, 84), MV.swi, "CR"),
+  saharancheetah: V("Saharan Cheetah", "saharancheetah", ["Swift", "Predator"], B(48, 60, 40, 86), MV.swi, "CR"),
+  barbarylion: V("Barbary Lion", "barbarylion", ["Predator", "Wild"], B(74, 80, 60, 48), MV.pred, "EW ~1960s"),
+  formosancloudedleopard: V("Formosan Clouded Leopard", "formosancloudedleopard", ["Predator", "Canopy"], B(54, 66, 46, 62), MV.can, "† ~1983"),
+  zanzibarleopard: V("Zanzibar Leopard", "zanzibarleopard", ["Predator", "Night"], B(56, 68, 48, 60), MV.night, "† ~1990s"),
+  pintatortoise: V("Pinta Island Tortoise", "pintatortoise", ["Armor", "Wild"], B(78, 40, 82, 12), MV.arm, "† 2012"),
+  // Status tag is the IUCN one, not the obituary. The bird has not been
+  // formally declared extinct and the argument about it is still live.
+  ivorybilledwoodpecker: V("Ivory-billed Woodpecker", "ivorybilledwoodpecker", ["Canopy", "Bug"], B(42, 50, 36, 60), MV.bug, "CR (PE)"),
+  slenderbilledcurlew: V("Slender-billed Curlew", "slenderbilledcurlew", ["Aerial", "Aquatic"], B(40, 40, 36, 66), MV.aer, "† 1995"),
+  greatindianbustard: V("Great Indian Bustard", "greatindianbustard", ["Aerial", "Wild"], B(58, 50, 46, 52), MV.aer, "CR"),
+  kihansispraytoad: V("Kihansi Spray Toad", "kihansispraytoad", ["Venom", "Aquatic"], B(28, 32, 30, 38), MV.ven, "EW 2009 ←"),
+  guamrail: V("Guam Rail", "guamrail", ["Wild", "Swift"], B(42, 44, 38, 58), MV.swi, "EW 1987 ←"),
+  mauritiuskestrel: V("Mauritius Kestrel", "mauritiuskestrel", ["Aerial", "Predator"], B(44, 54, 38, 72), MV.aer, "EN ←"),
+});
+
+// The addax was already in the field guide as an ordinary desert antelope.
+// It is not one. Fewer than a hundred remain in the wild, in a single
+// population, and it belongs in this region rather than out on the sand.
+if (DEX.addax) { DEX.addax.mem = true; DEX.addax.org = "CR"; }
+
 // ---- the region ----
 const VIG_MID = ["^^^^^^^n^^^^^^^^", "^..GGG....GGG..^", "^.GGGGG..GGGGG.^", "^......!.......^", "^R...........R.^", "^..GGGG..GGGG..^", "^..GGGG..GGGG..^", "^......!.......^", "^..GGG....GGG..^", "^^^^^^^s^^^^^^^^"];
 const VIG_END = ["^^^^^^^^^^^^^^^^", "^..GGG....GGG..^", "^.GGGGG..GGGGG.^", "^......!.......^", "^R...........R.^", "^..GGGG..GGGG..^", "^..GGGG..GGGG..^", "^......!.......^", "^..GGG....GGG..^", "^^^^^^^s^^^^^^^^"];
@@ -242,23 +289,23 @@ const VIG = [
   { k: "vig1", n: "The Roll Call", z: "vigilz", lvl: [52, 56], next: "vig2", prev: { map: "vigil", x: 1, y: 3 },
     pool: [["thylacine", 11], ["quagga", 10], ["aurochs", 9], ["bluebuck", 9], ["schomburgksdeer", 8], ["japanesewolf", 8], ["falklandwolf", 8], ["seamink", 8], ["toolachewallaby", 8], ["desertratkangaroo", 7], ["pigfootedbandicoot", 7], ["lesserbilby", 7], ["pyreneanibex", 6], ["bramblecaymelomys", 6], ["caribbeanmonkseal", 6]] },
   { k: "vig2", n: "The Striped Hollow", z: "vigilz", lvl: [53, 57], next: "vig3", prev: { map: "vig1", x: 7, y: 1 },
-    pool: [["balitiger", 9], ["javantiger", 9], ["caspiantiger", 8], ["thylacine", 9], ["japanesewolf", 8], ["quagga", 8], ["cavelion", 6], ["smilodon", 5], ["direwolf", 7], ["southchinatiger", 5], ["sumatrantiger", 6], ["amurleopard", 6]] },
+    pool: [["asiaticcheetah", 6], ["saharancheetah", 5], ["barbarylion", 6], ["formosancloudedleopard", 6], ["zanzibarleopard", 6], ["balitiger", 9], ["javantiger", 9], ["caspiantiger", 8], ["thylacine", 9], ["japanesewolf", 8], ["quagga", 8], ["cavelion", 6], ["smilodon", 5], ["direwolf", 7], ["southchinatiger", 5], ["sumatrantiger", 6], ["amurleopard", 6]] },
   { k: "vig3", n: "The Ice Wake", z: "vigilz", lvl: [55, 59], next: null, prev: { map: "vig2", x: 7, y: 1 },
     pool: [["mammoth", 8], ["columbianmammoth", 7], ["mastodon", 7], ["woollyrhino", 7], ["steppebison", 8], ["irishelk", 8], ["direwolf", 8], ["cavelion", 6], ["smilodon", 6], ["shortfacedbear", 6], ["megatherium", 6], ["glyptodon", 6], ["giantbeaver", 7]] },
   { k: "vig4", n: "The Island Grave", z: "vigilz", lvl: [52, 56], next: "vig5", prev: { map: "vigil", x: 14, y: 3 },
-    pool: [["dodo", 10], ["greatauk", 9], ["moa", 8], ["elephantbird", 7], ["haastseagle", 6], ["huia", 8], ["laysanhoneycreeper", 8], ["labradorduck", 8], ["heathhen", 8], ["socorrodove", 7], ["partulasnail", 8], ["stellerseacow", 6]] },
+    pool: [["pintatortoise", 7], ["dodo", 10], ["greatauk", 9], ["moa", 8], ["elephantbird", 7], ["haastseagle", 6], ["huia", 8], ["laysanhoneycreeper", 8], ["labradorduck", 8], ["heathhen", 8], ["socorrodove", 7], ["partulasnail", 8], ["stellerseacow", 6]] },
   { k: "vig5", n: "The Sky That Darkened", z: "vigilz", lvl: [53, 57], next: null, prev: { map: "vig4", x: 7, y: 1 },
-    pool: [["passengerpigeon", 12], ["carolinaparakeet", 10], ["rockymountainlocust", 10], ["xercesblue", 9], ["goldentoad", 8], ["splendidpoisonfrog", 7], ["heathhen", 8], ["imperialwoodpecker", 7], ["labradorduck", 7], ["greatauk", 7], ["xmasislandpipistrelle", 7]] },
+    pool: [["ivorybilledwoodpecker", 7], ["slenderbilledcurlew", 8], ["passengerpigeon", 12], ["carolinaparakeet", 10], ["rockymountainlocust", 10], ["xercesblue", 9], ["goldentoad", 8], ["splendidpoisonfrog", 7], ["heathhen", 8], ["imperialwoodpecker", 7], ["labradorduck", 7], ["greatauk", 7], ["xmasislandpipistrelle", 7]] },
   { k: "vig6", n: "The Last Song", z: "vigilz", lvl: [54, 58], next: "vig7", prev: { map: "vigil", x: 5, y: 1 },
     pool: [["kauaioo", 11], ["poouli", 10], ["laysanhoneycreeper", 9], ["huia", 9], ["alala", 8], ["imperialwoodpecker", 7], ["guamkingfisher", 7], ["regenthoneyeater", 7], ["orangebelliedparrot", 7], ["spixsmacaw", 6]] },
   { k: "vig7", n: "The Drowned Song", z: "vigilz", lvl: [55, 59], next: null, prev: { map: "vig6", x: 7, y: 1 },
     pool: [["baiji", 9], ["chinesepaddlefish", 9], ["yangtzesofttshell", 6], ["finlessporpoise", 8], ["chinesegiantsalamander", 8], ["vaquita", 6], ["angelshark", 8], ["kempsridley", 8], ["stellerseacow", 6], ["caribbeanmonkseal", 7], ["giantbeaver", 7], ["seamink", 7]] },
   { k: "vig8", n: "The Thin Edge", z: "vigilz", lvl: [56, 60], next: "vig9", prev: { map: "vigil", x: 10, y: 1 },
-    pool: [["vaquita", 5], ["northernwhiterhino", 4], ["javanrhino", 5], ["sumatranrhino", 5], ["amurleopard", 6], ["saola", 5], ["hainangibbon", 5], ["crossrivergorilla", 5], ["tapanuliorangutan", 5], ["sumatranorangutan", 6], ["sumatrantiger", 6], ["southchinatiger", 4], ["hirola", 7], ["damagazelle", 7], ["rustypatchedbumblebee", 8], ["franklinsbumblebee", 8], ["kakapo", 5], ["gharial", 6], ["philippineeagle", 5]] },
+    pool: [["asiaticcheetah", 4], ["saharancheetah", 4], ["addax", 6], ["greatindianbustard", 6], ["vaquita", 5], ["northernwhiterhino", 4], ["javanrhino", 5], ["sumatranrhino", 5], ["amurleopard", 6], ["saola", 5], ["hainangibbon", 5], ["crossrivergorilla", 5], ["tapanuliorangutan", 5], ["sumatranorangutan", 6], ["sumatrantiger", 6], ["southchinatiger", 4], ["hirola", 7], ["damagazelle", 7], ["rustypatchedbumblebee", 8], ["franklinsbumblebee", 8], ["kakapo", 5], ["gharial", 6], ["philippineeagle", 5]] },
   { k: "vig9", n: "The Glass Ark", z: "vigilz", lvl: [56, 60], next: "vig10", prev: { map: "vig8", x: 7, y: 1 },
-    pool: [["axolotl", 11], ["alala", 9], ["spixsmacaw", 8], ["wyomingtoad", 9], ["partulasnail", 9], ["guamkingfisher", 8], ["socorrodove", 8], ["peredavidsdeer", 8], ["scimitaroryx", 8], ["przewalskishorse", 7], ["californiacondor", 7], ["whoopingcrane", 7], ["redwolf", 7], ["ferret", 8], ["vancouvermarmot", 8], ["kakapo", 6], ["orangebelliedparrot", 7], ["regenthoneyeater", 7], ["southchinatiger", 4]] },
+    pool: [["kihansispraytoad", 8], ["guamrail", 8], ["mauritiuskestrel", 7], ["axolotl", 11], ["alala", 9], ["spixsmacaw", 8], ["wyomingtoad", 9], ["partulasnail", 9], ["guamkingfisher", 8], ["socorrodove", 8], ["peredavidsdeer", 8], ["scimitaroryx", 8], ["przewalskishorse", 7], ["californiacondor", 7], ["whoopingcrane", 7], ["redwolf", 7], ["ferret", 8], ["vancouvermarmot", 8], ["kakapo", 6], ["orangebelliedparrot", 7], ["regenthoneyeater", 7], ["southchinatiger", 4]] },
   { k: "vig10", n: "What We Kept", z: "hopez", lvl: [58, 62], next: null, prev: { map: "vig9", x: 7, y: 1 },
-    pool: [["przewalskishorse", 10], ["scimitaroryx", 9], ["peredavidsdeer", 9], ["californiacondor", 8], ["whoopingcrane", 8], ["redwolf", 7], ["ferret", 9], ["vancouvermarmot", 8], ["bison", 9], ["oryx", 8], ["humpback", 7], ["greywhale", 0], ["graywhale", 7], ["seaotter", 8], ["panda", 7], ["snowleopard", 6], ["baldeagle", 8], ["peregrine", 8], ["alala", 6], ["spixsmacaw", 6], ["kakapo", 6], ["beaver", 9], ["grizzly", 7], ["moonbear", 6], ["mandarinduck", 8], ["swan", 8], ["greenseaturtle", 8], ["hawksbill", 7]] },
+    pool: [["guamrail", 7], ["mauritiuskestrel", 7], ["kihansispraytoad", 6], ["przewalskishorse", 10], ["scimitaroryx", 9], ["peredavidsdeer", 9], ["californiacondor", 8], ["whoopingcrane", 8], ["redwolf", 7], ["ferret", 9], ["vancouvermarmot", 8], ["bison", 9], ["oryx", 8], ["humpback", 7], ["greywhale", 0], ["graywhale", 7], ["seaotter", 8], ["panda", 7], ["snowleopard", 6], ["baldeagle", 8], ["peregrine", 8], ["alala", 6], ["spixsmacaw", 6], ["kakapo", 6], ["beaver", 9], ["grizzly", 7], ["moonbear", 6], ["mandarinduck", 8], ["swan", 8], ["greenseaturtle", 8], ["hawksbill", 7]] },
 ];
 VIG.forEach((d) => {
   MAPS[d.k] = {
