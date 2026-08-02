@@ -57,7 +57,10 @@ Object.assign(ART, {
   huia: songA({ body: "#26221c", wingC: "#16140f", bill: "long", beakC: "#e8c547", wattleC: "#e8853a", iris: "#3c3226" }),
   labradorduck: waterA({ body: "#f2ede0", wingC: "#26221c", head: "#f5f2e8", mask: "#26221c", neck: true, neckC: "#f2ede0", bill: "long", beakC: "#5c6b7a" }),
   heathhen: fowlA({ body: "#8a7458", wingC: "#6b5844", head: "#a3906b", bib: "#e8a53a", beakC: "#5c5448" }),
-  imperialwoodpecker: songA({ body: "#26221c", wingC: "#f5f2e8", head: "#c94a3a", plume: true, plumeC: "#c94a3a", bill: "long", beakC: "#e8dcc3" }),
+  // songA has no "plume" option — the crest option is called crest. Both
+  // woodpeckers asked for a plume and silently got nothing, which cost them
+  // the one feature that makes a woodpecker read as a woodpecker.
+  imperialwoodpecker: songA({ body: "#26221c", wingC: "#f5f2e8", head: "#26221c", crest: true, crestC: "#c94a3a", beakC: "#e8dcc3" }),
   kauaioo: songA({ body: "#26292e", wingC: "#16181c", head: "#26292e", bib: "#e8c547", bill: "long", beakC: "#16140f", iris: "#8a8578" }),
   poouli: songA({ body: "#8a7458", wingC: "#6b5844", head: "#3c3630", mask: "#26221c", bill: "cone", beakC: "#5c5448" }),
   laysanhoneycreeper: songA({ body: "#c94a3a", wingC: "#8a3428", head: "#c94a3a", bill: "long", beakC: "#3c3630" }),
@@ -225,7 +228,7 @@ Object.assign(ART, {
   formosancloudedleopard: felArt({ fur: "#c9b078", inner: "#a89060", muzzle: "#f2ede0", iris: "#7a9a4a", rosettes: true, markC: "#4c3c2e", tufts: true }),
   zanzibarleopard: felArt({ fur: "#d9b06a", inner: "#b58f4c", muzzle: "#f2ede0", iris: "#c9a43a", rosettes: true, markC: "#3c2a1e" }),
   pintatortoise: armorA({ hide: "#9a8663", scutes: true, scuteC: "#6b5c40", plates: true, plateC: "#c9b083", beakC: "#8a7458", iris: "#3a2a18" }),
-  ivorybilledwoodpecker: songA({ body: "#26221c", wingC: "#f5f2e8", head: "#26221c", plume: true, plumeC: "#c94a3a", bill: "long", beakC: "#f2ede0" }),
+  ivorybilledwoodpecker: songA({ body: "#26221c", wingC: "#f5f2e8", head: "#26221c", crest: true, crestC: "#c94a3a", beakC: "#f2ede0" }),
   slenderbilledcurlew: birdA({ longLegs: true, body: "#c9bda3", wingC: "#a8997c", head: "#e0d5bd", neck: true, neckC: "#d9cbb0", bill: "long", beakC: "#3c3226", iris: "#3c3226" }),
   greatindianbustard: birdA({ longLegs: true, body: "#c9a878", wingC: "#a3855c", head: "#f8f4ea", neck: true, neckC: "#f2ede0", bill: "cone", beakC: "#5c4c3c", iris: "#3c3226" }),
   kihansispraytoad: frogA({ skin: "#e8c547", belly: "#f2e0a0", iris: "#26221c", toes: true, toeC: "#e8c547" }),
