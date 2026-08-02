@@ -1,5 +1,5 @@
 // ---------- CHAPTER XXV — THE VIGIL ----------
-// 87 animals. Every one either gone, gone from the wild, or close enough that
+// 100 animals. Every one either gone, gone from the wild, or close enough that
 // the number of individuals is a number you can hold in your head.
 //
 // Each gets: what it was and something true and remarkable about it, when it
@@ -534,4 +534,121 @@ vnote("chinesegiantsalamander", { d: "Carnivore — fish, crabs, insects", h: "M
 // woolly mammoth: it already has a note; add the de-extinction section Ayr asked for
 vnote("mammoth", {
   back: "Colossal Biosciences is editing Asian elephant cells — the mammoth's closest relative, sharing about 99.6% of its genome — toward mammoth traits: hair, fat, cold-tolerant haemoglobin, small ears. The stated aim is not a curiosity but a job: to put a large grazer back on the Siberian tundra, on the argument that mammoth grazing maintained the grassland, and that grassland reflects more sunlight and keeps permafrost frozen better than the mossy shrub tundra that replaced it. Melting permafrost releases carbon. The honest objections: it would be an edited elephant, not a mammoth; elephants have 22-month pregnancies and are themselves endangered; an artificial womb for one does not exist; the ecological argument is contested; and the same money would protect a lot of living elephants. The counter-argument the team makes is that the tools built along the way — the genetic rescue techniques — go straight into saving the animals still here, and that is not nothing.",
+});
+
+// ===== later additions =====
+// Five cats, two of them cheetahs. The cheetah reads as a merely threatened
+// animal until you count it subspecies by subspecies, at which point two of
+// the four are down to numbers a person can hold in their head.
+
+vnote("asiaticcheetah", {
+  d: "Carnivore — gazelle, wild sheep, ibex", h: "The arid central plateau of Iran, and nowhere else on earth", s: "CR",
+  f: "It split from Africa's cheetahs somewhere between 32,000 and 67,000 years ago and is genetically distinct from all of them. Unlike African cheetahs it hunts in mountains and works largely at night, and a single animal may range over 200 km in a few months. Iran put it on the national football team's World Cup shirts in 2014 to make the world look at it.",
+  lost: "Not yet. It once ran from the Arabian Peninsula to India; India's last three were shot by one maharaja in 1947. It was gone from every country but Iran by the end of the 20th century.",
+  cause: "Prey collapse first — the gazelle and wild sheep it eats were hunted out, and livestock replaced them. Then roads. One to two of the remaining cheetahs are killed by cars in a typical year, which in a population this size is a structural threat rather than an accident.",
+  better: "Counted honestly and early. Estimates fell from around 84 individuals photographed between 2011 and 2013 to a few dozen within a decade. Over roughly twenty years at least 150 cubs were born and the population still declined, which tells you the animals were dying faster than they were being made, and it was visible the whole time.",
+  back: "It is not gone, so this is not de-extinction, it is triage. Counts vary by who is doing the counting and how — around 27 identified in the wild in early 2026, plus a handful in breeding facilities and captivity. Numbers this small and this contested move with every camera-trap season. The most recent good news was a female filmed with five cubs, more than had ever been recorded; nine days later the war began, and conservation work that depends on rangers, fuel and foreign collaboration is exactly the kind of work a war stops.",
+});
+vnote("saharancheetah", {
+  d: "Carnivore — dorcas gazelle, addax calves, hares", h: "The Sahara and Sahel: Algeria, Mali, Niger, Chad, Benin, Burkina Faso", s: "CR",
+  f: "A cheetah bleached almost white, smaller and shorter-furred than its southern relatives, built for a place where there is no shade to hide the shape of a cat. It lives at the lowest density recorded for any big cat anywhere: surveys in the Algerian Sahara found roughly one animal per 4,000 square kilometres. It gets most of its water from what it eats.",
+  lost: "Not yet. It holds about 9% of the range it used to.",
+  cause: "Its prey was hunted out, and herders kill it for taking livestock that only became worth taking once the gazelles were gone. The Sahel is also a region where armed conflict makes even counting the animals dangerous.",
+  better: "Looked. The subspecies is so thinly spread and so rarely seen that for decades there was no reliable population estimate at all — expert opinion put it under 420 across six countries, and a camera-trap study published in 2025 estimated only about 68 animals across the parts of its range that could be surveyed. You cannot protect what nobody has counted.",
+});
+vnote("barbarylion", {
+  d: "Carnivore — Barbary stag, gazelle, wild boar", h: "The Atlas Mountains and forests of North Africa, from Morocco to Egypt", s: "EW",
+  f: "The lion of the Colosseum. Rome imported them by the thousand for the games, which makes this the only animal in this region whose decline has a paper trail running back two millennia. Victorian accounts describe an enormous dark mane running back over the shoulders; how much of that was the animal and how much was cold-climate captivity is still argued.",
+  lost: "From the wild, probably by the 1960s. The last confirmed shooting was in Morocco in 1942, though credible reports continued in the Atlas for another twenty years. The exact ending is not recorded, because nobody was keeping the record.",
+  cause: "Two thousand years of organised capture, then firearms and bounties, then the forests themselves.",
+  better: "Kept the ones we had. Lions descended from the Sultan of Morocco's royal collection survive in zoos and are the closest living link, but they are not a pure remnant population and there is no wild North African lion to compare them against.",
+  back: "Selective breeding among the descendant zoo animals aims at the Barbary phenotype. Like the quagga project this produces an appearance, not a resurrection, and the Atlas forests it would go back to are much reduced.",
+});
+vnote("formosancloudedleopard", {
+  d: "Carnivore — deer, monkeys, birds taken from branches", h: "The mountain forests of Taiwan",
+  s: "EX",
+  f: "A clouded leopard with ankles that rotate almost fully, letting it come down a tree trunk head-first like a squirrel — one of very few cats that can. It was central to the Rukai and Paiwan peoples, whose accounts hold that it led their ancestors to where they settled.",
+  lost: "The last confirmed animal was caught in a snare in 1983. A thirteen-year survey using thousands of camera traps and hair snares ended in 2013 without a single record, and the team concluded it was gone.",
+  cause: "Logging took the lowland forest, and it was hunted for its pelt.",
+  better: "Not waited until 1983 to start looking. By the time a serious search began there was nothing left to find, and the survey that established the extinction was in effect an autopsy.",
+  back: "Rangers reported sightings in 2018 and the claim is disputed and unconfirmed. Taiwan has discussed reintroducing clouded leopards from mainland populations, which would be a related animal in the same forest rather than the same animal.",
+});
+vnote("zanzibarleopard", {
+  d: "Carnivore — small antelope, monkeys, livestock", h: "Unguja, the main island of Zanzibar",
+  s: "EX",
+  f: "An island leopard that shrank, with rosettes broken into small dense spots. It went extinct largely because of what people believed about it: local accounts held that witches kept leopards and sent them out to do harm, so killing one was not poaching but self-defence.",
+  lost: "Probably by the mid-1990s. There is no last individual and no date, which is its own kind of ending.",
+  cause: "A government-backed extermination campaign through the 1960s and 70s, run alongside an anti-witchcraft drive. The animal was killed for what it was thought to be.",
+  better: "Separated the animal from the belief. A conservation programme in the 1990s concluded it was already too late to save. Whether it was ever a distinct subspecies is now doubted — it may have been an isolated population of African leopard — which changes the taxonomy and not the outcome.",
+  back: "Camera footage from 2018 was presented as a rediscovery and has not been confirmed by any survey since. Treat it as unresolved rather than as good news.",
+});
+vnote("pintatortoise", {
+  d: "Grazer — cactus pads, grasses, lichen", h: "Pinta Island, Galápagos", s: "EX",
+  f: "A saddleback tortoise: the front of its shell arched high so it could stretch its neck up to reach cactus, on an island dry enough that low browse was not enough. The last one had a name, a keeper, a global audience and an estimated age of around a hundred, and for forty years he was the most famous single animal alive.",
+  lost: "Lonesome George died on 24 June 2012. He was found on Pinta in 1971, long after the species was assumed gone, and no mate was ever found for him despite a reward and decades of searching.",
+  cause: "Whalers and sealers took Galápagos tortoises by the tens of thousands as shipboard food — they survive months without water, which made them provisions. Goats released on Pinta then ate the vegetation down to nothing.",
+  better: "Bred him. Attempts to pair George with females from related islands produced no viable young across four decades, and by then he was the only one. The goats were cleared from Pinta by 2003, so the island was ready before he died and the species was not.",
+  back: "Tortoises carrying partial Pinta ancestry have been found in the mixed population on Isabela, descended from animals dumped there by whalers. A breeding programme is working those genes back up. It will produce a tortoise with Pinta in it, not a Pinta tortoise.",
+});
+vnote("ivorybilledwoodpecker", {
+  d: "Insectivore — beetle larvae under the bark of recently dead trees", h: "Old-growth bottomland hardwood swamp, southeastern United States and Cuba",
+  s: "CR",
+  f: "The largest woodpecker in the United States, with a wingspan near three feet, and it needed something very specific: freshly dead big timber, because its prey lives under bark that has not yet loosened. People called it the Lord God Bird for what they said on seeing one.",
+  lost: "Disputed, which is why the status here is not a dagger. The last generally accepted sighting was in 1944 in the Singer Tract in Louisiana — a lone female, sketched by an Audubon artist while the forest around her was being logged.",
+  cause: "The old-growth bottomland forest was cut, essentially all of it. A bird that needs large dead trees across huge territories cannot live in second growth.",
+  better: "Bought the Singer Tract. Conservationists asked; the logging went ahead anyway. It is one of the clearest cases in this region of a species that could have been saved by one decision that somebody actually had the chance to make.",
+  back: "The US Fish and Wildlife Service proposed declaring it extinct in 2021, then held off in 2023 after new acoustic and photographic material from Louisiana, and the proposal was subsequently withdrawn with the bird left listed as Endangered. The evidence is contested and mostly grainy. A biotech de-extinction effort has also been announced. The honest position is that it is probably gone and not officially gone, and this room is the right place for it either way.",
+});
+vnote("slenderbilledcurlew", {
+  d: "Probing feeder — invertebrates in soft mud", h: "Bred in the steppes of Kazakhstan and southern Siberia; wintered around the Mediterranean",
+  s: "EX",
+  f: "A pale, fine-billed wader that crossed a continent twice a year. Its breeding grounds were so poorly known that the last well-documented nest was found in 1924 near Tara in Siberia, and a century of searching never reliably found another.",
+  lost: "The last accepted record was at Merja Zerga in Morocco on 25 February 1995. A 2024 study put the probability of extinction at 99.6%, and the IUCN made it official in October 2025 — the first global extinction of a widespread migratory bird whose range covered mainland Europe, and the first mainland European bird lost in some five hundred years.",
+  cause: "Unknown. That is the entry. Hunting along the migration route, and the draining of the wetlands it needed at both ends, are the likely contributors, but nobody can say which one finished it.",
+  better: "Found out where it bred. An animal that crosses twenty countries is nobody's national responsibility, and this one was studied so little that we cannot now say what killed it. There is an international action plan for the slender-billed curlew, signed by eighteen countries, agreed the year before the last confirmed bird.",
+});
+vnote("addax", {
+  d: "Grazer — desert grasses and succulents; it does not need to drink", h: "The Sahara. In practice, one part of the Tin Toumma desert in Niger",
+  s: "CR",
+  f: "A white antelope with spiral horns, so completely adapted to the deep desert that it takes all its water from plants and its hooves splay wide to carry it over soft sand. It may be the rarest hoofed mammal on earth.",
+  lost: "Not yet, but it holds about 0.68% of its historical range, and the wild population is under a hundred animals in a single population.",
+  cause: "Hunted from vehicles, then squeezed by oil development. Its last stronghold sits over an oil concession, and the security forces posted to protect the installations added to the poaching rather than stopping it.",
+  better: "Not moved the boundary. In 2019 Niger reclassified the Termit and Tin-Toumma reserve, cutting roughly 50,000 square kilometres from the eastern side to remove the overlap with oil blocks and extending it westward instead. The effect was that the addax's actual habitat ended up outside the protected area. The animals did not move. The map did.",
+  back: "Around 1,200 addax are registered in zoos and several thousand more in private collections, and reintroductions have run in Tunisia since the mid-1980s and in Morocco. The wild Niger animals carry genetic diversity that the captive population does not, so losing them would not be replaceable by releasing zoo stock.",
+});
+vnote("greatindianbustard", {
+  d: "Omnivore — insects, seeds, small reptiles", h: "Dry grassland and scrub of western India, chiefly Rajasthan",
+  s: "CR",
+  f: "One of the heaviest flying birds alive, a metre tall, and a bird that was seriously proposed as India's national bird before the peacock was chosen. It lays one egg on bare ground.",
+  lost: "Not yet. It is down to roughly the low hundreds, most of them in Rajasthan.",
+  cause: "Grassland converted to farmland, and then power lines. It is heavy, it has poor frontal vision, and it cannot change course fast enough — collisions with transmission cables running through its habitat are a leading cause of death.",
+  better: "Put the cables underground before building the renewable-energy corridors through the last of its range. India's Supreme Court has been directly involved in ordering mitigation, which is an unusual position for a court and a sign of how late the argument came.",
+  back: "A captive breeding programme is running, and the species is one of the few birds where power-line diverters and undergrounding have been tested at scale. This is a solvable problem with a known solution and a cost attached to it.",
+});
+vnote("kihansispraytoad", {
+  d: "Insectivore — tiny invertebrates", h: "A wetland of roughly two hectares in the spray of the Kihansi Falls, Tanzania",
+  s: "EW",
+  f: "It lived in the mist of a single waterfall and nowhere else — one of the smallest ranges of any vertebrate ever recorded. It gives birth to fully formed toadlets rather than laying eggs, and the females carry the young on their backs.",
+  lost: "From the wild in 2009, after a dam upstream cut the flow that made the spray that made the habitat.",
+  cause: "A hydroelectric dam, completed in 2000, reduced the water reaching the falls by about 90%. Sprinklers were installed to imitate the mist, but the drying let chytrid fungus into the gorge and that finished the remaining animals.",
+  better: "Understood that the spray was the habitat. The species was only described in the 1990s, a few years before the dam that removed it. Around 500 toads were taken to zoos in the United States shortly before the collapse, which is the only reason there is anything left.",
+  back: "The captive colonies bred well, and toads have been released back into the gorge with the artificial sprinkler system running. It is a species living inside a machine that stands in for a waterfall, which is either a success or a warning depending on how long anyone intends to keep paying for the machine.",
+});
+vnote("guamrail", {
+  d: "Omnivore — insects, snails, seeds, carrion", h: "Guam, and now Rota and Cocos Island",
+  s: "EW",
+  f: "A flightless rail that lost flight on an island with no snakes, and then met one.",
+  lost: "From the wild on Guam in 1987. Twenty-one birds had been taken into captivity before the last wild ones went.",
+  cause: "The brown tree snake, introduced accidentally after the Second World War, probably in cargo. It ate its way through Guam's forest birds and took most of them out entirely; the island's forests are now largely silent and the loss of birds has measurably changed how the trees themselves reproduce.",
+  better: "Caught the snake at the port. It arrived in freight, spread unchecked, and by the time the bird declines were understood the snake was established across the island in numbers that have never been reversed.",
+  back: "Captive-bred rails were released on snake-free Rota and on Cocos Island, and in 2019 the species was moved from Extinct in the Wild to Critically Endangered — only the second bird ever to make that move, after the California condor. It is still not back on Guam, because the snake is still on Guam.",
+});
+vnote("mauritiuskestrel", {
+  d: "Carnivore — geckos hunted in forest, plus insects and small birds", h: "Mauritius, chiefly the eastern and western forest",
+  s: "EN",
+  f: "A short-winged forest falcon that hunts by manoeuvring through trees rather than stooping from height. In 1974 it was the rarest bird in the world: four known individuals, including a single breeding pair.",
+  lost: "Not lost. It is here as the counterweight.",
+  cause: "Forest clearance, introduced monkeys and rats taking eggs, and DDT sprayed against malarial mosquitos thinning the eggshells — the same mechanism that nearly took the peregrine.",
+  better: "Started before four. The decline was first noticed by amateur ornithologists in the 1960s, several of them Mauritian, and the first captive breeding attempt in 1973 failed when an incubator broke.",
+  back: "From four birds to roughly 800 by the mid-2000s, using techniques invented on this species — harvesting wild eggs, artificial incubation, hand rearing, nest boxes, supplementary feeding — that were later used everywhere. Then it halved. Monitoring funding was cut once the status improved, the decline was not caught early, and the species was uplisted again in 2014. Recent estimates run from a few hundred upward and are uncertain. It is the best argument in this region for two things at once: that recovery works, and that recovery is not a finish line you cross and walk away from.",
 });
