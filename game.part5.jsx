@@ -553,9 +553,18 @@
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
               <div key={x + "," + y} style={{
-                background: glow ? "radial-gradient(circle, #6b5a2e 0%, " + bg + " 78%)" : bg,
-                backgroundImage: (!glow && grassBgImg) ? grassBgImg : undefined,
-                backgroundSize: grassBgImg ? "100% 100%" : undefined,
+                // All longhand. Mixing the background shorthand with
+                // backgroundImage and backgroundSize on the same element means
+                // React cannot tell which one won when only one of them
+                // changes, and it warns because the result depends on the order
+                // the properties happen to be applied in. Every tile bg here is
+                // a flat colour, so the glow and the grass are both images over
+                // it and the shorthand is not needed at all.
+                backgroundColor: bg,
+                backgroundImage: glow
+                  ? `radial-gradient(circle, #6b5a2e 0%, ${bg} 78%)`
+                  : (grassBgImg || undefined),
+                backgroundSize: (!glow && grassBgImg) ? "100% 100%" : undefined,
                 aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
