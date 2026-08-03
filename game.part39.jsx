@@ -216,3 +216,29 @@ const packSlots = (box) => {
     return { ...a, slot: s };
   });
 };
+
+/* Order the animals inside each enclosure by level, highest first.
+
+   Deliberately within an enclosure rather than across the whole sanctuary. A
+   global level sort would drag a level 60 crocodile out of the Waters to sit
+   beside a level 60 eagle, which undoes the organisation the enclosures exist
+   for and disagrees with the field guide. Habitat is where an animal lives;
+   level is the order you want to read them in once you are there.
+
+   Ties break on species name and then uid, so the order is stable: sorting
+   twice gives the same arrangement rather than shuffling equals about. */
+const sortByLevel = (box) => {
+  const groups = {};
+  (box || []).forEach((a) => { (groups[boxKey(a)] = groups[boxKey(a)] || []).push(a); });
+  const out = [];
+  Object.keys(groups).forEach((k) => {
+    groups[k]
+      .slice()
+      .sort((x, y) =>
+        (y.lvl || 0) - (x.lvl || 0) ||
+        String((DEX[x.sp] || {}).n || x.sp).localeCompare(String((DEX[y.sp] || {}).n || y.sp)) ||
+        (x.uid || 0) - (y.uid || 0))
+      .forEach((a, i) => out.push({ ...a, box: k, slot: i }));
+  });
+  return out;
+};
