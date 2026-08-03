@@ -17,53 +17,113 @@ const BOX_TYPES = ["Predator", "Aerial", "Aquatic", "Burrow", "Venom", "Armor", 
 const BOX_NAMES = ["Hunters' Ridge", "The Aviary", "The Waters", "The Warren", "The Vivarium",
                    "The Bulwark", "Running Grounds", "The Wildwood", "The Ashlands"];
 
-const boxNameAt = (i) => (i < BOX_NAMES.length ? BOX_NAMES[i] : `Annex ${i - BOX_NAMES.length + 1}`);
 
-// the enclosure an animal belongs in by its primary type; Wild takes anything
-// that does not match, and a full enclosure spills into the next with room
-const homeBoxFor = (sp) => {
+/* ---------- WHICH ENCLOSURE ----------
+   An enclosure used to be a number, with one per type and everything past the
+   ninth dumped into unsorted annexes. That works until a type has more than
+   thirty animals in it, which happens quickly, and then the organisation the
+   names promise quietly stops being true.
+
+   An enclosure is now a type and a page within that type: "Predator:0",
+   "Predator:1", and so on. A type grows as many pages as it needs and they stay
+   with their type, so the Aviary never overflows into an unlabelled annex — it
+   becomes The Aviary II. */
+
+const boxKey = (a) => {
+  if (!a) return BOX_TYPES[0] + ":0";
+  const b = a.box;
+  if (typeof b === "string" && b.indexOf(":") > 0) return b;
+  // Numeric enclosures from before this change. Nought to eight were the nine
+  // habitat enclosures; anything higher was an annex, and its animals go back
+  // to the type they should have been in all along.
+  if (typeof b === "number" && b >= 0 && b < BOX_TYPES.length) return BOX_TYPES[b] + ":0";
+  return typeKeyFor(a.sp) + ":0";
+};
+const boxType = (k) => String(k).split(":")[0];
+const boxPage = (k) => parseInt(String(k).split(":")[1], 10) || 0;
+const mkBoxKey = (type, page) => type + ":" + page;
+
+const typeKeyFor = (sp) => {
   const t = (DEX[sp] && DEX[sp].t && DEX[sp].t[0]) || "Wild";
-  const i = BOX_TYPES.indexOf(t);
-  return i >= 0 ? i : BOX_TYPES.indexOf("Wild");
-};
-const placeFor = (sp, box) => {
-  const want = homeBoxFor(sp);
-  return inBox(box, want).length < BOX_SIZE ? want : firstOpenBox(box);
+  return BOX_TYPES.indexOf(t) >= 0 ? t : "Wild";
 };
 
-// reassign everything to its habitat, spilling into the next enclosure with
-// room when one fills. Used by the Sort button.
+const boxNameFor = (k) => {
+  const i = BOX_TYPES.indexOf(boxType(k));
+  const base = i >= 0 ? BOX_NAMES[i] : boxType(k);
+  const p = boxPage(k);
+  return p === 0 ? base : `${base} ${ROMAN[p] || p + 1}`;
+};
+const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+
+const boxOf = (a) => boxKey(a);
+const inBox = (box, k) => (box || []).filter((a) => boxKey(a) === k);
+
+/* Every enclosure that exists, in order: each type, then its pages.
+
+   A type always shows at least one page, and always one spare page beyond its
+   last occupied one, so there is somewhere to put an animal without first
+   making room. That is the whole reason the annexes existed, and now the spare
+   page belongs to the type instead of being a dumping ground. */
+const boxList = (box) => {
+  const maxPage = {};
+  (box || []).forEach((a) => {
+    const k = boxKey(a), t = boxType(k), p = boxPage(k);
+    if (maxPage[t] === undefined || p > maxPage[t]) maxPage[t] = p;
+  });
+  const out = [];
+  BOX_TYPES.forEach((t) => {
+    const last = maxPage[t] === undefined ? -1 : maxPage[t];
+    const lastFull = last >= 0 && inBox(box, mkBoxKey(t, last)).length >= BOX_SIZE;
+    const pages = Math.max(1, last + 1 + (lastFull ? 1 : 0));
+    for (let p = 0; p < pages; p++) out.push(mkBoxKey(t, p));
+  });
+  // A type the list does not know about should still be reachable rather than
+  // silently swallowing its animals.
+  (box || []).forEach((a) => {
+    const k = boxKey(a);
+    if (!out.includes(k)) out.push(k);
+  });
+  return out;
+};
+
+const boxCount = (box) => boxList(box).length;
+
+// The page of an animal's own type with room in it, adding a page if every
+// existing one is full. An animal always goes home.
+const homeBoxFor = (sp, box) => {
+  const t = typeKeyFor(sp);
+  for (let p = 0; p < 256; p++) {
+    if (inBox(box, mkBoxKey(t, p)).length < BOX_SIZE) return mkBoxKey(t, p);
+  }
+  return mkBoxKey(t, 0);
+};
+const placeFor = (sp, box) => homeBoxFor(sp, box);
+
+const firstOpenBox = (box) => {
+  const list = boxList(box);
+  for (const k of list) if (inBox(box, k).length < BOX_SIZE) return k;
+  return list[0];
+};
+
+// Reassign everything to its own type, filling each page before starting the
+// next. Nothing lands outside its habitat any more, so there is no spilling
+// into a neighbour's enclosure to explain.
 const sortByHabitat = (box) => {
   const counts = {};
   return (box || []).map((a) => {
-    let want = homeBoxFor(a.sp);
-    while ((counts[want] || 0) >= BOX_SIZE) want++;
-    counts[want] = (counts[want] || 0) + 1;
-    return { ...a, box: want };
+    const t = typeKeyFor(a.sp);
+    let p = 0;
+    while ((counts[mkBoxKey(t, p)] || 0) >= BOX_SIZE) p++;
+    const k = mkBoxKey(t, p);
+    counts[k] = (counts[k] || 0) + 1;
+    return { ...a, box: k };
   });
 };
 
-// which enclosure an animal is in; older saves have no .box at all
-const boxOf = (a) => (a && a.box) || 0;
+const boxNameAt = boxNameFor;
 
-// everything living in one enclosure, in stored order
-const inBox = (box, i) => (box || []).filter((a) => boxOf(a) === i);
-
-// how many enclosures to show: always at least 8, and always one spare beyond
-// the furthest one in use, so there is somewhere to move an animal to
-const boxCount = (box) => {
-  let hi = 0;
-  (box || []).forEach((a) => { if (boxOf(a) > hi) hi = boxOf(a); });
-  return Math.max(BOX_NAMES.length, hi + 2);
-};
-
-// first enclosure with room, so a caught animal never lands somewhere full
-const firstOpenBox = (box) => {
-  for (let i = 0; i < 256; i++) if (inBox(box, i).length < BOX_SIZE) return i;
-  return 0;
-};
-
-console.log("[part39] sanctuary:", BOX_SIZE, "per enclosure |", BOX_NAMES.length, "habitat enclosures, one per type");
+console.log("[part39] sanctuary:", BOX_SIZE, "per enclosure |", BOX_TYPES.length, "habitats, each growing pages as it fills");
 
 /* ---------- SLOTS ----------
    An enclosure is a grid of BOX_SIZE places, and an animal occupies one of
