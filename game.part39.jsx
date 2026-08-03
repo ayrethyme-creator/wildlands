@@ -13,9 +13,15 @@ const BOX_SIZE = 30;
 // There is one enclosure per type, so the names mean something: an animal's
 // habitat is decided by what it actually is, not by the order you caught it in.
 // Overflow past the nine goes to numbered annexes.
-const BOX_TYPES = ["Predator", "Aerial", "Aquatic", "Burrow", "Venom", "Armor", "Swift", "Wild", "Ember"];
+// The nine habitats, then the two the field guide already keeps apart. A
+// fossil and a mythic are not habitats in the way the others are, but the guide
+// files them separately and the sanctuary should agree with the guide - it is
+// the same collection looked at from two directions.
+const BOX_TYPES = ["Predator", "Aerial", "Aquatic", "Burrow", "Venom", "Armor", "Swift", "Wild", "Ember",
+                   "Fossil", "Mythic"];
 const BOX_NAMES = ["Hunters' Ridge", "The Aviary", "The Waters", "The Warren", "The Vivarium",
-                   "The Bulwark", "Running Grounds", "The Wildwood", "The Ashlands"];
+                   "The Bulwark", "Running Grounds", "The Wildwood", "The Ashlands",
+                   "Deep Time", "The Rift"];
 
 
 /* ---------- WHICH ENCLOSURE ----------
@@ -44,7 +50,14 @@ const boxPage = (k) => parseInt(String(k).split(":")[1], 10) || 0;
 const mkBoxKey = (type, page) => type + ":" + page;
 
 const typeKeyFor = (sp) => {
-  const t = (DEX[sp] && DEX[sp].t && DEX[sp].t[0]) || "Wild";
+  const d = DEX[sp];
+  if (!d || !d.t) return "Wild";
+  // Checked by membership rather than by position. Both FD and MY happen to put
+  // their marker first, but relying on that would make the sanctuary quietly
+  // wrong the day one entry is written the other way round.
+  if (d.t.includes("Fossil")) return "Fossil";
+  if (d.t.includes("Mythic")) return "Mythic";
+  const t = d.t[0] || "Wild";
   return BOX_TYPES.indexOf(t) >= 0 ? t : "Wild";
 };
 
