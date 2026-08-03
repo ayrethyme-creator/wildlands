@@ -514,7 +514,9 @@ function Wildlands() {
         return;
       }
       setS((p) => ({
-        ...p, map: exit.map, x: exit.x, y: exit.y, swimming: false,
+        // warp increments on every transition so the avatar element is rebuilt
+        // rather than animated into place. See the note beside it in part5.
+        ...p, map: exit.map, x: exit.x, y: exit.y, swimming: false, warp: (p.warp || 0) + 1,
         visited: (exit.map.startsWith("town") || TOWN_LIST.some(([k]) => k === exit.map)) ? { ...p.visited, [exit.map]: true } : p.visited,
       }));
       return;
