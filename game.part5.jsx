@@ -894,7 +894,11 @@
               const go = (d) => setS((p) => ({ ...p, boxPage: ((pageIdx + d) % nBoxes + nBoxes) % nBoxes, relConfirm: null }));
               // Jump straight to a habitat rather than paging through nine of
               // them. With a large sanctuary the arrows alone are a long walk.
-              const jump = (t) => setS((p) => ({ ...p, boxPage: Math.max(0, list.indexOf(mkBoxKey(t, 0))), boxSel: null, relConfirm: null }));
+              // Deliberately does not clear boxSel. Walking to another
+              // enclosure while carrying an animal is how you move an animal to
+              // another enclosure; dropping it at the door made the strip look
+              // like navigation and behave like a trapdoor.
+              const jump = (t) => setS((p) => ({ ...p, boxPage: Math.max(0, list.indexOf(mkBoxKey(t, 0))), relConfirm: null }));
               const moveTo = (dest) => setS((p) => ({
                 ...p, relConfirm: null,
                 box: p.box.map((a) => (a.uid === sel.uid
@@ -1170,7 +1174,7 @@
                     </div>
                   );
                 })()}
-                {[["🌍 Wildlands", (sp) => !DEX[sp].t.includes("Fossil") && !DEX[sp].t.includes("Mythic") && !DEX[sp].mem], ["🦴 Fossils", (sp) => DEX[sp].t.includes("Fossil")], ["🌀 Myths", (sp) => DEX[sp].t.includes("Mythic")], ["🕯️ The Vigil", (sp) => DEX[sp].mem]].map(([label, fits]) => {
+                {[["🌍 Wildlands", (sp) => !DEX[sp].t.includes("Fossil") && !DEX[sp].t.includes("Mythic") && DEX[sp].t[0] !== "Bug" && !DEX[sp].mem], ["🐝 Small Life", (sp) => DEX[sp].t[0] === "Bug" && !DEX[sp].mem], ["🦴 Fossils", (sp) => DEX[sp].t.includes("Fossil")], ["🌀 Myths", (sp) => DEX[sp].t.includes("Mythic")], ["🕯️ The Vigil", (sp) => DEX[sp].mem]].map(([label, fits]) => {
                   const keys = Object.keys(DEX).filter(fits);
                   if (!keys.length) return null;
                   return (
