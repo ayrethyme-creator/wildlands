@@ -64,3 +64,62 @@ const firstOpenBox = (box) => {
 };
 
 console.log("[part39] sanctuary:", BOX_SIZE, "per enclosure |", BOX_NAMES.length, "habitat enclosures, one per type");
+
+/* ---------- SLOTS ----------
+   An enclosure is a grid of BOX_SIZE places, and an animal occupies one of
+   them. Before this the grid simply drew the array in order, which looks the
+   same until you try to move something: there was no destination to move it
+   to, only a position in a list that redrew itself. */
+
+const slotOf = (a) => (typeof a.slot === "number" ? a.slot : 0);
+const inBoxAt = (box, b, s) => (box || []).find((a) => boxOf(a) === b && slotOf(a) === s);
+
+// The first free place in an enclosure, or -1 when it is full.
+const freeSlot = (box, b) => {
+  const taken = new Set((box || []).filter((a) => boxOf(a) === b).map(slotOf));
+  for (let i = 0; i < BOX_SIZE; i++) if (!taken.has(i)) return i;
+  return -1;
+};
+
+// Where a newly arriving animal goes: its habitat enclosure if there is room,
+// otherwise the first enclosure with any.
+const placeSlotFor = (sp, box) => {
+  const b = placeFor(sp, box);
+  const s = freeSlot(box, b);
+  if (s >= 0) return { box: b, slot: s };
+  for (let i = 0; i < boxCount(box) + 1; i++) {
+    const f = freeSlot(box, i);
+    if (f >= 0) return { box: i, slot: f };
+  }
+  return { box: b, slot: 0 };
+};
+
+/* Move one animal to a place, swapping with whatever is already there.
+
+   Swap rather than refuse: the alternative is telling someone a place is
+   occupied and making them empty it first, which is the behaviour the real
+   games deliberately avoided. */
+const moveToSlot = (box, uid, destBox, destSlot) => {
+  const moving = (box || []).find((a) => a.uid === uid);
+  if (!moving) return box;
+  const fromBox = boxOf(moving), fromSlot = slotOf(moving);
+  if (fromBox === destBox && fromSlot === destSlot) return box;
+  const sitting = inBoxAt(box, destBox, destSlot);
+  return box.map((a) => {
+    if (a.uid === uid) return { ...a, box: destBox, slot: destSlot };
+    if (sitting && a.uid === sitting.uid) return { ...a, box: fromBox, slot: fromSlot };
+    return a;
+  });
+};
+
+// Re-slot everything after a habitat sort, so the grid is packed rather than
+// keeping whatever positions the animals held in their old enclosures.
+const packSlots = (box) => {
+  const next = {};
+  return (box || []).map((a) => {
+    const b = boxOf(a);
+    const s = next[b] || 0;
+    next[b] = s + 1;
+    return { ...a, slot: s };
+  });
+};
