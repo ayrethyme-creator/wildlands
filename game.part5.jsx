@@ -880,14 +880,21 @@
               </div>
             )}
             {S.menu === "sanctuary" && (() => {
-              const page = S.boxPage || 0;
-              const nBoxes = boxCount(S.box);
+              // Enclosures are now a list of type-and-page keys rather than a
+              // run of numbers, so the page index is a position in that list.
+              const list = boxList(S.box);
+              const pageIdx = Math.min(S.boxPage || 0, list.length - 1);
+              const page = list[pageIdx];
+              const nBoxes = list.length;
               const here = S.box.filter((a) => boxOf(a) === page);
               // What is in hand may have been picked up from the team as well
               // as from an enclosure, so both are searched.
               const sel = S.box.find((a) => a.uid === S.boxSel) || S.party.find((a) => a.uid === S.boxSel);
               const selInParty = !!sel && S.party.some((a) => a.uid === sel.uid);
-              const go = (d) => setS((p) => ({ ...p, boxPage: (((p.boxPage || 0) + d) % nBoxes + nBoxes) % nBoxes, relConfirm: null }));
+              const go = (d) => setS((p) => ({ ...p, boxPage: ((pageIdx + d) % nBoxes + nBoxes) % nBoxes, relConfirm: null }));
+              // Jump straight to a habitat rather than paging through nine of
+              // them. With a large sanctuary the arrows alone are a long walk.
+              const jump = (t) => setS((p) => ({ ...p, boxPage: Math.max(0, list.indexOf(mkBoxKey(t, 0))), boxSel: null, relConfirm: null }));
               const moveTo = (dest) => setS((p) => ({
                 ...p, relConfirm: null,
                 box: p.box.map((a) => (a.uid === sel.uid
@@ -900,7 +907,7 @@
                     <b>🏞️ Sanctuary</b>
                     <span style={{ fontSize: 11, color: "#c9b88a" }}>{S.box.length} in care</span>
                   </div>
-                  {S.box.some((a) => boxOf(a) !== homeBoxFor(a.sp)) && (
+                  {S.box.some((a) => boxType(boxOf(a)) !== typeKeyFor(a.sp)) && (
                     <button style={{ ...btnS("#2d7d5a"), width: "100%", marginTop: 8 }}
                       onClick={() => setS((p) => ({ ...p, box: packSlots(sortByHabitat(p.box)), boxSel: null, relConfirm: null }))}>
                       🧭 Rehouse everyone by habitat
@@ -910,12 +917,30 @@
                   <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "10px 0 8px" }}>
                     <button style={{ ...btn("#5c5344"), padding: "6px 12px", fontSize: 13 }} onClick={() => go(-1)}>◀</button>
                     <div style={{ flex: 1, textAlign: "center" }}>
-                      <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>{boxNameAt(page)}</div>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>{boxNameFor(page)}</div>
                       <div style={{ fontSize: 10, color: "#c9b88a" }}>
-                        {page < BOX_TYPES.length ? `${BOX_TYPES[page]} · ` : ""}{here.length}/{BOX_SIZE}
+                        {boxType(page)} · {here.length}/{BOX_SIZE}
                       </div>
                     </div>
                     <button style={{ ...btn("#5c5344"), padding: "6px 12px", fontSize: 13 }} onClick={() => go(1)}>▶</button>
+                  </div>
+
+                  {/* Nine habitats, each with however many pages it needs. The
+                      strip is the way to reach one directly; the arrows walk
+                      through the pages within and between them. */}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 3, marginBottom: 8 }}>
+                    {BOX_TYPES.map((t) => {
+                      const n = S.box.filter((a) => boxType(boxOf(a)) === t).length;
+                      const pages = list.filter((k) => boxType(k) === t).length;
+                      const on = boxType(page) === t;
+                      return (
+                        <button key={t} onClick={() => jump(t)}
+                          style={{ ...btn(on ? "#2d7d5a" : "#3a342b"), padding: "3px 7px", fontSize: 10,
+                            border: on ? "1px solid #e8c547" : "1px solid #5c5344", opacity: n ? 1 : .5 }}>
+                          {t} {n}{pages > 1 ? ` · ${pages}p` : ""}
+                        </button>
+                      );
+                    })}
                   </div>
 
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 4 }}>
@@ -996,7 +1021,7 @@
                               box: p.box.filter((a) => a.uid !== sel.uid), boxSel: null, relConfirm: null })); }}>
                           {S.party.length < 6 ? "➕ To Team" : "Team full"}
                         </button>
-                        <button style={btnS("#7d735f")} onClick={() => moveTo((page + 1) % nBoxes)}>📦 Move on ▶</button>
+                        <button style={btnS("#7d735f")} onClick={() => moveTo(list[(pageIdx + 1) % nBoxes])}>📦 Move on ▶</button>
                       </div>
 
                       {S.relConfirm === sel.uid ? (
