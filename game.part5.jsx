@@ -883,11 +883,16 @@
               const page = S.boxPage || 0;
               const nBoxes = boxCount(S.box);
               const here = S.box.filter((a) => boxOf(a) === page);
-              const sel = S.box.find((a) => a.uid === S.boxSel);
-              const go = (d) => setS((p) => ({ ...p, boxPage: (((p.boxPage || 0) + d) % nBoxes + nBoxes) % nBoxes, boxSel: null, relConfirm: null }));
+              // What is in hand may have been picked up from the team as well
+              // as from an enclosure, so both are searched.
+              const sel = S.box.find((a) => a.uid === S.boxSel) || S.party.find((a) => a.uid === S.boxSel);
+              const selInParty = !!sel && S.party.some((a) => a.uid === sel.uid);
+              const go = (d) => setS((p) => ({ ...p, boxPage: (((p.boxPage || 0) + d) % nBoxes + nBoxes) % nBoxes, relConfirm: null }));
               const moveTo = (dest) => setS((p) => ({
                 ...p, relConfirm: null,
-                box: p.box.map((a) => (a.uid === sel.uid ? { ...a, box: dest } : a)),
+                box: p.box.map((a) => (a.uid === sel.uid
+                  ? { ...a, box: dest, slot: Math.max(0, freeSlot(p.box.filter((x) => x.uid !== a.uid), dest)) }
+                  : a)),
               }));
               return (
                 <div>
@@ -897,7 +902,7 @@
                   </div>
                   {S.box.some((a) => boxOf(a) !== homeBoxFor(a.sp)) && (
                     <button style={{ ...btnS("#2d7d5a"), width: "100%", marginTop: 8 }}
-                      onClick={() => setS((p) => ({ ...p, box: sortByHabitat(p.box), boxSel: null, relConfirm: null }))}>
+                      onClick={() => setS((p) => ({ ...p, box: packSlots(sortByHabitat(p.box)), boxSel: null, relConfirm: null }))}>
                       🧭 Rehouse everyone by habitat
                     </button>
                   )}
@@ -915,18 +920,53 @@
 
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 4 }}>
                     {Array.from({ length: BOX_SIZE }).map((_, i) => {
-                      const a = here[i];
+                      const a = inBoxAt(S.box, page, i);
                       const on = a && a.uid === S.boxSel;
+                      const target = !!sel && !on;
                       return (
-                        <div key={i} onClick={() => a && setS((p) => ({ ...p, boxSel: a.uid, relConfirm: null }))}
+                        <div key={i}
+                          onClick={() => setS((p) => {
+                            const held = p.box.find((x) => x.uid === p.boxSel)
+                              || p.party.find((x) => x.uid === p.boxSel);
+                            // Nothing in hand: pick this one up.
+                            if (!held) return a ? { ...p, boxSel: a.uid, relConfirm: null } : p;
+                            // Tapping the one you are holding puts it back down.
+                            if (held.uid === (a && a.uid)) return { ...p, boxSel: null, relConfirm: null };
+                            // Holding one from the team: this is a deposit.
+                            if (p.party.some((x) => x.uid === held.uid)) {
+                              if (p.party.length <= 1) return p;
+                              const displaced = a || null;
+                              return {
+                                ...p, relConfirm: null, boxSel: null,
+                                party: displaced
+                                  ? p.party.map((x) => (x.uid === held.uid ? { ...displaced, box: undefined, slot: undefined } : x))
+                                  : p.party.filter((x) => x.uid !== held.uid),
+                                box: [
+                                  ...p.box.filter((x) => !displaced || x.uid !== displaced.uid),
+                                  { ...held, box: page, slot: i },
+                                ],
+                              };
+                            }
+                            // Otherwise both are in the sanctuary: move or swap.
+                            // Setting one down lets go of it, the way putting a
+                            // thing on a shelf means you are no longer holding it.
+                            return { ...p, box: moveToSlot(p.box, held.uid, page, i), boxSel: null, relConfirm: null };
+                          })}
                           style={{ aspectRatio: "1", borderRadius: 13, display: "flex", alignItems: "center", justifyContent: "center",
-                            border: on ? "2px solid #e8c547" : "1px dashed #5c5344",
-                            background: a ? "rgba(255,255,255,.06)" : "transparent", cursor: a ? "pointer" : "default" }}>
+                            border: on ? "2px solid #e8c547" : target ? "1px dashed #8a7f68" : "1px dashed #5c5344",
+                            background: on ? "rgba(232,197,71,.16)" : a ? "rgba(255,255,255,.06)" : target ? "rgba(255,255,255,.03)" : "transparent",
+                            cursor: a || sel ? "pointer" : "default" }}>
                           {a && <Sprite sp={a.sp} size={30} />}
                         </div>
                       );
                     })}
                   </div>
+
+                  {sel && (
+                    <div style={{ fontSize: 10, color: "#e8c547", marginTop: 6, textAlign: "center" }}>
+                      Holding {sel.indiv || DEX[sel.sp].n} — tap a place to set it down, or tap it again to stop.
+                    </div>
+                  )}
 
                   {sel && (
                     <div style={{ ...panel, marginTop: 10, padding: 10 }}>
@@ -936,6 +976,14 @@
                           <div style={{ fontSize: 13, fontWeight: 700 }}>{DEX[sel.sp].n} <span style={{ color: "#c9b88a" }}>Lv {sel.lvl}</span> {sel.sex === "F" ? "♀" : "♂"}</div>
                           <div style={{ margin: "3px 0" }}>{DEX[sel.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
                           <div style={{ fontSize: 10, color: "#c9b88a" }}>{sel.hp}/{sel.maxHp} HP · ATK {sel.atk} DEF {sel.def} SPD {sel.spd}</div>
+                          {NATURES[sel.nat] && (
+                            <div style={{ fontSize: 10, color: "#e8c547" }}>
+                              {NATURES[sel.nat].n}
+                              <span style={{ color: "#a89a7d" }}> — {NATURES[sel.nat].d}
+                                {NATURES[sel.nat].up ? ` (+${NATURES[sel.nat].up.toUpperCase()}, −${NATURES[sel.nat].dn.toUpperCase()})` : " (no trade)"}
+                              </span>
+                            </div>
+                          )}
                           <div style={{ fontSize: 10, color: "#a89a7d" }}>{sel.moves.map((k) => MOVES[k].n).join(" · ")}</div>
                         </div>
                       </div>
@@ -943,7 +991,8 @@
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginTop: 8 }}>
                         <button style={{ ...btnS(S.party.length < 6 ? "#27ae60" : "#5c5344"), opacity: S.party.length < 6 ? 1 : .5 }}
                           onClick={() => { if (S.party.length >= 6) return;
-                            setS((p) => ({ ...p, party: [...p.party, p.box.find((a) => a.uid === sel.uid)],
+                            setS((p) => ({ ...p,
+                              party: [...p.party, { ...p.box.find((a) => a.uid === sel.uid), box: undefined, slot: undefined }],
                               box: p.box.filter((a) => a.uid !== sel.uid), boxSel: null, relConfirm: null })); }}>
                           {S.party.length < 6 ? "➕ To Team" : "Team full"}
                         </button>
@@ -970,18 +1019,66 @@
 
                   <div style={{ marginTop: 12, borderTop: "1px solid #5c5344", paddingTop: 8 }}>
                     <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 5 }}>
-                      Your team {S.party.length > 1 ? "— tap to send one here" : "— you must keep at least one companion"}
+                      {sel
+                        ? "Your team — tap a place to set it down here"
+                        : S.party.length > 1
+                          ? "Your team — tap one to pick it up"
+                          : "Your team — you must keep at least one companion"}
                     </div>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                      {S.party.map((a) => (
-                        <div key={a.uid} onClick={() => { if (S.party.length <= 1) return;
-                          setS((p) => ({ ...p, party: p.party.filter((x) => x.uid !== a.uid),
-                            box: [...p.box, { ...a, box: placeFor(a.sp, p.box) }] })); }}
-                          style={{ ...panel, padding: "4px 7px", fontSize: 11, display: "flex", alignItems: "center", gap: 5,
-                            cursor: S.party.length > 1 ? "pointer" : "default", opacity: S.party.length > 1 ? 1 : .5 }}>
-                          <Sprite sp={a.sp} size={20} /> {DEX[a.sp].n} Lv{a.lvl}
+                    <div data-team-row="1" style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                      {S.party.map((a, idx) => {
+                        const on = a.uid === S.boxSel;
+                        const target = !!sel && !on;
+                        return (
+                          <div key={a.uid}
+                            onClick={() => setS((p) => {
+                              const held = p.box.find((x) => x.uid === p.boxSel)
+                                || p.party.find((x) => x.uid === p.boxSel);
+                              if (!held) {
+                                if (p.party.length <= 1) return p;
+                                return { ...p, boxSel: a.uid, relConfirm: null };
+                              }
+                              if (held.uid === a.uid) return { ...p, boxSel: null, relConfirm: null };
+                              // Both in the team: reorder. Marching order is the
+                              // order they go out in, so it is worth being able
+                              // to set it.
+                              if (p.party.some((x) => x.uid === held.uid)) {
+                                const party = [...p.party];
+                                const i = party.findIndex((x) => x.uid === held.uid);
+                                const j = party.findIndex((x) => x.uid === a.uid);
+                                [party[i], party[j]] = [party[j], party[i]];
+                                return { ...p, party, boxSel: null, relConfirm: null };
+                              }
+                              // Holding one from the sanctuary: swap it in for
+                              // this team member, who takes its place.
+                              return {
+                                ...p, relConfirm: null, boxSel: null,
+                                party: p.party.map((x) => (x.uid === a.uid ? { ...held, box: undefined, slot: undefined } : x)),
+                                box: p.box.map((x) => (x.uid === held.uid
+                                  ? { ...a, box: boxOf(held), slot: slotOf(held) } : x)),
+                              };
+                            })}
+                            style={{ ...panel, padding: "4px 7px", fontSize: 11, display: "flex", alignItems: "center", gap: 5,
+                              border: on ? "2px solid #e8c547" : target ? "1px dashed #8a7f68" : undefined,
+                              background: on ? "rgba(232,197,71,.16)" : undefined,
+                              cursor: (sel || S.party.length > 1) ? "pointer" : "default",
+                              opacity: (sel || S.party.length > 1) ? 1 : .5 }}>
+                            <span style={{ fontSize: 9, color: "#8a7f68" }}>{idx + 1}</span>
+                            <Sprite sp={a.sp} size={20} /> {a.indiv || DEX[a.sp].n} Lv{a.lvl}
+                          </div>
+                        );
+                      })}
+                      {sel && !selInParty && S.party.length < 6 && (
+                        <div onClick={() => setS((p) => ({
+                          ...p, boxSel: null, relConfirm: null,
+                          party: [...p.party, { ...sel, box: undefined, slot: undefined }],
+                          box: p.box.filter((x) => x.uid !== sel.uid),
+                        }))}
+                          style={{ ...panel, padding: "4px 10px", fontSize: 11, display: "flex", alignItems: "center",
+                            border: "1px dashed #8a7f68", cursor: "pointer", color: "#c9b88a" }}>
+                          ＋ empty place
                         </div>
-                      ))}
+                      )}
                     </div>
                   </div>
                 </div>
