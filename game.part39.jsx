@@ -22,11 +22,11 @@ const BOX_SIZE = 30;
 // so all four fell through to the default: about four hundred animals were
 // filed in the Wildwood because there was nowhere else for them to go.
 const BOX_TYPES = ["Predator", "Aerial", "Aquatic", "Burrow", "Venom", "Armor", "Swift", "Wild", "Ember",
-                   "Bug", "Canopy", "Night", "Ice", "Fossil", "Mythic"];
+                   "Bug", "Canopy", "Night", "Ice", "Fossil", "Mythic", "Vigil"];
 const BOX_NAMES = ["Hunters' Ridge", "The Aviary", "The Waters", "The Warren", "The Vivarium",
                    "The Bulwark", "Running Grounds", "The Wildwood", "The Ashlands",
                    "The Hive", "The Canopy", "The Night House", "The Cold Store",
-                   "Deep Time", "The Rift"];
+                   "Deep Time", "The Rift", "The Vigil"];
 
 
 /* ---------- WHICH ENCLOSURE ----------
@@ -73,6 +73,10 @@ const typeKeyFor = (sp) => {
   // wrong the day one entry is written the other way round.
   if (d.t.includes("Fossil")) return "Fossil";
   if (d.t.includes("Mythic")) return "Mythic";
+  // Checked after Fossil and Mythic so the sanctuary breaks a tie the same way
+  // the guide does. No species is currently both, but the order should not be
+  // the thing that has to stay true.
+  if (d.mem) return "Vigil";
   const t = d.t[0] || "Wild";
   return BOX_TYPES.indexOf(t) >= 0 ? t : "Wild";
 };
