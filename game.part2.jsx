@@ -383,13 +383,60 @@ const statAt = (base, lvl, isHp) =>
   isHp ? Math.floor(base * (0.5 + lvl * 0.07)) + 12 : Math.floor(base * (0.35 + lvl * 0.055)) + 4;
 
 let UID = 1;
+/* ---------- NATURES ----------
+   An individual temperament, rolled once when the animal is made and never
+   changed. Three stats can move, so there are nine: six that trade one stat
+   for another and three that trade nothing. The trade is ±10%.
+
+   HP is deliberately untouched. A temperament should change how an animal
+   behaves, not how much of it there is, and letting nature move HP makes the
+   difference between two individuals of the same species feel like a
+   different species instead of a different animal. */
+
+const NATURES = {
+  fierce:   { n: "Fierce",   up: "atk", dn: "def", d: "quick to escalate" },
+  dogged:   { n: "Dogged",   up: "atk", dn: "spd", d: "commits, and does not let go" },
+  wary:     { n: "Wary",     up: "def", dn: "atk", d: "watches the exits" },
+  patient:  { n: "Patient",  up: "def", dn: "spd", d: "waits things out" },
+  skittish: { n: "Skittish", up: "spd", dn: "atk", d: "moves before it thinks" },
+  restless: { n: "Restless", up: "spd", dn: "def", d: "never quite settles" },
+  even:     { n: "Even",     up: null,  dn: null,  d: "hard to rattle" },
+  placid:   { n: "Placid",   up: null,  dn: null,  d: "unbothered by much" },
+  gentle:   { n: "Gentle",   up: null,  dn: null,  d: "easy in the hand" },
+};
+const NATURE_KEYS = Object.keys(NATURES);
+
+const natMul = (nat, stat) => {
+  const N = NATURES[nat];
+  if (!N) return 1;
+  if (N.up === stat) return 1.1;
+  if (N.dn === stat) return 0.9;
+  return 1;
+};
+
+// A stat of 1 that a nature drops must not become 0, hence the floor.
+const withNature = (v, nat, stat) => Math.max(1, Math.round(v * natMul(nat, stat)));
+
+// Deterministic from the uid so a save written before natures existed gets the
+// same temperament every time it is loaded, rather than a new animal each time.
+const natureFor = (uid) => {
+  let h = 0x811c9dc5;
+  const s = "nat" + uid;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 0x01000193) >>> 0; }
+  return NATURE_KEYS[h % NATURE_KEYS.length];
+};
+
 const mk = (sp, lvl) => {
   const d = DEX[sp];
   const moves = [...d.m, ...(d.l || []).filter(([L]) => L <= lvl).map(([, k]) => k)].slice(-4);
   const maxHp = statAt(d.b.h, lvl, true);
-  return { uid: UID++, sp, lvl, xp: 0, maxHp, hp: maxHp, sex: Math.random() < 0.5 ? "M" : "F",
+  const uid = UID++;
+  const nat = NATURE_KEYS[Math.floor(Math.random() * NATURE_KEYS.length)];
+  return { uid, sp, lvl, xp: 0, maxHp, hp: maxHp, sex: Math.random() < 0.5 ? "M" : "F", nat,
     moves, pp: moves.map((k) => maxPP(MOVES[k])),
-    atk: statAt(d.b.a, lvl), def: statAt(d.b.d, lvl), spd: statAt(d.b.s, lvl) };
+    atk: withNature(statAt(d.b.a, lvl), nat, "atk"),
+    def: withNature(statAt(d.b.d, lvl), nat, "def"),
+    spd: withNature(statAt(d.b.s, lvl), nat, "spd") };
 };
 // Levelling curve. The quadratic term is what makes later levels cost more than
 // earlier ones; raising it slightly stretches the back half of the game without
