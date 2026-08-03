@@ -202,7 +202,11 @@ function Wildlands() {
     {
       const used = {};
       box.forEach((a) => {
-        const b = boxOf(a);
+        // boxOf now returns a type-and-page key and converts old numeric
+        // enclosures on the way through, so writing it back here is what
+        // actually migrates the save off the annex scheme.
+        a.box = boxOf(a);
+        const b = a.box;
         used[b] = used[b] || new Set();
         if (typeof a.slot === "number" && a.slot >= 0 && a.slot < BOX_SIZE && !used[b].has(a.slot)) {
           used[b].add(a.slot);
