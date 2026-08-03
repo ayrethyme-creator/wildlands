@@ -180,7 +180,40 @@ function Wildlands() {
         const ind = individualOf(a.sp);
         if (ind && ind.name) a.indiv = ind.name;
       }
+      // Animals from before natures existed get one derived from their uid, so
+      // it is the same temperament on every load rather than a fresh roll each
+      // time. Their stats are then rebuilt to match, because a stored stat
+      // block computed without a nature would disagree with the label shown
+      // beside it and with what the next level-up produces.
+      if (!a.nat || !NATURES[a.nat]) {
+        a.nat = natureFor(a.uid);
+        const d = DEX[a.sp];
+        if (d) {
+          a.atk = withNature(statAt(d.b.a, a.lvl), a.nat, "atk");
+          a.def = withNature(statAt(d.b.d, a.lvl), a.nat, "def");
+          a.spd = withNature(statAt(d.b.s, a.lvl), a.nat, "spd");
+        }
+      }
     });
+    // Boxed animals used to have no slot: the grid drew them in array order, so
+    // an animal had a position on screen but nowhere to actually be. Moving one
+    // needs a place to move it to, so each is given the slot it already appears
+    // to occupy and keeps it from then on.
+    {
+      const used = {};
+      box.forEach((a) => {
+        const b = boxOf(a);
+        used[b] = used[b] || new Set();
+        if (typeof a.slot === "number" && a.slot >= 0 && a.slot < BOX_SIZE && !used[b].has(a.slot)) {
+          used[b].add(a.slot);
+        } else {
+          let s = 0;
+          while (used[b].has(s)) s++;
+          a.slot = s;
+          used[b].add(s);
+        }
+      });
+    }
     let dex = {};
     Object.entries(p.dex || {}).forEach(([k, v]) => { if (DEX[k]) dex[k] = v; });
     [...party, ...box].forEach((a) => { dex[a.sp] = 2; });
@@ -822,7 +855,12 @@ function Wildlands() {
       const d = DEX[my.sp];
       const nm = statAt(d.b.h, my.lvl, true);
       my.hp += Math.max(0, nm - my.maxHp); my.maxHp = nm;
-      my.atk = statAt(d.b.a, my.lvl); my.def = statAt(d.b.d, my.lvl); my.spd = statAt(d.b.s, my.lvl);
+      // The nature has to be reapplied here. Without it a level-up quietly
+      // recalculates back to the base numbers and the temperament stops
+      // meaning anything the moment the animal grows.
+      my.atk = withNature(statAt(d.b.a, my.lvl), my.nat, "atk");
+      my.def = withNature(statAt(d.b.d, my.lvl), my.nat, "def");
+      my.spd = withNature(statAt(d.b.s, my.lvl), my.nat, "spd");
     }
   };
 
@@ -1189,7 +1227,10 @@ function Wildlands() {
             party.push(friend);
             dest = ind ? `${ind.name} will work with you.` : "It joined your team!";
           } else {
-            friend.box = placeFor(friend.sp, box);
+            // A new arrival needs a place in the enclosure, not only the
+            // enclosure. Without a slot it lands on top of whoever holds slot 0.
+            const spot = placeSlotFor(friend.sp, box);
+            friend.box = spot.box; friend.slot = spot.slot;
             box.push(friend);
             dest = ind
               ? `${ind.name} is waiting at the Sanctuary (${boxNameAt(friend.box)}) — your six are full.`
