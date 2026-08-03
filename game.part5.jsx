@@ -575,8 +575,19 @@
               tiles and the walk becomes continuous. The duration matches the
               step timer, so running looks like running rather than like the
               same walk played twice. */}
+          {/* Keyed on the map and on a warp counter. The transition above is
+              what makes walking continuous, and it is also what made arriving
+              somewhere look wrong: on a map change x and y jump to the entry
+              tile, React reuses this element, and the browser dutifully
+              animates the ranger sliding across the new map from wherever they
+              had been standing on the old one.
+
+              Changing the key gives the browser a new element with no previous
+              position, so arrival is instant while ordinary steps still glide.
+              The warp counter is there because no exit currently lands on the
+              same map, but one added later would slide across the room. */}
           {typeof Avatar !== "undefined" && (
-            <div style={{
+            <div key={`${S.map}:${S.warp || 0}`} style={{
               position: "absolute", left: 0, top: 0,
               width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
               transform: `translate(${S.x * 100}%, ${S.y * 100}%)`,
