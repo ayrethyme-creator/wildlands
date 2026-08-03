@@ -937,6 +937,16 @@
                       🧭 Rehouse everyone by habitat
                     </button>
                   )}
+                  {/* Orders each enclosure by level without moving anyone out of
+                      it, so this and the rehouse above compose rather than
+                      fight: rehouse decides which room, this decides the order
+                      within the room. */}
+                  {S.box.length > 1 && (
+                    <button style={{ ...btnS("#4a7ba7"), width: "100%", marginTop: 6 }}
+                      onClick={() => setS((p) => ({ ...p, box: sortByLevel(p.box), boxSel: null, relConfirm: null }))}>
+                      🔢 Order each enclosure by level
+                    </button>
+                  )}
 
                   <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "10px 0 8px" }}>
                     <button style={{ ...btn("#5c5344"), padding: "6px 12px", fontSize: 13 }} onClick={() => go(-1)}>◀</button>
