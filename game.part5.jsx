@@ -548,8 +548,15 @@
             // Grass draws as a background filling the whole cell, so adjacent
             // grass tiles run together into one field instead of each being a
             // square with a character stamped in the middle of it.
-            const grassBgImg = (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4)
+            const hidden = dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4;
+            // Grass and the drawn map tiles arrive the same way: as one
+            // background image. Whichever applies suppresses the emoji, because
+            // a drawn tree with 🌳 stamped on top of it is worse than either.
+            const grassBgImg = hidden
               ? null : (typeof GRASS_TILE !== "undefined" ? GRASS_TILE(ch2, x, y, bg) : null);
+            const artBgImg = (hidden || grassBgImg)
+              ? null : (typeof TILE_ART !== "undefined" ? TILE_ART(ch2, x, y, pal) : null);
+            if (artBgImg) em = "";
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
               <div key={x + "," + y} style={{
@@ -563,8 +570,8 @@
                 backgroundColor: bg,
                 backgroundImage: glow
                   ? `radial-gradient(circle, #6b5a2e 0%, ${bg} 78%)`
-                  : (grassBgImg || undefined),
-                backgroundSize: (!glow && grassBgImg) ? "100% 100%" : undefined,
+                  : (grassBgImg || artBgImg || undefined),
+                backgroundSize: (!glow && (grassBgImg || artBgImg)) ? "100% 100%" : undefined,
                 aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
