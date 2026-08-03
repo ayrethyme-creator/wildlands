@@ -17,10 +17,15 @@ const BOX_SIZE = 30;
 // fossil and a mythic are not habitats in the way the others are, but the guide
 // files them separately and the sanctuary should agree with the guide - it is
 // the same collection looked at from two directions.
+// Every type in the chart, then the two the field guide keeps apart. Bug,
+// Canopy, Night and Ice are real types with real species and had no enclosure,
+// so all four fell through to the default: about four hundred animals were
+// filed in the Wildwood because there was nowhere else for them to go.
 const BOX_TYPES = ["Predator", "Aerial", "Aquatic", "Burrow", "Venom", "Armor", "Swift", "Wild", "Ember",
-                   "Fossil", "Mythic"];
+                   "Bug", "Canopy", "Night", "Ice", "Fossil", "Mythic"];
 const BOX_NAMES = ["Hunters' Ridge", "The Aviary", "The Waters", "The Warren", "The Vivarium",
                    "The Bulwark", "Running Grounds", "The Wildwood", "The Ashlands",
+                   "The Hive", "The Canopy", "The Night House", "The Cold Store",
                    "Deep Time", "The Rift"];
 
 
@@ -35,6 +40,11 @@ const BOX_NAMES = ["Hunters' Ridge", "The Aviary", "The Waters", "The Warren", "
    with their type, so the Aviary never overflows into an unlabelled annex — it
    becomes The Aviary II. */
 
+// What the nine numeric enclosures meant before enclosures had names. Frozen:
+// this is a record of an old save format, not a list that should follow the
+// current one.
+const LEGACY_BOX_TYPES = ["Predator", "Aerial", "Aquatic", "Burrow", "Venom", "Armor", "Swift", "Wild", "Ember"];
+
 const boxKey = (a) => {
   if (!a) return BOX_TYPES[0] + ":0";
   const b = a.box;
@@ -42,7 +52,13 @@ const boxKey = (a) => {
   // Numeric enclosures from before this change. Nought to eight were the nine
   // habitat enclosures; anything higher was an annex, and its animals go back
   // to the type they should have been in all along.
-  if (typeof b === "number" && b >= 0 && b < BOX_TYPES.length) return BOX_TYPES[b] + ":0";
+  //
+  // Indexed against LEGACY_BOX_TYPES rather than BOX_TYPES, which has grown
+  // since. Reading the live list would silently reinterpret old annex numbers
+  // as whatever enclosure now sits at that index - an animal parked in Annex 1
+  // would reappear in The Hive - and it would break again every time a type is
+  // added. The old numbering is history and has to be read as history.
+  if (typeof b === "number" && b >= 0 && b < LEGACY_BOX_TYPES.length) return LEGACY_BOX_TYPES[b] + ":0";
   return typeKeyFor(a.sp) + ":0";
 };
 const boxType = (k) => String(k).split(":")[0];
