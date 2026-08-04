@@ -529,7 +529,10 @@ function Wildlands() {
       ((ch === "R" || ch === "V") && st.trainersBeaten[idKey]) ||
       (ch === "W" && st.swimming);
     if (walk) {
-      setS((p) => ({ ...p, x: nx, y: ny, swimming: ch === "W" }));
+      // step counts every completed footfall. The avatar and the grass both
+      // key an animation on it, which is what turns a smooth slide into a walk
+      // and makes the grass react to being walked through.
+      setS((p) => ({ ...p, x: nx, y: ny, swimming: ch === "W", step: ((p.step || 0) + 1) % 1000 }));
       if (ch === "G") rollEncounter(st.map, "grass");
       else if (ch === "W") rollEncounter(st.map, "water");
       return;
