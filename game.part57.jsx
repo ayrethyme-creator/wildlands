@@ -221,6 +221,10 @@ const PROP_BY_EM = {
   "🔥": ["flame", null], "✨": ["sparkle", null], "🌵": ["bloom", "#6fae5a"],
   "🐠": ["bloom", "#e8935c"], "⛏️": ["marker", null],
   "🕯️": ["candle", null], "🦴": ["bone", null],
+  // The lamp post and the fallen log both become a lit lantern after dark, so
+  // the drawn form has to follow what the tile is showing, not the character
+  // it was written as.
+  "🏮": ["lantern", null], "🔦": ["lamp", null],
   // Six trainers are marked by an object rather than a face - a beekeeper by
   // her bees, a surveyor by his clipboard. Those are drawn as the objects they
   // are rather than turned into people.
@@ -232,8 +236,12 @@ const PROP_CACHE = {};
 const PROP_TILE = (ch, em, bg) => {
   const key = `${ch}|${em}|${bg}`;
   if (key in PROP_CACHE) return PROP_CACHE[key];
-  let kind = PROP_BY_CHAR[ch], tint = null;
-  if (!kind && PROP_BY_EM[em]) { kind = PROP_BY_EM[em][0]; tint = PROP_BY_EM[em][1]; }
+  // The emoji is consulted first because it is the live state of the tile - a
+  // lamp lights up at night and a log becomes the lantern beside it - whereas
+  // the character is only what the map was written with.
+  let kind = null, tint = null;
+  if (PROP_BY_EM[em]) { kind = PROP_BY_EM[em][0]; tint = PROP_BY_EM[em][1]; }
+  if (!kind) kind = PROP_BY_CHAR[ch];
   const build = kind && PROP_SHAPES[kind];
   PROP_CACHE[key] = build
     ? `url("data:image/svg+xml,${encodeURIComponent(build(bg, tint))}")`
@@ -245,4 +253,4 @@ console.log(`[part57] buildings and props | ${Object.keys(PROP_SHAPES).length} s
 
 // Tiles whose drawn form contains a flame, so the render knows which ones
 // should flicker without having to look inside the picture.
-const FLICKER_TILES = new Set(["¦", "t"]);
+const FLICKER_TILES = new Set(["¦", "t", "\u00a1"]);
