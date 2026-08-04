@@ -88,6 +88,24 @@
       }
       .wl-flicker { animation: wlFlicker 1.7s ease-in-out infinite; }
 
+      /* One footfall. Short, and slightly asymmetric so consecutive steps do
+         not read as a bounce. */
+      @keyframes wlStep {
+        0%   { transform: translateY(0); }
+        45%  { transform: translateY(-7%); }
+        100% { transform: translateY(0); }
+      }
+      .wl-step { animation: wlStep 190ms ease-out; }
+
+      /* Grass being walked through: a quick shove, then settling. */
+      @keyframes wlRustle {
+        0%   { background-position: 0% 0%; }
+        30%  { background-position: -6% 2%; }
+        60%  { background-position: 4% 0%; }
+        100% { background-position: 0% 0%; }
+      }
+      .wl-rustle { animation: wlRustle 420ms ease-out; }
+
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
       }
@@ -611,6 +629,9 @@
             /* Which tiles move, and how much they are held back so a field does
                not move as one sheet. Water gets the longest spread because a
                lake is the largest continuous thing on screen. */
+            // Grass the ranger is standing in rustles rather than sways, and
+            // the tile is keyed on the step count so walking through a field
+            // disturbs each clump as she reaches it rather than once on entry.
             let motion = null, delay = 0;
             if (!hidden) {
               const jitter = ((x * 7 + y * 13) % 20) / 10;
@@ -625,7 +646,8 @@
               : null;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
-              <div key={x + "," + y} className={motion || undefined} style={{
+              <div key={x + "," + y + (isPlayer && grassBgImg ? ":" + (S.step || 0) : "")}
+                className={(isPlayer && grassBgImg && !hidden) ? "wl-rustle" : (motion || undefined)} style={{
                 // All longhand. Mixing the background shorthand with
                 // backgroundImage and backgroundSize on the same element means
                 // React cannot tell which one won when only one of them
@@ -689,7 +711,15 @@
               pointerEvents: "none", zIndex: 4,
               display: "flex", alignItems: "flex-end", justifyContent: "center",
             }}>
-              <div style={{ width: "128%", marginBottom: "-6%" }}>
+              {/* Keyed on the step count so the animation restarts on every
+                  footfall. Without it the ranger slid across the map like a
+                  chess piece: the position moved but nothing about her did.
+                  The bob is on this inner element rather than the wrapper
+                  because the wrapper's transform is already carrying her
+                  between tiles. */}
+              <div key={S.step || 0}
+                className={S.swimming ? undefined : "wl-step"}
+                style={{ width: "128%", marginBottom: "-6%" }}>
                 <Avatar dir={S.dir || "down"} swimming={S.swimming} size="100%" />
               </div>
             </div>
