@@ -45,6 +45,49 @@
         100% { transform: translateY(-14px) scale(1); opacity: 0; }
       }
       /* Anyone who has asked not to be animated is left alone. */
+      /* ---- the overworld moves a little ----
+         The battle screen bobs and floats and shakes; the map did not move at
+         all, which is most of why it read as flatter than the rest of the game.
+
+         All four of these are one CSS animation on a tile that is already
+         drawing a background image, so nothing new renders and no JavaScript
+         runs per frame.
+
+         Every one is staggered by tile position. Without that a field of grass
+         sways in lockstep and reads as the whole screen sliding rather than as
+         grass moving, which is worse than no motion at all. */
+
+      /* Water: a slow band of light crossing the surface. */
+      @keyframes wlWater {
+        0%   { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+      }
+      .wl-water { animation: wlWater 9s linear infinite; }
+
+      /* Grass: a small lean, not a wobble. Two percent of a tile is about half
+         a pixel on a phone, which is what makes it read as air moving through
+         it rather than as the tile itself shifting. */
+      @keyframes wlSway {
+        0%, 100% { background-position: 0% 0%; }
+        50%      { background-position: 2% 0%; }
+      }
+      .wl-sway { animation: wlSway 4.5s ease-in-out infinite; }
+
+      /* People: standing still is not standing frozen. */
+      @keyframes wlIdle {
+        0%, 100% { background-position: 0 0; }
+        50%      { background-position: 0 -4%; }
+      }
+      .wl-idle { animation: wlIdle 2.6s ease-in-out infinite; }
+
+      /* Anything with a flame in it. */
+      @keyframes wlFlicker {
+        0%, 100% { filter: brightness(1); }
+        40%      { filter: brightness(1.13); }
+        70%      { filter: brightness(0.95); }
+      }
+      .wl-flicker { animation: wlFlicker 1.7s ease-in-out infinite; }
+
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
       }
@@ -564,9 +607,25 @@
             const propBgImg = (hidden || grassBgImg || artBgImg || personBgImg)
               ? null : (typeof PROP_TILE !== "undefined" ? PROP_TILE(ch2, em, bg) : null);
             if (artBgImg || personBgImg || propBgImg) em = "";
+
+            /* Which tiles move, and how much they are held back so a field does
+               not move as one sheet. Water gets the longest spread because a
+               lake is the largest continuous thing on screen. */
+            let motion = null, delay = 0;
+            if (!hidden) {
+              const jitter = ((x * 7 + y * 13) % 20) / 10;
+              if (ch2 === "W") { motion = "wl-water"; delay = ((x * 3 + y * 5) % 40) / 10; }
+              else if (grassBgImg) { motion = "wl-sway"; delay = jitter; }
+              else if (personBgImg) { motion = "wl-idle"; delay = jitter * 0.6; }
+              else if (propBgImg && FLICKER_TILES.has(ch2)) { motion = "wl-flicker"; delay = jitter; }
+            }
+            // Water has no drawn tile of its own, so the shimmer is its image.
+            const waterImg = (!hidden && ch2 === "W")
+              ? `linear-gradient(100deg, ${bg} 38%, ${sh(bg, 0.16)} 50%, ${bg} 62%)`
+              : null;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
-              <div key={x + "," + y} style={{
+              <div key={x + "," + y} className={motion || undefined} style={{
                 // All longhand. Mixing the background shorthand with
                 // backgroundImage and backgroundSize on the same element means
                 // React cannot tell which one won when only one of them
@@ -577,8 +636,13 @@
                 backgroundColor: bg,
                 backgroundImage: glow
                   ? `radial-gradient(circle, #6b5a2e 0%, ${bg} 78%)`
-                  : (grassBgImg || artBgImg || personBgImg || propBgImg || undefined),
-                backgroundSize: (!glow && (grassBgImg || artBgImg || personBgImg || propBgImg)) ? "100% 100%" : undefined,
+                  : (grassBgImg || artBgImg || personBgImg || propBgImg || waterImg || undefined),
+                backgroundSize: waterImg ? "200% 100%"
+                  : (!glow && (grassBgImg || artBgImg || personBgImg || propBgImg)) ? "100% 100%" : undefined,
+                // Without this a shifted background wraps and a second copy of
+                // the tile slides in from the far edge.
+                backgroundRepeat: (grassBgImg || artBgImg || personBgImg || propBgImg) ? "no-repeat" : undefined,
+                animationDelay: motion ? `${delay}s` : undefined,
                 aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
