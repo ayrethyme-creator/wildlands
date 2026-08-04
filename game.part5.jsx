@@ -92,7 +92,7 @@
          not read as a bounce. */
       @keyframes wlStep {
         0%   { transform: translateY(0); }
-        45%  { transform: translateY(-7%); }
+        45%  { transform: translateY(-3.5%); }
         100% { transform: translateY(0); }
       }
       .wl-step { animation: wlStep 190ms ease-out; }
@@ -100,11 +100,15 @@
       /* Grass being walked through: a quick shove, then settling. */
       @keyframes wlRustle {
         0%   { background-position: 0% 0%; }
-        30%  { background-position: -6% 2%; }
-        60%  { background-position: 4% 0%; }
+        18%  { background-position: -13% 4%; }
+        44%  { background-position: 9% 1%; }
+        68%  { background-position: -5% 2%; }
+        86%  { background-position: 2% 0%; }
         100% { background-position: 0% 0%; }
       }
-      .wl-rustle { animation: wlRustle 420ms ease-out; }
+      .wl-rustle { animation: wlRustle 560ms cubic-bezier(.22,.9,.3,1); }
+      /* The tile just left settles rather than being struck. */
+      .wl-wake { animation: wlRustle 640ms cubic-bezier(.22,.9,.3,1); opacity: .97; }
 
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
@@ -606,6 +610,8 @@
             if (ch2 === "¦") { em = lit ? "🏮" : "🔦"; glow = lit; }         // town lamp post
             else if (ch2 === "¡") { em = lit ? "🏮" : "🪵"; glow = lit; }    // wild lantern
             const isPlayer = x === S.x && y === S.y;
+            const disturbed = isPlayer;
+            const wake = x === S.px && y === S.py && !isPlayer;
             // Grass draws as a background filling the whole cell, so adjacent
             // grass tiles run together into one field instead of each being a
             // square with a character stamped in the middle of it.
@@ -646,8 +652,10 @@
               : null;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
-              <div key={x + "," + y + (isPlayer && grassBgImg ? ":" + (S.step || 0) : "")}
-                className={(isPlayer && grassBgImg && !hidden) ? "wl-rustle" : (motion || undefined)} style={{
+              <div key={x + "," + y + ((disturbed || wake) && grassBgImg ? ":" + (S.step || 0) : "")}
+                className={grassBgImg && !hidden
+                  ? (disturbed ? "wl-rustle" : wake ? "wl-wake" : (motion || undefined))
+                  : (motion || undefined)} style={{
                 // All longhand. Mixing the background shorthand with
                 // backgroundImage and backgroundSize on the same element means
                 // React cannot tell which one won when only one of them
