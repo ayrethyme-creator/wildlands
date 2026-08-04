@@ -561,7 +561,9 @@
             // figure the tile would otherwise carry.
             const personBgImg = (hidden || grassBgImg || artBgImg)
               ? null : (typeof PERSON_TILE !== "undefined" ? PERSON_TILE(em, bg) : null);
-            if (artBgImg || personBgImg) em = "";
+            const propBgImg = (hidden || grassBgImg || artBgImg || personBgImg)
+              ? null : (typeof PROP_TILE !== "undefined" ? PROP_TILE(ch2, em, bg) : null);
+            if (artBgImg || personBgImg || propBgImg) em = "";
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
               <div key={x + "," + y} style={{
@@ -575,8 +577,8 @@
                 backgroundColor: bg,
                 backgroundImage: glow
                   ? `radial-gradient(circle, #6b5a2e 0%, ${bg} 78%)`
-                  : (grassBgImg || artBgImg || personBgImg || undefined),
-                backgroundSize: (!glow && (grassBgImg || artBgImg || personBgImg)) ? "100% 100%" : undefined,
+                  : (grassBgImg || artBgImg || personBgImg || propBgImg || undefined),
+                backgroundSize: (!glow && (grassBgImg || artBgImg || personBgImg || propBgImg)) ? "100% 100%" : undefined,
                 aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
