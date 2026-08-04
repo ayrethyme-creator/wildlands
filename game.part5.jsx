@@ -634,11 +634,18 @@
                 // a flat colour, so the glow and the grass are both images over
                 // it and the shorthand is not needed at all.
                 backgroundColor: bg,
-                backgroundImage: glow
-                  ? `radial-gradient(circle, #6b5a2e 0%, ${bg} 78%)`
-                  : (grassBgImg || artBgImg || personBgImg || propBgImg || waterImg || undefined),
+                // The lamp is drawn ON the glow, not replaced by it. Before
+                // this the gradient won outright, so a lit lamp post rendered
+                // as a dark olive circle on dark ground and read as a pit in
+                // the road. The warm centre is also actually warm now.
+                backgroundImage: [
+                  grassBgImg || artBgImg || personBgImg || propBgImg || waterImg,
+                  glow ? `radial-gradient(circle, rgba(255,203,120,.55) 0%, rgba(255,190,96,.22) 42%, ${bg} 76%)` : null,
+                ].filter(Boolean).join(", ") || undefined,
                 backgroundSize: waterImg ? "200% 100%"
-                  : (!glow && (grassBgImg || artBgImg || personBgImg || propBgImg)) ? "100% 100%" : undefined,
+                  : (grassBgImg || artBgImg || personBgImg || propBgImg)
+                    ? (glow ? "100% 100%, 100% 100%" : "100% 100%")
+                    : undefined,
                 // Without this a shifted background wraps and a second copy of
                 // the tile slides in from the far edge.
                 backgroundRepeat: (grassBgImg || artBgImg || personBgImg || propBgImg) ? "no-repeat" : undefined,
