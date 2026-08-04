@@ -67,16 +67,20 @@
       /* Grass: a small lean, not a wobble. Two percent of a tile is about half
          a pixel on a phone, which is what makes it read as air moving through
          it rather than as the tile itself shifting. */
+      /* Absolute lengths, not percentages. A percentage background-position
+         resolves against the difference between the element and the image, and
+         with background-size 100% 100% that difference is zero - so every one
+         of these animations was running and moving nothing at all. */
       @keyframes wlSway {
-        0%, 100% { background-position: 0% 0%; }
-        50%      { background-position: 2% 0%; }
+        0%, 100% { background-position: 0 0; }
+        50%      { background-position: 0.7px 0; }
       }
       .wl-sway { animation: wlSway 4.5s ease-in-out infinite; }
 
       /* People: standing still is not standing frozen. */
       @keyframes wlIdle {
         0%, 100% { background-position: 0 0; }
-        50%      { background-position: 0 -4%; }
+        50%      { background-position: 0 -1.2px; }
       }
       .wl-idle { animation: wlIdle 2.6s ease-in-out infinite; }
 
@@ -99,12 +103,12 @@
 
       /* Grass being walked through: a quick shove, then settling. */
       @keyframes wlRustle {
-        0%   { background-position: 0% 0%; }
-        18%  { background-position: -13% 4%; }
-        44%  { background-position: 9% 1%; }
-        68%  { background-position: -5% 2%; }
-        86%  { background-position: 2% 0%; }
-        100% { background-position: 0% 0%; }
+        0%   { background-position: 0 0; }
+        18%  { background-position: -5px 1.5px; }
+        44%  { background-position: 3.5px 0.5px; }
+        68%  { background-position: -2px 1px; }
+        86%  { background-position: 1px 0; }
+        100% { background-position: 0 0; }
       }
       .wl-rustle { animation: wlRustle 560ms cubic-bezier(.22,.9,.3,1); }
       /* The tile just left settles rather than being struck. */
@@ -608,7 +612,11 @@
             if (o.boulders.some((bb) => bb.x === x && bb.y === y)) em = "🪨";
             let glow = false;
             if (ch2 === "¦") { em = lit ? "🏮" : "🔦"; glow = lit; }         // town lamp post
-            else if (ch2 === "¡") { em = lit ? "🏮" : "🪵"; glow = lit; }    // wild lantern
+            // A fallen log stays a fallen log after dark. It used to turn into
+            // a lit lantern at dusk, which was invisible while everything was
+            // emoji and became 241 glowing logs scattered through the woods
+            // the moment they were drawn. The 35 lamp posts are the lights.
+            else if (ch2 === "¡") { em = "🪵"; }
             const isPlayer = x === S.x && y === S.y;
             const disturbed = isPlayer;
             const wake = x === S.px && y === S.py && !isPlayer;
