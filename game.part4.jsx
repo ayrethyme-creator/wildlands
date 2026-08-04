@@ -532,7 +532,11 @@ function Wildlands() {
       // step counts every completed footfall. The avatar and the grass both
       // key an animation on it, which is what turns a smooth slide into a walk
       // and makes the grass react to being walked through.
-      setS((p) => ({ ...p, x: nx, y: ny, swimming: ch === "W", step: ((p.step || 0) + 1) % 1000 }));
+      // px,py is the tile just left. The grass there is disturbed as well as
+      // the grass arrived in, which is what makes walking a field leave a wake
+      // through it rather than a single clump twitching under your feet.
+      setS((p) => ({ ...p, px: p.x, py: p.y, x: nx, y: ny,
+        swimming: ch === "W", step: ((p.step || 0) + 1) % 1000 }));
       if (ch === "G") rollEncounter(st.map, "grass");
       else if (ch === "W") rollEncounter(st.map, "water");
       return;
