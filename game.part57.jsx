@@ -253,4 +253,4 @@ console.log(`[part57] buildings and props | ${Object.keys(PROP_SHAPES).length} s
 
 // Tiles whose drawn form contains a flame, so the render knows which ones
 // should flicker without having to look inside the picture.
-const FLICKER_TILES = new Set(["¦", "t", "\u00a1"]);
+const FLICKER_TILES = new Set(["\u00a6", "t"]);
