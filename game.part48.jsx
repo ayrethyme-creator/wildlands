@@ -109,8 +109,16 @@
         + "who will listen, and not one person from this station has asked him a single useful question. "
         + "Go and ask him something useful. Then come back and tell me what it costs.",
     pitchArc: "beeloud",
-    // She takes whichever arc is live. Once Beeloud is solved she has the fen.
-    pitchArcs: ["beeloud", "reedwater"],
+    // She takes whichever arc is live, in order, so one benefactor serves the
+    // whole map rather than needing a copy of her in every region. The last
+    // four are flagged postgame and are filtered out until the summit is done,
+    // so she simply does not mention them before then.
+    pitchArcs: [
+      "beeloud", "reedwater", "millrace", "granary", "tidewater", "canopygap",
+      "sunfield", "lowstrand", "highpasture", "frostwatch", "ashfields",
+      "eyrie", "nightgrove",
+      "longline", "hearth", "digsite", "mythhub",
+    ],
   });
 
   // ---- Zuri, at the end of the region ----
