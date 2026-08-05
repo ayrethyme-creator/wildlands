@@ -738,7 +738,12 @@ function Wildlands() {
         // She works whichever arc is still open, in order — so one benefactor
         // serves all twelve regions without needing twelve copies of her.
         const list = tr.pitchArcs || [tr.pitchArc];
-        const live = list.find((id) => ARCS[id] && arcState(st, id).stage !== "done") || list[list.length - 1];
+        // Four arcs do not open until the summit is behind you. Same gate the
+        // Vigil uses, so the game has one idea of "finished" rather than two.
+        const champion = !!st.trainersBeaten["summit:7,1"];
+        const open = list.filter((id) => ARCS[id] && !(ARCS[id].postgame && !champion));
+        const live = open.find((id) => arcState(st, id).stage !== "done")
+          || open[open.length - 1] || list[list.length - 1];
         const A = ARCS[live];
         const cur = arcState(st, live);
         if (cur.stage === "done") { say(`👩🏿‍🏫 ${tr.name}: "The hives are holding. Write down what you did and when — in three years neither of us will remember."`); return; }
