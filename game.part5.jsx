@@ -1280,6 +1280,51 @@
                 <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 8 }}>
                   Seen {Object.values(S.dex).filter((v) => v >= 1).length} · Befriended {Object.values(S.dex).filter((v) => v === 2).length} of {Object.keys(DEX).length}
                 </div>
+
+                {/* The record, saved out as something that is not a save file.
+                    Lives here rather than on the title screen because this is
+                    the screen it is a record of, and because it has to be
+                    reachable mid-game without stopping to save. */}
+                {typeof fieldRecord !== "undefined" && (
+                  <div style={{ marginBottom: 10 }}>
+                    <button style={{ ...btnS("#4a7ba7"), width: "100%" }}
+                      onClick={() => setS((p) => ({ ...p, recPanel: !p.recPanel }))}>
+                      🗒️ Save my field record
+                    </button>
+                    {S.recPanel && (() => {
+                      const rec = fieldRecord(S);
+                      const text = fieldRecordText(S);
+                      return (
+                        <div style={{ ...panel, marginTop: 6, padding: 8 }}>
+                          <div style={{ fontSize: 10, color: "#c9b88a", marginBottom: 6 }}>
+                            {rec.totals.befriended} befriended of {rec.totals.speciesInGuide} ·
+                            {" "}{rec.totals.arcsResolved} pieces of work finished.
+                            <br />
+                            A plain record of what you have met and learned, with no save
+                            data in it. Keep it somewhere that is not this phone.
+                          </div>
+                          <textarea readOnly value={text}
+                            onFocus={(e) => e.target.select()}
+                            style={{ width: "100%", height: 90, fontSize: 9, fontFamily: "monospace",
+                              background: "#1e1b17", color: "#c9b88a", border: "1px solid #5c5344",
+                              borderRadius: 6, padding: 6 }} />
+                          <div style={{ display: "flex", gap: 6, marginTop: 6 }}>
+                            <button style={{ ...btnS("#2d7d5a"), flex: 1 }}
+                              onClick={() => { if (saveFieldRecord(S)) SFX.run(); }}>
+                              ⇩ Download
+                            </button>
+                            <button style={{ ...btnS("#7d735f"), flex: 1 }}
+                              onClick={() => {
+                                try { navigator.clipboard.writeText(text); SFX.run(); } catch (e) {}
+                              }}>
+                              ⧉ Copy
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
                 {S.guideSel && (() => {
                   const sp = S.guideSel, d = DEX[sp], nfo = INFO[sp], seen = S.dex[sp] || 0;
                   const spots = (WHERE[sp] || []).filter((w) => !w.k.startsWith("shrine_"));
