@@ -581,7 +581,7 @@
       {KEYFRAMES}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px" }}>
         <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {phase === "night" ? "🌙" : phase === "dusk" ? "🌆" : phase === "dawn" ? "🌅" : "☀️"}</div>
-        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have studied">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}</div>
+        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have studied">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}{S.items.compass && S.compassOn ? " 🧭" : ""}</div>
       </div>
 
       <div style={{ padding: "0 10px" }}>
@@ -777,6 +777,12 @@
           }}>🪽 Soar</button>
           <button style={btnS("#b7950b")} onClick={() => saveGame(false)}>💾 Save</button>
           <button style={btnS("#8e44ad")} onClick={() => setS((p) => ({ ...p, menu: "types" }))}>⚖️ Types</button>
+          <button style={btnS("#c9a227")} onClick={() => setS((p) => ({ ...p, menu: "achievements" }))}>🏆 Achievements</button>
+          {S.items.compass > 0 && (
+            <button style={btnS(S.compassOn ? "#2d8a6b" : "#7d735f")} onClick={() => setS((p) => ({ ...p, compassOn: !p.compassOn }))}>
+              {S.compassOn ? "🧭 Compass: On" : "🧭 Compass: Off"}
+            </button>
+          )}
           <button style={btnS("#7d735f")} onClick={() => setS((p) => ({ ...p, sound: !p.sound }))}>{S.sound ? "🔊 On" : "🔇 Off"}</button>
           <button style={btnS(S.run ? "#c0651a" : "#7d735f")} onClick={() => setS((p) => ({ ...p, run: !p.run }))}>{S.run ? "🏃 Withdraw" : "🚶 Walk"}</button>
         </div>
@@ -952,6 +958,75 @@
                 </div>
               ) : (
                 <button style={{ ...btnS("#7d735f"), width: "100%", marginTop: 10 }} onClick={closeExam}>
+                  Step away
+                </button>
+              )}
+            </div>
+          </div>
+        );
+      })()}
+
+      {S.critQuiz && (() => {
+        const cq = S.critQuiz;
+        const tier = CRIT_TIERS.find((t) => t.id === cq.tierId);
+        if (!tier) return null;
+        if (cq.done) {
+          const payout = cq.correct * tier.reward;
+          return (
+            <div style={{ position: "fixed", inset: 0, background: "rgba(20,17,13,.92)", zIndex: 60,
+              display: "flex", alignItems: "center", justifyContent: "center", padding: 14 }}>
+              <div style={{ ...panel, maxWidth: 420, width: "100%", padding: 14, textAlign: "center" }}>
+                <b style={{ fontSize: 14, color: "#e8c547" }}>{tier.name} — Assessment Complete</b>
+                <div style={{ fontSize: 28, margin: "14px 0 4px" }}>{cq.correct === tier.qs.length ? "🎓" : "📋"}</div>
+                <div style={{ fontSize: 13, marginBottom: 4 }}>{cq.correct} of {tier.qs.length} correct</div>
+                <div style={{ fontSize: 16, color: "#e8c547", fontWeight: 700, marginBottom: 12 }}>₡{payout} in trade shells</div>
+                <button style={{ ...btnS("#5c8a3a"), width: "100%" }} onClick={collectCritQuiz}>Collect</button>
+              </div>
+            </div>
+          );
+        }
+        const q = tier.qs[cq.i];
+        const answered = cq.picked !== null;
+        return (
+          <div style={{ position: "fixed", inset: 0, background: "rgba(20,17,13,.92)", zIndex: 60,
+            display: "flex", alignItems: "center", justifyContent: "center", padding: 14 }}>
+            <div style={{ ...panel, maxWidth: 420, width: "100%", padding: 14 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
+                <b style={{ fontSize: 13, color: "#e8c547" }}>{tier.name}</b>
+                <span style={{ fontSize: 11, color: "#c9b88a" }}>{cq.i + 1} / {tier.qs.length} · ₡{cq.correct * tier.reward} so far</span>
+              </div>
+              <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
+                {tier.qs.map((_, i) => (
+                  <div key={i} style={{ flex: 1, height: 4, borderRadius: 2,
+                    background: i < cq.i ? "#27ae60" : i === cq.i ? "#e8c547" : "#3a342b" }} />
+                ))}
+              </div>
+              <div style={{ fontSize: 13, lineHeight: 1.5, marginBottom: 10, whiteSpace: "pre-line" }}>{q.q}</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {q.opts.map((o, i) => {
+                  const isPicked = answered && i === cq.picked;
+                  const isRight = answered && i === q.a;
+                  return (
+                    <button key={i} disabled={answered}
+                      style={{ ...btn(isPicked && !isRight ? "#c0392b" : isRight && answered ? "#27ae60" : "#5c5344"),
+                        textAlign: "left", fontSize: 11.5, lineHeight: 1.45, padding: "9px 11px", fontWeight: 400,
+                        opacity: answered && !isPicked && !isRight ? .45 : 1 }}
+                      onClick={() => answerCritQuiz(i)}>{o}</button>
+                  );
+                })}
+              </div>
+              {answered && (
+                <div style={{ marginTop: 10, borderTop: "1px solid #5c5344", paddingTop: 9 }}>
+                  <div style={{ fontSize: 11, color: cq.picked === q.a ? "#8fd94a" : "#e8853a", marginBottom: 8 }}>
+                    {cq.picked === q.a ? "✅ Correct. " : "❌ Not quite. "}{q.explain}
+                  </div>
+                  <button style={{ ...btnS("#5c8a3a"), width: "100%" }} onClick={nextCritQuiz}>
+                    {cq.i + 1 >= tier.qs.length ? "See results" : "Next question"}
+                  </button>
+                </div>
+              )}
+              {!answered && (
+                <button style={{ ...btnS("#7d735f"), width: "100%", marginTop: 10 }} onClick={closeCritQuiz}>
                   Step away
                 </button>
               )}
@@ -1478,6 +1553,69 @@
                     </div>
                   );
                 })}
+              </div>
+            )}
+            {S.menu === "achievements" && (
+              <div>
+                <b>🏆 Achievements</b>
+                <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 8 }}>
+                  {ACHIEVEMENTS.filter((a) => S.achv?.[a.id]).length} of {ACHIEVEMENTS.length} unlocked
+                </div>
+                {["gold", "silver", "bronze"].map((tier) => {
+                  const list = ACHIEVEMENTS.filter((a) => a.tier === tier);
+                  if (!list.length) return null;
+                  const tierColor = tier === "gold" ? "#e8c547" : tier === "silver" ? "#c9d4de" : "#c98a5c";
+                  return (
+                    <div key={tier} style={{ marginBottom: 10 }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: tierColor, margin: "6px 0 4px", textTransform: "uppercase" }}>{tier}</div>
+                      {list.map((a) => {
+                        const got = !!S.achv?.[a.id];
+                        return (
+                          <div key={a.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 4px", borderBottom: "1px solid #3a342b", opacity: got ? 1 : 0.5 }}>
+                            <div style={{ fontSize: 20, width: 26, textAlign: "center" }}>{got ? a.icon : "🔒"}</div>
+                            <div style={{ flex: 1 }}>
+                              <div style={{ fontWeight: 700, fontSize: 12, color: got ? tierColor : "#c9b88a" }}>{a.name}</div>
+                              <div style={{ fontSize: 10, color: "#8a7f68" }}>{a.desc}</div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {S.menu === "quizhouse" && (
+              <div>
+                <b>🔎 The Naturalist's Archive</b>
+                <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 8 }}>
+                  Five reasoning questions per tier. Right answers pay out on the spot — a wrong one just doesn't, so there's no penalty for trying.
+                </div>
+                {(() => {
+                  const locked = CRIT_TIERS.filter((t) => (S.badges ?? 0) < t.badge);
+                  if (!locked.length) return null;
+                  const next = locked.reduce((a2, b2) => (a2.badge <= b2.badge ? a2 : b2));
+                  return (
+                    <div style={{ fontSize: 10, color: "#8a7f68", marginBottom: 6 }}>
+                      {next.name} opens at Badge {next.badge}.
+                    </div>
+                  );
+                })()}
+                {CRIT_TIERS.filter((t) => (S.badges ?? 0) >= t.badge).map((t) => (
+                  <div key={t.id} style={{ padding: "8px 4px", borderBottom: "1px solid #5c5344" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div style={{ fontWeight: 700, fontSize: 12 }}>{t.name}</div>
+                      <div style={{ fontSize: 11, color: "#e8c547" }}>up to ₡{t.reward * 5}</div>
+                    </div>
+                    <div style={{ fontSize: 10, color: "#c9b88a", margin: "3px 0 6px" }}>{t.blurb}</div>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontSize: 10, color: "#8a7f68" }}>
+                        Passed {S.quizWins?.[t.id] || 0}×{S.quizPerfect?.[t.id] ? " · perfect run ★" : ""}
+                      </span>
+                      <button style={btn("#5c8a3a")} onClick={() => startCritQuiz(t.id)}>Sit the assessment</button>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
             {S.menu === "learn" && learner && (

@@ -12,12 +12,13 @@ function Wildlands() {
     screen: "title",
     map: "town1", x: 7, y: 8, swimming: false,
     party: [], box: [],
-    items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0 },
+    items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, compass: 0 },
     badges: 0, profGift: false, houseIdx: 0,
     legends: {}, dex: {}, objects: {}, visited: { town1: true }, trainersBeaten: {}, rival: "otter_j",
     dialog: null, menu: null, battle: null, pick: null,
     sound: true, soundReady: false, run: true,
     slot: null, quiz: {}, dir: "down", arcs: {},
+    compassOn: false, achv: {}, achvQueue: [], quizWins: { notes: 0, trials: 0, masters: 0 }, quizPerfect: {}, critQuiz: null,
   });
   const SR = useRef(S);
   useEffect(() => { SR.current = S; }, [S]);
@@ -91,6 +92,7 @@ function Wildlands() {
         legends: st.legends, dex: st.dex, objects: st.objects, visited: st.visited,
         trainersBeaten: st.trainersBeaten, rival: st.rival, sound: st.sound, run: st.run,
         quiz: st.quiz, arcs: st.arcs,
+        compassOn: st.compassOn, achv: st.achv, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
       setSaves((prev) => ({ ...prev, [n]: payload }));
@@ -224,7 +226,7 @@ function Wildlands() {
     setS((s) => ({
       ...s, screen: "world", map, x, y, swimming,
       party, box,
-      items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, ...(p.items || {}) },
+      items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, compass: 0, ...(p.items || {}) },
       badges, profGift: !!p.profGift, houseIdx: p.houseIdx || 0,
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
@@ -236,6 +238,9 @@ function Wildlands() {
       slot: n,
       quiz: p.quiz || {},
       arcs: p.arcs || {},
+      compassOn: !!p.compassOn, achv: p.achv || {}, achvQueue: [],
+      quizWins: { notes: 0, trials: 0, masters: 0, ...(p.quizWins || {}) },
+      quizPerfect: p.quizPerfect || {}, critQuiz: null,
     }));
   };
 
@@ -373,6 +378,87 @@ function Wildlands() {
     startExam(ex.kind, gymId, ex.key, ex.title, ex.legendKey);
   };
 
+  // ----- the Naturalist's Archive: critical-thinking quizzes -----
+  // Deliberately not the gym-exam engine: a wrong answer here doesn't end the
+  // attempt, it just doesn't pay. Every question answered correctly pays out
+  // on the spot, so this is grindable income scaled to difficulty rather than
+  // a one-time gate.
+  const startCritQuiz = (tierId) => {
+    const tier = CRIT_TIERS.find((t) => t.id === tierId);
+    if (!tier) return;
+    setS((p) => ({ ...p, menu: null, critQuiz: { tierId, i: 0, correct: 0, picked: null, done: false } }));
+  };
+
+  const answerCritQuiz = (idx) => {
+    const st = SR.current;
+    const cq = st.critQuiz; if (!cq || cq.picked !== null) return;
+    const tier = CRIT_TIERS.find((t) => t.id === cq.tierId);
+    const q = tier.qs[cq.i];
+    const right = idx === q.a;
+    if (right) SFX.learn(); else SFX.miss();
+    setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, picked: idx, correct: p.critQuiz.correct + (right ? 1 : 0) } }));
+  };
+
+  const nextCritQuiz = () => {
+    const st = SR.current;
+    const cq = st.critQuiz; if (!cq) return;
+    const tier = CRIT_TIERS.find((t) => t.id === cq.tierId);
+    if (cq.i + 1 >= tier.qs.length) {
+      setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, done: true } }));
+    } else {
+      setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, i: p.critQuiz.i + 1, picked: null } }));
+    }
+  };
+
+  const collectCritQuiz = () => {
+    const st = SR.current;
+    const cq = st.critQuiz; if (!cq || !cq.done) return;
+    const tier = CRIT_TIERS.find((t) => t.id === cq.tierId);
+    const payout = cq.correct * tier.reward;
+    SFX.buy();
+    setS((p) => ({
+      ...p,
+      items: { ...p.items, coins: (p.items.coins ?? 0) + payout },
+      quizWins: { ...p.quizWins, [cq.tierId]: (p.quizWins[cq.tierId] || 0) + 1 },
+      quizPerfect: cq.correct === tier.qs.length ? { ...p.quizPerfect, [cq.tierId]: true } : p.quizPerfect,
+      critQuiz: null,
+      dialog: { text: `📋 ${cq.correct} of ${tier.qs.length} correct — collected ₡${payout} in trade shells.` },
+    }));
+  };
+
+  const closeCritQuiz = () => setS((p) => ({ ...p, critQuiz: null }));
+
+  // ----- achievements -----
+  // Every achievement is a pure function of state that already exists, so
+  // nothing new has to be tracked to know whether one is earned — only
+  // whether the player has already been told. `achv` remembers that; the
+  // queue lets several unlocked in the same tick surface one at a time rather
+  // than fighting over the single dialog box.
+  useEffect(() => {
+    if (SR.current.screen !== "world") return;
+    const st = SR.current;
+    const already = st.achv || {};
+    const queued = new Set(st.achvQueue || []);
+    const newly = ACHIEVEMENTS.filter((a) => !already[a.id] && !queued.has(a.id) && a.check(st));
+    if (!newly.length) return;
+    setS((p) => {
+      const achv = { ...(p.achv || {}) };
+      newly.forEach((a) => { achv[a.id] = true; });
+      return { ...p, achv, achvQueue: [...(p.achvQueue || []), ...newly.map((a) => a.id)] };
+    });
+  }, [S.dex, S.badges, S.legends, S.trainersBeaten, S.quiz, S.items?.coins, S.items?.compass, S.visited, S.quizWins, S.quizPerfect, S.screen]);
+
+  useEffect(() => {
+    const st = SR.current;
+    if (st.screen !== "world" || st.dialog || st.menu || st.battle || st.exam || st.critQuiz) return;
+    if (!st.achvQueue || !st.achvQueue.length) return;
+    const id = st.achvQueue[0];
+    const a = ACHIEVEMENTS.find((x) => x.id === id);
+    SFX.badge?.();
+    setS((p) => ({ ...p, achvQueue: p.achvQueue.slice(1),
+      dialog: { text: `🏆 Achievement unlocked: ${a ? a.name : id}!${a ? "\n" + a.desc : ""}` } }));
+  }, [S.achvQueue, S.dialog, S.menu, S.battle, S.exam, S.critQuiz, S.screen]);
+
   // ----- hold-to-move -----
   // A tap still steps one tile, but holding a direction now repeats. Walking
   // and running are just two repeat cadences; nothing about the step itself
@@ -489,7 +575,16 @@ function Wildlands() {
     const pool = water ? m.poolWater : (isNight() && m.poolN ? m.poolN : m.pool);
     const lv = water ? m.lvlWater : m.lvl;
     if (!pool || Math.random() > chance) return;
-    startBattle({ kind: "wild", enemy: mk(pickPool(pool), rnd(lv[0], lv[1])) });
+    // The Champion's Compass steers wild encounters toward species not yet
+    // in the Field Guide, but never toward an empty pool — if everything
+    // living here is already befriended, it quietly falls back to normal.
+    let usePool = pool;
+    const st = SR.current;
+    if (st.items.compass > 0 && st.compassOn) {
+      const undiscovered = pool.filter(([sp]) => (st.dex[sp] || 0) < 2);
+      if (undiscovered.length) usePool = undiscovered;
+    }
+    startBattle({ kind: "wild", enemy: mk(pickPool(usePool), rnd(lv[0], lv[1])) });
   };
 
   // ----- world movement -----
@@ -684,6 +779,7 @@ function Wildlands() {
     } else if (ch === "R") {
       const tr = TRAINERS[idKey];
       if (!tr) return;
+      if (tr.quizHouse) { setS((p) => ({ ...p, dialog: null, menu: "quizhouse" })); return; }
       // Story people are chat NPCs too, so they have to be handled BEFORE the
       // generic chat line - otherwise every one of them just recites its
       // opening speech forever and nothing can be learned, pitched or built.
@@ -1044,8 +1140,12 @@ function Wildlands() {
             snapEnd(`🏅 BADGE ${b.gym.id} of ${GYM_COUNT} earned! (+₡${c}, +5 Treats, +3 Berries)${b.gym.perk ? " " + b.gym.perk : ""}`);
           } else if (b.champion) {
             items.coins = (items.coins ?? 0) + 5000;
+            const firstCompass = !items.compass;
+            items.compass = 1;
             snapBusy("Zuri: \"...Okay. Okay! Champion. Say it out loud. SAY IT!\"", {}, "victory");
-            snapEnd("🏆 " + EPILOGUE);
+            snapEnd("🏆 " + EPILOGUE + (firstCompass
+              ? "\n\n🧭 Prof. Acacia presses something into your hand: a Champion's Compass. \"Point it anywhere and it'll pull your notice toward whatever you haven't met yet. Toggle it off whenever you'd rather the land surprise you.\""
+              : ""));
           } else {
             const won = trainerPrize(b.team, b.prize);
             items.coins = (items.coins ?? 0) + won;
