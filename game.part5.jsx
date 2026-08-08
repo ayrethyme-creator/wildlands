@@ -1285,6 +1285,22 @@
                     Lives here rather than on the title screen because this is
                     the screen it is a record of, and because it has to be
                     reachable mid-game without stopping to save. */}
+                {/* Survey mode. Lives here because it is a tool for filling
+                    this screen, and it only exists once the summit is done -
+                    before that, meeting the common animals is the game. */}
+                {S.trainersBeaten["summit:7,1"] && (
+                  <button
+                    style={{ ...btnS(S.surveyOn ? "#2d7d5a" : "#5c5344"), width: "100%", marginBottom: 6 }}
+                    onClick={() => setS((p) => ({ ...p, surveyOn: !p.surveyOn }))}>
+                    {S.surveyOn ? "🔎 Survey mode ON — only unmet animals" : "🔎 Survey mode OFF — meet anything"}
+                  </button>
+                )}
+                {S.trainersBeaten["summit:7,1"] && S.surveyOn && (
+                  <div style={{ fontSize: 10, color: "#8a7f68", marginBottom: 8 }}>
+                    Ground where you have already met everything will stay quiet.
+                  </div>
+                )}
+
                 {typeof fieldRecord !== "undefined" && (
                   <div style={{ marginBottom: 10 }}>
                     <button style={{ ...btnS("#4a7ba7"), width: "100%" }}
