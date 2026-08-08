@@ -483,13 +483,27 @@ function Wildlands() {
   const say = (text, options = null) => setS((p) => ({ ...p, dialog: { text, options } }));
 
   const rollEncounter = (mapKey, kind) => {
+    const st = SR.current;
     const m = MAPS[mapKey];
     const water = kind === "water";
     const chance = water ? 0.15 : 0.2;
     const pool = water ? m.poolWater : (isNight() && m.poolN ? m.poolN : m.pool);
     const lv = water ? m.lvlWater : m.lvl;
     if (!pool || Math.random() > chance) return;
-    startBattle({ kind: "wild", enemy: mk(pickPool(pool), rnd(lv[0], lv[1])) });
+
+    /* Survey mode. Earned at the summit and switched on and off in the guide:
+       only animals not yet befriended will come out to be met.
+
+       When a pool has nothing left unmet it produces no encounter at all,
+       rather than falling back to a normal roll. That is the point of it - a
+       finished stretch of grass should be quiet, so the ground still worth
+       walking is obvious from walking it. */
+    let live = pool;
+    if (st.surveyOn) {
+      live = pool.filter(([sp]) => (st.dex[sp] || 0) < 2);
+      if (!live.length) return;
+    }
+    startBattle({ kind: "wild", enemy: mk(pickPool(live), rnd(lv[0], lv[1])) });
   };
 
   // ----- world movement -----
