@@ -977,15 +977,15 @@
               display: "flex", alignItems: "center", justifyContent: "center", padding: 14 }}>
               <div style={{ ...panel, maxWidth: 420, width: "100%", padding: 14, textAlign: "center" }}>
                 <b style={{ fontSize: 14, color: "#e8c547" }}>{tier.name} — Assessment Complete</b>
-                <div style={{ fontSize: 28, margin: "14px 0 4px" }}>{cq.correct === tier.qs.length ? "🎓" : "📋"}</div>
-                <div style={{ fontSize: 13, marginBottom: 4 }}>{cq.correct} of {tier.qs.length} correct</div>
+                <div style={{ fontSize: 28, margin: "14px 0 4px" }}>{cq.correct === cq.qIdx.length ? "🎓" : "📋"}</div>
+                <div style={{ fontSize: 13, marginBottom: 4 }}>{cq.correct} of {cq.qIdx.length} correct</div>
                 <div style={{ fontSize: 16, color: "#e8c547", fontWeight: 700, marginBottom: 12 }}>₡{payout} in trade shells</div>
                 <button style={{ ...btnS("#5c8a3a"), width: "100%" }} onClick={collectCritQuiz}>Collect</button>
               </div>
             </div>
           );
         }
-        const q = tier.qs[cq.i];
+        const q = tier.qs[cq.qIdx[cq.i]];
         const answered = cq.picked !== null;
         return (
           <div style={{ position: "fixed", inset: 0, background: "rgba(20,17,13,.92)", zIndex: 60,
@@ -993,10 +993,10 @@
             <div style={{ ...panel, maxWidth: 420, width: "100%", padding: 14 }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
                 <b style={{ fontSize: 13, color: "#e8c547" }}>{tier.name}</b>
-                <span style={{ fontSize: 11, color: "#c9b88a" }}>{cq.i + 1} / {tier.qs.length} · ₡{cq.correct * tier.reward} so far</span>
+                <span style={{ fontSize: 11, color: "#c9b88a" }}>{cq.i + 1} / {cq.qIdx.length} · ₡{cq.correct * tier.reward} so far</span>
               </div>
               <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
-                {tier.qs.map((_, i) => (
+                {cq.qIdx.map((_, i) => (
                   <div key={i} style={{ flex: 1, height: 4, borderRadius: 2,
                     background: i < cq.i ? "#27ae60" : i === cq.i ? "#e8c547" : "#3a342b" }} />
                 ))}
@@ -1022,7 +1022,7 @@
                     {cq.order[cq.picked] === q.a ? "✅ Correct. " : "❌ Not quite. "}{q.explain}
                   </div>
                   <button style={{ ...btnS("#5c8a3a"), width: "100%" }} onClick={nextCritQuiz}>
-                    {cq.i + 1 >= tier.qs.length ? "See results" : "Next question"}
+                    {cq.i + 1 >= cq.qIdx.length ? "See results" : "Next question"}
                   </button>
                 </div>
               )}

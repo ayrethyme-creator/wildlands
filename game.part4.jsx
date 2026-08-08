@@ -395,17 +395,22 @@ function Wildlands() {
     return arr;
   };
 
+  // `qIdx` is a random draw of 5 questions out of the tier's whole pool (now
+  // 100 deep per tier), redrawn every sitting - the pool being far bigger
+  // than any one sitting is what actually makes memorising it pointless.
+  const SITTING_LEN = 5;
   const startCritQuiz = (tierId) => {
     const tier = CRIT_TIERS.find((t) => t.id === tierId);
     if (!tier) return;
-    setS((p) => ({ ...p, menu: null, critQuiz: { tierId, i: 0, correct: 0, picked: null, done: false, order: shuffledOrder(tier.qs[0].opts.length) } }));
+    const qIdx = shuffledOrder(tier.qs.length).slice(0, Math.min(SITTING_LEN, tier.qs.length));
+    setS((p) => ({ ...p, menu: null, critQuiz: { tierId, qIdx, i: 0, correct: 0, picked: null, done: false, order: shuffledOrder(tier.qs[qIdx[0]].opts.length) } }));
   };
 
   const answerCritQuiz = (idx) => {
     const st = SR.current;
     const cq = st.critQuiz; if (!cq || cq.picked !== null) return;
     const tier = CRIT_TIERS.find((t) => t.id === cq.tierId);
-    const q = tier.qs[cq.i];
+    const q = tier.qs[cq.qIdx[cq.i]];
     const right = cq.order[idx] === q.a;
     if (right) SFX.learn(); else SFX.miss();
     setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, picked: idx, correct: p.critQuiz.correct + (right ? 1 : 0) } }));
@@ -415,11 +420,11 @@ function Wildlands() {
     const st = SR.current;
     const cq = st.critQuiz; if (!cq) return;
     const tier = CRIT_TIERS.find((t) => t.id === cq.tierId);
-    if (cq.i + 1 >= tier.qs.length) {
+    if (cq.i + 1 >= cq.qIdx.length) {
       setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, done: true } }));
     } else {
       const nextI = cq.i + 1;
-      setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, i: nextI, picked: null, order: shuffledOrder(tier.qs[nextI].opts.length) } }));
+      setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, i: nextI, picked: null, order: shuffledOrder(tier.qs[cq.qIdx[nextI]].opts.length) } }));
     }
   };
 
@@ -433,9 +438,9 @@ function Wildlands() {
       ...p,
       items: { ...p.items, coins: (p.items.coins ?? 0) + payout },
       quizWins: { ...p.quizWins, [cq.tierId]: (p.quizWins[cq.tierId] || 0) + 1 },
-      quizPerfect: cq.correct === tier.qs.length ? { ...p.quizPerfect, [cq.tierId]: true } : p.quizPerfect,
+      quizPerfect: cq.correct === cq.qIdx.length ? { ...p.quizPerfect, [cq.tierId]: true } : p.quizPerfect,
       critQuiz: null,
-      dialog: { text: `📋 ${cq.correct} of ${tier.qs.length} correct — collected ₡${payout} in trade shells.` },
+      dialog: { text: `📋 ${cq.correct} of ${cq.qIdx.length} correct — collected ₡${payout} in trade shells.` },
     }));
   };
 
