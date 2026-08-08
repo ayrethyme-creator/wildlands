@@ -347,14 +347,39 @@ function Wildlands() {
     setS((p) => ({ ...p, dialog: null, exam: { kind, key, title, legendKey, qs, i: 0, wrong: null } }));
   };
 
+  // A sitting at the lecture hall: five questions, paid on a clean sweep, and
+  // re-sittable because nothing is being gated behind it.
+  const startHall = (count, pay) => {
+    if (typeof buildHallQuiz === "undefined") return;
+    const qs = buildHallQuiz((Date.now() ^ 0x5bd1e995) >>> 0, count);
+    if (!qs.length) return;
+    setS((p) => ({ ...p, dialog: null,
+      exam: { kind: "hall", key: "hall", title: "The Lecture Hall", qs, i: 0, wrong: null, pay } }));
+  };
+
   const answerExam = (idx) => {
     const st = SR.current;
     const ex = st.exam; if (!ex || ex.wrong !== null) return;
     const q = ex.qs[ex.i];
     const chosen = q.opts[idx];
-    if (chosen !== q.a) { SFX.miss(); setS((p) => ({ ...p, exam: { ...p.exam, wrong: idx } })); return; }
+    if (chosen !== q.a) {
+      SFX.miss();
+      // In the hall the explanation is the point of getting it wrong.
+      setS((p) => ({ ...p, exam: { ...p.exam, wrong: idx, why: (ex.pay && q.why) || null } }));
+      return;
+    }
     if (ex.i + 1 >= ex.qs.length) {
       SFX.puzzle();
+      // The lecture hall pays and can be sat again. A gym exam is a gate and
+      // is passed once; this is work, and work you can come back to.
+      if (ex.pay) {
+        setS((p) => ({
+          ...p, exam: null,
+          items: { ...p.items, coins: (p.items.coins ?? 0) + ex.pay },
+          dialog: { text: `✅ Full marks. "That is a naturalist's answer, not a memoriser's."\n\n💰 ${ex.pay} coins.` },
+        }));
+        return;
+      }
       setS((p) => ({
         ...p, exam: null,
         quiz: { ...(p.quiz || {}), [ex.key]: true },
@@ -703,6 +728,15 @@ function Wildlands() {
       // opening speech forever and nothing can be learned, pitched or built.
       const isStory = tr.learns || tr.pitchArc || tr.station
         || (typeof beeloudSolvedText !== "undefined" && beeloudSolvedText[idKey]);
+      // The lecture hall offers a sitting rather than just talking at you.
+      if (tr.hall) {
+        say(`${tr.em || "🧑‍🏫"} ${tr.name}: "${tr.line}"`, [
+          { label: `📝 Sit the seminar (${tr.hall.pay} coins)`,
+            act: () => startHall(tr.hall.count, tr.hall.pay) },
+          { label: "Not today", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+        return;
+      }
       if (!isStory && (tr.chat || !tr.team)) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
       // Once an arc is solved its people and places change what they say, and
       // the emoji on the tile changes with them. The payoff has to be visible
