@@ -97,6 +97,22 @@
   // Route 1 is 10,2 — standing there means the player lands on top of her,
   // which the harness caught. One tile to the side: still directly beside the
   // road out, still impossible to miss, and nobody arrives inside her.
+  // The lecture hall. She pays for reasoning rather than for recall, which is
+  // why her questions are not answerable out of the guide.
+  put("town3:4,3", {
+    name: "Dr. Yewande Adeyemi",
+    em: "\uD83D\uDC69\uD83C\uDFFE\u200D\uD83C\uDFEB",
+    line: "I run a seminar here, and I will pay you to sit it.\n\n"
+        + "Not for naming things — anyone can name things, and your guide names them for you. "
+        + "I want to know whether you have worked out how animals are put together. Why a whale is "
+        + "not a fish. Why the same shape keeps turning up in unrelated families. What is actually "
+        + "lost when a skull leaves a fossil bed in a crate.\n\n"
+        + "Five questions. All five or nothing, and you may sit it as often as you like. "
+        + "Get one wrong and I will tell you why, because sending you away confused would make me "
+        + "a bad teacher and a worse employer.",
+    hall: { count: 5, pay: 450 },
+  });
+
   put("town1:9,2", {
     name: "Prof. Amara Okonjo-Reyes",
     em: "👩🏿‍🏫",
