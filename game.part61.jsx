@@ -192,31 +192,35 @@ Object.assign(INFO, {
     lvl: [37, 41],
   };
 
+  // Tank rooms are water, not grass - Hearthside's cattery/kennel rooms reuse
+  // the grass-tile trigger for an indoor room because there's nothing else
+  // to stand in for "close enough to the animals to meet one," but a fish
+  // tank has an obvious, better fit already built into the engine.
   const AQUA_LEAF_ROWS = [
     "^^^^^^^^^^^^^^^^",
-    "^..GGG....GGG..^",
-    "^.GGGGG..GGGGG.^",
+    "^..WWW....WWW..^",
+    "^.WWWWW..WWWWW.^",
     "^......!.......^",
-    "^GGGG......GGGG^",
-    "^GGGG......GGGG^",
+    "^WWWW......WWWW^",
+    "^WWWW......WWWW^",
     "^..............^",
-    "^..GGG....GGG..^",
-    "^..GGG....GGG..^",
+    "^..WWW....WWW..^",
+    "^..WWW....WWW..^",
     "^^^^^^^s^^^^^^^^",
   ];
   MAPS.aqua_fresh = {
     name: "The Aquarium: Freshwater Hall", zone: "reefz", music: "route",
     rows: AQUA_LEAF_ROWS,
     exits: { "7,9": { map: "aquarium", x: 1, y: 3 } },
-    pool: AQUA_FRESH.map((sp, i) => [sp, Math.max(4, 12 - i)]).filter(([sp]) => DEX[sp]),
-    lvl: [37, 41],
+    poolWater: AQUA_FRESH.map((sp, i) => [sp, Math.max(4, 12 - i)]).filter(([sp]) => DEX[sp]),
+    lvlWater: [37, 41],
   };
   MAPS.aqua_salt = {
     name: "The Aquarium: Saltwater Hall", zone: "reefz", music: "route",
     rows: AQUA_LEAF_ROWS,
     exits: { "7,9": { map: "aquarium", x: 14, y: 3 } },
-    pool: AQUA_SALT.map((sp, i) => [sp, Math.max(4, 12 - i)]).filter(([sp]) => DEX[sp]),
-    lvl: [37, 41],
+    poolWater: AQUA_SALT.map((sp, i) => [sp, Math.max(4, 12 - i)]).filter(([sp]) => DEX[sp]),
+    lvlWater: [37, 41],
   };
 
   Object.assign(SIGNS, {
