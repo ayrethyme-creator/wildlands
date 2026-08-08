@@ -383,10 +383,22 @@ function Wildlands() {
   // attempt, it just doesn't pay. Every question answered correctly pays out
   // on the spot, so this is grindable income scaled to difficulty rather than
   // a one-time gate.
+  // `order` maps displayed slot -> original option index, reshuffled per
+  // question so the correct answer isn't always the first option printed in
+  // the data.
+  const shuffledOrder = (n) => {
+    const arr = Array.from({ length: n }, (_, i) => i);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  };
+
   const startCritQuiz = (tierId) => {
     const tier = CRIT_TIERS.find((t) => t.id === tierId);
     if (!tier) return;
-    setS((p) => ({ ...p, menu: null, critQuiz: { tierId, i: 0, correct: 0, picked: null, done: false } }));
+    setS((p) => ({ ...p, menu: null, critQuiz: { tierId, i: 0, correct: 0, picked: null, done: false, order: shuffledOrder(tier.qs[0].opts.length) } }));
   };
 
   const answerCritQuiz = (idx) => {
@@ -394,7 +406,7 @@ function Wildlands() {
     const cq = st.critQuiz; if (!cq || cq.picked !== null) return;
     const tier = CRIT_TIERS.find((t) => t.id === cq.tierId);
     const q = tier.qs[cq.i];
-    const right = idx === q.a;
+    const right = cq.order[idx] === q.a;
     if (right) SFX.learn(); else SFX.miss();
     setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, picked: idx, correct: p.critQuiz.correct + (right ? 1 : 0) } }));
   };
@@ -406,7 +418,8 @@ function Wildlands() {
     if (cq.i + 1 >= tier.qs.length) {
       setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, done: true } }));
     } else {
-      setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, i: p.critQuiz.i + 1, picked: null } }));
+      const nextI = cq.i + 1;
+      setS((p) => ({ ...p, critQuiz: { ...p.critQuiz, i: nextI, picked: null, order: shuffledOrder(tier.qs[nextI].opts.length) } }));
     }
   };
 
@@ -458,6 +471,21 @@ function Wildlands() {
     setS((p) => ({ ...p, achvQueue: p.achvQueue.slice(1),
       dialog: { text: `🏆 Achievement unlocked: ${a ? a.name : id}!${a ? "\n" + a.desc : ""}` } }));
   }, [S.achvQueue, S.dialog, S.menu, S.battle, S.exam, S.critQuiz, S.screen]);
+
+  // ----- retroactive Champion's Compass -----
+  // Saves that beat the Champion before the Compass existed had that grant
+  // fire and find nothing to hand over. This catches them the next time
+  // they're standing free in the world and quietly runs the same grant.
+  useEffect(() => {
+    const st = SR.current;
+    if (st.screen !== "world" || st.dialog || st.menu || st.battle || st.exam || st.critQuiz) return;
+    if (!st.trainersBeaten?.["summit:7,1"] || st.items?.compass) return;
+    setS((p) => ({
+      ...p,
+      items: { ...p.items, compass: 1 },
+      dialog: { text: "🧭 Prof. Acacia catches up with you on the trail. \"I never did get this to you properly.\" She presses something into your hand: a Champion's Compass. \"Point it anywhere and it'll pull your notice toward whatever you haven't met yet. Toggle it off whenever you'd rather the land surprise you.\"" },
+    }));
+  }, [S.screen, S.trainersBeaten, S.items?.compass, S.dialog, S.menu, S.battle, S.exam, S.critQuiz]);
 
   // ----- hold-to-move -----
   // A tap still steps one tile, but holding a direction now repeats. Walking

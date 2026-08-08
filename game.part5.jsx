@@ -1003,9 +1003,10 @@
               </div>
               <div style={{ fontSize: 13, lineHeight: 1.5, marginBottom: 10, whiteSpace: "pre-line" }}>{q.q}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {q.opts.map((o, i) => {
+                {cq.order.map((origIdx, i) => {
+                  const o = q.opts[origIdx];
                   const isPicked = answered && i === cq.picked;
-                  const isRight = answered && i === q.a;
+                  const isRight = answered && origIdx === q.a;
                   return (
                     <button key={i} disabled={answered}
                       style={{ ...btn(isPicked && !isRight ? "#c0392b" : isRight && answered ? "#27ae60" : "#5c5344"),
@@ -1017,8 +1018,8 @@
               </div>
               {answered && (
                 <div style={{ marginTop: 10, borderTop: "1px solid #5c5344", paddingTop: 9 }}>
-                  <div style={{ fontSize: 11, color: cq.picked === q.a ? "#8fd94a" : "#e8853a", marginBottom: 8 }}>
-                    {cq.picked === q.a ? "✅ Correct. " : "❌ Not quite. "}{q.explain}
+                  <div style={{ fontSize: 11, color: cq.order[cq.picked] === q.a ? "#8fd94a" : "#e8853a", marginBottom: 8 }}>
+                    {cq.order[cq.picked] === q.a ? "✅ Correct. " : "❌ Not quite. "}{q.explain}
                   </div>
                   <button style={{ ...btnS("#5c8a3a"), width: "100%" }} onClick={nextCritQuiz}>
                     {cq.i + 1 >= tier.qs.length ? "See results" : "Next question"}
