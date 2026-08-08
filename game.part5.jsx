@@ -941,10 +941,21 @@
 
               {failed ? (
                 <div style={{ marginTop: 10, borderTop: "1px solid #5c5344", paddingTop: 9 }}>
-                  <div style={{ fontSize: 11, color: "#e8c547", marginBottom: 8 }}>
-                    Not quite — the exam ends here. Everything asked is in your Field Guide, under the
-                    animals of this stretch of country. Read up and come back; the questions will be different.
-                  </div>
+                  {S.exam.why ? (
+                    // The hall teaches on the way out. A gym exam sends you to
+                    // the guide because the answer is in it; these answers are
+                    // not in it, so withholding the reason would only be a
+                    // scolding.
+                    <div style={{ fontSize: 11, color: "#e8c547", marginBottom: 8 }}>
+                      Not quite.
+                      <div style={{ color: "#c9b88a", marginTop: 6, fontWeight: 400 }}>{S.exam.why}</div>
+                    </div>
+                  ) : (
+                    <div style={{ fontSize: 11, color: "#e8c547", marginBottom: 8 }}>
+                      Not quite — the exam ends here. Everything asked is in your Field Guide, under the
+                      animals of this stretch of country. Read up and come back; the questions will be different.
+                    </div>
+                  )}
                   <div style={{ display: "flex", gap: 6 }}>
                     <button style={{ ...btnS("#27ae60"), flex: 1 }} onClick={retryExam}>🔄 Try again</button>
                     <button style={{ ...btnS("#7d735f"), flex: 1 }} onClick={closeExam}>📖 Go read</button>
