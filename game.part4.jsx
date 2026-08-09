@@ -464,7 +464,7 @@ function Wildlands() {
       newly.forEach((a) => { achv[a.id] = true; });
       return { ...p, achv, achvQueue: [...(p.achvQueue || []), ...newly.map((a) => a.id)] };
     });
-  }, [S.dex, S.badges, S.legends, S.trainersBeaten, S.quiz, S.items?.coins, S.items?.compass, S.visited, S.quizWins, S.quizPerfect, S.screen]);
+  }, [S.dex, S.badges, S.legends, S.trainersBeaten, S.quiz, S.items?.coins, S.items?.compass, S.visited, S.quizWins, S.quizPerfect, S.screen, S.party]);
 
   useEffect(() => {
     const st = SR.current;
