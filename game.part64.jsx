@@ -78,10 +78,9 @@ Object.assign(INFO, {
   addTo("route8", "poolN", [["littlebrownbat", 5], ["spectacledflyingfox", 4], ["whitetentbat", 4]]);
   addTo("route6", "poolN", [["littlebrownbat", 5], ["greaterhorseshoebat", 4]]);
   addTo("route3", "poolN", [["vampirebat", 4], ["spectacledflyingfox", 4], ["whitetentbat", 4]]);
-  addTo("cave1", "poolN", [["greaterhorseshoebat", 5], ["freetailbat", 4]]);
   addTo("peak", "poolN", [["greaterhorseshoebat", 4]]);
   addTo("shore", "poolN", [["fishingbat", 4]]);
-  addTo("route7", "poolN", [["pallidbat", 4]]);
+  addTo("route7", "poolN", [["pallidbat", 4], ["freetailbat", 4]]);
 
   console.log(`[part64] ten named bats scattered into night pools | DEX now ${Object.keys(DEX).length}`);
 })();
