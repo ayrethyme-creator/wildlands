@@ -62,6 +62,46 @@ const SPECIALISTS = [
     line: "The goslings hatched and the first moving thing they saw was me, so I became their mother. I swam with them. I honked at them. I lived with a line of geese behind me for years, and my neighbours thought me mad. But we learned that a mind arrives already expecting the world — and takes whatever it is given.",
     team: () => [mk("goose", 41), mk("swan", 41), mk("cygnet", 38), mk("mandarinduck", 42)], prize: 950,
   },
+  {
+    at: "seg_m4", name: "Karl von Frische", em: "👨🏼‍🔬", homage: "for Karl von Frisch",
+    line: "A forager comes home and dances a figure of eight on the vertical comb, in the dark, pressed among thousands of her sisters. The straight run is the bearing — its angle off vertical is the angle off the sun. How long she waggles is how far to fly. They are reading a map of a sun not one of them can see. I watched that for years before I dared say it out loud.",
+    team: () => [mk("honeybee", 10), mk("bumblebee", 10), mk("orchidbee", 9), mk("masonbee", 9)], prize: 200,
+  },
+  {
+    at: "seg_w3", name: "Dr. Salim Alvi", em: "🧓🏽", homage: "for Sálim Ali",
+    line: "I was a boy with an air gun, and I shot a sparrow, and its throat was yellow — and no sparrow I knew had a yellow throat. That one bird sent me to the museum to ask what it was, and I never really left. Years later they would not give me a curator's post; no formal degree, you see. So I went and counted the birds of the whole subcontinent instead.",
+    team: () => [mk("peacock", 17), mk("hornbill", 17), mk("kingfisher", 16), mk("crane", 18)], prize: 350,
+  },
+  {
+    at: "route3", name: "Dr. Irene Pepperbourne", em: "👩🏻‍🏫", homage: "for Irene Pepperberg",
+    line: "Everyone knew parrots only parrot. Alex learned to label fifty objects, seven colours and five shapes — and then to answer what was the same and what was different about two things he had never seen before. He worked out none as a quantity. The last thing he ever said to me was the thing he said every night when I left: you be good, I love you, see you tomorrow.",
+    team: () => [mk("africangrey", 19), mk("cockatoo", 18), mk("eclectus", 18), mk("quakerparrot", 17)], prize: 400,
+  },
+  {
+    at: "seg_j1", name: "Dr. Gladys Kalema-Zikusa", em: "👩🏿‍⚕️", homage: "for Gladys Kalema-Zikusoka",
+    line: "The gorillas came down with scabies and the infants died, and we traced it to clothing from the villages that they had handled. You cannot treat the apes and stop at the forest edge. The people living around this park had no clinic either. Gorilla health and human health are one problem wearing two coats, and I have spent my whole career refusing to separate them.",
+    team: () => [mk("gorilla", 22), mk("chimpanzee", 21), mk("mandrill", 21), mk("colobus", 20)], prize: 500,
+  },
+  {
+    at: "seg_j2", name: "Alfred Russell Wallis", em: "👨🏻‍🦳", homage: "for Alfred Russel Wallace",
+    line: "I collected four years on the Amazon, and the ship burned on the voyage home — I sat in a lifeboat and watched the whole of it go down. So I went east and did it again for eight years more. Then I took a fever on Ternate, and lying there the entire mechanism arrived at once, and I posted it to Darwin. People remember whose name ended up on it. I would rather you remembered the strait out there: narrow enough to row across, and Asia's animals live on one shore and Australia's on the other.",
+    team: () => [mk("birdwing", 23), mk("greaterbop", 23), mk("orangutan", 24), mk("atlasmoth", 22)], prize: 600,
+  },
+  {
+    at: "seg_j3", name: "Dr. Alan Rabinowicz", em: "👨🏻‍🦲", homage: "for Alan Rabinowitz",
+    line: "I stuttered so badly as a boy that they put me in a class for damaged children. The only time words came out of me whole was when I spoke to animals — so I sat with them and talked, and I promised them that if I ever found a voice I would spend it on them. I found it. I went to Belize and counted jaguars until the government set a whole basin aside for them. That was the first place on this earth kept for this animal.",
+    team: () => [mk("jaguar", 25), mk("ocelot", 24), mk("margay", 23), mk("jaguarundi", 23)], prize: 650,
+  },
+  {
+    at: "seg_w4", name: "Niko Tinbergen-Haas", em: "👨🏼‍🏫", homage: "for Nikolaas Tinbergen",
+    line: "A herring gull chick pecks the red spot on its parent's bill, and the parent brings up food. So I built cardboard heads and asked which part of the mother it was actually answering. A plain red rod with three white bands beat every accurate model I made. The chick was not seeing its mother — it was answering a signal, and I could build one more compelling than the real thing. Ask of any behaviour: what causes it, how it grew, what it is for, where it came from. Four questions. Never stop at one.",
+    team: () => [mk("oystercatcher", 18), mk("piedavocet", 18), mk("ruddyturnstone", 17), mk("redknot", 17)], prize: 400,
+  },
+  {
+    at: "openocean", name: "Dr. Katy Paine", em: "👵🏼", homage: "for Katy Payne",
+    line: "We slowed the tapes down and the humpbacks were not calling — they were singing. Phrases, then verses, then a whole song, and every singer in an ocean revises it together across a season. Years later I stood beside the elephants and felt a throbbing in the air that I could not hear. That was the rest of their conversation, pitched underneath us the entire time.",
+    team: () => [mk("humpback", 47), mk("humpback_c", 43), mk("rightwhale", 47), mk("spermwhale", 48)], prize: 1100,
+  },
 ];
 
 let specPlaced = 0;
