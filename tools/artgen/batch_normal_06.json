@@ -82,7 +82,6 @@
   "europeanrobin": "A European robin, brown back, vivid orange-red face and breast, perched on a branch",
   "barnswallow": "A barn swallow, glossy blue-black back, rusty throat, deeply forked tail, perched on a wire",
   "greattit": "A great tit, yellow underside with a black central stripe, glossy blue-black head with white cheeks, perched on a branch",
-  "superblyrebird": "A superb lyrebird, brown plumage, elaborate lyre-shaped tail feathers fanned out during display, standing on a forest mound",
   "northerncardinal": "A northern cardinal, brilliant red plumage on the male, black face mask, short thick orange beak, tall crest, perched on a branch",
   "villageweaver": "A village weaver, bright yellow body with a black face mask on the male, perched near a woven nest",
   "zebrafinch": "A zebra finch, grey body, orange cheek patches, fine black-and-white barred throat, perched on a branch",
@@ -102,7 +101,7 @@
   "pacifichagfish": "A Pacific hagfish, elongated pale pinkish-grey eel-like body, no visible eyes, slime pores along the sides, resting on the sea floor",
   "ringedcaecilian": "A ringed caecilian, long legless segmented purplish-grey body resembling a large earthworm, on damp soil",
   "ibericanworm": "An Iberian worm lizard, pale pink legless cylindrical body with ring-like segments, on soil",
-  "sundacolugo": "A Sunda colugo, mottled grey-brown furred body, wide gliding membrane stretched between limbs and tail, gliding between trees",
+  "sundacolugo": "A Sunda colugo, mottled grey-brown furred body with pale flecks, one smooth continuous kite-shaped gliding membrane running from the neck out to the wrists and ankles and fully enclosing the tail, no elongated finger bones, no bat-like wing struts or separated wing fingers, short rounded face with very large forward-facing eyes, gliding flat between trees",
   "commontreeshrew": "A common treeshrew, small reddish-brown squirrel-like body, long bushy tail, pointed snout, on a branch",
   "egyptianfruitbat": "An Egyptian fruit bat, brown furred body, large dark eyes, folded leathery wings, hanging upside down from a branch",
   "littlebrownbat": "A little brown bat, small brown fuzzy body, wings spread wide in flight, mouth slightly open",
@@ -111,7 +110,7 @@
   "spectacledflyingfox": "A spectacled flying fox, dark furred body with pale fur rings around the eyes, large leathery wings folded, hanging from a branch",
   "freetailbat": "A Mexican free-tailed bat, dark brown short-furred body, wrinkled lips, narrow wings, in flight",
   "longnosedbat": "A lesser long-nosed bat, brown furred body, elongated muzzle, long tongue extended toward a flower, hovering",
-  "fishingbat": "A greater bulldog bat, reddish-brown furred body, large clawed feet, wide wings, flying low over water",
+  "fishingbat": "A greater bulldog bat, a fishing bat, reddish-brown furred bat in flight, its wings are its forelimbs formed of very long finger bones spanning a leathery membrane, only two limbs besides the wings and those are small hind feet with long hooked claws, blunt muzzle with full pouched cheeks and a split upper lip, wings fully spread, not four-legged, not a dog",
   "pallidbat": "A pallid bat, pale sandy-yellow furred body, very large ears, standing on a rock",
   "whitetentbat": "A Honduran white bat, small fluffy pure white furred body, yellow nose leaf and ears, hanging inside a leaf tent"
 }
