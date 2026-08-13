@@ -20,7 +20,7 @@ const SPECIALISTS = [
   {
     at: "seg_g2", name: "Sir Davan Attenbury", em: "🧓🏻", homage: "for David Attenborough",
     line: "People ask which animal is my favourite, expecting something with teeth. It is usually whatever I am looking at. Do you know the lyrebird can reproduce a camera shutter, a car alarm and a chainsaw — the chainsaw, because it heard the forest coming down? No caption I could write would be sharper than that.",
-    team: () => [mk("lyrebird", 55), mk("birdofparadise", 56), mk("cassowary", 56), mk("kakapo", 57)], prize: 1400,
+    team: () => [mk("lyrebird", 55), mk("greaterbop", 56), mk("cassowary", 56), mk("kakapo", 57)], prize: 1400,
   },
   {
     at: "seg_w2", name: "Ranger Bruce Ervin", em: "🧑🏼‍🌾", homage: "for Steve Irwin",
