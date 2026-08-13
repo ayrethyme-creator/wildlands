@@ -129,16 +129,30 @@ Object.assign(PALS, {
 });
 Object.assign(ARENA, { arena: "linear-gradient(#c9b08a,#8a7a5c)" });
 
+// The arena block (YY) is what makes a gym a gym: bumping it starts the written
+// exam and then the practical. Without it the leader cannot be challenged at all.
+//
+// Two things this layout deliberately does NOT have, both inherited from the
+// town template this was first copied from and both wrong here:
+//   - tall grass (G). G calls rollEncounter, and these maps have no pool, so it
+//     rolled against nothing. Lowercase g is the same grass to look at and does
+//     not trigger. Town gyms use g for the same reason.
+//   - guards (X). A guard blocks the road north out of a *town* until you hold
+//     its badge - that is what its dialogue says. There is no road north here;
+//     the only way out is the door back at the top, above where they stood.
+//
+// Lanterns are added by part36 at x=2 and x=W-3 of the middle row, so the arena
+// block stays clear of those columns.
 const ARENA_ROWS = [
   "^^^^^^^s^^^^^^^^",
   "^..............^",
-  "^..GG......GG..^",
-  "^..GG..!...GG..^",
+  "^..gg......gg..^",
+  "^..gg..!...gg..^",
   "^..............^",
-  "^.....XXXX.....^",
-  "^..............^",
-  "^..GG......GG..^",
-  "^..GG......GG..^",
+  "^......YY......^",
+  "^......YY......^",
+  "^..gg......gg..^",
+  "^..gg......gg..^",
   "^^^^^^^^^^^^^^^^",
 ];
 // host, key, name, zone-flavour, the tile the player lands on coming back
@@ -164,7 +178,9 @@ OUTPOSTS.forEach(([host, key, name, sign]) => {
   m.exits = { ...m.exits, [(W - 1) + "," + doorY]: { map: key, x: 7, y: 1 } };
   MAPS[key] = {
     name, zone: "arena", music: "town",
-    rows: ARENA_ROWS,
+    // .slice() so each outpost owns its rows. part36 mutates rows in place to
+    // drop lanterns in; sharing one array would have every edit land on all four.
+    rows: ARENA_ROWS.slice(),
     exits: { "7,0": { map: host, x: W - 2, y: doorY } },
   };
   SIGNS[key + ":7,3"] = sign;
