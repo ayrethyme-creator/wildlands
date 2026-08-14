@@ -1,6 +1,6 @@
-import sys, os, json, random, time, urllib.request
+import sys, os, json, random, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import gen_flux2_batch as g
+import gen_steward as g
 import postprocess as pp
 
 STYLE = ("anime-influenced creature-collector game concept art, clean sharp linework, flat "
@@ -35,68 +35,14 @@ ARTDIR = "C:/Claude/wildlands/art"
 os.makedirs(RAWDIR, exist_ok=True)
 os.makedirs(ARTDIR, exist_ok=True)
 
-def host_up(timeout=8):
-    """Is the forge answering at all?"""
-    try:
-        with urllib.request.urlopen(g.HOST + "/system_stats", timeout=timeout) as r:
-            r.read(1)
-        return True
-    except Exception:
-        return False
-
-
-def wait_for_host(max_wait=3600, step=30):
-    """Block until the forge comes back, or give up after max_wait seconds.
-
-    The GPU host is somebody else's machine and it goes away sometimes - it
-    took batch_normal_03 down on 2026-08-11 and batch_mythic_01 on 08-13.
-    Sitting and waiting is much better than burning through every remaining
-    species turning each one into an instant failure.
-    """
-    waited = 0
-    while waited < max_wait:
-        if host_up():
-            return True
-        time.sleep(step)
-        waited += step
-    return False
-
-
-def queue_depth():
-    """(running, pending) on the shared host, or None if it cannot be read."""
-    try:
-        with urllib.request.urlopen(g.HOST + "/queue", timeout=10) as r:
-            d = json.loads(r.read().decode() or "{}")
-        return len(d.get("queue_running", [])), len(d.get("queue_pending", []))
-    except Exception:
-        return None
-
-
-def wait_for_slot(max_wait=1800, step=15):
-    """Hold off submitting while the forge already has work queued.
-
-    Halo is somebody else's only machine. If we submit regardless, our job sits
-    behind theirs, outlives the fetch timeout, gets abandoned, and the retry
-    submits *another* one - so a busy GPU quietly accumulates orphaned work of
-    ours. Waiting for a free slot means we never stack, and we yield to whoever
-    else is using it.
-    """
-    waited = 0
-    while waited < max_wait:
-        q = queue_depth()
-        if q is None:
-            return False
-        if q[1] == 0:
-            return True
-        time.sleep(step)
-        waited += step
-    return True
-
+# No host_up / wait_for_slot / wait_for_host here any more. Those polled
+# ComfyUI's port directly and queued around it, which COMFYUI.md forbids:
+# Scrying Glass already saves the request, waits for the steward to admit
+# it, and retries. A second watchdog just competes with the first.
 
 def gen_one(dexKey, desc, attempt=0):
     prompt = desc + ", " + STYLE + ", " + pick_composition(desc)
     seed = random.randint(1, 2**31 - 1)
-    wait_for_slot()
     # Every network call here can raise rather than return - a socket timeout
     # inside submit() is what killed the mythic run outright. Nothing below is
     # allowed to escape: a failed species is logged and retried, never fatal.
@@ -107,11 +53,11 @@ def gen_one(dexKey, desc, attempt=0):
     if "prompt_id" not in res:
         return "SUBMIT_FAIL:" + json.dumps(res)[:200]
     raw_path = os.path.join(RAWDIR, f"{dexKey}_{attempt}.png")
-    # Generous: a render is ~45s alone, but queued behind someone else's work it
-    # can be far longer. Abandoning it at 180s left the job still running on the
-    # host and cost a GPU slot for nothing.
+    # Generous, because the steward may hold the request while somebody else has
+    # the card. Giving up early does not cancel anything - the job still runs -
+    # so a short timeout only loses track of work that is going to happen anyway.
     try:
-        result = g.wait_and_fetch(res["prompt_id"], raw_path, timeout=900)
+        result = g.wait_and_fetch(res["prompt_id"], raw_path, timeout=1800)
     except Exception as e:
         return "FETCH_ERR:" + str(e)[:150]
     if result is not True:
@@ -135,19 +81,6 @@ def run_batch(batch_path, log_path):
         tries = 1
         while result is not True and tries <= 2:
             print(f"  {dexKey}: attempt{tries} failed ({str(result)[:100]}), retrying...")
-            # A timeout usually means the host went away rather than that this
-            # particular animal is hard to draw. Wait for it instead of
-            # spending both retries into a dead socket.
-            if not host_up():
-                print("  forge unreachable - waiting for it to come back...")
-                if wait_for_host():
-                    print("  forge is back, carrying on")
-                else:
-                    print("  forge still down after an hour, stopping here")
-                    log[dexKey] = "HOST_DOWN"
-                    with open(log_path, "w", encoding="utf-8") as f:
-                        json.dump(log, f, indent=1)
-                    return log
             result = gen_one(dexKey, desc, attempt=tries)
             tries += 1
         elapsed = time.time() - t0
