@@ -43,7 +43,7 @@ ARCS.reedwater = {
       label: "What the owners will actually agree to",
       detail: "Nobody will keep a cat in permanently. Almost everybody will put something on a collar, "
             + "and about half will bring a cat in overnight if asked properly.",
-      how: "Knock on doors at Rescue Row. Ask, do not tell.",
+      how: "Knock on doors along the houses on the fen edge. Ask, do not tell.",
     },
     bells: {
       label: "Whether bells work",
@@ -179,8 +179,14 @@ console.log("[part52] arc two loaded:", ARCS.reedwater.title,
           + "is cheap and it feels like doing something." },
   });
 
-  // Rescue Row: the households, and where you find out what people will accept
-  put("rescue:5,5", {
+  // The households on the fen edge, and where you find out what people will
+  // accept. This used to be placed on the "rescue" map because the arc calls
+  // this row of houses Rescue Row - but there is already a map of that name,
+  // Rescue Row in the hearth zone, which is the animal rescue at the end of the
+  // kennel chain at level 56-60. Reedwater is a region 2 arc, so its fifth
+  // finding sat about fifty levels of progression away and could not be
+  // collected. It belongs on the fen with the other four.
+  put("route2:11,14", {
     name: "Mr Adeyemi",
     em: "🧓🏿",
     line: "Cats. Right. I've been waiting for somebody to come about the cats.\n\n"
@@ -197,5 +203,5 @@ console.log("[part52] arc two loaded:", ARCS.reedwater.title,
           + "They are not refusing to help. They are refusing one specific thing." },
   });
 
-  console.log("[part52] Reedwater placed: 5 findings across the fen and Rescue Row");
+  console.log("[part52] Reedwater placed: 5 findings across the fen and its houses");
 })();
