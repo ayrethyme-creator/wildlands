@@ -20,9 +20,10 @@
 const ARC_CAST = {
   millrace: {
     who: "Ada Oyelaran", em: "👩🏿‍🌾", find: "💧",
-    line: "Four hectares under water and my culvert stopped solid. I have broken that dam open more "
-        + "times than I can count and it is back by Thursday morning.\n\nI am not asking anybody to "
-        + "kill anything. I am asking for this to stop.",
+    line: "There is a family of beavers on that stretch and four hectares of my pasture under water "
+        + "because of them. I have broken the dam open more times than I can count and it is back by "
+        + "Thursday morning.\n\nI am not asking anybody to kill anything. The beavers are not doing it "
+        + "at me. I am asking for it to stop.",
     build: "Amara signed it? Then let us get the pipe in before the next rain.",
   },
   granary: {
@@ -42,8 +43,9 @@ const ARC_CAST = {
   canopygap: {
     who: "Ranger Tomas Reyes", em: "🧑🏽‍🌾", find: "🌉",
     line: "The road takes ninety seconds to drive and it took about four metres of canopy.\n\n"
-        + "Everything that lives up there will not come down to cross it. So they do not cross. We "
-        + "have two populations now where there was one, and neither half knows it.",
+        + "The tamarins will not come down to cross it, and nothing else that lives up there will "
+        + "either. So they do not cross. We have two troops now where there was one, and neither half "
+        + "knows the other is still there.",
     build: "You have walked the gap and you have counted. Let us get the span up.",
   },
   sunfield: {
@@ -97,15 +99,17 @@ const ARC_CAST = {
   },
   longline: {
     who: "Dr. Marisol Vega", em: "👩🏽‍💼", find: "🎣",
-    line: "The birds cross oceans. The rules stop at borders.\n\nI can get one fleet into a room and "
-        + "the other three carry on exactly as before, and the birds do not care whose flag killed them.",
+    line: "The albatross cross oceans. The rules stop at borders.\n\nI can get one fleet into a room "
+        + "and the other three carry on exactly as before, and an albatross does not care whose flag "
+        + "killed it.",
     build: "Four fleets, one room, one standard. It will take two years. Let us start.",
   },
   hearth: {
     who: "Rescue Lead Hana Okada", em: "👩🏻‍⚕️", find: "🏠",
-    line: "We are full. We have been full since March.\n\nHalf of what comes through that door was "
-        + "sold to somebody as a thing that would stay small. They are not bad people. They were told "
-        + "a lie at the point of sale and the animal is what pays for it.",
+    line: "We are full. We have been full since March.\n\nHalf of what comes through that door — the "
+        + "pythons, the iguanas, the parrots that will outlive the person who bought them — was sold "
+        + "as a thing that would stay small. They are not bad people. They were told a lie at the "
+        + "point of sale, and the animal is what pays for it.",
     build: "A waiting period, and honest adult sizes at the point of sale. Let us write it.",
   },
   digsite: {
