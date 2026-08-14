@@ -62,9 +62,41 @@ def wait_for_host(max_wait=3600, step=30):
     return False
 
 
+def queue_depth():
+    """(running, pending) on the shared host, or None if it cannot be read."""
+    try:
+        with urllib.request.urlopen(g.HOST + "/queue", timeout=10) as r:
+            d = json.loads(r.read().decode() or "{}")
+        return len(d.get("queue_running", [])), len(d.get("queue_pending", []))
+    except Exception:
+        return None
+
+
+def wait_for_slot(max_wait=1800, step=15):
+    """Hold off submitting while the forge already has work queued.
+
+    Halo is somebody else's only machine. If we submit regardless, our job sits
+    behind theirs, outlives the fetch timeout, gets abandoned, and the retry
+    submits *another* one - so a busy GPU quietly accumulates orphaned work of
+    ours. Waiting for a free slot means we never stack, and we yield to whoever
+    else is using it.
+    """
+    waited = 0
+    while waited < max_wait:
+        q = queue_depth()
+        if q is None:
+            return False
+        if q[1] == 0:
+            return True
+        time.sleep(step)
+        waited += step
+    return True
+
+
 def gen_one(dexKey, desc, attempt=0):
     prompt = desc + ", " + STYLE + ", " + pick_composition(desc)
     seed = random.randint(1, 2**31 - 1)
+    wait_for_slot()
     # Every network call here can raise rather than return - a socket timeout
     # inside submit() is what killed the mythic run outright. Nothing below is
     # allowed to escape: a failed species is logged and retried, never fatal.
@@ -75,8 +107,11 @@ def gen_one(dexKey, desc, attempt=0):
     if "prompt_id" not in res:
         return "SUBMIT_FAIL:" + json.dumps(res)[:200]
     raw_path = os.path.join(RAWDIR, f"{dexKey}_{attempt}.png")
+    # Generous: a render is ~45s alone, but queued behind someone else's work it
+    # can be far longer. Abandoning it at 180s left the job still running on the
+    # host and cost a GPU slot for nothing.
     try:
-        result = g.wait_and_fetch(res["prompt_id"], raw_path, timeout=180)
+        result = g.wait_and_fetch(res["prompt_id"], raw_path, timeout=900)
     except Exception as e:
         return "FETCH_ERR:" + str(e)[:150]
     if result is not True:
