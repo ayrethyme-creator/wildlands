@@ -154,7 +154,10 @@ console.log("[part52] arc two loaded:", ARCS.reedwater.title,
           + "on your side to fix those eleven." },
   });
 
-  put("route2:4,12", {
+  // Spread along the fen rather than all on one screen. Everything here is
+  // still Reedwater water - the crossing, the bend and the approach are the
+  // same fen as route2 - so the fiction holds and gathering it is a walk.
+  put("seg_w1:6,3", {
     name: "Dawn and dusk",
     em: "🌅",
     line: "You sit out a dawn with Beatrix, and then a dusk. Almost everything happens in those two hours. "
@@ -166,7 +169,7 @@ console.log("[part52] arc two loaded:", ARCS.reedwater.title,
           + "twice, briefly, at times most of them are asleep anyway." },
   });
 
-  put("route2:11,12", {
+  put("seg_w3:7,4", {
     name: "What the cats are wearing",
     em: "🔔",
     line: "You get close enough to look at collars. Roughly half of them already have a bell on. "
@@ -185,8 +188,9 @@ console.log("[part52] arc two loaded:", ARCS.reedwater.title,
   // Rescue Row in the hearth zone, which is the animal rescue at the end of the
   // kennel chain at level 56-60. Reedwater is a region 2 arc, so its fifth
   // finding sat about fifty levels of progression away and could not be
-  // collected. It belongs on the fen with the other four.
-  put("route2:11,14", {
+  // collected. The houses on the Delta Approach are the fen's own edge, and
+  // in region 2 where the rest of the arc is.
+  put("seg_w4:9,1", {
     name: "Mr Adeyemi",
     em: "🧓🏿",
     line: "Cats. Right. I've been waiting for somebody to come about the cats.\n\n"
@@ -203,5 +207,5 @@ console.log("[part52] arc two loaded:", ARCS.reedwater.title,
           + "They are not refusing to help. They are refusing one specific thing." },
   });
 
-  console.log("[part52] Reedwater placed: 5 findings across the fen and its houses");
+  console.log("[part52] Reedwater placed: 5 findings across four maps of the fen");
 })();
