@@ -247,6 +247,51 @@ const ARC_CAST = {
     return [home, ...near];
   };
 
+  // One map, one arc. Two arcs in the same region share a bucket and so get the
+  // same candidate list, and the first version of this let them interleave:
+  // beaver clues and cat clues on the same four maps of the fen, granary and
+  // canopygap over the same jungle, and three separate ocean arcs all sitting
+  // on kelp, openocean, polarsea and abyss together. Reading two investigations
+  // off one screen is not a harder puzzle, it is an unreadable one.
+  //
+  // Seeded from whatever is already placed, so the hand-built beeloud and
+  // reedwater arcs own their ground before this file starts handing any out.
+  const claimed = {};
+  Object.keys(TRAINERS).forEach((k) => {
+    const t = TRAINERS[k];
+    if (t.arc && t.learns) {
+      const m = k.split(":")[0];
+      if (!claimed[m]) claimed[m] = t.arc;
+    }
+  });
+  // Every arc keeps its own home map.
+  Object.keys(ARC_CAST).forEach((arcId) => {
+    const h = ARCS[arcId] && ARCS[arcId].where;
+    if (h && !claimed[h]) claimed[h] = arcId;
+  });
+
+  // Deal the rest out a map at a time rather than letting the first arc in a
+  // bucket take everything. Four separate arcs live off bucket 6 - turtles,
+  // solar, bears and albatross - so first-come left three of them stranded on
+  // one map each, which is the same "all the clues in one place" problem in a
+  // different shape. Round-robin gives each a share, and each arc is only
+  // offered maps that suit its own level, so the desert arc cannot be handed
+  // the abyss.
+  const ALLOC = {};
+  Object.keys(ARC_CAST).forEach((a) => { ALLOC[a] = [ARCS[a] ? ARCS[a].where : null].filter(Boolean); });
+  const wants = Object.keys(ARC_CAST).filter((a) => ARCS[a]);
+  const eligible = {};
+  wants.forEach((a) => {
+    eligible[a] = candidateMaps(ARCS[a].where).filter((m) => m !== ARCS[a].where);
+  });
+  for (let round = 0; round < 6; round++) {
+    wants.forEach((a) => {
+      if (ALLOC[a].length > round + 1) return;      // already has enough this round
+      const pick = eligible[a].find((m) => !claimed[m]);
+      if (pick) { claimed[pick] = a; ALLOC[a].push(pick); }
+    });
+  }
+
   let placedPeople = 0, placedFindings = 0, skipped = [], scatter = [];
 
   // Placement is per-map: each person becomes a wall, so the map has to be
@@ -293,7 +338,7 @@ const ARC_CAST = {
     if (!MAPS[home]) { skipped.push(arcId + ":no-map:" + home); return; }
 
     const ev = Object.entries(A.evidence || {});
-    const maps = candidateMaps(home);
+    const maps = ALLOC[arcId] && ALLOC[arcId].length ? ALLOC[arcId] : [home];
     scatter.push(arcId + ":" + maps.length);
 
     // The person with the problem stays where the problem is.
