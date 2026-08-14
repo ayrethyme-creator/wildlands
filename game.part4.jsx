@@ -836,9 +836,16 @@ function Wildlands() {
         // Once Amara has funded something, the person who has the problem is
         // where you go to put it in.
         const cur = tr.arc ? arcState(st, tr.arc) : null;
-        if (cur && cur.stage === "build" && tr.name === "Thabo Sithole") {
-          say(`🧑🏿‍🌾 Thabo: "You came back with something. Alright. Show me."`, [
-            { label: "Build it with him", act: () => buildSolution(tr.arc) },
+        // Whoever is marked `builds` for this arc is where a funded proposal
+        // gets put in. This used to test `tr.name === "Thabo Sithole"`, which
+        // meant only Beeloud could ever be finished: every other arc reached
+        // "build" and stopped there with nobody able to accept it, and since
+        // Amara serves the first arc that is not done, one stuck arc blocked
+        // every arc behind it.
+        if (cur && cur.stage === "build" && tr.builds && tr.builds === tr.arc) {
+          say(`${tr.em || "🧍"} ${tr.name}: "${tr.buildLine
+            || "You came back with something. Alright. Show me."}"`, [
+            { label: "Put it in together", act: () => buildSolution(tr.arc) },
             { label: "Soon", act: () => setS((p) => ({ ...p, dialog: null })) },
           ]);
           return;

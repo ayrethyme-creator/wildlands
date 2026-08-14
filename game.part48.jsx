@@ -33,6 +33,10 @@
         + "If somebody can tell me how to have forty hives AND a badger, I will shake their hand. "
         + "Nobody has. So I have a rifle.",
     arc: "beeloud",
+    // He is the person with the problem, so he is where a funded proposal gets
+    // put in. The engine reads `builds`; it used to match on his name.
+    builds: "beeloud",
+    buildLine: "You came back with something. Alright. Show me.",
     // Asking about the money rather than the animal is the finding. It is
     // deliberately the least obvious question to ask a man complaining about
     // wildlife.

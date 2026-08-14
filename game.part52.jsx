@@ -131,6 +131,10 @@ console.log("[part52] arc two loaded:", ARCS.reedwater.title,
         + "been here, which is true, and useless, because there were nine houses on that edge when I "
         + "started and there are fifty-one now.",
     arc: "reedwater",
+    // Beatrix is the one with the problem and the one who walks the transect,
+    // so the funded work goes in with her.
+    builds: "reedwater",
+    buildLine: "Amara signed it off? Right. Then let us get it on the collars before the lapwings come back.",
     learns: { key: "counts",
       text: "📓 Beatrix: \"Lapwing down by half in six years. Reed bunting the same. Ducks and geese are "
           + "fine — they nest on water and they are big enough to argue.\"\n\n"
