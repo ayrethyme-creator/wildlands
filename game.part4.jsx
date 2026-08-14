@@ -816,7 +816,7 @@ function Wildlands() {
       // Story people are chat NPCs too, so they have to be handled BEFORE the
       // generic chat line - otherwise every one of them just recites its
       // opening speech forever and nothing can be learned, pitched or built.
-      const isStory = tr.learns || tr.pitchArc || tr.station
+      const isStory = tr.learns || tr.builds || tr.pitchArc || tr.station
         || (typeof beeloudSolvedText !== "undefined" && beeloudSolvedText[idKey]);
       if (!isStory && (tr.chat || !tr.team)) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
       // Once an arc is solved its people and places change what they say, and
@@ -829,27 +829,27 @@ function Wildlands() {
         return;
       }
 
+      // Whoever is marked `builds` for this arc is where a funded proposal gets
+      // put in. This has to sit OUTSIDE the tr.learns branch: Thabo happens to
+      // carry a finding as well, but the fifteen people part65 places do not,
+      // and while this check lived inside tr.learns none of them could ever
+      // accept the work - they recited their opening line forever, exactly the
+      // failure the isStory comment above warns about. Ada Oyelaran could not
+      // be given the beaver dam back however many times you talked to her.
+      if (tr.builds && tr.arc && tr.builds === tr.arc
+          && arcState(st, tr.arc).stage === "build") {
+        say(`${tr.em || "🧍"} ${tr.name}: "${tr.buildLine
+          || "You came back with something. Alright. Show me."}"`, [
+          { label: "Put it in together", act: () => buildSolution(tr.arc) },
+          { label: "Soon", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+        return;
+      }
+
       // Story people and examinable things. A finding is recorded once; after
       // that they say the same thing without re-announcing it, so the clearing
       // does not shout at you every time you cross it.
       if (tr.learns) {
-        // Once Amara has funded something, the person who has the problem is
-        // where you go to put it in.
-        const cur = tr.arc ? arcState(st, tr.arc) : null;
-        // Whoever is marked `builds` for this arc is where a funded proposal
-        // gets put in. This used to test `tr.name === "Thabo Sithole"`, which
-        // meant only Beeloud could ever be finished: every other arc reached
-        // "build" and stopped there with nobody able to accept it, and since
-        // Amara serves the first arc that is not done, one stuck arc blocked
-        // every arc behind it.
-        if (cur && cur.stage === "build" && tr.builds && tr.builds === tr.arc) {
-          say(`${tr.em || "🧍"} ${tr.name}: "${tr.buildLine
-            || "You came back with something. Alright. Show me."}"`, [
-            { label: "Put it in together", act: () => buildSolution(tr.arc) },
-            { label: "Soon", act: () => setS((p) => ({ ...p, dialog: null })) },
-          ]);
-          return;
-        }
         const already = arcFound(st, tr.arc, tr.learns.key);
         if (already) { say(`${tr.em || "📓"} ${tr.name}: "${tr.line}"`); return; }
         say(`${tr.em || "📓"} ${tr.line}`, [
