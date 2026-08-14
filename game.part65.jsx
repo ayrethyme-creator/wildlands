@@ -214,37 +214,57 @@ const ARC_CAST = {
 
   const lower = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 
-  let placedPeople = 0, placedFindings = 0, skipped = [];
+  // ---- which maps an arc may scatter across ----
+  // Findings all sitting on one screen is not an investigation, it is a queue.
+  // part42 already carves the world into the ground before each gym, by walking
+  // the exit graph, and the field exams use it - so it is the honest definition
+  // of "this region" and it is reused here rather than inventing another.
+  //
+  // Two traps. The arc's own `region` number is the author's numbering and does
+  // NOT index REGION_MAPS: canopygap is region 6, and REGION_MAPS[6] is the open
+  // ocean. So the bucket is found by asking which one actually contains the
+  // arc's home map. And a bucket is "everything reachable before the next gym",
+  // which sweeps in high-level side branches - bucket 2 holds Reedwater Fen at
+  // level 10 and the level 50-60 kennels both. Scattering into those would
+  // repeat the Mr Adeyemi mistake exactly, so candidates are also held to within
+  // ten levels of the arc's home map.
+  const bucketOf = (mapKey) => {
+    for (const n in REGION_MAPS) if (REGION_MAPS[n].indexOf(mapKey) >= 0) return n;
+    return null;
+  };
+  const band = (mapKey) => {
+    const M = MAPS[mapKey], l = M && (M.lvl || M.lvlWater);
+    return l ? (l[0] + l[1]) / 2 : null;
+  };
+  const candidateMaps = (home) => {
+    const b = bucketOf(home), home0 = band(home);
+    if (!b || home0 === null) return [home];
+    const near = REGION_MAPS[b].filter((m) => {
+      if (m === home || !MAPS[m]) return false;
+      const x = band(m);
+      return x !== null && Math.abs(x - home0) <= 10;
+    });
+    return [home, ...near];
+  };
 
-  Object.entries(ARC_CAST).forEach(([arcId, cast]) => {
-    const A = ARCS[arcId];
-    if (!A) { skipped.push(arcId + ":no-arc"); return; }
-    const mapKey = A.where, M = MAPS[mapKey];
-    if (!M) { skipped.push(arcId + ":no-map:" + mapKey); return; }
+  let placedPeople = 0, placedFindings = 0, skipped = [], scatter = [];
 
-    const ev = Object.entries(A.evidence || {});
+  // Placement is per-map: each person becomes a wall, so the map has to be
+  // re-read between placements, and nobody already standing there - mine or
+  // anyone else's - may be walled in.
+  const takenBy = {};
+  const placeOn = (mapKey, want, def) => {
+    const M = MAPS[mapKey];
+    if (!M) return false;
+    const taken = takenBy[mapKey] = takenBy[mapKey] || [];
 
-    const place = (x, y, def) => {
-      M.rows[y] = M.rows[y].slice(0, x) + "R" + M.rows[y].slice(x + 1);
-      TRAINERS[mapKey + ":" + x + "," + y] = { chat: true, ...def };
-    };
-
-    // Each person placed becomes a wall, so the map has to be re-read between
-    // placements. Doing it once up front let a later finding wall off an
-    // earlier one into a pocket nobody could walk to - which is exactly what
-    // happened on the Glacier Tongue.
-    // Everyone standing on this map, mine and everyone else's. A new person must
-    // not wall any of them off - placing a finding beside Dr. Biruta Galdis on
-    // the canopy walk sealed her into a two-tile pocket, which is how this check
-    // came to exist.
     const peopleHere = () => Object.keys(TRAINERS)
       .filter((k) => k.indexOf(mapKey + ":") === 0)
       .map((k) => k.split(":")[1].split(",").map(Number));
 
     const everyoneStillReachable = (cx, cy) => {
-      const row = M.rows[cy];
-      const saved = row;
-      M.rows[cy] = row.slice(0, cx) + "R" + row.slice(cx + 1);
+      const saved = M.rows[cy];
+      M.rows[cy] = saved.slice(0, cx) + "R" + saved.slice(cx + 1);
       const live = reachable(mapKey);
       const ok = peopleHere().concat([[cx, cy]]).every(([x, y]) =>
         [[1, 0], [-1, 0], [0, 1], [0, -1]]
@@ -253,44 +273,59 @@ const ARC_CAST = {
       return ok;
     };
 
-    const taken = [];
-    const nextSpot = () => {
-      const free = freeTiles(mapKey).filter(([x, y]) =>
-        !taken.some(([tx, ty]) => Math.abs(tx - x) + Math.abs(ty - y) <= 1));
-      if (!free.length) return null;
-      // Try the spread-out candidates in order and take the first that leaves
-      // the map intact for everybody already on it.
-      const ordered = spread(free, Math.max(1, ev.length + 1 - taken.length))
-        .concat(free);
-      const pick = ordered.find(([x, y]) => everyoneStillReachable(x, y));
-      if (pick) taken.push(pick);
-      return pick || null;
-    };
+    const free = freeTiles(mapKey).filter(([x, y]) =>
+      !taken.some(([tx, ty]) => Math.abs(tx - x) + Math.abs(ty - y) <= 1));
+    if (!free.length) return false;
+    const ordered = spread(free, Math.max(1, want)).concat(free);
+    const pick = ordered.find(([x, y]) => everyoneStillReachable(x, y));
+    if (!pick) return false;
+    taken.push(pick);
+    const [x, y] = pick;
+    M.rows[y] = M.rows[y].slice(0, x) + "R" + M.rows[y].slice(x + 1);
+    TRAINERS[mapKey + ":" + x + "," + y] = { chat: true, ...def };
+    return true;
+  };
 
-    // The person with the problem goes first, and is the one who builds.
-    const first = nextSpot();
-    if (!first) { skipped.push(arcId + ":no-room"); return; }
-    place(first[0], first[1], {
+  Object.entries(ARC_CAST).forEach(([arcId, cast]) => {
+    const A = ARCS[arcId];
+    if (!A) { skipped.push(arcId + ":no-arc"); return; }
+    const home = A.where;
+    if (!MAPS[home]) { skipped.push(arcId + ":no-map:" + home); return; }
+
+    const ev = Object.entries(A.evidence || {});
+    const maps = candidateMaps(home);
+    scatter.push(arcId + ":" + maps.length);
+
+    // The person with the problem stays where the problem is.
+    if (!placeOn(home, ev.length + 1, {
       name: cast.who, em: cast.em, line: cast.line,
       arc: arcId, builds: arcId, buildLine: cast.build,
-    });
+    })) { skipped.push(arcId + ":no-room-for-" + cast.who); return; }
     placedPeople++;
 
-    // One findable thing per piece of evidence.
-    ev.forEach(([key, e]) => {
-      const spot = nextSpot();
-      if (!spot) { skipped.push(arcId + ":" + key + ":no-room"); return; }
-      place(spot[0], spot[1], {
+    // One findable thing per piece of evidence, dealt round-robin across the
+    // region so gathering an arc is a walk rather than one screen. Deterministic
+    // - the same species lands on the same map every load.
+    ev.forEach(([key, e], i) => {
+      const def = {
         name: e.label, em: cast.find,
         line: "You " + lower(e.how),
         arc: arcId,
         learns: { key, text: "📓 " + e.label + " — " + e.detail },
-      });
-      placedFindings++;
+      };
+      // Walk the region from the offset, and fall back to the home map if a
+      // particular map has no room left rather than dropping the finding.
+      let done = false;
+      for (let t = 0; t < maps.length && !done; t++) {
+        done = placeOn(maps[(i + 1 + t) % maps.length], 2, def);
+      }
+      if (!done) done = placeOn(home, 2, def);
+      if (done) placedFindings++;
+      else skipped.push(arcId + ":" + key + ":no-room");
     });
   });
 
   console.log("[part65] arcs put into the world: " + placedPeople + " people who can build, "
-    + placedFindings + " findings"
+    + placedFindings + " findings across the regions (" + scatter.join(" ") + ")"
     + (skipped.length ? " | SKIPPED: " + skipped.join(", ") : ""));
 })();
