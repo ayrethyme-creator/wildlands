@@ -90,6 +90,8 @@ def remove_bg_and_crop(in_path, out_path, size=256, tol=20, pocket_tol=10, min_p
                     r, g, b, a = px[x, y]
                     px[x, y] = (r, g, b, 0)
 
+    img = strip_shadow(img)
+
     bbox = img.getbbox()
     if bbox:
         img = img.crop(bbox)
@@ -103,6 +105,69 @@ def remove_bg_and_crop(in_path, out_path, size=256, tol=20, pocket_tol=10, min_p
     canvas.paste(img, ((size - nw) // 2, (size - nh) // 2), img)
     canvas.save(out_path, optimize=True)
     return out_path
+
+def strip_shadow(img, lum=118, neutral=26, max_loss=0.35):
+    """Erase the soft grey shadow the model puts under almost every animal.
+
+    "no shadow" is in every prompt and is ignored constantly. The shadow is a
+    pale neutral grey and, unlike the animal, it has no outline around it - the
+    style draws clean sharp linework on the creature and nothing on the shadow.
+    So flooding inward from the transparent border and eating any pale, nearly
+    colourless pixel consumes the whole shadow and then stops dead at the
+    animal's own outline.
+
+    That outline is what makes this safe on a white animal. A polar bear cub or
+    a snowy owl is as pale as its shadow, and both survive untouched because the
+    flood cannot cross their linework.
+
+    But it is only safe while the outline is closed. A pale animal whose line
+    has a gap in it lets the flood inside and loses its whole body: the poodle
+    went to 14% of itself, the arctic fox to 20%, before this guard existed. So
+    the result is measured, and if more than `max_loss` of the animal has gone
+    the strip is abandoned and the original returned unchanged. Keeping a shadow
+    is much cheaper than erasing an animal.
+    """
+    src = img.convert("RGBA")
+    img = src.copy()
+    before = sum(1 for p in img.getdata() if p[3] > 40)
+    w, h = img.size
+    px = img.load()
+    seen = bytearray(w * h)
+    q = deque()
+    for x in range(w):
+        for y in (0, h - 1):
+            if px[x, y][3] <= 40 and not seen[y * w + x]:
+                seen[y * w + x] = 1
+                q.append((x, y))
+    for y in range(h):
+        for x in (0, w - 1):
+            if px[x, y][3] <= 40 and not seen[y * w + x]:
+                seen[y * w + x] = 1
+                q.append((x, y))
+    while q:
+        x, y = q.popleft()
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nx, ny = x + dx, y + dy
+            if not (0 <= nx < w and 0 <= ny < h):
+                continue
+            j = ny * w + nx
+            if seen[j]:
+                continue
+            r, g, b, a = px[nx, ny]
+            if a <= 40:
+                seen[j] = 1
+                q.append((nx, ny))
+                continue
+            if max(r, g, b) - min(r, g, b) <= neutral and \
+               (r * 299 + g * 587 + b * 114) // 1000 >= lum:
+                px[nx, ny] = (r, g, b, 0)
+                seen[j] = 1
+                q.append((nx, ny))
+    after = sum(1 for p in img.getdata() if p[3] > 40)
+    if before and (before - after) / before > max_loss:
+        return src          # the flood got inside the animal - keep the shadow
+    return img
+
 
 if __name__ == "__main__":
     inp, outp = sys.argv[1], sys.argv[2]
