@@ -23,7 +23,7 @@
   "graywhale": "A gray whale, mottled grey barnacle-encrusted body, no dorsal fin, ridged knuckles along the tail stock, swimming near the surface",
   "spermwhale": "A sperm whale, massive block-shaped head, wrinkled dark grey skin, small hump instead of a dorsal fin, swimming near the surface",
   "orca": "An orca, glossy black body with sharp white eye patches, white chin and belly, pale grey saddle patch behind the dorsal fin, tall black dorsal fin, swimming near the surface",
-  "pilotwhale": "A long-finned pilot whale, dark black-grey bulbous rounded head, curved dorsal fin, swimming near the surface",
+  "pilotwhale": "A long-finned pilot whale, dark black-grey bulbous rounded head, curved dorsal fin, swimming near the surface. Plain empty white background: no grey panel, no box, no square backdrop, no border, no ground, no scenery of any kind behind the animal.",
   "falsekiller": "A false killer whale, uniform dark grey-black slender body, rounded head, curved dorsal fin, swimming near the surface",
   "melonhead": "A melon-headed whale, dark grey slender body, rounded melon-shaped head with a pointed snout, tall dorsal fin, swimming near the surface",
   "beluga": "A beluga whale, all-white rounded body, bulbous forehead melon, no dorsal fin, swimming near the surface",
