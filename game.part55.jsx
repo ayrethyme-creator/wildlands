@@ -46,6 +46,30 @@ const tsh = (c, amt) => sh(c, amt < 0 ? amt * 1.75 : amt * 1.7);
 const svgWrap = (inner) =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">${inner}</svg>`;
 
+/* ---- plants drawn the way the props are ----
+
+   Ayr, pointing at the little quest tree on the Marula Approach: "I like how
+   it looks, it even has a little shadow under it... can you replace all of the
+   bushes with their weird green boxes with those pretty little trees or
+   flowers?"
+
+   She had spotted the real difference. The props in part57 are drawn as
+   objects standing on the ground: the tile is filled with the ground colour,
+   a soft ellipse is laid down as a shadow, and the thing itself is compact,
+   centred and outlined in the same warm off-white every prop uses. The
+   terrain shapes here were built the opposite way - fill the whole tile,
+   edge to edge, no shadow and no outline - which is right for a canopy or a
+   mountain and quite wrong for a bush, because a bush is an object, not a
+   surface. That is the green box.
+
+   plantWrap gives the small plants the prop treatment. Same ground, same
+   shadow, same outline weight, so a fern in the kelp and a sapling beside the
+   beehives now read as the same kind of thing. */
+const PLANT_OUT = "#f6f2e8";
+const plantWrap = (base, inner) => svgWrap(
+  `<rect width="32" height="32" fill="${base}"/>` +
+  `<ellipse cx="16" cy="28.6" rx="10" ry="2.8" fill="#000" opacity=".22"/>` + inner);
+
 /* Every shape is drawn to fill its tile rather than to sit in the middle of
    it. A forest should look like canopy, not like a grid of tree stamps with
    gaps showing between them - the same reasoning the grass tiles use. */
@@ -105,42 +129,50 @@ const TILE_SHAPES = {
       `<rect x="13.8" y="6.5" width="2" height="21" rx="1" fill="${light}" opacity=".65"/>`);
   },
   grain: (c, v, base) => {
-    // Heads taper to a point. Round-capped ellipses read as spoons.
-    const stalk = tsh(c, -0.34), head = tsh(c, 0.3), dark = tsh(c, -0.2);
-    const xs = [[3, 9, 15, 21, 27], [5, 11, 17, 23, 29], [2, 8, 16, 22, 28], [6, 12, 18, 24, 30]][v % 4];
-    return svgWrap(
-      `<rect width="32" height="32" fill="${base}"/>` +
-      xs.map((x, i) => {
-        const lean = (i % 2 ? 1 : -1) * (1 + (i % 3));
-        const tx = x + lean * 1.4, ty = 12 - (i % 2) * 2;
-        return `<path d="M${x} 31 q${lean} -10 ${lean * 1.4} -16" stroke="${stalk}" stroke-width="1.4" fill="none"/>` +
-               `<path d="M${tx} ${ty - 6} q3 4 0 8 q-3 -4 0 -8 Z" fill="${head}"/>`;
+    // A standing tuft rather than a field printed on the tile: fewer stalks,
+    // gathered at the base, so it sits on its shadow like the props do.
+    const stalk = tsh(c, -0.36), head = tsh(c, 0.28);
+    const offs = [[-5, -1, 4], [-4, 1, 5], [-6, 0, 3], [-3, 2, 6]][v % 4];
+    return plantWrap(base,
+      offs.map((dx, i) => {
+        const tipX = 16 + dx * 1.5, tipY = 12 + (i % 2) * 2.5;
+        return `<path d="M${16 + dx * 0.4} 28 Q${16 + dx} 20 ${tipX} ${tipY + 4}"` +
+               ` stroke="${stalk}" stroke-width="1.5" fill="none" stroke-linecap="round"/>` +
+               `<path d="M${tipX} ${tipY} q3 4 0 8 q-3 -4 0 -8 Z" fill="${head}"` +
+               ` stroke="${PLANT_OUT}" stroke-width=".6" stroke-linejoin="round"/>`;
       }).join(""));
   },
   fern: (c, v, base) => {
-    // The floor was so dark the fronds had nothing to sit against. Floor
-    // lifted, fronds broadened, and the middle one carries the highlight.
-    // The highlight was near-white against a green floor and read as bone
-    // rather than leaf, so it stays inside the green.
-    const floor = tsh(c, -0.26), mid = tsh(c, -0.02), light = tsh(c, 0.16);
-    const blade = (x, y, dir, h, fill) =>
-      `<path d="M${x} ${y} Q${x + dir * 9} ${y - h * 0.55} ${x + dir * 11} ${y - h}` +
-      ` Q${x + dir * 4} ${y - h * 0.5} ${x + dir * 2.5} ${y} Z" fill="${fill}"/>`;
-    return svgWrap(
-      `<rect width="32" height="32" fill="${base}"/>` +
-      blade(5, 31, -1, 17, mid) +
-      blade(27, 31, 1, 17, mid) +
-      blade(14, 32, -1, 24, light) +
-      blade(18, 32, 1, 24, light) +
-      `<path d="M16 32 v-11" stroke="${tsh(c, -0.34)}" stroke-width="1.6"/>`);
+    // Was a fern: four fronds fanning from a point. Ayr: "the ferns are weird,
+    // and they weren't visible in the map before. get rid of them or convert
+    // them into the tree."
+    //
+    // Converted rather than removed, because the tile still has to be
+    // something - it is what the kelp zone uses for its tree. It is now the
+    // same little tree as the quest sapling on the Marula Approach, which is
+    // the shape she picked out as the one that works: a short trunk, one
+    // rounded crown, a lighter patch where the light catches it. Tinted from
+    // the zone's own colour so it still belongs wherever it is used.
+    const crown = c, deep = tsh(c, -0.3), light = tsh(c, 0.24), trunk = "#6b5442";
+    const lean = [0, 1.4, -1.4, 0.7][v] || 0;
+    const cx = 16 + lean;
+    return plantWrap(base,
+      `<rect x="${cx - 1.2}" y="17" width="2.4" height="12" fill="${trunk}"` +
+      ` stroke="${PLANT_OUT}" stroke-width=".7"/>` +
+      `<ellipse cx="${cx}" cy="13" rx="9" ry="7.6" fill="${deep}"` +
+      ` stroke="${PLANT_OUT}" stroke-width="1"/>` +
+      `<ellipse cx="${cx}" cy="13.6" rx="7.4" ry="6.2" fill="${crown}"/>` +
+      `<ellipse cx="${cx - 3}" cy="10.6" rx="4" ry="3.2" fill="${light}" opacity=".8"/>`);
   },
   sprout: (c, v, base) => {
-    const dark = tsh(c, -0.28), light = tsh(c, 0.2);
-    return svgWrap(
-      `<rect width="32" height="32" fill="${base}"/>` +
-      `<path d="M16 30 v-12" stroke="${dark}" stroke-width="2.4" stroke-linecap="round"/>` +
-      `<ellipse cx="10" cy="16" rx="6.5" ry="4" fill="${c}" transform="rotate(-24 10 16)"/>` +
-      `<ellipse cx="22" cy="18" rx="6" ry="3.6" fill="${light}" transform="rotate(22 22 18)"/>`);
+    const dark = tsh(c, -0.3), light = tsh(c, 0.2);
+    const lean = [0, 1.2, -1.2, 0.6][v] || 0;
+    return plantWrap(base,
+      `<path d="M${16 + lean} 28 v-10" stroke="${dark}" stroke-width="2.2" stroke-linecap="round"/>` +
+      `<ellipse cx="${11.5 + lean}" cy="17" rx="5.4" ry="3.4" fill="${c}"` +
+      ` stroke="${PLANT_OUT}" stroke-width=".7" transform="rotate(-24 ${11.5 + lean} 17)"/>` +
+      `<ellipse cx="${20.5 + lean}" cy="18.6" rx="5" ry="3.1" fill="${light}"` +
+      ` stroke="${PLANT_OUT}" stroke-width=".7" transform="rotate(22 ${20.5 + lean} 18.6)"/>`);
   },
 
   hill: (c, v, base) => {
