@@ -181,9 +181,67 @@
         animation: wlArrive 190ms ease-out forwards;
       }
 
+      /* ---- things in the air ----
+         One absolutely positioned speck per creature or flake, drifting on its
+         own clock. Every one is a div with a background and a shadow, so the
+         compositor carries them and no JavaScript runs per frame.
+
+         Each kind moves the way the thing actually moves: a firefly wanders and
+         pulses, a leaf falls while swinging, snow comes down almost straight,
+         dust slides sideways, an ember rises. Getting that right is most of
+         the difference between weather and confetti. */
+      .amb {
+        position: absolute; pointer-events: none;
+        animation-iteration-count: infinite; animation-timing-function: linear;
+        will-change: transform, opacity;
+      }
+      /* Fireflies: no fall at all. They wander a little and breathe. */
+      @keyframes ambFly {
+        0%   { transform: translate(0,0);        opacity: 0; }
+        15%  {                                   opacity: .95; }
+        50%  { transform: translate(14px,-10px); opacity: .35; }
+        85%  {                                   opacity: .9; }
+        100% { transform: translate(0,0);        opacity: 0; }
+      }
+      .amb-fly { animation-name: ambFly; animation-timing-function: ease-in-out; }
+
+      /* Leaves fall and swing, and the swing is what stops them reading as
+         rain. They also drift downwind rather than straight down. */
+      @keyframes ambLeaf {
+        0%   { transform: translate(0,-12%) rotate(0deg);      opacity: 0; }
+        10%  {                                                 opacity: .85; }
+        100% { transform: translate(34px,120%) rotate(320deg); opacity: 0; }
+      }
+      .amb-leaf { animation-name: ambLeaf; }
+
+      @keyframes ambSnow {
+        0%   { transform: translate(0,-12%);     opacity: 0; }
+        10%  {                                   opacity: .9; }
+        100% { transform: translate(12px,120%);  opacity: .15; }
+      }
+      .amb-snow { animation-name: ambSnow; }
+
+      /* Dust does not fall, it blows past. */
+      @keyframes ambDust {
+        0%   { transform: translate(-8px,0);  opacity: 0; }
+        20%  {                                opacity: .5; }
+        80%  {                                opacity: .4; }
+        100% { transform: translate(58px,-6px); opacity: 0; }
+      }
+      .amb-dust { animation-name: ambDust; }
+
+      /* Embers rise, because heat does. */
+      @keyframes ambEmber {
+        0%   { transform: translate(0,0) scale(1);        opacity: 0; }
+        20%  {                                            opacity: .95; }
+        100% { transform: translate(10px,-70px) scale(.4); opacity: 0; }
+      }
+      .amb-ember { animation-name: ambEmber; }
+
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
         .wl-arrive { display: none; }
+        .amb { display: none; }
       }
     `}</style>
   );
@@ -886,6 +944,21 @@
           {/* Keyed on the warp counter, so it remounts and replays on every
               arrival and never on an ordinary step. */}
           <div key={`arrive:${S.map}:${S.warp || 0}`} className="wl-arrive" aria-hidden="true" />
+
+          {/* Whatever is in the air here. Sits above the tiles and below the
+              ranger, so a firefly can pass behind her but never over her face.
+              Keyed on map and phase so the set is rebuilt when either changes
+              and the specks do not carry their old positions across. */}
+          {typeof ambientFor === "function" && !m.dark && (() => {
+            const specks = ambientFor(m.zone, phase);
+            if (!specks.length) return null;
+            return (
+              <div key={`amb:${S.map}:${phase}`} aria-hidden="true"
+                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
+                {specks.map((s) => <div key={s.key} className={s.cls} style={s.style} />)}
+              </div>
+            );
+          })()}
 
           {/* ---- light on the scene ----
               The tiles themselves are drawn well - blades, mottle, four
