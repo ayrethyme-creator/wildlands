@@ -405,6 +405,14 @@ const MAPS = {
 // ---------- TILES ----------
 // An object sits ON the ground; it is not made of its own square of colour.
 //
+// And "the ground" means the ground, not the grass. Ayr circled the mountains
+// along a border as good and the trees beside them as bad, on the same screen -
+// and the only difference between them was this line. Mountains stood on
+// `ground`, which is the tan the whole map is made of, so nothing showed behind
+// them. Trees stood on `grass2`, which is green, so every tree carried a green
+// square across tan earth. grass2 differs from ground in all ten palettes, so
+// this was a visible box in every zone in the game.
+//
 // Trees, rock, buildings, shrines and lanterns each used to carry a background
 // of their own - a dark green cell under a tree, a tan cell under every hut -
 // so the map read as a grid of coloured boxes with pictures printed in them.
@@ -413,7 +421,7 @@ const MAPS = {
 // short grass, everything built or placed stands on bare ground.
 const TILE_STYLE = (ch, pal) => {
   switch (ch) {
-    case "T": return { bg: pal.grass2, em: pal.tree.em };
+    case "T": return { bg: pal.ground, em: pal.tree.em };
     case "^": return { bg: pal.ground, em: pal.mount.em };
     case "G": return { bg: pal.grass, em: "ᵛᵛ" };
     case "g": return { bg: pal.grass2, em: "" };

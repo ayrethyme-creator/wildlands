@@ -368,10 +368,10 @@ const TILE_ART = (ch, x, y, pal) => {
   if (!src || !src.em) return null;
   const kind = TILE_KIND[src.em];
   if (!kind || !TILE_SHAPES[kind]) return null;
-  // Trees stand in vegetation, rock stands on bare ground. Using the short
-  // grass for the first is what stops a line of forest reading as a wall of
-  // dark squares with trees printed on them.
-  const base = ch === "T" ? (pal.grass2 || pal.ground) : pal.ground;
+  // Both stand on the ground the map is made of. Giving trees the short grass
+  // instead put a green square under every one of them, which is the box Ayr
+  // circled in red while circling the mountains beside them in purple.
+  const base = pal.ground;
   return tileArtBg(kind, src.bg, tileVariant(x, y, 4), base);
 };
 
