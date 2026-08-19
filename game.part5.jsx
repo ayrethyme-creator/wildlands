@@ -778,7 +778,21 @@
             // meeting grass has no join to hide, and leaving those out is what
             // keeps interior tiles - most of any map - on the same four cached
             // images they have always used.
-            const nbEdges = (!hidden && (ch2 === "G" || ch2 === "g" || ch2 === "W")) ? (() => {
+            // One side tears per join, never both: two tears facing each other
+            // across a boundary cancel out and leave it straight again, only
+            // wider. So each kind of tile is given a standing, and the higher
+            // one does the tearing.
+            //
+            // Water outranks everything, because a shoreline is the edge worth
+            // drawing - water reaching into land reads as a shore, land
+            // reaching into water reads as weed. Trees and rock outrank grass,
+            // so a bush tears into the field rather than the field into the
+            // bush. Two tiles of equal standing but different colour - short
+            // grass meeting tall - break the tie on character code, which is
+            // arbitrary but stable, and stable is all it has to be.
+            const tearRank = (c) => (c === "W" ? 3 : (c === "T" || c === "^") ? 2 : (c === "G" || c === "g") ? 1 : 0);
+            const nbEdges = (!hidden && tearRank(ch2) > 0) ? (() => {
+              const mine = tearRank(ch2);
               const at = (nx, ny) => {
                 const r = m.rows[ny];
                 if (!r || nx < 0 || nx >= r.length) return null;
@@ -791,13 +805,9 @@
                 .forEach(([side, nx, ny]) => {
                   const n = at(nx, ny);
                   if (!n || n.bg === bg) return;
-                  // One side tears per join, never both - two tears facing each
-                  // other across a boundary cancel out and leave it straight
-                  // again, just wider. Water wins every join it is part of,
-                  // because a shoreline is the edge worth drawing: grass
-                  // reaching into water reads as weed, water reaching into
-                  // grass reads as a shore.
-                  if (ch2 !== "W" && n.ch === "W") return;
+                  const theirs = tearRank(n.ch);
+                  if (theirs > mine) return;
+                  if (theirs === mine && n.ch >= ch2) return;
                   out[side] = n.bg;
                 });
               return Object.keys(out).length ? out : null;
@@ -805,7 +815,7 @@
             const grassBgImg = hidden
               ? null : (typeof GRASS_TILE !== "undefined" ? GRASS_TILE(ch2, x, y, bg, nbEdges) : null);
             const artBgImg = (hidden || grassBgImg)
-              ? null : (typeof TILE_ART !== "undefined" ? TILE_ART(ch2, x, y, pal) : null);
+              ? null : (typeof TILE_ART !== "undefined" ? TILE_ART(ch2, x, y, pal, nbEdges) : null);
             // People are read after the trainer and gym overrides above, so a
             // trainer's own emoji is what gets drawn rather than the generic
             // figure the tile would otherwise carry.
