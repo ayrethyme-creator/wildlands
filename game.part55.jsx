@@ -316,33 +316,12 @@ const TILE_SHAPES = {
 // edge, and what it paints is the same ground as the tile beside it, so the box
 // disappears and only the tree is left standing on it.
 const TILE_ART_CACHE = {};
-const tileArtBg = (kind, colour, v, base, edges) => {
-  const sig = edges ? ["n", "e", "s", "w"].map((s) => (edges[s] ? s + edges[s] : "")).join("") : "";
-  const key = `${kind}|${colour}|${v}|${base}|${sig}`;
+const tileArtBg = (kind, colour, v, base) => {
+  const key = `${kind}|${colour}|${v}|${base}`;
   if (!TILE_ART_CACHE[key]) {
     const build = TILE_SHAPES[kind];
     if (!build) return null;
-    let svg = build(colour, v, base);
-    // Ayr, after the ground colour went in: "there's still the sqare boxes
-    // around the green plant type objects."
-    //
-    // Filling the tile with the ground it stands on only hides the box while
-    // the neighbour happens to be that same ground. A bush drawn on short grass
-    // sitting next to bare earth is still a green square on brown, because a
-    // cell is one flat colour and the join is ruled. It is the same fault the
-    // grass had, so it takes the same fix: the neighbour's colour torn a little
-    // way across the edge.
-    //
-    // Injected after the shape's own opening rect and before everything else,
-    // so the plant is drawn over the tear rather than under it - exactly as
-    // grass grows up through its own torn edge in part45.
-    if (edges && typeof tornEdge === "function") {
-      const torn = ["n", "e", "s", "w"].filter((s) => edges[s])
-        .map((s) => tornEdge(s, edges[s], v)).join("");
-      const at = svg.indexOf("/>") + 2;               // end of the base rect
-      if (torn && at > 1) svg = svg.slice(0, at) + torn + svg.slice(at);
-    }
-    TILE_ART_CACHE[key] = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+    TILE_ART_CACHE[key] = `url("data:image/svg+xml,${encodeURIComponent(build(colour, v, base))}")`;
   }
   return TILE_ART_CACHE[key];
 };
@@ -351,7 +330,7 @@ const tileArtBg = (kind, colour, v, base, edges) => {
    position and the zone palette, get back a background image or null. Null
    means this tile has no drawn form yet and should keep rendering its emoji,
    so adding a shape later is additive and nothing has to be removed. */
-const TILE_ART = (ch, x, y, pal, edges) => {
+const TILE_ART = (ch, x, y, pal) => {
   if (!pal) return null;
   const src = ch === "T" ? pal.tree : ch === "^" ? pal.mount : null;
   if (!src || !src.em) return null;
@@ -361,7 +340,7 @@ const TILE_ART = (ch, x, y, pal, edges) => {
   // grass for the first is what stops a line of forest reading as a wall of
   // dark squares with trees printed on them.
   const base = ch === "T" ? (pal.grass2 || pal.ground) : pal.ground;
-  return tileArtBg(kind, src.bg, tileVariant(x, y, 4), base, edges);
+  return tileArtBg(kind, src.bg, tileVariant(x, y, 4), base);
 };
 
 // Which of the world's emoji tiles now have a drawn form.
