@@ -58,9 +58,14 @@
          grass moving, which is worse than no motion at all. */
 
       /* Water: a slow band of light crossing the surface. */
+      /* Two layers now: the shimmer band on top, the drawn surface underneath.
+         Both positions have to be named or the single value applies to every
+         layer and drags the ripples along with the highlight - which slides the
+         surface off its own tile and shows the seam it was drawn to hide. The
+         second pair pins the surface still. */
       @keyframes wlWater {
-        0%   { background-position: 0% 50%; }
-        100% { background-position: 200% 50%; }
+        0%   { background-position: 0% 50%, 0 0; }
+        100% { background-position: 200% 50%, 0 0; }
       }
       .wl-water { animation: wlWater 9s linear infinite; }
 
@@ -744,18 +749,27 @@
             // meeting grass has no join to hide, and leaving those out is what
             // keeps interior tiles - most of any map - on the same four cached
             // images they have always used.
-            const nbEdges = (!hidden && (ch2 === "G" || ch2 === "g")) ? (() => {
+            const nbEdges = (!hidden && (ch2 === "G" || ch2 === "g" || ch2 === "W")) ? (() => {
               const at = (nx, ny) => {
                 const r = m.rows[ny];
                 if (!r || nx < 0 || nx >= r.length) return null;
-                const t = TILE_STYLE(r[nx], pal);
-                return t ? t.bg : null;
+                const nch = r[nx];
+                const t = TILE_STYLE(nch, pal);
+                return t ? { ch: nch, bg: t.bg } : null;
               };
               const out = {};
               [["n", x, y - 1], ["s", x, y + 1], ["w", x - 1, y], ["e", x + 1, y]]
                 .forEach(([side, nx, ny]) => {
-                  const c = at(nx, ny);
-                  if (c && c !== bg) out[side] = c;
+                  const n = at(nx, ny);
+                  if (!n || n.bg === bg) return;
+                  // One side tears per join, never both - two tears facing each
+                  // other across a boundary cancel out and leave it straight
+                  // again, just wider. Water wins every join it is part of,
+                  // because a shoreline is the edge worth drawing: grass
+                  // reaching into water reads as weed, water reaching into
+                  // grass reads as a shore.
+                  if (ch2 !== "W" && n.ch === "W") return;
+                  out[side] = n.bg;
                 });
               return Object.keys(out).length ? out : null;
             })() : null;
@@ -786,9 +800,14 @@
               else if (personBgImg) { motion = "wl-idle"; delay = jitter * 0.6; }
               else if (propBgImg && FLICKER_TILES.has(ch2)) { motion = "wl-flicker"; delay = jitter; }
             }
-            // Water has no drawn tile of its own, so the shimmer is its image.
+            // Water is two layers: the shimmer band that slides, over a drawn
+            // surface that stays put. The band is transparent at both ends now
+            // rather than fading back to the flat colour, because an opaque
+            // band painted the ripples out as it passed over them.
+            const waterSurface = (!hidden && ch2 === "W" && typeof WATER_TILE !== "undefined")
+              ? WATER_TILE(ch2, x, y, bg, nbEdges) : null;
             const waterImg = (!hidden && ch2 === "W")
-              ? `linear-gradient(100deg, ${bg} 38%, ${sh(bg, 0.16)} 50%, ${bg} 62%)`
+              ? `linear-gradient(100deg, rgba(255,255,255,0) 38%, ${sh(bg, 0.16)}80 50%, rgba(255,255,255,0) 62%)`
               : null;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             return (
@@ -809,10 +828,14 @@
                 // as a dark olive circle on dark ground and read as a pit in
                 // the road. The warm centre is also actually warm now.
                 backgroundImage: [
-                  grassBgImg || artBgImg || personBgImg || propBgImg || waterImg,
+                  waterImg,
+                  grassBgImg || artBgImg || personBgImg || propBgImg || waterSurface,
                   glow ? `radial-gradient(circle, rgba(255,203,120,.55) 0%, rgba(255,190,96,.22) 42%, ${bg} 76%)` : null,
                 ].filter(Boolean).join(", ") || undefined,
-                backgroundSize: waterImg ? "200% 100%"
+                // Water names both layers: the sliding band is oversized so it
+                // has somewhere to travel, the surface under it is exactly one
+                // tile and never moves.
+                backgroundSize: waterImg ? "200% 100%, 100% 100%"
                   : (grassBgImg || artBgImg || personBgImg || propBgImg)
                     ? (glow ? "100% 100%, 100% 100%" : "100% 100%")
                     : undefined,

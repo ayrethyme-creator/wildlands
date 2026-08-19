@@ -156,4 +156,60 @@ const GRASS_TILE = (ch, x, y, bg, edges) => {
   return grassBg(bg, blade, tall, grassVariant(x, y), edges);
 };
 
-console.log("[part45] grass drawn as tiles |", GRASS_VARIANTS, "variants | torn edges on terrain joins");
+// ---- water ----
+//
+// Water had no drawn tile at all. It was a flat fill with one pale band slid
+// across it on a nine second loop, which is why a lake read as a blue
+// rectangle with a highlight travelling over it rather than as water: no
+// surface, and a shoreline ruled dead straight against the sand.
+//
+// Two things fix that, and they are the same two that fixed the grass. The
+// surface gets drawn - ripple lines at rest, short and broken, so the eye has
+// something to sit on - and the shore gets torn, so the join with the land is
+// ragged instead of ruled.
+//
+// The ripples are deliberately faint. The shimmer band still slides over the
+// top of this, and a busy surface underneath a moving highlight reads as
+// static, not as depth.
+const waterSvg = (base, v, edges) => {
+  const torn = edges
+    ? ["n", "e", "s", "w"].filter((s) => edges[s]).map((s) => tornEdge(s, edges[s], v)).join("")
+    : "";
+  const pale = sh(base, 0.26);
+  const deep = sh(base, -0.14);
+  // Ripple runs per variant: y position, start x, length. Broken lines rather
+  // than full-width strokes, because a line that spans the tile edge to edge
+  // lines up with its neighbour and draws the grid straight back on.
+  const runs = [
+    [[3.5, 1, 6], [7.5, 8, 6], [11, 3, 5], [13.5, 9, 4]],
+    [[2.5, 6, 6], [6, 2, 5], [9.5, 7, 6], [13, 1, 5]],
+    [[4, 4, 7], [8, 1, 5], [11.5, 8, 6], [14, 3, 4]],
+    [[3, 9, 5], [6.5, 3, 6], [10, 6, 6], [13.5, 2, 5]],
+  ][v % 4];
+  const ripples = runs.map(([y, x0, len], i) =>
+    `<path d="M${x0} ${y} q${len / 2} ${i % 2 ? -0.9 : 0.9} ${len} 0"` +
+    ` stroke="${i % 2 ? pale : deep}" stroke-width=".9" fill="none"` +
+    ` stroke-linecap="round" opacity="${i % 2 ? ".42" : ".30"}"/>`).join("");
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">` +
+         `<rect width="16" height="16" fill="${base}"/>${torn}${ripples}</svg>`;
+};
+
+const WATER_CACHE = {};
+const waterBg = (base, v, edges) => {
+  const sig = edges ? ["n", "e", "s", "w"].map((s) => (edges[s] ? s + edges[s] : "")).join("") : "";
+  const key = `${base}|${v}|${sig}`;
+  if (!WATER_CACHE[key]) {
+    WATER_CACHE[key] = `url("data:image/svg+xml,${encodeURIComponent(waterSvg(base, v, edges))}")`;
+  }
+  return WATER_CACHE[key];
+};
+
+// Same contract as GRASS_TILE: character, position, colour, and whichever
+// neighbours differ. Returns null for anything that is not water.
+const WATER_TILE = (ch, x, y, bg, edges) => {
+  if (ch !== "W") return null;
+  return waterBg(bg, grassVariant(x, y), edges);
+};
+
+console.log("[part45] grass and water drawn as tiles |", GRASS_VARIANTS,
+  "variants | torn edges on terrain joins");
