@@ -690,7 +690,7 @@
       </div>
 
       <div style={{ padding: "0 10px" }}>
-        <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "3px solid #5c5344", borderRadius: 15, overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : undefined), transition: "filter 1.2s ease" }}>
+        <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "2px solid rgba(122,110,90,.6)", borderRadius: "18px 13px 20px 14px", boxShadow: "0 10px 26px -12px rgba(14,9,5,.65), inset 0 0 0 1px rgba(255,246,224,.05)", overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : undefined), transition: "filter 1.2s ease" }}>
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
             const idKey = `${S.map}:${x},${y}`;
@@ -803,6 +803,36 @@
               </div>
             );
           }))}
+
+          {/* ---- light on the scene ----
+              The tiles themselves are drawn well - blades, mottle, four
+              variants each - and the map still read flat, because nothing was
+              ever lit. Every cell was painted at exactly the same value from
+              corner to corner, so a screen of grass was three hundred equally
+              bright squares and the eye had nowhere to travel.
+
+              This is one element over the whole grid: warm light falling from
+              the top left, cool shade gathering bottom right, and a vignette
+              pulling the corners down. It is deliberately weak - strong enough
+              to give the scene a direction, far too weak to hide a tile - and
+              it sits under the ranger's z-index so she is never washed over.
+
+              Screen blend for the light, multiply for the shade, so both
+              respond to whatever the day-phase filter is doing above rather
+              than sitting on top as a grey film at night. */}
+          <div aria-hidden="true" style={{
+            position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
+            background:
+              "radial-gradient(120% 95% at 14% 6%, rgba(255,232,186,.16) 0%, rgba(255,232,186,0) 55%)",
+            mixBlendMode: "screen",
+          }} />
+          <div aria-hidden="true" style={{
+            position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
+            background:
+              "radial-gradient(115% 90% at 88% 96%, rgba(46,32,18,.34) 0%, rgba(46,32,18,0) 58%)," +
+              "radial-gradient(150% 120% at 50% 50%, rgba(0,0,0,0) 52%, rgba(24,16,9,.30) 100%)",
+            mixBlendMode: "multiply",
+          }} />
 
           {/* The ranger lives above the grid rather than inside a cell.
               Rendered into a tile it had to be destroyed and recreated in a

@@ -94,17 +94,31 @@ const DEX = {
 };
 
 // ---------- ZONE PALETTES ----------
+// Mixed as pigments rather than picked as colours.
+//
+// The originals were screen values - #74a857 grass, #3b7dc4 water, #3c7a3c
+// jungle - each near the top of its own hue's saturation. Laid edge to edge
+// across a whole screen that is what made the map read flat and loud at the
+// same time: nothing recedes, nothing sits behind anything else, and every
+// tile shouts at the same volume.
+//
+// Every value below is the same hue with the chroma pulled down and a little
+// earth mixed in, the way a wash of one pigment is never the pigment straight
+// from the pan. Greens go toward olive and sage, the blues toward slate, and
+// the deserts toward bone. Relative order is preserved throughout - grass2 is
+// still lighter than grass, tall grass still reads darker than short - because
+// those differences are gameplay signals, not decoration.
 const PALS = {
-  savanna: { ground: "#c9a86a", grass: "#74a857", grass2: "#8fbc6f", tree: { bg: "#2d6a4f", em: "🌳" }, mount: { bg: "#77746e", em: "⛰️" }, water: "#3b7dc4", flower: "🌼" },
-  wetland: { ground: "#9aa86b", grass: "#5c9a6b", grass2: "#7db088", tree: { bg: "#2e5c4a", em: "🌾" }, mount: { bg: "#6b7460", em: "⛰️" }, water: "#2e86ab", flower: "🪷" },
-  jungle: { ground: "#6b7d4a", grass: "#3c7a3c", grass2: "#4f9a4f", tree: { bg: "#1e4a2e", em: "🌴" }, mount: { bg: "#4a5c44", em: "⛰️" }, water: "#2e7d6b", flower: "🌺" },
-  desert: { ground: "#e8d0a3", grass: "#d4b96a", grass2: "#e0c987", tree: { bg: "#c9a868", em: "🌵" }, mount: { bg: "#c0975c", em: "🏜️" }, water: "#4a9ac9", flower: "🌵" },
-  highveld: { ground: "#b5a488", grass: "#8a9a5c", grass2: "#a3b070", tree: { bg: "#6b6b60", em: "🪨" }, mount: { bg: "#77746e", em: "⛰️" }, water: "#3b7dc4", flower: "🌾" },
-  alpine: { ground: "#e8edf2", grass: "#c9d8e4", grass2: "#dae5ee", tree: { bg: "#4a6b5c", em: "🌲" }, mount: { bg: "#dfe6ee", em: "🏔️" }, water: "#7db4d8", flower: "❄️" },
-  volcanic: { ground: "#8a7568", grass: "#a3583c", grass2: "#b56a4a", tree: { bg: "#4c3833", em: "🌋" }, mount: { bg: "#5c4038", em: "🌋" }, water: "#3b7dc4", flower: "🔥" },
-  grove: { ground: "#8a7a9c", grass: "#5c4a7d", grass2: "#6f5c94", tree: { bg: "#3c2e5c", em: "🌳" }, mount: { bg: "#4c3e63", em: "⛰️" }, water: "#4a5c9c", flower: "🍄" },
-  summit: { ground: "#b8c0cc", grass: "#9aa5b5", grass2: "#a8b2c0", tree: { bg: "#8a93a3", em: "🏔️" }, mount: { bg: "#8a93a3", em: "🏔️" }, water: "#7db4d8", flower: "✨" },
-  cavezone: { ground: "#6b5f4c", grass: "#5c5344", grass2: "#6b6152", tree: { bg: "#4a4438", em: "🪨" }, mount: { bg: "#4a4438", em: "🪨" }, water: "#2e5c6b", flower: "💎" },
+  savanna: { ground: "#c2a274", grass: "#7d9a5e", grass2: "#93ab75", tree: { bg: "#3a634f", em: "🌳" }, mount: { bg: "#7a7770", em: "⛰️" }, water: "#4a7ba8", flower: "🌼" },
+  wetland: { ground: "#9aa376", grass: "#68906f", grass2: "#84a488", tree: { bg: "#3a5a4c", em: "🌾" }, mount: { bg: "#6e7565", em: "⛰️" }, water: "#3d7b95", flower: "🪷" },
+  jungle: { ground: "#6f7a55", grass: "#4a7248", grass2: "#5e8a58", tree: { bg: "#2a4633", em: "🌴" }, mount: { bg: "#4e5c48", em: "⛰️" }, water: "#3a7268", flower: "🌺" },
+  desert: { ground: "#e0cba8", grass: "#cbb47c", grass2: "#d9c495", tree: { bg: "#c0a476", em: "🌵" }, mount: { bg: "#b8956a", em: "🏜️" }, water: "#5590ae", flower: "🌵" },
+  highveld: { ground: "#b2a48d", grass: "#8d9765", grass2: "#a2ab7b", tree: { bg: "#6d6d63", em: "🪨" }, mount: { bg: "#7a7770", em: "⛰️" }, water: "#4a7ba8", flower: "🌾" },
+  alpine: { ground: "#e2e7ec", grass: "#c6d1da", grass2: "#d5dee5", tree: { bg: "#546e62", em: "🌲" }, mount: { bg: "#dae1e8", em: "🏔️" }, water: "#82a9c4", flower: "❄️" },
+  volcanic: { ground: "#87756a", grass: "#9c6049", grass2: "#a97155", tree: { bg: "#4e3c36", em: "🌋" }, mount: { bg: "#5c443c", em: "🌋" }, water: "#4a7ba8", flower: "🔥" },
+  grove: { ground: "#867a94", grass: "#5f5077", grass2: "#6f608a", tree: { bg: "#3e3357", em: "🌳" }, mount: { bg: "#4c4160", em: "⛰️" }, water: "#535f90", flower: "🍄" },
+  summit: { ground: "#b6bcc6", grass: "#9ba3b0", grass2: "#a7aeba", tree: { bg: "#8a919e", em: "🏔️" }, mount: { bg: "#8a919e", em: "🏔️" }, water: "#82a9c4", flower: "✨" },
+  cavezone: { ground: "#695f4f", grass: "#5c5446", grass2: "#6a6153", tree: { bg: "#4a4439", em: "🪨" }, mount: { bg: "#4a4439", em: "🪨" }, water: "#365d68", flower: "💎" },
 };
 const ARENA = {
   savanna: "linear-gradient(#87b26a,#c9a86a)", wetland: "linear-gradient(#7db088,#9aa86b)",
