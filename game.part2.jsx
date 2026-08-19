@@ -922,7 +922,16 @@ const PHOTO_ART = {
   "minotaur": true,
   "mishipeshu": true,
   "moa": true,
-  "molepup": true,
+  // "molepup" is deliberately absent. The generated sprite came back as a pink
+  // humanoid infant standing upright - the same "drawn as a person" fault the
+  // audit passes kept finding, but on a species that turns up constantly in the
+  // desert, so it was on screen more than almost anything else. Ayr: "it is
+  // hideous and it comes up a lot."
+  //
+  // Dropping the line is the whole fix: Sprite falls back to ART.molepup, which
+  // is the game's own drawn rodent, on four legs, in the house style. Better a
+  // plain correct animal than a striking wrong one. Put the line back when the
+  // art pipeline is up and the reworked description below has been through it.
   "molequeen": true,
   "monarch": true,
   "monarch_c": true,
