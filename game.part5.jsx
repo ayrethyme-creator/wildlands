@@ -768,6 +768,7 @@
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
           <button style={btnS("#2471a3")} onClick={() => setS((p) => ({ ...p, menu: "party" }))}>👥 Team</button>
+          <button style={btnS("#a0522d")} onClick={() => setS((p) => ({ ...p, menu: "bag", bagSel: null }))}>🎒 Bag</button>
           <button style={btnS("#27ae60")} onClick={() => setS((p) => ({ ...p, menu: "guide" }))}>📖 Guide</button>
           <button style={btnS("#2d7d5a")} onClick={() => setS((p) => ({ ...p, menu: "sanctuary", boxSel: null, relConfirm: null }))}>🏞️ Sanctuary</button>
           <button style={btnS("#5dade2")} onClick={() => {
@@ -1053,6 +1054,54 @@
       {S.menu && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.65)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>
           <div style={{ ...panel, margin: 14, maxWidth: 400, width: "100%", maxHeight: "80vh", overflowY: "auto" }}>
+            {S.menu === "bag" && (() => {
+              // Two steps: pick the item, then pick who it is for. Doing it the
+              // other way round means opening an animal and finding out you own
+              // nothing that would help it.
+              const held = Object.keys(FIELD_ITEMS).filter((k) => (S.items[k] ?? 0) > 0);
+              const sel = S.bagSel;
+              return (
+                <div>
+                  <b>🎒 Bag</b> <span style={{ fontSize: 11, color: "#c9b88a" }}>
+                    {sel ? `— ${FIELD_ITEMS[sel].n} on whom?` : "— tap something to use it"}</span>
+                  {!held.length && (
+                    <div style={{ fontSize: 12, color: "#c9b88a", marginTop: 10 }}>
+                      Nothing usable in here yet. Berries and cures are sold at any Trading Post.
+                    </div>
+                  )}
+                  {!sel && held.map((k) => (
+                    <div key={k} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 4px", borderBottom: "1px solid #5c5344", fontSize: 12 }}>
+                      <div style={{ flex: 1, fontWeight: 700 }}>{FIELD_ITEMS[k].n}
+                        <span style={{ color: "#c9b88a", fontWeight: 400 }}> ×{S.items[k]}</span></div>
+                      <button
+                        disabled={!S.party.some((a) => fieldItemUseful(k, a))}
+                        style={{ ...btn("#5c8a3a"), padding: "6px 12px", fontSize: 12,
+                          opacity: S.party.some((a) => fieldItemUseful(k, a)) ? 1 : 0.4 }}
+                        onClick={() => setS((p) => ({ ...p, bagSel: k }))}>Use</button>
+                    </div>
+                  ))}
+                  {sel && S.party.map((a, i) => {
+                    const ok = fieldItemUseful(sel, a);
+                    return (
+                      <button key={i} disabled={!ok}
+                        style={{ ...btn(ok ? "#2471a3" : "#5c5344"), width: "100%", textAlign: "left",
+                          padding: "8px 10px", marginTop: 6, fontSize: 12, opacity: ok ? 1 : 0.45 }}
+                        onClick={() => { useFieldItem(sel, i); setS((p) => ({ ...p, menu: null, bagSel: null })); }}>
+                        {a.indiv ? `${a.indiv} the ${DEX[a.sp].n}` : DEX[a.sp].n} — Lv{a.lvl} · {a.hp}/{a.maxHp} HP
+                        {a.hp <= 0 ? " · worn out" : ""}
+                        {a.psn ? " ☠️" : ""}{(a.slp ?? 0) > 0 ? " 💤" : ""}{(a.fear ?? 0) > 0 ? " 😨" : ""}
+                        {(a.chill ?? 0) > 0 ? " 🧊" : ""}{(a.brn ?? 0) > 0 ? " 🔥" : ""}
+                        {!ok ? " · no use for this" : ""}
+                      </button>
+                    );
+                  })}
+                  {sel && (
+                    <button style={{ ...btn("#7d735f"), marginTop: 8, padding: "6px 12px", fontSize: 12 }}
+                      onClick={() => setS((p) => ({ ...p, bagSel: null }))}>← Back</button>
+                  )}
+                </div>
+              );
+            })()}
             {S.menu === "party" && (
               <div>
                 <b>Your Team</b> <span style={{ fontSize: 11, color: "#c9b88a" }}>{S.pick != null ? "— tap a team member to swap them out" : "(tap to make lead)"}</span>
@@ -1647,7 +1696,7 @@
               </div>
             )}
             {S.menu !== "learn" && (
-              <button style={{ ...btn("#7d735f"), width: "100%", marginTop: 12 }} onClick={() => setS((p) => ({ ...p, menu: null, pick: null }))}>Close</button>
+              <button style={{ ...btn("#7d735f"), width: "100%", marginTop: 12 }} onClick={() => setS((p) => ({ ...p, menu: null, pick: null, bagSel: null }))}>Close</button>
             )}
           </div>
         </div>

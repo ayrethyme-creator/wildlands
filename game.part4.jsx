@@ -326,8 +326,16 @@ function Wildlands() {
     const p = A.proposals[cur.funded];
     if (!p) return;
     if (p.works) {
-      setS((prev) => ({ ...prev, dialog: { text: `📗 ${A.outcome.good}` },
-        arcs: { ...(prev.arcs || {}), [arcId]: { ...cur, stage: "done", solved: true } } }));
+      // Paid once. `solved` is the guard - a solved arc cannot be rebuilt, so
+      // this cannot be farmed, and re-reading the good ending pays nothing.
+      const reward = ARC_REWARD(arcId);
+      setS((prev) => {
+        const items = { ...prev.items, coins: (prev.items.coins ?? 0) + reward.coins };
+        Object.keys(reward.items).forEach((k) => { items[k] = (items[k] ?? 0) + reward.items[k]; });
+        return { ...prev, items,
+          dialog: { text: `📗 ${A.outcome.good}\n\n${rewardLine(reward)}` },
+          arcs: { ...(prev.arcs || {}), [arcId]: { ...cur, stage: "done", solved: true } } };
+      });
       SFX.badge?.();
     } else {
       setS((prev) => ({ ...prev, dialog: { text: `📕 ${p.why}\n\n${A.outcome.bad}` },
@@ -1450,5 +1458,74 @@ function Wildlands() {
         battle: { ...prev.battle, phase: "choose", mode: "main", log: [...prev.battle.log, `Go, ${DEX[tmp.sp].n}!`].slice(-4) },
       };
     });
+  };
+
+  // ----- using things outside a battle -----
+  // Every healing item in the game could only be used with something in front
+  // of you trying to knock you over. Walk out of a fight with a poisoned animal
+  // and a bag full of antidote and there was nothing you could do about it but
+  // start another fight, which is exactly backwards. The bag opens on the map
+  // now and reaches the whole team, bench included.
+  //
+  // Nothing here is a battle turn: no enemy acts, nothing is spent unless the
+  // use actually does something. Feeding a berry to an animal already at full
+  // health returns the berry.
+  const FIELD_ITEMS = {
+    berries:      { n: "🫐 Berry Snack",  heal: 30 },
+    bigberries:   { n: "🍇 Big Berry",    heal: 70 },
+    goldberries:  { n: "🍯 Golden Berry", heal: 150 },
+    prismberries: { n: "💎 Prism Berry",  heal: 200 },
+    revives:      { n: "✨ Revive",       revive: true },
+    antidote:     { n: "🧪 Antidote",     cures: ["psn"] },
+    wakeberry:    { n: "⏰ Rouse Berry",  cures: ["slp"] },
+    calmbalm:     { n: "🍵 Calming Herb", cures: ["fear"] },
+    coolbalm:     { n: "🧣 Warm Wrap",    cures: ["chill"] },
+    freshair:     { n: "🩹 Burn Salve",   cures: ["brn"] },
+    balms:        { n: "🌿 Soothe Balm",  cures: ["psn", "slp", "fear", "chill", "brn"] },
+    honeycombs:   { n: "🍯 Honeycomb",    pp: true },
+  };
+
+  // Whether an item would actually change this animal. Drives both the button
+  // state and the guard, so a greyed button and a refused use never disagree.
+  const fieldItemUseful = (key, a) => {
+    const F = FIELD_ITEMS[key];
+    if (!F || !a) return false;
+    if (F.revive) return a.hp <= 0;
+    if (a.hp <= 0) return false;                       // the rest need it awake
+    if (F.heal) return a.hp < a.maxHp;
+    if (F.cures) return F.cures.some((c) => (c === "slp" ? (a.slp ?? 0) > 0 : c === "psn" ? !!a.psn : (a[c] ?? 0) > 0));
+    if (F.pp) return a.moves.some((k, i) => (a.pp[i] ?? 0) < maxPP(MOVES[k]));
+    return false;
+  };
+
+  const useFieldItem = (key, idx) => {
+    const F = FIELD_ITEMS[key];
+    if (!F) return;
+    setS((prev) => {
+      if ((prev.items[key] ?? 0) <= 0) return prev;
+      const party = prev.party.map((a) => ({ ...a }));
+      const a = party[idx];
+      if (!fieldItemUseful(key, a)) return prev;
+      let msg;
+      if (F.revive) {
+        a.hp = Math.max(1, Math.floor(a.maxHp / 2));
+        a.psn = false; a.slp = 0; a.fear = 0; a.chill = 0; a.brn = 0;
+        msg = `✨ ${DEX[a.sp].n} is back on its feet. (half HP)`;
+      } else if (F.heal) {
+        const before = a.hp;
+        a.hp = Math.min(a.maxHp, a.hp + F.heal);
+        msg = `🫐 ${DEX[a.sp].n} recovered ${a.hp - before} HP.`;
+      } else if (F.cures) {
+        F.cures.forEach((c) => { if (c === "psn") a.psn = false; else a[c] = 0; });
+        msg = `${F.n.split(" ")[0]} ${DEX[a.sp].n} is feeling better.`;
+      } else {
+        a.pp = a.moves.map((k) => maxPP(MOVES[k]));
+        msg = `🍯 ${DEX[a.sp].n} has its moves back.`;
+      }
+      return { ...prev, party,
+        items: { ...prev.items, [key]: (prev.items[key] ?? 0) - 1 },
+        dialog: { text: msg } };
+    });
+    SFX.heal?.();
   };
 

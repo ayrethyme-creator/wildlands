@@ -103,4 +103,49 @@ const trainerPrize = (team, base) => {
 const blackoutLoss = (coins, badges) =>
   Math.floor((coins || 0) * Math.min(0.34, 0.08 + 0.022 * (badges || 0)));
 
-console.log("[part43] economy: trainers pay by level, shop gates on badges, selling at half");
+// ---- 3. what solving a knot is worth ----
+//
+// Until now: nothing. An arc that worked printed its good ending and paid the
+// player in prose, which left the economy with a hole in the middle of it.
+// Everything else that pays is finite - a road battler pays once and is then
+// beaten for good - and a wild animal yields floor(level/3), about ten coins
+// late on, deliberately, so that grinding grass is not an income. Add up what
+// is actually renewable after the eighth badge and it is close to nothing,
+// against a Revive at 350 and a Prism Berry at 320. The arcs were the obvious
+// thing to pay for and they paid nothing at all.
+//
+// So they pay now, and they are the largest single sum in the game, because
+// they are the longest thing in it: five findings gathered across a whole
+// stretch of country, a pitch that has to be argued from evidence, and a build
+// that can fail and cost you the attempt. Amara funds work that is shown to
+// her; this is the funding arriving.
+//
+// Scaled on the arc's own region so the late knots, which cost more to reach
+// and more to get wrong, are worth more than the beehives outside Town 1.
+const ARC_REWARD = (arcId) => {
+  const n = Math.max(1, (ARCS[arcId] && ARCS[arcId].region) || 1);
+  const coins = 220 + n * 65;
+  // Paid in kind as well as coin, weighted to what that stage of the game is
+  // short of: early runs want healing, late runs want the expensive things a
+  // player will not otherwise be able to afford at all.
+  const items = n >= 11 ? { revives: 1, prismberries: 1, balms: 1 }
+    : n >= 7 ? { revives: 1, goldberries: 1 }
+    : n >= 4 ? { bigberries: 2, balms: 1 }
+    : { berries: 3, treats: 2 };
+  return { coins, items };
+};
+
+// One line the player can read, for the dialog after a build succeeds.
+const rewardLine = (r) => {
+  const names = { revives: "✨ Revive", prismberries: "💎 Prism Berry", goldberries: "🍯 Golden Berry",
+    bigberries: "🍇 Big Berry", berries: "🫐 Berry Snack", balms: "🌿 Soothe Balm", treats: "🍖 Trail Treat" };
+  const kind = Object.keys(r.items)
+    .map((k) => (r.items[k] > 1 ? r.items[k] + "x " : "") + (names[k] || k))
+    .join(", ");
+  return `💰 The station releases ₡${r.coins} against the work` + (kind ? `, and sends up ${kind}.` : ".");
+};
+
+// ARCS is defined in part47, which loads after this file, so the reward is only
+// ever read at call time - never here.
+console.log("[part43] economy: trainers pay by level, shop gates on badges, selling at half,",
+  "solved arcs pay ₡285-₡1325 by region");
