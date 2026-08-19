@@ -1694,6 +1694,28 @@
                             {iu && <div style={{ display: "inline-block", fontSize: 10, fontWeight: 700, color: "#1a1713", background: iu[1], borderRadius: 4, padding: "1px 6px" }}>{st} · {iu[0]}</div>}
                           </div>
                         </div>
+                        {/* How this species is doing in THIS world, as opposed
+                            to everything else on this card, which is true of the
+                            animal everywhere and always.
+
+                            Without this the per-run ecology is invisible: a
+                            player meeting a scarce animal has no way to tell
+                            scarce from unlucky, and a system you cannot see is
+                            indistinguishable from the game being broken. Held
+                            to species that actually live somewhere in the
+                            world, so a fossil or a myth is never told it is
+                            having a quiet season. */}
+                        {typeof ecologyNote === "function" && spots.length > 0 && (() => {
+                          const note = ecologyNote(S.runSeed, sp);
+                          if (!note) return null;
+                          return (
+                            <div style={{ marginTop: 10, background: "#26221c", border: "1px solid #4a4438",
+                              borderLeft: "3px solid #7fa6c2", borderRadius: 4, padding: "7px 9px",
+                              fontSize: 11.5, lineHeight: 1.45, color: "#cfc6b6" }}>
+                              <b style={{ color: "#7fa6c2" }}>This season </b>{note}
+                            </div>
+                          );
+                        })()}
                         {nfo ? (
                           <div style={{ marginTop: 10, fontSize: 12, lineHeight: 1.5, color: "#d9cfc0" }}>
                             <div style={{ marginBottom: 6 }}><b style={{ color: "#e8c547" }}>Eats </b>{nfo.d}</div>
