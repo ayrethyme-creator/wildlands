@@ -316,61 +316,74 @@ const INTRO_AT = {
     const M = MAPS[mapKey], l = M && (M.lvl || M.lvlWater);
     return l ? (l[0] + l[1]) / 2 : null;
   };
-  const candidateMaps = (home) => {
-    const b = bucketOf(home), home0 = band(home);
-    if (!b || home0 === null) return [home];
-    const near = REGION_MAPS[b].filter((m) => {
-      if (m === home || !MAPS[m]) return false;
-      const x = band(m);
-      return x !== null && Math.abs(x - home0) <= 10;
-    });
-    return [home, ...near];
+  // The screens within a few doors of an anchor, nearest first. Used only for
+  // the champion hubs, which are not on any road and so have no walk of their
+  // own - the Vigil, the Rift, Hearthside and the Fossil Rift each sit in a
+  // little cluster of their own maps.
+  const neighbourhood = (anchor, hops) => {
+    const seen = new Set([anchor]);
+    const out = [];
+    let frontier = [anchor];
+    for (let d = 0; d < hops; d++) {
+      const next = [];
+      frontier.forEach((cur) => {
+        Object.values((MAPS[cur] || {}).exits || {}).forEach((e) => {
+          if (e && e.map && MAPS[e.map] && !seen.has(e.map)) {
+            seen.add(e.map); out.push(e.map); next.push(e.map);
+          }
+        });
+      });
+      frontier = next;
+    }
+    return out;
   };
 
-  // One map, one arc. Two arcs in the same region share a bucket and so get the
-  // same candidate list, and the first version of this let them interleave:
-  // beaver clues and cat clues on the same four maps of the fen, granary and
-  // canopygap over the same jungle, and three separate ocean arcs all sitting
-  // on kelp, openocean, polarsea and abyss together. Reading two investigations
-  // off one screen is not a harder puzzle, it is an unreadable one.
+  // ---- the walk out of each town, in order ----
   //
-  // Seeded from whatever is already placed, so the hand-built beeloud and
-  // reedwater arcs own their ground before this file starts handing any out.
-  const claimed = {};
-  Object.keys(TRAINERS).forEach((k) => {
-    const t = TRAINERS[k];
-    if (t.arc && t.learns) {
-      const m = k.split(":")[0];
-      if (!claimed[m]) claimed[m] = t.arc;
-    }
-  });
-  // Every arc keeps its own home map.
-  Object.keys(ARC_CAST).forEach((arcId) => {
-    const h = ARCS[arcId] && ARCS[arcId].where;
-    if (h && !claimed[h]) claimed[h] = arcId;
+  // part11 does not scatter the world about: it chains each road into a fixed
+  // sequence of screens you walk through, road first, then its segments in
+  // order, then the next town. Leaving Baobab Base that reads
+  //
+  //   town1 -> route1 Acacia Trail -> seg_m1 Fernhollow Path
+  //         -> seg_m2 Sunmote Meadow -> seg_m3 The Old Fence Line
+  //         -> seg_m4 Beeloud Clearing -> seg_m5 Marula Approach -> town2
+  //
+  // and that sequence is the answer to where an investigation's clues belong:
+  // the person on the road, then their findings spread one per screen along the
+  // walk that follows, all of it gathered before the next town.
+  //
+  // Everything before this dealt findings out of REGION_MAPS buckets instead,
+  // which are flood-filled catchments rather than a route - they know that
+  // Beeloud Clearing is somewhere in region 1, but nothing about it being the
+  // fourth screen out of town. That is why all four of Thabo's clues landed on
+  // that one map: the bucket offered it, and nothing said the walk had five
+  // screens in it that a player passes in a known order.
+  const ROAD_CHAIN = {};
+  (typeof ROADS !== "undefined" ? ROADS : []).forEach(([routeKey, , , segs]) => {
+    ROAD_CHAIN[routeKey] = segs
+      .map(([k]) => "seg_" + k)
+      .filter((m) => MAPS[m]);
   });
 
-  // Deal the rest out a map at a time rather than letting the first arc in a
-  // bucket take everything. Four separate arcs live off bucket 6 - turtles,
-  // solar, bears and albatross - so first-come left three of them stranded on
-  // one map each, which is the same "all the clues in one place" problem in a
-  // different shape. Round-robin gives each a share, and each arc is only
-  // offered maps that suit its own level, so the desert arc cannot be handed
-  // the abyss.
-  const ALLOC = {};
-  Object.keys(ARC_CAST).forEach((a) => { ALLOC[a] = [ARCS[a] ? ARCS[a].where : null].filter(Boolean); });
-  const wants = Object.keys(ARC_CAST).filter((a) => ARCS[a]);
-  const eligible = {};
-  wants.forEach((a) => {
-    eligible[a] = candidateMaps(ARCS[a].where).filter((m) => m !== ARCS[a].where);
+  // One map, one investigation. On the roads this comes free - a road carries
+  // exactly one arc, so its chain cannot be contested. In the champion hubs it
+  // does not: two arcs share each hub, and without a claim they interleave, so
+  // the beaver clues and the rescue clues end up on the same kennel screens.
+  // Seeded from what is already on the map, so the hand-placed beeloud and
+  // reedwater findings hold their ground before this file hands any out.
+  const mapClaim = {};
+  Object.keys(TRAINERS).forEach((k) => {
+    const t = TRAINERS[k];
+    if (t && t.arc && t.learns) {
+      const m = k.split(":")[0];
+      if (!mapClaim[m]) mapClaim[m] = t.arc;
+    }
   });
-  for (let round = 0; round < 6; round++) {
-    wants.forEach((a) => {
-      if (ALLOC[a].length > round + 1) return;      // already has enough this round
-      const pick = eligible[a].find((m) => !claimed[m]);
-      if (pick) { claimed[pick] = a; ALLOC[a].push(pick); }
-    });
-  }
+
+  // Filled in below, once introMapFor exists: arcId -> the screens its findings
+  // may use, in the order the player walks them.
+  const WALK_OF = {};
+  const clueWalk = (arcId, intro) => WALK_OF[arcId] || neighbourhood(intro, 2);
 
   let placedPeople = 0, placedFindings = 0, skipped = [], scatter = [];
 
@@ -483,6 +496,35 @@ const INTRO_AT = {
     return routeOfRegion(home) || routeOfArcRegion(arcId) || routeByBand(home) || home;
   };
 
+  // ---- hand out the walks, roads first ----
+  //
+  // Roads have to go first and claim their whole chain. A hub arc's
+  // neighbourhood spills several doors in every direction and will happily eat
+  // segments of a road belonging to somebody else: the albatross work reached
+  // inland as far as the Dry Riverbed, and the polar bears took a screen of the
+  // Gloam road out from under the bats. Claiming the roads first leaves the hubs
+  // only what is genuinely spare.
+  const arcsToPlace = Object.keys(ARC_CAST).filter((a) => ARCS[a]);
+  const introOf = {};
+  arcsToPlace.forEach((a) => { introOf[a] = introMapFor(a, ARCS[a].where); });
+  // A person's own screen belongs to them. Without this the hub arcs wander onto
+  // each other's doorsteps - the polar bears put a finding on the floor of the
+  // Rift Crossroads, and the albatross one in the middle of the Fossil Rift camp.
+  arcsToPlace.forEach((a) => { if (!mapClaim[introOf[a]]) mapClaim[introOf[a]] = a; });
+
+  arcsToPlace.forEach((a) => {
+    const road = ROAD_CHAIN[introOf[a]];
+    if (!road || !road.length) return;
+    WALK_OF[a] = road;
+    road.forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
+  });
+  arcsToPlace.forEach((a) => {
+    if (WALK_OF[a]) return;
+    WALK_OF[a] = neighbourhood(introOf[a], 4)
+      .filter((m) => !mapClaim[m] || mapClaim[m] === a);
+    WALK_OF[a].forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
+  });
+
   Object.entries(ARC_CAST).forEach(([arcId, cast]) => {
     const A = ARCS[arcId];
     if (!A) { skipped.push(arcId + ":no-arc"); return; }
@@ -494,9 +536,9 @@ const INTRO_AT = {
     // player is told what they are looking for. Findings stay on the rest of
     // the arc's own ground, so two investigations never share a screen.
     const intro = introMapFor(arcId, home);
-    const allocated = ALLOC[arcId] && ALLOC[arcId].length ? ALLOC[arcId] : [home];
-    const maps = allocated.filter((m) => m !== intro);
-    scatter.push(arcId + ":" + (maps.length || allocated.length));
+    // The screens after the person, before the next town, in walking order.
+    const maps = clueWalk(arcId, intro).filter((m) => m !== intro);
+    scatter.push(arcId + ":" + maps.length);
 
     // The person with the problem stands on the road out of town, and names the
     // animal before anything else. Everything after that sentence is part58's
@@ -513,9 +555,12 @@ const INTRO_AT = {
     })) { skipped.push(arcId + ":no-room-for-" + cast.who); return; }
     placedPeople++;
 
-    // One findable thing per piece of evidence, dealt round-robin across the
-    // region so gathering an arc is a walk rather than one screen. Deterministic
-    // - the same species lands on the same map every load.
+    // One findable thing per piece of evidence, laid out along the walk in the
+    // order the player will meet them: first finding on the first screen after
+    // the person, second on the next, and so on to the town at the end. Where
+    // there are more findings than screens the walk wraps, so a short road
+    // doubles up rather than leaving anything unplaceable - some on each screen,
+    // never all of them on one.
     ev.forEach(([key, e], i) => {
       const def = {
         name: e.label, em: cast.find,
@@ -523,13 +568,14 @@ const INTRO_AT = {
         arc: arcId,
         learns: { key, text: "📓 " + e.label + " — " + e.detail },
       };
-      // Walk the region from the offset, and fall back to the home map if a
-      // particular map has no room left rather than dropping the finding.
+      // Start at this finding's own screen and walk forward from there, so a
+      // full screen pushes the finding further along the road rather than back
+      // to the start of it or all the way home.
       let done = false;
       for (let t = 0; t < maps.length && !done; t++) {
-        done = placeOn(maps[(i + 1 + t) % maps.length], 2, def);
+        done = placeOn(maps[(i + t) % maps.length], 2, def);
       }
-      if (!done) done = placeOn(home, 2, def);
+      if (!done) done = placeOn(intro, 2, def);
       if (done) placedFindings++;
       else skipped.push(arcId + ":" + key + ":no-room");
     });

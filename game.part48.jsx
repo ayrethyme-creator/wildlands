@@ -64,8 +64,12 @@
           + "Whatever you do about this, it has to be something she cannot hold on to." },
   });
 
-  // ---- the untouched inner hives ----
-  put("seg_m4:4,8", {
+  // ---- the untouched inner hives, out on the old fence line ----
+  // Spread along the walk rather than stacked in the clearing: all four of these
+  // sat on seg_m4 and a player who found one found the lot on the same screen.
+  // Each now sits where its own text says it is - the old stands on the old
+  // fence line, the den under the marulas on the Marula Approach.
+  put("seg_m3:5,10", {
     name: "The old hives",
     em: "🐝",
     line: "The inner rows. Older stands, greyer timber, hives still standing. "
@@ -76,8 +80,12 @@
           + "She has always been here. The hives came to her." },
   });
 
-  // ---- which rows go ----
-  put("seg_m4:6,10", {
+  // ---- which rows go: counting the stands on the way in ----
+  // On the first screen out of the Acacia Trail deliberately. Thabo carries one
+  // finding himself, so there are four to spread over five screens and one of
+  // them has to be bare - and the one that must not be bare is the first, or a
+  // player leaves the man with the problem and walks a whole screen of nothing.
+  put("seg_m1:6,10", {
     name: "The hive rows",
     em: "📋",
     line: "You walk the rows and count. Forty stands. Nine wrecked, and every single one of them "
@@ -88,8 +96,8 @@
           + "the edge of one, and coming no further into the open than she has to." },
   });
 
-  // ---- the den ----
-  put("seg_m4:2,10", {
+  // ---- the den, under the marulas the approach is named for ----
+  put("seg_m5:3,10", {
     name: "Under the marula roots",
     em: "🌳",
     line: "A worn track runs from the treeline to a gap under the marula roots. "

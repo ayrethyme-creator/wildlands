@@ -142,7 +142,10 @@ console.log("[part52] arc two loaded:", ARCS.reedwater.title,
           + "It is the ground-nesters. It is only ever the ground-nesters." },
   });
 
-  put("route2:11,1", {
+  // Moved off route2, which already carries Beatrix herself. The road is where
+  // you are told about the problem; the boardwalk out into the fen is where you
+  // start finding it, and this fills the one screen of that walk that was bare.
+  put("seg_w2:4,10", {
     name: "The fen edge at dusk",
     em: "🌾",
     line: "You walk the boundary as the light goes and count what crosses. Most of the cats on this edge "
