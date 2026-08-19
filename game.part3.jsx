@@ -403,26 +403,34 @@ const MAPS = {
 };
 
 // ---------- TILES ----------
+// An object sits ON the ground; it is not made of its own square of colour.
+//
+// Trees, rock, buildings, shrines and lanterns each used to carry a background
+// of their own - a dark green cell under a tree, a tan cell under every hut -
+// so the map read as a grid of coloured boxes with pictures printed in them.
+// The drawn shape is the object now, and the cell beneath it is simply the
+// ground it stands on, the same ground as the tile next door. Trees stand in
+// short grass, everything built or placed stands on bare ground.
 const TILE_STYLE = (ch, pal) => {
   switch (ch) {
-    case "T": return { bg: pal.tree.bg, em: pal.tree.em };
-    case "^": return { bg: pal.mount.bg, em: pal.mount.em };
+    case "T": return { bg: pal.grass2, em: pal.tree.em };
+    case "^": return { bg: pal.ground, em: pal.mount.em };
     case "G": return { bg: pal.grass, em: "ᵛᵛ" };
     case "g": return { bg: pal.grass2, em: "" };
     case "W": return { bg: pal.water, em: "" };
     case "*": return { bg: pal.ground, em: pal.flower };
-    case "H": return { bg: "#d4b483", em: "🛖" };
-    case "P": return { bg: "#d4b483", em: "⛺" };
-    case "C": return { bg: "#d4b483", em: "🏥" };
-    case "Y": return { bg: "#d4b483", em: "🏟️" };
-    case "M": return { bg: "#d4b483", em: "🛒" };
+    case "H": return { bg: pal.ground, em: "🛖" };
+    case "P": return { bg: pal.ground, em: "⛺" };
+    case "C": return { bg: pal.ground, em: "🏥" };
+    case "Y": return { bg: pal.ground, em: "🏟️" };
+    case "M": return { bg: pal.ground, em: "🛒" };
     case "X": return { bg: pal.ground, em: "💂" };
     case "R": return { bg: pal.ground, em: "🧍" };
     case "V": return { bg: pal.ground, em: "🏃" };
-    case "L": return { bg: "#b8a06a", em: "🗿" };
-    case "D": return { bg: "#8a7a5c", em: "⛩️" };
+    case "L": return { bg: pal.ground, em: "🗿" };
+    case "D": return { bg: pal.ground, em: "⛩️" };
     case "p": return { bg: pal.ground, em: "▫️" };
-    case "t": return { bg: "#8a7a5c", em: "🪔" };
+    case "t": return { bg: pal.ground, em: "🪔" };
     case "!": return { bg: pal.ground, em: "🪧" };
     case "¦": return { bg: pal.ground, em: "🔦" };
     case "¡": return { bg: pal.ground, em: "🪵" };
