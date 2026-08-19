@@ -932,7 +932,11 @@ const PHOTO_ART = {
   // is the game's own drawn rodent, on four legs, in the house style. Better a
   // plain correct animal than a striking wrong one. Put the line back when the
   // art pipeline is up and the reworked description below has been through it.
-  "molequeen": true,
+  // "molequeen" absent for the same reason as the pup, and so is the adult
+  // below. All three came out of the generator as pink upright humanoids -
+  // it is the one species in the game where the reference photographs really
+  // do look like something a model will read as a person, and it lost that
+  // argument three times out of three. ART.molequeen is rodA with `big`.
   "monarch": true,
   "monarch_c": true,
   "monarch_p": true,
@@ -953,7 +957,10 @@ const PHOTO_ART = {
   "myrmedon": true,
   "naga": true,
   "naiad": true,
-  "nakedmolerat": true,
+  // "nakedmolerat" absent - see the note on molequeen. ART.nakedmolerat is
+  // rodA with `naked`, which is the drawn hairless variant made for exactly
+  // this animal. The whole colony now renders in one consistent style rather
+  // than three photographs that disagree with each other and with the game.
   "narwhal": true,
   "narwhal_c": true,
   "nautilus": true,
