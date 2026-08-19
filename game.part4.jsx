@@ -522,17 +522,39 @@ function Wildlands() {
     move(d.dx, d.dy);
     TIMER.current = setTimeout(stepLoop, stepDelay());
   };
+  // The pause between the first step and the second. This was 250ms - a
+  // keyboard key-repeat delay, borrowed from text entry, where it exists to
+  // stop a held key spraying characters. Walking is not typing: you press a
+  // direction because you want to go that way, and a quarter second of nothing
+  // before the walk starts is most of what made moving feel sticky.
+  const REPEAT_DELAY = 120;
+
   const holdStart = (dx, dy) => {
+    // Turning while already walking keeps the cadence it already had. Before
+    // this every change of direction went back through the full repeat delay,
+    // so rounding a corner stopped you dead for a quarter second - the stickiest
+    // moment in the whole game, and it happened constantly.
+    const alreadyWalking = !!HELD.current;
     HELD.current = { dx, dy };
     move(dx, dy);                                     // first step is immediate
     if (TIMER.current) clearTimeout(TIMER.current);
-    TIMER.current = setTimeout(stepLoop, 250);        // pause before it repeats
+    TIMER.current = setTimeout(stepLoop, alreadyWalking ? stepDelay() : REPEAT_DELAY);
   };
   const holdEnd = () => {
     HELD.current = null;
     if (TIMER.current) { clearTimeout(TIMER.current); TIMER.current = null; }
   };
   useEffect(() => () => { if (TIMER.current) clearTimeout(TIMER.current); }, []);
+
+  // The way just cleared: spend a buffered direction if it is still fresh.
+  // 400ms is about as long as a press can precede a box closing and still have
+  // been meant for the world behind it.
+  useEffect(() => {
+    if (S.screen !== "world" || S.dialog || S.menu || S.battle) return;
+    const b = BUFFER.current;
+    BUFFER.current = null;
+    if (b && Date.now() - b.at < 400) move(b.dx, b.dy);
+  }, [S.dialog, S.menu, S.battle, S.screen]);
 
   // ----- keyboard -----
   useEffect(() => {
@@ -609,13 +631,26 @@ function Wildlands() {
 
   const say = (text, options = null) => setS((p) => ({ ...p, dialog: { text, options } }));
 
+  // Steps of grass owed before the next encounter may fire. Set after every
+  // battle, counted down here.
+  //
+  // Two things were wrong with a flat 20% per step. It is about one encounter
+  // every five tiles, which at 85ms a step means a field cannot be crossed
+  // without being stopped three or four times - that constant interruption is
+  // a large part of what reads as repetitive. And with no floor at all, the
+  // roll could fire again on the very next step out of a battle, so leaving a
+  // patch of grass sometimes cost three fights in a row.
+  const ENC_COOL = useRef(0);
+
   const rollEncounter = (mapKey, kind) => {
     const m = MAPS[mapKey];
     const water = kind === "water";
-    const chance = water ? 0.15 : 0.2;
+    const chance = water ? 0.08 : 0.1;
     const pool = water ? m.poolWater : (isNight() && m.poolN ? m.poolN : m.pool);
     const lv = water ? m.lvlWater : m.lvl;
+    if (ENC_COOL.current > 0) { ENC_COOL.current -= 1; return; }
     if (!pool || Math.random() > chance) return;
+    ENC_COOL.current = 3;
     // The Champion's Compass steers wild encounters toward species not yet
     // in the Field Guide, but never toward an empty pool — if everything
     // living here is already befriended, it quietly falls back to normal.
@@ -629,8 +664,20 @@ function Wildlands() {
   };
 
   // ----- world movement -----
+  // A direction pressed while a box is still up. Closing a dialog and stepping
+  // away are one motion in the player's head, and the game was throwing away
+  // everything pressed in the gap - so the input that felt right got nothing
+  // and you had to press again. Held for a moment and fired when the way is
+  // clear. One direction only, and only briefly: replaying a queue of stale
+  // input is worse than dropping it.
+  const BUFFER = useRef(null);
+
   const move = (dx, dy) => {
     const st = SR.current;
+    if (st.screen === "world" && (st.dialog || st.menu || st.battle)) {
+      BUFFER.current = { dx, dy, at: Date.now() };
+      return;
+    }
     if (st.screen !== "world" || st.dialog || st.menu || st.battle) return;
     // Face the way we are trying to go, even if the step is blocked - walking
     // into a wall should still turn you toward it, the way it does in every

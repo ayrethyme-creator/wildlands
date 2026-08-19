@@ -166,8 +166,24 @@
           radial-gradient(100% 80% at 88% 96%, rgba(58,38,20,.30), transparent 62%);
       }
 
+      /* Arriving somewhere new. Every map change was a hard cut: one screen
+         replaced by another between two frames, which is what made walking
+         through a door feel like a page turn rather than like continuing to
+         walk. Short enough that it never delays control - the map is already
+         live underneath and the fade is only on top of it. */
+      @keyframes wlArrive {
+        0%   { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      .wl-arrive {
+        position: absolute; inset: 0; pointer-events: none; z-index: 5;
+        background: #1a1510;
+        animation: wlArrive 190ms ease-out forwards;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
+        .wl-arrive { display: none; }
       }
     `}</style>
   );
@@ -854,6 +870,10 @@
             );
           }))}
 
+          {/* Keyed on the warp counter, so it remounts and replays on every
+              arrival and never on an ordinary step. */}
+          <div key={`arrive:${S.map}:${S.warp || 0}`} className="wl-arrive" aria-hidden="true" />
+
           {/* ---- light on the scene ----
               The tiles themselves are drawn well - blades, mottle, four
               variants each - and the map still read flat, because nothing was
@@ -908,7 +928,15 @@
               position: "absolute", left: 0, top: 0,
               width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
               transform: `translate(${S.x * 100}%, ${S.y * 100}%)`,
-              transition: `transform ${S.run === false ? 165 : 100}ms linear`,
+              // Exactly the cadence the step loop is running at, read from the
+              // same function that drives it. It used to be hardcoded at 100ms
+              // against a running step of 85ms, so in the default mode - which
+              // is running - every step was cut off fifteen milliseconds early
+              // by the next one. The ranger never finished a stride and sat
+              // permanently behind the input, which reads as lag however
+              // quickly the game actually responds. Holding shift made it
+              // worse: 165ms of animation over an 85ms step.
+              transition: `transform ${typeof stepDelay === "function" ? stepDelay() : 165}ms linear`,
               pointerEvents: "none", zIndex: 4,
               display: "flex", alignItems: "flex-end", justifyContent: "center",
             }}>
