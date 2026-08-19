@@ -77,6 +77,7 @@ globalThis.dayPhase = () => {
 // --- place the lights ---
 // Towns: a lamp post beside the care center door and at path junctions.
 const TOWN_KEYS = Object.keys(MAPS).filter((k) => /^town/.test(k) || k === "hearthgate");
+let blooms = 0;
 let posts = 0, lanterns = 0;
 
 // collect every tile that some exit lands the player onto, per map — never
@@ -124,13 +125,32 @@ WILD_KEYS.forEach((mk) => {
     const [, xy] = tk.split(":"); const [x, y] = xy.split(",").map(Number);
     near.push([x, y]);
   });
-  // one lantern diagonally adjacent to up to three trainers, plus a couple at edges
-  near.slice(0, 3).forEach(([x, y]) => {
-    if (setTile(m, x + 1, y + 1, "¡", mk) || setTile(m, x - 1, y + 1, "¡", mk) || setTile(m, x + 1, y - 1, "¡", mk)) lanterns++;
-  });
-  // a lantern near each landing so you arrive somewhere lit
+  // Ayr: "there are too many random logs in the entire game... replace half of
+  // the logs with flowers."
+  //
+  // The catch is that the logs ARE the lanterns - the same tile, lit after
+  // dark - and the glow is the thing she likes. So this cannot simply thin them
+  // out or the nights go dark with them.
+  //
+  // What gets kept is the light that does a job: the lantern beside a trainer,
+  // which is what makes a route legible at night. What becomes a flower is the
+  // filler - the second and third trainer lantern on a map that already has
+  // one, and the pair dropped at the edges purely so an arrival was lit. Every
+  // map still keeps at least one lantern, so no stretch of country goes
+  // unlit, and roughly half of what was there is now in bloom.
   const W = m.rows[0].length, H = m.rows.length;
-  [[2, Math.floor(H / 2)], [W - 3, Math.floor(H / 2)]].forEach(([x, y]) => { if (setTile(m, x, y, "¡", mk)) lanterns++; });
+  near.slice(0, 3).forEach(([x, y], i) => {
+    const ch = i === 0 ? "¡" : "*";          // the first lights the path, the rest flower
+    if (setTile(m, x + 1, y + 1, ch, mk) || setTile(m, x - 1, y + 1, ch, mk) || setTile(m, x + 1, y - 1, ch, mk)) {
+      if (ch === "¡") lanterns++; else blooms++;
+    }
+  });
+  // The landings keep one lantern between them rather than one each.
+  [[2, Math.floor(H / 2)], [W - 3, Math.floor(H / 2)]].forEach(([x, y], i) => {
+    const ch = i === 0 ? "¡" : "*";
+    if (setTile(m, x, y, ch, mk)) { if (ch === "¡") lanterns++; else blooms++; }
+  });
 });
 
-console.log("[part36] lamp posts placed:", posts, "| lanterns placed:", lanterns);
+console.log("[part36] lamp posts placed:", posts, "| lanterns placed:", lanterns,
+  "| flowers in place of logs:", blooms);

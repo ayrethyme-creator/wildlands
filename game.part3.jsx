@@ -112,7 +112,11 @@ const PALS = {
   savanna: { ground: "#c2a274", grass: "#7d9a5e", grass2: "#93ab75", tree: { bg: "#3a634f", em: "🌳" }, mount: { bg: "#7a7770", em: "⛰️" }, water: "#4a7ba8", flower: "🌼" },
   wetland: { ground: "#9aa376", grass: "#68906f", grass2: "#84a488", tree: { bg: "#3a5a4c", em: "🌾" }, mount: { bg: "#6e7565", em: "⛰️" }, water: "#3d7b95", flower: "🪷" },
   jungle: { ground: "#6f7a55", grass: "#4a7248", grass2: "#5e8a58", tree: { bg: "#2a4633", em: "🌴" }, mount: { bg: "#4e5c48", em: "⛰️" }, water: "#3a7268", flower: "🌺" },
-  desert: { ground: "#e0cba8", grass: "#cbb47c", grass2: "#d9c495", tree: { bg: "#c0a476", em: "🌵" }, mount: { bg: "#b8956a", em: "🏜️" }, water: "#5590ae", flower: "🌵" },
+  // The cactus was being painted in sand. `tree.bg` is the colour the drawn
+  // shape is made of, and the desert's was #c0a476 - the same tan as the dune
+  // it stands on - so a saguaro came out as a pale pill you could barely see.
+  // It is green now, which is the one thing a cactus reliably is.
+  desert: { ground: "#e0cba8", grass: "#cbb47c", grass2: "#d9c495", tree: { bg: "#7a9463", em: "🌵" }, mount: { bg: "#b8956a", em: "🏜️" }, water: "#5590ae", flower: "🌵" },
   highveld: { ground: "#b2a48d", grass: "#8d9765", grass2: "#a2ab7b", tree: { bg: "#6d6d63", em: "🪨" }, mount: { bg: "#7a7770", em: "⛰️" }, water: "#4a7ba8", flower: "🌾" },
   alpine: { ground: "#e2e7ec", grass: "#c6d1da", grass2: "#d5dee5", tree: { bg: "#546e62", em: "🌲" }, mount: { bg: "#dae1e8", em: "🏔️" }, water: "#82a9c4", flower: "❄️" },
   volcanic: { ground: "#87756a", grass: "#9c6049", grass2: "#a97155", tree: { bg: "#4e3c36", em: "🌋" }, mount: { bg: "#5c443c", em: "🌋" }, water: "#4a7ba8", flower: "🔥" },
