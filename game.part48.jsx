@@ -20,13 +20,19 @@
     TRAINERS[key] = { chat: true, ...def };
   };
 
-  // ---- Thabo Sithole, on the south edge of the clearing ----
-  // He is not angry at the animal and the game should establish that in his
-  // first breath, because the whole arc collapses if he reads as a villain.
-  put("seg_m4:11,10", {
+  // ---- Thabo Sithole, on the Acacia Trail out of Town 1 ----
+  // He stood on the south edge of the clearing until part65 moved every other
+  // arc's person onto the road out of their town. He was the one exception, and
+  // being the exception meant the very first road in the game had nobody on it:
+  // a player could reach Town 2 having met no investigation at all, and then
+  // meet three at once on the next road. He stands on route1 now, which is the
+  // one stretch of ground every player walks.
+  //
+  // The clearing keeps all five findings. He is the introduction, not the work.
+  put("route1:5,12", {
     name: "Thabo Sithole",
     em: "🧑🏿‍🌾",
-    line: "You are here about the badger. Everyone is here about the badger. "
+    line: "You are here about the honey badger. Everyone is here about the honey badger. "
         + "Let me tell you what nobody from the station has asked me yet — I do not hate that animal. "
         + "My grandfather kept bees on this ground and he lost hives too, and he did not hate it either. "
         + "What I hate is that I have nine fewer colonies than I had in March, and a debt at the co-operative. "

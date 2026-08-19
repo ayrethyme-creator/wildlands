@@ -128,6 +128,86 @@ const ARC_CAST = {
   },
 };
 
+// The animal at the centre of each knot, named out loud.
+//
+// part58 writes the situation beautifully and then, in most of these, never
+// says what the animal actually is: "the predators", "the animals that live
+// above the ground", "a rabbit that lives in the old grass". A player who
+// cannot name the animal cannot look it up in the Field Guide, cannot go and
+// catch one, and has no way to connect the person's problem to a thing they
+// have actually met in the grass. So every introduction now names it.
+//
+// `sp` is the DEX key, which keeps this honest - if a species is ever renamed
+// or retired the check below says so in the console instead of silently
+// introducing an animal that no longer exists.
+const ARC_ANIMAL = {
+  // beeloud and reedwater are not listed here on purpose: their people are
+  // hand-written and hand-placed by part48 and part52, not dealt out from
+  // ARC_CAST, so an entry here would never be read. Both name their animal in
+  // their own opening lines instead - Thabo says honey badger, Beatrix names
+  // the ground-nesters and the cats.
+  millrace:    { sp: "beaver",              says: "Beavers. A family of them, dam and all." },
+  granary:     { sp: "python",              says: "Ball pythons. That is what we cleared out of the trees." },
+  tidewater:   { sp: "greenseaturtle",      says: "Green sea turtles. That is what comes up in the net." },
+  canopygap:   { sp: "tamarin",             says: "Golden tamarins. They live up there and they will not come down." },
+  sunfield:    { sp: "nakedmolerat",        says: "Naked mole-rats. The whole colony is under that site." },
+  lowstrand:   { sp: "pangolin",            says: "Pangolins. They walk into the bottom wire and they do not get out." },
+  highpasture: { sp: "wolf",                says: "Wolves. I will say it plainly, since nobody else up here will." },
+  frostwatch:  { sp: "polarbear",           says: "Polar bears. One came down the school route in September." },
+  ashfields:   { sp: "volcanorabbit",       says: "Volcano rabbits. They live in the old grass and nowhere else on earth." },
+  eyrie:       { sp: "goldeneagle",         says: "Golden eagles. I find them under the poles." },
+  nightgrove:  { sp: "greaterhorseshoebat", says: "Greater horseshoe bats. They used that road and now they do not." },
+  longline:    { sp: "albatross",           says: "Wandering albatross. They cross oceans; the rules stop at borders." },
+  hearth:      { sp: "python",              says: "Ball pythons, mostly. Sold as something that would stay small." },
+  digsite:     { sp: "archaeopteryx",        says: "Archaeopteryx, and what is in the rock around it." },
+  mythhub:     { sp: "pangolin",            says: "Pangolins, more than anything else. The scales are the trade." },
+};
+
+// Where each investigation is introduced.
+//
+// One per road, and no more. The rule this enforces is Ayr's: by the time you
+// walk into Town 2 you should have met exactly one person with a problem, not
+// three. Meeting three at once is not a richer game, it is an unreadable one.
+//
+// The arithmetic does not fit on its own. There are thirteen main-line
+// investigations and only nine roads, because five of the gym stretches have no
+// country of their own at all - the apiary and Delta Town share an approach,
+// and so do three later pairs, so those stretches come out empty and cannot
+// hold anybody. Four investigations therefore have no road to stand on.
+//
+// Those four move to the champion-gated hubs, which is where they belong
+// anyway: they are the longest and least forgiving of the knots, and they read
+// better as work you take on after the Citadel than as one more person stopping
+// you on the way to a gym. Each hub already holds one post-game arc and now
+// holds a second, which is comfortable because a hub is somewhere you travel to
+// deliberately and stand still in, not a road you are trying to walk down.
+//
+// Anything not listed here falls back to the derived placement below.
+const INTRO_AT = {
+  // --- the main line: one per road, in the order you walk them ---
+  beeloud:     "route1",   // honey badger and the hives
+  reedwater:   "route2",   // the fen cats  (already hand-placed here by part52)
+  granary:     "route3",   // the cleared pythons
+  tidewater:   "route4",   // turtles in the prawn nets
+  lowstrand:   "route5",   // pangolins and the bottom wire
+  highpasture: "route6",   // wolves back on the mountain
+  ashfields:   "route7",   // volcano rabbits and the burning
+  nightgrove:  "route8",   // horseshoe bats and the new lights
+  frostwatch:  "route9",   // polar bears at the edge of town
+
+  // --- the four with no road, moved past the Elite Four ---
+  millrace:    "rescue",   // Hearthside: the beaver dam and the flooded pasture
+  canopygap:   "mythhub",  // Rift Crossroads: the tamarins and the severed canopy
+  sunfield:    "digsite",  // Fossil Rift: mole-rat burrows under the solar field
+  eyrie:       "vigil",    // the Vigil: golden eagles dying on the poles
+
+  // --- already post-game, left where they are ---
+  hearth:      "rescue",
+  digsite:     "digsite",
+  mythhub:     "mythhub",
+  longline:    "openocean",
+};
+
 (() => {
   // Tiles another map sends the player onto. Standing a person there means the
   // player arrives inside them, which part48 hit with Amara and had to move.
@@ -331,6 +411,78 @@ const ARC_CAST = {
     return true;
   };
 
+  // ---- where the player is introduced to the animal ----
+  //
+  // The person used to stand on the arc's home map, which is where the problem
+  // physically is - the fen with the dam in it, the ridge with the poles. That
+  // is tidy and it is also why you could walk past three investigations without
+  // meeting any of them: the home map is somewhere in the middle of a region,
+  // and nothing sends you to it.
+  //
+  // Every region begins with exactly one road out of a town, so that road is
+  // the one tile of ground every player crosses on the way in. The person with
+  // the problem stands there now. You leave town, you meet them, you are told
+  // what the animal is, and then you go and find the rest.
+  const isRoute = (m) => /^route\d+$/.test(m);
+  const routeOfRegion = (mapKey) => {
+    const b = bucketOf(mapKey);
+    return b ? (REGION_MAPS[b] || []).find(isRoute) || null : null;
+  };
+  // The four ocean arcs sit in open water, and no town road reaches a region
+  // made of reef and abyss, so they need a road chosen for them.
+  //
+  // Walking the map graph outward for the nearest road is the obvious way and
+  // it is wrong: every ocean map connects back through the same shallow water,
+  // so all four came out on route4 - the polar bears introduced in the tropics
+  // immediately after Town 4, one road carrying four separate investigations.
+  //
+  // Matching on level band instead puts each one on the road whose country is
+  // the same difficulty as the water it concerns. The abyss and the polar sea
+  // are late-game water and land on late-game roads; the reef is mid and stays
+  // mid. Ties break toward the earlier road so an arc is never introduced after
+  // the point the player could already have finished it.
+  const allRoutes = Object.keys(MAPS).filter(isRoute)
+    .sort((a, b) => (parseInt(a.slice(5), 10) || 0) - (parseInt(b.slice(5), 10) || 0));
+  const routeByBand = (home) => {
+    const h = band(home);
+    if (h === null) return null;
+    let best = null, bestGap = Infinity;
+    allRoutes.forEach((r) => {
+      const x = band(r);
+      if (x === null) return;
+      const gap = Math.abs(x - h);
+      if (gap < bestGap) { bestGap = gap; best = r; }
+    });
+    return best;
+  };
+  // Each arc also carries its own `region` number, which is the order the
+  // player is meant to meet them in, and that is a better signal than distance
+  // for the ocean arcs: the reef work belongs to the stretch after Town 4 even
+  // though the reef itself is a swim away. Walking back from the arc's own
+  // number finds the last road laid before it, which is the road the player was
+  // on when that stretch began. Band matching stays as the final fallback for
+  // the post-game arcs whose numbers run past the end of the gym ladder.
+  const routeOfArcRegion = (arcId) => {
+    const n = ARCS[arcId] && ARCS[arcId].region;
+    if (!n) return null;
+    for (let i = Math.min(n, GYM_ORDER.length); i >= 1; i--) {
+      const r = (REGION_MAPS[i] || []).find(isRoute);
+      if (r) return r;
+    }
+    return null;
+  };
+  // The pinned assignment wins. It encodes a pacing decision that no amount of
+  // graph-walking can work out on its own, and it fails loudly rather than
+  // silently drifting if a map is ever renamed.
+  const introMapFor = (arcId, home) => {
+    const pinned = INTRO_AT[arcId];
+    if (pinned) {
+      if (MAPS[pinned]) return pinned;
+      skipped.push(arcId + ":pinned-map-missing:" + pinned);
+    }
+    return routeOfRegion(home) || routeOfArcRegion(arcId) || routeByBand(home) || home;
+  };
+
   Object.entries(ARC_CAST).forEach(([arcId, cast]) => {
     const A = ARCS[arcId];
     if (!A) { skipped.push(arcId + ":no-arc"); return; }
@@ -338,13 +490,26 @@ const ARC_CAST = {
     if (!MAPS[home]) { skipped.push(arcId + ":no-map:" + home); return; }
 
     const ev = Object.entries(A.evidence || {});
-    const maps = ALLOC[arcId] && ALLOC[arcId].length ? ALLOC[arcId] : [home];
-    scatter.push(arcId + ":" + maps.length);
+    // The introduction road is not a place to hide findings: it is where the
+    // player is told what they are looking for. Findings stay on the rest of
+    // the arc's own ground, so two investigations never share a screen.
+    const intro = introMapFor(arcId, home);
+    const allocated = ALLOC[arcId] && ALLOC[arcId].length ? ALLOC[arcId] : [home];
+    const maps = allocated.filter((m) => m !== intro);
+    scatter.push(arcId + ":" + (maps.length || allocated.length));
 
-    // The person with the problem stays where the problem is.
-    if (!placeOn(home, ev.length + 1, {
-      name: cast.who, em: cast.em, line: cast.line,
+    // The person with the problem stands on the road out of town, and names the
+    // animal before anything else. Everything after that sentence is part58's
+    // writing, untouched.
+    const animal = ARC_ANIMAL[arcId];
+    const named = animal && DEX[animal.sp];
+    if (animal && !named) skipped.push(arcId + ":unknown-species:" + animal.sp);
+    const line = named ? animal.says + "\n\n" + cast.line : cast.line;
+
+    if (!placeOn(intro, ev.length + 1, {
+      name: cast.who, em: cast.em, line,
       arc: arcId, builds: arcId, buildLine: cast.build,
+      animal: named ? animal.sp : undefined,
     })) { skipped.push(arcId + ":no-room-for-" + cast.who); return; }
     placedPeople++;
 
