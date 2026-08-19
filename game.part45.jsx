@@ -22,7 +22,14 @@ const hashStr = (str) => {
   return h;
 };
 
-const grassSvg = (base, blade, tall, v) => {
+const grassSvg = (base, blade, tall, v, edges) => {
+  // The neighbour's colour reaching across the join. Painted after the bed and
+  // before the blades, so grass grows up THROUGH the tear rather than being
+  // covered by it - which is what stops the overlap reading as a sticker laid
+  // on top of the tile.
+  const torn = edges
+    ? ["n", "e", "s", "w"].filter((s) => edges[s]).map((s) => tornEdge(s, edges[s], v)).join("")
+    : "";
   // Blade positions per variant. Some run off the tile edge on purpose - a
   // blade clipped by the cell boundary is what stops the eye finding the grid.
   const sets = [
@@ -54,7 +61,7 @@ const grassSvg = (base, blade, tall, v) => {
     // it, which reads as grass catching the light without touching the
     // background at all.
     return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">` +
-           `<rect width="16" height="16" fill="${base}"/>${blades}</svg>`;
+           `<rect width="16" height="16" fill="${base}"/>${torn}${blades}</svg>`;
   }
 
   // Short grass is a texture, not a feature: a faint mottle and a few small
@@ -70,16 +77,60 @@ const grassSvg = (base, blade, tall, v) => {
          `<stop offset="1" stop-color="${shade}" stop-opacity="0"/></radialGradient></defs>` +
          `<rect width="16" height="16" fill="${base}"/>` +
          `<rect width="16" height="16" fill="url(%23${gid3})"/>` +
-         `${tufts}</svg>`;
+         `${torn}${tufts}</svg>`;
 };
 
-// Cache by colour and variant, so the same four images are reused everywhere
-// rather than rebuilt for all 280 tiles on a map.
+// ---- torn edges ----
+//
+// Ayr, after the lighting pass: "the blockyness still looks bad to me."
+// Lighting could never have fixed it. The grid is visible because terrain
+// changes on a hard cell boundary - grass stops and ground begins along a
+// perfectly straight line, sixteen pixels of it, repeated down the whole join.
+// However well an individual tile is drawn, the eye finds the ruled edges
+// between them.
+//
+// So a tile now draws its neighbour's colour intruding a little way across the
+// shared edge, along a wobbling profile rather than a straight one. The join
+// becomes a torn overlap. Drawn on the grass side only: if both sides drew
+// their own spill they would paint over each other and the boundary would end
+// up straight again, two pixels further out.
+//
+// The wobble is derived from the tile's own variant, so a given patch of
+// ground always tears the same way and nothing shimmers on redraw.
+const tornEdge = (side, colour, v) => {
+  // Four fixed profiles, picked by variant. Hand-written rather than random so
+  // the tear reads as torn paper and not as noise.
+  const p = [
+    [2.9, 1.5, 3.4, 2.0, 2.6],
+    [1.7, 3.1, 2.2, 3.5, 1.9],
+    [3.3, 2.0, 1.6, 2.8, 3.2],
+    [2.1, 2.7, 3.5, 1.7, 2.4],
+  ][v % 4];
+  // Points across the edge, then back along the outside.
+  const pts = p.map((d, i) => [i * 4, d]);
+  let d;
+  if (side === "n") {
+    d = `M0 0 H16 V${pts[4][1]} ` + pts.slice().reverse().map(([x, o]) => `L${x} ${o}`).join(" ") + " Z";
+  } else if (side === "s") {
+    d = `M0 16 H16 V${16 - pts[4][1]} ` + pts.slice().reverse().map(([x, o]) => `L${x} ${16 - o}`).join(" ") + " Z";
+  } else if (side === "w") {
+    d = `M0 0 V16 H${pts[4][1]} ` + pts.slice().reverse().map(([y, o]) => `L${o} ${y}`).join(" ") + " Z";
+  } else {
+    d = `M16 0 V16 H${16 - pts[4][1]} ` + pts.slice().reverse().map(([y, o]) => `L${16 - o} ${y}`).join(" ") + " Z";
+  }
+  return `<path d="${d}" fill="${colour}"/>`;
+};
+
+// Cache by colour, variant and the exact edge signature, so the same images are
+// reused everywhere rather than rebuilt for all 280 tiles on a map. Interior
+// tiles - which are most of any map - carry an empty signature and so still
+// share the same four images they always did.
 const GRASS_CACHE = {};
-const grassBg = (base, blade, tall, v) => {
-  const key = `${base}|${blade}|${tall ? 1 : 0}|${v}`;
+const grassBg = (base, blade, tall, v, edges) => {
+  const sig = edges ? ["n", "e", "s", "w"].map((s) => (edges[s] ? s + edges[s] : "")).join("") : "";
+  const key = `${base}|${blade}|${tall ? 1 : 0}|${v}|${sig}`;
   if (!GRASS_CACHE[key]) {
-    GRASS_CACHE[key] = `url("data:image/svg+xml,${encodeURIComponent(grassSvg(base, blade, tall, v))}")`;
+    GRASS_CACHE[key] = `url("data:image/svg+xml,${encodeURIComponent(grassSvg(base, blade, tall, v, edges))}")`;
   }
   return GRASS_CACHE[key];
 };
@@ -94,11 +145,15 @@ const grassVariant = (x, y) => {
 
 // The public helper: hand it a tile character and its position, get back a
 // background, or null if this tile is not grass and should render as before.
-const GRASS_TILE = (ch, x, y, bg) => {
+//
+// `edges` is optional and carries the colours of whichever of the four
+// neighbours are a different terrain - {n,e,s,w}, any of them absent when that
+// side matches. Called without it, grass renders exactly as it did before.
+const GRASS_TILE = (ch, x, y, bg, edges) => {
   if (ch !== "G" && ch !== "g") return null;
   const tall = ch === "G";
   const blade = sh(bg, tall ? -0.46 : -0.22);
-  return grassBg(bg, blade, tall, grassVariant(x, y));
+  return grassBg(bg, blade, tall, grassVariant(x, y), edges);
 };
 
-console.log("[part45] grass drawn as tiles |", GRASS_VARIANTS, "variants");
+console.log("[part45] grass drawn as tiles |", GRASS_VARIANTS, "variants | torn edges on terrain joins");

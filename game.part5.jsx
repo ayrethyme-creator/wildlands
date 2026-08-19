@@ -732,8 +732,35 @@
             // Grass and the drawn map tiles arrive the same way: as one
             // background image. Whichever applies suppresses the emoji, because
             // a drawn tree with 🌳 stamped on top of it is worse than either.
+            // What is on the other side of each edge. A grass tile draws its
+            // neighbour's colour a little way across the join with a torn
+            // profile, which is what stops the map reading as a grid of
+            // squares - but it can only do that if it knows what it is next
+            // to. Read off the raw rows rather than the overridden character,
+            // because a beaten trainer becoming walkable does not change what
+            // the ground under them is made of.
+            //
+            // Only sides whose colour actually differs are passed on: grass
+            // meeting grass has no join to hide, and leaving those out is what
+            // keeps interior tiles - most of any map - on the same four cached
+            // images they have always used.
+            const nbEdges = (!hidden && (ch2 === "G" || ch2 === "g")) ? (() => {
+              const at = (nx, ny) => {
+                const r = m.rows[ny];
+                if (!r || nx < 0 || nx >= r.length) return null;
+                const t = TILE_STYLE(r[nx], pal);
+                return t ? t.bg : null;
+              };
+              const out = {};
+              [["n", x, y - 1], ["s", x, y + 1], ["w", x - 1, y], ["e", x + 1, y]]
+                .forEach(([side, nx, ny]) => {
+                  const c = at(nx, ny);
+                  if (c && c !== bg) out[side] = c;
+                });
+              return Object.keys(out).length ? out : null;
+            })() : null;
             const grassBgImg = hidden
-              ? null : (typeof GRASS_TILE !== "undefined" ? GRASS_TILE(ch2, x, y, bg) : null);
+              ? null : (typeof GRASS_TILE !== "undefined" ? GRASS_TILE(ch2, x, y, bg, nbEdges) : null);
             const artBgImg = (hidden || grassBgImg)
               ? null : (typeof TILE_ART !== "undefined" ? TILE_ART(ch2, x, y, pal) : null);
             // People are read after the trainer and gym overrides above, so a
