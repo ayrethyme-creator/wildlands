@@ -1458,6 +1458,21 @@ function Wildlands() {
       my.hp = Math.min(my.maxHp, my.hp + 70);
       snapBusy(`You fed ${DEX[my.sp].n} a Big Berry. (+70 HP)`, {}, "heal");
       if (!enemyActs()) finishRound();
+    } else if (action.kind === "calm") {
+      // The answer to wariness, and the decision the catch was missing. A berry
+      // spent on the animal in front of you rather than on your own team: it
+      // settles, and the next treat has a real chance again. Costs a berry and
+      // costs the turn, so it is a choice with a price rather than a free undo.
+      if (b.kind === "trainer") { snapBusy("That animal is already someone's partner."); backToChoose(); }
+      else if ((items.berries ?? 0) <= 0) { snapBusy("You have no Berry Snacks to offer."); backToChoose(); }
+      else if (!(b.wary || 0)) { snapBusy(`The ${DEX[en.sp].n} is calm already.`); backToChoose(); }
+      else {
+        items.berries -= 1;
+        const nw = Math.max(0, (b.wary || 0) - 1);
+        snapBusy(`You set a Berry Snack down and step back. The ${DEX[en.sp].n} watches you, then eats.` +
+          (nw ? " Some of the tension goes out of it." : " It settles."), { wary: nw }, "heal");
+        if (!enemyActs()) finishRound();
+      }
     } else if (action.kind === "treat") {
       if (b.kind === "trainer") { snapBusy("That animal is already someone's partner — study it another time."); backToChoose(); }
       else if (items.treats <= 0) { snapBusy("You're out of Trail Treats!"); backToChoose(); }
@@ -1466,7 +1481,16 @@ function Wildlands() {
         snapBusy(`You offered a Trail Treat to the ${b.kind === "legend" ? "Guardian" : "wild " + DEX[en.sp].n}...`, {}, "treat");
         const isLeg = !!DEX[en.sp].legend;
         const eased = isLeg ? DEX[en.sp].c * 1.3 : DEX[en.sp].c * 1.8 + 0.12;
-        const chance = Math.min(isLeg ? 0.6 : 0.95, eased * (1.7 - en.hp / en.maxHp));
+        // How wary it has become in this encounter. Every refused treat makes
+        // the next one harder, so throwing treats until it works is no longer
+        // the answer - it is the thing that loses the animal.
+        //
+        // Per encounter only, and deliberately: this can cost you an animal
+        // now, never for the run. Walk back into the grass and it is there
+        // again, which is the rule Ayr set and the reason wariness resets.
+        const wary = b.wary || 0;
+        const chance = Math.min(isLeg ? 0.6 : 0.95,
+          eased * (1.7 - en.hp / en.maxHp) * (1 - 0.22 * wary));
         if (Math.random() < chance) {
           const friend = clean({ ...en, hp: Math.max(1, en.hp) });
           dex[en.sp] = 2;
@@ -1504,8 +1528,24 @@ function Wildlands() {
             ? `Field study complete — ${DEX[en.sp].n} logged. The land settles; the guardian chose you.`
             : dest);
         } else {
-          snapBusy(b.kind === "legend" ? "The Guardian regards the treat... and you. Not yet, its eyes say." : "It sniffed the treat... and darted back, wary!", {}, "miss");
-          if (!enemyActs()) finishRound();
+          const nw = wary + 1;
+          // Three refusals and it is gone. Deterministic rather than a roll,
+          // so a player can learn the rule and act on it - a hidden dice throw
+          // that sometimes takes the animal reads as the game cheating.
+          if (!isLeg && nw >= 3) {
+            // snapEnd clears the battle outright, so wariness goes with it -
+            // it is a fact about one encounter and nothing carries out of it.
+            snapEnd(`The ${DEX[en.sp].n} has had enough of being followed. It slips into the grass and is gone.\n\n` +
+              `You will find another — but it will not be this one, today.`);
+          } else if (isLeg) {
+            snapBusy("The Guardian regards the treat... and you. Not yet, its eyes say.", { wary: nw }, "miss");
+            if (!enemyActs()) finishRound();
+          } else {
+            snapBusy(nw >= 2
+              ? `It backs off, ears flat. One more refusal and it will bolt — offer it a berry to settle it.`
+              : `It sniffed the treat... and darted back, wary!`, { wary: nw }, "miss");
+            if (!enemyActs()) finishRound();
+          }
         }
       }
     } else if (action.kind === "run") {

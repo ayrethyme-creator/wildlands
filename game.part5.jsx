@@ -669,6 +669,19 @@
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
               <button disabled={busy} style={{ ...btn("#c0392b"), opacity: busy ? 0.5 : 1, gridColumn: "1 / -1", fontSize: 16 }} onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "moves", confirmRun: false } }))}>⚔️ Fight</button>
               <button disabled={busy} style={{ ...btn("#b7950b"), opacity: busy ? 0.5 : 1 }} onClick={() => takeTurn({ kind: "treat" })}>🍖 Befriend ({S.items.treats})</button>
+              {/* Only offered once the animal is actually unsettled, so it is a
+                  response to something the player can see happening rather than
+                  one more button to learn up front. */}
+              {b.kind === "wild" && (b.wary || 0) > 0 && (
+                <button disabled={busy || (S.items.berries ?? 0) <= 0}
+                  style={{ ...btn("#5d8a5f"), opacity: busy || (S.items.berries ?? 0) <= 0 ? 0.45 : 1 }}
+                  onClick={() => takeTurn({ kind: "calm" })}>
+                  🫐 Settle it ({S.items.berries ?? 0})
+                  <div style={{ fontSize: 10, fontWeight: 400 }}>
+                    {(b.wary || 0) >= 2 ? "About to bolt" : "Wary of you"}
+                  </div>
+                </button>
+              )}
               <button disabled={busy} style={{ ...btn("#8e44ad"), opacity: busy ? 0.5 : 1 }} onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "bag", confirmRun: false } }))}>🎒 Items</button>
               <button disabled={busy} style={{ ...btn("#2471a3"), opacity: busy ? 0.5 : 1 }} onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "party", confirmRun: false } }))}>👥 Team</button>
               <button disabled={busy}
