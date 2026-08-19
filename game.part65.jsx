@@ -380,6 +380,35 @@ const INTRO_AT = {
     }
   });
 
+  // The champion hubs are not on any road, so they have no chain of their own -
+  // but each one does sit in a themed cluster of its own screens, and those are
+  // the walk. Written out rather than found by flooding outward, because
+  // flooding wanders: from the Fossil Rift it reaches Dune Town and the reef
+  // inside three doors, and the solar-field clues went out into country that has
+  // nothing to do with the dig.
+  //
+  // Two hubs carry two investigations each. There is room - nine rift screens
+  // and ten at the Vigil - and the claim below keeps them off each other.
+  const HUB_WALK = {
+    rescue:    ["kennel5", "kennel4", "kennel1", "kennel2", "kennel3",
+                "cattery1", "cattery2", "cattery3", "cattery4"],
+    mythhub:   ["rift1", "rift2", "rift3", "rift4", "rift5",
+                "rift6", "rift7", "rift8", "rift9", "rift10"],
+    digsite:   ["dig1", "dig2", "dig3", "dig1b", "dig2b",
+                "dig3b", "dig1c", "dig2c", "dig3c", "dig3d"],
+    vigil:     ["vig1", "vig2", "vig3", "vig4", "vig5",
+                "vig6", "vig7", "vig8", "vig9", "vig10"],
+    // The albatross work is the open sea itself, and the polar bears come off
+    // the ice, so route9 is given the cold water rather than a road it has no
+    // segments for. frostwatch is dealt before longline and takes the polar
+    // pair; longline gets the warmer water below it.
+    openocean: ["reef", "kelp", "polarsea", "abyss"],
+    route9:    ["polarsea", "abyss", "openocean"],
+  };
+  Object.keys(HUB_WALK).forEach((h) => {
+    HUB_WALK[h] = HUB_WALK[h].filter((m) => MAPS[m]);
+  });
+
   // Filled in below, once introMapFor exists: arcId -> the screens its findings
   // may use, in the order the player walks them.
   const WALK_OF = {};
@@ -518,8 +547,27 @@ const INTRO_AT = {
     WALK_OF[a] = road;
     road.forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
   });
+  // Then the hubs, each off its own cluster, taking only screens no road and no
+  // earlier hub arc has taken - and taking only as many as it has findings for.
+  // Without that cap the first arc dealt swallows the whole cluster and the one
+  // sharing the hub with it gets nothing: the tamarins took all ten rift screens
+  // and the Rift's own investigation fell back to dumping five findings on the
+  // floor of Gloam Town.
   arcsToPlace.forEach((a) => {
     if (WALK_OF[a]) return;
+    const cluster = HUB_WALK[introOf[a]];
+    if (!cluster || !cluster.length) return;
+    const need = Object.keys((ARCS[a] && ARCS[a].evidence) || {}).length || 5;
+    WALK_OF[a] = cluster
+      .filter((m) => !mapClaim[m] || mapClaim[m] === a)
+      .slice(0, need);
+    WALK_OF[a].forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
+  });
+  // Anything still without ground falls back to flooding outward, which is
+  // worse but never leaves an arc unplaceable.
+  arcsToPlace.forEach((a) => {
+    if (WALK_OF[a] && WALK_OF[a].length) return;
+    skipped.push(a + ":no-cluster-for:" + introOf[a]);
     WALK_OF[a] = neighbourhood(introOf[a], 4)
       .filter((m) => !mapClaim[m] || mapClaim[m] === a);
     WALK_OF[a].forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
