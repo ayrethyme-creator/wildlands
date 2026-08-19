@@ -114,19 +114,111 @@
       /* The tile just left settles rather than being struck. */
       .wl-wake { animation: wlRustle 640ms cubic-bezier(.22,.9,.3,1); opacity: .97; }
 
+      /* ---- watercolour ----
+         Ayr: "the colors are harsh and plain and everything is blocky."
+         All three were true and all three came from the same place: every
+         surface in the game was one flat fill, one 3px border and one corner
+         radius, and the accent colours were saturated screen primaries that
+         shared no pigment with the warm browns they sat on.
+
+         Watercolour is three things, and none of them needs an image file.
+         Pigment pools unevenly, so fills are gradients that gather at one
+         corner rather than flat colour. Paper has tooth, so there is a grain
+         over everything. And a wash has a soft edge that darkens where it
+         dries, so borders are translucent and radii are uneven instead of a
+         machined 16px on all four corners. */
+
+      /* Paper tooth. feTurbulence is the grain itself - no asset, no request,
+         and it scales to any screen because it is generated. Fixed to the
+         viewport so it reads as the paper the game is painted on rather than
+         as texture sliding around on top of it. */
+      .wl-paper::after {
+        content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 3;
+        opacity: .055; mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'>\
+<filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/>\
+</filter><rect width='140' height='140' filter='url(%23g)'/></svg>");
+      }
+
+      /* Where a wash dries it leaves a darker rim. One inset shadow does it,
+         and it is what stops a panel reading as a rectangle of flat colour. */
+      .wl-wash {
+        box-shadow:
+          inset 0 1px 0 rgba(255,246,224,.10),
+          inset 0 -18px 26px -22px rgba(38,26,14,.75),
+          0 6px 18px -8px rgba(20,14,8,.55);
+      }
+
+      /* A bloom: pigment carried to the edge of the wet patch. Sits under the
+         content and never intercepts a tap. */
+      .wl-bloom { position: relative; isolation: isolate; }
+      .wl-bloom::before {
+        content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+        border-radius: inherit; opacity: .5;
+        background:
+          radial-gradient(120% 90% at 12% 8%, rgba(255,241,214,.16), transparent 58%),
+          radial-gradient(100% 80% at 88% 96%, rgba(58,38,20,.30), transparent 62%);
+      }
+
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
       }
     `}</style>
   );
 
+  // ---- pigments ----
+  // The accent colours were screen primaries - #2471a3, #27ae60, #c9a227 -
+  // dropped onto a warm brown ground they had nothing in common with, which is
+  // most of what "harsh" was. These are the same hues mixed down to pigments
+  // that share the paper's warmth: less chroma, a little ochre through all of
+  // them, nothing at full saturation.
+  //
+  // Mapped rather than replaced at the call sites, because those colours are
+  // written inline in well over a hundred places across the UI. One table here
+  // retunes all of them, and any colour not listed passes through untouched.
+  const WASH = {
+    "#2471a3": "#4d7391", "#5dade2": "#7fa6c2", "#27ae60": "#5d8a5f",
+    "#2d7d5a": "#527e66", "#2d8a6b": "#4f8570", "#8e44ad": "#7a6291",
+    "#c9a227": "#c0a052", "#b7950b": "#a89043", "#5c8a3a": "#6b8a4c",
+    "#c9457a": "#ab6180", "#e74c3c": "#c05c50", "#2ecc71": "#6faf76",
+    "#f1c40f": "#d5b352", "#a0522d": "#9a5c3c", "#7d735f": "#7a7160",
+    "#5c5344": "#5f5647", "#3a342b": "#3d372e",
+  };
+  const wash = (c) => WASH[String(c).toLowerCase()] || c;
+
+  // Two stops rather than one flat fill: pigment settles toward the bottom of a
+  // wet patch, so every surface is very slightly darker where it pooled.
+  const pool = (c, lift = 0.10) =>
+    `linear-gradient(168deg, rgba(255,248,232,${lift}) 0%, rgba(255,248,232,0) 42%), ` +
+    `linear-gradient(184deg, ${c} 0%, ${c} 55%, rgba(28,19,10,.22) 100%), ${c}`;
+
   const frame = {
-    maxWidth: 430, margin: "0 auto", minHeight: "100vh", background: "#231f1a",
+    maxWidth: 430, margin: "0 auto", minHeight: "100vh",
+    // The ground was one flat near-black. Three washes laid over a warm base
+    // give it somewhere to be lighter and somewhere to be deep, which is what
+    // stops a screen of solid colour reading as a screen of nothing.
+    background:
+      "radial-gradient(120% 70% at 18% 0%, #33291f 0%, transparent 60%)," +
+      "radial-gradient(100% 60% at 92% 12%, #2b2b26 0%, transparent 55%)," +
+      "radial-gradient(140% 90% at 50% 108%, #1c1712 0%, transparent 62%)," +
+      "#241f19",
     fontFamily: "'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
     color: "#f2e8d5",
     display: "flex", flexDirection: "column",
   };
-  const panel = { background: "#3a342b", border: "3px solid #5c5344", borderRadius: 16, padding: 12 };
+
+  // Uneven corners: a wash does not dry to a machined radius. Four different
+  // values is the whole trick, and it is what takes the blockiness out.
+  const panel = {
+    background:
+      "radial-gradient(120% 100% at 10% 0%, rgba(255,244,222,.07), transparent 55%)," +
+      "linear-gradient(172deg, #443c31 0%, #3a3329 60%, #332c23 100%)",
+    border: "2px solid rgba(122,110,90,.55)",
+    borderRadius: "20px 15px 22px 16px",
+    padding: 12,
+    boxShadow: "inset 0 1px 0 rgba(255,246,224,.09), inset 0 -20px 30px -24px rgba(30,20,10,.8), 0 8px 22px -10px rgba(16,11,6,.6)",
+  };
   // Hold a direction to keep moving; release (or slide off) to stop.
   //
   // This deliberately does NOT use React's synthetic touch events: React
@@ -161,18 +253,31 @@
     </svg>
   );
 
-  const btn = (bg = "#5c8a3a") => ({
-    background: bg, color: "#fff", border: "none", borderRadius: 15, padding: "12px 14px",
-    fontFamily: "inherit", fontWeight: 700, fontSize: 14, cursor: "pointer", boxShadow: "0 3px 10px rgba(0,0,0,.34), 0 1px 0 rgba(255,255,255,.05) inset",
-    touchAction: "none", userSelect: "none", WebkitUserSelect: "none", MozUserSelect: "none", msUserSelect: "none",
-    WebkitTouchCallout: "none", WebkitTapHighlightColor: "transparent",
-  });
+  const btn = (bg = "#5c8a3a") => {
+    const c = wash(bg);
+    return {
+      background: pool(c), color: "#fff7ea", border: "1px solid rgba(24,16,8,.34)",
+      // Same uneven-corner trick as the panels, at a smaller scale.
+      borderRadius: "16px 12px 17px 13px",
+      padding: "12px 14px",
+      fontFamily: "inherit", fontWeight: 700, fontSize: 14, cursor: "pointer",
+      // Two shadows and a highlight rather than one flat drop: a lifted edge, a
+      // soft contact shadow, and a rim where the pigment dried at the bottom.
+      boxShadow:
+        "0 1px 0 rgba(255,248,232,.14) inset," +
+        "0 -9px 14px -12px rgba(28,18,8,.9) inset," +
+        "0 4px 12px -4px rgba(16,11,6,.5)",
+      textShadow: "0 1px 1px rgba(30,20,10,.35)",
+      touchAction: "none", userSelect: "none", WebkitUserSelect: "none", MozUserSelect: "none", msUserSelect: "none",
+      WebkitTouchCallout: "none", WebkitTapHighlightColor: "transparent",
+    };
+  };
   const btnS = (bg) => ({ ...btn(bg), padding: "8px 10px", fontSize: 12 });
 
   // ---------- TITLE ----------
   if (S.screen === "title") {
     return (
-      <div style={{ ...frame, justifyContent: "center", alignItems: "center", textAlign: "center", padding: 20 }}>
+      <div className="wl-paper" style={{ ...frame, justifyContent: "center", alignItems: "center", textAlign: "center", padding: 20 }}>
         {KEYFRAMES}
         <div style={{ display: "flex", gap: 4, marginBottom: 4, filter: "brightness(0) opacity(.8)" }}>
           <Sprite sp="qilin" size={54} /><Sprite sp="thunderbird" size={54} /><Sprite sp="phoenix" size={54} />
@@ -335,7 +440,7 @@
   if (S.screen === "starter") {
     const orphans = ["fennec_j", "otter_j", "kestrel_j"];
     return (
-      <div style={{ ...frame, padding: 16, overflowY: "auto" }}>
+      <div className="wl-paper" style={{ ...frame, padding: 16, overflowY: "auto" }}>
         {KEYFRAMES}
         <div style={{ ...panel, marginBottom: 12 }}>
           <b>👩🏾‍🌾 Keeper Ruth:</b> "You're the new ranger. Good — I've got eleven animals and two hands.
@@ -404,7 +509,7 @@
     // shake replay on every blow rather than only the first.
     const shakeKey = S.hitFlash || 0;
     return (
-      <div key={shakeKey} className={shakeKey ? "shake" : undefined} style={{ ...frame, padding: 10 }}>
+      <div key={shakeKey} className={shakeKey ? "wl-paper shake" : "wl-paper"} style={{ ...frame, padding: 10 }}>
         {KEYFRAMES}
         <div style={{ background: arenaBg, borderRadius: 14, border: "3px solid #5c5344", padding: 12, position: "relative", minHeight: 230 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -577,7 +682,7 @@
   const learner = S.party.find((a) => a.pending?.length);
 
   return (
-    <div style={frame}>
+    <div className="wl-paper" style={frame}>
       {KEYFRAMES}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px" }}>
         <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {phase === "night" ? "🌙" : phase === "dusk" ? "🌆" : phase === "dawn" ? "🌅" : "☀️"}</div>
