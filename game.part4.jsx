@@ -19,6 +19,10 @@ function Wildlands() {
     sound: true, soundReady: false, run: true,
     slot: null, quiz: {}, dir: "down", arcs: {},
     compassOn: false, achv: {}, achvQueue: [], quizWins: { notes: 0, trials: 0, masters: 0 }, quizPerfect: {}, critQuiz: null,
+    // This save's own ecology. Dealt once, kept forever, so a world is
+    // consistent with itself across sessions and two saves are not the same
+    // game. `pressure` is how hard each patch has been worked lately.
+    runSeed: (Math.random() * 0x7fffffff) | 0, pressure: {},
   });
   const SR = useRef(S);
   useEffect(() => { SR.current = S; }, [S]);
@@ -228,6 +232,11 @@ function Wildlands() {
       party, box,
       items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, compass: 0, ...(p.items || {}) },
       badges, profGift: !!p.profGift, houseIdx: p.houseIdx || 0,
+      // An older save has no ecology, so it is dealt one on load rather than
+      // running as the flat world forever. Once dealt it is kept, so the save
+      // stays the same world it was the session before.
+      runSeed: p.runSeed || ((Math.random() * 0x7fffffff) | 0),
+      pressure: p.pressure || {},
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
       visited: { town1: true, ...(typeof p.badges === "number" ? p.visited || {} : {}) },
@@ -660,7 +669,23 @@ function Wildlands() {
       const undiscovered = pool.filter(([sp]) => (st.dex[sp] || 0) < 2);
       if (undiscovered.length) usePool = undiscovered;
     }
-    startBattle({ kind: "wild", enemy: mk(pickPool(usePool), rnd(lv[0], lv[1])) });
+    // Reweighted for this save's ecology and for how hard this patch has been
+    // worked. Every species the map lists is still in the pool afterwards -
+    // part66 floors every weight - so nothing here can lock a species out.
+    if (typeof ecologyPool === "function") {
+      usePool = ecologyPool(usePool, {
+        seed: st.runSeed, pressure: st.pressure, mapKey, badges: st.badges,
+      });
+    }
+    const picked = pickPool(usePool);
+    // Taking one from a patch makes that species harder to find there for a
+    // while. Recorded on the roll rather than on the catch, because a fight
+    // you fled from still disturbed them.
+    setS((p) => ({ ...p, pressure: {
+      ...(p.pressure || {}),
+      [mapKey + "|" + picked]: ((p.pressure || {})[mapKey + "|" + picked] || 0) + PRESSURE_STEP,
+    } }));
+    startBattle({ kind: "wild", enemy: mk(picked, rnd(lv[0], lv[1])) });
   };
 
   // ----- world movement -----
@@ -718,8 +743,25 @@ function Wildlands() {
       // px,py is the tile just left. The grass there is disturbed as well as
       // the grass arrived in, which is what makes walking a field leave a wake
       // through it rather than a single clump twitching under your feet.
-      setS((p) => ({ ...p, px: p.x, py: p.y, x: nx, y: ny,
-        swimming: ch === "W", step: ((p.step || 0) + 1) % 1000 }));
+      setS((p) => {
+        // A worked patch recovers while you are away from it. Only entries
+        // belonging to other maps fade, so standing in the grass you just
+        // emptied does not quietly refill it under your feet - walking
+        // somewhere else is the thing that lets it come back.
+        let pressure = p.pressure;
+        if (pressure && typeof PRESSURE_FADE === "number") {
+          const next = {}; let changed = false;
+          for (const k in pressure) {
+            if (k.indexOf(p.map + "|") === 0) { next[k] = pressure[k]; continue; }
+            const v = pressure[k] - PRESSURE_FADE;
+            if (v > 0.01) next[k] = v; else changed = true;
+            if (v !== pressure[k]) changed = true;
+          }
+          if (changed) pressure = next;
+        }
+        return { ...p, pressure, px: p.x, py: p.y, x: nx, y: ny,
+          swimming: ch === "W", step: ((p.step || 0) + 1) % 1000 };
+      });
       if (ch === "G") rollEncounter(st.map, "grass");
       else if (ch === "W") rollEncounter(st.map, "water");
       return;
