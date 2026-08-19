@@ -179,3 +179,58 @@ const readTracks = (mapKey, st) => {
 };
 
 console.log("[part67] tracks laid on", placeTracks(), "maps");
+
+// ---------- SET DRESSING ----------
+// The rest of Ayr's list that is an object rather than an effect: a beehive in
+// the meadow, a web strung in the jungle, a nest in the grove.
+//
+// Placed the same careful way the tracks are. These are things you walk into
+// and read, so the tile stops being walkable, so each one needs open ground
+// with a way round it - and at most one of each kind per map, because a hive
+// every eight paces stops being a discovery and becomes wallpaper.
+const DRESSING = [
+  { ch: "\u2043", kind: "hive", zones: ["meadow", "savanna"],
+    line: "🍯 A hive on a rough stand, and the air busy around it. Somebody keeps these — the grass is trodden in a ring." },
+  { ch: "\u2044", kind: "web", zones: ["jungle", "grove"],
+    line: "🕸️ A web strung between two trunks, wet with morning. The spider sits dead centre and does not move as you pass." },
+  { ch: "\u2045", kind: "nest", zones: ["grove", "wetland", "jungle"],
+    line: "🪹 A cup of twigs, low in the fork of a branch. Three eggs, still warm. Whatever laid them is watching you from somewhere close, so you step back." },
+];
+
+const placeDressing = () => {
+  if (typeof MAPS === "undefined") return 0;
+  let placed = 0;
+  Object.keys(MAPS).forEach((mk) => {
+    const m = MAPS[mk];
+    if (!m.rows || !m.zone) return;
+    if (/^town/.test(mk) || /cave|shrine|rift|vig|dig|kennel|cattery|rescue/.test(mk)) return;
+    DRESSING.forEach((d) => {
+      if (!d.zones.includes(m.zone)) return;
+      // deterministic per map, so the same world always dresses the same way
+      const H = m.rows.length, W = m.rows[0].length;
+      const start = (mk.length * 7 + d.kind.length * 13) % Math.max(1, H - 2);
+      let spot = null;
+      for (let i = 0; i < H - 2 && !spot; i++) {
+        const y = 1 + ((start + i) % (H - 2));
+        for (let x = 1; x < W - 1 && !spot; x++) {
+          if (m.rows[y][x] !== ".") continue;
+          const at = (dx, dy) => (m.rows[y + dy] || "")[x + dx];
+          const open = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+            .filter(([dx, dy]) => ".gG*p".includes(at(dx, dy) || "")).length;
+          if (open >= 3) spot = [x, y];
+        }
+      }
+      if (!spot) return;
+      const [x, y] = spot;
+      m.rows = m.rows.map((r, ry) => ry === y ? r.slice(0, x) + d.ch + r.slice(x + 1) : r);
+      placed++;
+    });
+  });
+  return placed;
+};
+
+// What each says when you walk into it.
+const DRESSING_LINE = {};
+DRESSING.forEach((d) => { DRESSING_LINE[d.ch] = d.line; });
+
+console.log("[part67] set dressing placed:", placeDressing());

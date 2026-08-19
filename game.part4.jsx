@@ -838,6 +838,8 @@ function Wildlands() {
       say(`💂 Guard: "The road north opens for Badge ${g ? g.id : 8} holders. ${g ? g.leader + "'s arena is right here in town — prove yourself there first." : ""}"`);
     } else if (ch === "!") {
       say(SIGNS[st.map + ":" + nx + "," + ny] || SIGNS[st.map] || "🪧 The letters have long worn away.");
+    } else if (typeof DRESSING_LINE !== "undefined" && DRESSING_LINE[ch]) {
+      say(DRESSING_LINE[ch]);
     } else if (ch === "⁂") {
       // Read off the map's own pool and this save's ecology, so what the ground
       // says and what the grass gives you cannot disagree.

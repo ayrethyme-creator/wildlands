@@ -209,6 +209,35 @@ const PROP_SHAPES = {
       [[-2.4, -2.2], [-0.7, -3.1], [1.1, -3.0], [2.5, -1.9]].map(([tx, ty]) =>
         `<circle cx="${x + tx}" cy="${y + ty}" r=".85" fill="#3a2c1e"/>`).join("") +
       `</g>`).join("")),
+  // A hive on a stand. The bees are three specks; any more and at tile size it
+  // turns into a smudge rather than reading as movement.
+  hive: (bg) => propWrap(bg,
+    `<rect x="14.6" y="21" width="2.8" height="8" fill="#6b5442" stroke="${PROP_OUT}" stroke-width=".7"/>` +
+    `<ellipse cx="16" cy="18" rx="8.5" ry="4" fill="#c9a24a" stroke="${PROP_OUT}" stroke-width=".9"/>` +
+    `<ellipse cx="16" cy="14" rx="7.4" ry="3.6" fill="#d9b45c" stroke="${PROP_OUT}" stroke-width=".9"/>` +
+    `<ellipse cx="16" cy="10.4" rx="5.8" ry="3.2" fill="#e8c76e" stroke="${PROP_OUT}" stroke-width=".9"/>` +
+    `<circle cx="16" cy="17" r="1.5" fill="#4a3a26"/>` +
+    [[6, 8], [25, 12], [8, 20]].map(([x, y]) =>
+      `<circle cx="${x}" cy="${y}" r="1.1" fill="#3a2c1e"/>`).join("")),
+
+  // Strung between two things, so it hangs from the top corners rather than
+  // sitting on the ground - the one prop here with no shadow under it.
+  web: (bg) => propWrap(bg,
+    `<g stroke="${PROP_OUT}" stroke-width=".7" fill="none" opacity=".85">` +
+    [5, 10, 15].map((r) =>
+      `<path d="M2 2 Q${2 + r} ${2 + r * .5} ${2 + r * 1.5} ${2 + r * 1.5}` +
+      ` Q${2 + r * .5} ${2 + r} 2 ${2 + r * 1.5} Z"/>`).join("") +
+    `<path d="M2 2 L26 26 M2 2 L2 26 M2 2 L26 2"/>` +
+    `</g>` +
+    `<circle cx="13" cy="13" r="1.8" fill="#2e2620" stroke="${PROP_OUT}" stroke-width=".5"/>`),
+
+  // A cup of twigs with eggs in it, tucked low.
+  nest: (bg) => propWrap(bg,
+    `<path d="M7 26 q1 -8 9 -8 q8 0 9 8 Z" fill="#7a5c3a" stroke="${PROP_OUT}" stroke-width=".9"/>` +
+    `<path d="M9 24 q2 -5 7 -5 q5 0 7 5 Z" fill="#8f6f47"/>` +
+    [[13.5, 21], [18.5, 21], [16, 19.4]].map(([x, y]) =>
+      `<ellipse cx="${x}" cy="${y}" rx="2.1" ry="1.7" fill="#e8e2d0" stroke="${PROP_OUT}" stroke-width=".4"/>`).join("")),
+
   snow: (bg) => propWrap(bg,
     [[16, 15, 7], [9, 23, 4], [23, 22, 4.5]].map(([x, y, r]) =>
       `<g stroke="#f2f8ff" stroke-width="1.2" stroke-linecap="round">` +
@@ -221,6 +250,10 @@ const PROP_SHAPES = {
 const PROP_BY_CHAR = {
   H: "hut", C: "clinic", M: "shop", Y: "arena", P: "tent",
   "!": "sign", "¡": "log", "¦": "lamp", t: "lantern",
+  // Set dressing placed by part67. Given characters rather than emoji because
+  // the honey pot is already spoken for by a trainer marker, and a later key
+  // silently wins in an object literal.
+  "⁃": "hive", "⁄": "web", "⁅": "nest",
   D: "gate", p: "marker", L: "idol",
 };
 

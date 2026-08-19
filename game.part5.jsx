@@ -238,10 +238,26 @@
       }
       .amb-ember { animation-name: ambEmber; }
 
+      /* ---- what you leave behind ----
+         Only where ground actually takes a print: snow and sand. On grass the
+         blades already spring back behind you, which is the wake animation, and
+         a footprint on rock would be a lie.
+
+         It fades over about two seconds, which is long enough to look back and
+         see where you came from and short enough that a field you have crossed
+         twice does not turn into a diagram. */
+      @keyframes wlPrint {
+        0%   { opacity: .38; transform: scale(1); }
+        70%  { opacity: .18; }
+        100% { opacity: 0;   transform: scale(1.08); }
+      }
+      .wl-print { animation: wlPrint 2.1s ease-out forwards; pointer-events: none; }
+
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
         .wl-arrive { display: none; }
         .amb { display: none; }
+        .wl-print { display: none; }
       }
     `}</style>
   );
@@ -944,6 +960,27 @@
           {/* Keyed on the warp counter, so it remounts and replays on every
               arrival and never on an ordinary step. */}
           <div key={`arrive:${S.map}:${S.warp || 0}`} className="wl-arrive" aria-hidden="true" />
+
+          {/* The tile just left, in country that holds a print. Keyed on the
+              step count so each footfall remounts it and the fade replays;
+              positioned exactly like the ranger so it lands where she was
+              rather than where she is. */}
+          {["alpine", "summit", "desert"].includes(m.zone) && S.px != null && !S.swimming && (
+            <div key={`print:${S.step || 0}`} aria-hidden="true" className="wl-print"
+              style={{
+                position: "absolute", left: 0, top: 0, zIndex: 1,
+                width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
+                transform: `translate(${S.px * 100}%, ${S.py * 100}%)`,
+                display: "flex", alignItems: "flex-end", justifyContent: "center",
+              }}>
+              <svg viewBox="0 0 32 32" style={{ width: "62%", height: "62%", display: "block" }}>
+                {/* Two prints side by side, pressed in rather than laid on, so
+                    they take the shade of the ground and never an outline. */}
+                <ellipse cx="12" cy="20" rx="2.6" ry="3.4" fill={m.zone === "desert" ? "#8a6f4a" : "#8fa0b5"} />
+                <ellipse cx="20" cy="24" rx="2.6" ry="3.4" fill={m.zone === "desert" ? "#8a6f4a" : "#8fa0b5"} />
+              </svg>
+            </div>
+          )}
 
           {/* Whatever is in the air here. Sits above the tiles and below the
               ranger, so a firefly can pass behind her but never over her face.
