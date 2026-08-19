@@ -198,6 +198,17 @@ const PROP_SHAPES = {
     `<rect x="14.8" y="17" width="2.4" height="12" fill="#6b5442" stroke="${PROP_OUT}" stroke-width=".7"/>` +
     `<ellipse cx="16" cy="13" rx="9" ry="7.6" fill="#3f7a46" stroke="${PROP_OUT}" stroke-width="1"/>` +
     `<ellipse cx="13" cy="10.6" rx="4" ry="3.2" fill="#5a9a5c" opacity=".8"/>`),
+  // Four prints walking away from you, getting fainter. Pressed INTO the ground
+  // rather than sitting on it, so they take a dark fill and no outline - the
+  // opposite of every other prop here, which is what makes them read as a mark
+  // rather than an object.
+  tracks: (bg) => propWrap(bg,
+    [[10, 25, 1, .5], [14, 20, -1, .4], [19, 15, 1, .3], [23, 10, -1, .2]].map(([x, y, d, o]) =>
+      `<g opacity="${o + .28}">` +
+      `<ellipse cx="${x}" cy="${y}" rx="2.1" ry="2.6" fill="#3a2c1e" transform="rotate(${d * 12} ${x} ${y})"/>` +
+      [[-2.4, -2.2], [-0.7, -3.1], [1.1, -3.0], [2.5, -1.9]].map(([tx, ty]) =>
+        `<circle cx="${x + tx}" cy="${y + ty}" r=".85" fill="#3a2c1e"/>`).join("") +
+      `</g>`).join("")),
   snow: (bg) => propWrap(bg,
     [[16, 15, 7], [9, 23, 4], [23, 22, 4.5]].map(([x, y, r]) =>
       `<g stroke="#f2f8ff" stroke-width="1.2" stroke-linecap="round">` +
@@ -228,6 +239,7 @@ const PROP_BY_EM = {
   // Six trainers are marked by an object rather than a face - a beekeeper by
   // her bees, a surveyor by his clipboard. Those are drawn as the objects they
   // are rather than turned into people.
+  "🐾": ["tracks", null],
   "🐝": ["bee", null], "🍯": ["honey", null], "🔔": ["bell", null],
   "📋": ["clipboard", null], "🌅": ["sunrise", null], "🌳": ["sapling", null],
 };

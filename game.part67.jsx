@@ -92,3 +92,90 @@ const ambientFor = (zone, phase) => {
 
 console.log("[part67] air:", Object.keys(AMBIENT).length, "zones with weather |",
   Object.values(AMBIENT).reduce((n, a) => n + a.length, 0), "kinds in total");
+
+// ---------- TRACKS ----------
+// The second thing Ayr asked for, and the one with teeth: "tracks and
+// droppings that hint which species live in that patch, readable before you
+// meet anything."
+//
+// This is the piece the ecology in part66 has been missing. A save now decides
+// privately that a fennec is scarce this season and abroad only after dark, and
+// the only place that is stated is the Field Guide - which you have to already
+// own an entry for. Standing in grass, a player has no way to tell a quiet
+// patch from bad luck, and that is exactly the blind grinding the ecology was
+// meant to remove.
+//
+// A set of tracks reads the ground. It names two animals that genuinely live
+// on this map, favours the ones you have not befriended yet, and says plainly
+// when one of them is having a scarce season and when it is abroad. No new
+// state: the answer is derived from the map's own pool and the save's seed, so
+// it is consistent with what the grass will actually give you.
+
+const TRACK_CHAR = "\u2042";           // ⁂ - a character no map uses for terrain
+
+// Where a set of tracks makes sense: beside grass, on open ground, on a wild
+// map. Not in towns - a paw print outside the market is a joke, not a hint.
+const placeTracks = () => {
+  if (typeof MAPS === "undefined") return 0;
+  let placed = 0;
+  Object.keys(MAPS).forEach((mk) => {
+    const m = MAPS[mk];
+    if (!m.rows || !m.pool || !m.pool.length) return;
+    if (/^town/.test(mk) || /cave|shrine|rift|vig|dig|kennel|cattery|rescue/.test(mk)) return;
+    // one per map, on plain ground with tall grass next to it
+    const H = m.rows.length, W = m.rows[0].length;
+    let best = null;
+    for (let y = 1; y < H - 1 && !best; y++) {
+      for (let x = 1; x < W - 1 && !best; x++) {
+        if (m.rows[y][x] !== ".") continue;
+        const at = (dx, dy) => (m.rows[y + dy] || "")[x + dx];
+        const touchesGrass = [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => at(dx, dy) === "G");
+        // Tracks are read by walking into them, like a sign, so the tile stops
+        // being walkable the moment one is laid. Dropping that into a corridor
+        // would wall the map in half. Requiring three open sides keeps them out
+        // in the open where there is always a way round.
+        const open = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+          .filter(([dx, dy]) => ".gG*p".includes(at(dx, dy) || "")).length;
+        if (touchesGrass && open >= 3) best = [x, y];
+      }
+    }
+    if (!best) return;
+    const [x, y] = best;
+    m.rows = m.rows.map((r, ry) => ry === y ? r.slice(0, x) + TRACK_CHAR + r.slice(x + 1) : r);
+    placed++;
+  });
+  return placed;
+};
+
+// What the ground says. Two animals, the unmet ones first, with their standing
+// this season spelled out - so "come back after dark" is something the world
+// tells you rather than something you have to infer.
+const readTracks = (mapKey, st) => {
+  const m = MAPS[mapKey];
+  const pool = (m && m.pool) || [];
+  if (!pool.length) return "🐾 The ground is scuffed, but nothing here is legible.";
+
+  const seed = st && st.runSeed;
+  const dex = (st && st.dex) || {};
+  // Prefer what the player has never befriended: a hint about an animal already
+  // in the party is a hint nobody needed.
+  const ranked = pool.slice().sort((a, b) => ((dex[a[0]] || 0) - (dex[b[0]] || 0)) || (b[1] - a[1]));
+  const picks = ranked.slice(0, 2).filter(([sp]) => DEX[sp]);
+  if (!picks.length) return "🐾 Old prints, all of them yours.";
+
+  const lines = picks.map(([sp]) => {
+    const name = DEX[sp].n;
+    const tier = (typeof runTier === "function" && seed) ? runTier(seed, sp).k : "ordinary";
+    if (tier === "abundant") return `${name} — and plenty of them, by the state of it.`;
+    if (tier !== "scarce") return `${name} — a few, coming and going.`;
+    const w = (typeof runWindow === "function") ? runWindow(seed, sp) : null;
+    const when = w === "night" ? "moves after dark this season"
+      : w === "day" ? "moves in daylight this season"
+      : "has been keeping away, though they settle once the country is better known";
+    return `${name} — thin on the ground, and ${when}.`;
+  });
+
+  return "🐾 Tracks, and what they say:\n\n" + lines.map((l) => "· " + l).join("\n");
+};
+
+console.log("[part67] tracks laid on", placeTracks(), "maps");
