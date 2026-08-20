@@ -44,6 +44,49 @@ const AMBIENT = {
   reefz:    [{ kind: "glint", when: "day", n: 8, c: "#f2ffff" }],
   oceanz:   [{ kind: "glint", when: "day", n: 6, c: "#e8f8ff" }],
   polarz:   [{ kind: "glint", when: "day", n: 5, c: "#f4ffff" }],
+
+  // The wider regions had nothing in their air at all - every map added after
+  // the original eight biomes was silent. Same rules as above: one kind per
+  // zone unless the place genuinely changes character after dark, and counts
+  // low enough that you notice the air rather than the specks.
+  canopyz:  [{ kind: "leaf",  when: "day",   n: 5,  c: "#4c7a3c" },
+             { kind: "fly",   when: "night", n: 8,  c: "#c0f0b8" }],
+  outbackz: [{ kind: "dust",  when: "day",   n: 8,  c: "#d9a06c" }],
+  tundraz:  [{ kind: "snow",  when: "any",   n: 7,  c: "#f4fafe" }],
+  taigaz:   [{ kind: "snow",  when: "any",   n: 5,  c: "#e8f0f6" }],
+  fossil:   [{ kind: "dust",  when: "day",   n: 6,  c: "#ded0b0" }],
+
+  // Ember Hollow is the only cave that is lit. The other two are `dark`, and
+  // the render skips ambient there entirely, so this reaches exactly the one
+  // map it should.
+  cavezone: [{ kind: "ember", when: "any",   n: 5,  c: "#ff9a4a" }],
+
+  // No sun reaches the Midnight Zone, so a glint would be a lie down there.
+  // What is actually in that water is animals making their own light, which is
+  // the firefly behaviour exactly - wandering, breathing, lit from within.
+  abyssz:   [{ kind: "fly",   when: "any",   n: 7,  c: "#7fd8ff" }],
+
+  // The rifts are not weather. Slow motes, always, in a colour nothing else
+  // in the game uses, because these places should not feel like anywhere.
+  rift:     [{ kind: "fly",   when: "any",   n: 9,  c: "#cbb0ff" }],
+
+  // The Vigil is a memorial to animals that are gone, and it should not
+  // sparkle. Grey dust, very few, drifting in still air - the look of a room
+  // nobody has come into for a long time.
+  vigilz:   [{ kind: "dust",  when: "any",   n: 4,  c: "#9aa0ac" }],
+
+  // "What We Kept" is the far end of that walk, and the only one of those maps
+  // where something was saved. It is the one place in the region with living
+  // light in it, and it is the whole point of the region that it looks
+  // different from the nine rooms before it.
+  hopez:    [{ kind: "fly",   when: "night", n: 10, c: "#b8f0a0" }],
+
+  // Hearthside is somebody's back garden after dark, full of animals that live
+  // with people. Fireflies over a lawn, warmer than the wild ones.
+  hearth:   [{ kind: "fly",   when: "night", n: 7,  c: "#ffddaa" }],
+
+  // `arena` is deliberately absent: the battle outposts are rooms, and rooms
+  // do not have weather.
 };
 
 // Deterministic scatter. A firefly that jumps to a new place on every redraw is
