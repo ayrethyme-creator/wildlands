@@ -113,6 +113,19 @@ console.log("[part67] air:", Object.keys(AMBIENT).length, "zones with weather |"
 
 const TRACK_CHAR = "\u2042";           // ⁂ - a character no map uses for terrain
 
+// Every mark this file lays down.
+//
+// part4 treats all of these as floor. They were solid at first, read by walking
+// into them like a sign, and that turned each one into a wall. Requiring three
+// open sides at placement was not enough: two marks placed independently can
+// still pinch a tile off between them, and nine maps ended up with an isolated
+// square. Save while standing on one and you load in unable to move - which is
+// what happened to Ayr.
+//
+// Floor removes the whole class of fault instead of narrowing it. Nothing this
+// file adds to a map can trap anybody, because nothing it adds is solid.
+const MAP_MARKS = "⁂⁃⁄⁅";
+
 // Where a set of tracks makes sense: beside grass, on open ground, on a wild
 // map. Not in towns - a paw print outside the market is a joke, not a hint.
 const placeTracks = () => {
@@ -130,10 +143,9 @@ const placeTracks = () => {
         if (m.rows[y][x] !== ".") continue;
         const at = (dx, dy) => (m.rows[y + dy] || "")[x + dx];
         const touchesGrass = [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => at(dx, dy) === "G");
-        // Tracks are read by walking into them, like a sign, so the tile stops
-        // being walkable the moment one is laid. Dropping that into a corridor
-        // would wall the map in half. Requiring three open sides keeps them out
-        // in the open where there is always a way round.
+        // Marks are floor, so this can no longer block anything. Kept because
+        // a set of prints out in the open reads better than one wedged against
+        // a wall.
         const open = [[1, 0], [-1, 0], [0, 1], [0, -1]]
           .filter(([dx, dy]) => ".gG*p".includes(at(dx, dy) || "")).length;
         if (touchesGrass && open >= 3) best = [x, y];

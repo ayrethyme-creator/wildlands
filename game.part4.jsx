@@ -732,6 +732,19 @@ function Wildlands() {
     const idKey = `${st.map}:${nx},${ny}`;
     const walk =
       ch === "." || ch === "g" || ch === "G" || ch === "p" || ch === "*" ||
+      // Tracks, hives, webs and nests are walked ONTO, not into.
+      //
+      // They were bumped into like signs, which meant each one turned its tile
+      // into a wall. Placement demanded three open sides, and that is still not
+      // enough: two of them placed independently can pinch a tile off between
+      // them, and nine maps ended up with an isolated square. A player who saved
+      // while standing on one would load in unable to move at all - which is
+      // exactly what happened to Ayr.
+      //
+      // Making them floor removes the entire class of fault rather than
+      // narrowing it. Nothing this file adds to a map can trap anybody now,
+      // because nothing it adds is solid.
+      (typeof MAP_MARKS !== "undefined" && MAP_MARKS.indexOf(ch) >= 0) ||
       (ch === "X" && st.badges >= (GYMS[st.map]?.id ?? GYM_COUNT)) ||
       (ch === "D" && o.solved) ||
       ((ch === "R" || ch === "V") && st.trainersBeaten[idKey]) ||
@@ -743,6 +756,12 @@ function Wildlands() {
       // px,py is the tile just left. The grass there is disturbed as well as
       // the grass arrived in, which is what makes walking a field leave a wake
       // through it rather than a single clump twitching under your feet.
+      // Stepping onto one reads it. Same words, no wall.
+      if (typeof MAP_MARKS !== "undefined" && MAP_MARKS.indexOf(ch) >= 0) {
+        const line = (typeof DRESSING_LINE !== "undefined" && DRESSING_LINE[ch])
+          || (ch === "⁂" && typeof readTracks === "function" ? readTracks(st.map, st) : null);
+        if (line) { const t = setTimeout(() => say(line), 120); timers.current.push(t); }
+      }
       setS((p) => {
         // A worked patch recovers while you are away from it. Only entries
         // belonging to other maps fade, so standing in the grass you just
@@ -838,14 +857,6 @@ function Wildlands() {
       say(`💂 Guard: "The road north opens for Badge ${g ? g.id : 8} holders. ${g ? g.leader + "'s arena is right here in town — prove yourself there first." : ""}"`);
     } else if (ch === "!") {
       say(SIGNS[st.map + ":" + nx + "," + ny] || SIGNS[st.map] || "🪧 The letters have long worn away.");
-    } else if (typeof DRESSING_LINE !== "undefined" && DRESSING_LINE[ch]) {
-      say(DRESSING_LINE[ch]);
-    } else if (ch === "⁂") {
-      // Read off the map's own pool and this save's ecology, so what the ground
-      // says and what the grass gives you cannot disagree.
-      say(typeof readTracks === "function"
-        ? readTracks(st.map, st)
-        : "🐾 Prints in the dust, crossing and recrossing.");
     } else if (ch === "Y") {
       const g = GYMS[st.map];
       if (!g) return;
