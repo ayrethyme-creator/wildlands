@@ -108,9 +108,15 @@ const Avatar = ({ dir, swimming, size }) => {
   return (
     // width only, with the height following the viewBox, so the sprite scales
     // with the tile instead of being squashed into a square.
+    // No CSS filter here, deliberately. The wrapper in part5 carries a
+    // transform with a transition on it, which promotes the ranger to her own
+    // composited layer; a filter on top of that gets rasterised into the layer
+    // and on a phone that raster is what was going soft. Contrast is already
+    // carried properly - every shape is stroked in AV_OUTLINE and the halo
+    // ellipse is drawn underneath - so the drop-shadow was the least of the
+    // three and the only one costing sharpness.
     <svg viewBox="0 0 32 30" width={size} style={{ display: "block",
-      transform: dir === "left" ? "scaleX(-1)" : undefined,
-      filter: "drop-shadow(0 0 1.5px rgba(0,0,0,.6))" }}>
+      transform: dir === "left" ? "scaleX(-1)" : undefined }}>
       {inner}
     </svg>
   );

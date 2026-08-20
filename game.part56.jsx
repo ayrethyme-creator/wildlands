@@ -145,7 +145,7 @@ const npcSvg = (p, bg, key) => {
   const open = p.child
     ? `<g transform="translate(${16 * (1 - scale)}, ${30 * (1 - scale)}) scale(${scale})">`
     : "<g>";
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">` +
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 32 32">` +
     `<rect width="32" height="32" fill="${bg}"/>` + open +
     `<ellipse cx="16" cy="27.4" rx="9" ry="3.2" fill="#000" opacity=".28"/>` +
     // legs and boots

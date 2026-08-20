@@ -44,7 +44,7 @@ const tileVariant = (x, y, n) => {
 const tsh = (c, amt) => sh(c, amt < 0 ? amt * 1.75 : amt * 1.7);
 
 const svgWrap = (inner) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">${inner}</svg>`;
+  `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 32 32">${inner}</svg>`;
 
 /* ---- plants drawn the way the props are ----
 

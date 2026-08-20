@@ -60,7 +60,7 @@ const grassSvg = (base, blade, tall, v, edges) => {
     // carry all the depth instead: a dark stroke with a lighter tip drawn over
     // it, which reads as grass catching the light without touching the
     // background at all.
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">` +
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 16 16">` +
            `<rect width="16" height="16" fill="${base}"/>${torn}${blades}</svg>`;
   }
 
@@ -71,7 +71,7 @@ const grassSvg = (base, blade, tall, v, edges) => {
     `<path d="M${x} 14 q${lean * 0.8} -2 ${lean * 1.6} -3.2"` +
     ` stroke="${blade}" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".8"/>`).join("");
   const gid3 = "gs" + Math.abs(hashStr(base + "s")) % 100000;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">` +
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 16 16">` +
          `<defs><radialGradient id="${gid3}" cx="0.35" cy="0.62" r="0.75">` +
          `<stop offset="0" stop-color="${shade}" stop-opacity=".2"/>` +
          `<stop offset="1" stop-color="${shade}" stop-opacity="0"/></radialGradient></defs>` +
@@ -190,7 +190,7 @@ const waterSvg = (base, v, edges) => {
     `<path d="M${x0} ${y} q${len / 2} ${i % 2 ? -0.9 : 0.9} ${len} 0"` +
     ` stroke="${i % 2 ? pale : deep}" stroke-width=".9" fill="none"` +
     ` stroke-linecap="round" opacity="${i % 2 ? ".42" : ".30"}"/>`).join("");
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">` +
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 16 16">` +
          `<rect width="16" height="16" fill="${base}"/>${torn}${ripples}</svg>`;
 };
 

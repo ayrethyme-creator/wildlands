@@ -21,7 +21,7 @@ const PROP_OUT = "#f6f2e8";
 const PROP_DARK = "#2a2620";
 
 const propWrap = (bg, inner) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">` +
+  `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 32 32">` +
   `<rect width="32" height="32" fill="${bg}"/>` +
   `<ellipse cx="16" cy="28.6" rx="11" ry="3" fill="#000" opacity=".22"/>` + inner + `</svg>`;
 
