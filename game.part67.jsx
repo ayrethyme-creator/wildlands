@@ -18,7 +18,11 @@
 // Kept deliberately thin: two or three specks per screen reads as air moving.
 // Twenty reads as a screensaver, and on a phone it reads as a fault.
 const AMBIENT = {
-  meadow:   [{ kind: "fly",   when: "night", n: 9,  c: "#ffe9a3" }],
+  // "meadow" was never a zone. No map has ever used that name, so these nine
+  // fireflies - the example this whole part opens with - have never once been
+  // drawn. The picture was right and the key was wrong: long grass after dark
+  // is Long Grass Savanna, which until now had nothing in its air at all.
+  savannaz: [{ kind: "fly",   when: "night", n: 9,  c: "#ffe9a3" }],
   savanna:  [{ kind: "fly",   when: "night", n: 7,  c: "#ffe1a0" },
              { kind: "dust",  when: "day",   n: 6,  c: "#e8d9b8" }],
   wetland:  [{ kind: "fly",   when: "night", n: 10, c: "#d8f0a8" },
