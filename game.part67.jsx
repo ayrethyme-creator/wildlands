@@ -352,3 +352,85 @@ const sealPockets = () => {
 };
 
 console.log("[part67] unreachable floor pockets sealed:", sealPockets());
+
+// ---------- BIRDS ----------
+// From the same list as the weather: "birds scattering out of trees as you
+// pass."
+//
+// The obvious version fires whenever you walk beside a "T", and it would be
+// wrong twice over.
+//
+// "T" is not a tree. It is whatever that zone puts in the way, and the palette
+// decides what it looks like: a cactus in the desert, a rock on the highveld
+// and in the Outback, a block of ice in the polar sea, coral on the reef, a
+// volcano in the ash. Coral does not hold sparrows. So this is limited to the
+// zones where "T" is genuinely something a bird could have been sitting in,
+// and the colour comes with it - birds read as silhouettes, and a silhouette
+// against jungle is not the same colour as one against snow.
+//
+// The second mistake would be firing every time. A tree that empties itself
+// on every pass is a machine, not a bird. Roughly one pass in four does
+// anything, and which one is decided from the map, the tile and the step
+// counter rather than Math.random - so it is unpredictable to the player but
+// identical across every redraw of the same step, which is what stops React
+// re-rolling it halfway through the animation.
+const BIRD_ZONES = {
+  savanna:  "#3a2e24", savannaz: "#3a2e24",
+  wetland:  "#2e3a2c",          // reeds, and reeds are where birds really do go up
+  jungle:   "#22301f", canopyz:  "#22301f",
+  grove:    "#2a2436",
+  alpine:   "#3a4048", taigaz:   "#3a4048",
+};
+
+// Returns null far more often than not. When it does return, part5 has
+// everything it needs to draw: which tile they came out of, what colour they
+// are, and one entry per bird.
+const birdsFrom = (mapKey, zone, rows, x, y, step) => {
+  const col = BIRD_ZONES[zone];
+  if (!col || x == null || y == null) return null;
+
+  const at = (tx, ty) => {
+    const r = rows[ty];
+    return (!r || tx < 0 || tx >= r.length) ? "" : r.charAt(tx);
+  };
+
+  // Only the four tiles you could have reached out and touched. Diagonals
+  // would fire from trees you never actually came near.
+  const trees = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+    .map(([dx, dy]) => [x + dx, y + dy])
+    .filter(([tx, ty]) => at(tx, ty) === "T");
+  if (!trees.length) return null;
+
+  // Hash the whole key, not its length. Using mapKey.length meant any two maps
+  // whose names happen to be the same length produced identical flocks from a
+  // tree at the same coordinates - invisible in play, but it is the kind of
+  // accidental twinning that shows up later as "why do these two look the same".
+  let mh = 0;
+  for (let i = 0; i < mapKey.length; i++) mh = (Math.imul(mh, 31) + mapKey.charCodeAt(i)) | 0;
+  const salt = (mh ^ Math.imul(step, 3)) | 0;
+  const [tx, ty] = trees[Math.floor(ambSeed(step, salt) * trees.length) % trees.length];
+  if (ambSeed(tx * 71 + ty, salt) > 0.28) return null;   // most passes, nothing happens
+
+  // Away from you, so they break in the direction that makes sense. If the
+  // tree is directly above or below, there is no "away" horizontally and they
+  // pick a side instead.
+  const dirX = tx === x ? (ambSeed(step, tx + ty) < 0.5 ? -1 : 1) : Math.sign(tx - x);
+
+  const n = 2 + Math.floor(ambSeed(step, tx * 13 + ty) * 3);   // two to four
+  const birds = [];
+  for (let i = 0; i < n; i++) {
+    birds.push({
+      key: "b" + i,
+      dx: ((18 + ambSeed(i, tx * 5 + ty + step) * 26) * dirX).toFixed(1),
+      dy: (-(20 + ambSeed(i, ty * 7 + tx + step) * 22)).toFixed(1),
+      // They do not all leave at once. The stagger is most of what separates
+      // a flock from a firework.
+      delay: (ambSeed(i, step + tx + ty * 3) * 0.18).toFixed(2),
+      dur: (0.75 + ambSeed(i, step * 3 + tx) * 0.4).toFixed(2),
+      size: (7 + ambSeed(i, tx + ty * 11) * 3).toFixed(1),
+    });
+  }
+  return { tx, ty, col, birds };
+};
+
+console.log("[part67] birds live in", Object.keys(BIRD_ZONES).length, "zones");

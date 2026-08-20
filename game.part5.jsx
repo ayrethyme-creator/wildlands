@@ -266,11 +266,31 @@
       }
       .wl-print { animation: wlPrint 2.1s ease-out forwards; pointer-events: none; }
 
+      /* ---- birds out of a tree ----
+         Two moves at once, on nested elements, because a bird is two moves at
+         once. The outer one carries it up and away along its own vector, set
+         per bird from part67. The inner one squashes the chevron flat and back
+         about six times a second, which is the wingbeat - without it they are
+         arrowheads sliding across the screen, and the difference between that
+         and a bird is entirely in the flap. */
+      @keyframes wlBird {
+        0%   { transform: translate(0,0) rotate(0deg); opacity: 0; }
+        15%  { opacity: .92; }
+        100% { transform: translate(var(--bx,0), var(--by,0)) rotate(-14deg); opacity: 0; }
+      }
+      .wl-bird {
+        position: absolute; pointer-events: none;
+        animation: wlBird var(--bd,.9s) ease-out forwards;
+      }
+      @keyframes wlFlap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.4); } }
+      .wl-flap { animation: wlFlap .16s linear infinite; }
+
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
         .wl-arrive { display: none; }
         .amb { display: none; }
         .wl-print { display: none; }
+        .wl-bird { display: none; }
       }
     `}</style>
   );
@@ -994,6 +1014,41 @@
               </svg>
             </div>
           )}
+
+          {/* Birds out of the tree you just walked past. Keyed on the step so
+              each footfall gets at most one flush and the animation replays;
+              part67 decides whether anything happens at all, and returns null
+              on most steps. Skipped at night - these are songbirds, and a
+              songbird bursting out of a tree at midnight is a different and
+              much worse event. */}
+          {typeof birdsFrom === "function" && !m.dark && !S.swimming && phase !== "night" && (() => {
+            const b = birdsFrom(S.map, m.zone, m.rows, S.x, S.y, S.step || 0);
+            if (!b) return null;
+            return (
+              <div key={`birds:${S.map}:${S.step || 0}`} aria-hidden="true"
+                style={{
+                  position: "absolute", left: 0, top: 0, zIndex: 2, pointerEvents: "none",
+                  width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
+                  transform: `translate(${b.tx * 100}%, ${b.ty * 100}%)`,
+                }}>
+                {b.birds.map((bird) => (
+                  <div key={bird.key} className="wl-bird"
+                    style={{
+                      left: "50%", top: "38%",
+                      "--bx": bird.dx + "px", "--by": bird.dy + "px", "--bd": bird.dur + "s",
+                      animationDelay: bird.delay + "s",
+                    }}>
+                    <div className="wl-flap">
+                      <svg viewBox="0 0 12 8" style={{ width: bird.size + "px", height: "auto", display: "block" }}>
+                        <path d="M1 6 Q3.5 1 6 5 Q8.5 1 11 6" fill="none"
+                          stroke={b.col} strokeWidth="1.6" strokeLinecap="round" />
+                      </svg>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
 
           {/* Whatever is in the air here. Sits above the tiles and below the
               ranger, so a firefly can pass behind her but never over her face.
