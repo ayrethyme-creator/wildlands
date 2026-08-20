@@ -258,7 +258,10 @@ console.log("[part67] tracks laid on", placeTracks(), "maps");
 // with a way round it - and at most one of each kind per map, because a hive
 // every eight paces stops being a discovery and becomes wallpaper.
 const DRESSING = [
-  { ch: "\u2043", kind: "hive", zones: ["meadow", "savanna"],
+  { ch: "\u2043", kind: "hive", zones: ["savanna", "savannaz"],
+    // "meadow" again - the same zone that never existed, so in practice the
+    // hive has only ever appeared in savanna. Long Grass Savanna is the map
+    // that name was reaching for.
     line: "🍯 A hive on a rough stand, and the air busy around it. Somebody keeps these — the grass is trodden in a ring." },
   { ch: "\u2044", kind: "web", zones: ["jungle", "grove"],
     line: "🕸️ A web strung between two trunks, wet with morning. The spider sits dead centre and does not move as you pass." },
