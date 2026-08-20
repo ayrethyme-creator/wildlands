@@ -234,7 +234,15 @@ const INTRO_AT = {
     const starts = [...(arrivals[mapKey] || [])];
     const ok = (x, y) => {
       const row = M.rows[y];
-      return row && WALKABLE.includes(row[x] || "");
+      // `row[x] || ""` past the end of a row gives "", and includes("") is
+      // true for every string - so every tile off the edge of the map tested
+      // as walkable and the flood fill escaped into open space. It still
+      // returned a plausible-looking set, which is why this survived: the
+      // reachable region was right in the middle and wrong at the borders, so
+      // findings could be placed against an edge the player cannot get to.
+      if (!row || x < 0 || x >= row.length) return false;
+      const c = row[x];
+      return !!c && WALKABLE.includes(c);
     };
     starts.forEach((s) => {
       const [sx, sy] = s.split(",").map(Number);

@@ -246,3 +246,52 @@ const DRESSING_LINE = {};
 DRESSING.forEach((d) => { DRESSING_LINE[d.ch] = d.line; });
 
 console.log("[part67] set dressing placed:", placeDressing());
+
+// ---------- SEAL THE POCKETS ----------
+// Seven maps carried a single square of floor with no way in: six share one
+// corner of a segment template where a tree closes off the last tile against
+// the border, and Beeloud Clearing has one walled in behind two hand-placed
+// people.
+//
+// Nobody can be trapped in one, because nobody can reach one to stand there.
+// The harm is subtler: they are floor, so anything that looks for somewhere to
+// put a finding, a person or a lantern can choose one, and whatever goes there
+// can never be collected. part65 was doing exactly that until its bounds check
+// was fixed a moment ago.
+//
+// Rather than hand-edit seven maps and hope no future one grows an eighth, any
+// floor tile with no walkable neighbour at all becomes terrain. That is a
+// pocket by definition - a tile you could only stand on by teleporting - and
+// filling it in costs the player nothing.
+const sealPockets = () => {
+  if (typeof MAPS === "undefined") return 0;
+  const WALK = ".gGp*W" + (typeof MAP_MARKS !== "undefined" ? MAP_MARKS : "");
+  let sealed = 0;
+  Object.keys(MAPS).forEach((mk) => {
+    const m = MAPS[mk];
+    if (!m || !m.rows) return;
+    const at = (x, y) => {
+      const r = m.rows[y];
+      if (!r || x < 0 || x >= r.length) return "";
+      return r.charAt(x);
+    };
+    const walkable = (x, y) => { const c = at(x, y); return c !== "" && WALK.includes(c); };
+    for (let y = 0; y < m.rows.length; y++) {
+      for (let x = 0; x < m.rows[y].length; x++) {
+        if (!walkable(x, y)) continue;
+        const open = [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => walkable(x + dx, y + dy));
+        if (open) continue;
+        // Fill with whatever is already crowding it, so it disappears rather
+        // than becoming a lone rock in the middle of a tree line.
+        const nb = [[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dy]) => at(x + dx, y + dy))
+          .filter((c) => c === "T" || c === "^");
+        const fill = nb[0] || "T";
+        m.rows = m.rows.map((r, ry) => ry === y ? r.slice(0, x) + fill + r.slice(x + 1) : r);
+        sealed++;
+      }
+    }
+  });
+  return sealed;
+};
+
+console.log("[part67] unreachable floor pockets sealed:", sealPockets());
