@@ -64,10 +64,13 @@ Pushing: plain `git push` hangs. Use
 
 ## Where things stand
 
-All work is committed and pushed; the tree is clean at `54111d1`.
+All work is committed and pushed; the tree is clean at `f228af5`.
 
 Recent, newest first:
 
+- `f228af5` birds scattering out of trees as you pass
+- `cd16c74` ambient air for the twelve zones that had none
+- `7992469` fixed nine fireflies keyed to a zone that does not exist
 - `54111d1` water glint on kelp, reef, ocean and polar ice
 - `fdf0725` fixed the reachability test and sealed 15 unreachable floor pockets
 - `f54c763` made the track/hive/web/nest marks walkable — this fixed "I'm stuck"
@@ -83,9 +86,15 @@ Recent, newest first:
 
 **Effects Ayr approved and asked for, not yet built:**
 
-- birds scattering out of trees as you pass
 - puddles reflecting lantern light
 - seasonal fruit
+
+Birds are done (`f228af5`). If you extend that pattern, the trap is worth
+knowing: `"T"` is not a tree. It is the zone's obstacle glyph, and the palette
+in part3 decides what it looks like - a cactus in the desert, a rock on the
+highveld and in the Outback, ice in the polar sea, coral on the reef. Anything
+keyed to "trees" has to name the zones it means. `BIRD_ZONES` in part67 is the
+list.
 
 She explicitly excluded berry bushes — *"that's a mechanic from Pokémon I don't
 want yet."* Do not build that one.
@@ -115,6 +124,14 @@ C:\Users\ayr\AppData\Local\Temp\claude\C--Claude-wildlands\
 ComfyUI. Progress is in `run_all_168.log` and the `batch_*_log.json` files.
 Ayr has standing permission for sprites to be committed and pushed as they
 land, without asking first.
+
+**A whole class of bug worth checking for.** `AMBIENT` in part67 had nine
+fireflies keyed to a zone called `"meadow"`, and no map has ever used that
+name, so they had never once been drawn - the example the part's own opening
+comment leads with. Nothing warns you: a lookup on a key that does not exist
+just returns nothing and the feature is silently absent. Any table keyed by
+zone name is worth checking against `PALS` and against the zones the maps
+actually use, which are not the same set. Both were wrong here.
 
 **Smaller things:**
 
