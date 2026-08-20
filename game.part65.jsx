@@ -617,6 +617,54 @@ const INTRO_AT = {
     WALK_OF[a].forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
   });
 
+  // ---- and finally, put every walk in the order it is actually walked ----
+  //
+  // The lists above are written by hand, and a hand-written list encodes where
+  // the writer thinks the story starts rather than where the player comes in
+  // from. SEA_WALK had the polar bear findings running "out from the ice" -
+  // polar sea, the deep, kelp, reef - which reads beautifully and is backwards,
+  // because nobody arrives at the ice. Every route into that water is a door
+  // off Tidewater Cove, so a player walking out of the cove met finding four on
+  // the reef before finding one out on the floes. That is exactly the fault
+  // Ayr reported, and I had already seen it in a diagnostic and talked myself
+  // out of it as a branch being walked in a sensible order. It was not.
+  //
+  // Sorting by real distance from the person makes the fault unrepresentable
+  // rather than fixed: a later finding can never sit closer to the quest-giver
+  // than an earlier one, whatever anybody writes in the tables above. Roads
+  // already run outward so this changes nothing there; it only straightens the
+  // hubs and the sea, where the walk is a set of doors rather than a corridor.
+  //
+  // The sort is stable, so screens the same distance out keep the order they
+  // were written in - which is where the thematic ordering still lives.
+  const hopsFrom = (start) => {
+    const d = { [start]: 0 };
+    let front = [start];
+    while (front.length) {
+      const next = [];
+      front.forEach((k) => {
+        const M = MAPS[k];
+        if (!M || !M.exits) return;
+        Object.values(M.exits).forEach((e) => {
+          if (!e || e.map == null || !MAPS[e.map] || d[e.map] !== undefined) return;
+          d[e.map] = d[k] + 1;
+          next.push(e.map);
+        });
+      });
+      front = next;
+    }
+    return d;
+  };
+
+  arcsToPlace.forEach((a) => {
+    const walk = WALK_OF[a];
+    if (!walk || walk.length < 2) return;
+    const d = hopsFrom(introOf[a]);
+    // Anything the flood cannot reach sorts to the back rather than to the
+    // front, so an unreachable screen never becomes finding number one.
+    WALK_OF[a] = walk.slice().sort((p, q) => (d[p] == null ? 99 : d[p]) - (d[q] == null ? 99 : d[q]));
+  });
+
   Object.entries(ARC_CAST).forEach(([arcId, cast]) => {
     const A = ARCS[arcId];
     if (!A) { skipped.push(arcId + ":no-arc"); return; }
