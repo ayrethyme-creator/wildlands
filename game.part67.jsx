@@ -608,3 +608,91 @@ const fruitFor = (mapKey, rows, zone, month) => {
 };
 
 console.log("[part67] fruit seasons written for", Object.keys(FRUIT).length, "zones");
+
+// ---------- MORE OF WHAT WAS ALREADY THERE ----------
+// Ayr, on the first attempt at filling the towns back up: "I don't like the
+// random objects added to the towns. can you just add more of what was there
+// before? flowers, flames, mushrooms, stars, etc."
+//
+// She is describing one tile. "*" is the zone's own decoration and the palette
+// decides what it is - daisies in the savanna, lotus in the fen, cactus in the
+// desert, mushrooms in the grove, flame in the volcanic country, snow on the
+// alpine, a star at the summit. Every one of the things she listed is already
+// in the game and is already this character. Nothing new needs inventing, and
+// nothing new should be: a town filled with its own zone's decoration still
+// looks like that town, which is exactly what the crates and toolboxes did not.
+//
+// Unstacking the buildings took 164 duplicate tiles out of nine towns and left
+// the floor bare. This puts ground cover back on it - ten of the zone's own
+// decoration per town, plus one more patch of lawn, both of which the towns
+// were already built from.
+const BLOOM_PER_TOWN = 10;
+
+const bloomTowns = () => {
+  if (typeof MAPS === "undefined") return 0;
+  let added = 0;
+
+  Object.keys(MAPS).filter((k) => /^town[1-9]$/.test(k)).forEach((mk) => {
+    const m = MAPS[mk];
+    if (!m.rows) return;
+    const H = m.rows.length, W = m.rows[0].length;
+
+    let mh = 0;
+    for (let i = 0; i < mk.length; i++) mh = (Math.imul(mh, 31) + mk.charCodeAt(i)) | 0;
+
+    // Nowhere a traveller is put down, and not in a doorway.
+    const clear = [];
+    if (typeof LAND !== "undefined") {
+      Object.keys(LAND).forEach((k) => clear.push(LAND[k].join(",")));
+    }
+    (m.exits ? Object.keys(m.exits) : []).forEach((e) => clear.push(e));
+    const blocked = (x, y) => clear.some((c) => {
+      const p = c.split(",");
+      return Math.abs(Number(p[0]) - x) + Math.abs(Number(p[1]) - y) <= 1;
+    });
+
+    // Seeded with the decoration the town already had, or the spacing rule
+    // below only holds against tiles this pass placed and a new flower can
+    // still land against an old one - which is how Cinder Town ended up with
+    // two flames side by side on the first run.
+    const put = [];
+    m.rows.forEach((r, ry) => {
+      for (let rx = 0; rx < r.length; rx++) if (r.charAt(rx) === "*") put.push([rx, ry]);
+    });
+
+    const free = (x, y) => {
+      const r = m.rows[y];
+      return r && x > 0 && x < W - 1 && y > 0 && y < H - 1 && r.charAt(x) === ".";
+    };
+    const set = (x, y, ch) => {
+      m.rows = m.rows.map((r, ry) => ry === y ? r.slice(0, x) + ch + r.slice(x + 1) : r);
+    };
+
+    // One more patch of lawn, the same 2x2 the towns are already built from.
+    for (let t = 0; t < 60; t++) {
+      const x = 1 + Math.floor(ambSeed(t, mh ^ 5501) * (W - 3));
+      const y = 1 + Math.floor(ambSeed(t, mh ^ 8821) * (H - 3));
+      const cells = [[x, y], [x + 1, y], [x, y + 1], [x + 1, y + 1]];
+      if (!cells.every((c) => free(c[0], c[1]) && !blocked(c[0], c[1]))) continue;
+      cells.forEach((c) => { set(c[0], c[1], "g"); put.push(c); added++; });
+      break;
+    }
+
+    // Then the decoration itself, scattered rather than bedded - kept a tile
+    // apart so it reads as growing through the town rather than as a carpet
+    // laid over it.
+    let n = 0;
+    for (let t = 0; t < 400 && n < BLOOM_PER_TOWN; t++) {
+      const x = 1 + Math.floor(ambSeed(t * 2 + 1, mh ^ 1487) * (W - 2));
+      const y = 1 + Math.floor(ambSeed(t * 2 + 2, mh ^ 2939) * (H - 2));
+      if (!free(x, y) || blocked(x, y)) continue;
+      if (put.some((p) => Math.abs(p[0] - x) + Math.abs(p[1] - y) < 2)) continue;
+      set(x, y, "*");
+      put.push([x, y]);
+      n++; added++;
+    }
+  });
+  return added;
+};
+
+console.log("[part67] town ground cover added:", bloomTowns());
