@@ -21,7 +21,8 @@ const AMBIENT = {
   meadow:   [{ kind: "fly",   when: "night", n: 9,  c: "#ffe9a3" }],
   savanna:  [{ kind: "fly",   when: "night", n: 7,  c: "#ffe1a0" },
              { kind: "dust",  when: "day",   n: 6,  c: "#e8d9b8" }],
-  wetland:  [{ kind: "fly",   when: "night", n: 10, c: "#d8f0a8" }],
+  wetland:  [{ kind: "fly",   when: "night", n: 10, c: "#d8f0a8" },
+             { kind: "glint", when: "day",   n: 6,  c: "#eaf8ff" }],
   jungle:   [{ kind: "fly",   when: "night", n: 8,  c: "#bff0c0" },
              { kind: "leaf",  when: "day",   n: 5,  c: "#5e8a58" }],
   grove:    [{ kind: "fly",   when: "night", n: 12, c: "#c8f0a0" },
@@ -31,6 +32,14 @@ const AMBIENT = {
   desert:   [{ kind: "dust",  when: "day",   n: 8,  c: "#e8d0a3" }],
   volcanic: [{ kind: "ember", when: "any",   n: 9,  c: "#ffb055" }],
   highveld: [{ kind: "dust",  when: "day",   n: 5,  c: "#d9cbb0" }],
+  // Water catches the light. The shimmer band already travelling across a lake
+  // says the surface is moving; a glint says the sun is on it. Daylight only -
+  // a sparkle at midnight is a torch, not a reflection - and slow, because a
+  // fast twinkle reads as a broken pixel.
+  kelpz:    [{ kind: "glint", when: "day", n: 7, c: "#eaffff" }],
+  reefz:    [{ kind: "glint", when: "day", n: 8, c: "#f2ffff" }],
+  oceanz:   [{ kind: "glint", when: "day", n: 6, c: "#e8f8ff" }],
+  polarz:   [{ kind: "glint", when: "day", n: 5, c: "#f4ffff" }],
 };
 
 // Deterministic scatter. A firefly that jumps to a new place on every redraw is
@@ -50,7 +59,8 @@ const ambientSpecks = (spec, salt) => {
     const y = ambSeed(i, salt + 17) * 100;
     const dur = 5 + ambSeed(i, salt + 33) * 9;
     const delay = -ambSeed(i, salt + 51) * dur;      // negative: already in motion
-    const size = spec.kind === "snow" ? 2 + ambSeed(i, salt + 7) * 2.4
+    const size = spec.kind === "glint" ? 1.4 + ambSeed(i, salt + 7) * 1.6
+      : spec.kind === "snow" ? 2 + ambSeed(i, salt + 7) * 2.4
       : spec.kind === "leaf" ? 3 + ambSeed(i, salt + 7) * 2
       : 1.8 + ambSeed(i, salt + 7) * 1.8;
     out.push({
@@ -65,7 +75,7 @@ const ambientSpecks = (spec, salt) => {
         animationDuration: dur.toFixed(2) + "s",
         animationDelay: delay.toFixed(2) + "s",
         // Fireflies and embers glow; leaves, snow and dust are lit by the sky.
-        boxShadow: (spec.kind === "fly" || spec.kind === "ember")
+        boxShadow: (spec.kind === "fly" || spec.kind === "ember" || spec.kind === "glint")
           ? `0 0 ${(size * 2.4).toFixed(1)}px ${spec.c}` : undefined,
         borderRadius: spec.kind === "leaf" ? "60% 10% 60% 10%" : "50%",
       },

@@ -230,6 +230,19 @@
       }
       .amb-dust { animation-name: ambDust; }
 
+      /* A glint is the odd one out: it does not travel at all. Sun on water is
+         a fixed point that flares when the surface tilts into the light and is
+         gone again, so this is almost entirely dark with one short spike. The
+         long dead stretch matters - if they were lit most of the time the lake
+         would look like it was full of fireflies at noon. */
+      @keyframes ambGlint {
+        0%,  70% { transform: scale(.5); opacity: 0; }
+        80%      { transform: scale(1);  opacity: .95; }
+        90%      { transform: scale(.8); opacity: .35; }
+        100%     { transform: scale(.5); opacity: 0; }
+      }
+      .amb-glint { animation-name: ambGlint; animation-timing-function: ease-out; }
+
       /* Embers rise, because heat does. */
       @keyframes ambEmber {
         0%   { transform: translate(0,0) scale(1);        opacity: 0; }
