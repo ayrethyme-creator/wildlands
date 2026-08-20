@@ -15,78 +15,114 @@
 // What is in the air where, and when. `when` is checked against the day phase,
 // so a firefly is a night animal and a falling leaf is not.
 //
-// Kept deliberately thin: two or three specks per screen reads as air moving.
-// Twenty reads as a screensaver, and on a phone it reads as a fault.
+// Counts were kept deliberately thin at first - two or three specks per screen
+// reads as air moving, and twenty reads as a screensaver. Ayr has since asked
+// for more of it, and for something in the air on every screen rather than only
+// on the ones that happened to have weather: "increase the pretty floaty things
+// that are in the later towns... add more fireflies and lanterns on every
+// screen, but balanced."
+//
+// So the ceiling has moved up rather than come off. Nothing here goes past
+// eighteen, the sparse zones are lifted rather than the busy ones doubled, and
+// every zone now has something after dark - the test being that no screen in
+// the game is dead air at night.
 const AMBIENT = {
   // "meadow" was never a zone. No map has ever used that name, so these nine
   // fireflies - the example this whole part opens with - have never once been
   // drawn. The picture was right and the key was wrong: long grass after dark
   // is Long Grass Savanna, which until now had nothing in its air at all.
-  savannaz: [{ kind: "fly",   when: "night", n: 9,  c: "#ffe9a3" }],
-  savanna:  [{ kind: "fly",   when: "night", n: 7,  c: "#ffe1a0" },
+  savannaz: [{ kind: "fly",   when: "night", n: 12, c: "#ffe9a3" },
+             { kind: "dust",  when: "day",   n: 5,  c: "#e4d8b4" }],
+  savanna:  [{ kind: "fly",   when: "night", n: 10, c: "#ffe1a0" },
              { kind: "dust",  when: "day",   n: 6,  c: "#e8d9b8" }],
-  wetland:  [{ kind: "fly",   when: "night", n: 10, c: "#d8f0a8" },
+  wetland:  [{ kind: "fly",   when: "night", n: 14, c: "#d8f0a8" },
              { kind: "glint", when: "day",   n: 6,  c: "#eaf8ff" }],
-  jungle:   [{ kind: "fly",   when: "night", n: 8,  c: "#bff0c0" },
+  jungle:   [{ kind: "fly",   when: "night", n: 11, c: "#bff0c0" },
              { kind: "leaf",  when: "day",   n: 5,  c: "#5e8a58" }],
-  grove:    [{ kind: "fly",   when: "night", n: 12, c: "#c8f0a0" },
-             { kind: "leaf",  when: "day",   n: 8,  c: "#b8794a" }],
-  alpine:   [{ kind: "snow",  when: "any",   n: 14, c: "#ffffff" }],
-  summit:   [{ kind: "snow",  when: "any",   n: 10, c: "#eef4fa" }],
-  desert:   [{ kind: "dust",  when: "day",   n: 8,  c: "#e8d0a3" }],
-  volcanic: [{ kind: "ember", when: "any",   n: 9,  c: "#ffb055" }],
-  highveld: [{ kind: "dust",  when: "day",   n: 5,  c: "#d9cbb0" }],
+  // The four zones Ayr means by "the later towns" - Gloam, Frost, Cinder and
+  // the Citadel. These are the places whose weather is the reason to stand
+  // still and look at them, so they carry the most.
+  grove:    [{ kind: "fly",   when: "night", n: 16, c: "#c8f0a0" },
+             { kind: "leaf",  when: "day",   n: 10, c: "#b8794a" }],
+  alpine:   [{ kind: "snow",  when: "any",   n: 18, c: "#ffffff" }],
+  summit:   [{ kind: "snow",  when: "any",   n: 15, c: "#eef4fa" }],
+  volcanic: [{ kind: "ember", when: "any",   n: 14, c: "#ffb055" }],
+
+  // Dry country was blowing dust all day and then going completely dead at
+  // dark - Dune Town and Crag Town had nothing in the air at night at all.
+  // Desert nights are not empty; they are when almost everything out there
+  // actually moves.
+  desert:   [{ kind: "dust",  when: "day",   n: 8,  c: "#e8d0a3" },
+             { kind: "fly",   when: "night", n: 9,  c: "#ffdca0" }],
+  highveld: [{ kind: "dust",  when: "day",   n: 6,  c: "#d9cbb0" },
+             { kind: "fly",   when: "night", n: 10, c: "#ffe6b0" }],
   // Water catches the light. The shimmer band already travelling across a lake
   // says the surface is moving; a glint says the sun is on it. Daylight only -
   // a sparkle at midnight is a torch, not a reflection - and slow, because a
   // fast twinkle reads as a broken pixel.
-  kelpz:    [{ kind: "glint", when: "day", n: 7, c: "#eaffff" }],
-  reefz:    [{ kind: "glint", when: "day", n: 8, c: "#f2ffff" }],
-  oceanz:   [{ kind: "glint", when: "day", n: 6, c: "#e8f8ff" }],
-  polarz:   [{ kind: "glint", when: "day", n: 5, c: "#f4ffff" }],
+  // Sun on the water by day, and the water lighting itself at night. Phosphor-
+  // escence is real, it is the same wandering breathing behaviour as a firefly,
+  // and it means the reef and the ice stop going dead the moment the sun does.
+  kelpz:    [{ kind: "glint", when: "day",   n: 7,  c: "#eaffff" },
+             { kind: "fly",   when: "night", n: 8,  c: "#8ce8d8" }],
+  reefz:    [{ kind: "glint", when: "day",   n: 8,  c: "#f2ffff" },
+             { kind: "fly",   when: "night", n: 9,  c: "#8ce0f0" }],
+  oceanz:   [{ kind: "glint", when: "day",   n: 6,  c: "#e8f8ff" },
+             { kind: "fly",   when: "night", n: 7,  c: "#88d4f4" }],
+  polarz:   [{ kind: "glint", when: "day",   n: 5,  c: "#f4ffff" },
+             { kind: "fly",   when: "night", n: 6,  c: "#a8e4ff" }],
 
   // The wider regions had nothing in their air at all - every map added after
   // the original eight biomes was silent. Same rules as above: one kind per
   // zone unless the place genuinely changes character after dark, and counts
   // low enough that you notice the air rather than the specks.
-  canopyz:  [{ kind: "leaf",  when: "day",   n: 5,  c: "#4c7a3c" },
-             { kind: "fly",   when: "night", n: 8,  c: "#c0f0b8" }],
-  outbackz: [{ kind: "dust",  when: "day",   n: 8,  c: "#d9a06c" }],
-  tundraz:  [{ kind: "snow",  when: "any",   n: 7,  c: "#f4fafe" }],
-  taigaz:   [{ kind: "snow",  when: "any",   n: 5,  c: "#e8f0f6" }],
-  fossil:   [{ kind: "dust",  when: "day",   n: 6,  c: "#ded0b0" }],
+  canopyz:  [{ kind: "leaf",  when: "day",   n: 6,  c: "#4c7a3c" },
+             { kind: "fly",   when: "night", n: 11, c: "#c0f0b8" }],
+  outbackz: [{ kind: "dust",  when: "day",   n: 8,  c: "#d9a06c" },
+             { kind: "fly",   when: "night", n: 9,  c: "#ffd9a0" }],
+  tundraz:  [{ kind: "snow",  when: "any",   n: 10, c: "#f4fafe" }],
+  taigaz:   [{ kind: "snow",  when: "any",   n: 8,  c: "#e8f0f6" }],
+  fossil:   [{ kind: "dust",  when: "day",   n: 6,  c: "#ded0b0" },
+             { kind: "fly",   when: "night", n: 8,  c: "#ffe0ac" }],
 
   // Ember Hollow is the only cave that is lit. The other two are `dark`, and
   // the render skips ambient there entirely, so this reaches exactly the one
   // map it should.
-  cavezone: [{ kind: "ember", when: "any",   n: 5,  c: "#ff9a4a" }],
+  cavezone: [{ kind: "ember", when: "any",   n: 8,  c: "#ff9a4a" }],
 
   // No sun reaches the Midnight Zone, so a glint would be a lie down there.
   // What is actually in that water is animals making their own light, which is
   // the firefly behaviour exactly - wandering, breathing, lit from within.
-  abyssz:   [{ kind: "fly",   when: "any",   n: 7,  c: "#7fd8ff" }],
+  abyssz:   [{ kind: "fly",   when: "any",   n: 10, c: "#7fd8ff" }],
 
   // The rifts are not weather. Slow motes, always, in a colour nothing else
   // in the game uses, because these places should not feel like anywhere.
-  rift:     [{ kind: "fly",   when: "any",   n: 9,  c: "#cbb0ff" }],
+  rift:     [{ kind: "fly",   when: "any",   n: 12, c: "#cbb0ff" }],
 
   // The Vigil is a memorial to animals that are gone, and it should not
   // sparkle. Grey dust, very few, drifting in still air - the look of a room
   // nobody has come into for a long time.
-  vigilz:   [{ kind: "dust",  when: "any",   n: 4,  c: "#9aa0ac" }],
+  vigilz:   [{ kind: "dust",  when: "any",   n: 5,  c: "#9aa0ac" }],
 
   // "What We Kept" is the far end of that walk, and the only one of those maps
   // where something was saved. It is the one place in the region with living
   // light in it, and it is the whole point of the region that it looks
   // different from the nine rooms before it.
-  hopez:    [{ kind: "fly",   when: "night", n: 10, c: "#b8f0a0" }],
+  hopez:    [{ kind: "fly",   when: "night", n: 13, c: "#b8f0a0" },
+             { kind: "leaf",  when: "day",   n: 4,  c: "#6f9a5c" }],
 
   // Hearthside is somebody's back garden after dark, full of animals that live
   // with people. Fireflies over a lawn, warmer than the wild ones.
-  hearth:   [{ kind: "fly",   when: "night", n: 7,  c: "#ffddaa" }],
+  hearth:   [{ kind: "fly",   when: "night", n: 10, c: "#ffddaa" },
+             { kind: "dust",  when: "day",   n: 5,  c: "#e8dcc0" }],
 
-  // `arena` is deliberately absent: the battle outposts are rooms, and rooms
-  // do not have weather.
+  // The battle outposts were left out on the grounds that rooms do not have
+  // weather. Wrong: they are not rooms. Thornwood Apiary and Windward Eyrie are
+  // walled yards with lawn in them, open to the sky, and leaving them out was
+  // the reason four screens still had dead air after everything else had been
+  // filled. Small enclosures, so small counts.
+  arena:    [{ kind: "fly",   when: "night", n: 8,  c: "#ffe6b0" },
+             { kind: "dust",  when: "day",   n: 4,  c: "#e4dcc4" }],
 };
 
 // Deterministic scatter. A firefly that jumps to a new place on every redraw is
@@ -696,3 +732,125 @@ const bloomTowns = () => {
 };
 
 console.log("[part67] town ground cover added:", bloomTowns());
+
+// ---------- A LIGHT ON EVERY SCREEN ----------
+// Ayr: "add more fireflies and lanterns on every screen, but balanced."
+//
+// The fireflies are in AMBIENT above. The lanterns needed care, because the
+// wilds look lit and are not. part36 drops a "¡" beside the trainer on each
+// wild map and calls it a lantern, but part5 draws "¡" as a fallen log and
+// never lights it - that was the fix for 241 glowing logs appearing in the
+// woods the moment the tiles were drawn properly. So every real light in the
+// game is one of the 37 lamp posts, and all 37 are inside towns.
+//
+// Rather than relight the logs, which would put the 241 straight back and undo
+// the thinning Ayr asked for, this adds the light itself: one lamp post per
+// wild screen, two on the big ones. The logs stay logs and nothing is removed.
+//
+// Skipped: anywhere that already has a post, the dark caves, which have their
+// own torches and are supposed to be dark, and open water, where a lamp post
+// standing in the sea would be a joke. The sea got phosphorescence instead.
+//
+// A lamp post is SOLID. part36 defines WALK_EXTRA = "¦¡" meaning to make posts
+// and logs walkable, and nothing in the game has ever read that variable, so
+// both are walls. That makes dropping one onto a route a way to seal a corridor
+// and strand somebody - the "I'm stuck" fault again - so every placement here
+// is checked: put the post down, re-flood the map, and take it back up again
+// unless the only tile that stopped being reachable is the one it stands on.
+const LAMP_NONE = { reefz: 1, oceanz: 1, abyssz: 1, kelpz: 1, polarz: 1 };
+const LAMP_WALK = ".gGp*W" + (typeof MAP_MARKS !== "undefined" ? MAP_MARKS : "");
+
+const lightTheWilds = () => {
+  if (typeof MAPS === "undefined") return 0;
+
+  const landings = {};
+  Object.keys(MAPS).forEach((mk) => {
+    const m = MAPS[mk];
+    if (!m || !m.exits) return;
+    Object.keys(m.exits).forEach((k) => {
+      const e = m.exits[k];
+      if (!e || e.map == null) return;
+      (landings[e.map] = landings[e.map] || []).push(e.x + "," + e.y);
+    });
+  });
+
+  // How much of a map you can actually stand on, flooded from where the world
+  // puts you down.
+  const reach = (m, starts) => {
+    const seen = {};
+    let front = [];
+    starts.forEach((c) => {
+      const p = c.split(","), x = Number(p[0]), y = Number(p[1]);
+      const r = m.rows[y];
+      if (r && LAMP_WALK.indexOf(r.charAt(x)) >= 0 && !seen[c]) { seen[c] = 1; front.push(c); }
+    });
+    while (front.length) {
+      const next = [];
+      front.forEach((c) => {
+        const p = c.split(","), x = Number(p[0]), y = Number(p[1]);
+        [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach((d) => {
+          const nx = x + d[0], ny = y + d[1], r = m.rows[ny];
+          if (!r || nx < 0 || nx >= r.length) return;
+          if (LAMP_WALK.indexOf(r.charAt(nx)) < 0) return;
+          const k = nx + "," + ny;
+          if (!seen[k]) { seen[k] = 1; next.push(k); }
+        });
+      });
+      front = next;
+    }
+    return Object.keys(seen).length;
+  };
+
+  let lit = 0, refused = 0;
+  Object.keys(MAPS).forEach((mk) => {
+    const m = MAPS[mk];
+    if (!m || !m.rows || !m.zone) return;
+    if (/^town/.test(mk) || mk === "hearthgate") return;      // towns already have posts
+    if (m.dark || LAMP_NONE[m.zone]) return;
+    if (m.rows.some((r) => r.indexOf("¦") >= 0)) return;      // already lit
+
+    const H = m.rows.length, W = m.rows[0].length;
+    let mh = 0;
+    for (let i = 0; i < mk.length; i++) mh = (Math.imul(mh, 31) + mk.charCodeAt(i)) | 0;
+
+    const near = landings[mk] || [];
+    if (!near.length) return;                                 // nowhere to flood from
+    const before = reach(m, near);
+    if (!before) return;
+
+    const blocked = (x, y) => near.some((c) => {
+      const p = c.split(",");
+      return Math.abs(Number(p[0]) - x) + Math.abs(Number(p[1]) - y) <= 1;
+    });
+
+    // Two on a big screen, one on a small one. A small route with two posts on
+    // it stops being country with a light in it and starts being a street.
+    const want = (W * H >= 220) ? 2 : 1;
+    const put = [];
+    for (let t = 0; t < 400 && put.length < want; t++) {
+      const x = 1 + Math.floor(ambSeed(t * 2 + 1, mh ^ 6113) * (W - 2));
+      const y = 1 + Math.floor(ambSeed(t * 2 + 2, mh ^ 9377) * (H - 2));
+      const row = m.rows[y];
+      if (!row || row.charAt(x) !== ".") continue;
+      if (blocked(x, y)) continue;
+      if (typeof TRAINERS !== "undefined" && TRAINERS[mk + ":" + x + "," + y]) continue;
+      if (put.some((q) => Math.abs(q[0] - x) + Math.abs(q[1] - y) < 7)) continue;
+
+      const saved = m.rows[y];
+      m.rows = m.rows.map((rr, ry) => ry === y ? rr.slice(0, x) + "¦" + rr.slice(x + 1) : rr);
+      // The post itself stops being floor. Anything else that stopped being
+      // reachable was sealed off behind it, and that is not acceptable.
+      if (reach(m, near) === before - 1 - put.length) {
+        put.push([x, y]);
+        lit++;
+      } else {
+        m.rows = m.rows.map((rr, ry) => ry === y ? saved : rr);
+        refused++;
+      }
+    }
+  });
+  if (refused) console.log("[part67] lamp spots refused for sealing a way through:", refused);
+  return lit;
+};
+
+console.log("[part67] lamp posts added to the wilds:", lightTheWilds());
