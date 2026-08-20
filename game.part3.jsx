@@ -450,6 +450,15 @@ const TILE_STYLE = (ch, pal) => {
     case "⁅": return { bg: pal.ground, em: "🪹" };
     case "¦": return { bg: pal.ground, em: "🔦" };
     case "¡": return { bg: pal.ground, em: "🪵" };
+    // Town furniture. The objects are ordinary on purpose - a crate is a crate
+    // in every town in the world - and what makes each one belong to its road
+    // is the line you get for walking into it, which part67 writes per tile.
+    case "⁆": return { bg: pal.ground, em: "📦" };
+    case "⁇": return { bg: pal.ground, em: "🧺" };
+    case "⁈": return { bg: pal.ground, em: "🛢️" };
+    case "⁉": return { bg: pal.ground, em: "🪣" };
+    case "⁊": return { bg: pal.ground, em: "🪑" };
+    case "⁋": return { bg: pal.ground, em: "🧰" };
     default: return { bg: pal.ground, em: "" };
   }
 };

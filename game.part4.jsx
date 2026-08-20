@@ -758,7 +758,12 @@ function Wildlands() {
       // through it rather than a single clump twitching under your feet.
       // Stepping onto one reads it. Same words, no wall.
       if (typeof MAP_MARKS !== "undefined" && MAP_MARKS.indexOf(ch) >= 0) {
-        const line = (typeof DRESSING_LINE !== "undefined" && DRESSING_LINE[ch])
+        // Per-tile first. The town objects share six characters between nine
+        // towns, so the crate in Marula Town and the crate in Gloam Town are
+        // the same tile and must not say the same thing; only the coordinates
+        // tell them apart.
+        const line = (typeof SPOT_LINE !== "undefined" && SPOT_LINE[st.map + ":" + nx + "," + ny])
+          || (typeof DRESSING_LINE !== "undefined" && DRESSING_LINE[ch])
           || (ch === "⁂" && typeof readTracks === "function" ? readTracks(st.map, st) : null);
         if (line) { const t = setTimeout(() => say(line), 120); timers.current.push(t); }
       }
