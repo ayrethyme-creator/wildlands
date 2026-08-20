@@ -434,3 +434,93 @@ const birdsFrom = (mapKey, zone, rows, x, y, step) => {
 };
 
 console.log("[part67] birds live in", Object.keys(BIRD_ZONES).length, "zones");
+
+// ---------- PUDDLES ----------
+// Also from Ayr's list: "puddles reflecting lantern light."
+//
+// The reflecting is the whole point, so a puddle is only worth putting down
+// where there is something to reflect. The lights in this world are the 37 lamp
+// posts - the "¦" tiles, lit from dusk to dawn - so puddles are laid beside
+// those and nowhere else. A puddle out in unlit country is a grey smear.
+//
+// Not every lamp gets one. Standing water under every light in town reads as a
+// flooded street rather than weather that has been and gone, so about half of
+// them do, chosen the same deterministic way as everything else here.
+//
+// And not in every zone. Water does not stand on sand or on hot rock.
+//
+// Named as the places it CANNOT form rather than the places it can, which is
+// the opposite of how AMBIENT and BIRD_ZONES are written, and deliberately so.
+// An allow-list of zones goes quietly dead: the first draft of this listed
+// wetland, savannaz, canopyz, taigaz and tundraz, and not one of those has a
+// lamp post anywhere in it, so five of the eleven entries could never have
+// produced anything - the same silent nothing as the fireflies keyed to a
+// "meadow" that does not exist. A deny-list cannot fail that way. Anywhere a
+// lamp is ever added gets its puddles for free, and the only thing that needs
+// maintaining is the short list of country where standing water would be a lie.
+const PUDDLE_DRY = {
+  desert: 1, outbackz: 1, volcanic: 1, summit: 1, fossil: 1, cavezone: 1,
+  // Underwater zones: the whole screen is water, so a puddle means nothing.
+  reefz: 1, oceanz: 1, abyssz: 1, kelpz: 1, polarz: 1,
+};
+
+// Ground a puddle can lie on. Bare earth and paths only: a puddle drawn over
+// tall grass floats on top of the blades, because the grass is a background
+// image filling the whole cell and the puddle would sit above it.
+const PUDDLE_GROUND = ".p*";
+
+const puddlesFor = (mapKey, rows, zone) => {
+  if (PUDDLE_DRY[zone] || !rows || !rows.length) return null;
+
+  const lamps = [];
+  for (let y = 0; y < rows.length; y++) {
+    for (let x = 0; x < rows[y].length; x++) {
+      if (rows[y].charAt(x) === "¦") lamps.push([x, y]);
+    }
+  }
+  if (!lamps.length) return null;
+
+  let mh = 0;
+  for (let i = 0; i < mapKey.length; i++) mh = (Math.imul(mh, 31) + mapKey.charCodeAt(i)) | 0;
+
+  const groundBy = (lx, ly) => [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]]
+    .map(([dx, dy]) => [lx + dx, ly + dy])
+    .filter(([x, y]) => {
+      const r = rows[y];
+      return r && x >= 0 && x < r.length && PUDDLE_GROUND.includes(r.charAt(x));
+    });
+
+  // Roughly half the lamps, but never none. Frost Town has four lamps standing
+  // on open ground and all four lost the toss - and because the toss is
+  // deterministic it lost it permanently, so that town could never have had a
+  // puddle in it. part36 keeps at least one lantern on every map for the same
+  // reason. A rule that is allowed to return nothing eventually will.
+  const wet = lamps.filter((l, li) => ambSeed(li, mh ^ 9781) <= 0.55);
+  const use = wet.length ? wet : lamps.filter((l) => groundBy(l[0], l[1]).length).slice(0, 1);
+
+  const out = [];
+  use.forEach(([lx, ly]) => {
+    const li = lamps.findIndex(([ax, ay]) => ax === lx && ay === ly);
+    const near = groundBy(lx, ly);
+    if (!near.length) return;
+    const [x, y] = near[Math.floor(ambSeed(li, mh ^ 4423) * near.length) % near.length];
+    out.push({
+      key: "pd" + li,
+      x: x, y: y,
+      // Puddles are not round and not all the same size. Width and height vary
+      // independently so they read as something water did rather than a stamp.
+      w: (44 + ambSeed(li, mh ^ 271) * 30).toFixed(0),
+      h: (26 + ambSeed(li, mh ^ 617) * 18).toFixed(0),
+      // Where the reflected light sits in the puddle, so the highlight is not
+      // dead centre in every one of them.
+      cx: (38 + ambSeed(li, mh ^ 811) * 24).toFixed(0),
+      // The shimmer is slow. Fast water reads as a broken pixel, the same way
+      // a fast glint does.
+      dur: (5.5 + ambSeed(li, mh ^ 1013) * 3.5).toFixed(2),
+      delay: (-ambSeed(li, mh ^ 1289) * 6).toFixed(2),
+    });
+  });
+  return out.length ? out : null;
+};
+
+console.log("[part67] puddles: dry country listed for", Object.keys(PUDDLE_DRY).length, "zones");

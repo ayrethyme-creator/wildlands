@@ -285,6 +285,29 @@
       @keyframes wlFlap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.4); } }
       .wl-flap { animation: wlFlap .16s linear infinite; }
 
+      /* ---- puddles ----
+         Two layers, because a lit puddle is two things: water, which is dark
+         and slightly cooler than the ground, and a reflection sitting on it.
+         The reflection is a separate element so it can breathe on its own
+         while the water stays put - still water with a moving highlight is
+         what reads as a reflection. The water itself never animates; a puddle
+         that changes shape is a puddle nobody believes. */
+      @keyframes wlSheen {
+        0%, 100% { opacity: .55; transform: translate(-50%, -50%) scale(.92); }
+        50%      { opacity: .95; transform: translate(-50%, -50%) scale(1.06); }
+      }
+      .wl-puddle { position: absolute; pointer-events: none; border-radius: 50%; }
+      .wl-sheen {
+        position: absolute; pointer-events: none; border-radius: 50%;
+        /* Base state matters: prefers-reduced-motion kills the animation, and
+           without these the highlight would snap back to unshifted and sit off
+           its puddle. Stopped, it should still be a reflection - just a still
+           one. */
+        transform: translate(-50%, -50%); opacity: .72;
+        animation-name: wlSheen; animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         * { animation: none !important; }
         .wl-arrive { display: none; }
@@ -1014,6 +1037,50 @@
               </svg>
             </div>
           )}
+
+          {/* Puddles, under the lamps that are worth reflecting. Below the
+              ranger and below whatever is in the air, because this is water
+              lying on the ground and everything else passes over it. Not keyed
+              on anything that changes - a puddle is a fixture of the map, so it
+              is computed once from the tiles and stays where it is. */}
+          {typeof puddlesFor === "function" && !m.dark && (() => {
+            const pool = puddlesFor(S.map, m.rows, m.zone);
+            if (!pool) return null;
+            return (
+              <div aria-hidden="true"
+                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
+                {pool.map((pd) => (
+                  <div key={pd.key}
+                    style={{
+                      position: "absolute", left: 0, top: 0,
+                      width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
+                      transform: `translate(${pd.x * 100}%, ${pd.y * 100}%)`,
+                    }}>
+                    {/* the water */}
+                    <div className="wl-puddle"
+                      style={{
+                        left: "50%", top: "58%", width: `${pd.w}%`, height: `${pd.h}%`,
+                        transform: "translate(-50%, -50%)",
+                        background: lit
+                          ? "radial-gradient(ellipse at 50% 45%, rgba(46,52,62,.52), rgba(38,44,54,.30) 70%, rgba(38,44,54,0) 100%)"
+                          : "radial-gradient(ellipse at 50% 45%, rgba(126,146,160,.30), rgba(70,82,92,.16) 70%, rgba(70,82,92,0) 100%)",
+                      }} />
+                    {/* what the lamp is doing to it, once the lamp is on */}
+                    {lit && (
+                      <div className="wl-sheen"
+                        style={{
+                          left: `${pd.cx}%`, top: "58%",
+                          width: `${Math.round(pd.w * 0.5)}%`, height: `${Math.round(pd.h * 0.42)}%`,
+                          background: "radial-gradient(ellipse at 50% 50%, rgba(255,214,140,.85), rgba(255,186,92,.34) 55%, rgba(255,186,92,0) 100%)",
+                          animationDuration: pd.dur + "s",
+                          animationDelay: pd.delay + "s",
+                        }} />
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
 
           {/* Birds out of the tree you just walked past. Keyed on the step so
               each footfall gets at most one flush and the animation replays;
