@@ -524,3 +524,84 @@ const puddlesFor = (mapKey, rows, zone) => {
 };
 
 console.log("[part67] puddles: dry country listed for", Object.keys(PUDDLE_DRY).length, "zones");
+
+// ---------- SEASONAL FRUIT ----------
+// The last of the effects Ayr asked for, and the one that needed a calendar.
+//
+// There was no season in this game and there did not need to be a new clock for
+// one: part36's day phase already reads the real time of day off the machine,
+// so a tree here fruits in the real month it would fruit in. Walk past a stand
+// of marulas in February and they are loaded; come back in June and they are
+// bare. Nothing is stored and nothing ticks.
+//
+// Deliberately only a thing to look at. Ayr ruled out berry bushes - "that's a
+// mechanic from Pokemon I don't want yet" - so there is nothing to pick here,
+// no item, no counter. A tree that is in fruit looks like a tree that is in
+// fruit, and that is the whole feature.
+//
+// Months are 0-11. The species are real and so are the seasons: marulas fruit
+// in the southern late summer, prickly pear through the desert summer, elders
+// in early autumn, and conifers hold their cones into the back end of the year.
+const FRUIT = {
+  savanna:  { c: "#e9c85c", months: [0, 1, 2],       what: "marula" },
+  savannaz: { c: "#e9c85c", months: [0, 1, 2],       what: "marula" },
+  jungle:   { c: "#6b3f7a", months: [5, 6, 7, 8, 9], what: "figs" },
+  canopyz:  { c: "#6b3f7a", months: [5, 6, 7, 8, 9], what: "figs" },
+  grove:    { c: "#7a2338", months: [7, 8, 9],       what: "elderberries" },
+  desert:   { c: "#c43a6b", months: [6, 7, 8],       what: "prickly pear" },
+  alpine:   { c: "#6b4a30", months: [8, 9, 10],      what: "cones" },
+  taigaz:   { c: "#6b4a30", months: [8, 9, 10],      what: "cones" },
+};
+
+// Every tree does not fruit, and the ones that do are not all equally loaded.
+// A whole screen of identically studded trees is wallpaper - the same reason
+// there is at most one hive per map.
+const FRUIT_MAX = 8;
+
+const fruitFor = (mapKey, rows, zone, month) => {
+  const F = FRUIT[zone];
+  if (!F || !rows || !rows.length) return null;
+  const mo = month == null ? new Date().getMonth() : month;
+  if (F.months.indexOf(mo) < 0) return null;
+
+  let mh = 0;
+  for (let i = 0; i < mapKey.length; i++) mh = (Math.imul(mh, 31) + mapKey.charCodeAt(i)) | 0;
+
+  // Every fruiting tree on the map first, then thin them down. Taking the first
+  // eight in scan order instead put every fruit in the top rows of a dense
+  // wood and left the bottom half of the screen bare, which looks like a bug
+  // rather than a season. Thinning by an even stride keeps them spread from
+  // the top of the map to the bottom.
+  const cand = [];
+  for (let y = 0; y < rows.length; y++) {
+    for (let x = 0; x < rows[y].length; x++) {
+      if (rows[y].charAt(x) !== "T") continue;
+      const seed = mh ^ Math.imul(x + 1, 73856093) ^ Math.imul(y + 1, 19349663);
+      if (ambSeed(x + y * 31, seed) > 0.42) continue;      // most trees are bare
+      cand.push([x, y, seed]);
+    }
+  }
+  if (!cand.length) return null;
+
+  const keep = cand.length <= FRUIT_MAX
+    ? cand
+    : Array.from({ length: FRUIT_MAX }, (_, i) => cand[Math.floor((i * cand.length) / FRUIT_MAX)]);
+
+  const out = keep.map(([x, y, seed]) => {
+    const n = 2 + Math.floor(ambSeed(x, seed ^ 55) * 3);   // two to four on a tree
+    const dots = [];
+    for (let i = 0; i < n; i++) {
+      dots.push({
+        // Kept inside the crown rather than the cell, so fruit never floats off
+        // the side of a tree onto the ground beside it.
+        left: (26 + ambSeed(i, seed ^ (i * 101 + 7)) * 48).toFixed(1),
+        top:  (22 + ambSeed(i, seed ^ (i * 211 + 13)) * 40).toFixed(1),
+        r:    (1.6 + ambSeed(i, seed ^ (i * 307 + 19)) * 1.3).toFixed(2),
+      });
+    }
+    return { key: "f" + x + "_" + y, x: x, y: y, dots: dots };
+  });
+  return out.length ? { c: F.c, what: F.what, trees: out } : null;
+};
+
+console.log("[part67] fruit seasons written for", Object.keys(FRUIT).length, "zones");

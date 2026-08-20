@@ -1038,6 +1038,41 @@
             </div>
           )}
 
+          {/* Fruit on the trees, if this is the month for it. Sits above the
+              tiles and below the ranger, like everything else in this stack.
+              Not keyed on the clock - the month does not change while anyone is
+              looking, and re-reading the date every render is enough. */}
+          {typeof fruitFor === "function" && !m.dark && (() => {
+            const crop = fruitFor(S.map, m.rows, m.zone);
+            if (!crop) return null;
+            return (
+              <div aria-hidden="true"
+                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
+                {crop.trees.map((tr) => (
+                  <div key={tr.key}
+                    style={{
+                      position: "absolute", left: 0, top: 0,
+                      width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
+                      transform: `translate(${tr.x * 100}%, ${tr.y * 100}%)`,
+                    }}>
+                    {tr.dots.map((d, di) => (
+                      <span key={di}
+                        style={{
+                          position: "absolute", left: `${d.left}%`, top: `${d.top}%`,
+                          width: `${d.r * 2}px`, height: `${d.r * 2}px`,
+                          marginLeft: `${-d.r}px`, marginTop: `${-d.r}px`,
+                          borderRadius: "50%", background: crop.c,
+                          // A fruit is a solid little thing in a mass of leaves,
+                          // so it takes a shadow rather than a glow.
+                          boxShadow: "0 1px 1px rgba(0,0,0,.45)",
+                        }} />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
+
           {/* Puddles, under the lamps that are worth reflecting. Below the
               ranger and below whatever is in the air, because this is water
               lying on the ground and everything else passes over it. Not keyed
