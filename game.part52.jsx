@@ -29,26 +29,26 @@ ARCS.reedwater = {
       detail: "Warden's counts: lapwing and reed bunting down by half in six years. Ducks and geese unchanged.",
       how: "Ask the fen warden what she is counting, and over how long.",
     },
+    when: {
+      label: "When they hunt",
+      detail: "Dawn and the hour after dusk, overwhelmingly. Almost nothing in the middle of the day.",
+      how: "Sit with the warden through a dawn and a dusk.",
+    },
     who: {
       label: "Which cats, and how many",
       detail: "Fifty-one households on the fen edge. Most cats stay in the gardens. Eleven regularly cross into the reeds.",
       how: "Walk the fen edge at dusk and see whose cats are where.",
     },
-    when: {
-      label: "When they hunt",
-      detail: "Dawn and the hour after dusk, overwhelmingly. Almost nothing in the middle of the day.",
-      how: "Sit with the warden through a dawn and a dusk.",
+    bells: {
+      label: "Whether bells work",
+      detail: "Half the cats here already wear bells and the counts fell anyway. The evidence for bells is thin.",
+      how: "Look at what the cats are already wearing.",
     },
     owners: {
       label: "What the owners will actually agree to",
       detail: "Nobody will keep a cat in permanently. Almost everybody will put something on a collar, "
             + "and about half will bring a cat in overnight if asked properly.",
       how: "Knock on doors along the houses on the fen edge. Ask, do not tell.",
-    },
-    bells: {
-      label: "Whether bells work",
-      detail: "Half the cats here already wear bells and the counts fell anyway. The evidence for bells is thin.",
-      how: "Look at what the cats are already wearing.",
     },
   },
 

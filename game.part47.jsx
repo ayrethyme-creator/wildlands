@@ -29,16 +29,6 @@ const ARCS = {
         detail: "Nine colonies lost since the rains. He owes the co-operative eleven thousand.",
         how: "Ask Thabo about the money, not the badger.",
       },
-      climbs: {
-        label: "How she gets in",
-        detail: "She climbs the stands. The legs are rough-sawn timber and she can grip them.",
-        how: "Watch the clearing after dark.",
-      },
-      nursing: {
-        label: "Why she needs so much",
-        detail: "She is nursing two cubs in a den under the marula roots.",
-        how: "Follow her back from the hives.",
-      },
       edges: {
         label: "Which hives she takes",
         detail: "Always the outer rows, nearest the treeline. The old inner hives are untouched.",
@@ -48,6 +38,16 @@ const ARCS = {
         label: "How long she has been here",
         detail: "There are old claw marks on stands still standing. She did not arrive this year — the hives came to her.",
         how: "Look at the oldest stands.",
+      },
+      climbs: {
+        label: "How she gets in",
+        detail: "She climbs the stands. The legs are rough-sawn timber and she can grip them.",
+        how: "Watch the clearing after dark.",
+      },
+      nursing: {
+        label: "Why she needs so much",
+        detail: "She is nursing two cubs in a den under the marula roots.",
+        how: "Follow her back from the hives.",
       },
     },
 

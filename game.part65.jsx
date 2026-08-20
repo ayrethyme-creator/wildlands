@@ -398,20 +398,22 @@ const INTRO_AT = {
   // Two hubs carry two investigations each. There is room - nine rift screens
   // and ten at the Vigil - and the claim below keeps them off each other.
   const HUB_WALK = {
+    // The cattery is not one chain. Sunroom -> Long Coats -> Shorthairs runs
+    // off one door of Hearthside, and The Wild Line is a door of its own - so
+    // a player reaches Shorthairs before ever seeing The Wild Line. Listing
+    // them in key order put clue three on The Wild Line and clue four on
+    // Shorthairs, which is the walk doubling back on itself.
     rescue:    ["kennel5", "kennel4", "kennel1", "kennel2", "kennel3",
-                "cattery1", "cattery2", "cattery3", "cattery4"],
+                "cattery1", "cattery2", "cattery4", "cattery3"],
     mythhub:   ["rift1", "rift2", "rift3", "rift4", "rift5",
                 "rift6", "rift7", "rift8", "rift9", "rift10"],
     digsite:   ["dig1", "dig2", "dig3", "dig1b", "dig2b",
                 "dig3b", "dig1c", "dig2c", "dig3c", "dig3d"],
     vigil:     ["vig1", "vig2", "vig3", "vig4", "vig5",
                 "vig6", "vig7", "vig8", "vig9", "vig10"],
-    // The albatross work is the open sea itself, and the polar bears come off
-    // the ice, so route9 is given the cold water rather than a road it has no
-    // segments for. frostwatch is dealt before longline and takes the polar
-    // pair; longline gets the warmer water below it.
-    openocean: ["reef", "kelp", "polarsea", "abyss"],
-    route9:    ["polarsea", "abyss", "openocean"],
+    // The two marine arcs are handled by SEA_WALK below rather than here. Dealt
+    // exclusively out of this table, as every other cluster is, they starved
+    // each other - see the note there.
   };
   Object.keys(HUB_WALK).forEach((h) => {
     HUB_WALK[h] = HUB_WALK[h].filter((m) => MAPS[m]);
@@ -555,6 +557,40 @@ const INTRO_AT = {
     WALK_OF[a] = road;
     road.forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
   });
+  // The sea is the one case the road/hub split does not cover, and both marine
+  // investigations were wrecked by being forced through it.
+  //
+  // It is neither a road nor a cluster. Tidewater Cove is a town with four
+  // doors off it - reef, kelp, open ocean, polar ice - and the Midnight Zone
+  // hangs off the open ocean. Five screens of water in total, and two
+  // investigations wanting five findings each.
+  //
+  // Dealt exclusively, the way every other walk is dealt, they starved each
+  // other: the polar work claimed the ice and the deep, the albatross work was
+  // left the reef and the kelp, and each then had to lay five findings across
+  // two screens. Ice Floe, the deep, Ice Floe, the deep, Ice Floe. Three of the
+  // five clues on one screen and the walk turning round twice - which is the
+  // same fault as all four of Thabo's clues on Beeloud Clearing, arrived at
+  // from the opposite direction.
+  //
+  // So these two share the water, and each walks it in its own order, starting
+  // where its animal actually is. Sharing is much the lesser problem: the
+  // screens are wide, placeOn keeps findings well apart, and a clue about
+  // longlines has never been mistakable for a clue about sea ice. Neither list
+  // includes the open ocean, because that is where the albatross woman stands
+  // and nobody's findings belong on a person's own screen.
+  const SEA_WALK = {
+    frostwatch: ["polarsea", "abyss", "kelp", "reef"],   // out from the ice
+    longline:   ["reef", "kelp", "polarsea", "abyss"],   // out from the shallows
+  };
+  arcsToPlace.forEach((a) => {
+    if (WALK_OF[a] || !SEA_WALK[a]) return;
+    WALK_OF[a] = SEA_WALK[a].filter((m) => MAPS[m]);
+    // Deliberately claims nothing. These two are the only arcs allowed onto
+    // each other's ground, and claiming would put us straight back to two
+    // screens apiece.
+  });
+
   // Then the hubs, each off its own cluster, taking only screens no road and no
   // earlier hub arc has taken - and taking only as many as it has findings for.
   // Without that cap the first arc dealt swallows the whole cluster and the one
@@ -613,10 +649,17 @@ const INTRO_AT = {
 
     // One findable thing per piece of evidence, laid out along the walk in the
     // order the player will meet them: first finding on the first screen after
-    // the person, second on the next, and so on to the town at the end. Where
-    // there are more findings than screens the walk wraps, so a short road
-    // doubles up rather than leaving anything unplaceable - some on each screen,
-    // never all of them on one.
+    // the person, second on the next, and so on to the town at the end.
+    //
+    // Where there are more findings than screens they are dealt in contiguous
+    // blocks rather than round-robin. This is the difference between a
+    // checklist that fills top to bottom and one that fills 1, 4, 2, 5, 3.
+    // Five findings on a three-screen road used to go 0,1,2 then wrap to 0,1 -
+    // so the first screen carried findings one and four, and the casebook, which
+    // lists evidence in the order it is written down, ticked itself in a
+    // jumbled order all the way along the road. Proportional dealing puts
+    // findings one and two on the first screen, three and four on the second,
+    // five on the third, and the list fills in the order the player walks.
     ev.forEach(([key, e], i) => {
       const def = {
         name: e.label, em: cast.find,
@@ -627,9 +670,10 @@ const INTRO_AT = {
       // Start at this finding's own screen and walk forward from there, so a
       // full screen pushes the finding further along the road rather than back
       // to the start of it or all the way home.
+      const start = Math.floor((i * maps.length) / ev.length);
       let done = false;
       for (let t = 0; t < maps.length && !done; t++) {
-        done = placeOn(maps[(i + t) % maps.length], 2, def);
+        done = placeOn(maps[(start + t) % maps.length], 2, def);
       }
       if (!done) done = placeOn(intro, 2, def);
       if (done) placedFindings++;
