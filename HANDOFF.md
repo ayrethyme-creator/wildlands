@@ -64,10 +64,14 @@ Pushing: plain `git push` hangs. Use
 
 ## Where things stand
 
-All work is committed and pushed; the tree is clean at `f228af5`.
+All work is committed and pushed; the tree is clean at `adb6c80`.
 
 Recent, newest first:
 
+- `adb6c80` the hive was keyed to the meadow too
+- `8c850a2` seasonal fruit, off the real calendar month
+- `979737e` puddles reflecting the lamp posts
+- `dea6b86` every investigation's clues back in walking order
 - `f228af5` birds scattering out of trees as you pass
 - `cd16c74` ambient air for the twelve zones that had none
 - `7992469` fixed nine fireflies keyed to a zone that does not exist
@@ -84,10 +88,9 @@ Recent, newest first:
 
 ## What is still open
 
-**Effects Ayr approved and asked for, not yet built:**
-
-- puddles reflecting lantern light
-- seasonal fruit
+**Effects Ayr approved and asked for: all three are now built.** Birds
+(`f228af5`), puddles (`979737e`) and seasonal fruit (`8c850a2`). Nothing on
+that list is outstanding - ask her for the next one rather than inventing it.
 
 Birds are done (`f228af5`). If you extend that pattern, the trap is worth
 knowing: `"T"` is not a tree. It is the zone's obstacle glyph, and the palette
@@ -132,6 +135,21 @@ comment leads with. Nothing warns you: a lookup on a key that does not exist
 just returns nothing and the feature is silently absent. Any table keyed by
 zone name is worth checking against `PALS` and against the zones the maps
 actually use, which are not the same set. Both were wrong here.
+
+It was not a one-off. The same dead `"meadow"` key was also in `DRESSING`, so
+the beehive could never appear in the long grass it is named for (`adb6c80`),
+and the first draft of the puddles named five zones that have no lamp post in
+them, so five of eleven entries could never have produced anything. **Prefer a
+deny-list.** `PUDDLE_DRY` names the country where water cannot stand and lets
+everywhere else work by default; an allow-list of zones is the shape that goes
+quietly dead. Where an allow-list is genuinely right - `BIRD_ZONES`, `FRUIT` -
+check every key against the zones the maps actually use before trusting it.
+
+**And a rule that can return nothing eventually will.** Frost Town has four
+lamp posts on open ground and all four lost the same deterministic coin toss,
+so that town could never have had a puddle in it - silently, forever. Anything
+that rolls per-candidate needs a floor, the way part36 keeps at least one
+lantern on every map.
 
 **Smaller things:**
 
