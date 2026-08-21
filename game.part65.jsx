@@ -546,10 +546,147 @@ const INTRO_AT = {
   const arcsToPlace = Object.keys(ARC_CAST).filter((a) => ARCS[a]);
   const introOf = {};
   arcsToPlace.forEach((a) => { introOf[a] = introMapFor(a, ARCS[a].where); });
+
+  // ---- one road each, for the arcs that never had one ----
+  //
+  // Ayr's specification, given twice now: "I want the quest giver in the first
+  // screen after the town and the clues for that quest only in the next few
+  // screens before the next town. for every quest."
+  //
+  // The eight road arcs have always worked that way, because part11 threads a
+  // road into a fixed corridor and this file lays them along it. The champion
+  // hubs never had a road, so they were given a *cluster* instead - a bag of
+  // screens near the hub - and a bag has no order. Sorting that bag by distance
+  // stopped it running backwards but did not give it a shape, which is why it
+  // still read as scattered.
+  //
+  // The regions do contain corridors; nobody had looked. Off Hearthside the
+  // cattery runs Sunroom, Long Coats, Shorthairs, and the kennels run the Yard,
+  // the Working Line, the Snow Yard. The Fossil Rift has three dig lines. The
+  // Vigil has four. These are walked exactly like a road, so an arc given one
+  // gets the same shape a road arc has: person on the first screen out, clues
+  // on the screens after it, all of it before you come back.
+  // A corridor ends where the world opens out again.
+  const junction = (k) => {
+    const M = MAPS[k];
+    if (!M) return true;
+    return M.music === "town" || /^town/.test(k) || k === "hearthgate" || k === "tidewater"
+        || k === "digsite" || k === "mythhub" || k === "vigil" || k === "shore" || k === "openocean";
+  };
+  const chainsFromHub = (hub) => {
+    const doorsOf = (k) => {
+      const M = MAPS[k], out = [];
+      if (!M || !M.exits) return out;
+      Object.values(M.exits).forEach((e) => {
+        if (e && e.map != null && MAPS[e.map] && out.indexOf(e.map) < 0) out.push(e.map);
+      });
+      return out;
+    };
+    return doorsOf(hub).map((first) => {
+      const path = [first];
+      let prev = hub, cur = first;
+      for (let g = 0; g < 20 && !junction(cur); g++) {
+        const on = doorsOf(cur).filter((t) => t !== prev && path.indexOf(t) < 0);
+        // Stop AT the junction without walking into it. Including the far end
+        // made "Summit Citadel > Rift Crossroads" look like a two-screen
+        // corridor, and the Rift's second arc had its quest-giver sent into the
+        // Elite Four gauntlet, where there is no floor to stand on and the
+        // whole arc silently lost its person.
+        if (on.length !== 1 || junction(on[0])) break;
+        prev = cur; cur = on[0];
+        path.push(cur);
+      }
+      return path;
+    }).filter((c) => c.length && !junction(c[0]));
+  };
+
+  // Which corridor each arc belongs down, named rather than derived, because
+  // the cat rescue belongs in the cattery and the kennels belong to the dogs -
+  // and no rule reads that off a map. Anything not named here takes the longest
+  // corridor still going spare.
+  const CHAIN_HEAD = {
+    hearth:   "The Cattery: Sunroom",
+    millrace: "The Kennels: The Yard",
+    digsite:  "Cretaceous Beds",
+    sunfield: "Jurassic Beds",
+    mythhub:  "Twilight Rift",
+    eyrie:    "The Roll Call",
+  };
+
+  const PINNED_WALK = {};
+  (() => {
+    // The hub is not where the arc currently stands. Hearthside's two arcs were
+    // both pinned to Rescue Row, which is the dead end at the FAR end of a
+    // corridor - deriving chains from there finds one door leading back the way
+    // you came. Walk out to the nearest junction first and take the corridors
+    // from that, which is the town the player actually arrives from.
+    const junctionOf = (start) => {
+      const seen = { [start]: 1 };
+      let front = [start];
+      for (let depth = 0; depth < 12 && front.length; depth++) {
+        const hit = front.find((k) => junction(k));
+        if (hit) return hit;
+        const next = [];
+        front.forEach((k) => {
+          const M = MAPS[k];
+          if (!M || !M.exits) return;
+          Object.values(M.exits).forEach((e) => {
+            if (!e || e.map == null || !MAPS[e.map] || seen[e.map]) return;
+            seen[e.map] = 1; next.push(e.map);
+          });
+        });
+        front = next;
+      }
+      return start;
+    };
+
+    const byHub = {};
+    arcsToPlace.forEach((a) => {
+      if (ROAD_CHAIN[introOf[a]] && ROAD_CHAIN[introOf[a]].length) return;   // roads already comply
+      const hub = junctionOf(introOf[a]);
+      (byHub[hub] = byHub[hub] || []).push(a);
+    });
+    Object.keys(byHub).forEach((hub) => {
+      const chains = chainsFromHub(hub);
+      const taken = {};
+      const give = (a, chain) => {
+        if (!chain || chain.length < 2) return false;
+        taken[chain[0]] = 1;
+        introOf[a] = chain[0];
+        PINNED_WALK[a] = chain.slice(1);
+        return true;
+      };
+      // named preferences first, so the pairing is deliberate
+      byHub[hub].forEach((a) => {
+        const want = CHAIN_HEAD[a];
+        if (!want) return;
+        const hit = chains.find((c) => !taken[c[0]] && MAPS[c[0]] && MAPS[c[0]].name === want);
+        if (hit) give(a, hit);
+      });
+      // Deliberately no automatic fallback. Handing an unnamed arc "the longest
+      // corridor still free" sent the Rift's second investigation down the only
+      // other exit it had - into the Elite Four citadel, which has no floor
+      // spare - and that arc lost its quest-giver entirely and silently. An arc
+      // with no corridor named for it keeps exactly the placement it had
+      // before, which is worse-shaped but works.
+      byHub[hub].forEach((a) => {
+        if (!PINNED_WALK[a]) skipped.push(a + ":no-corridor-named-at:" + hub);
+      });
+    });
+  })();
+
   // A person's own screen belongs to them. Without this the hub arcs wander onto
   // each other's doorsteps - the polar bears put a finding on the floor of the
   // Rift Crossroads, and the albatross one in the middle of the Fossil Rift camp.
   arcsToPlace.forEach((a) => { if (!mapClaim[introOf[a]]) mapClaim[introOf[a]] = a; });
+
+  // A corridor derived above beats everything: it is the same shape a road has.
+  arcsToPlace.forEach((a) => {
+    if (!PINNED_WALK[a]) return;
+    WALK_OF[a] = PINNED_WALK[a];
+    mapClaim[introOf[a]] = a;
+    PINNED_WALK[a].forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
+  });
 
   arcsToPlace.forEach((a) => {
     const road = ROAD_CHAIN[introOf[a]];
@@ -584,7 +721,7 @@ const INTRO_AT = {
     longline:   ["reef", "kelp", "polarsea", "abyss"],   // out from the shallows
   };
   arcsToPlace.forEach((a) => {
-    if (WALK_OF[a] || !SEA_WALK[a]) return;
+    if (WALK_OF[a] || !SEA_WALK[a]) return;   // only reached where no corridor exists
     WALK_OF[a] = SEA_WALK[a].filter((m) => MAPS[m]);
     // Deliberately claims nothing. These two are the only arcs allowed onto
     // each other's ground, and claiming would put us straight back to two
@@ -675,7 +812,9 @@ const INTRO_AT = {
     // The introduction road is not a place to hide findings: it is where the
     // player is told what they are looking for. Findings stay on the rest of
     // the arc's own ground, so two investigations never share a screen.
-    const intro = introMapFor(arcId, home);
+    // introOf is authoritative: the corridor pass above moves hub arcs onto the
+    // first screen of their own corridor, and the person has to follow.
+    const intro = introOf[arcId] || introMapFor(arcId, home);
     // The screens after the person, before the next town, in walking order.
     const maps = clueWalk(arcId, intro).filter((m) => m !== intro);
     scatter.push(arcId + ":" + maps.length);
