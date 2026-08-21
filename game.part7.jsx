@@ -486,9 +486,6 @@ Object.assign(ART, {
   minotaur: giantM({ fur: "#6b4c38", horns: true, shag: true }),
   nemeanlion: beastM(felArt({ fur: "#d9a43a", ruff: true, ruffC: "#b5822a" }), { aura: "#e8c547" }),
   goldenhind: hoofM({ coat: "#e8c547", antlers: true, hornC: "#b5822a", maneC: "#d9b03a" }),
-  stymphbird: birdM({ body: "#8a93a3", beakC: "#c9c9d4", wingC: "#6b7484" }),
-  cetus: marineA({ hide: "#3c5468", teeth: true, belly: "#8fa8b5" }),
-  ladon: dragonW({ hide: "#4c7a4c", iris: "#e8c547", spikes: true }),
   harpy: birdM({ body: "#8a6b7a", head: "#c9a88a", plume: true }),
   hippocampus: hoofM({ coat: "#5c8aa3", kelp: true, maneC: "#3c7a8a", muzzle: "#a8ccd9" }),
   cyclops: giantM({ fur: "#b5906b", cyclops: true, skin: "#c9a88a" }),
@@ -696,9 +693,6 @@ Object.assign(DEX, {
   minotaur: MY("Minotaur", "minotaur", "Armor", B(72, 76, 62, 40), MV.arm, 0.2, "Greek"),
   nemeanlion: MY("Nemean Lion", "nemeanlion", "Predator", B(74, 78, 66, 50), MV.pred, 0.12, "Greek"),
   goldenhind: MY("Golden Hind", "goldenhind", "Swift", B(54, 52, 44, 84), MV.swi, 0.2, "Greek"),
-  stymphbird: MY("Stymphalian Bird", "stymphbird", "Aerial", B(52, 64, 46, 62), MV.aer, 0.3, "Greek"),
-  cetus: MY("Cetus", "cetus", "Aquatic", B(76, 72, 60, 40), MV.aqua, 0.15, "Greek"),
-  ladon: MY("Ladon", "ladon", "Venom", B(70, 66, 62, 42), MV.ven, 0.2, "Greek"),
   harpy: MY("Harpy", "harpy", "Aerial", B(54, 60, 44, 68), MV.aer, 0.3, "Greek"),
   hippocampus: MY("Hippocampus", "hippocampus", "Aquatic", B(60, 56, 52, 60), MV.aqua, 0.3, "Greek"),
   cyclops: MY("Cyclops", "cyclops", "Wild", B(76, 74, 60, 34), MV.wild, 0.2, "Greek"),
@@ -838,7 +832,7 @@ Object.assign(MAPS, {
   rift1: {
     name: "Olympus Rift", zone: "rift", music: "legend", rows: ROWS_RIFT,
     exits: { "7,9": { map: "mythhub", x: 1, y: 3 } },
-    pool: [["harpy", 10], ["stymphbird", 10], ["hippocampus", 9], ["pegasus", 8], ["goldenhind", 7], ["griffin", 7], ["minotaur", 7], ["cyclops", 7], ["ladon", 6], ["colchisdrake", 6], ["chimera", 5], ["cerberus", 5], ["hydra", 5], ["cetus", 5], ["nemeanlion", 3], ["teumessian", 2]],
+    pool: [["harpy", 10], ["hippocampus", 9], ["pegasus", 8], ["goldenhind", 7], ["griffin", 7], ["minotaur", 7], ["cyclops", 7], ["colchisdrake", 6], ["chimera", 5], ["cerberus", 5], ["hydra", 5], ["nemeanlion", 3], ["teumessian", 2]],
     lvl: [50, 54],
   },
   rift2: {

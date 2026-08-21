@@ -19,8 +19,6 @@ mnote("griffin", "Carnivore — in the stories, horses and gold thieves", "Greec
   "The best material explanation of any myth on this list. Greek accounts place griffins in the Gobi, guarding gold, and the Gobi is full of weathered Protoceratops skeletons — a beaked, four-legged animal with a bony shield behind its head, lying in gold-bearing ground. Scythian miners found them. Adrienne Mayor made the case in the 1990s, and while it isn't proven, once you have seen the skull you cannot unsee the griffin.");
 mnote("cyclops", "Carnivore — sheep, and unlucky sailors", "Greece and Sicily",
   "Dwarf elephant skulls litter Mediterranean caves, and an elephant skull has a single vast opening in the middle of the face — the nasal cavity, where the trunk anchors. The tusks fall out. What is left looks exactly like the skull of a one-eyed giant, twice human size, in a cave. Othenio Abel proposed this in 1914, and it has never been bettered.");
-mnote("cetus", "Carnivore — coastal livestock and sacrificial princesses", "Greek and Levantine coasts",
-  "The sea monster Perseus killed, and the origin of 'cetacean'. Its bones were exhibited in Rome in 58 BC — 12 metres of them, hauled from Jaffa and displayed as the actual monster. They were almost certainly a whale's. Ancient people found whale skeletons on beaches and reasoned, correctly, that something enormous had died there.");
 mnote("pegasus", "Herbivore — grass, and it drinks from springs it makes itself", "Greece",
   "The winged horse is one of the few here with no obvious fossil behind it. It probably grew from the Near Eastern motif of winged animals guarding thresholds, which Greek art borrowed. Every spring Pegasus struck open — including Hippocrene, the fountain of poets — is a real spring somebody could visit, which is how a myth gets anchored to a landscape.");
 mnote("hydra", "Carnivore — anything near the swamp", "Lerna, Greece",
@@ -33,10 +31,6 @@ mnote("nemeanlion", "Carnivore — the people of Nemea", "Greece",
   "A lion with a hide no weapon could pierce, so Herakles had to strangle it. Lions genuinely lived in Greece into classical times — Aristotle and Herodotus both describe them, and there are bones. This is a myth about a real animal that people had actually met, which is rarer than you'd think.");
 mnote("goldenhind", "Herbivore — grass", "Keryneia, Greece",
   "A deer with golden antlers that Herakles had to catch without harming. The detail that gives it away is that it's a female with antlers — and the one deer where females grow antlers is the reindeer, which lives far to the north. If the story travelled south along the amber routes, someone was describing a real animal they'd only heard about.");
-mnote("stymphbird", "Carnivore — people", "Arcadia, Greece",
-  "Man-eating birds with metal feathers that they shot like arrows, driven off with a bronze rattle. Scholars have long suspected a memory of a genuine plague of birds over a marsh — and the marsh at Stymphalia is real and periodically floods. Herakles's solution was noise, which is exactly how farmers actually deal with birds.");
-mnote("ladon", "Carnivore — guards, doesn't eat", "Greece",
-  "The hundred-headed serpent coiled round the tree of golden apples, never sleeping. Serpent-guarding-treasure is one of the oldest and most widespread stories on earth, and the practical origin is mundane: snakes really do live in stores of grain and fruit, because that is where the rodents are. Guard the granary, meet the snake.");
 mnote("harpy", "Carnivore — snatches food", "Greece",
   "Wind spirits with women's faces who stole food and fouled what they left. Sailors named them for sudden squalls that took things off the deck. Real birds of the same habit — skuas, frigatebirds — harass other animals for their food, which is called kleptoparasitism, and the harpy eagle carries the name.");
 mnote("hippocampus", "Carnivore — small fish", "Greek and Etruscan coasts",
