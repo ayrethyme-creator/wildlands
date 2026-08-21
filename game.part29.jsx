@@ -27,18 +27,10 @@ mnote("chimera", "Carnivore — lion, goat and snake in one body", "Lycia, Anato
   "The Chimaera of Lycia is a real place: a mountainside in Turkey where natural methane seeps from the rock and has burned continuously for at least 2,500 years. A fire-breathing monster living in that mountain is not a wild leap — sailors used the flames to navigate. The word now means any organism with two sets of DNA.");
 mnote("minotaur", "Carnivore — Athenian tribute", "Crete",
   "Knossos is a palace of over a thousand interlocking rooms, and Minoan art is full of bull-leaping — young people vaulting live bulls. A confusing building and a bull cult, remembered by outsiders centuries later, is a plausible labyrinth with a bull-man in it. Whether the Minoans would have recognised the story is another matter.");
-mnote("nemeanlion", "Carnivore — the people of Nemea", "Greece",
-  "A lion with a hide no weapon could pierce, so Herakles had to strangle it. Lions genuinely lived in Greece into classical times — Aristotle and Herodotus both describe them, and there are bones. This is a myth about a real animal that people had actually met, which is rarer than you'd think.");
-mnote("goldenhind", "Herbivore — grass", "Keryneia, Greece",
-  "A deer with golden antlers that Herakles had to catch without harming. The detail that gives it away is that it's a female with antlers — and the one deer where females grow antlers is the reindeer, which lives far to the north. If the story travelled south along the amber routes, someone was describing a real animal they'd only heard about.");
 mnote("harpy", "Carnivore — snatches food", "Greece",
   "Wind spirits with women's faces who stole food and fouled what they left. Sailors named them for sudden squalls that took things off the deck. Real birds of the same habit — skuas, frigatebirds — harass other animals for their food, which is called kleptoparasitism, and the harpy eagle carries the name.");
 mnote("hippocampus", "Carnivore — small fish", "Greek and Etruscan coasts",
   "A horse in front, fish behind, drawing Poseidon's chariot. Its name is now the seahorse's genus and the part of your brain that makes memories, which is shaped like one. The myth is probably just what surf looks like: whitecaps have been called white horses in a dozen languages independently.");
-mnote("colchisdrake", "Carnivore — guards the Golden Fleece", "Colchis, on the Black Sea",
-  "The sleepless dragon guarding the fleece. The fleece itself may be entirely real: in the Caucasus, people panned gold by pegging sheepskins in the riverbed to trap the flakes, then hanging them to dry — a fleece heavy with gold. Strabo says so. The monster is the story people told about a valuable process.");
-mnote("teumessian", "Carnivore — the children of Thebes", "Thebes, Greece",
-  "A fox destined never to be caught, hunted by a hound destined always to catch. Zeus resolved the paradox by turning both to stone. It is one of the earliest recorded logical paradoxes dressed as an animal story, which is what a lot of myth is.");
 mnote("sphinx", "Carnivore — those who answer wrong", "Egypt and Greece",
   "Egypt's sphinx is a guardian and male; Greece's is a monster and female, and she asks a riddle. The shape — lion's body, human head — starts in Egypt around 2500 BC and travelled. The Greeks got the image without the context, and built a different animal around it. That's how most of these happen.");
 
@@ -122,6 +114,9 @@ mnote("impundulu", "Carnivore — blood", "Southern Africa, Xhosa and Zulu",
 mnote("anansi", "Omnivore — whatever he can trick out of you", "Ghana, and the Caribbean",
   "A spider who owns all the stories because he outsmarted the sky god for them. He is not a monster; he is small and weak and wins by being cleverer, which is exactly why enslaved West Africans carried him across the Atlantic and kept telling him. He becomes Aunt Nancy in the American South. The story survived the crossing because the story was about surviving.");
 
+mnote("mamiwata", "Carnivore — offerings, and the occasional swimmer", "West and Central Africa",
+  "A water spirit found from Senegal to the Congo and carried across the Atlantic with the people who were taken, so she is also in Haiti and Brazil. Two things fed her: manatees and dugongs, which surface holding their young in one flipper and are the origin of mermaid reports worldwide, and — remarkably — a German lithograph of a Samoan snake charmer, printed around 1880, that reached West Africa on trade goods and was recognised instantly as a portrait of her.");
+
 // ===== Chinese =====
 mnote("qinglong", "Carnivore — it brings rain", "China",
   "The Azure Dragon of the East, one of four cardinal beasts, and a constellation — its body is a real arc of stars whose rising marks spring. Chinese dragons are water, not fire: they live in rivers and are asked for rain. Every Chinese dragon on this list is closer to weather than to a monster.");
@@ -186,6 +181,9 @@ mnote("sarimanok", "Omnivore — fish", "Mindanao, the Philippines",
 mnote("barong", "Carnivore — evil", "Bali",
   "A lion-like spirit who fights the demon queen Rangda in a dance that has no winner and never ends, because neither side is supposed to win. It is a myth about balance rather than victory, and it is performed constantly in Bali. The costume takes two men.");
 
+mnote("yeti", "Omnivore — unclear, and possibly nothing", "Himalaya, Nepal and Tibet",
+  "In 2017 a team ran DNA on nine museum relics held for decades as yeti: hair, bone, a tooth, a scrap of hide. Eight came back Himalayan brown bear, Asian black bear or Tibetan brown bear. The ninth was a dog. That is not the deflating answer it sounds like — Himalayan brown bears are genuinely rare, genuinely enormous, and stand to look around, and the people reporting them were reporting something real that science had barely described.");
+
 // ===== Oceanian =====
 mnote("taniwha", "Carnivore — depends entirely on the taniwha", "Aotearoa New Zealand",
   "Guardians of specific rivers, harbours and caves — some protective, some dangerous, all local and named. They are not folklore in a museum sense: taniwha have been recognised in New Zealand planning law, and a road was rerouted in 2002 after Ngāti Naho raised one. A myth with legal standing is a rare thing.");
@@ -223,6 +221,10 @@ mnote("piasa", "Carnivore — people", "Illinois, Mississippi River",
   "A winged creature painted on a bluff above the Mississippi, described by Marquette in 1673 as a monster with horns, scales and a long tail wrapped around its body. The original painting is gone — quarried away — and the one there now is a modern recreation. What Marquette saw was real paint on real rock, and nobody knows what it depicted.");
 mnote("akhlut", "Carnivore — whatever is on the shore", "Iñupiat and Inuit Alaska",
   "A killer whale that walks out of the sea as a wolf, and the way to know it has been there is wolf tracks that run down the beach and into the water. It is one of the few myths that names a thing people had actually watched happen: orcas hunt in packs, coordinate, teach their young, and beach themselves deliberately to take seals off the sand. A culture that saw that and called it a wolf of the sea was not being fanciful. It was being accurate.");
+mnote("encantado", "Carnivore — fish", "Amazon, Brazil",
+  "A boto — an Amazon river dolphin — that comes ashore at a party as a man in white, always wearing a hat, because the blowhole never quite closes. It is the selkie told on another continent, and the animal underneath is stranger than the story: the boto is pink, its neck vertebrae are unfused so it can turn its head to look at you, and it hunts in flooded forest between the trees. People who share a river with it find it very easy to believe it is watching.");
+mnote("wendigo", "Carnivore — people, and never satisfied", "Algonquian peoples, northern forests",
+  "A spirit of starvation and of the appetite that outlasts the food, from peoples who wintered where a bad season could mean months of nothing. It is not a monster story so much as a rule: the thing you must not become. Anthropologists spent a century arguing about whether the associated disorder was real or an artefact of how it was recorded, which is its own kind of answer about how hard it is to hear a culture describe its own worst fear.");
 mnote("jackalope", "Herbivore — grass, and whiskey", "Wyoming, USA",
   "A rabbit with antlers, invented as a taxidermy joke in Douglas, Wyoming in the 1930s — and built on something real. The Shope papillomavirus gives rabbits keratinous horn-like growths on the head, and the study of it led directly to the discovery that viruses can cause cancer, and from there to the HPV vaccine. A joke animal, with a real disease behind it, that saved lives.");
 mnote("chupacabra", "Carnivore — goat blood", "Puerto Rico, 1995 onward",

@@ -218,13 +218,13 @@ MAPS.rift6.rows = withRow(MAPS.rift6.rows, 0, "TTTTTTTnTTTTTTTT");
 MAPS.rift6.exits = { ...MAPS.rift6.exits, "7,0": { map: "rift7", x: 7, y: 8 } };
 const DEEP = [
   { k: "rift7", n: "The Weaving", lvl: [55, 58], prev: { map: "rift6", x: 7, y: 1 }, next: "rift8",
-    pool: [["anansi", 11], ["kitsune", 9], ["tanuki", 9], ["nekomata", 8], ["puca", 8], ["caitsith", 8], ["teumessian", 5], ["ratatoskr", 9], ["sigbin", 7], ["tikbalang", 7], ["cadejo", 7], ["jackalope", 8], ["mushussu", 6], ["serpopard", 7], ["sha", 7]] },
+    pool: [["anansi", 11], ["kitsune", 9], ["tanuki", 9], ["nekomata", 8], ["puca", 8], ["caitsith", 8], ["ratatoskr", 9], ["sigbin", 7], ["tikbalang", 7], ["cadejo", 7], ["jackalope", 8], ["mushussu", 6], ["serpopard", 7], ["sha", 7]] },
   { k: "rift8", n: "The Deluge", lvl: [56, 59], prev: { map: "rift7", x: 7, y: 1 }, next: "rift9",
     pool: [["jormungandr", 5], ["leviathan", 4], ["kraken", 6], ["bakunawa", 6], ["rainbowserpent", 5], ["taniwha", 7], ["moo", 8], ["phayanaga", 7], ["naga", 7], ["makara", 7], ["qinglong", 4], ["hippocampus", 8], ["kelpie", 8], ["adaro", 8], ["bunyip", 7], ["cipactli", 6], ["mishipeshu", 6], ["hornedserpent", 6], ["ahuizotl", 7], ["kappa", 8]] },
   { k: "rift9", n: "The Underworld Gate", lvl: [57, 60], prev: { map: "rift8", x: 7, y: 1 }, next: "rift10",
     pool: [["cerberus", 6], ["ammit", 7], ["anubis", 0], ["sha", 8], ["camazotz", 7], ["cadejo", 8], ["baku", 8], ["nidhogg", 6], ["apep", 5], ["orochi", 4], ["sphinx", 7], ["harpy", 8], ["alkonost", 7], ["impundulu", 7], ["mothman", 6], ["chupacabra", 7], ["cusith", 8], ["grootslang", 5], ["taotie", 6]] },
   { k: "rift10", n: "The First Story", lvl: [58, 62], prev: { map: "rift9", x: 7, y: 1 }, next: null,
-    pool: [["quetzalcoatl", 4], ["rainbowserpent", 4], ["fenghuang", 4], ["bennu", 6], ["firebird", 6], ["simurgh", 6], ["ziz", 5], ["garuda", 4], ["roc", 5], ["behemoth", 5], ["leviathan", 4], ["airavata", 5], ["amaru", 6], ["unicorn", 6], ["pegasus", 7], ["sleipnir", 6], ["lamassu", 6], ["baihu", 5], ["xuanwu", 5], ["qinglong", 4], ["nemeanlion", 4], ["fenrir", 3], ["leshy", 6], ["barong", 6], ["haetae", 6], ["navagunjara", 6], ["alicanto", 7]] },
+    pool: [["quetzalcoatl", 4], ["rainbowserpent", 4], ["fenghuang", 4], ["bennu", 6], ["firebird", 6], ["simurgh", 6], ["ziz", 5], ["garuda", 4], ["roc", 5], ["behemoth", 5], ["leviathan", 4], ["airavata", 5], ["amaru", 6], ["unicorn", 6], ["pegasus", 7], ["sleipnir", 6], ["lamassu", 6], ["baihu", 5], ["xuanwu", 5], ["qinglong", 4], ["fenrir", 3], ["leshy", 6], ["barong", 6], ["haetae", 6], ["navagunjara", 6], ["alicanto", 7]] },
 ];
 DEEP.forEach((d) => {
   MAPS[d.k] = {

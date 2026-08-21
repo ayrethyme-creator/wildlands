@@ -484,13 +484,9 @@ Object.assign(ART, {
   chimera: beastM(felArt({ fur: "#c98a3a", ruff: true, ruffC: "#8a5c2a" }), { flame: true, horns: true }),
   griffin: birdM({ body: "#c9a05c", head: "#f2ede0", plume: true, plumeC: "#8a6f52" }),
   minotaur: giantM({ fur: "#6b4c38", horns: true, shag: true }),
-  nemeanlion: beastM(felArt({ fur: "#d9a43a", ruff: true, ruffC: "#b5822a" }), { aura: "#e8c547" }),
-  goldenhind: hoofM({ coat: "#e8c547", antlers: true, hornC: "#b5822a", maneC: "#d9b03a" }),
   harpy: birdM({ body: "#8a6b7a", head: "#c9a88a", plume: true }),
   hippocampus: hoofM({ coat: "#5c8aa3", kelp: true, maneC: "#3c7a8a", muzzle: "#a8ccd9" }),
   cyclops: giantM({ fur: "#b5906b", cyclops: true, skin: "#c9a88a" }),
-  colchisdrake: dragonW({ hide: "#6b5c9a", spikes: true }),
-  teumessian: canArt({ fur: "#c9703a", muzzle: "#e8d0b5", iris: "#3a7ad9" }),
   // Aurora Rift — Norse, Celtic & Slavic
   fenrir: beastM(canArt({ fur: "#5c6068", inner: "#3c4048", muzzle: "#8a8f9a" }), { aura: "#8fb3d9" }),
   jormungandr: serpentM({ hide: "#3c6b5c", bands: true, bandC: "#8fd9b5", horns: true }),
@@ -678,6 +674,13 @@ Object.assign(ART, {
   akhlut: beastM(canArt({ fur: "#1e2128", inner: "#0f1114", muzzle: "#f2ede0", iris: "#8fd9e8" }), { aura: "#2471a3" }),
   chupacabra: canArt({ fur: "#4c5c44", inner: "#2e3c2a", muzzle: "#7a8a70", iris: "#c94a3a", crest: "#2e3c2a" }),
   sasquatch: giantM({ fur: "#5c4838", shag: true, skin: "#8a6f52" }),
+  yeti: giantM({ fur: "#e8ecf0", shag: true, skin: "#c9b8a8" }),
+  // Antlers and a starved grey hide: the shape the story took after people
+  // started drawing it, which is the shape anybody picturing one now sees.
+  wendigo: beastM(giantM({ fur: "#8a9098", shag: true, skin: "#c4c0b8", horns: true }), { aura: "#8fa8b5" }),
+  // A pink river dolphin, because that is what an encantado is until midnight.
+  encantado: marineA({ hide: "#d98fa8", belly: "#f2d4dc", bigEye: true }),
+  mamiwata: marineA({ hide: "#3a7a8a", belly: "#e8c98a", bigEye: true, finC: "#2a5c6b" }),
   mothman: bugM({ moth: true, body: "#3c3244", wingC: "#4c4458", iris: "#c94a3a" }),
   unicorn: hoofM({ coat: "#f8f4ea", horn: true, maneC: "#d4c9e8", iris: "#8a6fc4" }),
   cockatrice: birdM({ body: "#8a9a4c", plume: true, plumeC: "#c94a3a", wingC: "#6b7a3c", beakC: "#d9a43a" }),
@@ -691,13 +694,9 @@ Object.assign(DEX, {
   chimera: MY("Chimera", "chimera", "Ember", B(68, 74, 54, 56), MV.emb, 0.15, "Greek"),
   griffin: MY("Griffin", "griffin", "Aerial", B(66, 70, 56, 64), MV.aer, 0.2, "Greek"),
   minotaur: MY("Minotaur", "minotaur", "Armor", B(72, 76, 62, 40), MV.arm, 0.2, "Greek"),
-  nemeanlion: MY("Nemean Lion", "nemeanlion", "Predator", B(74, 78, 66, 50), MV.pred, 0.12, "Greek"),
-  goldenhind: MY("Golden Hind", "goldenhind", "Swift", B(54, 52, 44, 84), MV.swi, 0.2, "Greek"),
   harpy: MY("Harpy", "harpy", "Aerial", B(54, 60, 44, 68), MV.aer, 0.3, "Greek"),
   hippocampus: MY("Hippocampus", "hippocampus", "Aquatic", B(60, 56, 52, 60), MV.aqua, 0.3, "Greek"),
   cyclops: MY("Cyclops", "cyclops", "Wild", B(76, 74, 60, 34), MV.wild, 0.2, "Greek"),
-  colchisdrake: MY("Colchian Drake", "colchisdrake", "Predator", B(66, 70, 56, 52), MV.pred, 0.2, "Greek"),
-  teumessian: MY("Teumessian Fox", "teumessian", "Swift", B(50, 56, 42, 88), ["quickdash", "firststrike", "lightstep"], 0.08, "Greek"),
   fenrir: MY("Fenrir", "fenrir", "Predator", B(78, 82, 62, 58), ["maul", "dreadhowl", "apexfang"], 0.1, "Norse"),
   jormungandr: MY("Jörmungandr", "jormungandr", "Aquatic", B(82, 74, 64, 40), MV.aqua, 0.1, "Norse"),
   sleipnir: MY("Sleipnir", "sleipnir", "Swift", B(64, 60, 52, 86), MV.swi, 0.15, "Norse"),
@@ -782,6 +781,10 @@ Object.assign(DEX, {
   akhlut: MY("Akhlut", "akhlut", "Aquatic", B(76, 82, 62, 64), ["tidalcrash", "apexfang", "frostfang", "maul"], 0.12, "Inuit"),
   chupacabra: MY("Chupacabra", "chupacabra", "Night", B(58, 66, 48, 68), MV.night, 0.25, "Latin American"),
   sasquatch: MY("Sasquatch", "sasquatch", "Wild", B(76, 72, 62, 38), MV.wild, 0.15, "N. American folklore"),
+  yeti: MY("Yeti", "yeti", "Ice", B(84, 78, 74, 40), MV.ice, 0.15, "Himalayan"),
+  wendigo: MY("Wendigo", "wendigo", "Night", B(78, 84, 60, 66), MV.night, 0.12, "Algonquian"),
+  encantado: MY("Encantado", "encantado", "Aquatic", B(62, 60, 54, 72), MV.aqua, 0.25, "Amazonian"),
+  mamiwata: MY("Mami Wata", "mamiwata", "Aquatic", B(70, 68, 60, 62), MV.aqua, 0.2, "West and Central African"),
   mothman: MY("Mothman", "mothman", "Night", B(62, 64, 50, 74), ["duskfeint", "dreadhowl", "moonstrike"], 0.15, "American folklore"),
   unicorn: MY("Unicorn", "unicorn", "Wild", B(66, 62, 58, 72), ["quickdash", "bodyslam", "preen"], 0.15, "European"),
   cockatrice: MY("Cockatrice", "cockatrice", "Venom", B(56, 62, 48, 60), MV.ven, 0.25, "European"),
@@ -832,7 +835,7 @@ Object.assign(MAPS, {
   rift1: {
     name: "Olympus Rift", zone: "rift", music: "legend", rows: ROWS_RIFT,
     exits: { "7,9": { map: "mythhub", x: 1, y: 3 } },
-    pool: [["harpy", 10], ["hippocampus", 9], ["pegasus", 8], ["goldenhind", 7], ["griffin", 7], ["minotaur", 7], ["cyclops", 7], ["colchisdrake", 6], ["chimera", 5], ["cerberus", 5], ["hydra", 5], ["nemeanlion", 3], ["teumessian", 2]],
+    pool: [["harpy", 10], ["hippocampus", 9], ["pegasus", 8], ["griffin", 7], ["minotaur", 7], ["cyclops", 7], ["chimera", 5], ["cerberus", 5], ["hydra", 5]],
     lvl: [50, 54],
   },
   rift2: {
@@ -844,7 +847,7 @@ Object.assign(MAPS, {
   rift3: {
     name: "Hearth Rift", zone: "rift", music: "legend", rows: ROWS_RIFT,
     exits: { "7,9": { map: "mythhub", x: 1, y: 7 } },
-    pool: [["sha", 10], ["serpopard", 10], ["anansi", 9], ["impundulu", 8], ["mushussu", 7], ["manticore", 7], ["simurgh", 7], ["sphinx", 6], ["bennu", 6], ["ammit", 6], ["lamassu", 6], ["ziz", 5], ["roc", 4], ["apep", 4], ["grootslang", 4], ["behemoth", 3], ["leviathan", 2]],
+    pool: [["sha", 10], ["serpopard", 10], ["mamiwata", 8], ["anansi", 9], ["impundulu", 8], ["mushussu", 7], ["manticore", 7], ["simurgh", 7], ["sphinx", 6], ["bennu", 6], ["ammit", 6], ["lamassu", 6], ["ziz", 5], ["roc", 4], ["apep", 4], ["grootslang", 4], ["behemoth", 3], ["leviathan", 2]],
     lvl: [52, 55],
   },
   rift4: {
@@ -856,13 +859,13 @@ Object.assign(MAPS, {
   rift5: {
     name: "Monsoon Rift", zone: "rift", music: "legend", rows: ROWS_RIFT,
     exits: { "7,9": { map: "mythhub", x: 5, y: 1 } },
-    pool: [["sigbin", 10], ["sarimanok", 9], ["moo", 9], ["adaro", 8], ["tikbalang", 8], ["yali", 7], ["makara", 7], ["navagunjara", 7], ["naga", 6], ["barong", 6], ["phayanaga", 6], ["bunyip", 6], ["taniwha", 5], ["airavata", 4], ["bakunawa", 4], ["garuda", 2], ["rainbowserpent", 2]],
+    pool: [["sigbin", 10], ["sarimanok", 9], ["yeti", 6], ["moo", 9], ["adaro", 8], ["tikbalang", 8], ["yali", 7], ["makara", 7], ["navagunjara", 7], ["naga", 6], ["barong", 6], ["phayanaga", 6], ["bunyip", 6], ["taniwha", 5], ["airavata", 4], ["bakunawa", 4], ["garuda", 2], ["rainbowserpent", 2]],
     lvl: [53, 56],
   },
   rift6: {
     name: "Twilight Rift", zone: "rift", music: "legend", rows: ROWS_RIFT,
     exits: { "7,9": { map: "mythhub", x: 10, y: 1 } },
-    pool: [["jackalope", 11], ["cadejo", 9], ["chupacabra", 8], ["akhlut", 6], ["alicanto", 8], ["ahuizotl", 8], ["unicorn", 7], ["cockatrice", 7], ["piasa", 6], ["amaru", 6], ["camazotz", 6], ["mothman", 5], ["sasquatch", 5], ["cipactli", 5], ["hornedserpent", 5], ["mishipeshu", 4], ["quetzalcoatl", 2]],
+    pool: [["jackalope", 11], ["cadejo", 9], ["encantado", 8], ["wendigo", 5], ["chupacabra", 8], ["akhlut", 6], ["alicanto", 8], ["ahuizotl", 8], ["unicorn", 7], ["cockatrice", 7], ["piasa", 6], ["amaru", 6], ["camazotz", 6], ["mothman", 5], ["sasquatch", 5], ["cipactli", 5], ["hornedserpent", 5], ["mishipeshu", 4], ["quetzalcoatl", 2]],
     lvl: [54, 58],
   },
 });
