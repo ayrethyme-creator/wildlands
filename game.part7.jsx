@@ -504,6 +504,10 @@ Object.assign(ART, {
   lindworm: dragonW({ hide: "#7a884c", wings: false, spikes: true }),
   kelpie: hoofM({ coat: "#3c5c54", kelp: true, maneC: "#2a443c", iris: "#8fd9c4" }),
   cusith: canArt({ fur: "#3c7a3c", inner: "#2a5c2a", muzzle: "#8ab585" }),
+  // A selkie is a seal until it is not. Drawn as the seal, because that is
+  // the shape it is wearing when you meet it.
+  selkie: beastM(marineA({ hide: "#4c5460", belly: "#c9d4dc", bigEye: true }), { aura: "#5dade2" }),
+  whitehart: hoofM({ coat: "#f6f2e8", antlers: true, hornC: "#e8dcc3", maneC: "#e2dacb", iris: "#c9a227" }),
   caitsith: felArt({ fur: "#26292e", muzzle: "#e8e0d0", iris: "#3ad9a4", earTall: true }),
   puca: hoofM({ coat: "#2e2921", maneC: "#0f0d0a", iris: "#e8c547" }),
   questingbeast: dragonE({ hide: "#6b8a5c", maneC: "#c9704a" }),
@@ -672,6 +676,9 @@ Object.assign(ART, {
   hornedserpent: serpentM({ hide: "#5c3c6b", horns: true, bands: true, bandC: "#e8c547" }),
   piasa: birdM({ body: "#5c8a3c", mask: "#c94a3a", plume: true, plumeC: "#e8c547", batWings: true, wingC: "#3c5c28" }),
   jackalope: beastM(ART.rabbit, { antlers: true }),
+  // The Akhlut comes out of the sea as a wolf, so it is drawn as the wolf and
+  // wearing the whale: orca black and white, with the cold of the water on it.
+  akhlut: beastM(canArt({ fur: "#1e2128", inner: "#0f1114", muzzle: "#f2ede0", iris: "#8fd9e8" }), { aura: "#2471a3" }),
   chupacabra: canArt({ fur: "#4c5c44", inner: "#2e3c2a", muzzle: "#7a8a70", iris: "#c94a3a", crest: "#2e3c2a" }),
   sasquatch: giantM({ fur: "#5c4838", shag: true, skin: "#8a6f52" }),
   mothman: bugM({ moth: true, body: "#3c3244", wingC: "#4c4458", iris: "#c94a3a" }),
@@ -706,6 +713,8 @@ Object.assign(DEX, {
   lindworm: MY("Lindworm", "lindworm", "Venom", B(64, 66, 56, 44), MV.ven, 0.25, "Norse"),
   kelpie: MY("Kelpie", "kelpie", "Aquatic", B(62, 64, 50, 66), MV.aqua, 0.25, "Scottish"),
   cusith: MY("Cù-Sìth", "cusith", "Night", B(64, 66, 52, 60), MV.night, 0.25, "Scottish"),
+  selkie: MY("Selkie", "selkie", "Aquatic", B(60, 54, 52, 64), MV.aqua, 0.25, "Scottish"),
+  whitehart: MY("White Hart", "whitehart", "Swift", B(56, 50, 48, 84), MV.swi, 0.15, "Arthurian"),
   caitsith: MY("Cat-Sìth", "caitsith", "Night", B(52, 58, 44, 72), MV.night, 0.3, "Celtic"),
   puca: MY("Púca", "puca", "Night", B(58, 60, 48, 70), MV.night, 0.25, "Irish"),
   questingbeast: MY("Questing Beast", "questingbeast", "Swift", B(60, 58, 50, 74), MV.swi, 0.2, "Arthurian"),
@@ -776,6 +785,7 @@ Object.assign(DEX, {
   hornedserpent: MY("Horned Serpent", "hornedserpent", "Aquatic", B(72, 68, 58, 46), MV.aqua, 0.15, "Indigenous N. American"),
   piasa: MY("Piasa", "piasa", "Aerial", B(66, 68, 52, 62), MV.aer, 0.2, "Illini"),
   jackalope: MY("Jackalope", "jackalope", "Swift", B(48, 50, 42, 78), MV.swi, 0.35, "American folklore"),
+  akhlut: MY("Akhlut", "akhlut", "Aquatic", B(76, 82, 62, 64), ["tidalcrash", "apexfang", "frostfang", "maul"], 0.12, "Inuit"),
   chupacabra: MY("Chupacabra", "chupacabra", "Night", B(58, 66, 48, 68), MV.night, 0.25, "Latin American"),
   sasquatch: MY("Sasquatch", "sasquatch", "Wild", B(76, 72, 62, 38), MV.wild, 0.15, "N. American folklore"),
   mothman: MY("Mothman", "mothman", "Night", B(62, 64, 50, 74), ["duskfeint", "dreadhowl", "moonstrike"], 0.15, "American folklore"),
@@ -834,7 +844,7 @@ Object.assign(MAPS, {
   rift2: {
     name: "Aurora Rift", zone: "rift", music: "legend", rows: ROWS_RIFT,
     exits: { "7,9": { map: "mythhub", x: 14, y: 3 } },
-    pool: [["ratatoskr", 11], ["caitsith", 9], ["puca", 8], ["cusith", 8], ["kelpie", 8], ["lindworm", 8], ["wyvern", 7], ["alkonost", 7], ["questingbeast", 6], ["leshy", 6], ["sleipnir", 5], ["firebird", 5], ["nidhogg", 5], ["zmey", 4], ["kraken", 4], ["fenrir", 2], ["jormungandr", 2]],
+    pool: [["ratatoskr", 11], ["caitsith", 9], ["puca", 8], ["cusith", 8], ["kelpie", 8], ["selkie", 8], ["whitehart", 5], ["lindworm", 8], ["wyvern", 7], ["alkonost", 7], ["questingbeast", 6], ["leshy", 6], ["sleipnir", 5], ["firebird", 5], ["nidhogg", 5], ["zmey", 4], ["kraken", 4], ["fenrir", 2], ["jormungandr", 2]],
     lvl: [51, 55],
   },
   rift3: {
@@ -858,7 +868,7 @@ Object.assign(MAPS, {
   rift6: {
     name: "Twilight Rift", zone: "rift", music: "legend", rows: ROWS_RIFT,
     exits: { "7,9": { map: "mythhub", x: 10, y: 1 } },
-    pool: [["jackalope", 11], ["cadejo", 9], ["chupacabra", 8], ["alicanto", 8], ["ahuizotl", 8], ["unicorn", 7], ["cockatrice", 7], ["piasa", 6], ["amaru", 6], ["camazotz", 6], ["mothman", 5], ["sasquatch", 5], ["cipactli", 5], ["hornedserpent", 5], ["mishipeshu", 4], ["quetzalcoatl", 2]],
+    pool: [["jackalope", 11], ["cadejo", 9], ["chupacabra", 8], ["akhlut", 6], ["alicanto", 8], ["ahuizotl", 8], ["unicorn", 7], ["cockatrice", 7], ["piasa", 6], ["amaru", 6], ["camazotz", 6], ["mothman", 5], ["sasquatch", 5], ["cipactli", 5], ["hornedserpent", 5], ["mishipeshu", 4], ["quetzalcoatl", 2]],
     lvl: [54, 58],
   },
 });
