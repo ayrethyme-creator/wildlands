@@ -285,20 +285,6 @@ const INTRO_AT = {
 
   // Spread them across the map rather than clumping them in one corner, while
   // refusing any tile orthogonally touching one already taken.
-  const spread = (list, n) => {
-    const picked = [], touching = ([x, y]) =>
-      picked.some(([px, py]) => Math.abs(px - x) + Math.abs(py - y) <= 1);
-    const step = Math.max(1, list.length / n);
-    for (let i = 0; i < n; i++) {
-      let idx = Math.min(list.length - 1, Math.floor(i * step)), found = null;
-      for (let off = 0; off < list.length && !found; off++) {
-        const c = list[(idx + off) % list.length];
-        if (!touching(c)) found = c;
-      }
-      if (found) picked.push(found);
-    }
-    return picked;
-  };
 
   const lower = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 
@@ -453,7 +439,28 @@ const INTRO_AT = {
     const free = freeTiles(mapKey).filter(([x, y]) =>
       !taken.some(([tx, ty]) => Math.abs(tx - x) + Math.abs(ty - y) <= 1));
     if (!free.length) return false;
-    const ordered = spread(free, Math.max(1, want)).concat(free);
+
+    // freeTiles scans row by row from the top, so its first entry is always the
+    // top-left corner of the map. The old line here computed a nicely spread
+    // set and then took ordered[0] anyway - which is that same corner, every
+    // time, on every map. That is why all five of the python investigation's
+    // clues ended up in a row along the top border with the trees, where a
+    // player walking the road never looks. `want` did nothing at all.
+    //
+    // Now: candidates are ranked farthest-from-what-is-already-placed first, so
+    // findings push apart across the whole screen, and ties are broken by a
+    // hash of the tile so the choice is scattered rather than top-left but
+    // still identical on every load.
+    let mh = 0;
+    for (let i = 0; i < mapKey.length; i++) mh = (Math.imul(mh, 31) + mapKey.charCodeAt(i)) | 0;
+    const rank = ([x, y]) => {
+      let h = Math.imul((mh ^ Math.imul(x + 1, 73856093) ^ Math.imul(y + 1, 19349663)) | 0, 2654435761);
+      return ((h ^ (h >>> 15)) >>> 0);
+    };
+    const apart = ([x, y]) => taken.length
+      ? Math.min.apply(null, taken.map(([tx, ty]) => Math.abs(tx - x) + Math.abs(ty - y)))
+      : 999;
+    const ordered = free.slice().sort((a, b) => (apart(b) - apart(a)) || (rank(a) - rank(b)));
     const pick = ordered.find(([x, y]) => everyoneStillReachable(x, y));
     if (!pick) return false;
     taken.push(pick);

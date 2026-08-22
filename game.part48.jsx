@@ -131,10 +131,24 @@
     // whole map rather than needing a copy of her in every region. The last
     // four are flagged postgame and are filtered out until the summit is done,
     // so she simply does not mention them before then.
+    // ROAD ORDER. This list is the order she sends you out in, and it has to
+    // match the order the roads actually come in, because she is the only thing
+    // telling a player where to go next. It did not: millrace sat third, and
+    // its investigation is at Hearthside, so after the fen cats she sent
+    // players to a region they had no way to work in and the whole chain
+    // stopped there. canopygap, sunfield and eyrie were interleaved the same
+    // way further down.
+    //
+    // The nine road arcs now run in road order, route1 through route9, so the
+    // sequence she gives is the sequence you walk: the hives, the fen cats, the
+    // pythons, the turtles, the pangolins, the wolves, the volcano rabbits, the
+    // bats, the polar bears. The hub arcs follow, and every one of them is
+    // flagged postgame so she does not mention them at all until the summit is
+    // behind you.
     pitchArcs: [
-      "beeloud", "reedwater", "millrace", "granary", "tidewater", "canopygap",
-      "sunfield", "lowstrand", "highpasture", "frostwatch", "ashfields",
-      "eyrie", "nightgrove",
+      "beeloud", "reedwater", "granary", "tidewater", "lowstrand",
+      "highpasture", "ashfields", "nightgrove", "frostwatch",
+      "millrace", "canopygap", "sunfield", "eyrie",
       "longline", "hearth", "digsite", "mythhub",
     ],
   });

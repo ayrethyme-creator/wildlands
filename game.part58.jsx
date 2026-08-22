@@ -16,6 +16,7 @@
 Object.assign(ARCS, {
   // ---------------- REGION 3: the fen and the water ----------------
   millrace: {
+    postgame: true,
     region: 3,
     title: "The Millrace",
     where: "seg_w2",
@@ -139,6 +140,7 @@ Object.assign(ARCS, {
 
   // ---------------- REGION 6: the road through the canopy ----------------
   canopygap: {
+    postgame: true,
     region: 6,
     title: "The Gap in the Trees",
     where: "canopywalk",
@@ -180,6 +182,7 @@ Object.assign(ARCS, {
 
   // ---------------- REGION 7: the panels and the burrows ----------------
   sunfield: {
+    postgame: true,
     region: 7,
     title: "The Field of Glass",
     where: "seg_d3",
@@ -385,6 +388,7 @@ Object.assign(ARCS, {
 
   // ---------------- REGION 12: the poles ----------------
   eyrie: {
+    postgame: true,
     region: 12,
     title: "The Poles on the Ridge",
     where: "eyrie",
