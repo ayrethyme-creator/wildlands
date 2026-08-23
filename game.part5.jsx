@@ -1377,14 +1377,20 @@
                     “I have been pitched forty-one projects this year and funded six. What are you asking me to buy?”
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    {Object.entries(A.proposals).map(([k, p]) => (
+                    {/* Not Object.entries: that is definition order, and every
+                        arc was written with the funded answer first. See
+                        pitchOrder in part47. */}
+                    {pitchOrder(S.runSeed, S.pitch.arc).map((k) => {
+                      const p = A.proposals[k];
+                      return (
                       <button key={k} style={{ ...btn("#5c5344"), textAlign: "left", fontSize: 11.5,
                         lineHeight: 1.45, padding: "9px 11px", fontWeight: 400 }}
                         onClick={() => makePitch(S.pitch.arc, k)}>
                         <b style={{ color: "#e8dcc3" }}>{p.label}</b><br />
                         <span style={{ color: "#a89880" }}>{p.pitch}</span>
                       </button>
-                    ))}
+                      );
+                    })}
                   </div>
                   <button style={{ ...btnS("#7d735f"), width: "100%", marginTop: 10 }} onClick={closePitch}>
                     Not yet — go back out

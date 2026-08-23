@@ -104,6 +104,34 @@ const ARCS = {
 const arcState = (st, id) => (st.arcs && st.arcs[id]) || { stage: "listen", found: {}, tried: [] };
 const arcFound = (st, id, key) => !!arcState(st, id).found[key];
 
+// The order the proposals are offered in.
+//
+// Every arc was written with the funded answer first, all seventeen of them,
+// so the correct choice was always the top button. That is exactly as
+// reliable a tell as the old one where the right answer was also the longest
+// paragraph, and Ayr spotted it the moment the lengths stopped giving it away.
+//
+// Shuffled against the save's own seed rather than at random on each render:
+// the order is stable within a save, so the buttons never move under the
+// player's hand and re-opening the panel cannot be used to re-roll, but it
+// differs between playthroughs, so no walkthrough can just name a position.
+const pitchOrder = (seed, id) => {
+  const ks = Object.keys((ARCS[id] && ARCS[id].proposals) || {});
+  let h = ((seed | 0) ^ 0x9e3779b9) || 0x6d2b79f5;
+  for (let i = 0; i < id.length; i++) h = Math.imul(h ^ id.charCodeAt(i), 0x85ebca6b) | 0;
+  const rnd = () => {
+    h ^= h << 13; h |= 0;
+    h ^= h >>> 17;
+    h ^= h << 5;  h |= 0;
+    return (h >>> 0) / 4294967296;
+  };
+  for (let i = ks.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    const t = ks[i]; ks[i] = ks[j]; ks[j] = t;
+  }
+  return ks;
+};
+
 // A case is open once you have met the person whose problem it is. Before
 // that its findings are objects on the ground rather than evidence, because
 // a clue you cannot place is not a clue - it is scenery that files itself
