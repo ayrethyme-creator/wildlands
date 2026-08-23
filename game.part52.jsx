@@ -21,33 +21,32 @@ ARCS.reedwater = {
   region: 2,
   title: "The Cats of Reedwater",
   where: "route2",
-  blurb: "The fen is losing its ground-nesters. Fifty households have cats, and every one of them is loved.",
+  blurb: "A fen is wet, low ground full of reeds, and the birds that matter here nest on it — not in trees, but in scrapes on the ground among the stems. That is the whole problem in one sentence: a chick that cannot fly cannot go upward to get away. Along the edge of the fen are fifty-one houses, and almost every one of them has a cat. A well-fed cat still hunts; it is not hunger, it is wiring, and no amount of feeding switches it off. Nobody here is a villain and nobody is going to give up their cat, so the answer has to be something fifty-one households will actually keep doing.",
 
   evidence: {
     counts: {
       label: "What the fen is actually losing",
-      detail: "Warden's counts: lapwing and reed bunting down by half in six years. Ducks and geese unchanged.",
+      detail: "The warden's counts: lapwing and reed bunting down by half in six years, while ducks and geese are unchanged. That gap is the useful part. Ducks and geese nest on water or defend their young hard; lapwing and reed bunting nest on open ground and rely on not being found. Whatever is doing this is finding nests at ground level, which points at a ground predator rather than at weather, disease or the state of the water.",
       how: "Ask the fen warden what she is counting, and over how long.",
     },
     when: {
       label: "When they hunt",
-      detail: "Dawn and the hour after dusk, overwhelmingly. Almost nothing in the middle of the day.",
+      detail: "Dawn and the hour after dusk, overwhelmingly — almost nothing in the middle of the day. Cats are crepuscular, meaning they hunt at the edges of the day, and so the risk is not spread evenly across twenty-four hours; it is concentrated into about two of them. That is worth knowing, because a measure that only has to hold for two hours a day is one people might actually keep up.",
       how: "Sit with the warden through a dawn and a dusk.",
     },
     who: {
       label: "Which cats, and how many",
-      detail: "Fifty-one households on the fen edge. Most cats stay in the gardens. Eleven regularly cross into the reeds.",
+      detail: "Fifty-one households on the fen edge. Most of their cats never leave the gardens; eleven regularly cross into the reeds. So a small minority is doing nearly all of it — which tempts you toward dealing with those eleven specifically. Hold that thought against the fact that all fifty-one households have to agree to whatever you propose, and it is the other forty who decide whether you are worth listening to.",
       how: "Walk the fen edge at dusk and see whose cats are where.",
     },
     bells: {
       label: "Whether bells work",
-      detail: "Half the cats here already wear bells and the counts fell anyway. The evidence for bells is thin.",
+      detail: "Half the cats here already wear bells, and the counts fell anyway. Bells are the thing everybody reaches for first, and the evidence behind them is genuinely thin — a stalking cat can move without ringing one, and a bird that has heard a jingle all season stops treating it as a warning. This is the single most useful finding here, because it rules out the answer you would otherwise have picked without checking.",
       how: "Look at what the cats are already wearing.",
     },
     owners: {
       label: "What the owners will actually agree to",
-      detail: "Nobody will keep a cat in permanently. Almost everybody will put something on a collar, "
-            + "and about half will bring a cat in overnight if asked properly.",
+      detail: "Nobody will keep a cat in permanently. Almost everybody will put something on a collar, and about half will bring a cat in overnight if they are asked properly rather than instructed. This is evidence in exactly the way a bird count is evidence: a measure that people will not sustain has an effectiveness of zero however well it works in principle, so what they will agree to is part of what works.",
       how: "Knock on doors along the houses on the fen edge. Ask, do not tell.",
     },
   },
@@ -58,27 +57,34 @@ ARCS.reedwater = {
       needs: ["counts", "when", "owners"],
       cost: 0,
       works: true,
-      pitch: "A wide collar cover in a colour birds pick out early. It does nothing to the cat and it does "
-           + "not stop it hunting mice — but a lapwing sees it coming and goes. Pair it with asking people "
-           + "to bring cats in at dawn and dusk, which is when almost all of it happens.",
+      pitch: "A wide collar cover in a colour birds see early. Cats are ambush hunters — the whole method "
+           + "depends on not being noticed until the last second — so a bird that picks out the colour "
+           + "simply leaves, while the cat is unbothered and still catches mice, which owners care about. "
+           + "Pair it with asking people to bring cats in at dawn and dusk.",
     },
     indoors: {
-      label: "Ask everyone to keep their cats indoors",
+      label: "Ask every household to keep its cat indoors",
       needs: ["counts"],
       cost: 0,
       works: false,
-      pitch: "The cleanest answer. No cat in the reeds, no cats taking birds.",
+      pitch: "The cleanest answer, and the only one that removes the risk rather than reducing it. No cat "
+           + "in the reeds means no cat taking chicks, and it costs nothing to ask for. Fifty-one "
+           + "households, one clear request, and the ground-nesters get a spring in which the only thing "
+           + "hunting them is what has always hunted them.",
       why: "Eleven households agreed. Four lasted a month. One man kept his cat in for six weeks and it "
          + "sprayed the house and cried at the door until three in the morning, and he let it out, and "
          + "he has not spoken to the station since.\n\nA solution that only works if everyone complies "
          + "forever is not a solution. It is a wish.",
     },
     bellsOnly: {
-      label: "Hand out bells",
+      label: "Hand out bells to every household",
       needs: [],
       cost: 0,
       works: false,
-      pitch: "Cheap, easy, everyone already understands it.",
+      pitch: "Cheap, immediate, and already understood — everybody knows what a bell on a cat is for, so "
+           + "there is nobody to persuade and nothing to explain. Hand them out free at the door and you "
+           + "would have near-total uptake inside a week. The bird hears the cat coming and has time to "
+           + "get off the nest before it is found.",
       why: "Half of them were already wearing bells. The counts fell anyway.\n\nIt was the easy answer and "
          + "you did not check whether it was the right one — which is the whole reason she makes you bring "
          + "her evidence.",
@@ -88,7 +94,10 @@ ARCS.reedwater = {
       needs: [],
       cost: 0,
       works: false,
-      pitch: "Eleven cats are doing most of it. Remove those eleven.",
+      pitch: "Eleven cats are doing almost all of it while the other forty stay in the gardens. Trap those "
+           + "eleven, rehome them properly well away from the fen, and you have dealt with nearly the whole "
+           + "problem by touching the smallest possible number of animals. Targeted, proportionate, and "
+           + "finished inside a fortnight rather than argued about for years.",
       why: "They are somebody's cats. The first one you take is somebody's, and by the evening the whole "
          + "fen edge knows what the station does, and nobody opens a door to you again.\n\nThe birds needed "
          + "fifty-one households on your side. You have none.",
