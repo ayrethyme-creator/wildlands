@@ -83,8 +83,8 @@ mnote("bennu", "Herbivore — nothing; it is a soul", "Egypt",
   "The heron-god that self-creates and stands on the first mound of land, and the direct ancestor of the Greek phoenix. It is probably a real bird: an enormous extinct heron lived in Arabia into human times, and Bennu is drawn as a grey heron with two head plumes. Herons standing alone on mudflats at dawn is where this comes from.");
 mnote("ammit", "Carnivore — hearts that fail", "Egypt",
   "Crocodile head, lion forequarters, hippo hindquarters — the three animals most likely to actually kill an Egyptian, assembled into one. If your heart weighed more than the feather of truth, she ate it, and you simply stopped existing. It isn't a punishment. It's an erasure, which the Egyptians considered far worse.");
-mnote("serpopard", "Carnivore — unclear", "Predynastic Egypt and Mesopotamia",
-  "A leopard with an enormously long snake neck, carved on the Narmer Palette around 3100 BC — one of the oldest fictional animals we have. Nobody knows what it meant. It appears in both Egypt and Mesopotamia at the same moment, which suggests contact, and then it vanishes entirely.");
+mnote("fairy", "Omnivore — milk, and what is left out", "Ireland, Scotland and Wales",
+  "Not the small winged thing on a greeting card. The older accounts describe the Aos Sí as tall, proud, and easily insulted, living under the hills and owing you nothing. You left food out and did not thank them aloud, because thanks implied they were servants. The wings arrived late, in Victorian illustration, and stuck.");
 mnote("apep", "Carnivore — the sun", "Egypt",
   "The serpent that attacks the sun boat every night and must be fought off before dawn. Egyptian priests performed rituals to defeat it, and eclipses were understood as Apep briefly succeeding. It is a myth doing what myth is for: it makes a terrifying, arbitrary event into a story with a role for you in it.");
 mnote("sha", "Carnivore — unclear", "Egypt",

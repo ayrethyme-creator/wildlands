@@ -502,7 +502,7 @@ Object.assign(ART, {
   selkie: beastM(marineA({ hide: "#4c5460", belly: "#c9d4dc", bigEye: true }), { aura: "#5dade2" }),
   whitehart: hoofM({ coat: "#f6f2e8", antlers: true, hornC: "#e8dcc3", maneC: "#e2dacb", iris: "#c9a227" }),
   caitsith: felArt({ fur: "#26292e", muzzle: "#e8e0d0", iris: "#3ad9a4", earTall: true }),
-  puca: hoofM({ coat: "#2e2921", maneC: "#0f0d0a", iris: "#e8c547" }),
+  puca: lagoA({ fur: "#2e2921", belly: "#4c453a", inner: "#5c4c3c", tailC: "#6b6154", iris: "#e8c547" }),
   questingbeast: dragonE({ hide: "#6b8a5c", maneC: "#c9704a" }),
   // A wyvern is defined by having two legs, not four — the forelimbs are the
   // wings. That is the whole distinction from a dragon, and the sprite was
@@ -519,7 +519,7 @@ Object.assign(ART, {
   sphinx: beastM(felArt({ fur: "#d9b06a", ruff: true, ruffC: "#e8c547", iris: "#3a7ad9" }), { wings: true, wingC: "#3f5c8a" }),
   bennu: birdM({ body: "#c95c3a", halo: true, plume: true, plumeC: "#e8c547" }),
   ammit: marineA({ hide: "#6b8a5c", teeth: true, jaw: "#4c6b44", belly: "#c9a88a" }),
-  serpopard: beastM(felArt({ fur: "#c9a05c", spots: true, earTall: true }), {}),
+  fairy: bugM({ body: "#d8c8f0", moth: true, wingC: "#f2ecff", legC: "#8a7aa8" }),
   apep: serpentM({ hide: "#3c3244", bands: true, bandC: "#c94a3a" }),
   sha: canArt({ fur: "#8a745c", inner: "#5c4c3c", muzzle: "#b5a08a" }),
   roc: birdM({ body: "#8a6f52", wingC: "#68533c", beakC: "#d9b06a" }),
@@ -719,7 +719,7 @@ Object.assign(DEX, {
   sphinx: MY("Sphinx", "sphinx", "Night", B(68, 64, 58, 54), MV.night, 0.15, "Egyptian"),
   bennu: MY("Bennu", "bennu", "Ember", B(64, 66, 52, 66), MV.emb, 0.15, "Egyptian"),
   ammit: MY("Ammit", "ammit", "Predator", B(70, 76, 58, 42), MV.pred, 0.15, "Egyptian"),
-  serpopard: MY("Serpopard", "serpopard", "Swift", B(56, 62, 46, 72), MV.swi, 0.3, "Egyptian"),
+  fairy: MY("Fairy", "fairy", "Aerial", B(48, 58, 44, 80), MV.aer, 0.3, "Celtic"),
   apep: MY("Apep", "apep", "Venom", B(76, 72, 58, 44), MV.ven, 0.12, "Egyptian"),
   sha: MY("Sha", "sha", "Night", B(58, 60, 48, 66), MV.night, 0.3, "Egyptian"),
   roc: MY("Roc", "roc", "Aerial", B(78, 76, 58, 58), MV.aer, 0.12, "Middle Eastern"),
@@ -847,7 +847,7 @@ Object.assign(MAPS, {
   rift3: {
     name: "Hearth Rift", zone: "rift", music: "legend", rows: ROWS_RIFT,
     exits: { "7,9": { map: "mythhub", x: 1, y: 7 } },
-    pool: [["sha", 10], ["serpopard", 10], ["mamiwata", 8], ["anansi", 9], ["impundulu", 8], ["mushussu", 7], ["manticore", 7], ["simurgh", 7], ["sphinx", 6], ["bennu", 6], ["ammit", 6], ["lamassu", 6], ["ziz", 5], ["roc", 4], ["apep", 4], ["grootslang", 4], ["behemoth", 3], ["leviathan", 2]],
+    pool: [["sha", 10], ["mamiwata", 8], ["anansi", 9], ["impundulu", 8], ["mushussu", 7], ["manticore", 7], ["simurgh", 7], ["sphinx", 6], ["bennu", 6], ["ammit", 6], ["lamassu", 6], ["ziz", 5], ["roc", 4], ["apep", 4], ["grootslang", 4], ["behemoth", 3], ["leviathan", 2]],
     lvl: [52, 55],
   },
   rift4: {

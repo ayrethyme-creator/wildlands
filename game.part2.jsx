@@ -1173,7 +1173,7 @@ const PHOTO_ART = {
   "secretarybird": true,
   "seiwhale": true,
   "seiwhale_c": true,
-  "serpopard": true,
+  "fairy": true,
   "serval": true,
   "sha": true,
   "sheep": true,

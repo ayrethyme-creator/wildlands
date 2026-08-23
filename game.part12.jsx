@@ -218,7 +218,7 @@ MAPS.rift6.rows = withRow(MAPS.rift6.rows, 0, "TTTTTTTnTTTTTTTT");
 MAPS.rift6.exits = { ...MAPS.rift6.exits, "7,0": { map: "rift7", x: 7, y: 8 } };
 const DEEP = [
   { k: "rift7", n: "The Weaving", lvl: [55, 58], prev: { map: "rift6", x: 7, y: 1 }, next: "rift8",
-    pool: [["anansi", 11], ["kitsune", 9], ["tanuki", 9], ["nekomata", 8], ["puca", 8], ["caitsith", 8], ["ratatoskr", 9], ["sigbin", 7], ["tikbalang", 7], ["cadejo", 7], ["jackalope", 8], ["mushussu", 6], ["serpopard", 7], ["sha", 7]] },
+    pool: [["anansi", 11], ["kitsune", 9], ["tanuki", 9], ["nekomata", 8], ["puca", 8], ["caitsith", 8], ["ratatoskr", 9], ["sigbin", 7], ["tikbalang", 7], ["cadejo", 7], ["jackalope", 8], ["mushussu", 6], ["fairy", 7], ["sha", 7]] },
   { k: "rift8", n: "The Deluge", lvl: [56, 59], prev: { map: "rift7", x: 7, y: 1 }, next: "rift9",
     pool: [["jormungandr", 5], ["leviathan", 4], ["kraken", 6], ["bakunawa", 6], ["rainbowserpent", 5], ["taniwha", 7], ["moo", 8], ["phayanaga", 7], ["naga", 7], ["makara", 7], ["qinglong", 4], ["hippocampus", 8], ["kelpie", 8], ["adaro", 8], ["bunyip", 7], ["cipactli", 6], ["mishipeshu", 6], ["hornedserpent", 6], ["ahuizotl", 7], ["kappa", 8]] },
   { k: "rift9", n: "The Underworld Gate", lvl: [57, 60], prev: { map: "rift8", x: 7, y: 1 }, next: "rift10",
