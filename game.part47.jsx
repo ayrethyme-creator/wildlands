@@ -103,6 +103,20 @@ const ARCS = {
 // changing its shape.
 const arcState = (st, id) => (st.arcs && st.arcs[id]) || { stage: "listen", found: {}, tried: [] };
 const arcFound = (st, id, key) => !!arcState(st, id).found[key];
+
+// A case is open once you have met the person whose problem it is. Before
+// that its findings are objects on the ground rather than evidence, because
+// a clue you cannot place is not a clue - it is scenery that files itself
+// into a casebook you have never opened.
+//
+// Saves written before `met` existed do not carry it, so anything already
+// under way counts as met: any evidence recorded, or any stage past
+// listening. Without that, loading an old save would lock a player out of
+// findings for a case they are halfway through.
+const arcMet = (st, id) => {
+  const a = arcState(st, id);
+  return !!a.met || a.stage !== "listen" || Object.keys(a.found || {}).length > 0;
+};
 const arcEvidenceCount = (st, id) => Object.keys(arcState(st, id).found).length;
 const arcTotalEvidence = (id) => Object.keys(ARCS[id].evidence).length;
 

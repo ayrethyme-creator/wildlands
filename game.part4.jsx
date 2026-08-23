@@ -257,6 +257,18 @@ function Wildlands() {
   // A finding is recorded once and stays recorded. There is no way to lose
   // evidence, because the point is understanding a place, and you do not
   // un-understand it.
+  // Meeting the person with the problem is what opens their case. Everything
+  // they are worried about is already lying around the region, but until you
+  // have heard the problem those findings stay inert - see the gate in the
+  // tr.learns branch of the interact handler.
+  const meetArc = (arcId) => {
+    setS((p) => {
+      const cur = (p.arcs && p.arcs[arcId]) || { stage: "listen", found: {}, tried: [] };
+      if (cur.met) return p;
+      return { ...p, arcs: { ...(p.arcs || {}), [arcId]: { ...cur, met: true } } };
+    });
+  };
+
   const learn = (arcId, key, text) => {
     const st = SR.current;
     if (arcFound(st, arcId, key)) { if (text) say(text); return; }
@@ -962,10 +974,35 @@ function Wildlands() {
         return;
       }
 
+      // The people part65 places introduce a case and nothing else: seventeen
+      // of them, not one with a battle team, and only two carrying a finding
+      // of their own. Without this branch the other fifteen fell all the way
+      // through to the battle line at the bottom of this handler and were
+      // offered "Battle!", which would have called tr.team() - undefined on
+      // every one of them.
+      //
+      // Meeting them is also what opens their case. justMet carries that to
+      // the tr.learns branch below, because setS has not landed yet and the
+      // two people who introduce a case AND carry a finding would otherwise
+      // be told they had not met themselves.
+      let justMet = false;
+      if (tr.builds && tr.arc && tr.builds === tr.arc) {
+        justMet = true;
+        meetArc(tr.arc);
+        if (!tr.learns) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
+      }
+
       // Story people and examinable things. A finding is recorded once; after
       // that they say the same thing without re-announcing it, so the clearing
       // does not shout at you every time you cross it.
       if (tr.learns) {
+        // A finding belonging to a case you have not opened is scenery. Ayr
+        // found albatross evidence writing itself into an unopened casebook
+        // while she was working on the sea turtles two regions earlier.
+        if (!justMet && !arcMet(st, tr.arc)) {
+          say(`${tr.em || "📓"} ${tr.line}\n\nYou make a note of where it is. Whatever it means, it belongs to a problem nobody has told you about yet.`);
+          return;
+        }
         const already = arcFound(st, tr.arc, tr.learns.key);
         if (already) { say(`${tr.em || "📓"} ${tr.name}: "${tr.line}"`); return; }
         say(`${tr.em || "📓"} ${tr.line}`, [
