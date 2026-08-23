@@ -55,7 +55,7 @@ const YOUNGLINGS = [
   ["giraffe_c", "Giraffe Calf", "giraffe", 26, 0.6, "falls two metres at birth · stands within an hour"],
   ["hippo_c", "Hippo Calf", "hippo", 26, 0.6, "born underwater · suckles underwater"],
   ["whiterhino_c", "White Rhino Calf", "whiterhino", 30, 0.58, "no horn yet — that grows in"],
-  ["blackrhino_c", "Black Rhino Calf", "blackrhino", 30, 0.58, "runs in front; white rhino calves run behind"],
+  ["blackrhino_c", "Black Rhino Calf", "blackrhino", 30, 0.58, "runs behind; white rhino calves run in front"],
   ["bison_c", "Bison Calf", "bison", 26, 0.6, "born orange — 'red dog'"],
   ["moose_c", "Moose Calf", "moose", 26, 0.6, "outruns a person within days"],
   ["camel_c", "Camel Calf", "camel", 24, 0.6, "born humpless"],
