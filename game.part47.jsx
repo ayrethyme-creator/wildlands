@@ -19,62 +19,74 @@ const ARCS = {
     region: 1,
     title: "The Beeloud Hives",
     where: "seg_m4",
-    blurb: "Thabo Sithole is losing beehives. A honey badger is feeding two cubs.",
+    blurb: "Thabo Sithole keeps bees here, and something is tearing his hives apart at night. It is a honey badger — a low, heavy animal about the size of a big dog, built for digging, with claws that open a beehive the way a tin opener opens a tin. She is after the fat white grubs in the comb, not the honey. Thabo is not being sentimental about this: nine colonies gone is most of his year. The usual answer is to shoot her or cart her away, and neither of those works for long. Your job is to find out enough about how she is actually getting in to propose something that does.",
 
     // Everything the player can find out. Each is gathered somewhere specific,
     // and the pitch is graded on how much of it you actually did.
+    //
+    // Each finding has to stand on its own. A player who does not already know
+    // what a honey badger is cannot be handed an observation and left to infer
+    // the conservation point from it, so every detail says what was seen AND
+    // what it means for the decision at the end.
     evidence: {
       loss: {
         label: "What a colony is worth to Thabo",
-        detail: "Nine colonies lost since the rains. He owes the co-operative eleven thousand.",
+        detail: "Nine colonies lost since the rains, and he borrowed against them — eleven thousand still owed to the co-operative. A hive takes a season to build back up to strength, so this is not a bad month, it is most of a year's income. It matters because it rules out the answer conservationists reach for first: asking the person to simply put up with the loss. He cannot. Whatever you propose has to actually stop the raids, not ask him to absorb them.",
         how: "Ask Thabo about the money, not the badger.",
       },
       edges: {
         label: "Which hives she takes",
-        detail: "Always the outer rows, nearest the treeline. The old inner hives are untouched.",
+        detail: "Always the outer rows, the ones nearest the treeline. The old inner hives have never been touched. She is working from cover and will not cross open ground to reach the middle of the apiary — like most raiding animals she wants a short line back to somewhere safe. That is a weakness you can build against: the distance between her and the trees is doing some of the work already.",
         how: "Look at which hives are wrecked and which are not.",
       },
       history: {
         label: "How long she has been here",
-        detail: "There are old claw marks on stands still standing. She did not arrive this year — the hives came to her.",
+        detail: "There are old claw marks on stands that are still standing, from seasons before this one. She did not move in on the apiary — the apiary was built in ground she already lived in. It matters because it changes who the newcomer is. Removing her would not be restoring the place to normal, it would be clearing an animal off her own territory, and territory that good does not stay empty.",
         how: "Look at the oldest stands.",
       },
       climbs: {
         label: "How she gets in",
-        detail: "She climbs the stands. The legs are rough-sawn timber and she can grip them.",
+        detail: "She climbs. The hives sit waist-high on stands, and the legs are rough-sawn timber — splintery, soft, full of grip for a claw built to dig. She goes up the leg, not over the ground. This is the single most useful thing you can learn here, because it means the raid depends on one thing she needs and cannot do without: something to hold on to.",
         how: "Watch the clearing after dark.",
       },
       nursing: {
         label: "Why she needs so much",
-        detail: "She is nursing two cubs in a den under the marula roots.",
+        detail: "She is nursing two cubs in a den under the marula roots. A female feeding cubs needs far more than she does alone, which explains both the timing — the raids started this season, not before — and why she keeps coming back through everything Thabo has tried. She is not raiding out of habit or boldness. She is short of food and the hives are the richest thing for miles.",
         how: "Follow her back from the hives.",
       },
     },
 
     // What you can propose. Each is a real thing people have tried.
+    //
+    // The three pitches are deliberately kept within a few words of each other,
+    // and the correct one is not the longest. Every arc used to give itself
+    // away: the answer that worked ran three to five times longer than the
+    // ones that did not, so a player could skip the reading entirely and click
+    // the biggest block of text. A wrong answer has to be argued as well as the
+    // right one, or the choice is not a choice.
     proposals: {
       stands: {
-        label: "Smooth steel stands, and move the outer hives in",
+        label: "Steel legs, and the outer hives moved in",
         needs: ["climbs", "edges"],
         cost: 0,
         works: true,
-        pitch: "She climbs timber. She cannot climb smooth steel, and she cannot jump the height. Move the outer rows in behind the old ones and put every hive on a stand.",
+        pitch: "Take away the grip. She reaches the hives by climbing the timber legs, and smooth steel gives a digging claw nothing to hold; the stands are too tall for her to simply jump. Put every hive on steel, and move the outer rows in behind the old ones so she has open ground to cross before she can even try.",
       },
       relocate: {
-        label: "Move the hives further from the treeline",
+        label: "Move the whole apiary out from the trees",
         needs: ["edges"],
         cost: 0,
         works: false,
-        pitch: "She takes the outer rows. Move them away from the trees and she may lose interest.",
-        why: "She followed them. Of course she followed them. She is not stupid, she is hungry.",
+        pitch: "Use the distance. She only ever takes the outer rows, the ones closest to the treeline she comes down through, and she will not cross open ground to reach the middle. Move the entire apiary further out into the clear, away from the trees, and the hives stop being a short safe stop on a night's foraging.",
+        why: "She followed them. Of course she followed them — she is not stupid, she is hungry, and a hive is worth the walk to an animal feeding cubs. Moving food does not stop it being food. Within a month the outer rows were being opened again, only now Thabo had further to carry everything.",
       },
       remove: {
-        label: "Trap her and release her somewhere far away",
+        label: "Trap her and release her out in the reserve",
         needs: [],
         cost: 0,
         works: false,
-        pitch: "Take her off the land entirely and let Thabo keep his hives.",
-        why: "Two cubs under the marula roots, and a mother eighty kilometres away. And the clearing did not stay empty a fortnight.",
+        pitch: "Separate them. Trap her cleanly and release her eighty kilometres out in the reserve, where there is plenty of wild food and nobody's livelihood depends on her leaving it alone. Thabo keeps his colonies, she keeps her life, and an argument that neither of them can win simply stops.",
+        why: "Two cubs under the marula roots, and their mother eighty kilometres away. They starve, and she walks back or dies trying — they do that. And the clearing did not stay empty a fortnight: it is good ground she was living in first, so the next badger moved in and started on the outer rows.",
       },
     },
 
