@@ -717,22 +717,30 @@ const INTRO_AT = {
   // same fault as all four of Thabo's clues on Beeloud Clearing, arrived at
   // from the opposite direction.
   //
-  // So these two share the water, and each walks it in its own order, starting
-  // where its animal actually is. Sharing is much the lesser problem: the
-  // screens are wide, placeOn keeps findings well apart, and a clue about
-  // longlines has never been mistakable for a clue about sea ice. Neither list
-  // includes the open ocean, because that is where the albatross woman stands
-  // and nobody's findings belong on a person's own screen.
+  // Sharing was the wrong call and Ayr caught it in play: every one of these
+  // four screens carried findings from both investigations at once, and they
+  // were the only maps in the game that did. Walking the reef during the turtle
+  // work, you pick up albatross evidence for a woman you have not met, filed
+  // under a case you have not opened. "A clue about longlines has never been
+  // mistakable for a clue about sea ice" was true and beside the point - the
+  // reader cannot tell which case either belongs to.
+  //
+  // So they are exclusive again, two screens each. The starvation this was
+  // meant to avoid no longer applies: findings are dealt proportionally now
+  // (see the block further down), so five findings across two screens go two
+  // then three, in reading order, instead of the 1,4,2,5,3 wrap that made
+  // the walk turn round twice.
   const SEA_WALK = {
-    frostwatch: ["polarsea", "abyss", "kelp", "reef"],   // out from the ice
-    longline:   ["reef", "kelp", "polarsea", "abyss"],   // out from the shallows
+    frostwatch: ["polarsea", "abyss"],   // the ice, and the water under it
+    longline:   ["reef", "kelp"],        // the shallows the boats work
   };
   arcsToPlace.forEach((a) => {
     if (WALK_OF[a] || !SEA_WALK[a]) return;   // only reached where no corridor exists
     WALK_OF[a] = SEA_WALK[a].filter((m) => MAPS[m]);
-    // Deliberately claims nothing. These two are the only arcs allowed onto
-    // each other's ground, and claiming would put us straight back to two
-    // screens apiece.
+    // Claim them, like every other walk does. The open ocean stays unclaimed
+    // because that is where the albatross woman stands, and nobody's findings
+    // belong on a person's own screen.
+    WALK_OF[a].forEach((m) => { if (!mapClaim[m]) mapClaim[m] = a; });
   });
 
   // Then the hubs, each off its own cluster, taking only screens no road and no
