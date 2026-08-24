@@ -38,6 +38,7 @@
        border:1px solid var(--line);color:var(--dim)}
   .tag.cr,.tag.en{color:#e8845c;border-color:#6b3f2e}
   .tag.ex,.tag.ew{color:#c98ad6;border-color:#5a3a63}
+  .tag.young{color:#8fc9d6;border-color:#33565e}
   #status{padding:24px 14px;color:var(--dim);font-family:var(--mono);font-size:13px}
   /* lightbox */
   #box{position:fixed;inset:0;background:rgba(10,9,7,.96);display:none;z-index:20;
@@ -56,6 +57,7 @@
   <div class="controls">
     <input type="search" id="q" placeholder="Search a name…" autocomplete="off" />
     <select id="biome"><option value="">All biomes</option></select>
+    <select id="stage"><option value="">Adults &amp; young</option><option value="adult">Adults only</option><option value="young">Young only</option></select>
     <select id="sort">
       <option value="name">A–Z</option>
       <option value="biome">By biome</option>
@@ -143,20 +145,30 @@ function build() {
   ALL = keys.map(function (k) {
     var d = DEX[k] || {}, info = INFO[k] || {};
     var h = info.h || "";
-    var biome = "";
-    if (NA[k]) return null;                                  // a life stage, not a species
-    if (d.t && d.t.indexOf("Mythic") >= 0) biome = "Mythic";
-    else if (d.t && d.t.indexOf("Fossil") >= 0) biome = "Fossil";
-    else if (info.s === "EX" || info.s === "EW" || d.mem) biome = "Gone";
-    else if (/_j$|_c$|_f$|_p$|_i$/.test(k)) return null;
+    var biome = "", young = false;
+
+    /* Everything is shown - this is an art viewer, not a species list. Life
+       stages inherit their adult's biome so the filter still groups sensibly,
+       and are tagged so it is obvious what they are. */
+    var parent = k.replace(/_(j|c|f|p|i|j2)$/, "");
+    if (parent !== k) young = true;
+    if (NA[k]) young = true;
+
+    var basis = (parent !== k && DEX[parent]) ? parent : k;
+    var bd = DEX[basis] || d, bi = INFO[basis] || info;
+    var bh = bi.h || h;
+
+    if (bd.t && bd.t.indexOf("Mythic") >= 0) biome = "Mythic";
+    else if (bd.t && bd.t.indexOf("Fossil") >= 0) biome = "Fossil";
+    else if (bi.s === "EX" || bi.s === "EW" || bd.mem) biome = "Gone";
     else {
-      biome = HAND[k] || "";
+      biome = HAND[basis] || "";
       if (!biome) for (var i = 0; i < RULES.length; i++)
-        if (RULES[i][1].test(h)) { biome = RULES[i][0]; break; }
-      biome = MERGE[biome] || biome || "Unplaced";
+        if (RULES[i][1].test(bh)) { biome = RULES[i][0]; break; }
+      biome = MERGE[biome] || biome || (young ? "life stage" : "Unplaced");
     }
-    return { key: k, name: d.n || k, habitat: h, status: info.s || "", biome: biome };
-  }).filter(Boolean);
+    return { key: k, name: d.n || k, habitat: h, status: info.s || "", biome: biome, young: young };
+  });
 
   var seen = {}, opts = [];
   ALL.forEach(function (r) { if (!seen[r.biome]) { seen[r.biome] = 1; opts.push(r.biome); } });
@@ -167,7 +179,7 @@ function build() {
   });
 
   statusEl.style.display = "none";
-  ["q", "biome", "sort"].forEach(function (id) {
+  ["q", "biome", "sort", "stage"].forEach(function (id) {
     document.getElementById(id).addEventListener("input", render);
   });
   render();
@@ -177,9 +189,12 @@ function render() {
   var q = document.getElementById("q").value.trim().toLowerCase();
   var b = document.getElementById("biome").value;
   var sort = document.getElementById("sort").value;
+  var stage = document.getElementById("stage").value;
 
   var rows = ALL.filter(function (r) {
     if (b && r.biome !== b) return false;
+    if (stage === "adult" && r.young) return false;
+    if (stage === "young" && !r.young) return false;
     if (q && r.name.toLowerCase().indexOf(q) < 0 && r.key.indexOf(q) < 0) return false;
     return true;
   });
@@ -199,6 +214,7 @@ function render() {
     img.loading = "lazy"; img.src = "art/" + r.key + ".png"; img.alt = r.name;
     var cap = document.createElement("figcaption");
     var st = r.status ? '<span class="tag ' + r.status.toLowerCase() + '">' + r.status + "</span>" : "";
+    if (r.young) st += ' <span class="tag young">young</span>';
     cap.innerHTML = "<b>" + r.name + "</b><small>" + r.biome + "</small>" + st;
     fig.appendChild(img); fig.appendChild(cap);
     fig.addEventListener("click", function () { open(r); });
