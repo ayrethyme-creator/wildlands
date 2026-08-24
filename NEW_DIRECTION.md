@@ -1497,6 +1497,87 @@ prepared in advance.
 
 ---
 
+## Question 1 — scope and platform
+
+> **Claude-contributed**, 2026-08-24, researched. Taken first because it gates
+> questions 3 and 6, and because it is the decision most expensive to reverse.
+
+### What the current game is, and why it will not carry this
+
+Safari Saga is ~67 `.jsx` files concatenated in the browser, transformed by
+Babel at load time, and run through `eval`. That has been genuinely fine for
+what it is. It will not reach "professional, competitive with the market"
+because:
+
+- Everything is re-parsed on every page load; the file is already over 2 MB.
+- No real audio engine, no shader pipeline, no controller support, no Steam.
+- The hiring pool for "our own bespoke JSX engine" is **zero people**.
+
+This is not a criticism of it. It is the wrong tool for the next thing.
+
+### The options
+
+| | Cost | 2D | Reversible? |
+|---|---|---|---|
+| **Stay on the web** | free | fine | n/a |
+| **Godot 4** | **free forever, MIT** | **purpose-built 2D** | yes, open source |
+| **Unity** | free under $200k revenue, then **$2,040/yr per seat** | 2D layered on a 3D engine | terms have changed before |
+| **GameMaker** | subscription | strong 2D pedigree | smaller ecosystem |
+
+### Recommendation: Godot 4
+
+For this project specifically:
+
+- **The whole art library is 2D sprites.** Godot's 2D is native rather than
+  retrofitted onto a 3D renderer — reportedly 15–40% faster on sprite-heavy
+  scenes, with real 2D lighting, tilemaps and physics.
+- **Free forever, MIT licence, no revenue cap, no royalties.** For a project
+  that may take years and might sell, this matters twice: it costs nothing, and
+  **the terms cannot be changed underneath it.** Unity's 2023 runtime-fee
+  episode is the cautionary tale — a proprietary engine's pricing can move after
+  you have committed years.
+- **Fast iteration.** ~164 MB install against Unity's ~21 GB; projects open in
+  under a second against 15+. When the person reviewing the work is not a
+  programmer and is judging by eye, iteration speed *is* the workflow.
+- **It still exports to the web**, so the "send Ayr a link, they play it on
+  their phone" loop that works today survives.
+- **It is no longer a risk.** Slay the Spire 2, Dome Keeper (10M+ copies),
+  Brotato, Backpack Battles ($5.2M) are all Godot, and Steam release counts are
+  growing sharply.
+
+### What transfers and what does not
+
+| Transfers | Does not |
+|---|---|
+| **All 1000 sprites** — they are PNGs | The game logic |
+| The species data: `DEX`, `INFO`, habitats, field-guide text | The map and battle systems |
+| The biome classifier and its rules | The rendering and UI |
+| The conservation writing and structure | |
+
+The logic loss is smaller than it looks, because **the new game is a different
+game**. Very little of Safari Saga's code would have been kept regardless.
+
+**Do not port Safari Saga.** It stays as it is, on the web, on `main`, playable
+and updatable. The new game starts clean.
+
+### Separating the money question from the engine question
+
+"Professional level music and art" is **not** an engine decision. Godot does not
+make music. That is a people-and-money question, and it is worth stating
+plainly:
+
+- The **art already exists** — 1000 finished sprites, which is the part most
+  projects never complete.
+- **Music, UI design and audio** are the gaps, and those are commissioned or
+  hired, at any scale from a single freelance composer upward.
+- Cultural consultation (question 5) draws on the same budget.
+
+So the honest sequence is: **engine now, because it is free and gates the
+work; money later, when there is something worth funding.**
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
