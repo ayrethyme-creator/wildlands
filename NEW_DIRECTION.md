@@ -142,6 +142,111 @@ may take years, and **I'm ok with that**. I do however want to keep it
 
 ---
 
+## Ideas — round two
+
+*Ayr's, 2026-08-24. Breed and species names are spelled to their standard
+forms so the doc can be used as a reference; everything else is her wording.*
+
+### Pets, and the first rescue
+
+**21. You choose a pet as a kid, and then another more exotic one as a teen.**
+
+**22.** "Maybe your **first encounter in the wild** (your backyard or
+neighborhood) can be **something you rescue and raise** — like a baby bird or
+small mammal."
+
+**23. Kid pet options.** Each animal has breed options.
+
+| Type | Options |
+|---|---|
+| Cat | **Long hair, short hair, no hair — as breed, not cosmetic.** Separately: **indoor, outdoor/indoor, stray — this defines personality.** |
+| Dog | **Small:** chihuahua, dachshund, pug. **Medium:** corgi, basset hound, pit bull. **Large:** husky, golden retriever, German shepherd. "2-3 breed choices for each that match temperaments." |
+| Fish | goldfish, betta, tadpole |
+| Reptile | snake, bearded dragon, tortoise |
+| Small mammal | rabbit, rat, hamster |
+
+**24. Teen animal options.**
+
+| Type | Options |
+|---|---|
+| Birds | parakeet, rescue parrot |
+| Other small mammals | chinchilla, ferret |
+| Fish tank | saltwater or freshwater; crabs, axolotl, eels |
+| Farm animals | goat, chicken, pig, cow, horse |
+
+**25. The mentor.** "You meet your mentor when you **rescue your first animal
+from the wild**. The mentor will **follow your career** and be the **help
+button**."
+
+**26. What the rescued animal should be.** "My goal is for the animal you
+rescue to be **hand reared as a baby, but partially living in the wild**. A few
+choices. But I want **animals that live a long time, or will easily pass along
+its babies, like a deer would. But long lived animals mainly.**"
+
+Candidates Ayr named to check: crow, a raptor, fox, raccoon, squirrel. See
+**Reference: lifespans** below for what the numbers actually say.
+
+
+---
+
+## Reference: lifespans for the rescued animal
+
+> **Claude-contributed**, in answer to Ayr's question in idea 26. Facts, not
+> design proposals — the choice is hers.
+
+**The single most important thing here: wild and protected lifespans are not
+close.** For most small backyard mammals the wild figure is dominated by
+first-year deaths — predation, cars, starvation — not by old age. A hand-reared
+animal that is fed, sheltered and treated when sick lands somewhere between the
+two columns, which matters a lot given that idea 26 wants exactly that.
+
+| Animal | Typical in the wild | Protected / recorded maximum |
+|---|---|---|
+| Eastern box turtle | **30–50** | 100+ recorded |
+| Common raven | 10–15 | 40+ |
+| Great horned owl | ~13 | 28 wild-banded, 30–40 captive |
+| Red-tailed hawk | 10–15 | ~30 wild-banded |
+| Canada goose | 10–24 | ~33 |
+| American crow | 7–8 average, 15–17 reachable | ~30 |
+| White-tailed deer | 6–14 | ~20 |
+| Barred owl | ~10 | 24 |
+| **Grey squirrel** | **~6** | up to 20 |
+| **Red fox** | **3–5** | 12–14 |
+| **Raccoon** | **2–3** | ~16, 20 captive |
+| Barn owl | 2–4 | 15–20 |
+
+### On the five Ayr named
+
+- **Crow — yes.** Clears 15 and has a property nothing else on this list has:
+  crows recognise individual human faces, remember them for years, and *teach
+  that recognition to their offspring*. Young crows also often stay with the
+  family group to help raise the next brood. That is idea 26's "or will easily
+  pass along its babies" satisfied literally — the bird you raised could have
+  descendants that still know you decades later.
+- **Raptor — yes.** Red-tailed hawk or great horned owl both clear it
+  comfortably. Falconry is already the model idea 26 is describing: hand-reared,
+  flies free, comes back.
+- **Fox — no**, not in the wild. 3–5 years typical. Long-lived only if
+  effectively kept.
+- **Raccoon — no**, not in the wild. 2–3 years typical, though they reach 16–20
+  when protected.
+- **Squirrel — no**, not in the wild. About 6 years, with most dying in year one.
+
+### Worth considering, not on Ayr's list
+
+- **Eastern box turtle** — the longest-lived option by a wide margin, 30–50+
+  years and sometimes a century. Its home range is only a few acres, so it
+  genuinely stays in your woods without being contained, and it is a common
+  backyard find. A slow, permanent, quiet counterpart to a bird.
+- **Canada goose** — imprinting on a hand-reared gosling is real and well
+  documented, and it migrates and returns, which is a striking way to mark the
+  passing of the life stages.
+- **Common raven** — everything the crow offers, longer-lived and more dramatic,
+  but less of a backyard animal than crows are.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
