@@ -672,6 +672,65 @@ stories, and everything else is still collectable through encounters. The
 
 ---
 
+## Ideas — round six: what a quest *is*, and how careers relate
+
+*Ayr's, 2026-08-24.*
+
+**43. Naming and language, deferred.** Ayr agrees the origin-language naming
+needs to be sourced properly rather than automated, "and that's something
+easier to do later." Deferred, not dropped.
+
+**44. The quests are NOT the arcs already written.** "I don't want the quests to
+be the animal stories we have already written. I want the quests to be
+**learning about the conservation story**, and once you've completed that quest,
+**you get access to that animal instead of encountering it in the wild**."
+
+**45. Scope, eyes open.** "I know that's a lot. I also know that most games,
+RPGs and simulators and lots of others **take 40 hours to finish the main
+story** and then have **lots of post game content** to keep the fun going."
+
+**46. One world, three lenses.** "I want the quests to be **the same in each
+career**, the **map and progression and people you meet be the same** — just
+you come from a **different angle** because you have a different career and a
+**different game mechanic**."
+
+### Note on 46 — this is the single biggest scope decision so far (Claude note)
+
+It means the content is authored **once**, not three times. The careers differ
+in *mechanic* and *angle of approach*, not in what exists in the world. So the
+quest arithmetic is ~48 quest lines total rather than ~144, and the three
+careers multiply replay value instead of multiplying build cost.
+
+It also gives each career a clear job to do inside the same scene: the
+photographer has to *see* it, the researcher has to *measure* it, the tour
+guide has to *explain* it to someone. Same lion, same herders, same night.
+
+### Note on 44 — what carries over from Safari Saga, and what does not
+
+The seventeen investigations do **not** become quests; they stay with Safari
+Saga on `main`. But their *structure* is worth keeping even though their
+content is not:
+
+- evidence gathered in the field before you may propose anything
+- several proposals, all plausible, only one of which works
+- wrong answers that fail for **specific, real, stated reasons**
+- no villains — everybody in the situation is behaving reasonably
+- outcomes that can half-work
+
+That shape is exactly what idea 44 describes as "learning about the
+conservation story", applied to documented history instead of invented local
+conflicts.
+
+### Note on 45 — what 40 hours implies
+
+If the main story is roughly forty hours across twelve biomes, that is around
+three hours per biome, and the leftover species from idea 38 plus the
+facilities from idea 18 are the post-game. Useful as a sizing constraint to
+design against rather than discover late.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -754,6 +813,16 @@ change rather than a contradiction.*
   it in the wild**, or **a named individual at the facility with a story**.
 - **2026-08-24** — Players **name** their animals, choosing from suggestions
   drawn from the language of the animal's real region of origin.
+- **2026-08-24** — **Quests are authored once and shared by all three
+  careers.** Same map, same progression, same people; the career changes the
+  mechanic and the angle of approach, not the content.
+- **2026-08-24** — Quests are **not** Safari Saga's seventeen investigations.
+  They teach a real conservation story, and completing one **grants** that
+  animal rather than leaving it to a wild encounter.
+- **2026-08-24** — Target shape: roughly a **40-hour main story**, with the
+  leftover species and the facilities as post-game content.
+- **2026-08-24** — Origin-language naming is **deferred**, to be sourced
+  properly later rather than automated.
 
 ---
 
