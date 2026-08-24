@@ -3407,6 +3407,98 @@ still spare** for whatever the biome review turns up.
 
 ---
 
+## The real test: is each biome a functioning ecosystem?
+
+> **Ayr, 2026-08-24.** *"Stop worrying about continents. What's more important
+> is that each biome is a functional ecosystem. So what's more needed is closer
+> numbers of animals in each biome."*
+
+This replaces the region-based gap analysis. Europe being thin does not matter
+if the world is invented. **A biome with five species does matter**, because it
+is not an ecosystem — it is a corridor with some bats in it.
+
+### The current imbalance
+
+After the 41 breeds come out of Farmland:
+
+| Biome | Now | | Biome | Now |
+|---|---|---|---|---|
+| Forest | **105** | | Reef | 42 |
+| Coast | 72 | | Open ocean | 36 |
+| Rainforest | 67 | | Desert | 30 |
+| Wetlands | 63 | | Mountains | 26 |
+| Savanna | 58 | | **Polar** | **16** |
+| Farmland | 54 | | **Caves** | **5** |
+
+**Twenty-one to one.** Forest could lose forty species and still be the largest;
+caves cannot lose any.
+
+### The arithmetic works out almost exactly
+
+```
+ 899 species (the 1000 less 101 juveniles, which are now life stages)
+ -41 breeds
+=858
++142 new species
+=1000
+```
+
+Bringing every biome up to a floor of **50**:
+
+| Biome | Now | Needs |
+|---|---|---|
+| Caves | 5 | **+45** |
+| Polar | 16 | **+34** |
+| Mountains | 26 | **+24** |
+| Desert | 30 | **+20** |
+| Open ocean | 36 | **+14** |
+| Reef | 42 | **+8** |
+| | | **145 total** |
+
+**145 needed, 142 available.** Close enough that the floor is right at 50 — and
+the final spread becomes **50 to 105** instead of 5 to 105.
+
+### But numbers are the crude version of the test
+
+"Functional ecosystem" is a better standard than a headcount, and it is
+checkable. Each biome should carry:
+
+- **an apex predator**
+- **mesopredators** — the middle of the food chain
+- **large herbivores** and **small herbivores**
+- **scavengers and decomposers**
+- **invertebrates**, including pollinators where it makes sense
+- **birds**, and **something aquatic** if the biome has water
+
+Run against the thin ones, that is where the real holes are:
+
+**Caves (5)** — Olm and four bats. **No herbivores at all, no producers, no
+predator-prey structure.** Not an ecosystem in any sense. It needs cave fish,
+crickets, spiders, harvestmen, isopods, crayfish, salamanders, glow-worms,
+swiftlets — a whole functioning cave community, which is roughly the 45 the
+number demands anyway.
+
+**Polar (16)** — surprisingly sound at the top: polar bear as apex, seals and
+hares as prey, muskox and reindeer as herbivores, arctic fox as mesopredator,
+snowy owl. **What is missing is the bottom**: krill, copepods, fish, seabirds
+in numbers, and the invertebrates the whole thing rests on. Thirty-four
+additions should be mostly small and mostly cold water.
+
+**Mountains (26)** — good on hoofed herbivores and raptors, **thin on
+everything small**: rodents, insects, ground birds, alpine amphibians.
+
+**Desert (30)** — reasonable spread, **thin on invertebrates**, which is
+backwards, since arid ecosystems are overwhelmingly invertebrate by biomass.
+
+### What this changes about the earlier gap list
+
+The Europe/polar/cave/ocean list was built around **regional** representation.
+That is now irrelevant. **Rebuild it around ecological function**, biome by
+biome, filling the roles each one is missing rather than the continents.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -3587,6 +3679,11 @@ change rather than a contradiction.*
   entries). They become customisation options on Dog and House Cat, which is
   what a breed is. Generics stay: House Cat, Tabby, Calico, Black Cat, Farm
   Dog, Puppy. All wild cats and dogs stay.
+- **2026-08-24** — **Balance biomes, not continents.** Geographic
+  representation stops mattering once the world is invented. Every biome must
+  read as a **functioning ecosystem** — apex predator, mesopredators, large and
+  small herbivores, scavengers, invertebrates, birds — with a **floor of ~50
+  species**. Current spread is 5 to 105; target is 50 to 105.
 - **2026-08-24** — **No animal appears twice in the same biome.** Four quests,
   four species.
 - **2026-08-24** — **The impact ladder:** young adult makes local change; adult
