@@ -2106,9 +2106,10 @@ are removed rather than left to look unresolved.*
    remains of it is money rather than technology: a technical artist, a
    composer, and cultural consultation all draw on the same budget, and that
    conversation belongs later, when there is something worth funding.
-2. **How the six life stages are paced (ideas 6, 7, 8).** The real career
-   ladders give the *shape* — apprentice, qualified, professional, mentor — but
-   not the hours. How long is each stage, and what advances you?
+2. ~~**How the six life stages are paced**~~ — **decided 2026-08-24.** One
+   sub-question left open: **can an assessment be failed?** Retakes that cost
+   in-game time are the middle path, and time now has a price because animals
+   are ageing.
 3. **What the researcher and tour-guide loops do minute to minute.** The
    photographer has a clear real-world reference and a game one. The other two
    have real-world references but no worked design yet. This is the largest
@@ -2264,6 +2265,18 @@ change rather than a contradiction.*
   **documented across its life stages**.
 - **2026-08-24** — **The world scrolls.** A camera-follow over a contiguous
   world, not Safari Saga's flip-screen rooms.
+- **2026-08-24** — **Life-stage pacing accepted.** ~1.5h kid, ~2.5h teen, then
+  8/9/10/6h across the four adult stages. Advancement needs **both** logged
+  fieldwork **and** a passed codex assessment, which makes the learning
+  mechanically required. A threshold rather than a checklist, so all 48 quests
+  can exist while one playthrough needs 15–20.
+- **2026-08-24** — **Time is hybrid**: days pass within a stage so seasons
+  work; years leap between stages, so slow growth is visible and the childhood
+  pet is gone when you return.
+- **2026-08-24** — **Camera: fixed-angle follow by default, free camera in
+  photo mode.** Keeps every animal to one drawn angle — which is what the 1000
+  sprites already are — and makes the photographer's difference felt in the
+  camera itself.
 
 ---
 
