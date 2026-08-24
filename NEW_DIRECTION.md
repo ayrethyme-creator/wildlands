@@ -2540,6 +2540,77 @@ wildebeest migrations, and **painted dog snare removal**.
 
 ---
 
+## Mandatory or optional? Revisiting the threshold
+
+> **Claude-contributed**, 2026-08-24. Ayr asked why a playthrough would only
+> need 15–20 of the 48 quests rather than all of them. Honest answer: **the
+> threshold was solving a problem that no longer exists.**
+
+### Where the threshold came from
+
+It was proposed when idea 32 looked like it might mean *many* quests per biome
+per stage — a number in the high dozens that no playthrough could absorb. Once
+the count settled at **one quest per biome per adult stage — 12 per age, 48
+total** — that pressure went away. Ayr's instinct is correct.
+
+### It also duplicated something already decided
+
+Replay value was the other argument for a threshold: play again, take a
+different route. But **idea 50 already provides replay** — three careers that
+are three different games. Different quest routes were solving a problem the
+careers had already solved, at the cost of players never seeing content that
+exists.
+
+### The real constraint is time, and here it is honestly
+
+| | Quest time | Plus world, travel, encounters, facilities | Campaign |
+|---|---|---|---|
+| **All 48 at ~45 min** | 36 h | ~20 h | **~55 h** |
+| **All 48 at ~30 min** | 24 h | ~16 h | **~40 h** |
+| **36 (three per biome) at ~45 min** | 27 h | ~18 h | **~45 h** |
+| 15–20 of 48 | ~13 h | ~27 h | ~40 h |
+
+So **mandatory does not break anything — it lengthens the campaign.** 55 hours
+is entirely normal: Witcher 3 is ~52, Stardew ~52, Fire Emblem: Three Houses
+runs 35–80 per route. And Ayr has already said 120 hours across three careers
+is the goal rather than the fear.
+
+### The argument that mandatory is actually *better* here
+
+Three reasons, and the third is the strong one:
+
+1. **The stories are the point of the game.** Letting a player skip them is
+   letting them skip the reason it exists.
+2. **Nothing authored goes unseen.** 48 hand-researched quests is a great deal
+   of work to leave optional.
+3. **Returning to a place across a life is the whole emotional structure.**
+   Visiting the savanna four times is not repetition — it is the point. You
+   arrive as an apprentice keeping lions off cattle, and come back decades later
+   as an elder to shut down the lion farms. The seasons have turned, your
+   standing has changed, the animals you knew have died, and their descendants
+   are still there. **A threshold would let players opt out of exactly the thing
+   the life-stage structure exists to deliver.**
+
+### What it changes
+
+- **Advancement simplifies.** A stage ends when its **twelve quests are done**
+  and the assessment is passed. No threshold arithmetic.
+- **The four quests per biome must be genuinely different from each other**,
+  since everyone plays all of them. No filler — the savanna's four are lions,
+  cheetahs, vultures, lions again, and they are four different kinds of problem.
+- **The writing cost is now fixed and known: 48 quests, all shipped, all
+  played.** That is the single largest content commitment in the project and it
+  should be sized deliberately.
+
+### Recommendation
+
+**Make all 48 mandatory**, and let the campaign land at 50–55 hours rather than
+40. The 40-hour figure was a market comparison, not a requirement, and the
+market's own examples run right through it.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
