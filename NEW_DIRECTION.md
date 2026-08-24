@@ -505,6 +505,120 @@ international outcome.
 
 ---
 
+## Ideas — round four: how quests and ages fit together
+
+*Ayr's, 2026-08-24.*
+
+**31.** "I still want **all of the animals researchable**, whatever that means."
+
+**32. Each age period should have quests in each biome.** "I know that's a
+lot."
+
+**33.** Completing a quest line is an **automatic befriend** for its animal.
+
+**34.** "Maybe **the first time you enter a biome you're immediately there on a
+quest already**, that you got from completing the last quest from the previous
+biome." — biomes hand you off to each other rather than being chosen off a menu.
+
+**35. Difficulty depends on AGE, not biome.** Savanna can carry quests built on
+real conservation stories of single species — lion, cheetah, rhino, elephant,
+giraffe, hippo. Animals without a big real-life story are **wild encounters as
+you travel the terrain** — meerkat, serval, porcupine.
+
+**36. What it has to be at once.** "I do want this to be **educational for me
+and people who already know a lot**... but it also needs to be **fun, engaging,
+and focused on exciting game play so people actually want to play it**." And:
+"I want the world to feel **real and alive**."
+
+**37. On scope.** "This is a BIG project. Eric said it could turn into my
+life's magnum opus." And, clear-eyed: "I know it's not something I can work on
+with just you forever, not at the scope I'm imagining. And that's ok."
+
+### Note on 35 — the arithmetic
+
+Six life stages across twelve biomes is **72 quest lines**. If the kid and teen
+stages stay in the home biome as tutorials (ideas 7 and 8), it is **48** for the
+four adult stages, plus two tutorial sets. Either number is very large at the
+scale idea 30 asks for. Worth deciding deliberately rather than by default —
+possible shapes include fewer stages spanning all biomes, or all stages but not
+every biome carrying a quest at every stage.
+
+### Note on 35 — why age-based difficulty is a good call
+
+It makes the world **non-linear**. Any biome can be visited at any stage, which
+suits the seeded-world and Diablo influences far better than gated regions
+would, and it means idea 34's hand-off can send the player anywhere rather than
+along a fixed track.
+
+
+---
+
+## Reference: the "small" animals have stories too
+
+> **Claude-contributed**, 2026-08-24, answering Ayr's aside in idea 35 — "maybe
+> those animals do have complex conservation stories."
+
+**They do, and some of the biggest stories in conservation belong to the least
+glamorous animals.** This matters for idea 36: a game that only tells lion and
+elephant stories teaches the same thing every wildlife documentary already
+does. The under-known ones are where a player who already knows a lot would
+actually learn something.
+
+### The three Ayr named as "just encounters"
+
+- **Meerkat.** No conservation crisis — but the **Kalahari Meerkat Project**
+  has followed habituated wild groups continuously since 1993, one of the
+  longest-running mammal studies anywhere. Meerkats are why we understand
+  cooperative breeding and sentinel behaviour, and they are one of the very few
+  animals shown to *teach*: adults bring pups live scorpions with the stings
+  removed, then progressively more dangerous ones. That is a research story
+  rather than a rescue story — which is exactly the second half of idea 28,
+  "saving **or fully researching**".
+- **Serval.** Low conservation concern, but servals are the parent stock of the
+  **Savannah cat**, and both the hybrid trade and the wild-caught exotic pet
+  trade run through them. It connects directly to the rescue-and-surrender
+  material already sketched for the Hearth arc.
+- **Porcupine.** Persecuted as a crop pest across its range, hunted for meat
+  and quills — and in Asia, **porcupine bezoars** (stony masses from the gut)
+  sell for extraordinary sums in traditional medicine, driving targeted
+  poaching of an animal nobody thinks of as poached.
+
+### The under-known story that beats most famous ones
+
+- **The Asian vulture crisis.** In the 1990s the veterinary painkiller
+  **diclofenac**, given to cattle, proved lethal to *Gyps* vultures that fed on
+  the carcasses. Three species crashed by **over 97%** in roughly a decade —
+  among the fastest declines ever recorded in any bird. Then the second-order
+  effect: with no vultures to clear carcasses, feral dog numbers rose sharply
+  and India recorded a surge in rabies exposure. A painkiller for cows became a
+  human public health emergency by way of a bird nobody was looking at. India
+  banned veterinary diclofenac in 2006 and the populations are only now
+  beginning to recover.
+
+### Others worth knowing
+
+- **Pangolin** — the most trafficked wild mammal on earth.
+- **Horseshoe crab** — its blue blood is used to test that every injectable
+  medicine is free of bacterial contamination, and the red knot's entire
+  migration depends on its eggs.
+- **Saiga antelope** — 200,000 died in a matter of weeks in 2015 when a normally
+  harmless gut bacterium turned lethal in unusual heat and humidity.
+- **Axolotl** — functionally extinct in the wild, down to the canals of Lake
+  Xochimilco, while hundreds of thousands live in tanks worldwide.
+- **Bumblebees** — Franklin's bumblebee has not been seen since 2006.
+
+### The design consequence
+
+Idea 35's split — big-story species get quests, the rest are encounters — is
+sound as a *structure*. But which animals fall on which side should be decided
+from the real record rather than from fame, or the game will quietly teach that
+charismatic animals matter and small ones do not. A meerkat encounter that
+mentions the thirty-year study, or a vulture quest about diclofenac, costs the
+same to build as a lion quest and teaches more.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -572,6 +686,12 @@ change rather than a contradiction.*
   not the local one-farmer scale of Safari Saga's investigations.
 - **2026-08-24** — Each biome carries **multiple** quests. Not every species
   needs one; some are wild encounters that simply appear at the facility.
+- **2026-08-24** — **Difficulty scales with life stage, not with biome.** The
+  world is therefore non-linear: any biome can be entered at any stage.
+- **2026-08-24** — Completing a quest line **automatically befriends** its
+  animal.
+- **2026-08-24** — Biomes **hand off to each other**: finishing a biome's last
+  quest starts you already inside the next one.
 
 ---
 
