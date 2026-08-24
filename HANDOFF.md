@@ -4,32 +4,32 @@ Rewritten 22 Aug 2026. Read this first if you are picking the work up fresh.
 
 ## Who you are working with
 
-Ayr owns the game and plays it herself, on her phone, all the way through.
-She is not a programmer. She reports faults in terms of what she saw
+Ayr owns the game and plays it themselves, on their phone, all the way through.
+They are not a programmer. They report faults in terms of what they saw
 ("I'm stuck", "the boxes look bad", "the clues are in the wrong order"), and
 those reports have been right every single time — when a report and my
 diagnosis disagreed, the report was correct. Take them literally and go look.
 
-### Her annotated screenshots
+### Their annotated screenshots
 
-She marks up screenshots of the live dex and sends them. **A thick hand-drawn
-loop around a sprite means she dislikes it.** Do not key off the colour: she
-used purple on 17 Aug and red on 21 Aug, and when asked she said she does not
-remember which she used before. The reliable signal is that the mark is a
+They mark up screenshots of the live dex and sends them. **A thick hand-drawn
+loop around a sprite means they dislike it.** Do not key off the colour: they
+used purple on 17 Aug and red on 21 Aug, and when asked they said they do not
+remember which they used before. The reliable signal is that the mark is a
 thick, obviously hand-drawn loop.
 
-**Do not mistake the card outlines for her marks.** Every card in the dex has
+**Do not mistake the card outlines for their marks.** Every card in the dex has
 a thin coloured border — yellow, blue, orange, red, green, purple — and that is
-the game's own rarity ring. It is on every card, including the ones she is
+the game's own rarity ring. It is on every card, including the ones they are
 happy with.
 
 An earlier version of this file said "red means dislike, purple means like",
 which was wrong in both directions and would have caused a session to
-regenerate the sprites she liked. It is fixed here; trust this paragraph.
+regenerate the sprites they liked. It is fixed here; trust this paragraph.
 
 **Reply with a per-animal list before spending any GPU time** — the species
 name as you read it off the label, what the sprite actually shows, and the fix.
-She asked for that in as many words. It is a cheap confirmation step against an
+They asked for that in as many words. It is a cheap confirmation step against an
 expensive one, and it has caught misreads.
 
 **Never judge a sprite by silhouette alone.** Check colour and markings too.
@@ -37,15 +37,15 @@ expensive one, and it has caught misreads.
 
 ### Cutting content
 
-The old rule here read "no species may be cut". That is no longer true — she
+The old rule here read "no species may be cut". That is no longer true — they
 has since asked for seven mythological creatures to be removed to hold a round
 number. The real rule is:
 
-- She is a completionist and has caught nearly everything. Cutting a species
-  she has caught silently deletes that record from her save.
-- Say so before cutting, once, and then do as she asks. She has accepted that
+- They are a completionist and has caught nearly everything. Cutting a species
+  they have caught silently deletes that record from their save.
+- Say so before cutting, once, and then do as they ask. They have accepted that
   trade knowingly.
-- Where there is a choice, cut the content she has had least chance to play.
+- Where there is a choice, cut the content they have had least chance to play.
 
 ## How the code is put together
 
@@ -95,7 +95,7 @@ art together.
 Pushing: plain `git push` hangs. Use
 `GIT_TERMINAL_PROMPT=0 timeout 30 git push origin main`.
 
-## Two numbers she cares about
+## Two numbers they care about
 
 - **The dex is exactly 1000 species.**
 - **The mythological roster is exactly 100.**
@@ -180,7 +180,7 @@ All work is committed and pushed; the tree is clean at `eecd936`.
 Recent, newest first:
 
 - `eecd936` bobcat stub tail and kodkod scale
-- `9a3ecf9` the wild cat pass — 17 sprites from her marked-up list
+- `9a3ecf9` the wild cat pass — 17 sprites from their marked-up list
 - `8ceff09` the last of the 119 circled sprites
 - `38abd1e` sprites for yeti, wendigo, encantado, Mami Wata
 - `9ac9fe8` traded four Heracles labours for four the world actually tells
@@ -250,14 +250,14 @@ the coyote is less leggy than it was but still tall, and the sand cat's ears
 are much bigger as asked but went upright rather than low and wide the way a
 real sand cat's are.
 
-**The people and the ranger avatar.** She asked for a redraw and does not like
+**The people and the ranger avatar.** They asked for a redraw and does not like
 any of the four directions offered, nor a cel-style attempt built to match the
 animal sprites. Three artifacts exist with the options and the reasoning:
 `People at True Size`, `Four Ways to Draw a Person`, `People Drawn Like the
-Animals`. **This is parked, not finished** — she said "we can come back to this
+Animals`. **This is parked, not finished** — they said "we can come back to this
 later". Do not restart it unprompted.
 
-**Effects she approved are all built** — birds, puddles, seasonal fruit. She
+**Effects they approved are all built** — birds, puddles, seasonal fruit. They
 explicitly excluded berry bushes: *"that's a mechanic from Pokémon I don't want
 yet."* Ask for the next one rather than inventing it.
 
