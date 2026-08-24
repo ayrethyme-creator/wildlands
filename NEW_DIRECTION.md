@@ -3280,6 +3280,71 @@ honest parts** — which the real-Earth version could never have offered.
 
 ---
 
+## How much should actually be generated?
+
+> **Ayr, 2026-08-24.** *"I don't know if I want a new world map generated every
+> time."* The doubt is well founded — and it runs against idea 5, which is worth
+> re-examining rather than defending.
+
+### The argument against generating the map
+
+**This game is about attachment to a place across a lifetime.** That is the
+whole point of the six life stages, of returning to the savanna four times, of
+the beaver pond widening over decades and the raven's descendants recognising
+you. **Randomisation fights every one of those.**
+
+Concretely:
+
+1. **You cannot return somewhere that was never the same place.** "Come back to
+   the savanna as an elder" only lands if it is *the* savanna — the same ridge,
+   the same waterhole, the same crooked tree that was already old when you were
+   an apprentice.
+2. **Beloved game worlds are specific.** Hyrule, Pelican Town, Hallownest.
+   People love *places*. Procedural worlds are admired for their systems and
+   almost never loved as geography.
+3. **48 authored quests need somewhere to be.** Placing fixed story into
+   generated terrain is one of the hardest problems in the field, and it usually
+   produces landmarks that sit slightly wrong.
+4. **Handmade landmarks cannot exist** in a generated world without enormous
+   effort — and landmarks are how a place becomes memorable.
+5. **Replay value is already solved.** Idea 50 gives three careers that are three
+   different games. Generation was solving a problem that no longer exists.
+
+### The argument for it
+
+Really only one: it was in idea 5, and the Diablo influence is genuine. But
+Diablo is a game about *loot and combat variety*, where a fresh layout each run
+is the point. This is a game about *knowing a place well enough to notice what
+has changed in it*. The two want opposite things from terrain.
+
+### The proposal
+
+**A fixed, handmade world map. Seeded contents.**
+
+| Fixed and authored | Seeded per save |
+|---|---|
+| The world map, and where the twelve regions sit | Which animals are present this run, and how abundant |
+| Each region's terrain, coastline and landmarks | Where individuals are on a given day |
+| Micro-region *locations* — the waterhole, the gorge | Weather, and how a season runs this year |
+| Where the facility goes | Which quest reaches you first |
+| The 48 quests and their places | The rarity tier each species is dealt |
+
+So the ridge is always the ridge. What is standing on it is not.
+
+That keeps every consequence of the invented-world decision — two rainforests,
+two ice regions, sensible layout, no cultural claim to fund — while giving up
+only the part that was fighting the rest of the design.
+
+### Note
+
+Safari Saga already does exactly this: `runSeed` deals each species an
+abundance tier per save, on a fixed map, "so a save is consistent with itself
+across sessions." **The pattern is already built and already working** — the
+proposal is to keep it rather than replace it.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
