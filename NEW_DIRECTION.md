@@ -2423,6 +2423,123 @@ do, which is exactly what idea 52 asked for.
 
 ---
 
+## Question 4 — how many quests, and which real stories
+
+> **Claude-contributed**, 2026-08-24, with the savanna worked as the example.
+> (The savanna section above answers question 3 — the encounter loops — and is
+> a separate thing.)
+
+### The count
+
+The structure already decides it. Four adult life stages x twelve biomes:
+
+- **Four quests per biome, one per adult life stage.** 48 in total.
+- **Farmland & Town carries two extra** — the kid and teen tutorials — so 6.
+- **~50 authored quest lines**, of which one playthrough needs 15–20 (question
+  2's threshold rule). The rest are replay and other-career content.
+
+At roughly three hours per biome that is **about 45 minutes a quest**, which is
+the right size for evidence-gathering, a decision and a consequence.
+
+### The organising principle: scale escalates with the player
+
+The life stages give the escalation for free, and it maps onto how conservation
+work actually widens as a career grows:
+
+| Stage | Scale of the problem |
+|---|---|
+| **Young adult** — apprentice | One homestead, one farm, one valley. You are helping someone else |
+| **Adult with skills** — qualified | A district. Your own project, your own name on it |
+| **Adult with influence** — professional | National. Policy, industry, law |
+| **Elder** — mentor | Legacy. What outlives you, and who you taught |
+
+---
+
+### SAVANNA — the four quests
+
+**1. Young adult — the lights on the boma**
+*Animal: lion. Scale: one homestead, then a valley. No villain.*
+
+Herders are killing lions that take cattle at night. Everyone is behaving
+reasonably: the lions are hungry, the cattle are somebody's entire wealth.
+The answer turns out to belong to **a thirteen-year-old boy** — flashing lights
+around the enclosure that mimic a person walking with a torch.
+
+*Real: Richard Turere, Kitengela, Kenya, around 2011.*
+**Teaches:** the answer does not have to come from an expert.
+
+**2. Adult with skills — the dogs**
+*Animal: cheetah. Scale: a farming district. No villain.*
+
+Farmers are shooting cheetahs over livestock losses. The fix is not aimed at
+the cheetah at all — it is **giving the farmer a dog**. Anatolian shepherds
+raised with the herd cut losses so far that shooting stops being worth it.
+
+*Real: Cheetah Conservation Fund, Namibia, since 1994.*
+**Teaches:** you can save a predator by solving somebody else's problem.
+
+**3. Adult with influence — the poisoned carcass**
+*Animal: vultures. Scale: national. **Villain: yes.***
+
+Vultures circling a carcass tell rangers where poaching happened — so poachers
+have begun **poisoning carcasses deliberately to kill the vultures**. Hundreds
+die at a single kill. Several African vulture species have fallen by over 90%.
+
+This is idea 47's villain case done properly: not a farmer with no
+alternative, but people destroying an animal on purpose to hide a crime.
+
+**Teaches:** an animal nobody loves, doing a job nobody noticed, being wiped
+out as a side effect of concealment.
+
+**4. Elder — the farms**
+*Animal: lion again. Scale: national policy. **Villain: yes.***
+
+**350+ captive lion farms holding 8,000–12,000 animals.** Cubs pulled from
+their mothers within days so the female breeds again sooner, sold as petting
+experiences, then walking-with-lions, then canned hunting, then the bone trade.
+Volunteers are told they are hand-rearing orphans for release.
+
+*Real: ended in principle by South African government policy, May 2021.*
+
+**Teaches:** idea 55, exactly. The industry's entire product is **the feeling
+the player was given honestly as a child** — bottle-feeding a genuine orphan —
+resold as a lie.
+
+### Why these four, in this order
+
+They **bookend on the lion**. You begin as an apprentice keeping lions alive
+for herders who have no alternative, and you end as an elder dismantling an
+industry that breeds lions to be petted and shot. Same animal, opposite moral
+ends, across one life.
+
+They also escalate through the villain question deliberately: two quests where
+nobody is a villain, then two where somebody is — which teaches the player to
+tell the difference rather than assuming either.
+
+### The same quest, three careers (idea 46)
+
+Quest 1, entered from each side:
+
+- **Photographer** — documents the killed cattle and the lions, and the
+  photograph of the lit boma at night is what carries the idea to the next
+  valley.
+- **Researcher** — records when and where attacks happen, and proves with data
+  that the lights work rather than asserting it.
+- **Tour guide** — already knows these herders, translates between them and the
+  conservationists, and is the one who saw the idea working somewhere else.
+
+One authored quest. Three genuinely different jobs inside it.
+
+### Held in reserve for the savanna
+
+Good stories that did not make the four, kept for post-game, other stages or
+other careers: **Operation Rhino** (Ian Player, from ~50 white rhinos),
+**the 1989 Kenyan ivory burn**, **the Botswana veterinary fences** that cut the
+wildebeest migrations, and **painted dog snare removal**.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
