@@ -2611,6 +2611,87 @@ market's own examples run right through it.
 
 ---
 
+## Ideas — round eighteen: the impact ladder, and the facility comes first
+
+*Ayr's, 2026-08-24. These correct the savanna example above.*
+
+**66. No animal twice in the same biome.** Each of a biome's four quests takes a
+different species.
+
+**67. The impact ladder, in Ayr's words:**
+
+| Stage | What the player does |
+|---|---|
+| **Young adult** | **Local change** |
+| **Adult with skills** | **Figuring out the problem on a larger scale** |
+| **Adult with power** | **Establishing a program** |
+| **Elder** | **Enacting laws and policy changes** |
+
+This is sharper than the version proposed above and replaces it. It also
+describes how conservation careers genuinely widen — you fix a fence, then you
+understand the pattern, then you build the institution, then you change the law.
+
+**68. A facility must be established in every biome during the young adult
+stage**, so that animals encountered there have somewhere to go.
+
+### How the facility fits the young adult quest (Claude note)
+
+Cleanest reading: **the local-change quest is what earns the facility.** Solving
+the first problem is what gets you the standing, the land, the permission and
+the goodwill to establish a base. So every biome opens the same way — arrive,
+prove yourself locally, put down roots — and the facility exists from then on to
+receive whatever you encounter afterwards.
+
+That gives all twelve biomes a consistent, satisfying opening beat without
+twelve separate designs.
+
+---
+
+### SAVANNA — corrected
+
+Four quests, four different animals, following the ladder in idea 67.
+
+**1. Young adult — local change · LION**
+*The lights on the boma.* Herders killing lions that take cattle at night;
+everyone reasonable; the answer belongs to a thirteen-year-old boy with flashing
+lights. **Solving it earns the land and trust to establish the savanna
+facility.** *Real: Richard Turere, Kitengela, ~2011.*
+
+**2. Adult with skills — the larger pattern · CHEETAH**
+*The dogs.* Not one farm but a whole district shooting cheetahs. The work is
+understanding **why** livestock losses happen and what actually reduces them —
+and the answer is not aimed at the cheetah at all, it is Anatolian shepherds
+placed with the herds. *Real: Cheetah Conservation Fund, Namibia, since 1994.*
+
+**3. Adult with power — establishing a program · VULTURE**
+*The poisoned carcass.* Poachers poison carcasses deliberately, because
+circling vultures show rangers where a kill happened. Hundreds die at once;
+several African species are down over 90%. The work is **building the
+institution** — a poison-response unit, carcass monitoring, trained teams.
+**Villain: yes.**
+
+**4. Elder — law and policy · ELEPHANT**
+*The burn.* The ivory trade, and the fight to change it internationally —
+culminating in the 1989 CITES ban and Kenya burning twelve tonnes of
+confiscated ivory in public to prove the stockpile would never be sold.
+The work is **policy**: treaties, bans, and the argument against selling
+stockpiles. **Villain: yes.**
+
+### What moved, and why
+
+**The captive lion industry quest is relocated.** It repeated the lion and would
+have broken idea 66. It belongs better in **Farmland & Town** — captive lion
+farms are agricultural operations, not wild savanna — where it also works as
+the dark mirror of the player's own facilities: the same buildings, the same
+cubs, sold as a lie. Idea 55 lands harder there than it would have in the
+savanna.
+
+**Still in reserve for the savanna:** Operation Rhino, the Botswana veterinary
+fences and the wildebeest migrations, painted dog snare removal.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -2779,6 +2860,16 @@ change rather than a contradiction.*
   **documented across its life stages**.
 - **2026-08-24** — **The world scrolls.** A camera-follow over a contiguous
   world, not Safari Saga's flip-screen rooms.
+- **2026-08-24** — **No animal appears twice in the same biome.** Four quests,
+  four species.
+- **2026-08-24** — **The impact ladder:** young adult makes local change; adult
+  with skills understands the problem at scale; adult with power establishes a
+  program; elder enacts law and policy.
+- **2026-08-24** — **Every biome's facility is established during the young
+  adult stage**, earned by that biome's local-change quest, so encountered
+  animals have somewhere to go from then on.
+- **2026-08-24** — **All 48 quests are mandatory.** Campaign lands at ~50-55
+  hours rather than 40; the threshold idea is dropped.
 - **2026-08-24** — **Cutscenes are in.** Primarily in-engine scripted scenes,
   concentrated on the five life-stage transitions, quest resolutions, biome
   arrivals and the elder handover. Replayable from the codex.
