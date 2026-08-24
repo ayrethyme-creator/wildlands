@@ -2876,6 +2876,110 @@ a stronger last thing to teach.
 
 ---
 
+## Roster gaps, and ~82 species to add
+
+> **Claude-contributed**, 2026-08-24. Ayr confirmed **1000 counts species**, so
+> folding 82 juveniles into their adults frees 82 slots. This is where they
+> should go.
+
+### The arithmetic
+
+```
+1000 entries now
+ -82 juveniles folded into their adults as life stages
+ =918 species
+ +82 new species
+=1000
+```
+
+### What the data says
+
+Regions, counted from the habitat sentences of the 647 live species:
+
+| Region | Species |
+|---|---|
+| Ocean / global | 104 |
+| Africa | 101 |
+| Asia | 85 |
+| South America | 62 |
+| North America | 60 |
+| Australasia | 48 |
+| Polar | 22 |
+| **Europe** | **16** |
+
+**Europe at 16 is the outlier by a distance** — a quarter of Australasia, a
+sixth of Africa. And the thinnest biomes are **caves (6–10)**, **open ocean
+(16–32)** and **polar (22–29)**.
+
+### Accuracy note
+
+Several apparent gaps are not gaps. `badger` is the **Honey Badger**, not the
+European one. `lynx`, `ibex`, `beaver` and `dormouse` are generic entries that
+arguably already cover their European species. `puffin`, `leatherback`,
+`sailfish`, `manta ray`, `giant squid` and `pine marten` are all present.
+Anything proposed below was checked against the actual keys.
+
+### The proposal
+
+**Europe — 26.** The largest gap and the easiest to fill well.
+
+*European badger · European wildcat · European bison (wisent) · chamois ·
+capercaillie · hoopoe · European adder · common buzzard · northern gannet ·
+red-billed chough · corncrake · red deer · roe deer · Eurasian otter ·
+white-tailed eagle · red kite · nightingale · European hare · hazel dormouse ·
+natterjack toad · great crested grebe · kingfisher · stag beetle · glow-worm ·
+European eel · Atlantic salmon*
+
+**Quest-worthy:** wisent (rebuilt from 54 captive animals, all living ones
+descended from twelve), corncrake (mowing practice), red kite (reintroduction
+after near-extirpation), European eel (a critically endangered animal almost
+nobody realises is in trouble), Atlantic salmon (dams and rivers).
+
+**Polar — 14.** Currently thin and it is a whole biome.
+
+*Arctic tern · ivory gull · snow petrel · south polar skua · Adélie penguin ·
+gentoo penguin · king penguin · chinstrap penguin · Antarctic krill · collared
+lemming · Arctic wolf · rock ptarmigan · Pacific walrus calf → (folded) ·
+Antarctic toothfish · Weddell seal pup → (folded)*
+
+**Quest-worthy:** Antarctic krill (the base of the entire Southern Ocean food
+web, and now fished), Antarctic toothfish (the Ross Sea MPA fight), Arctic tern
+(the longest migration of any animal).
+
+**Caves — 14.** Currently six. This decides whether caves are a biome at all.
+
+*Olm is already there. Add: blind cave fish (Mexican tetra) · Texas blind
+salamander · cave cricket · New Zealand glow-worm · cave spider · cave crayfish
+· harvestman · springtail · cave beetle · Kauaʻi cave wolf spider · bent-wing
+bat · long-fingered bat · cave swiftlet · troglobitic isopod*
+
+**Quest-worthy:** the swiftlet (nests harvested for bird's nest soup), and
+white-nose syndrome across the bat species.
+
+**Open ocean and deep sea — 16.**
+
+*Bluefin tuna · yellowfin tuna · lanternfish · Portuguese man o' war · blue
+shark · oceanic whitetip · salp · pyrosome · vampire squid · dumbo octopus ·
+snailfish · gulper eel · viperfish · barreleye · Atlantic sailfish → present ·
+sea butterfly (pteropod) · giant isopod*
+
+**Quest-worthy:** bluefin tuna (the most valuable fish in the world and the
+clearest quota story there is), oceanic whitetip (once among the most abundant
+large animals on earth, now critically endangered), sea butterfly (dissolving
+shells — ocean acidification made visible).
+
+**Balance: 12 spare** for wherever the biome work turns up a hole.
+
+### The one judgement call
+
+**Caves.** Six species is not a biome. Fourteen additions would make it one —
+but it competes with Europe, which is thinner relative to its real diversity
+and much easier to make interesting. Worth deciding whether caves become a real
+thirteenth biome or stay a **site type** inside others, as suggested earlier.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
