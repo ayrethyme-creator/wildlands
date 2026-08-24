@@ -8,8 +8,13 @@ invented or proposed by Claude unless it is explicitly marked as such.
 
 ## Status
 
-Brainstorming. Twenty opening ideas captured 2026-08-24. Almost nothing is
-settled yet — the Ideas section is the record of intent, not a spec.
+Brainstorming, 2026-08-24. **58 ideas captured and 26 decisions logged.** The
+shape is settled: real-world map with a sourced codex, twelve biomes, three
+careers that are three different games, six life stages, quests built on
+documented conservation history.
+
+Still genuinely open: how the life stages are paced, what the researcher and
+tour-guide loops do minute to minute, and the platform question.
 
 ---
 
@@ -1494,35 +1499,41 @@ prepared in advance.
 
 ## Questions to come back to
 
-*Raised by the ideas above, noted so they do not interrupt brainstorming.
-None of these are objections — several are just "which way do you want it".*
+*Kept honest: several earlier entries have been answered by decisions above and
+are removed rather than left to look unresolved.*
 
-1. **Real world map or invented world (idea 12).** Flagged as undecided by
-   Ayr. It affects a lot downstream — species placement, the biome list, and
-   whether region names are real places.
-2. **What replaces the battle system (idea 13).** Removing gyms, battles and
-   trainers takes out the main progression spine of the current game. Ideas
-   16 and 17 name the replacement (fixed-plot biome sections, career
-   advancement) — the question is what the moment-to-moment verbs are.
-3. **What "befriend" actually is (idea 10).** Explicitly Ayr's to design.
-   Everything about pacing and the 1000-species goal hangs off it.
-4. **How seeded generation and fixed plots coexist (ideas 1, 5, 16).** The
-   world is procedural but story sections are authored and fixed. Needs a
-   rule for how authored content is placed into a generated world.
-5. **How the six life stages are paced (ideas 6, 7, 8).** Kid and teen are
-   tutorials, the game starts at young adult — so how long are the four adult
-   stages, and what moves you between them?
-6. **Do the three careers diverge or converge (idea 2)?** Different abilities
-   could mean three different playthroughs, or one game seen from three
-   angles.
-7. **Is one career a complete game, or are all three required (idea 48)?**
-   Birth by Sleep requires all three to resolve its story. At 40 hours a
-   campaign that is 120 hours to reach an ending. Decides campaign length and
-   whether the full picture is a reward or a requirement.
-8. **Scope and platform against the quality bar (idea 20).** "Professional
-   level" music and art, and competitive with the market, is a different
-   proposition from a browser game built from concatenated JSX. Worth an
-   honest conversation about target platform before much is built.
+1. **Scope and platform (idea 20).** The biggest open question by some
+   distance. "Professional level" music and art, competitive with the market,
+   is a different proposition from a browser game built from concatenated JSX
+   loaded through Babel. Deciding the target platform is expensive to reverse
+   and cheap to decide early.
+2. **How the six life stages are paced (ideas 6, 7, 8).** The real career
+   ladders give the *shape* — apprentice, qualified, professional, mentor — but
+   not the hours. How long is each stage, and what advances you?
+3. **What the researcher and tour-guide loops do minute to minute.** The
+   photographer has a clear real-world reference and a game one. The other two
+   have real-world references but no worked design yet. This is the largest
+   undesigned space.
+4. **How many quests per biome, and which real stories.** Roughly three hours
+   per biome at the 40-hour target. The candidate history shortlist exists; the
+   selection does not.
+5. **When cultural consultation happens.** Early enough to shape the writing
+   rather than review it after the fact — but it costs money, so it interacts
+   with question 1.
+6. **What the codex actually is as a UI.** It carries the sourcing, the field
+   guide, the read-aloud option (idea 14) and the tests (idea 15). That is a
+   lot of jobs for one system.
+
+### Answered since these were written
+
+- ~~Real world or invented world~~ — real world, decided 2026-08-24.
+- ~~What replaces the battle system~~ — the three career loops.
+- ~~What "befriend" actually is~~ — three of them, one per career, drawn from
+  the real professions.
+- ~~How seeded generation and fixed plots coexist~~ — fixed geography, seeded
+  content.
+- ~~Do the careers diverge or converge~~ — three different games, one world.
+- ~~Is one career a complete game~~ — yes; Option B.
 
 ---
 
@@ -1619,6 +1630,25 @@ change rather than a contradiction.*
 - **2026-08-24** — **Pets have a real-world provenance** and the player sees it:
   humane society for cats and dogs, pet store for fish and small mammals. The
   game must show that **not all of the pet industry is bad**.
+- **2026-08-24** — **THE MAP IS THE REAL WORLD.** Idea 12 closed. Real
+  continents, real ranges, real places, with the conservation stories sitting
+  where they actually happened.
+- **2026-08-24** — **A sourced codex is a core system**, not flavour. Every
+  quest states what real event it is based on, credits the real people, and
+  says what was changed and why. A documented departure is a choice; an
+  undocumented one is an error.
+- **2026-08-24** — **Fictional characters, real credited history.** No living
+  person is impersonated or given invented dialogue; they are credited in the
+  codex instead.
+- **2026-08-24** — **A stated fiction covers geography only** — the map
+  compresses and composites real places so a life can be lived across it. It is
+  explicitly *not* a defence for cultural portrayal.
+- **2026-08-24** — Following from the real map: **seeded content, fixed
+  geography** (option 3). The seed varies population, micro-regions, weather,
+  season and quest order — not the terrain.
+- **2026-08-24** — **Cultural consultation is a budgeted cost**, not an
+  optional extra. It is the only thing that addresses the representation
+  question.
 
 ---
 
