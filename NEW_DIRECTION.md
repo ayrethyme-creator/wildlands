@@ -2692,6 +2692,71 @@ fences and the wildebeest migrations, painted dog snare removal.
 
 ---
 
+## Working method: story menus, not story picks
+
+> **2026-08-24.** Ayr: *"we can come up with possible stories based on different
+> real life stories you research and I can choose if I like them or not."*
+> From here Claude researches and offers options per slot; Ayr chooses.
+
+Also noted: **the captive lion industry story does not move to Farmland &
+Town.** That biome is the home and the tutorial ground and the tone is wrong.
+It goes back to the reserve pile pending a better home.
+
+---
+
+## SAVANNA — the menu
+
+Four slots, one per adult life stage. **No animal may repeat within the biome**,
+so choices interact — the animal is listed against each option.
+
+### Slot 1 · Young adult · local change · earns the facility
+
+| | Story | Animal |
+|---|---|---|
+| **A** | **Lion Lights.** Herders killing lions that raid cattle at night. A thirteen-year-old works out that flashing lights mimic a person walking with a torch, and the killing stops. *Richard Turere, Kitengela, ~2011* | Lion |
+| **B** | **Beehive fences.** Elephants raid crops and are killed for it. Elephants turn out to genuinely fear bees — they flee the sound and have an alarm call for it. Hives strung along a fence line deter **76% of elephants annually, up to 86% at peak crop season**, over a nine-year study. **The farmers also sell the honey.** *Lucy King / Save the Elephants, Kenya* | Elephant |
+| **C** | **Chilli fences and deterrents.** Lower-tech crop protection — chilli-oil rags, buffer crops, watch towers. Cheaper, cruder, less effective | Elephant |
+
+*B is the strongest win-win on the list: the farmer ends up with a second
+income, which is why it spread.*
+
+### Slot 2 · Adult with skills · understanding the problem at scale
+
+| | Story | Animal |
+|---|---|---|
+| **A** | **The guard dogs.** A whole district shooting cheetahs over livestock. The answer is not aimed at the cheetah — Anatolian shepherds raised with the herds cut losses enough that shooting stops being worth it. *Cheetah Conservation Fund, Namibia, since 1994* | Cheetah |
+| **B** | **Snares and sickness.** A painted dog population crashing for two reasons at once — wire snares set for bushmeat, and rabies and distemper crossing from village dogs. The work is separating the two causes | African wild dog |
+| **C** | **Rinderpest.** A cattle disease crossing into wildlife and collapsing wildebeest and buffalo herds. Eradicated in 2011 — **only the second disease ever eradicated**, after smallpox | Wildebeest / buffalo |
+
+### Slot 3 · Adult with power · establishing a program
+
+| | Story | Animal |
+|---|---|---|
+| **A** | **The conservancies.** Communities given legal ownership of the wildlife on their land. Namibia now has **86 communal conservancies covering over 20% of the country**, returning **$10M+ a year** to the people living there. In Kenya, **two-thirds of large mammals live on communal and private land, not in state parks** | Multi-species |
+| **B** | **The poison response.** Poachers poisoning carcasses deliberately, because circling vultures show rangers where a kill happened. Hundreds die at one carcass. The work is building the institution — response teams, carcass monitoring, safe zones. **Villain: yes** | Vulture |
+| **C** | **Operation Rhino.** Moving southern white rhino out of the last reserve holding them, from roughly fifty animals. *Ian Player, South Africa, 1960s* | White rhino |
+
+### Slot 4 · Elder · law and policy
+
+| | Story | Animal |
+|---|---|---|
+| **A** | **The burn.** The international ivory fight, the **1989 CITES ban**, and Kenya burning twelve tonnes of confiscated ivory in public to prove the stockpile would never be sold. **Villain: yes** | Elephant |
+| **B** | **The fences.** Botswana's veterinary cordon fences, built to protect cattle from disease, cut the wildebeest migration routes and caused mass die-offs. **A policy that caused the harm** — and the elder's work is unpicking it. An inversion of every other quest here | Wildebeest |
+| **C** | **The horn question.** Rhino horn trade policy, including the genuinely contested argument about whether a legal trade would undercut poaching or legitimise it. **The one with no clean answer** | Black rhino |
+
+### Notes on combinations
+
+- **A + A + B + A** is the escalation I would pick: lions, cheetahs, vultures,
+  elephants. Four species, two without villains then two with.
+- **B in slot 1 blocks A in slot 4** — both are elephants.
+- **Slot 4 option B** is the most unusual: the antagonist is a well-meaning
+  policy, not a person. It would teach something none of the others do.
+- **Slot 4 option C** has no correct answer, which may be the most honest quest
+  in the game or the most frustrating.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
