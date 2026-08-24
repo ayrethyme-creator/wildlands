@@ -2757,6 +2757,76 @@ income, which is why it spread.*
 
 ---
 
+## SAVANNA — CHOSEN
+
+> **Ayr, 2026-08-24.** Slot 1 B, slot 2 A, slot 3 A, slot 4 C.
+
+| Stage | Impact | Story | Animal |
+|---|---|---|---|
+| **Young adult** | Local change · **earns the facility** | **Beehive fences.** Elephants raid crops and are killed for it. Elephants genuinely fear bees — they flee the sound and have an alarm call for it — so hives strung along a fence line deter 76% of elephants annually and 86% at peak crop season. **The farmers also sell the honey.** *Lucy King / Save the Elephants* | **Elephant** |
+| **Adult with skills** | The problem at scale | **The guard dogs.** A whole district shooting cheetahs over livestock. The fix is not aimed at the cheetah — Anatolian shepherds raised with the herds cut losses until shooting stops being worth it. *Cheetah Conservation Fund, Namibia, since 1994* | **Cheetah** |
+| **Adult with power** | Establishing a program | **The conservancies.** Communities given legal ownership of the wildlife on their land. Namibia: **86 communal conservancies, 20%+ of the country, $10M+ a year** returning to residents. Kenya: **two-thirds of large mammals live outside state parks** | **TBD — see below** |
+| **Elder** | Law and policy | **The horn question.** Rhino horn trade policy, including the genuinely unsettled argument over whether a legal trade would undercut poaching or legitimise it. **No clean answer** | **Black rhino** |
+
+Animals used: elephant, cheetah, black rhino. **Lion, wildebeest, vulture, wild
+dog and white rhino remain free** for the conservancy slot or for reserve.
+
+### Follow-up 1 — the conservancy quest needs a representative animal
+
+Idea 28 says a quest ends in saving or fully researching **an animal that
+represents its species**, and "multi-species" cannot do that. Options, all
+consistent with the Namibian story and none clashing with the other three:
+
+- **Oryx / gemsbok** — the emblematic conservancy animal, and it opens the
+  honest topic of conservancies part-funding themselves through regulated
+  quotas. Contested, and true.
+- **Desert-adapted lion** — Namibia's most famous conservancy tension: lions
+  recovering *because* of conservancies, then killing conservancy livestock.
+  Powerful, but it makes three consecutive livestock-conflict quests.
+- **Hartmann's mountain zebra** — quieter, cleanly a recovery story, no conflict
+  angle.
+- **Springbok** — the commonest conservancy species; the least dramatic and the
+  most representative.
+
+**Recommendation: oryx.** It carries the money argument, which is what the
+conservancy story is actually about, and it avoids a third predator-livestock
+quest in the same biome.
+
+### Follow-up 2 — slot 4 has no correct answer, and that breaks the format
+
+Every quest so far follows Safari Saga's inherited shape: gather evidence,
+choose among proposals, **one works**. The horn question deliberately has no
+proposal that works, which is why it is interesting and why it needs a different
+structure.
+
+What the real argument looks like:
+
+- **For a legal trade:** horn regrows and can be cut without killing the animal;
+  a legal supply could undercut poaching and fund protection.
+- **Against:** it may stimulate demand rather than satisfy it; legal horn
+  launders illegal horn; no legal supply could meet the demand anyway.
+- **Separately: dehorning** — cutting horns off living rhinos as a deterrent.
+  Effective in places, and it changes the animal's life.
+
+Three ways to build it:
+
+1. **No funded outcome.** You present the strongest case you can and the
+   decision goes elsewhere. Honest, and possibly unsatisfying as an ending.
+2. **Several partial answers.** Every option helps something and costs something
+   else, and the outcome text says exactly what you traded. This preserves the
+   structure while abandoning the single right answer.
+3. **The quest is the argument.** Success is measured on whether you argued from
+   evidence rather than on which side you took — which is the researcher's
+   defence assessment, used as a quest.
+
+**Recommendation: 2, with 3's scoring.** It keeps the proposal format the whole
+game runs on, and it lets the elder stage end on the honest note that some
+conservation questions are still open — which is a stronger last lesson than a
+win.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
