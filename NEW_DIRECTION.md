@@ -1942,6 +1942,97 @@ The art worry is **real but pointed at the wrong thing**:
 
 ---
 
+## Question 2 — pacing the six life stages
+
+> **Claude-contributed proposal**, 2026-08-24. Not decided. Built against the
+> 40-hour campaign target, the real career ladders, and the new decision that
+> animals age and die.
+
+### The time budget
+
+| Stage | Hours | What it is |
+|---|---|---|
+| **Kid** | ~1.5 | Tutorial. Choose a pet, make the first wild rescue, meet the mentor |
+| **Teen** | ~2.5 | Choose the career, learn its verbs, choose friends. Second animal |
+| **Young adult** | ~8 | Apprentice. Working under someone else's permit and name |
+| **Adult with skills** | ~9 | Qualified. Your own projects, your own name on them |
+| **Adult with influence** | ~10 | Professional. Money, access, and the power to change policy |
+| **Elder** | ~6 | Mentor. Teaching, handing over, the long view |
+| | **~37** | plus slack toward 40 |
+
+Kid and teen together are **four hours of a forty-hour game** — enough to matter
+emotionally, short enough that a replaying player is not trapped in childhood.
+
+### What advances you — two gates, both real
+
+Every one of the three professions advances the same way in life: **accumulate
+qualifying experience, then pass an assessment.** FGASA does this literally —
+log the days, then be evaluated.
+
+So each stage ends when **both** are satisfied:
+
+1. **Logged fieldwork**, in your career's own currency — published photographs,
+   completed studies, guided outings.
+2. **An assessment you have to actually pass** — which is exactly idea 15's
+   codex tests.
+
+That second gate is the important one. It makes **the learning mechanically
+required** rather than an optional extra, which is the entire point of the
+game, and it is what the real professions genuinely do.
+
+### This resolves the 48-quest arithmetic
+
+Idea 32 wanted quests in every biome at every age — 4 adult stages x 12 biomes =
+48 quest lines, which looked impossible.
+
+A **threshold** rather than a checklist fixes it. The player must log enough
+qualifying work to be assessed, but chooses **where**. So:
+
+- All 48 can exist.
+- A single playthrough might need **15–20** of them.
+- The remainder are replay content, and content for the other two careers.
+
+Nothing is cut, and no playthrough is forced through all twelve biomes four
+times.
+
+### How time passes — the hybrid
+
+Now that animals age and die, the clock has to be decided.
+
+- **Within a stage: days pass.** Seasons turn, day and night cycle, migrations
+  arrive and leave. This is the Stardew register and it is what seasons need.
+- **Between stages: years leap.** Moving up the ladder skips forward several
+  years in a single transition.
+
+This solves three things at once:
+
+- **Slow growth becomes visible.** A tortoise or a raven matures across a stage
+  boundary rather than in real time.
+- **Seasons stay meaningful** without a decade of play.
+- **Death lands where it should.** You leave a stage, years pass, and the dog
+  you chose as a child is not there when you come back. That is the heaviest
+  beat available and the structure delivers it without being asked to.
+
+### The elder stage is different, deliberately
+
+The first five stages are about *acquiring*. The elder stage should be about
+*handing over*: teaching new guides, giving away permits and facilities,
+seeing which of your animals' descendants are still on the ground.
+
+It is also where the mentor from idea 25 pays off — **you become them**, and a
+new young character arrives asking you the questions you once asked.
+
+### The open sub-question
+
+**Can the player fail to advance?** Real assessments can be failed. Allowing it
+gives the tests weight, but a stuck player in a 40-hour game is a problem.
+Middle path: you can retake, but a failure costs in-game time, which — now that
+time matters and animals are ageing — is a real price rather than an
+inconvenience.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
