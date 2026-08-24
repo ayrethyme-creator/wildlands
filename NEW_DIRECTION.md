@@ -183,8 +183,21 @@ rescue to be **hand reared as a baby, but partially living in the wild**. A few
 choices. But I want **animals that live a long time, or will easily pass along
 its babies, like a deer would. But long lived animals mainly.**"
 
-Candidates Ayr named to check: crow, a raptor, fox, raccoon, squirrel. See
-**Reference: lifespans** below for what the numbers actually say.
+**SETTLED 2026-08-24 — four choices, locked:** box turtle, raven, beaver,
+white-tailed deer. Chosen to be four genuinely different relationships rather
+than four variations on one:
+
+| | what it gives the player |
+|---|---|
+| **Eastern box turtle** | The one that outlives you. 30–50+ years, a home range of a few acres so it stays in your woods without being kept. |
+| **Raven** | The one that knows your face. Corvids recognise individual people, remember for years, and teach that recognition to their offspring. |
+| **Beaver** | The one whose work reshapes the place. 10–20 years, kits stay two years to help raise the next litter, and the pond visibly widens and matures across the life stages. |
+| **White-tailed deer** | The one whose daughters are still here. Does are philopatric — daughters settle beside their mothers, so a matriline builds up in the same woods over decades. |
+
+Ayr's original candidates were crow, a raptor, fox, raccoon and squirrel. Fox,
+raccoon and squirrel were dropped on the numbers — see **Reference: lifespans**
+below. Porcupine was offered as a no-caveats alternative to beaver and not
+taken.
 
 
 ---
@@ -342,6 +355,13 @@ change rather than a contradiction.*
 - **2026-08-24** — All 1000 species remain befriendable (idea 9).
 - **2026-08-24** — Long timeline is acceptable; quality bar is professional
   and market-competitive (idea 20).
+- **2026-08-24** — The rescued wild animal (idea 26) offers **four choices:
+  Eastern box turtle, raven, beaver, white-tailed deer.** Fox, raccoon and
+  squirrel rejected: their wild lifespans are 2–6 years, dominated by
+  first-year mortality.
+- **2026-08-24** — Accepted with the deer: hand-reared deer lose their fear of
+  people and become dangerous at maturity, and this is to be **used as a
+  teaching beat**, not designed around.
 
 ---
 
