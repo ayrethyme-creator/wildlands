@@ -2220,6 +2220,74 @@ outperform a fully animated sequence for almost everything on the list above.
 
 ---
 
+## Ideas — round seventeen: no voice acting, and music matters
+
+*Ayr's, 2026-08-24.*
+
+**64. No voice acting.** Decided. The read-aloud option for the guide (idea 14)
+is separate and stays.
+
+**65. Music is important**, and Eric notes there are AI music tools that could
+work the way the art pipeline does.
+
+### The technical wrinkle that art does not have (Claude note)
+
+**Game music is not song music.** A finished linear track is much less useful
+than it looks, because a game score has to:
+
+- **loop seamlessly**, sometimes for an hour
+- **layer in stems** — drop the percussion at night, add strings when an animal
+  appears
+- **transition on state** — biome change, season change, a quest resolving
+- and this design has an unusual number of states: **12 biomes x day/night x
+  four seasons x six life stages**
+
+AI tools generate **finished linear songs**. Getting clean loop points and
+separable stems out of them is the hard part, and adaptive scoring is a
+different discipline from writing a good three-minute piece. This is the
+practical limit, and it applies regardless of which tool is used.
+
+### The legal position, as of 2026
+
+Genuinely mixed, and moving fast:
+
+- **Suno** settled with Warner (Nov 2025), agreed to **deprecate every model
+  trained on unlicensed music**, and is launching licensed models through 2026.
+  A Munich court still ruled against it in July 2026, under appeal. Sony's US
+  suit is live.
+- **Udio** has the cleanest licensing story — UMG, Warner, Merlin and Kobalt all
+  signed — but **downloads are currently paused** pending its co-licensed
+  platform.
+- **ElevenLabs Music** and **Stable Audio 3** (trained on licensed material) are
+  the cleanest picks if legal certainty is the priority.
+
+**The sharpest practical point:** the US Supreme Court has confirmed that
+**fully AI-generated works without meaningful human input cannot be
+copyrighted.** For a game whose music is meant to be a signature, that means the
+soundtrack may not be protectable — anyone could lift it and use it freely.
+
+### The option worth considering
+
+**AI for temp, a composer for ship.** This is ordinary practice, not a
+compromise: generate scratch music now so the game has feel and pacing during
+development, and budget a human composer for the score that ships. It gets the
+benefit immediately, avoids the copyright hole, and hands the composer something
+concrete to work from — "this, but ours."
+
+It also puts music in the same bucket as the technical artist and the cultural
+consultation: **a real budget line, deferred until there is something worth
+funding.**
+
+### One practical thing to be ready for
+
+A game that ships with a **sourced codex crediting real people and real
+history** will get asked how its assets were made. That is not a reason to avoid
+AI tools — it is a reason to have a clear, honest answer prepared rather than
+being caught out by the question.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -2391,6 +2459,10 @@ change rather than a contradiction.*
 - **2026-08-24** — **Cutscenes are in.** Primarily in-engine scripted scenes,
   concentrated on the five life-stage transitions, quest resolutions, biome
   arrivals and the elder handover. Replayable from the codex.
+- **2026-08-24** — **No voice acting.** The read-aloud guide option (idea 14)
+  is separate and stays.
+- **2026-08-24** — **Music is a priority.** Approach undecided; AI-for-temp
+  with a composer for the shipped score is the option on the table.
 - **2026-08-24** — **Life-stage pacing accepted.** ~1.5h kid, ~2.5h teen, then
   8/9/10/6h across the four adult stages. Advancement needs **both** logged
   fieldwork **and** a passed codex assessment, which makes the learning
