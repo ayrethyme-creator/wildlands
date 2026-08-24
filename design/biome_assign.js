@@ -172,3 +172,11 @@ Object.keys(BIOME_MOVE).forEach(function (k) { BIOME_BY_HAND[k] = BIOME_MOVE[k];
 // Ayr, 2026-08-24: beluga and orca belong in polar.
 BIOME_BY_HAND.beluga = "polar";
 BIOME_BY_HAND.orca = "polar";
+
+// Ayr, 2026-08-24: three more into polar.
+// Southern elephant seals breed on subantarctic islands and feed in Antarctic
+// water; the wandering albatross is a Southern Ocean bird and is already the
+// animal in the longline story; the blue whale feeds on polar krill.
+BIOME_BY_HAND.elephantseal = "polar";
+BIOME_BY_HAND.albatross = "polar";
+BIOME_BY_HAND.bluewhale = "polar";
