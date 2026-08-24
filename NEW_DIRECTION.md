@@ -3136,6 +3136,99 @@ codex, or split polar into two and drop something else.
 
 ---
 
+## Reopening the map decision — the data argues against a real Earth
+
+> **2026-08-24.** Ayr, on reading how the world would be built: *"this is making
+> me think we do need to make our own map."* Asked for the reasoning from the
+> data. Here it is, and the data does point that way.
+
+### 1. Every single region is already invented
+
+Look at what the composites actually are:
+
+| Region | Composited from | Distance |
+|---|---|---|
+| Rainforest | Amazon **+ Borneo** | Different hemispheres. **No shared species** |
+| Wetlands | Everglades + Danube + Pantanal | Three continents |
+| Desert | Namib + Sonoran + Australian interior | Three continents |
+| Coast | California + North Atlantic | Opposite sides of a continent |
+| Savanna | Kenya + Namibia | 3,000 km |
+| **Polar** | **Arctic + Antarctic** | **Opposite ends of the planet** |
+
+**Not one region is a real place.** Every one is a fiction already. At that
+point "the real world" is a claim being maintained at cost rather than a truth
+being preserved.
+
+### 2. Compositing breaks the thing the real map was for
+
+The strongest argument for a real Earth was **teaching where animals actually
+live**. But a rainforest region containing both jaguars and orangutans teaches
+the opposite — it teaches that they share a forest. The educational value of
+real geography dies the moment two continents are merged, and we merged them in
+every region.
+
+### 3. It contradicts the scrolling contiguous world
+
+Idea 60 wants a world that **scrolls**, and idea 34 wants biomes to **hand off
+to each other** — finish one region's last quest and you begin the next already
+in place. On a real Earth that is an intercontinental flight between every
+quest chain. You cannot walk from the Serengeti to Borneo. On an invented
+continent the regions can genuinely border one another.
+
+### 4. Seeded generation was already sacrificed for it
+
+The real map forced "fixed geography, seeded content" — giving up procedural
+terrain, which was the whole Diablo influence in ideas 1 and 5. An invented
+world gives it back.
+
+### 5. The costs were being paid without the benefits
+
+A real setting brings a **cultural representation responsibility** with a real
+consultation budget, and an obligation to engage with conservation's colonial
+history. Those costs are worth paying *for accuracy*. They are not worth paying
+for a map that has already merged Borneo into the Amazon.
+
+### What is actually lost — honestly, not much
+
+- **Geographic education.** Already lost to compositing.
+- **The career road map.** Barely affected — FGASA and the real qualifications
+  live in the codex, not in the terrain.
+- **Credibility.** This is the real one. A conservation game in an invented
+  world could read as less serious.
+
+### Why credibility survives — the codex was doing that work all along
+
+The **sourced codex** and the **fifth quest beat** are what carry the truth, not
+the map. A quest can play out in an invented savanna and still end with:
+
+> *This is based on Lion Lights, invented by Richard Turere in Kitengela,
+> Kenya, in 2011.*
+
+The real people are credited, the real event is named, the real place is
+stated. **None of that needed the terrain to be Kenya.** The map was never the
+thing making it true — the sourcing was.
+
+### The shape this suggests
+
+**An invented world, with real biomes, real species placed by real biome, and
+real stories credited to real places in the codex.**
+
+- Regions are recognisably savanna, reef, taiga — real biome types.
+- Species are placed by **where they actually live ecologically**, so a jaguar
+  is still a rainforest animal.
+- **Species do not have to co-occur wrongly**, because an invented world can
+  have *two* rainforest regions if it wants — a New World one and an Old World
+  one — which a single composited "rainforest" could not.
+- Regions can **border each other**, so the world scrolls and hands off.
+- **Terrain can be seeded**, restoring ideas 1 and 5.
+- The codex still says, every time: this happened, here, to these people.
+
+That last point resolves the polar problem too. An invented world can simply
+have a **northern ice** region and a **southern ice** region.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
