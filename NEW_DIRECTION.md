@@ -2097,6 +2097,71 @@ flatness is acceptable — or where a handful of hero species get extra angles.
 
 ---
 
+## Ideas — round fifteen: quizzes yes, exams maybe not
+
+*Ayr's, 2026-08-24.*
+
+**61.** "I like taking quizzes. I like being able to take **sample quizzes in
+the guide whenever I want**, based on the animals and information I have access
+to and have seen in the game so far."
+
+**62.** "So the **official ones... I don't know.**"
+
+### The hesitation is correct (Claude note)
+
+An official quiz that gates progression has real problems: it reads as
+homework, it walls players who freeze at tests, and it turns the best part of
+the game — curiosity — into an exam condition. Making the *only* proof of
+learning a multiple-choice screen would also repeat Safari Saga's mistake in a
+new form: a test can be gamed, and once it is, the learning is skippable again.
+
+But dropping the gate entirely takes the teeth out of the whole design.
+
+### The way out: the assessment is not a quiz, it is the job
+
+Each real profession assesses **differently**, and none of them by
+multiple-choice alone. Matching that solves the problem and makes the careers
+diverge at the moment of progression, which they otherwise would not.
+
+| Career | Real assessment | In game |
+|---|---|---|
+| **Photographer** | **Portfolio review** | Submit your best work. Judged on the picture, on **coverage** (species, behaviours, life stages), and on **ethics** — was it baited? was it a nest? was it captive and declared? No questions asked at all |
+| **Researcher** | **Defence** — questioned by people who know more than you | An examiner presses your findings and you answer **from data you actually collected**. This is idea 13's "convince people using info you gathered", used as progression |
+| **Tour guide** | **Practical assessment** — an assessor watches you guide | Take an assessor out. They watch you find animals, read the conditions, explain well, and keep people safe |
+
+None of these is a quiz. All three are things the player was already doing;
+the assessment is simply **the day it counts**.
+
+### Where the quizzes Ayr actually likes live
+
+**Practice quizzes stay, exactly as described in idea 61**: always available in
+the guide, optional, drawn only from what the player has genuinely seen. Never
+a gate, never timed, no failure state.
+
+And they can *matter* without being mandatory:
+
+- Practising unlocks **better options in the researcher's defence** — you can
+  only argue a point you have properly learned.
+- It raises what the **photographer's portfolio review** notices, so a
+  knowledgeable player gets credit for the shot that shows a behaviour rather
+  than just an animal.
+- It gives the **tour guide better things to say** in front of clients, which
+  is the whole job.
+
+So the quizzes reward the player who enjoys them without punishing the one who
+does not — and the person who skips every quiz simply finds the assessments
+harder, rather than being locked out.
+
+### What this changes
+
+Question 2 said advancement needs "logged fieldwork **and** a passed
+assessment". That still holds. The assessment is just **not a test** — it is
+the profession's own way of judging you, which is more real, more fun, and
+different in all three careers.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -2109,7 +2174,7 @@ are removed rather than left to look unresolved.*
 2. ~~**How the six life stages are paced**~~ — **decided 2026-08-24.** One
    sub-question left open: **can an assessment be failed?** Retakes that cost
    in-game time are the middle path, and time now has a price because animals
-   are ageing.
+   are ageing. Note the assessment is **not a quiz** — see round fifteen.
 3. **What the researcher and tour-guide loops do minute to minute.** The
    photographer has a clear real-world reference and a game one. The other two
    have real-world references but no worked design yet. This is the largest
