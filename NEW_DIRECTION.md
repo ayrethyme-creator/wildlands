@@ -307,6 +307,85 @@ year bar without any caveats attached.
 
 ---
 
+## The biome list
+
+> **Derived from the data, 2026-08-24**, at Ayr's request: build the biomes
+> from the animals we actually have, excluding late-game content, real-world
+> based. Classifier lives in `design/biomes.js`.
+
+### What was counted
+
+Of the 1000 species, **651 are live present-day adults** and those are what the
+biomes are built from:
+
+| | count | why excluded |
+|---|---|---|
+| Live adult species | **651** | — |
+| Juveniles | 81 | follow their adults, not separate placements |
+| Fossil / mythic / legendary / warden | 166 | late-game content, per Ayr |
+| Extinct, extinct-in-wild, memorial | 102 | late-game content, per Ayr |
+
+### How they were assigned
+
+Not by hand. Two signals, in order, then nine by hand:
+
+1. **The habitat sentence** in each species' field-guide entry — 395 placed.
+   Preferred because it describes a *place* ("Rainforest floor of Central and
+   South America") rather than a continent.
+2. **Where Safari Saga already put it** — 247 placed. About a third of habitat
+   strings name only a region ("Africa, Asia and Oceania"), and the existing
+   zone encodes a biome judgement somebody already made by hand.
+3. **Nine overrides** for species neither signal caught.
+
+**All 651 place. Nothing is unassigned.**
+
+### The twelve
+
+| Biome | Species | Notes |
+|---|---|---|
+| **Savanna & Grassland** | 90 | Largest. Plains, steppe, veld, pampas. |
+| **Temperate Forest** | 87 | Includes taiga — only 4 boreal species, and they are forest animals. |
+| **Tropical Rainforest** | 73 | Floor and canopy both. |
+| **Mountains & Alpine** | 73 | Absorbs the old "volcanic" and "summit" zones. |
+| **Coast & Kelp** | 65 | Shore, estuary, mangrove, and the kelp forest folded in. |
+| **Wetlands & Rivers** | 53 | Freshwater generally — rivers, lakes, marsh, swamp. |
+| **Farmland & Town** | 49 | The human-edge biome. Sparrows, foxes, the stray cat. |
+| **Desert & Arid** | 46 | Includes the Australian outback. |
+| **Coral Reef** | 44 | |
+| **Open Ocean** | 32 | Pelagic plus the deep sea, which is reached through it. |
+| **Polar** | 29 | Tundra and sea ice as one place rather than two thin ones. |
+| **Caves** | 10 | **Too thin to be a full biome — see note.** |
+
+### Four things folded in, and why
+
+The raw classifier produced 16, of which four were too thin to carry a facility
+and a story arc of their own: **taiga (4)** into temperate forest, **kelp (12)**
+into coast, **deep sea (11)** into open ocean, and **sea ice (11)** with
+**tundra (18)** combined into polar.
+
+### The cave problem
+
+Caves came out at 10 species — real, distinctive, and not enough to justify a
+facility or a story arc. **Suggestion, not a decision:** make caves a *site
+type* rather than a biome, in the sense of idea 19 — a place inside another
+biome where a guaranteed encounter happens, alongside the beaver ponds and the
+moose fields. That keeps bats and cave fish without pretending there is a cave
+facility to build.
+
+### Fit against the rest of the design
+
+- **Facilities (idea 18):** eight land biomes support a zoo or recovery centre;
+  reef, open ocean, coast and polar are aquarium-shaped. Twelve facilities is a
+  lot of content — worth deciding whether every biome gets one.
+- **Seeded regions (ideas 1, 5):** twelve themed region types is a good number
+  for Diablo-style generation — enough variety that a seed feels different,
+  few enough that each can be authored properly.
+- **Real-world basis (idea 12 still open):** these twelve are all real biomes,
+  so they work whether the map ends up being the real world or invented.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -362,6 +441,10 @@ change rather than a contradiction.*
 - **2026-08-24** — Accepted with the deer: hand-reared deer lose their fear of
   people and become dangerous at maturity, and this is to be **used as a
   teaching beat**, not designed around.
+- **2026-08-24** — **Twelve real-world biomes**, derived from the 651 live
+  present-day species. Fossils, mythics, legendaries and extinct species are
+  late-game and excluded from biome placement. Classifier in
+  `design/biomes.js`; all 651 place with none unassigned.
 
 ---
 
