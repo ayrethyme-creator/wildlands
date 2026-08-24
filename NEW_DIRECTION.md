@@ -1578,6 +1578,101 @@ work; money later, when there is something worth funding.**
 
 ---
 
+## Godot games, and the 2D / 3D decision
+
+> **Claude-contributed**, 2026-08-24, researched. Ayr asked for examples and
+> raised whether 2D is what they want. That second question is **larger than
+> the engine question** and is answered here.
+
+### Games shipped in Godot
+
+**2D**
+
+| Game | Note |
+|---|---|
+| **Cassette Beasts** | **A monster-collecting RPG. ~20 hours, $4.1M, 94.7% positive.** The closest existing proof of concept for this genre in this engine |
+| Brotato | $10.7M |
+| Buckshot Roulette | $6.9M |
+| Backpack Battles | $5.2M |
+| Dome Keeper | 10M+ copies |
+| Slay the Spire 2 | 100k+ concurrent at early-access launch |
+| The Case of the Golden Idol | |
+| Halls of Torment | |
+
+**3D**
+
+| Game | Note |
+|---|---|
+| Cruelty Squad | First-person, deliberately abrasive art |
+| Road to Vostok | Survival FPS, solo developer |
+
+Godot does 3D, and the 3D games shipped in it tend to be **stylised rather than
+photorealistic**. For high-end realistic 3D, Unreal is the tool — and that is a
+different budget entirely.
+
+### The constraint that actually decides this
+
+**Wildlands has 1000 finished animal sprites. That is the single most valuable
+asset in the project, and full 3D throws it away.**
+
+The arithmetic, at market rates:
+
+- A **2D sprite** runs roughly **$20–$30**; a fully animated 2D character
+  $500–$5,000.
+- A **3D model** starts around **$150** and runs into the thousands — *before*
+  rigging and animation, and every animal needs several cycles (idle, walk,
+  run, feed, alert, flee).
+- A polished 2D RPG with original art and audio is put at **$50k–$150k** total.
+
+So **1000 animals in 3D is studio-scale** — comfortably into six or seven
+figures and years of pipeline. 1000 animals in 2D is **already done and paid
+for.**
+
+This is not a matter of taste. It is the difference between a game that can
+exist and one that cannot.
+
+### The middle path: HD-2D
+
+There is a well-proven style that is neither flat 2D nor full 3D: **2D sprites
+in a lit 3D environment.** Octopath Traveler, Triangle Strategy, Live A Live,
+the Dragon Quest III remake. It reads as premium and modern rather than retro.
+
+How it works: sprites are **billboarded** so they always face the camera, but
+sit in real 3D space, cast real shadows, and receive **dynamic lighting**, depth
+of field and particles.
+
+Why it fits this project unusually well:
+
+- **The 1000 sprites are reused, not replaced.**
+- The expensive 3D is **environment**, which can be modular and repeated —
+  rocks, trees, terrain — instead of 1000 unique creatures.
+- **Dynamic lighting gives day/night and seasons directly** (ideas 9 and 39),
+  which flat 2D has to fake.
+- **Depth of field is a photography mechanic.** The photographer career wants a
+  moving camera, focus and framing, and HD-2D provides exactly that. Flat
+  top-down 2D does not.
+- Square Enix built it specifically so a **small team could iterate quickly**.
+
+The caveat: Square Enix's versions are Unreal, and the style needs someone
+comfortable with 3D lighting and shaders. Godot supports billboarded sprites,
+3D environments and dynamic 2D/3D lighting, but this is the option that most
+wants a technical artist.
+
+### The three real choices
+
+| | Art cost | Look | Fit |
+|---|---|---|---|
+| **Flat 2D** (top-down / isometric) | **zero extra** | Cassette Beasts, Stardew | Safe, proven, sprites reused wholesale. Weakest for the photography career |
+| **HD-2D** | environments only | Octopath Traveler | Premium look, sprites reused, gives lighting and camera for free. Needs a technical artist |
+| **Full 3D** | **1000 models + rigs + animation** | Planet Zoo | Throws away the sprites. Not achievable at indie scale |
+
+**Recommendation: HD-2D if a technical artist is reachable, flat 2D if not.
+Full 3D is off the table** — not because of ambition, but because 1000 animals
+is the one number that makes it impossible.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
