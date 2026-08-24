@@ -1308,6 +1308,111 @@ serving two careers and the pet system.
 
 ---
 
+## The map decision: real world vs invented world
+
+> **Claude-contributed**, 2026-08-24, at Ayr's request. Idea 12 has been open
+> since the first round. Nothing here is decided.
+
+### Option 1 — the real world
+
+**For it**
+
+- **The data already exists and is already real.** All 651 species carry true
+  habitat sentences, and the biome classifier used them. A real map costs
+  nothing extra because the placement work is done.
+- **The conservation stories are located.** Lion Lights is Kenya. The cheetah
+  guard dogs are Namibia. Sea otters are California. Cabo Pulmo is Mexico. On a
+  real map they sit where they actually happened.
+- **It is the version that teaches geography**, not just animals. "Where do
+  cheetahs live" becomes a thing the player simply knows afterwards.
+- **The road-map goal (idea 54) works properly.** If a young player wants to do
+  this for real, FGASA is a real qualification in a real country. An invented
+  world cannot point at anything.
+- **Credibility.** A game about documented conservation history carries more
+  weight when the places are the real ones.
+
+**Against it, and these are real**
+
+- **Cultural representation is a genuine responsibility, not a nuisance.**
+  Setting quests in Kenya, Namibia or India means portraying real living
+  communities. Maasai herders, Namibian farmers, Indian villagers. Getting that
+  wrong is harmful, and the project's own Mythhub arc already contains the
+  lesson: the version where outsiders hand down the answer is the version that
+  fails. Doing it properly means consultation and sensitivity reading, which is
+  real money and real time.
+- **Conservation has a colonial history** that a real-world setting cannot
+  politely skip. Fortress conservation, national parks created by evicting the
+  people who lived there, foreign NGOs deciding local land use. A game set in
+  the real places either engages with that or conspicuously avoids it.
+- **It collides with seeded generation (ideas 1 and 5).** The Serengeti is
+  where it is. A real map cannot be regenerated per seed, which is the whole
+  point of the Diablo influence.
+- **Scale.** The real world is mostly empty ocean and enormous distances. Twelve
+  biomes across a globe is a lot of nothing in between.
+
+### Option 2 — an invented world
+
+**For it**
+
+- **Seeded generation actually works.** A made-up world can be regenerated per
+  playthrough, which is what ideas 1 and 5 ask for.
+- **Biome adjacency can serve pacing** rather than plate tectonics. The real
+  world does not put tundra a day's travel from a reef; an invented one can.
+- **No risk of misrepresenting a living culture**, because there are none to
+  misrepresent.
+- **Compression.** A walkable twelve-biome continent instead of a planet.
+
+**Against it, and these are real too**
+
+- **It weakens the pillar Ayr liked most.** Idea 30 wants documented
+  conservation history. On an invented map those stories become fictionalised,
+  and the thing that made them powerful — *this actually happened* — is
+  diluted.
+- **The road map goes away.** You cannot point a fourteen-year-old at a career
+  that exists in a country that does not.
+- **Species mixing becomes arbitrary.** If the biomes are invented, nothing
+  explains why a moose and a lion are two screens apart, and the educational
+  value of range and distribution is lost.
+- **Invented cultures are not automatically safe.** Fantasy peoples that are
+  thin analogues of real ones are their own well-documented problem.
+
+### Option 3 — real geography, seeded content
+
+The reconciliation, and worth considering seriously: **the map is real and
+fixed; what fills it is seeded.**
+
+- Real continents, real biomes, real ranges. Cheetahs are in Africa.
+- The **seed determines what generates inside them**: which micro-regions
+  appear where, which animals are present this run, weather, seasons, events,
+  and which of a biome's quests you meet first.
+- Replay value comes from a different *population and sequence*, not different
+  *terrain*.
+
+This keeps the educational geography, keeps the located history, keeps the road
+map — and keeps a real reason to start a second save. It gives up procedurally
+generated terrain, which is the part of the Diablo influence that fights
+everything else anyway.
+
+It does **not** solve the cultural representation question. Nothing does except
+doing the work.
+
+### The question underneath the question
+
+Which pillar wins when they conflict?
+
+- If **"documented real history" and "road map into real careers"** are the
+  heart of the game, the world should be real, and the cultural work is a cost
+  to be budgeted rather than avoided.
+- If **"seeded, endlessly replayable"** is the heart, the world should be
+  invented, and the history becomes inspiration rather than depiction.
+
+Everything decided so far — real species data, real conservation stories, real
+professions, real qualification ladders, real ethics codes — leans hard toward
+the first.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
