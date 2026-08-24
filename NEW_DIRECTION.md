@@ -1051,6 +1051,96 @@ The three loops, sketched only as far as Ayr has described them:
 
 ---
 
+## Ideas — round ten: reference the real world, not other games
+
+*Ayr's, 2026-08-24.*
+
+**53.** "I kinda want each reference to be **the real world, not just a game**."
+
+So Pokémon Snap is a shorthand for how the photographer *feels*, not the model
+to copy. Each career loop is designed from the real profession.
+
+---
+
+## Reference: the three careers as they actually work
+
+> **Claude-contributed**, 2026-08-24, researched. Each real profession has its
+> own verbs, its own ethics, and — usefully — its own real career ladder.
+
+### The finding that matters most
+
+**All three professions have a real progression structure, and it maps onto the
+six life stages.** That means the life stages do not need inventing; they can be
+taken from how these careers actually work.
+
+| Stage | Photographer | Researcher | Tour guide |
+|---|---|---|---|
+| Kid / teen | First camera; learning to sit still | Collecting, noticing, first notebook | Knowing your own patch |
+| Young adult | Amateur; building a portfolio | Field assistant on somebody's project | **Apprentice guide**, logging hours |
+| Adult with skills | Selling stock; first commissions | Running your own study; publishing | **Qualified field guide** (FGASA NQF2 → NQF4) |
+| Adult with influence | Assignments; competitions; a name | Principal investigator; grants; students | **Professional / trails guide**, on foot, leading others |
+| Elder | Judging, mentoring, teaching fieldcraft | Emeritus; the long dataset | Trainer and assessor of new guides |
+
+Southern African guiding is the most formalised of the three: **FGASA** runs
+graded qualifications from Nature Site Guide up through Field Guide (NQF2 →
+NQF4) to Professional and specialist **Trails Guide** certifications for leading
+people on foot. That is a real, documented ladder that the game can borrow
+outright.
+
+### Photographer — the real verbs
+
+Fieldcraft, not equipment. The governing principle in the actual codes of
+practice is blunt: **"the welfare of the subject is more important than the
+photograph."**
+
+- **Hides and blinds**, camouflage, and — critically — **reading wind direction
+  so your scent does not carry**.
+- Light, timing and patience; being in position before the animal is.
+- **Real ethical constraints that are natural game rules:** baiting teaches
+  animals to associate people with food and gets them killed; photographing at
+  nests and dens causes abandonment and predation.
+- Professional standards require disclosing whether an image was **Wild,
+  Captive, Controlled, Baited or Lured** — an existing real-world honesty
+  system that could drive scoring directly.
+
+### Researcher — the real verbs
+
+Method and repetition, and it is mostly **not** about handling animals.
+
+- **Camera traps** — run unattended for long periods, work almost anywhere, and
+  disturb nothing.
+- **Line transects** and grids; **mark-recapture**, including capture-recapture
+  done purely from **scat, hair or environmental DNA** with no animal ever
+  touched.
+- **Radio and GPS collars** for movement data.
+- **Permits and ethics review** before anything begins, and the standing
+  constraint that even observation disturbs — trails cut to reach a site are
+  themselves an impact.
+- Scat degrades fast, so genetic work needs **large sample numbers** — a natural
+  grind loop that is true to life.
+
+### Tour guide — the real verbs
+
+Finding the animal reliably, on a schedule, with people watching.
+
+- Tracks, signs, alarm calls, and the **guide radio network** — real guides
+  share sightings constantly.
+- Reading season, weather and time of day to know where an animal will be.
+- **Client management and safety**, which is the part no other career has.
+- A formal qualification ladder, and on-foot work as the senior specialism.
+
+### Why this is better than referencing games
+
+The ethics rules are already game mechanics. "Do not bait", "do not photograph
+at a nest", "get the permit first", "disclose whether it was captive" are all
+real professional constraints that create genuine tension between the easy
+shot and the right one — which is the same design the conservation quests use.
+Nothing has to be invented to make the careers feel different; they already
+are.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -1164,6 +1254,8 @@ change rather than a contradiction.*
 - **2026-08-24** — All 1000 species are catchable in **every** career, but
   **method changes difficulty**: some animals are far easier for one career
   than another, and that asymmetry is allowed to stand.
+- **2026-08-24** — Career loops are designed from **the real professions**, not
+  from other games. Game references are shorthand for feel only.
 
 ---
 
