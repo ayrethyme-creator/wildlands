@@ -168,3 +168,7 @@ var BIOME_MOVE = {
   bobcat:"desert", ninebandarmadillo:"desert", giantarmadillo:"desert"
 };
 Object.keys(BIOME_MOVE).forEach(function (k) { BIOME_BY_HAND[k] = BIOME_MOVE[k]; });
+
+// Ayr, 2026-08-24: beluga and orca belong in polar.
+BIOME_BY_HAND.beluga = "polar";
+BIOME_BY_HAND.orca = "polar";
