@@ -1673,6 +1673,62 @@ is the one number that makes it impossible.
 
 ---
 
+## HD-2D and 2.5D games to look at
+
+> **Claude-contributed**, 2026-08-24. Ayr asked for examples to look at. Split
+> into the strict Square Enix style and the broader technique, because the
+> second group is closer to what this project actually needs.
+
+### Square Enix HD-2D — the strict version
+
+Look at these for **how premium the style can read**. All Unreal.
+
+| Game | Year | Worth looking at for |
+|---|---|---|
+| **Octopath Traveler** | 2018 | The original. Depth of field and lighting doing the heavy lifting |
+| **Octopath Traveler II** | 2023 | Day/night is a real mechanic here — the same town differs by time |
+| **Triangle Strategy** | 2022 | Tactical camera; how the style handles being rotated |
+| **Live A Live** (remake) | 2022 | Many small distinct settings, which is closer to twelve biomes |
+| **Dragon Quest III HD-2D Remake** | 2024 | The most recent and most polished; big outdoor overworld |
+
+### The broader technique — closer to this project
+
+These are **2D sprites billboarded in a 3D world**, which is the part that
+matters here, and several are far nearer to Wildlands in subject and structure.
+
+| Game | Why it is relevant |
+|---|---|
+| **Don't Starve** | **The closest match in subject.** Outdoors, wildlife, gathering, **real seasons**, day/night, and hand-drawn 2D creatures in a 3D world. Proof the technique carries a nature game |
+| **Cult of the Lamb** | All art drawn in 2D then placed in a 3D world; sprites rotate to face the camera and write to depth. **Also a management-sim hybrid**, like the facilities. Made in Unity by a small team whose first 3D engine it was |
+| **Sea of Stars** | Not billboarded, but the best modern example of **dynamic lighting and a day/night cycle over pixel art** |
+| **Paper Mario** (originals) | The oldest version of the trick, and still the clearest illustration of it |
+
+### The reassuring part
+
+Massive Monster chose the 2.5D look for *Cult of the Lamb* because they were
+**moving to a 3D engine for the first time** and it felt wasteful to stay flat.
+Their reasons were practical: being able to move sprites around in space, build
+faux-3D structures, and choose camera angles in the editor.
+
+That is close to this project's position — an existing 2D art library, a first
+move into a 3D-capable engine, and a want for camera and lighting that flat 2D
+cannot give.
+
+### What to look at while judging
+
+- **Octopath Traveler II** for how day and night change a place.
+- **Don't Starve** for whether hand-drawn animals hold up outdoors across
+  seasons.
+- **Cult of the Lamb** for how it looks when the sprites are cleaner and more
+  modern rather than pixel art — which is what the Wildlands sprites are.
+
+That last point matters: the Wildlands sprites are **not pixel art**. They are
+clean illustrated creatures, so *Cult of the Lamb* is a truer visual comparison
+than Octopath, even though Octopath is the more famous style.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
