@@ -619,6 +619,59 @@ same to build as a lion quest and teaches more.
 
 ---
 
+## Ideas — round five: what is left over, and what catching one gives you
+
+*Ayr's, 2026-08-24.*
+
+**38. The leftovers are the collection.** Once the conservation stories are
+chosen across every timeline and every biome, **whatever animals are left over
+become wild encounters** — "so there's still that **gotta catch em all** feel
+that is so much fun."
+
+**39.** Seasons and times of day, restated (see idea 9).
+
+**40. Micro-regions inside biomes.** "Having micro regions within those biomes
+is a good idea too, like with the cave." — generalises the cave suggestion into
+a rule: biomes contain smaller distinct places.
+
+**41. What a successful catch gives you.** Two possible outcomes, and it can be
+either:
+
+- **The info, plus a place to go and visit it** — like the moose pasture in
+  idea 19.
+- **An actual individual of that species becomes viewable at the zoo or
+  sanctuary, with a story**, the way Safari Saga does it.
+
+**42. The player names it.** With **suggested names drawn from the language of
+the place the animal actually comes from** — "like how they often name animals
+at zoos in real life."
+
+### Already built, and worth reusing (Claude note)
+
+Idea 41's second branch is not a blank page. Safari Saga already has an
+`INDIVIDUALS` table in `game.part49.jsx`: **39 hand-written individual animals**,
+each with a name, a sex, a story and a note about when they arrived — plus
+`individualOf()`, a deterministic fallback that gives any unlisted species a
+stable generated individual rather than nothing.
+
+Some of those names already follow idea 42's convention without it having been
+stated: the station goat is **Ntate**, which is Sesotho. So the instinct is
+partly in the existing game and can be made into a rule rather than invented.
+
+For the suggested-names feature, the origin data also already exists — every
+species carries a habitat sentence naming its real region, which is what a name
+list would be keyed off.
+
+### Note on 38 (Claude note)
+
+This resolves the arithmetic worry from idea 32 rather than adding to it.
+Quests do not have to cover 651 species — they cover the ones with real
+stories, and everything else is still collectable through encounters. The
+"catch em all" goal stays intact while the authored content stays finite.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -692,6 +745,15 @@ change rather than a contradiction.*
   animal.
 - **2026-08-24** — Biomes **hand off to each other**: finishing a biome's last
   quest starts you already inside the next one.
+- **2026-08-24** — Species without a real conservation story are **wild
+  encounters**, so the collection goal survives without every animal needing
+  authored content.
+- **2026-08-24** — Biomes contain **micro-regions** — smaller distinct places
+  inside them, of which the cave is one example.
+- **2026-08-24** — A caught animal yields either **info plus a place to visit
+  it in the wild**, or **a named individual at the facility with a story**.
+- **2026-08-24** — Players **name** their animals, choosing from suggestions
+  drawn from the language of the animal's real region of origin.
 
 ---
 
