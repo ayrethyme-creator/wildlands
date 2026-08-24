@@ -245,6 +245,53 @@ two columns, which matters a lot given that idea 26 wants exactly that.
   but less of a backyard animal than crows are.
 
 
+### Mammals — answering "is there a mammal that would work?"
+
+> **Claude-contributed**, 2026-08-24. Ayr has kept **box turtle** and **raven**
+> from the list above and asked whether a mammal fits, particularly a deer for
+> the passing-on-offspring idea.
+
+| Mammal | Typical in the wild | Why it does or does not fit |
+|---|---|---|
+| **Beaver** | **10–20** | Long-lived *and* generational, and builds something that visibly persists |
+| **Porcupine** | up to ~18 | Genuinely long-lived, docile, woodland, low drama |
+| **White-tailed deer** | 6–14 (to ~20 protected) | Moderate lifespan, but the offspring behaviour is exactly right |
+| River otter | 8–15 | Charismatic, semi-aquatic, a rehab staple |
+| Opossum | 1–2 | No |
+| Groundhog | 3–6 | No |
+| Coyote | 6–8 | Short, plus the taming problem below |
+
+**Deer, for the offspring idea — the real mechanism is better than a game
+conceit.** Female white-tailed deer are *philopatric*: a doe stays in the home
+range she was born in for life, and her daughters establish their own ranges
+directly adjacent to hers. The result over years is a matriline — a group of
+related does in the same patch of woods, all descended from one female. Sons
+disperse and leave. So a fawn you hand-reared as a kid could, by the elder
+stage, be the origin of a small related herd in the same woods, and that is
+simply what deer do.
+
+**The honest caveat on deer.** Hand-reared deer that lose their fear of people
+are a serious and well-known problem in wildlife rehabilitation — bucks in
+particular become genuinely dangerous at maturity during the rut, and
+habituated deer often end up destroyed. In many places rearing one is also
+illegal without a licence. This is not a reason to drop the idea. It may be the
+strongest teaching beat available: the animal you loved cannot stay tame, and
+raising it wrong is what makes it dangerous. That is a real lesson the game
+could carry rather than a problem to design around.
+
+**Beaver is the strongest single mammal**, because it satisfies both halves of
+idea 26 at once. It lives 10–20 years in the wild. Kits stay with the family
+for about two years and help raise the next litter, so the generational
+element is there too. And it is the only candidate that *builds* — a pond that
+appears, widens and matures across the life stages is a visible record of the
+years passing, which nothing else on this list gives. Idea 19 already has
+beaver ponds as a wild-encounter site.
+
+**Porcupine** is the low-drama long-lived option: slow, arboreal, common in
+woodland, easy to hand-rear, no aggression problem, and it clears the fifteen-
+year bar without any caveats attached.
+
+
 ---
 
 ## Questions to come back to
