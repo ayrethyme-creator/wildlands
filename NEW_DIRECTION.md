@@ -966,6 +966,91 @@ ever gets finished; C is far likelier to get finished.
 
 ---
 
+## Ideas — round nine: three careers, three *games*
+
+*Ayr's, 2026-08-24. This supersedes the recommendation above.*
+
+**49. "Nobody sees the whole picture" is not the main message.** "I think it's a
+great lesson, but I'd rather have it be **so fun people want to play 120 hours
+of story**."
+
+**50. Each career is almost a totally different game.** "That's partially why
+the teen life stage is where you pick your career — because I want each career
+to be **almost like a totally different gameplay**. Instead of playing different
+*classes*, each career is more like a **different game**."
+
+**51.** Example given: "the photographer gameplay is like **Pokémon Snap** — how
+the animals appear in the wild and what you do with them to reach 'caught' will
+look **completely different** from what the tour guide does."
+
+**52.** "You can still catch all 1000 in each career if you want, though I don't
+see anyone doing that lol — but **some careers will be easier to catch certain
+animals from certain biomes**, because your method is different."
+
+### This settles idea 48 — Option B (Claude note)
+
+I recommended Option C on the assumption that the split-perspective theme was
+the point and that a 120-hour ask was too much. Ayr's answer is that the theme
+is a bonus, not the goal, and that 120 hours is fine **if it is three different
+games rather than one story told three times.** That is a different proposition
+and it changes the answer. **Option B.**
+
+Critically, it also dissolves the Birth by Sleep repetition problem entirely.
+That criticism applies when three characters walk the same ground doing the
+same verb with different stats. It does not apply when the verb itself changes.
+
+### What this does to the build cost
+
+Not 3x everything. The split is:
+
+| Shared across all three careers | Built three times |
+|---|---|
+| The world, terrain and seeded generation | The core encounter loop |
+| All 651 species, their art and field-guide text | The "how do you reach caught" mechanic |
+| The twelve biomes and their micro-regions | The interface for that loop |
+| The conservation stories and their real history | Career-specific tools and progression |
+| The NPCs, facilities and life stages | How quests are approached and resolved |
+
+So the expensive part moves from **three times the story** to **three times the
+systems**. That is a real cost, but a different and more tractable one, because
+systems are reusable and generative where bespoke narrative is not.
+
+### Idea 52 is an elegant systemic consequence
+
+If the method differs, the difficulty naturally differs per animal, without
+anybody hand-tuning it:
+
+- A **cave bat** is straightforward for a **researcher** with a camera trap, and
+  near-impossible for a **tour guide** who cannot take clients into a cave at
+  three in the morning.
+- A **whale** is bread and butter for a **tour guide** with a boat, and a
+  permits-and-tagging ordeal for a **researcher**.
+- A **shy nocturnal cat** may only ever be *photographed*, never handled.
+
+That asymmetry falls out of the design rather than being authored, and it is a
+genuine reason to play a second career.
+
+### The honest caution
+
+Each loop has to carry **forty hours on its own**. New Pokémon Snap — the
+closest existing thing to the photographer loop — is about **ten hours**. The
+loop therefore needs considerably more depth than Snap had: progression, tools,
+seasons, twelve biomes, day and night. That is achievable because the world here
+is far larger, but "make it like Pokémon Snap" is a starting point rather than a
+finished design.
+
+The three loops, sketched only as far as Ayr has described them:
+
+- **Photographer** — observational. Animals behave naturally; you position,
+  wait, and capture. Rewards patience, timing and knowing behaviour.
+- **Researcher** — systematic. Traps, tags, transects, samples, camera traps.
+  Rewards method, repeat visits and equipment.
+- **Tour guide** — performative. Find the animal reliably, on schedule, with
+  people watching. Rewards reading conditions and managing expectations.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -1072,6 +1157,13 @@ change rather than a contradiction.*
 - **2026-08-24** — The three careers follow a **Birth by Sleep structure**:
   same world, three campaigns, each holding part of the story, intersecting
   rather than repeating.
+- **2026-08-24** — **Option B chosen.** Three complete ~40-hour campaigns, one
+  per career, sharing a world. Each career is a *different game*, not a
+  different class — different encounter loop, different way of reaching
+  "caught". The split-perspective theme is a bonus, not the goal.
+- **2026-08-24** — All 1000 species are catchable in **every** career, but
+  **method changes difficulty**: some animals are far easier for one career
+  than another, and that asymmetry is allowed to stand.
 
 ---
 
