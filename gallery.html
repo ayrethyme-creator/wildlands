@@ -93,29 +93,21 @@ var DATA_PARTS = [
   "game.part63.jsx","game.part64.jsx","game.part65.jsx","game.part66.jsx","game.part67.jsx"
 ];
 
-var BIOME_RULES = [
-  ["Coral reef",      /coral|reef/i],
-  ["Open ocean",      /deep sea|abyss|midnight zone|hydrothermal|open ocean|pelagic|open sea|oceans worldwide|all oceans/i],
-  ["Polar",           /sea ice|pack ice|antarctic|arctic|tundra|polar|ice floe/i],
-  ["Coast & kelp",    /kelp|mangrove|estuar|tidal|shoreline|coastal|coast|beach|shore|seabird colon/i],
-  ["Caves",           /cave|cavern|karst|subterranean/i],
-  ["Wetlands",        /river|lake|marsh|swamp|wetland|pond|fen|bog|floodplain|delta|freshwater|billabong|stream/i],
-  ["Mountains",       /mountain|alpine|highland|montane|andes|himalaya|plateau|cliff|crag|rocky slope|rocky country/i],
-  ["Desert",          /desert|sahara|kalahari|arid|sand dune|gobi|atacama|semi-arid/i],
-  ["Rainforest",      /rainforest|rain forest|jungle|tropical forest|cloud forest|canopy/i],
-  ["Savanna",         /savanna|grassland|plains|steppe|prairie|pampas|veld|grassy|open woodland/i],
-  ["Farmland & town", /farmland|cities|urban|garden|villages|towns|human settlement|hedgerow|suburb|park/i],
-  ["Forest",          /forest|woodland|deciduous|bamboo|scrub|bush|thicket|heath|moor|taiga|boreal|conifer/i]
-];
+/* The gallery uses the SAME classifier the design work uses - design/biomes.js
+   for the habitat rules and design/biome_assign.js for the 237 species whose
+   habitat text names only a region. One source of truth, so the gallery cannot
+   disagree with the design doc. */
+var CLASSIFIER = ["design/biomes.js", "design/biome_assign.js"];
 
 var statusEl = document.getElementById("status");
-var texts = new Array(DATA_PARTS.length), done = 0;
+var ALL_FILES = DATA_PARTS.concat(CLASSIFIER);
+var texts = new Array(ALL_FILES.length), done = 0;
 
-DATA_PARTS.forEach(function (name, i) {
+ALL_FILES.forEach(function (name, i) {
   fetch(name + "?g=1").then(function (r) { return r.text(); }).then(function (t) {
     texts[i] = t; done++;
-    statusEl.textContent = "Loading the game data… " + done + "/" + DATA_PARTS.length;
-    if (done === DATA_PARTS.length) start();
+    statusEl.textContent = "Loading the game data… " + done + "/" + ALL_FILES.length;
+    if (done === ALL_FILES.length) start();
   }, function (e) {
     statusEl.textContent = "Could not load " + name + " — " + e.message;
   });
@@ -128,7 +120,9 @@ function start() {
        with it because its UI is evaluated in the same call. The gallery is not,
        so the data has to be handed out explicitly. */
     var EXPORTS = ";window.__DEX = (typeof DEX !== 'undefined') ? DEX : null;"
-                + ";window.__INFO = (typeof INFO !== 'undefined') ? INFO : {};";
+                + ";window.__INFO = (typeof INFO !== 'undefined') ? INFO : {};"
+                + ";window.__RULES = BIOME_RULES;window.__HAND = BIOME_BY_HAND;"
+                + ";window.__MERGE = BIOME_MERGE;window.__NA = NOT_A_SPECIES;";
     var code = texts.join(String.fromCharCode(10)) + String.fromCharCode(10) + EXPORTS;
     var out = Babel.transform(code, { presets: [["react", { runtime: "classic" }]] }).code;
     (0, eval)(out);
@@ -143,21 +137,26 @@ function start() {
 var ALL = [];
 function build() {
   var DEX = window.__DEX, INFO = window.__INFO;
+  var RULES = window.__RULES, HAND = window.__HAND, MERGE = window.__MERGE;
+  var NA = {}; (window.__NA || []).forEach(function (k) { NA[k] = 1; });
   var keys = Object.keys(DEX);
   ALL = keys.map(function (k) {
     var d = DEX[k] || {}, info = INFO[k] || {};
     var h = info.h || "";
     var biome = "";
+    if (NA[k]) return null;                                  // a life stage, not a species
     if (d.t && d.t.indexOf("Mythic") >= 0) biome = "Mythic";
     else if (d.t && d.t.indexOf("Fossil") >= 0) biome = "Fossil";
+    else if (info.s === "EX" || info.s === "EW" || d.mem) biome = "Gone";
+    else if (/_j$|_c$|_f$|_p$|_i$/.test(k)) return null;
     else {
-      for (var i = 0; i < BIOME_RULES.length; i++) {
-        if (BIOME_RULES[i][1].test(h)) { biome = BIOME_RULES[i][0]; break; }
-      }
-      if (!biome) biome = "Unplaced";
+      biome = HAND[k] || "";
+      if (!biome) for (var i = 0; i < RULES.length; i++)
+        if (RULES[i][1].test(h)) { biome = RULES[i][0]; break; }
+      biome = MERGE[biome] || biome || "Unplaced";
     }
     return { key: k, name: d.n || k, habitat: h, status: info.s || "", biome: biome };
-  });
+  }).filter(Boolean);
 
   var seen = {}, opts = [];
   ALL.forEach(function (r) { if (!seen[r.biome]) { seen[r.biome] = 1; opts.push(r.biome); } });

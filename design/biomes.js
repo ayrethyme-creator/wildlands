@@ -24,19 +24,10 @@ var BIOME_RULES = [
   ["forest",      /forest|woodland|deciduous|bamboo|scrub|bush|thicket|heath|moor/i],
 ];
 
-// Where Safari Saga already put them. Game-specific zone names collapse onto
-// real biomes; the two lategame zones are excluded before this is consulted.
-var ZONE_TO_BIOME = {
-  desert: "desert",   outbackz: "desert",
-  wetland: "wetland",
-  savanna: "savanna", savannaz: "savanna", highveld: "savanna",
-  alpine: "alpine",   summit: "alpine",    volcanic: "alpine",
-  grove: "forest",    hearth: "farmland",
-  canopyz: "rainforest", jungle: "rainforest",
-  taigaz: "taiga",    tundraz: "tundra",   polarz: "polarsea",
-  kelpz: "kelp",      oceanz: "opensea",   abyssz: "deepsea",  reefz: "reef",
-  cavezone: "cave",
-};
+// The zone fallback that used to live here has been REMOVED. It classified 252
+// species by which Safari Saga map they appear in, which is a gameplay layout
+// and not an ecological one - it put barracuda, clownfish, puffins and golden
+// retrievers in "alpine". Those 252 are now hand-assigned in biome_assign.js.
 
 // Nine that neither signal caught, placed by hand.
 var BIOME_OVERRIDE = {
