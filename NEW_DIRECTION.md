@@ -1870,6 +1870,78 @@ turns juveniles from a separate collection into the *depth* of an existing one.
 
 ---
 
+## The art cost of life stages — and the bigger one behind it
+
+> **Claude-contributed**, 2026-08-24. Ayr decided juveniles are life stages of
+> one entry and that animals die of old age, and named **artwork** as the main
+> concern. Here is what it actually costs.
+
+### Juvenile art is the cheap part
+
+- **651 live species. 82 juvenile sprites already exist.**
+- The generator, the prompts and the whole pipeline still work — this session
+  alone produced around a hundred corrected sprites in batches.
+- At roughly **52 seconds a sprite**, even giving *every* live species a
+  juvenile is about **eight hours of GPU time**. Overnight, free, on Eric's
+  machine.
+
+And most species do not need one. Tier it:
+
+| Tier | What it is | Art needed |
+|---|---|---|
+| **Distinct young** | Metamorphosis, spotted fawns, downy chicks, cubs, different juvenile plumage | **A real sprite.** Perhaps 150–250 species |
+| **Smaller adult** | Most reptiles, fish, many birds and small mammals | **Scale the adult sprite**, sometimes recolour. Free |
+| **Never seen young** | Deep sea, most invertebrates, anything whose young is planktonic or hidden | **Nothing** |
+
+So the realistic juvenile job is **150–250 new sprites, three or four hours of
+GPU**, not 651.
+
+### The bigger cost, which is not juveniles
+
+**Every sprite in the game is a single static image.** That is fine in Safari
+Saga, where nothing moves. It is **not** fine in a living HD-2D world where
+animals are supposed to graze, walk, startle and flee.
+
+**Animation is the real art cost of this decision**, and it is the one thing the
+generator cannot solve. Some numbers for scale: 651 species × even four short
+cycles (idle, walk, feed, alert) is 2,600 animations.
+
+### The proven cheap path
+
+*Cult of the Lamb* is the exact precedent, and its solution is documented:
+**skeletal animation that distorts the 2D mesh**. The sprite is cut into parts,
+rigged, and deformed — no redrawing, no frame-by-frame, and it reads as more
+three-dimensional than a flat image because the parts move in depth.
+
+Practically:
+
+1. **Rig once per body plan, not per species.** A quadruped rig fits deer, lion,
+   fox, wolf, badger. A bird rig fits most birds. Perhaps **10–15 rigs** cover
+   almost the whole roster.
+2. **Auto-cut each sprite** to the rig for its body plan; hand-correct the
+   awkward ones.
+3. **Animate the rigs, not the animals.** One good quadruped walk cycle serves
+   two hundred species with per-species timing tweaks.
+4. Reserve bespoke animation for the few that genuinely need it — snakes,
+   octopus, jellyfish, anything with no shared body plan.
+
+This turns 2,600 animations into roughly **15 rigs and 60 cycles**, plus cutting
+work per sprite. That is a real job, and it is a tractable one.
+
+### What this means for the concern
+
+The art worry is **real but pointed at the wrong thing**:
+
+- **Juvenile sprites: nearly free.** The pipeline exists and it is a few hours of
+  GPU.
+- **The 1024px re-export: free.** Another fifteen hours of GPU, prompts all
+  survive.
+- **Animation: the genuine cost**, and the first thing a technical artist should
+  be scoped against — rigs and cutting, not per-species drawing.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -2029,6 +2101,12 @@ change rather than a contradiction.*
   rather than pixel art.
 - **2026-08-24** — Sprites to be **re-exported at 1024x1024** before use in 3D.
   All 1009 prompts survive, so this is a batch job, not a rework.
+- **2026-08-24** — **No evolution.** Life cycle replaces it. Juveniles are
+  **life stages of one dex entry**, not separate species.
+- **2026-08-24** — **Animals die of old age.** Accepted deliberately as the
+  strongest emotional material in the design.
+- **2026-08-24** — A species counts as fully researched only when
+  **documented across its life stages**.
 
 ---
 
