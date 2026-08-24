@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Wildlands — Art Gallery</title>
+<style>
+  :root{
+    --ground:#14120f; --panel:#1e1b16; --line:#3a342b;
+    --ink:#f2e8d5; --dim:#9a8f78; --gold:#e8c547;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+       -webkit-text-size-adjust:100%}
+  header{position:sticky;top:0;z-index:5;background:rgba(20,18,15,.97);
+         border-bottom:1px solid var(--line);padding:10px 12px calc(8px + env(safe-area-inset-bottom,0))}
+  h1{margin:0 0 8px;font-size:15px;letter-spacing:.02em}
+  h1 span{color:var(--dim);font-weight:400;font-size:12px;font-family:var(--mono)}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  input[type=search]{flex:1 1 180px;min-width:0;background:var(--panel);color:var(--ink);
+    border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:16px;font-family:inherit}
+  select{background:var(--panel);color:var(--ink);border:1px solid var(--line);
+    border-radius:8px;padding:9px 11px;font-size:15px;font-family:inherit}
+  #grid{display:grid;gap:10px;padding:12px;
+        grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  @media(min-width:700px){#grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}}
+  figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+         padding:8px;display:flex;flex-direction:column;gap:6px;cursor:zoom-in}
+  figure img{width:100%;aspect-ratio:1;object-fit:contain;display:block;
+             image-rendering:auto;background:transparent}
+  figcaption{font-size:12px;line-height:1.35}
+  figcaption b{display:block;color:var(--ink)}
+  figcaption small{display:block;color:var(--dim);font-size:10.5px;font-family:var(--mono);
+                   text-transform:uppercase;letter-spacing:.06em}
+  .tag{display:inline-block;margin-top:2px;font-size:10px;padding:1px 6px;border-radius:99px;
+       border:1px solid var(--line);color:var(--dim)}
+  .tag.cr,.tag.en{color:#e8845c;border-color:#6b3f2e}
+  .tag.ex,.tag.ew{color:#c98ad6;border-color:#5a3a63}
+  #status{padding:24px 14px;color:var(--dim);font-family:var(--mono);font-size:13px}
+  /* lightbox */
+  #box{position:fixed;inset:0;background:rgba(10,9,7,.96);display:none;z-index:20;
+       align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:16px;cursor:zoom-out}
+  #box.on{display:flex}
+  #box img{max-width:min(92vw,720px);max-height:68vh;object-fit:contain}
+  #box .meta{max-width:min(92vw,720px);text-align:center;font-size:14px;line-height:1.5}
+  #box .meta b{display:block;font-size:19px;margin-bottom:4px}
+  #box .meta span{color:var(--dim)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Wildlands art <span id="count"></span></h1>
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search a name…" autocomplete="off" />
+    <select id="biome"><option value="">All biomes</option></select>
+    <select id="sort">
+      <option value="name">A–Z</option>
+      <option value="biome">By biome</option>
+      <option value="status">By status</option>
+    </select>
+  </div>
+</header>
+
+<div id="status">Loading the game data…</div>
+<div id="grid"></div>
+
+<div id="box"><img id="boxImg" alt="" /><div class="meta" id="boxMeta"></div></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script>
+/* The gallery reads the game's OWN data rather than a copied export, so it can
+   never drift out of sync. It loads the data parts only - part4 and part5 are
+   the React application and are not needed to read DEX and INFO. */
+var DATA_PARTS = [
+  "game.part1.jsx","game.part2.jsx","game.part3.jsx","game.part3b.jsx","game.part6.jsx",
+  "game.part7.jsx","game.part8.jsx","game.part9.jsx","game.part10.jsx","game.part11.jsx",
+  "game.part12.jsx","game.part13.jsx","game.part14.jsx","game.part15.jsx","game.part16.jsx",
+  "game.part17.jsx","game.part18.jsx","game.part19.jsx","game.part20.jsx","game.part21.jsx",
+  "game.part22.jsx","game.part23.jsx","game.part24.jsx","game.part25.jsx","game.part26.jsx",
+  "game.part27.jsx","game.part28.jsx","game.part29.jsx","game.part30.jsx","game.part31.jsx",
+  "game.part32.jsx","game.part33.jsx","game.part34.jsx","game.part35.jsx","game.part36.jsx",
+  "game.part37.jsx","game.part38.jsx","game.part39.jsx","game.part40.jsx","game.part41.jsx",
+  "game.part42.jsx","game.part43.jsx","game.part45.jsx","game.part46.jsx","game.part47.jsx",
+  "game.part48.jsx","game.part49.jsx","game.part50.jsx","game.part51.jsx","game.part52.jsx",
+  "game.part53.jsx","game.part54.jsx","game.part55.jsx","game.part56.jsx","game.part57.jsx",
+  "game.part58.jsx","game.part59.jsx","game.part60.jsx","game.part61.jsx","game.part62.jsx",
+  "game.part63.jsx","game.part64.jsx","game.part65.jsx","game.part66.jsx","game.part67.jsx"
+];
+
+var BIOME_RULES = [
+  ["Coral reef",      /coral|reef/i],
+  ["Open ocean",      /deep sea|abyss|midnight zone|hydrothermal|open ocean|pelagic|open sea|oceans worldwide|all oceans/i],
+  ["Polar",           /sea ice|pack ice|antarctic|arctic|tundra|polar|ice floe/i],
+  ["Coast & kelp",    /kelp|mangrove|estuar|tidal|shoreline|coastal|coast|beach|shore|seabird colon/i],
+  ["Caves",           /cave|cavern|karst|subterranean/i],
+  ["Wetlands",        /river|lake|marsh|swamp|wetland|pond|fen|bog|floodplain|delta|freshwater|billabong|stream/i],
+  ["Mountains",       /mountain|alpine|highland|montane|andes|himalaya|plateau|cliff|crag|rocky slope|rocky country/i],
+  ["Desert",          /desert|sahara|kalahari|arid|sand dune|gobi|atacama|semi-arid/i],
+  ["Rainforest",      /rainforest|rain forest|jungle|tropical forest|cloud forest|canopy/i],
+  ["Savanna",         /savanna|grassland|plains|steppe|prairie|pampas|veld|grassy|open woodland/i],
+  ["Farmland & town", /farmland|cities|urban|garden|villages|towns|human settlement|hedgerow|suburb|park/i],
+  ["Forest",          /forest|woodland|deciduous|bamboo|scrub|bush|thicket|heath|moor|taiga|boreal|conifer/i]
+];
+
+var statusEl = document.getElementById("status");
+var texts = new Array(DATA_PARTS.length), done = 0;
+
+DATA_PARTS.forEach(function (name, i) {
+  fetch(name + "?g=1").then(function (r) { return r.text(); }).then(function (t) {
+    texts[i] = t; done++;
+    statusEl.textContent = "Loading the game data… " + done + "/" + DATA_PARTS.length;
+    if (done === DATA_PARTS.length) start();
+  }, function (e) {
+    statusEl.textContent = "Could not load " + name + " — " + e.message;
+  });
+});
+
+function start() {
+  try {
+    /* The parts declare DEX and INFO with top-level const, and a const declared
+       inside eval() is scoped to that eval - it is NOT global. The game gets away
+       with it because its UI is evaluated in the same call. The gallery is not,
+       so the data has to be handed out explicitly. */
+    var EXPORTS = ";window.__DEX = (typeof DEX !== 'undefined') ? DEX : null;"
+                + ";window.__INFO = (typeof INFO !== 'undefined') ? INFO : {};";
+    var code = texts.join(String.fromCharCode(10)) + String.fromCharCode(10) + EXPORTS;
+    var out = Babel.transform(code, { presets: [["react", { runtime: "classic" }]] }).code;
+    (0, eval)(out);
+  } catch (e) {
+    statusEl.textContent = "Failed to read the game data: " + e.message;
+    return;
+  }
+  if (!window.__DEX) { statusEl.textContent = 'Loaded, but found no species data.'; return; }
+  build();
+}
+
+var ALL = [];
+function build() {
+  var DEX = window.__DEX, INFO = window.__INFO;
+  var keys = Object.keys(DEX);
+  ALL = keys.map(function (k) {
+    var d = DEX[k] || {}, info = INFO[k] || {};
+    var h = info.h || "";
+    var biome = "";
+    if (d.t && d.t.indexOf("Mythic") >= 0) biome = "Mythic";
+    else if (d.t && d.t.indexOf("Fossil") >= 0) biome = "Fossil";
+    else {
+      for (var i = 0; i < BIOME_RULES.length; i++) {
+        if (BIOME_RULES[i][1].test(h)) { biome = BIOME_RULES[i][0]; break; }
+      }
+      if (!biome) biome = "Unplaced";
+    }
+    return { key: k, name: d.n || k, habitat: h, status: info.s || "", biome: biome };
+  });
+
+  var seen = {}, opts = [];
+  ALL.forEach(function (r) { if (!seen[r.biome]) { seen[r.biome] = 1; opts.push(r.biome); } });
+  opts.sort();
+  var sel = document.getElementById("biome");
+  opts.forEach(function (b) {
+    var o = document.createElement("option"); o.value = b; o.textContent = b; sel.appendChild(o);
+  });
+
+  statusEl.style.display = "none";
+  ["q", "biome", "sort"].forEach(function (id) {
+    document.getElementById(id).addEventListener("input", render);
+  });
+  render();
+}
+
+function render() {
+  var q = document.getElementById("q").value.trim().toLowerCase();
+  var b = document.getElementById("biome").value;
+  var sort = document.getElementById("sort").value;
+
+  var rows = ALL.filter(function (r) {
+    if (b && r.biome !== b) return false;
+    if (q && r.name.toLowerCase().indexOf(q) < 0 && r.key.indexOf(q) < 0) return false;
+    return true;
+  });
+  rows.sort(function (x, y) {
+    if (sort === "biome" && x.biome !== y.biome) return x.biome < y.biome ? -1 : 1;
+    if (sort === "status" && x.status !== y.status) return (y.status || "").localeCompare(x.status || "");
+    return x.name.localeCompare(y.name);
+  });
+
+  document.getElementById("count").textContent = rows.length + " of " + ALL.length;
+  var grid = document.getElementById("grid");
+  grid.textContent = "";
+  var frag = document.createDocumentFragment();
+  rows.forEach(function (r) {
+    var fig = document.createElement("figure");
+    var img = document.createElement("img");
+    img.loading = "lazy"; img.src = "art/" + r.key + ".png"; img.alt = r.name;
+    var cap = document.createElement("figcaption");
+    var st = r.status ? '<span class="tag ' + r.status.toLowerCase() + '">' + r.status + "</span>" : "";
+    cap.innerHTML = "<b>" + r.name + "</b><small>" + r.biome + "</small>" + st;
+    fig.appendChild(img); fig.appendChild(cap);
+    fig.addEventListener("click", function () { open(r); });
+    frag.appendChild(fig);
+  });
+  grid.appendChild(frag);
+}
+
+var box = document.getElementById("box");
+function open(r) {
+  document.getElementById("boxImg").src = "art/" + r.key + ".png";
+  document.getElementById("boxMeta").innerHTML =
+    "<b>" + r.name + "</b><span>" + (r.habitat || r.biome) +
+    (r.status ? " · " + r.status : "") + "</span>";
+  box.classList.add("on");
+}
+box.addEventListener("click", function () { box.classList.remove("on"); });
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") box.classList.remove("on");
+});
+</script>
+</body>
+</html>
