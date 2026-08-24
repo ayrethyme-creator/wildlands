@@ -1245,6 +1245,69 @@ the life stages stay in the order they are already in.
 
 ---
 
+## Ideas — round twelve: where the pets come from
+
+*Ayr's, 2026-08-24.*
+
+**56.** The kid pet list is deliberate: **only animals that genuinely thrive as
+pets**. The teen list is similar but **requires more responsibility**.
+
+**57. The parrot is the deliberate exception**, and it is a **rescue**, and it
+**comes with a lesson**.
+
+**58. Pets should be real-world adjacent, including where you get them.** "Maybe
+you go to the **humane society** for the cats and dogs, but you go to a **pet
+store** for the fish and small mammals." The point being to **show that not all
+of the pet industry is bad.**
+
+### Why 58 is the right call (Claude note)
+
+A game that treats the whole pet trade as villainous would be both inaccurate
+and preachy, and players would stop trusting it. The real picture is
+genuinely mixed, and *sourcing* is the axis that separates good from bad — which
+is exactly what idea 58 puts in front of the player as a choice.
+
+### Ayr's teen list already encodes real lessons (Claude note)
+
+Several choices already carry a true and specific distinction. They can be made
+deliberate rather than accidental.
+
+- **Saltwater vs freshwater tank** — the sharpest one in the whole list.
+  Freshwater aquarium fish are overwhelmingly **captive-bred**. Marine fish are
+  overwhelmingly **not**: roughly **98% of saltwater species cannot yet be bred
+  commercially**, only about 17% have been bred in captivity at all, and only
+  about 6% of those are actually available. Worse, a large share of the wild
+  catch is taken with **cyanide**, which stuns the fish and kills the reef
+  around it — mortality from reef to retail exceeds 90%, and each fish taken
+  this way can kill up to a cubic yard of reef. **The same tank, stocked two
+  ways, is a whole conservation lesson with no lecture attached.**
+- **Axolotl** — functionally extinct in the wild, while hundreds of thousands
+  live in tanks. The captive population dwarfs the wild one. A genuinely
+  strange case that complicates any simple "captivity bad" reading.
+- **Rescue parrot** — large parrots live 40–80 years, routinely outlive their
+  owners, and are among the most surrendered pets there are. Ayr's instinct to
+  make it a rescue *and* attach a lesson is exactly right.
+- **Tortoise** (kid list) — the same lifespan problem in a quieter form. A
+  tortoise is genuinely a multi-generational commitment.
+- **Horse** (teen farm list) — a thirty-year commitment and the most expensive
+  animal on either list by a wide margin.
+
+### The sourcing axis, as a system
+
+Idea 58 suggests a small mechanic that would carry a lot: **every animal the
+player acquires has a provenance**, and provenance is visible.
+
+- **Adopted** — humane society, rescue, rehoming
+- **Captive-bred** — reputable breeder or store; fine, and most of the list
+- **Wild-caught** — legal for some species, and the thing to notice
+
+That is the same honesty system the photographer career already uses (Wild /
+Captive / Controlled / Baited / Lured, from idea 53's research). One idea,
+serving two careers and the pet system.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -1366,6 +1429,12 @@ change rather than a contradiction.*
   satisfies it inside a legitimate frame — orphan rearing, rehabilitation,
   permitted handling — so the lesson and the feeling arrive together instead of
   competing.
+- **2026-08-24** — Kid pets are **only species that genuinely thrive as pets**;
+  teen animals are the same but need more responsibility. The rescue parrot is
+  a **deliberate exception that carries a lesson**.
+- **2026-08-24** — **Pets have a real-world provenance** and the player sees it:
+  humane society for cats and dogs, pet store for fish and small mammals. The
+  game must show that **not all of the pet industry is bad**.
 
 ---
 
