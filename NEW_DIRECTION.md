@@ -2033,6 +2033,70 @@ inconvenience.
 
 ---
 
+## Ideas — round fourteen: the world must scroll
+
+*Ayr's, 2026-08-24.*
+
+**60.** "I don't like being limited to one screen... I want something that
+**scrolls** like the real Pokémon games."
+
+### The terms
+
+| What | Term | Example |
+|---|---|---|
+| One screen, exit at the edge, next screen loads | **flip-screen** (also *screen-by-screen*, *room-based*) | The original Zelda. **Safari Saga now** |
+| Camera follows the player continuously across a large map | **scrolling**, with a **camera-follow** | Pokémon, Stardew Valley |
+| No loading seams between areas | **contiguous** or **seamless** world | |
+| Loading map chunks in and out as the player moves | **streaming** | Needed once the world is large |
+
+So the ask is: **a scrolling camera-follow over a contiguous world**, replacing
+Safari Saga's flip-screen rooms.
+
+### The good news — this gets *easier*, not harder
+
+Flip-screen was never a property of 2D. It was a property of how Safari Saga was
+built: maps are fixed grids of text rows, each its own screen, with hard-coded
+exits. That is a **1980s constraint being voluntarily re-enacted**, not a limit
+of the medium.
+
+Moving to a 3D world in Godot makes scrolling close to free:
+
+- A **camera that follows a character in 3D space is a solved, built-in
+  problem.** It is the default, not a feature to be added.
+- The world is a **terrain**, not a list of screens, so there are no seams to
+  design around.
+- Chunk **streaming** is standard practice, and is exactly how a seeded world
+  should be generated anyway — build the chunk when the player approaches it.
+
+### Camera choices for HD-2D specifically
+
+Worth deciding early, because it drives how sprites are drawn and lit:
+
+| Camera | Feel | Notes |
+|---|---|---|
+| **Fixed-angle follow** | Octopath Traveler, Cult of the Lamb | Simplest. Camera stays at one pitch and yaw, follows the player. Sprites only ever seen from one angle — which suits a single-view sprite perfectly |
+| **Rotatable follow** | Don't Starve | Player can spin the camera. Reveals hidden things, but billboarded sprites must look right from every direction |
+| **Free camera in photo mode** | Pokémon Snap, most photo modes | The default camera is fixed-angle; the **photographer career unlocks a free camera** while composing a shot |
+
+**The third row is probably the answer**, and it makes idea 51 land properly:
+the world plays on a comfortable fixed-angle follow camera, and when the
+photographer raises the camera the view becomes free — move, aim, focus, frame.
+The career difference is felt in the camera itself rather than in a menu.
+
+### What it changes about the sprites
+
+A fixed-angle follow camera means **each animal only ever needs to look right
+from one direction**, which is precisely what the existing 1000 sprites are.
+A freely rotating camera would demand several angles per species, which is
+1000 more sprites at minimum.
+
+**That is a strong argument for fixed-angle as the default**, with free camera
+reserved for photo mode where the player is deliberately composing and a little
+flatness is acceptable — or where a handful of hero species get extra angles.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -2198,6 +2262,8 @@ change rather than a contradiction.*
   strongest emotional material in the design.
 - **2026-08-24** — A species counts as fully researched only when
   **documented across its life stages**.
+- **2026-08-24** — **The world scrolls.** A camera-follow over a contiguous
+  world, not Safari Saga's flip-screen rooms.
 
 ---
 
