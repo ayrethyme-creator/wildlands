@@ -1729,16 +1729,72 @@ than Octopath, even though Octopath is the more famous style.
 
 ---
 
+## DECIDED: HD-2D in Godot
+
+> **2026-08-24.** Ayr, with Eric agreeing. Closes question 1 and the 2D/3D
+> question together.
+
+### What this settles
+
+- **Engine: Godot 4.** Free forever under MIT, native 2D, exports to desktop
+  and web, proven commercially.
+- **Style: HD-2D** — the 1000 existing sprites billboarded in lit 3D
+  environments, in the manner of *Cult of the Lamb* and *Don't Starve* rather
+  than the pixel-art register of *Octopath Traveler*.
+- **The sprites are kept**, which is the entire reason this is achievable.
+
+### The practical finding: resolution
+
+**Every sprite is currently 256x256.** That is fine for a flat 2D game and
+**borderline for a lit 3D scene** at 1080p and above, where a creature filling a
+quarter of the screen height already wants more than 256 pixels.
+
+It is fixable, and cheaply:
+
+- The generator renders at **1024x1024**; the post-process step is what reduces
+  to 256. So the ceiling is a setting, not a limit.
+- **288 of the 1024px originals still survive** in the pipeline's `raw`
+  directory. Those can simply be re-processed at full size.
+- **All 1009 prompts survive**, spread across 37 batch files. So the rest can be
+  regenerated at full resolution — same prompts, same style, no new authoring.
+- At roughly 52 seconds each, the whole roster is about **15 hours of GPU time**
+  on Eric's machine. Free, just slow.
+
+**So the art is not a constraint on this decision.** It only needs re-exporting
+before the sprites go into a 3D scene, and that is a batch job rather than a
+rework.
+
+### What this decision unblocks
+
+- **Question 3** (the researcher and tour-guide loops) can now be designed
+  against a real camera in a real 3D space, rather than in the abstract.
+- **Question 6** (the codex UI) has a real toolkit — Godot's UI system rather
+  than hand-rolled HTML.
+- Day/night and seasons (ideas 9 and 39) come from **lighting** now, rather
+  than needing to be faked with palette swaps.
+- The photographer career gets **focus, framing and depth of field for free**,
+  because they are properties of a 3D camera.
+
+### What it adds to the to-do list
+
+- **A technical artist** is now on the hiring list, for lighting, shaders and
+  the billboarding setup. This is the one role HD-2D genuinely needs.
+- Sprites will want **consistent ground-line alignment** so they sit correctly
+  on terrain when billboarded — worth checking during the re-export rather than
+  after.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
 are removed rather than left to look unresolved.*
 
-1. **Scope and platform (idea 20).** The biggest open question by some
-   distance. "Professional level" music and art, competitive with the market,
-   is a different proposition from a browser game built from concatenated JSX
-   loaded through Babel. Deciding the target platform is expensive to reverse
-   and cheap to decide early.
+1. ~~**Scope and platform**~~ — **decided 2026-08-24: HD-2D in Godot 4.** What
+   remains of it is money rather than technology: a technical artist, a
+   composer, and cultural consultation all draw on the same budget, and that
+   conversation belongs later, when there is something worth funding.
 2. **How the six life stages are paced (ideas 6, 7, 8).** The real career
    ladders give the *shape* — apprentice, qualified, professional, mentor — but
    not the hours. How long is each stage, and what advances you?
@@ -1881,6 +1937,14 @@ change rather than a contradiction.*
 - **2026-08-24** — **Cultural consultation is a budgeted cost**, not an
   optional extra. It is the only thing that addresses the representation
   question.
+- **2026-08-24** — **Engine: Godot 4.** Free under MIT, native 2D, no revenue
+  cap, terms cannot be revoked.
+- **2026-08-24** — **Style: HD-2D** — the existing 1000 sprites billboarded in
+  lit 3D environments. Closer to *Cult of the Lamb* and *Don't Starve* than to
+  *Octopath Traveler*, because the Wildlands sprites are clean illustration
+  rather than pixel art.
+- **2026-08-24** — Sprites to be **re-exported at 1024x1024** before use in 3D.
+  All 1009 prompts survive, so this is a batch job, not a rework.
 
 ---
 
