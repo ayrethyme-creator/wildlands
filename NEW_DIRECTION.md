@@ -1413,6 +1413,85 @@ the first.
 
 ---
 
+## On framing devices, and what they can and cannot excuse
+
+> **Claude-contributed**, 2026-08-24. Ayr asked whether a dream or
+> alternate-reality framing could give the game a legitimate in-fiction defence
+> for the mistakes they will inevitably make. Straight answer: partly.
+
+### What a framing device genuinely buys you
+
+A stated fiction — an alternate Earth, a composite continent — legitimately
+covers everything **structural**:
+
+- **Compressed geography.** Biomes adjacent that are not adjacent on Earth.
+- **Composite places.** One reserve standing in for several real ones.
+- **Species co-occurrence** that does not happen in reality.
+- **Time compression.** Conservation stories from the 1910s, the 1970s and 2011
+  all reachable within one character's life.
+
+These are real problems and a framing device solves them cleanly and honestly.
+Nobody is harmed by a fictional continent, and it stops every compression being
+read as an error.
+
+### What it does not buy you, and this is the important part
+
+**It does not excuse misrepresenting a living culture, and it may make it
+worse.**
+
+If a community in the game is a thin version of a real people, "it is an
+alternate reality" is not a defence anyone will accept — and it can read as
+taking the aesthetics of a culture while ducking accountability for the
+portrayal. The device protects the map. It does not protect the people on it.
+
+It also does not cover animal facts, because those are the educational core. A
+dream framing that lets the game be wrong about lions defeats the purpose of
+the game.
+
+### What actually protects the project
+
+The defence Ayr wants exists, but it is not fictional. It is procedural, and it
+is stronger than any framing device:
+
+1. **A visible sources-and-changes layer.** The game already has a field guide.
+   Extend it: *this is based on the real Lion Lights, invented by Richard
+   Turere in Kitengela in 2011; here is what we changed and why.* An error that
+   is documented as a deliberate departure is a **choice**, not ignorance —
+   and "we said so in the codex" is a far better answer than "it was a dream."
+2. **Fictional characters, real credited history.** Do not put words in the
+   mouths of real people. The player meets a *situation like* Turere's, in
+   Kenya, and the codex credits the real person and links out. The history stays
+   documented; nobody living is impersonated.
+3. **Consultation, credited.** "We worked with people from there" converts an
+   entire category of criticism into a strength. It costs money. It is the only
+   thing that actually works for the cultural question.
+4. **Fixing things when told.** A live game that publicly corrects errors earns
+   more trust than one that was never wrong.
+
+### The recommendation
+
+**Real Earth, fictional characters, sourced codex — and a stated fiction only
+for the geography.**
+
+Say plainly, up front, that the map compresses and composites the real world so
+that a life can be lived across it. That covers the structural mistakes
+honestly. Then handle the cultural question with consultation and credit rather
+than with a device, because that is the only thing that handles it.
+
+A dream framing would read as evasive to exactly the people whose criticism Ayr
+is worried about. A sourced codex reads as careful to the same people.
+
+### And the plain reassurance
+
+Every game about real places gets things wrong, including ones made by large
+teams with consultants. Mistakes are survivable. What determines whether they
+are forgiven is almost entirely **whether the work shows evidence of care** —
+sources, credits, corrections — rather than whether it had a clever excuse
+prepared in advance.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
