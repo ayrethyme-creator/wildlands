@@ -731,6 +731,83 @@ design against rather than discover late.
 
 ---
 
+## Ideas — round seven: villains do exist
+
+*Ayr's, 2026-08-24.*
+
+**47.** "I agree for the most part everyone is being reasonable, **but sometimes
+there are villains**. Poachers, corporations where their bottom line matters
+more than morals. And yes, I know that with poachers, a lot of them are people
+who **don't know there's an alternative** to making money, or one doesn't exist
+and **one needs to be created**. But sometimes there are just people who **want
+to kill animals for parts**. And the greedy corporations. I think those should
+be **addressed and handled appropriately** too."
+
+### What this changes (Claude note)
+
+Safari Saga's rule was "no villains — everyone is behaving reasonably". That
+becomes a **default rather than a law**: most conflicts have no villain, and
+some do.
+
+This is the stronger teaching position, not the softer one. Telling the two
+apart is a real conservation skill: a herder killing lions to protect his
+cattle and an organised horn-trafficking network are not the same problem and
+do not have the same answer. A game where everyone turns out to be reasonable
+teaches a player to look for the win-win even when there isn't one.
+
+Ayr's own distinction is the useful one to build on — subsistence poaching where
+no alternative livelihood exists is a problem to **solve**, and commercial
+trafficking or a corporation knowingly externalising harm is something to be
+**opposed**. Same act, different situation, different correct response.
+
+---
+
+## Reference: how long games actually are
+
+> **Claude-contributed**, 2026-08-24, researched at Ayr's request. Figures are
+> community-reported averages, so treat them as ranges rather than precise.
+
+| Game | Main story | Completionist |
+|---|---|---|
+| New Pokémon Snap | ~10 h | 70–80 h |
+| Breath of the Wild | 25–30 h | 100 h+ |
+| Elden Ring | ~30 h | ~135 h |
+| Pokémon Scarlet/Violet | ~32 h (25–35) | 70–80 h |
+| Planet Zoo (career mode) | ~40 h (up to ~57) | 100 h+; average tracked playtime **212 h** |
+| Red Dead Redemption 2 | 50–60 h | 170–190 h |
+| Stardew Valley | ~52 h | 150–200 h |
+| The Witcher 3 | ~52 h | ~180 h |
+| Subnautica | ~60 h first run | varies widely |
+
+### What this says about idea 45
+
+**Ayr's forty-hour instinct was right.** Main stories cluster between 25 and 55
+hours, and the three closest comparisons land almost exactly on it: Pokémon
+Scarlet/Violet at 32, Planet Zoo's career mode at 40, Stardew at 52.
+
+Two things worth taking from the table beyond that:
+
+1. **The main story is not where the hours are.** Completionist figures run
+   three to five times the main story in every case. The shape the market
+   actually rewards is a focused main story with very deep optional content —
+   which is exactly what ideas 38 and 18 already describe. The leftover species
+   and the facilities *are* the post-game, and they are where a 40-hour game
+   becomes a 200-hour one.
+
+2. **Planet Zoo's average tracked playtime is 212 hours**, far beyond its ~40
+   hour career mode. Management sims retain people almost indefinitely because
+   the building never really ends. That is the strongest argument yet for the
+   facility mini-game being a major system rather than a side feature.
+
+**One caution.** New Pokémon Snap is the shortest game on the list at about ten
+hours, and it is the closest existing thing to the photographer career played on
+its own. Photography alone does not carry forty hours. It works here because it
+is one lens on a much larger structure — which is precisely what idea 46 sets
+up.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -823,6 +900,13 @@ change rather than a contradiction.*
   leftover species and the facilities as post-game content.
 - **2026-08-24** — Origin-language naming is **deferred**, to be sourced
   properly later rather than automated.
+- **2026-08-24** — **Villains exist.** "Nobody is a villain" is the default,
+  not a law. Subsistence poaching with no alternative livelihood is a problem
+  to solve; commercial trafficking and corporations knowingly externalising
+  harm are to be opposed. The game should distinguish them.
+- **2026-08-24** — The ~40-hour main story target is **confirmed against the
+  market**: main stories cluster at 25–55 h, and completionist content runs
+  3–5x that. Facilities and leftover species are the post-game.
 
 ---
 
