@@ -3499,6 +3499,74 @@ biome, filling the roles each one is missing rather than the continents.
 
 ---
 
+## Caves are cut as a biome — eleven regions
+
+> **Ayr, 2026-08-24.** *"Get rid of caves as a category."*
+
+**Twelve biomes becomes eleven.** Caves survive as a **micro-region type**
+(idea 40) appearing inside forest, mountains, coast and desert — which is where
+cave animals actually live, since almost nothing spends its entire life
+underground.
+
+### The five reassign
+
+| Species | Goes to | Why |
+|---|---|---|
+| **Olm** | Wetlands | An aquatic salamander in underground *water* |
+| **Greater Horseshoe Bat** | Forest | Roosts in caves, hunts over woodland |
+| **Little Brown Bat** | Forest | Same |
+| **Egyptian Fruit Bat** | Forest | Roosts in caves, forages in orchards and trees |
+| **Mexican Free-tailed Bat** | Desert | Cave roosts, hunts over open arid country |
+
+A bat is not a cave animal. It is a forest or desert animal that **sleeps** in a
+cave — which is exactly what makes caves a micro-region rather than a biome.
+
+### The eleven, and what balancing now costs
+
+142 slots to spend, and no cave sink to fill:
+
+| Biome | Now | Target | Needs |
+|---|---|---|---|
+| Forest | 108 | — | — |
+| Coast | 72 | — | — |
+| Rainforest | 67 | — | — |
+| Wetlands | 64 | — | — |
+| Savanna | 58 | — | — |
+| Farmland | 54 | 57 | **+3** |
+| Reef | 42 | 57 | **+15** |
+| Open ocean | 36 | 57 | **+21** |
+| Desert | 31 | 57 | **+26** |
+| Mountains | 26 | 57 | **+31** |
+| **Polar** | **16** | 57 | **+41** |
+| | | | **137 of 142** |
+
+**A floor of 57 is reachable, with five spare.**
+
+The spread goes from **5:1 through 21:1** down to **57 to 108 — under two to
+one.** That is a set of biomes that all read as real places.
+
+### What the additions should be
+
+Not "European species" — that framing is gone. **Roles the ecosystem is
+missing:**
+
+- **Polar (+41)** — sound at the top, missing its whole base. Krill, copepods,
+  amphipods, cold-water fish, seabirds in numbers, sea stars, urchins.
+- **Mountains (+31)** — good on hoofed herbivores and raptors, thin on
+  everything small. Rodents, pikas, ground birds, alpine insects, high-altitude
+  amphibians.
+- **Desert (+26)** — thin on invertebrates, which is backwards for an arid
+  system. Beetles, ants, termites, solifuges, spiders, plus more small reptiles
+  and seed-eating birds.
+- **Open ocean (+21)** — needs its midwater layer. Lanternfish, squid, salps,
+  pyrosomes, siphonophores, and the deep-sea oddities.
+- **Reef (+15)** — good on fish, thin on invertebrates and grazers. Urchins,
+  molluscs, crustaceans, corals as animals.
+- **Farmland (+3)** — nearly there already.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -3683,7 +3751,11 @@ change rather than a contradiction.*
   representation stops mattering once the world is invented. Every biome must
   read as a **functioning ecosystem** — apex predator, mesopredators, large and
   small herbivores, scavengers, invertebrates, birds — with a **floor of ~50
-  species**. Current spread is 5 to 105; target is 50 to 105.
+  species**.
+- **2026-08-24** — **Caves cut as a biome. Eleven regions, not twelve.** Caves
+  become a micro-region type inside forest, mountains, coast and desert. The
+  five cave species reassign — a bat is a forest animal that sleeps in a cave.
+  Balancing floor becomes **57**, giving a final spread of 57 to 108.
 - **2026-08-24** — **No animal appears twice in the same biome.** Four quests,
   four species.
 - **2026-08-24** — **The impact ladder:** young adult makes local change; adult
