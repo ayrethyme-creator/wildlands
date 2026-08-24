@@ -180,3 +180,7 @@ BIOME_BY_HAND.orca = "polar";
 BIOME_BY_HAND.elephantseal = "polar";
 BIOME_BY_HAND.albatross = "polar";
 BIOME_BY_HAND.bluewhale = "polar";
+
+// Ayr, 2026-08-24: the puffin is polar. Atlantic puffin colonies are Iceland,
+// Norway, Greenland and Newfoundland - subarctic rather than tropical coast.
+BIOME_BY_HAND.puffin = "polar";
