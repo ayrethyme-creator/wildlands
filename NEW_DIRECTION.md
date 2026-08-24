@@ -3229,6 +3229,57 @@ have a **northern ice** region and a **southern ice** region.
 
 ---
 
+## Clarification: an invented world still has a map
+
+> **Ayr, 2026-08-24.** *"It doesn't have to be the biomes morph into each other.
+> There can still be a map."*
+
+Correct, and the previous section overstated the case. **Regions bordering one
+another was never a requirement** — and forcing it would look ridiculous, since
+tundra does not touch a coral reef in reality either.
+
+### The structure
+
+**An invented world, with a world map, holding twelve discrete regions.**
+
+- The world is **invented** — a continent, a planet, an archipelago. Its own
+  geography, its own names.
+- It has a **world map**, and the regions are **separate places on it**, laid
+  out sensibly relative to each other: ice at the poles, reefs and rainforest
+  near the equator, temperate forest between.
+- **Each region is internally contiguous and scrolls** — that was the actual
+  ask in idea 60. The scrolling is *within* a region, not between them.
+- **Travel between regions is a deliberate act**, matching how the professions
+  work: a field season, a posting, a boat out. Not a menu click, and not a walk.
+
+### What this fixes
+
+- **The hand-off (idea 34) becomes narrative rather than physical.** Finishing a
+  region's last quest sends you to the next one — you arrive already working.
+  That was always the intent; it never required a shared border.
+- **No absurd adjacencies.** Nobody has to explain a desert against an ice
+  shelf.
+- **Regions can be far apart and it costs nothing**, because the map is
+  invented and travel is a story beat.
+
+### And the seed gets more to work with
+
+With an invented world, the seed can shape the **world map itself**, not just
+what grows inside a region:
+
+- where the regions sit relative to each other
+- the shape and size of each
+- which micro-regions generate inside them
+- which species are present this run, and in what abundance
+- weather, season, and the order the quests come to you
+
+That is the Diablo influence (ideas 1 and 5) restored at the level it was
+originally meant for — **a different world each time, built from the same
+honest parts** — which the real-Earth version could never have offered.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
