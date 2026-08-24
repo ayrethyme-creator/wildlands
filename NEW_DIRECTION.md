@@ -2162,6 +2162,64 @@ different in all three careers.
 
 ---
 
+## Ideas — round sixteen: cutscenes
+
+*Ayr's, 2026-08-24.*
+
+**63.** "Cut scenes need to happen."
+
+### Where they matter most, in order (Claude note)
+
+The structure already decides this, and it is a small number of moments rather
+than a general appetite for cinematics.
+
+1. **The five life-stage transitions.** These are the load-bearing ones. Years
+   pass between stages, and that is where the game's heaviest material lives:
+   qualifying, the childhood pet not being there when you come back, becoming
+   the person the mentor was. **Only five, and they carry the emotional spine.**
+2. **Quest resolutions.** The moment the lights go up on the boma, the grids
+   come out of the shed, the policy passes. Idea 30's real history deserves a
+   real beat rather than a dialogue box.
+3. **First contact with a biome**, since idea 34 has biomes hand you off to each
+   other — arriving somewhere new already on a job.
+4. **The elder handover**, which is the ending.
+
+### The cheap kind is also the right kind
+
+Cutscenes run from very expensive to nearly free, and HD-2D lands well:
+
+| Kind | Cost | Notes |
+|---|---|---|
+| **In-engine scripted** — move the camera, walk the sprites, run dialogue | **Low.** The world and camera already exist | What Octopath and *Cult of the Lamb* use for almost everything |
+| **Static illustrated panel + text** | Low | Devastating when written well; a still image and a line can outdo animation |
+| **Animated cinematic** | **Very high** | Reserve for one or two moments, if ever |
+
+Because the world is already a lit 3D scene with a moving camera, **in-engine
+scenes are close to free** — this is a direct benefit of the HD-2D decision that
+flat 2D would not have given.
+
+### Two things worth deciding early
+
+- **Voice acting.** Idea 14 wants a read-aloud option for the guide. That is
+  text-to-speech or recorded narration, and it is a *different* commitment from
+  voicing cutscene characters. Voicing the game is a large, recurring cost that
+  also makes every text edit expensive. Worth deciding deliberately rather than
+  drifting into it.
+- **Cutscenes must be replayable from the codex.** In a game explicitly about
+  memory, time passing and animals that die, a player will want to go back and
+  see the scene where the dog was still alive. That is cheap to build if planned
+  and awkward to retrofit.
+
+### And one caution
+
+The strongest beats here are quiet: an absence, a gap where something used to
+be, a familiar animal recognising you years later. **Those are cheap to do well
+and easy to ruin with too much production.** A held shot and one line will
+outperform a fully animated sequence for almost everything on the list above.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -2330,6 +2388,9 @@ change rather than a contradiction.*
   **documented across its life stages**.
 - **2026-08-24** — **The world scrolls.** A camera-follow over a contiguous
   world, not Safari Saga's flip-screen rooms.
+- **2026-08-24** — **Cutscenes are in.** Primarily in-engine scripted scenes,
+  concentrated on the five life-stage transitions, quest resolutions, biome
+  arrivals and the elder handover. Replayable from the codex.
 - **2026-08-24** — **Life-stage pacing accepted.** ~1.5h kid, ~2.5h teen, then
   8/9/10/6h across the four adult stages. Advancement needs **both** logged
   fieldwork **and** a passed codex assessment, which makes the learning
