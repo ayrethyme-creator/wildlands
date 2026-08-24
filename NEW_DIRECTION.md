@@ -2980,6 +2980,78 @@ thirteenth biome or stay a **site type** inside others, as suggested earlier.
 
 ---
 
+## CORRECTION: the biome classifier is wrong for 39% of species
+
+> **2026-08-24.** Ayr disagreed with biome assignments seen in the gallery and
+> asked for the full list. Checking it found a real error, and the earlier claim
+> that "all 651 place, nothing is unassigned" was **true but misleading** —
+> they were all placed, and about two in five were placed badly.
+
+### The diagnosis
+
+Of 647 live species:
+
+| | |
+|---|---|
+| Placed by their **habitat sentence** | **394** — reliable |
+| Fell through to the **zone fallback** | **252** — unreliable |
+| No habitat text at all | 1 |
+
+The habitat sentences of those 252 name **only a region, never a place**:
+
+```
+hedgehog  :: Europe, Asia and Africa
+gecko     :: Warm regions worldwide
+puma      :: The greatest range of any land mammal in the Americas
+tasdevil  :: Tasmania
+quokka    :: Rottnest Island and small pockets of Western Australia
+```
+
+Nothing in those strings says forest, desert or reef, so the classifier fell
+back to **where the animal appears in Safari Saga's maps** — which is a
+*gameplay* decision, not an ecological one. That is how barracuda, clownfish,
+sea turtles, puffins, golden retrievers and highland cows all ended up filed
+under **alpine**.
+
+### What was actually wrong with the reasoning
+
+The zone fallback was justified earlier as "a biome judgement somebody already
+made by hand." That was wrong. Safari Saga's zones were laid out to make a game
+work — which animals should appear on which screen for pacing and variety — and
+they were never an ecological classification. Treating them as one imported
+every gameplay compromise as a fact.
+
+### The fix
+
+The 252 need **real assignment**, and no rule can derive it because the source
+data does not contain it. The options:
+
+1. **Hand-assign the 252.** Tractable — these are well-known animals, and a
+   hedgehog, a quokka and a barracuda are not hard to place. Ayr reviews and
+   corrects.
+2. **Improve the habitat text for those 252**, which fixes the classifier *and*
+   improves the field guide. More work, more lasting.
+3. Leave the 394 that are right and mark the rest **unassigned** rather than
+   wrong, which is at least honest.
+
+**Recommendation: 1 now, 2 later.** Hand-assign so the biome roster is usable,
+and rewrite the thin habitat sentences when the field-guide text is revisited
+for the new game anyway.
+
+### Consequences for what was already decided
+
+- **The twelve biomes stand.** The list came from the 394 reliable placements
+  plus real-world biome structure, not from the bad 252.
+- **The counts move.** Every per-biome number quoted earlier is provisional
+  until the 252 are reassigned.
+- **The gap analysis holds.** Europe at 16 was counted from *region* keywords,
+  which the habitat sentences do contain reliably.
+- **`design/biomes.js` needs its zone fallback removed** and replaced with an
+  explicit assignment table.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
