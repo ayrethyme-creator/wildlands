@@ -1224,6 +1224,24 @@ That last detail is the sharpest possible version of idea 55: the industry's
 entire business model is selling people the exact feeling Ayr wants the game to
 give away honestly.
 
+### The sequencing falls out for free (Claude note)
+
+Ayr's observation that the feeling is *guaranteed* through pets and rescued
+animals has a structural consequence worth writing down.
+
+The kid pet (idea 23), the teen animal (idea 24) and the hand-reared orphan
+(idea 26) all come **before** the player ever meets a wild-animal restriction.
+Every one of them is a context where closeness is unambiguously fine — your own
+cat, your own goat, an orphan with no mother.
+
+So by the time the game says *"you cannot hold that cub, and here is why"*, the
+player has already been given the feeling, several times over, at no cost to any
+animal. The desire is not stranded, because it has already been met.
+
+That is the reverse of how it goes in life, where people meet the prohibition
+first and the substitute never arrives. It requires no new system — only that
+the life stages stay in the order they are already in.
+
 
 ---
 
