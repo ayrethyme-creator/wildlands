@@ -1786,6 +1786,90 @@ rework.
 
 ---
 
+## Ideas — round thirteen: evolution becomes life cycle
+
+*Ayr's, 2026-08-24.*
+
+**59.** Safari Saga has **evolution** as a concept. That does not belong in a
+realistic game. **But baby animals do** — and real growth can take its place.
+
+### What is already there
+
+**82 juvenile sprites exist**: 41 calves, 33 juveniles, 7 pups, 1 foal. They are
+currently separate dex entries with their own keys.
+
+### The benefits
+
+- **It is real.** Animals genuinely transform. A fawn loses its spots, a lion
+  cub grows a mane, a joey leaves the pouch.
+- **Metamorphosis is the honest version of evolution** and needs no
+  invention at all. Tadpole to frog, caterpillar to chrysalis to butterfly,
+  nymph to dragonfly. These are dramatic, fast, and completely true.
+- **It rhymes with the player's own life stages.** Your animals grow up while
+  you do. That is thematically exact and costs nothing structurally.
+- **It gives the rescued animal (idea 26) its arc.** Raising a baby *is* the
+  mechanic.
+- It teaches real developmental biology — precocial versus altricial young,
+  metamorphosis, how long maturity actually takes.
+
+### The problems, honestly
+
+1. **Growth is not a power-up.** In Pokémon, evolving means winning harder.
+   Here there is no combat, so an adult is not "better" than a juvenile — just
+   different. **Growth needs a purpose that is not strength.**
+2. **You do not own wild animals.** Befriending is not capturing. A fawn you
+   photographed becomes a doe somewhere without your involvement, so wild growth
+   is something you *witness*, not something you *do*.
+3. **Time scales differ wildly.** A tadpole is weeks. A tortoise is decades.
+   One fits a play session; the other only fits the life-stage structure.
+4. **Not every species has a distinct juvenile.** Many young animals are just
+   small adults, so the mechanic cannot be universal.
+5. **Ageing implies death**, which is real, powerful, and needs a deliberate
+   decision rather than an accident.
+6. **Dex structure.** Juveniles are currently *separate entries*. Are they
+   separate species, or life stages of one? That changes what "all 1000" means.
+
+### Where it genuinely works — three places
+
+**1. Metamorphosis in the wild.** Fast, dramatic, observable without owning
+anything. Frogs, butterflies, dragonflies, newts. This is the closest honest
+equivalent to watching something evolve, and it is free.
+
+**2. The animals you personally raise.** The rescued orphan and the childhood
+pet. You witness the whole change because you are there for it — which is
+exactly the feeling idea 55 wants to give back.
+
+**3. Breeding at your facilities.** Real zoos and recovery centres run breeding
+programmes. Young appearing at your own facility is both realistic and earned,
+and it gives the facility system (idea 18) a long-term payoff beyond collecting.
+
+### What growth is *for* — the mechanical answer
+
+Replace "evolve to complete the dex" with something truer:
+
+> **A species is not fully researched until you have documented it across its
+> life stages.**
+
+That is real science — a life history is incomplete without the young. It gives
+growth a purpose with no combat anywhere near it, it works differently for each
+career (photograph the cub, measure the cub, show the cub to visitors), and it
+turns juveniles from a separate collection into the *depth* of an existing one.
+
+### Decisions this forces
+
+- **Are juveniles separate dex entries or life stages of one entry?** Life
+  stages is the more honest model and would reduce the headline species count
+  while deepening each.
+- **Do animals die of old age?** The box turtle outliving the player and the
+  raven's descendants recognising them (idea 26) both imply yes. It is the
+  strongest emotional material in the design and the heaviest.
+- **Does time pass fast enough to see slow growth?** A tortoise maturing needs
+  either the life-stage jumps to carry it, or an acceptance that some animals
+  are only ever seen at one stage in one playthrough.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
