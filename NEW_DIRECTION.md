@@ -808,6 +808,76 @@ up.
 
 ---
 
+## Ideas — round eight: the Birth by Sleep model
+
+*Ayr's, 2026-08-24.*
+
+**48.** The three careers can follow a structure like **Kingdom Hearts: Birth by
+Sleep** — its three protagonists (Terra, Ventus, Aqua) as a model for
+mechanics, story timing and story pacing.
+
+### How Birth by Sleep actually works (Claude note, researched)
+
+- **Three separate campaigns** over the **same ten worlds**, each visited in a
+  **different order** by each character.
+- **Each world's story is split three ways**: one character sees the *setup*,
+  another the *unfolding*, another the *climax*. No single campaign contains
+  the whole of any world's story.
+- The three narratives **run parallel and intersect** — characters sometimes
+  pass each other, and one explains what another only glimpsed.
+- **Genuinely different combat**: Terra slow and powerful, Ventus fast, Aqua a
+  magic and barrier specialist.
+- A recommended play order (Terra, Ventus, Aqua) and a **Final Episode** that
+  unlocks only after all three are finished.
+- **The known criticism**: replaying the same worlds three times gets
+  repetitive, and the fighting styles are doing most of the work of keeping
+  them distinct.
+
+### Why this fits unusually well here
+
+The split-story device is not just structurally convenient, it is
+**thematically exact** for a conservation game. The whole premise of the
+existing investigations is that nobody has the full picture on their own:
+
+- the **photographer** sees the animal
+- the **researcher** sees the data
+- the **tour guide** sees the people
+
+Three careers each holding one third of the truth is what conservation actually
+looks like, so Birth by Sleep's structure would be carrying meaning rather than
+just providing variety.
+
+It also lines up with decisions already made: different world order per
+character is idea 34's biome hand-off and idea 35's non-linear difficulty, and
+the Final Episode maps onto the elder-mentor life stage from idea 6.
+
+### The trap, and how to avoid it
+
+Birth by Sleep's repetition complaint is the thing to design against. The
+mitigation is its own best idea, applied harder: **do not send all three
+careers through the same events in the same places.** If the photographer is
+present when a problem starts, the researcher during the investigation, and the
+guide at the resolution, then a second playthrough *adds* rather than *repeats*.
+
+The three careers here also differ far more than Birth by Sleep's do —
+photographing, measuring and explaining are different verbs, where Terra,
+Ventus and Aqua are three flavours of the same combat.
+
+### The open question this raises
+
+**Is one career a complete experience, or do you need all three?**
+
+- Birth by Sleep requires all three for the story to resolve. At a 40-hour
+  campaign that is 120 hours to see the ending, which is a very large ask.
+- The alternative is that one career is a whole, satisfying game, and the other
+  two are optional depth that recontextualises what you already saw.
+
+Not decided. It affects how long each campaign should be, and whether the
+"full picture" is a reward or a requirement.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -831,7 +901,11 @@ None of these are objections — several are just "which way do you want it".*
 6. **Do the three careers diverge or converge (idea 2)?** Different abilities
    could mean three different playthroughs, or one game seen from three
    angles.
-7. **Scope and platform against the quality bar (idea 20).** "Professional
+7. **Is one career a complete game, or are all three required (idea 48)?**
+   Birth by Sleep requires all three to resolve its story. At 40 hours a
+   campaign that is 120 hours to reach an ending. Decides campaign length and
+   whether the full picture is a reward or a requirement.
+8. **Scope and platform against the quality bar (idea 20).** "Professional
    level" music and art, and competitive with the market, is a different
    proposition from a browser game built from concatenated JSX. Worth an
    honest conversation about target platform before much is built.
@@ -907,6 +981,9 @@ change rather than a contradiction.*
 - **2026-08-24** — The ~40-hour main story target is **confirmed against the
   market**: main stories cluster at 25–55 h, and completionist content runs
   3–5x that. Facilities and leftover species are the post-game.
+- **2026-08-24** — The three careers follow a **Birth by Sleep structure**:
+  same world, three campaigns, each holding part of the story, intersecting
+  rather than repeating.
 
 ---
 
