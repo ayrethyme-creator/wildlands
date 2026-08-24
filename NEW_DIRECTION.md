@@ -2765,7 +2765,7 @@ income, which is why it spread.*
 |---|---|---|---|
 | **Young adult** | Local change · **earns the facility** | **Beehive fences.** Elephants raid crops and are killed for it. Elephants genuinely fear bees — they flee the sound and have an alarm call for it — so hives strung along a fence line deter 76% of elephants annually and 86% at peak crop season. **The farmers also sell the honey.** *Lucy King / Save the Elephants* | **Elephant** |
 | **Adult with skills** | The problem at scale | **The guard dogs.** A whole district shooting cheetahs over livestock. The fix is not aimed at the cheetah — Anatolian shepherds raised with the herds cut losses until shooting stops being worth it. *Cheetah Conservation Fund, Namibia, since 1994* | **Cheetah** |
-| **Adult with power** | Establishing a program | **The conservancies.** Communities given legal ownership of the wildlife on their land. Namibia: **86 communal conservancies, 20%+ of the country, $10M+ a year** returning to residents. Kenya: **two-thirds of large mammals live outside state parks** | **TBD — see below** |
+| **Adult with power** | Establishing a program | **The conservancies.** Communities given legal ownership of the wildlife on their land. Namibia: **86 communal conservancies, 20%+ of the country, $10M+ a year** returning to residents. Kenya: **two-thirds of large mammals live outside state parks** | **Oryx** |
 | **Elder** | Law and policy | **The horn question.** Rhino horn trade policy, including the genuinely unsettled argument over whether a legal trade would undercut poaching or legitimise it. **No clean answer** | **Black rhino** |
 
 Animals used: elephant, cheetah, black rhino. **Lion, wildebeest, vulture, wild
@@ -2823,6 +2823,55 @@ Three ways to build it:
 game runs on, and it lets the elder stage end on the honest note that some
 conservation questions are still open — which is a stronger last lesson than a
 win.
+
+
+---
+
+## THE QUEST TEMPLATE
+
+> **Ayr, 2026-08-24.** The shape every one of the 48 quests follows.
+
+**1. Learn the problem** → **2. Find the clues** → **3. Choose the right
+solution** → **4. Build it** → **5. Cutscene: what really happened**
+
+| Beat | What it is | Inherited from |
+|---|---|---|
+| **1. Learn the problem** | Meet the person whose problem it is. This is also what **opens the case** — findings stay inert until you have heard it | Safari Saga's giver, plus the clue gate |
+| **2. Find the clues** | Field evidence, gathered in your career's own way — photographed, measured, or learned from the people who live there | The evidence system, now career-specific |
+| **3. Choose the solution** | Several plausible proposals, argued properly. Wrong answers fail for **specific stated reasons**. Length and position are randomised | The proposal system, with both tells fixed |
+| **4. Build it** | Actually put it in. The hives go on the fence, the dogs go to the farms, the conservancy is registered | Safari Saga's build stage |
+| **5. The cutscene** | **What really happened.** The real event, the real place, the real people, credited by name | **New — and it is the sourced codex made into a story beat** |
+
+### Why beat 5 matters more than it looks (Claude note)
+
+This is the **sourced codex decision landing somewhere the player will actually
+see it.** Not a menu nobody opens — the payoff at the end of every quest.
+
+It means all 48 quests end with real people being named: **Richard Turere**,
+**Lucy King**, **Laurie Marker**, **Ian Player**. The fictional characters carry
+the playable story; the closing scene hands the credit back to whoever actually
+did it. That is the "fictional characters, real credited history" decision made
+concrete.
+
+It also solves a tone problem for free. A quest that ends *"and then it worked"*
+is a fairy tale. A quest that ends *"and this is the part that is true, and here
+is who did it, and here is what is still unresolved"* is the game Ayr is
+actually making.
+
+**The codex entry is the companion, not the substitute** — the cutscene gives
+the feeling, the codex gives the detail, the dates and the sources.
+
+### Beat 3, in the one quest that has no right answer
+
+The savanna elder quest (the horn question) keeps all five beats. Beat 3 offers
+**several partial answers, each of which helps something and costs something
+else**, and the outcome states plainly what was traded. Scoring is on **whether
+the player argued from the evidence they gathered**, not on which side they
+took.
+
+Beat 5 then does something no other quest does: it says the argument **is still
+going on**. The elder stage ends on an open question rather than a win, which is
+a stronger last thing to teach.
 
 
 ---
@@ -2995,6 +3044,14 @@ change rather than a contradiction.*
   **documented across its life stages**.
 - **2026-08-24** — **The world scrolls.** A camera-follow over a contiguous
   world, not Safari Saga's flip-screen rooms.
+- **2026-08-24** — **The quest template**, for all 48: learn the problem, find
+  the clues, choose the solution, build it, then a **cutscene explaining the
+  real-world event it was based on** and crediting the real people.
+- **2026-08-24** — **Savanna quests chosen:** beehive fences (elephant), guard
+  dogs (cheetah), the conservancies (**oryx**), the horn question (black rhino).
+- **2026-08-24** — The horn quest uses **partial answers that each trade
+  something**, scored on **whether the player argued from evidence** rather than
+  which side they took.
 - **2026-08-24** — **No animal appears twice in the same biome.** Four quests,
   four species.
 - **2026-08-24** — **The impact ladder:** young adult makes local change; adult
