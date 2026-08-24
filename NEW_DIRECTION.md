@@ -3345,6 +3345,68 @@ proposal is to keep it rather than replace it.
 
 ---
 
+## Breeds come out of the species roster
+
+> **Ayr, 2026-08-24.** *"Take out the breeds of cats and dogs. Leave house cat
+> and farm dog and generics like that."*
+
+### What goes — 41 entries
+
+**15 cat breeds:** Bengal, British Shorthair, Devon Rex, Maine Coon, Norwegian
+Forest Cat, Oriental Shorthair, Persian, Ragdoll, Russian Blue, Savannah Cat,
+Scottish Fold, Siamese, Sphynx, Turkish Van, Abyssinian.
+
+**26 dog breeds:** Akita, Alaskan Malamute, Australian Shepherd, Beagle,
+Bernese Mountain Dog, Border Collie, Bulldog, Chihuahua, Corgi, Dachshund,
+Dalmatian, Dogue de Bordeaux, German Shepherd, Golden Retriever, Great Dane,
+Greyhound, Jack Russell, Labrador, Poodle, Pug, Rottweiler, Saint Bernard,
+Samoyed, Shiba Inu, Siberian Husky, Wolfdog.
+
+### What stays
+
+**House Cat, Tabby Cat, Calico Cat, Black Cat, Farm Dog, Puppy** — generics and
+coat patterns rather than breeds.
+
+And every **wild** cat and dog stays, obviously: Andean Cat, Asian Golden Cat,
+Black-footed Cat, Bobcat, Fishing Cat, Jungle Cat, Marbled Cat, Pallas's Cat,
+Rusty-spotted Cat, Sand Cat, Bush Dog, Raccoon Dog, African Wild Dog.
+
+### They are not deleted — they change what they are
+
+Idea 23 already has breed options in the kid pet choice: *"small: chihuahua,
+dachshund, pug; medium: corgi, basset hound, pit bull; large: husky, golden
+retriever, German shepherd."* That still happens.
+
+**A breed becomes a customisation option on one species, not a species of its
+own.** The player still picks a pug. The dex has one entry for Dog, with breeds
+as variants — which is what a breed actually is.
+
+### Two worth a second thought before they go
+
+- **Savannah Cat** — a serval crossed with a house cat, and one of the clearest
+  exotic-pet-trade stories there is. It may be worth keeping as a *wild*-adjacent
+  entry rather than a breed, because it carries a quest.
+- **Wolfdog** — the same argument in a different animal. Both are hybrids that
+  exist because people wanted a wild animal in a living room.
+
+### What this does to the roster arithmetic
+
+```
+1000 entries now
+ -82 juveniles folded into their adults as life stages
+ -41 cat and dog breeds folded into Dog and House Cat
+=877 species
++123 new species
+=1000
+```
+
+**123 free slots**, up from 82. Which covers the whole gap list with room to
+spare: Europe 26, polar 14, caves 14, open ocean 16 — that is 70, leaving **53
+still spare** for whatever the biome review turns up.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -3521,6 +3583,10 @@ change rather than a contradiction.*
 - **2026-08-24** — The horn quest uses **partial answers that each trade
   something**, scored on **whether the player argued from evidence** rather than
   which side they took.
+- **2026-08-24** — **Cat and dog breeds come out of the species roster** (41
+  entries). They become customisation options on Dog and House Cat, which is
+  what a breed is. Generics stay: House Cat, Tabby, Calico, Black Cat, Farm
+  Dog, Puppy. All wild cats and dogs stay.
 - **2026-08-24** — **No animal appears twice in the same biome.** Four quests,
   four species.
 - **2026-08-24** — **The impact ladder:** young adult makes local change; adult
