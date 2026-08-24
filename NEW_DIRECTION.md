@@ -386,6 +386,125 @@ facility to build.
 
 ---
 
+## Ideas — round three: what a quest is
+
+*Ayr's, 2026-08-24.*
+
+**27.** Twelve biomes and twelve arcs confirmed. "Within these biomes the
+species are **so vast and diverse, they each need a story**."
+
+**28.** "Each biome will have **multiple quests that are mini story lines that
+end in saving or fully researching an animal that represents its species**."
+
+**29.** Not every animal needs a quest. "Some animals will **just be a wild
+encounter and it shows up at the facility**, like a porcupine or sugar glider
+for example."
+
+**30. The scale of a quest changes.** "I want the quests to **not be small like
+they currently are. A badger bothering one farmer is too small** for what I
+have in mind. I want quests more similar to the **guard dog program for
+cheetahs**, the **lion lights**, whatever story ends in things like **legal
+protections on sea otters** and stuff like that. **Actual history.**"
+
+This supersedes the scale of Safari Saga's seventeen investigations, which
+were deliberately local and personal — one beekeeper, one fen, one farmer.
+The new target is documented conservation history with a national or
+international outcome.
+
+> **Correction, for accuracy since these are real programmes.** The cheetah
+> guard dogs are **Anatolian shepherds** (and Kangals), not Bernese or Burmese
+> mountain dogs — run by the Cheetah Conservation Fund in Namibia since 1994.
+> The other two are exactly right: **Lion Lights** was invented by Richard
+> Turere, a thirteen-year-old Maasai boy in Kitengela, Kenya, around 2011; and
+> the **sea otter** story runs from the 1911 North Pacific Fur Seal Convention
+> — the first international wildlife treaty — through the 1972 Marine Mammal
+> Protection Act.
+
+---
+
+## Reference: real conservation history, by biome
+
+> **Claude-contributed**, 2026-08-24. Candidate true stories at the scale idea
+> 30 describes. Not a decision about which get used — a starting shortlist so
+> the quest design has real history to draw on.
+
+### Savanna & Grassland
+- **Lion Lights** (Kenya, 2011). A thirteen-year-old invents flashing LEDs
+  around cattle bomas that mimic a person walking with a torch. Lion killings
+  by herders drop; the design spreads across Kenya and beyond.
+- **Cheetah Conservation Fund guard dogs** (Namibia, 1994–). Anatolian
+  shepherds placed with farmers cut livestock losses dramatically, so farmers
+  stop shooting cheetahs. The animal is saved by giving somebody a dog.
+- **Operation Rhino** (South Africa, 1960s). Ian Player moves southern white
+  rhinos out of the last reserve holding them; from roughly fifty animals to
+  thousands.
+
+### Temperate Forest
+- **Wolves to Yellowstone** (1995). The most studied reintroduction there is,
+  and a genuine argument about how much of the trophic cascade is real.
+- **European bison** — the entire species rebuilt from 54 captive animals, all
+  living wisent descended from twelve.
+- **Beavers back to Britain** (Knapdale 2009, Devon) — from illegal releases
+  and legal fights to protected status.
+
+### Tropical Rainforest
+- **Golden lion tamarin** (Brazil). From a few hundred to several thousand via
+  captive breeding, reintroduction and replanted forest corridors.
+- **Mountain gorilla** — the only great ape whose numbers are rising, through
+  community conservation and tourism revenue sharing.
+
+### Mountains & Alpine
+- **California condor** — every remaining wild bird taken into captivity in
+  1987, twenty-two individuals, then bred back out.
+- **Snow Leopard Enterprises** — herders earn more from handicrafts than they
+  lose to predation, conditional on not killing snow leopards.
+- **Bearded vulture** reintroduced to the Alps after extermination.
+
+### Coast & Kelp
+- **Sea otters** — the story Ayr named. Hunted to perhaps a thousand animals
+  worldwide; the 1911 treaty; a relict Californian group of about fifty near
+  Bixby Creek; and the kelp forests that come back with them.
+- **Project Puffin** (Maine, 1973). Decoys and mirrors persuade puffins to
+  recolonise an island they had been shot off a century earlier.
+
+### Wetlands & Rivers
+- **Whooping crane** — fifteen birds in 1941; captive breeding, costume-reared
+  chicks, and migration taught by ultralight aircraft.
+- **Otters return to Britain** after the organochlorine pesticide ban.
+
+### Farmland & Town
+- **Peregrine falcon and DDT** — Silent Spring, the 1972 ban, and city
+  skyscraper nest boxes.
+- **Corncrake recovery** — changing when and how fields are mown.
+
+### Desert & Arid
+- **Arabian oryx** — extinct in the wild in 1972, bred in zoos, released in
+  1982; the first species ever downlisted from Extinct in the Wild.
+- **Arid Recovery / predator-free fenced reserves** (Australia) for bilbies
+  and bettongs.
+
+### Coral Reef
+- **Cabo Pulmo** (Mexico, 1995). A fishing village declares its own no-take
+  zone; fish biomass rises many times over and the fishers end up better off.
+- **Palau shark sanctuary** (2009), the first national one.
+
+### Open Ocean
+- **The whaling moratorium** (1982/86) and the humpback recovery that followed.
+- **Turtle excluder devices** — already an arc in Safari Saga, at a much
+  smaller scale; the real version is a fishery-wide regulatory fight.
+
+### Polar
+- **The 1973 polar bear agreement** — five Cold War rival nations signing a
+  wildlife treaty across an iron curtain.
+- **Ross Sea marine protected area** (2016), the largest in the world.
+
+### Caves (site type)
+- **White-nose syndrome** response, and gating mines and caves to protect
+  roosts without sealing the bats in.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
@@ -445,6 +564,14 @@ change rather than a contradiction.*
   present-day species. Fossils, mythics, legendaries and extinct species are
   late-game and excluded from biome placement. Classifier in
   `design/biomes.js`; all 651 place with none unassigned.
+- **2026-08-24** — **Twelve biomes locked**, and twelve arcs accepted as the
+  right amount of content.
+- **2026-08-24** — **Quest scale changes.** Quests are mini storylines ending
+  in saving or fully researching a representative animal, modelled on
+  documented conservation history with national or international outcomes —
+  not the local one-farmer scale of Safari Saga's investigations.
+- **2026-08-24** — Each biome carries **multiple** quests. Not every species
+  needs one; some are wild encounters that simply appear at the facility.
 
 ---
 
