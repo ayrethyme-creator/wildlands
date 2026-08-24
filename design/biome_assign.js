@@ -145,3 +145,26 @@ Object.keys(BIOME_FIX).forEach(function (k) { BIOME_BY_HAND[k] = BIOME_FIX[k]; }
 
 // More life stages that slipped through - "eyas" is a nestling falcon.
 ["eyas","goldeneyas"].forEach(function (k) { NOT_A_SPECIES.push(k); });
+
+// --- Ayr's redistribution pass, 2026-08-24. Rebalancing what exists before
+// adding anything new. Forest was carrying 108 species; the primates in it are
+// mostly rainforest animals that had drifted there.
+var BIOME_MOVE = {
+  // primates -> rainforest
+  capuchin:"rainforest", colobus:"rainforest", howler:"rainforest",
+  marmoset:"rainforest", uakari:"rainforest", spidermonkey:"rainforest",
+  tarsier:"rainforest", loris:"rainforest", commontreeshrew:"rainforest",
+  sifaka:"rainforest", ringtaillemur:"rainforest", langur:"rainforest",
+  tamarin:"rainforest", proboscis:"rainforest", galago:"rainforest",
+  bonobo:"rainforest", chimpanzee:"rainforest",
+
+  // mountains
+  panda:"alpine", redpanda:"alpine", lynx:"alpine", philippineeagle:"alpine",
+
+  // savanna
+  gerenuk:"savanna", giantmillipede:"savanna", stripedhyena:"savanna",
+
+  // desert
+  bobcat:"desert", ninebandarmadillo:"desert", giantarmadillo:"desert"
+};
+Object.keys(BIOME_MOVE).forEach(function (k) { BIOME_BY_HAND[k] = BIOME_MOVE[k]; });
