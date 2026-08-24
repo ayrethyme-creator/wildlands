@@ -1,7 +1,7 @@
 # New Direction — working notes
 
 This is the initiation document for the new game. It is a **container for
-Ayr's ideas**, written down as she has them, in her words. Nothing here is
+Ayr's ideas**, written down as they have them, in their words. Nothing here is
 invented or proposed by Claude unless it is explicitly marked as such.
 
 ---
@@ -46,7 +46,7 @@ early — the old game is safe on `main` regardless.
 
 ## Ideas
 
-*Ayr's, 2026-08-24, in her words. Grouped by subject for reading, not
+*Ayr's, 2026-08-24, in their words. Grouped by subject for reading, not
 reordered by priority and not filtered.*
 
 ### The world
@@ -145,7 +145,7 @@ may take years, and **I'm ok with that**. I do however want to keep it
 ## Ideas — round two
 
 *Ayr's, 2026-08-24. Breed and species names are spelled to their standard
-forms so the doc can be used as a reference; everything else is her wording.*
+forms so the doc can be used as a reference; everything else is their wording.*
 
 ### Pets, and the first rescue
 
