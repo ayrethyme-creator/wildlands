@@ -878,6 +878,94 @@ Not decided. It affects how long each campaign should be, and whether the
 
 ---
 
+## Reference: other games with interlocking multi-perspective stories
+
+> **Claude-contributed**, 2026-08-24. Birth by Sleep is not unusual — this is a
+> recognised structure with a long lineage and several acclaimed executions.
+
+| Game | Shape | What it proves |
+|---|---|---|
+| **13 Sentinels: Aegis Rim** | **13** protagonists, non-linear, heavily interlocking | The model scales far past three, and it is the most critically praised execution of it |
+| **Fire Emblem: Three Houses** | 3 routes, same world, same cast, same timeline | Closest comparison. **35–80 h per route.** Each route is complete alone; the full truth needs all three |
+| **NieR: Automata** | Sequential routes A/B/C, each recontextualising the last | A second run can be the *point* rather than a replay — famous for it |
+| **Resident Evil 2** (1998) | Two scenarios, "Zapping System" | One character's actions **change** the other's playthrough |
+| **The Last of Us Part II** | Two protagonists, the same days from opposing sides | The other side's version can reframe what you thought you saw |
+| **Odin Sphere** | Five "books", same events, five protagonists | Same-events-different-eyes works in a compact package |
+| **Grand Theft Auto V** | Three protagonists, one city, **switch at will** | Removes repetition entirely — you never replay, you swap |
+| **Halo 2** | Alternating between two sides of the same war | Short guest sequences can carry a second perspective cheaply |
+
+---
+
+## The four options for idea 48
+
+> **Claude-contributed**, 2026-08-24, in answer to Ayr asking for options with
+> lengths and trade-offs. **Nothing here is decided.**
+
+### Option A — Full Birth by Sleep: all three required
+
+Three campaigns of about **13 hours each, ~40 h total**, each covering all
+twelve biomes but seeing only a third of each story. A final episode unlocks
+after all three.
+
+- **Cost:** one set of content, three sets of mechanics. Cheapest of the "all
+  three" options.
+- **For it:** the theme is enforced rather than offered — you literally cannot
+  know the whole story from one career.
+- **Against it:** no single career is satisfying alone. And it **collides with
+  the life stages**: six stages in thirteen hours is about two hours each,
+  which is not enough for a life.
+
+### Option B — Three complete campaigns: the Three Houses model
+
+Three campaigns of about **40 hours each, ~120 h for everything**. Each career
+plays the full arc through all six life stages.
+
+- **Cost:** highest. Even sharing a world, each route needs enough distinct
+  content to fill forty hours — call it two to three times the authored
+  material.
+- **For it:** one purchase is one complete game, and replay value is enormous.
+  Fits the 40-hour target per campaign exactly.
+- **Against it:** most players will only ever see one route, so the
+  "nobody has the whole picture" theme lands for a minority. It is also the
+  option most likely to not get finished.
+
+### Option C — One campaign with guest chapters: the Halo 2 / Last of Us II model
+
+You choose a career and play a full **~40-hour** campaign. At fixed story
+moments you play **short sequences (30–90 minutes) as the other two careers**,
+placed at moments only they could have witnessed.
+
+- **Cost:** lowest. One set of content, one full mechanic set, two lighter ones.
+- **For it:** **every player sees all three perspectives**, so the theme lands
+  for 100% of players rather than for completionists. No repetition at all,
+  because nothing is replayed.
+- **Against it:** the other two careers are not fully realised as playstyles,
+  and replay incentive is weaker.
+
+### Option D — Three characters in one campaign: the GTA V model
+
+One 40-hour campaign with three protagonists you switch between at will.
+
+- **For it:** no repetition, all three mechanics in every playthrough, full
+  picture guaranteed.
+- **Against it:** **it contradicts decisions already made.** Idea 2 and idea 7
+  have the player *choose a career* and grow into it through life stages. In
+  this model you are not a photographer — you are three people. Probably rules
+  itself out.
+
+### A recommendation, offered not decided
+
+**Option C now, built so that Option B stays possible later.**
+
+The reasoning is scope. At a multi-year project with a professional quality
+bar, C is the only one where the thematic payoff reaches every player at the
+lowest content cost, and nothing about it forecloses expanding a guest chapter
+into a full campaign in a sequel or an expansion. B is the better game if it
+ever gets finished; C is far likelier to get finished.
+
+
+---
+
 ## Questions to come back to
 
 *Raised by the ideas above, noted so they do not interrupt brainstorming.
