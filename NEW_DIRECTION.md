@@ -2288,6 +2288,141 @@ being caught out by the question.
 
 ---
 
+## Question 3 — the three loops, worked on the savanna
+
+> **Claude-contributed**, 2026-08-24. Ayr asked whether the loop changes per
+> biome, and for the savanna worked as an example.
+
+### First, the structural answer
+
+**The verb is constant per career. The toolkit and the constraints change per
+biome.**
+
+- The photographer always photographs. But in open savanna the problem is
+  *distance*; in rainforest it is *darkness and cover*; underwater it is
+  *breath and buoyancy*.
+- The researcher always turns observation into data. But savanna allows
+  **individual identification by markings**, rainforest forces reliance on
+  **camera traps and calls**, and the deep sea allows almost nothing.
+- The guide always finds it, shows it and keeps people safe. But a savanna
+  drive, a rainforest night walk and a whale boat are different jobs.
+
+That gives **3 careers x 12 biomes = 36 distinct-feeling situations** out of
+three designed loops, rather than 36 designed loops. Ayr's instinct that it
+changes per biome is right; it just changes at the level of tools and obstacles.
+
+---
+
+### SAVANNA — the shared conditions
+
+Everything below sits on facts that are true of real savanna work:
+
+- **Open country.** You can see enormous distances and reach almost nothing.
+- **Vehicles are the hide.** Most savanna animals tolerate a vehicle and will
+  not tolerate a person on foot. Getting out changes everything.
+- **Dawn and dusk are the whole day.** Predators are active, light is low and
+  golden, and the middle of the day is heat, shade and stillness — with **heat
+  haze that ruins long-lens shots**.
+- **Water concentrates everything** in the dry season. A waterhole is the one
+  place the animals come to you.
+- **Individuals are identifiable** — lions by whisker-spot patterns, zebras by
+  stripes, giraffes by patch shapes. This is real, and it is the savanna's gift
+  to the researcher.
+
+---
+
+### Photographer — savanna
+
+**The problem: distance.** You can see it. You cannot get to it.
+
+The loop: **scout** from the vehicle across open ground, **read the light and
+the wind**, **position** and cut the engine, **wait**, and take the shot when
+the animal does something worth a photograph.
+
+Savanna-specific texture:
+
+- Long lens from a vehicle; stepping out ruins the sighting and may be illegal.
+- **Golden hour is both the best light and peak activity** — the same two hours
+  are the whole day's opportunity, so time pressure is real without being
+  artificial.
+- **Midday heat haze** softens anything shot at distance, which pushes the
+  player onto the dawn/dusk rhythm without a rule ever being stated.
+- Waterhole hides trade patience for near-certainty.
+- The ethics bite: baiting a predator is the easy way and it is the wrong one.
+
+**"Caught" means:** a publishable frame — sharp, well lit, and ideally showing
+**behaviour** rather than a portrait.
+
+---
+
+### Researcher — savanna
+
+**The problem: one sighting means nothing.** The answer only appears across
+many.
+
+The loop: **design a survey**, **run transects** along tracks or **place camera
+traps** at waterholes and trails, **identify individuals** from their markings,
+and **return** — until a population picture accumulates.
+
+Savanna-specific texture:
+
+- **Individual ID is the savanna speciality.** Photograph a lion's whisker
+  spots and you have not "caught a lion" — you have caught *that* lion, and
+  seeing her again next season is the actual data.
+- Camera traps run while the player is elsewhere, which suits days passing
+  inside a life stage.
+- Scat and spoor give diet and presence without ever seeing the animal.
+- Collaring exists but needs **a permit and a vet**, and it is the slow,
+  bureaucratic, high-value option.
+
+**"Caught" means:** a completed record. Identified, re-sighted, and placed in a
+population — not a single encounter.
+
+---
+
+### Tour guide — savanna
+
+**The problem: other people.** They have expectations, a schedule and a limited
+tolerance for sitting still.
+
+The loop: **read the conditions**, **plan the drive**, **track** — spoor, alarm
+calls, vultures circling, oxpeckers rising — **find it**, **position** so
+everyone can see and photograph, **interpret** it so they understand what they
+are looking at, and **keep them safe**.
+
+Savanna-specific texture:
+
+- **The guide radio network is real** and is the guide's superpower: other
+  guides share sightings, so reputation and relationships are mechanical.
+- Clients arrive wanting the Big Five. **The actual skill is making a dung
+  beetle fascinating on a morning with no lion** — and that is a genuine
+  measure of a guide.
+- Safety is not decoration: never between an elephant and its calf, never on
+  foot near buffalo.
+- Dawn and dusk drives are the working day; midday is downtime.
+
+**"Caught" means:** you found it, showed it, and the people with you understood
+what they saw.
+
+---
+
+### The asymmetry, made concrete (idea 52)
+
+The same four savanna animals, three careers:
+
+| Animal | Photographer | Researcher | Tour guide |
+|---|---|---|---|
+| **Lion** | Medium — findable, but needs light and behaviour | Medium — easy to find, individual ID takes work | **Easy** — famous, findable, and the radio net finds them |
+| **Meerkat** | **Easy** — diurnal, active, predictable at burrows | **Easy** — habituated study groups are real | Easy |
+| **Leopard** | **Hard** — nocturnal, cryptic, solitary | Medium — camera traps do what eyes cannot | **Hard** — the guide's white whale |
+| **Aardvark** | **Very hard** — nocturnal and rare | **Easy** — a camera trap does not sleep | **Very hard** — clients are in bed |
+
+None of that was hand-tuned. It falls out of what each profession can actually
+do, which is exactly what idea 52 asked for.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
