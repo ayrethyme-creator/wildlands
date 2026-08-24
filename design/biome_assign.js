@@ -184,3 +184,24 @@ BIOME_BY_HAND.bluewhale = "polar";
 // Ayr, 2026-08-24: the puffin is polar. Atlantic puffin colonies are Iceland,
 // Norway, Greenland and Newfoundland - subarctic rather than tropical coast.
 BIOME_BY_HAND.puffin = "polar";
+
+// --- Ayr, 2026-08-24: coast review. Coast was carrying land animals that
+// happened to have "coast" in their habitat sentence, and a set of cold-water
+// species that belong in polar.
+BIOME_BY_HAND.grizzly       = "forest";      // salmon rivers put it in coast
+BIOME_BY_HAND.ocelot        = "rainforest";
+BIOME_BY_HAND.brownhyena    = "desert";      // scavenges the Namib shore, but it is an arid animal
+BIOME_BY_HAND.fishingcat    = "wetland";     // mangrove and marsh, not open coast
+BIOME_BY_HAND.fishingbat    = "rainforest";  // Central American rivers
+BIOME_BY_HAND.baskingshark  = "opensea";     // Ayr: open ocean
+
+// cold-water, into polar
+BIOME_BY_HAND.walrus        = "polar";
+BIOME_BY_HAND.graywhale     = "polar";
+BIOME_BY_HAND.rightwhale    = "polar";
+BIOME_BY_HAND.stellerseagle = "polar";
+BIOME_BY_HAND.fursealion    = "polar";
+BIOME_BY_HAND.sealion       = "polar";
+
+// Two more life stages the suffix filter cannot see.
+["eaglejuv","sealpup"].forEach(function (k) { NOT_A_SPECIES.push(k); });
