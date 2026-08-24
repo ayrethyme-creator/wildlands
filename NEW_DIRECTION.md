@@ -3052,6 +3052,90 @@ for the new game anyway.
 
 ---
 
+## How the world is actually built
+
+> **Claude-contributed**, 2026-08-24. Ayr asked the obvious question nobody had
+> answered: twelve biomes, on a real Earth — so what *is* a biome, physically?
+
+### The confusion is real
+
+A biome is a **category**, not a place. Savanna exists in Kenya, Namibia,
+Brazil and northern Australia. Temperate forest covers a third of the northern
+hemisphere. "Go to the savanna" is not a destination the way "go to Nairobi" is.
+
+### The answer, which is already implied by decisions made
+
+Two earlier decisions settle it together:
+
+- The map is **real Earth**.
+- A **stated fiction covers geography only** — the map compresses and
+  composites real places so a life can be lived across it.
+
+So: **each biome is one composite region on the real map.** A named, bounded,
+walkable place that draws on several real locations of that biome type, with
+the codex saying which.
+
+### The shape
+
+**One home region + eleven field regions.**
+
+- **Home is Farmland & Town.** Where the player grows up, where the kid and
+  teen stages happen, and where they come back between field seasons. It is
+  also the largest roster at 89 species, which is convenient rather than a
+  coincidence — it is the biome humans live in.
+- **Eleven field regions**, each a composite standing for one biome.
+- **You travel** the way the professions actually do: field seasons, flights,
+  boats, a posting that lasts months. Travel is a life event, not a menu.
+
+### Candidate real anchors
+
+Each region composites the places its quests actually come from:
+
+| Biome | Composited from | Because the quests are there |
+|---|---|---|
+| **Savanna** | Kenya + Namibia | Lion Lights is Kitengela; the guard dogs and conservancies are Namibian |
+| **Farmland & town** | Temperate Europe / N. America | Home. Pets, livestock, hedgerows, garden wildlife |
+| **Temperate forest** | Central Europe + Pacific NW | Wisent, lynx, wolves, old growth |
+| **Rainforest** | Amazon + Borneo | Two very different rainforests, both quest-rich |
+| **Wetlands** | Everglades + the Danube delta + Pantanal | Cranes, otters, beavers, caimans |
+| **Coast & kelp** | California + North Atlantic | Sea otters, puffins, Project Puffin, kelp |
+| **Mountains** | Andes + Himalaya | Condors, snow leopards, ibex |
+| **Desert** | Namib + Sonoran + Australian interior | Oryx, bilby, Gila monster |
+| **Coral reef** | Great Barrier + Coral Triangle + Cabo Pulmo | The reef stories are Pacific and Mexican |
+| **Open ocean** | Pacific + Southern Ocean | Whales, albatross, longlines, tuna |
+| **Polar** | Svalbard + Antarctic Peninsula | Polar bears at one end, penguins at the other |
+| **Caves** | *see below* | |
+
+### What is inside a region
+
+Each of the eleven is a **contiguous scrolling area** — not a screen, not a
+menu — containing:
+
+- **Micro-regions** (idea 40): a waterhole, a burnt block, a village edge, a
+  gorge.
+- **The facility**, established during the young adult stage.
+- **Four quests**, one per adult life stage.
+- **Guaranteed-encounter sites** (idea 19): the beaver pond, the moose field.
+- **Seeded content**: which micro-regions generate where, which animals are
+  present this run, weather, season.
+
+### Caves resolve themselves
+
+Cave is down to **5 species**. It is not a region. It becomes a **micro-region
+type** appearing inside forest, mountains and coast — which is where those five
+actually live. That frees its slot, and the twelfth region can be either a
+second forest type (**taiga**, currently folded in) or a second ocean type.
+
+### The honest wrinkle
+
+**Polar composites two poles.** Arctic and Antarctic share no species and are
+opposite ends of the planet, and putting polar bears and penguins in one
+"region" is the compression working hardest. Either accept it and say so in the
+codex, or split polar into two and drop something else.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
