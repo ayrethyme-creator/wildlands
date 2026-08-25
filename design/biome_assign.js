@@ -252,3 +252,12 @@ BIOME_BY_HAND.opossum      = "farmland";
 ["anglerfish","coelacanth","frilledshark","giantsquid","goblinshark",
  "spidercrab","oarfish","pacifichagfish","pompeiiworm","scalyfootsnail"
 ].forEach(function (k) { BIOME_BY_HAND[k] = "deepsea"; });
+
+// sealjuv is a life stage the suffix filter cannot see.
+NOT_A_SPECIES.push("sealjuv");
+
+// These three are deep DIVERS, not deep-sea animals - the habitat rule caught
+// them on the words "deep water". They live at the surface.
+BIOME_BY_HAND.falsekiller = "opensea";
+BIOME_BY_HAND.pilotwhale  = "opensea";
+BIOME_BY_HAND.rissos      = "opensea";

@@ -45,5 +45,6 @@ var BIOME_OVERRIDE = {
 // and tundra (18) combine into one polar biome rather than splitting 29 animals
 // across two thin ones.
 var BIOME_MERGE = {
-  taiga: "forest", kelp: "coast", deepsea: "opensea", polarsea: "polar", tundra: "polar",
+  taiga: "forest", kelp: "coast", polarsea: "polar", tundra: "polar",
+  // deepsea NO LONGER merges into opensea - it is the twelfth biome as of 2026-08-25.
 };
