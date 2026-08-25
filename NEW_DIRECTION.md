@@ -4787,10 +4787,12 @@ change rather than a contradiction.*
   the heaviest reading of idea 74: it is **not** 700 bespoke plot-woven narratives.
   The intake story is flavour from the ten categories; the autobiography still works
   because the record — what, where, when, at which life stage — is real.
-- **2026-08-25 — Open: does each life stage span all twelve biomes?** If each
-  biome's young-adult quest earns that biome's facility, then all twelve are earned
-  during young adulthood and the three later stages develop them. Fits the impact
-  ladder exactly. Flagged, not assumed.
+- **2026-08-25 — CONFIRMED: the campaign is four waves of twelve.** Each life
+  stage spans all twelve biomes, so all twelve facilities are earned during young
+  adulthood and the later stages develop them. Quests within a wave can be taken in
+  any order; gating is by capability (the water ladder), not difficulty. Fixes the
+  deep-sea conflict by making the young adult **crew on someone else's boat** —
+  owning one at adult/power then reads as a promotion.
 
 ## Practical notes
 
@@ -6178,3 +6180,49 @@ quests, then twelve adult-with-skills quests, and so on. Which means:
 
 That fits the impact ladder exactly — local change first, everywhere, then scale,
 then programmes, then law. **Flagged for Ayr rather than assumed.**
+
+---
+
+## THE CAMPAIGN IS FOUR WAVES OF TWELVE
+
+> **Ayr, 2026-08-25.** Confirmed.
+
+**The 48 quests are four waves of twelve, not twelve sets of four.**
+
+```
+Young adult      12 quests, one per biome    local change    -> earns all 12 facilities
+Adult / skills   12 quests, one per biome    the pattern at scale
+Adult / power    12 quests, one per biome    establishing programmes
+Elder            12 quests, one per biome    law and policy
+```
+
+### What follows
+
+- **All twelve facilities are earned during young adulthood.** The three later
+  stages develop them rather than acquire them, which is why specialisation arrives
+  with the facility — each is earned in its own biome.
+- **The world opens wide and early.** Twelve young-adult quests can be taken in any
+  order, so the player chooses their own route instead of following a corridor.
+  This is the Diablo-shaped world the design started from.
+- **The impact ladder becomes literal.** You fix a fence in every biome on earth
+  before you understand a single pattern at scale. That is a better arc than
+  finishing one biome and moving on, and it is closer to how the careers really widen.
+- **On the Brink unlocking after all twelve** stays consistent — it is the wave
+  after the last wave.
+
+### The gating is by capability, not by difficulty
+
+Order is free, but not everything is reachable at once. The water ladder already
+gates the wet biomes: reef and kelp need the teen open-water certification, and the
+deep sea needs instruments.
+
+### One conflict this exposes, and its fix
+
+The deep sea's young-adult quest is **the dropcam** — which needs a boat. But the
+water ladder puts owning a boat at **adult with power.**
+
+**Fix, already implied by the ladder's own wording:** the adult-with-power entry
+reads *"you stop borrowing rides."* So as a young adult **you borrow the ride.** You
+are crew on someone else's vessel, which is exactly how early marine careers
+actually work, and it makes owning your own boat later a real promotion rather than
+a purchase.
