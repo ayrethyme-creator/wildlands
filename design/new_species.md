@@ -267,7 +267,7 @@ Saudi Arabia", which is arid)*
 | **Sidewinder** | Moves sideways specifically to keep **as little of itself as possible touching burning sand** at any moment |
 | **Shovel-snouted lizard** | Does a **thermal dance**, lifting its feet off the sand in alternating pairs, and dives into the dune to escape the heat |
 | **Elf owl** | **The smallest owl in the world**, at about 40 grams, nesting in woodpecker holes in giant cactus |
-| **Addax** | Critically endangered — **fewer than a hundred left in the wild** — and it can go its whole life without drinking |
+| ~~**Addax**~~ | **Already exists** — and is already flagged for the Vigil. See the Vigil note in NEW_DIRECTION.md; do not create |
 | **Chuckwalla** | Wedges itself into a rock crack and **inflates its body** so it cannot be pulled out |
 
 ---

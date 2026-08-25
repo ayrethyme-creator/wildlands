@@ -4020,6 +4020,66 @@ dragonfish · Sea toad · Deep-sea cucumber
 
 ---
 
+## The Vigil is holding living animals
+
+> **2026-08-25.** Ayr asked whether the addax belongs in the Vigil. It is
+> **already there** — and checking why exposed an inconsistency worth deciding.
+
+### What the data says
+
+Of the species carrying the memorial flag:
+
+| | |
+|---|---|
+| **EX +mem** — genuinely extinct | 56 |
+| **EW +mem** — extinct in the wild | 13 |
+| **CR +mem** — **critically endangered, but alive** | **30** |
+| **EN +mem** | 1 |
+
+**And 21 other critically endangered species are NOT flagged.** So the rule is
+not being applied consistently:
+
+- **In the Vigil:** Addax · Amur Leopard · Asiatic Cheetah · California Condor ·
+  Northern White Rhino · Red Wolf · Saola · Sumatran Rhino · Sumatran Tiger ·
+  Whooping Crane · Javan Rhino · Hainan Gibbon *(and 18 more)*
+- **Not in the Vigil, same status:** **Vaquita** *(around ten individuals left —
+  more precarious than anything on the list above)* · Kākāpō · Axolotl ·
+  Pangolin · Black Rhinoceros · Gharial · Sawfish
+
+The vaquita is the clearest case. It is closer to gone than the addax, and it is
+in the live game while the addax is in the memorial.
+
+### The question
+
+**Is the Vigil for the extinct, or for the nearly-gone?**
+
+**Extinct only (EX + EW = 69).** Clean, and philosophically stronger: the Vigil
+is where you go to mourn, and **a living species does not belong in a
+memorial.** More than that — the 30 CR species are exactly the animals whose
+stories are most urgent, and putting them in a postgame memorial takes them out
+of the game where a player could still act on them. The California Condor is a
+*recovery* story. The whooping crane went from fifteen birds to hundreds. Those
+are not eulogies.
+
+**Extinct plus the functionally gone.** A few genuinely qualify — the northern
+white rhino has two individuals left, both female, and cannot recover. But that
+is a handful, not thirty.
+
+### Recommendation
+
+**Vigil = extinct and extinct-in-the-wild only.** The 30 CR species return to
+the living game, where their quests can actually be about saving something.
+
+That also solves an arithmetic problem: the Vigil is currently 101 and needs to
+be 100. Moving 30 out makes it **69**, which leaves room for the ones that
+belong there and are missing.
+
+And it means **the addax does not need creating** — it exists, and it comes
+back to the desert instead.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
