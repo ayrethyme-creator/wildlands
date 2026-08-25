@@ -4760,6 +4760,21 @@ change rather than a contradiction.*
   consequence that an animal dying before an outcome never gets named, which is the
   mortality question arriving by another door.
 
+- **2026-08-25 — The sanctuary is a MODE, not a second campaign.** Ayr, after
+  asking directly whether I was assuming a whole story game at the sanctuary. I
+  was, and it broke the fiction, the clock and the time budget. The 48-quest
+  campaign stays the bounded spine at ~50-55 hours; the sanctuary is unbounded,
+  unlocked early, with no completion requirement. One save, one character — a way
+  to play, not a separate file.
+- **2026-08-25 — The facility runs while you are away, which fixes quarantine.**
+  Real durations are preserved (2-6 weeks) and the campaign is what the player does
+  while they pass. Satisfies the no-idle-waiting rule without compressing anything.
+- **2026-08-25 — The 700 split by life stage.** Child watches at the fence, teen
+  volunteers at someone else's centre, young adult earns the first facility, elder
+  is the person others visit. **Interaction is universal, ownership is earned** —
+  every named individual anywhere can be fed, enriched and have its ability viewed,
+  but only the ones you took in carry the autobiography.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -5963,3 +5978,100 @@ they lose are the ones still carrying a number.
 
 **This is the euthanasia and mortality question, arriving by a different door.**
 Still open, still Ayr's.
+
+---
+
+## THE SANCTUARY IS A MODE, NOT A SECOND CAMPAIGN
+
+> **Ayr, 2026-08-25.** Asked directly whether I had been assuming an entire story
+> game happens at the sanctuary. **I had been, and it did not reconcile.** Three
+> things were broken and this section records the fix Ayr chose.
+
+### What was broken
+
+1. **The fiction.** All 700 species passing through one player's centre means
+   personally rehabilitating one of every species on earth. Real centres take local
+   animals.
+2. **The clock.** Quarantine is 2–6 weeks, which collides head-on with the
+   no-idle-waiting rule.
+3. **The budget.** The campaign is costed at ~40–55 hours. 700 individuals at two
+   minutes each is 23 hours **before any rehab loop**. Content was being added with
+   no time budget attached to it.
+
+### Ayr's decision: a separate mode
+
+**The 48-quest campaign is the spine and stays exactly as costed.** The sanctuary
+is a second way to play, unlocked early, running alongside, with **no completion
+requirement and no upper bound.**
+
+This is the Planet Zoo shape the research already found: **a ~40-hour campaign and
+a 212-hour average tracked playtime.** The long tail is not in the story. It never
+was.
+
+| | Campaign | Sanctuary |
+|---|---|---|
+| **Bounded** | 48 quests, ~50–55 hours | **Unbounded** |
+| **Required** | Yes, all 48 | No |
+| **Gates progress** | Yes | No — except earning the first facility |
+| **Ends** | Yes | Never |
+
+**One save, one character, one world.** A mode in the sense of *a way to play*, not
+a separate file — otherwise the autobiography effect dies, and that effect is the
+whole point.
+
+### And this fixes quarantine without compromising anything
+
+**The facility runs while you are away.**
+
+Quarantine takes 2–6 weeks of in-world time, and the campaign is what you do while
+it passes. You do not wait for an animal — **you go and do a quest, and when you
+come back the animal has moved a stage.**
+
+That is not a workaround. It is the honest relationship between the two halves of a
+rehabilitator's life, and it means **neither mode is padding for the other.** The
+no-idle-waiting rule is satisfied because the player never stands still; the real
+durations are preserved because the world keeps its own clock.
+
+### The 700, split by life stage
+
+Ayr's second decision. The ratio of *visited* to *yours* shifts across the career:
+
+| Stage | Where the animals are | What you are |
+|---|---|---|
+| **Child** | Someone else's local wildlife centre | **At the fence.** You watch. Nothing is yours |
+| **Teen** | Volunteering at that centre | You clean, you feed, you are trusted with small things. You know them by number |
+| **Young adult** | **Your first facility, earned by a quest** | You start taking animals in |
+| **Adult / skills** | Yours, and more of them | The intake is steady now |
+| **Adult / power** | A network | Others work for you |
+| **Elder** | Yours, and you are the one people visit | **You are on the other side of the fence** |
+
+**The arc is the whole point: you begin at the fence and end up being the person on
+the other side of it.**
+
+### What that means for the 700 individuals
+
+Every one still has a name, an intake story and a place. What changes is **whose**.
+
+- **Animals at other people's sanctuaries** can be visited, fed, enriched, and their
+  signature ability viewed. Everything Ayr specified. They are simply not yours.
+- **Animals you took in** carry the autobiography — the date, the quest, what
+  happened, whether you named it at release or at the moment it became a resident.
+
+**Interaction is universal. Ownership is earned.** That keeps every interaction Ayr
+asked for, keeps the fiction honest, and puts the emotional weight on the ones the
+player actually chose.
+
+### What this does not change
+
+- The rehab loop, the outcome fork, ambassadors, the naming rule, the ten intake
+  categories, the release sites — **all stand.**
+- **Field knowledge is still the husbandry manual.** It just now also applies when
+  you are a teenager cleaning someone else's enclosures and reading their notes.
+
+### Still open
+
+- **Sandbox** — Ayr's original question. A mode with no campaign attached at all is
+  now a much smaller step, because the sanctuary is already a mode.
+- **Euthanasia and mortality**, which arrived again through the naming rule.
+- **Do the twelve facilities specialise**, and does the player run all twelve or
+  build toward a few.
