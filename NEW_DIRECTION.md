@@ -4665,6 +4665,19 @@ change rather than a contradiction.*
   one-biome vertical slice early to price them. Supersedes the "may take years"
   assumption in idea 20.
 
+- **2026-08-25 — All twelve biome quest menus proposed.** Four per biome on the
+  idea-67 ladder, no animal repeated within a biome, every quest ending in real
+  named people. Savanna was already chosen; the other eleven await Ayr's review.
+- **2026-08-25 — Scuba does not reach the deep sea, and that is the design.**
+  Recreational limit ~40m, deep sea starts ~200m. Certification lands in the
+  **teen** stage (real minimum age is 15). The deep sea is played through
+  instruments — dropcam, ROV, and eventually a submersible — not by swimming.
+- **2026-08-25 — Mythology and fossil quests are learning-first, not conservation.**
+  Mythology: one per culture, twelve proposed, unified by "folklore is data" and
+  gated on cultural consultation for living traditions. Fossils: one per **period**
+  not era (three eras is too few), thirteen proposed, each a detective story about
+  **how anyone knows**.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -4943,3 +4956,290 @@ the number to watch rather than the generation rate.
 
 **Working assumption from here: a year, not years** — with the vertical slice built
 early to price the two unproven pipelines.
+
+---
+
+# THE REMAINING QUEST MENUS
+
+> **Ayr, 2026-08-25.** *"Let's pick the quests for all of the biomes. Including
+> unique fun and learning based quests, not conservation focused ones, for
+> mythology and fossils."*
+>
+> Proposals for review, following the rules already set: **four per biome, one per
+> adult life stage**, the impact ladder from idea 67, **no animal twice in a
+> biome**, and every quest ending with real named people. The Vigil and On the
+> Brink are deliberately left out — Ayr will decide those later.
+
+---
+
+## FOREST
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **The den boxes, and the predator you want back.** Pine martens were nearly gone from Britain. Putting up den boxes brings them back — and martens suppress grey squirrels, which lets red squirrels return. **You save a predator to save a prey species.** *Emma Sheehy's research, Ireland 2014; Vincent Wildlife Trust's Pine Marten Recovery Project, Wales, from 2015* | **Pine marten** |
+| **Adult / skills** · the pattern | **Too many deer.** No predators, so deer eat every sapling and the forest quietly stops replacing itself. The trees look fine; there is simply nothing under them. Unglamorous, deeply unpopular, and the thing that decides whether the wood exists in a century. | **Red deer** |
+| **Adult / power** · a programme | **The Iberian lynx.** Down to about 94 animals in 2002. Captive breeding, rebuilding the rabbit population it eats, and underpasses to stop road deaths — over 2,000 by 2023, and downlisted. *LIFE Iberlince; Miguel Ángel Simón* | **Iberian lynx** |
+| **Elder** · law | **The spotted owl.** The 1994 Northwest Forest Plan reshaped US logging law around one bird. The owl kept declining anyway — outcompeted by barred owls moving in. The 2024 answer is a plan to shoot barred owls for decades. **The law worked and the bird still lost.** No clean answer. | **Northern spotted owl** |
+
+## RAINFOREST
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **Old phones in the canopy.** Recycled smartphones, solar-powered, strapped in trees, listening for chainsaw sound and alerting rangers while the tree is still standing. The same recordings turn out to be a census of everything calling nearby. *Topher White, Rainforest Connection, from 2013* | **Siamang** |
+| **Adult / skills** · the pattern | **Palm oil.** The boycott answer is wrong: oil palm yields far more per hectare than any alternative, so replacing it costs *more* forest. Certification is real and imperfect. The honest lesson is that the satisfying answer and the correct answer are different. | **Orangutan** |
+| **Adult / power** · a programme | **Whose land it is.** Deforestation is dramatically lower inside recognised Indigenous territory — one of the best-evidenced findings in conservation. The programme is not a reserve; it is a land title. *The Kayapó, Brazil; Almir Suruí and the Paiter-Suruí* | **Jaguar** |
+| **Elder** · law | **Yasuní.** Ecuador put it to a national vote in 2023 and the country chose to leave the oil in the ground under one of the most biodiverse places on earth. A binding referendum on extraction — and then the argument about actually carrying it out. | **Harpy eagle** |
+
+## WETLANDS
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **The toad patrol.** One night each spring, thousands of amphibians cross a road to the pond they were born in. Volunteers with buckets and torches carry them over. It is the least technological quest in the game and it saves whole populations. *Froglife's Toads on Roads, UK; Germany's Krötenzäune* | **Common toad** |
+| **Adult / skills** · the pattern | **The engineer.** Beaver dams slow water, so the flood peak downstream drops measurably. The trial that proved it ran for years on one Devon stream. **The animal you raised as a child turns out to be the infrastructure.** *Devon Beaver Trial, Prof Richard Brazier, University of Exeter* | **Beaver** |
+| **Adult / power** · a programme | **The marshes that were drained on purpose.** Saddam Hussein drained the Mesopotamian Marshes to punish the people living in them. An engineer who had left came back to reflood them, and much of it worked. *Azzam Alwash, Nature Iraq; Goldman Prize 2013* | **Otter** |
+| **Elder** · law | **What counts as a wetland.** Legal protection depends entirely on a definition, and the definition keeps moving — the 2023 *Sackett v. EPA* ruling removed federal protection from a large share of US wetlands overnight. Nothing physical changed. The word did. | **Sandhill crane** |
+
+## COAST
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **Lights out.** Hatchlings find the sea by heading for the brightest horizon. A beachfront hotel's lighting sends a whole nest inland to die. The fix is a municipal ordinance and some shielded bulbs. *Sea Turtle Conservancy; Florida's coastal lighting ordinances* | **Loggerhead turtle** |
+| **Adult / skills** · the pattern | **Coastal squeeze.** Sea walls stop saltmarsh retreating inland as the sea rises, so the marsh drowns against the wall. The fix is to **deliberately breach your own sea defence** and let the water in. *Wallasea Island, RSPB, 2015 — built from Crossrail tunnel spoil* | **Avocet** |
+| **Adult / power** · a programme | **The no-take zone.** Two divers spent seventeen years arguing for one bay to be closed to all fishing. It became Scotland's first, and the lobsters inside grew large enough to spill out and restock the water around it. *Howard Wood and Don MacNeish, COAST, Lamlash Bay, 2008; Goldman Prize 2015* | **Lobster** |
+| **Elder** · law | **The blue blood.** Horseshoe crab blood detects bacterial contamination, so it is used to test injectable medicines — nearly every vaccine you have had. A synthetic replacement has existed for years and was resisted for years. Ancient animal, modern pharmacopoeia, slow-moving standards body. | **Horseshoe crab** |
+
+## REEF
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **Coral gardening.** Broken staghorn fragments grow fast on rope nurseries and can be cemented back onto dead reef. A hobby diver worked this out and it became the standard method. *Ken Nedimyer, Coral Restoration Foundation, Florida Keys* | **Staghorn coral** |
+| **Adult / skills** · the pattern | **The starfish outbreaks.** Crown-of-thorns eat coral, and their population explodes in pulses. The trail leads back inland to fertiliser runoff feeding the larvae. **The reef problem starts on a farm.** *COTSbot / RangerBot, Matthew Dunbabin, QUT* | **Crown-of-thorns starfish** |
+| **Adult / power** · a programme | **Protect the herbivore.** When coral dies, algae takes the space and stops new coral settling. Parrotfish eat the algae. So the programme is not a coral programme — it is a **ban on catching a fish nobody thought was important.** *Bonaire, 2010; Belize, 2009* | **Parrotfish** |
+| **Elder** · law | **The heat.** Water quality, fishing pressure and runoff can all be fixed locally, and the reef bleaches anyway when the ocean runs hot. Repeated mass bleaching from 2016 onward. **The one thing that decides the outcome is the one thing local law cannot reach.** *Terry Hughes and the mass-bleaching surveys* | **Humphead wrasse** |
+
+## OPEN OCEAN
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **The escape hatch.** A shrimp trawl drowns sea turtles. A working shrimper welded a grid into his net that lets big animals push out through a flap while the shrimp pass through — he built it to keep jellyfish out, and it turned into law. *Sinkey Boone, Georgia shrimper, 1970s — the Turtle Excluder Device* | **Kemp's ridley turtle** |
+| **Adult / skills** · the pattern | **Dolphin-safe.** Tuna boats used to set nets on dolphin herds because tuna swim beneath them. The label fixed that — and pushed fleets to set on floating objects instead, which catches far more sharks and turtles. **Every fishing method kills something; the label chose which.** | **Spinner dolphin** |
+| **Adult / power** · a programme | **Watching from orbit.** Almost every large vessel broadcasts its position, and a boat that switches its transponder off at a marine reserve boundary is telling you something. Made public and free, worldwide. *Global Fishing Watch — Oceana, SkyTruth and Google, 2016* | **Bluefin tuna** |
+| **Elder** · law | **The two-thirds nobody owned.** International waters — most of the ocean — had no legal mechanism to protect biodiversity at all. The High Seas Treaty, agreed 2023 after nearly twenty years of negotiation, created one. | **Blue whale** |
+
+## DEEP SEA
+
+*See the access section below — this biome is reached differently from every other.*
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **The dropcam.** You cannot go down, so you send something instead: a camera in a pressure housing, a weight, some bait and a float. Built cheaply, dropped over the side, and it comes back with an animal nobody has filmed there before. | **Bluntnose sixgill shark** |
+| **Adult / skills** · the pattern | **Fished as if it were fast.** Orange roughy were managed like an ordinary fish and turned out to live over 150 years and not breed until their twenties. The stock was gone before anyone read the ear bones. **The mistake was about time, not quantity.** | **Orange roughy** |
+| **Adult / power** · a programme | **Older than the fishery.** Bottom trawls flatten seamount corals that have been growing for thousands of years — one black coral colony dated to over 4,000 years old. Closing seamounts to bottom gear is the programme, and it is enforced by the satellite work from the ocean quest. | **Black coral** |
+| **Elder** · law | **The nodules.** Potato-sized metal lumps on the abyssal plain, wanted for batteries for the energy transition. One octopus is known to lay its eggs only on sponge stalks that grow only on those nodules — **mine the nodule and the species has nowhere to breed.** Genuinely no clean answer. *The International Seabed Authority; the moratorium coalition* | **Ghost octopus** |
+
+## DESERT
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **Head-starting.** Hatchling tortoises are soft for years and ravens eat them. Raven numbers exploded because of landfill and powerlines — so you are not fixing a raven problem, you are fixing a **rubbish** problem, while raising hatchlings in pens until their shells harden. *Mojave desert tortoise head-start programmes* | **Desert tortoise** |
+| **Adult / skills** · the pattern | **The solar farm.** Desert sun is the best climate solution available and utility-scale solar sterilises the ground it covers. Two things you believe in, on the same hectare. | **Fennec fox** |
+| **Adult / power** · a programme | **The trees that were already there.** The Great Green Wall planned to plant a forest across Africa and most of the planting died. What worked was noticing that living rootstock was already under the fields and simply protecting the shoots — millions of hectares regreened for almost nothing. *Tony Rinaudo, farmer-managed natural regeneration, Niger* | **Dorcas gazelle** |
+| **Elder** · law | **Protection, removed.** Oman's Arabian Oryx Sanctuary was the first place ever struck off the World Heritage list — cut by 90% for oil prospecting in 2007. Every other quest is about winning protection. **This one is about losing it, legally and on purpose.** | **Arabian oryx** |
+
+## MOUNTAINS
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **The corral.** A snow leopard gets into an unroofed livestock pen and, in the panic, kills far more than it can eat — so the herder loses a year's income and kills the leopard. A wire roof ends it. Add insurance and the killing stops being rational. *Snow Leopard Trust; Shafqat Hussain, Project Snow Leopard, Baltistan* | **Snow leopard** |
+| **Adult / skills** · the pattern | **The painkiller.** South Asia's vultures fell by around 99% in a decade and nobody knew why. The cause was a veterinary anti-inflammatory in cattle carcasses, fatal to vultures in trace amounts. Then the second-order effect: no vultures, more feral dogs, more rabies. **A drug for cows became a human health crisis.** *Lindsay Oaks and Rick Watson, 2004* | **White-rumped vulture** |
+| **Adult / power** · a programme | **All from one valley.** Alpine ibex were hunted to about a hundred animals in a single royal reserve. Everything alive today descends from them — a full recovery in numbers that is still carrying the genetic narrowness of that bottleneck. **Population recovered, diversity did not.** *Gran Paradiso* | **Alpine ibex** |
+| **Elder** · law | **The one that is going up.** Mountain gorillas rose from a few hundred to over a thousand — the only great ape increasing. It took a treaty between three countries that were not always at peace, and a law that sends tourist revenue to the villages next to the park. Success, and expensive, and fragile. | **Mountain gorilla** |
+
+## POLAR
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **The bear patrol.** A town where polar bears walk through in autumn keeps a hotline, bear-proof bins and a holding facility, so bears are moved rather than shot. Mundane municipal work, and it is why the town and the bears both still exist. *Churchill, Manitoba's Polar Bear Alert Program* | **Polar bear** |
+| **Adult / skills** · the pattern | **The haulout.** Walruses rest on sea ice between dives. Without ice they pile onto beaches in tens of thousands, and animals die in stampedes rather than from anything you can treat. **The injury is real and the cause is a thousand miles away.** | **Walrus** |
+| **Adult / power** · a programme | **The Ross Sea.** The world's largest marine protected area, agreed in 2016 by consensus among nations including several that fish there, after years of annual refusals. It covers the least-altered stretch of ocean left. | **Adélie penguin** |
+| **Elder** · law | **Whose count was right.** In the 1970s scientists estimated a few hundred bowheads and moved to stop Iñupiat whaling. The hunters said the estimate was wrong because whales pass *under* the ice where nobody was watching. New methods proved the hunters right — the population was many times larger. The quota system that followed is co-managed. *Alaska Eskimo Whaling Commission* | **Bowhead whale** |
+
+## FARMLAND
+
+| Stage | Story | Animal |
+|---|---|---|
+| **Young adult** · local | **A hole in the fence.** A hedgehog needs about a mile of range a night and a modern garden fence seals it in. A 13cm gap in every fence on the street reconnects the whole block. **The smallest possible intervention, done by everyone.** *Hedgehog Street, PTES and the British Hedgehog Preservation Society, from 2011* | **Hedgehog** |
+| **Adult / skills** · the pattern | **The seed coating.** A pesticide applied to seed rather than sprayed ends up throughout the plant, including the pollen. The EU restricted the main neonicotinoids in 2018, and the argument over what replaced them has not stopped. | **Bumblebee** |
+| **Adult / power** · a programme | **Let it go.** A failing arable estate stopped farming, put grazing animals on it and let scrub come. Within twenty years it had nightingales, turtle doves, purple emperors and the first storks to breed in Britain in centuries — on ordinary clay soil nobody thought was special. *Knepp Estate; Isabella Tree and Charlie Burrell, from 2001* | **White stork** |
+| **Elder** · law | **The nitrogen ruling.** A court found the Netherlands was breaking its own nature law on nitrogen deposition, which meant cutting livestock, which brought tractors to the capital and eventually brought a government down. **Environmental law with a real political price, paid by real farmers.** | **Black-tailed godwit** |
+
+---
+
+## GETTING TO THE DEEP SEA — the access problem
+
+> **Ayr, 2026-08-25.** *"The deep sea one should have more analysis on how to do it
+> bc it's physically hard to get to. Like, the player has to learn scuba diving at
+> some point. Maybe teen, maybe young adult."*
+
+### The fact that decides the whole design
+
+**Recreational scuba stops at about 40 metres. The deep sea starts at about 200.**
+
+**Scuba does not get you there, and no amount of training will.** Below roughly
+40m an ordinary air supply becomes actively dangerous — nitrogen narcosis, oxygen
+toxicity, and decompression obligations measured in hours. The trained-diver
+fantasy tops out an order of magnitude short of the biome.
+
+This is the most useful constraint in the game, because it is real and it cannot
+be argued with. **Every other biome is entered by walking into it. The deep sea has
+to be entered through instruments.**
+
+### The water ladder
+
+| Stage | Capability | Opens |
+|---|---|---|
+| **Child** | Swim | Shallows, rockpools, the pond |
+| **Teen** | Snorkel and freedive | Coast, tide line, kelp canopy |
+| **Teen** | **Open water certification** | Reef and kelp to 18m — the first serious gate |
+| **Young adult** | Advanced and deep training | 30–40m: wrecks, reef walls, the bottom of the kelp |
+| **Adult / power** | **A boat** | You stop borrowing rides. A facility-scale purchase |
+| **Adult / power** | **ROV and dropcam** | The deep sea, at a distance |
+| **Elder** | **Crewed submersible** | The deep sea, in person, rarely, and it is an event |
+
+**Recommendation on Ayr's open question: certify as a teen.** The real minimum age
+for a full open-water certification is 15, and a junior qualification starts at 10
+— so a teenager certifying is accurate rather than generous. It also gives the teen
+stage a genuine accomplishment, which idea 69's parked kid and teen stages need,
+and it means young adult begins with the water already open instead of spending its
+first hours on paperwork.
+
+### Certification is real teachable content
+
+The course content is genuinely interesting and none of it needs inventing:
+
+- **Why you never hold your breath on the way up** — the air in your lungs expands
+  as pressure drops, and this is the one rule that kills people who break it
+- **Buoyancy** — hovering without touching anything, which is also the entire
+  ethic of not wrecking a reef with your fins
+- **Nitrogen loading and why you cannot simply come straight up**
+- **Narcosis** — that judgement quietly degrades with depth and you will not notice
+- **The buddy system** — nobody dives alone, which makes it a two-character activity
+
+**This is a tutorial that is also a quest that is also true.** It fits the codex's
+read-aloud and practice-quiz jobs exactly.
+
+### The deep sea plays differently, and should
+
+You do not swim here. You **operate**: position the vessel, drop the camera, set
+the bait, wait, recover, and see what came. The animal encounters arrive as
+**footage** rather than as meetings — which is precisely how every deep-sea species
+you have ever seen was actually seen.
+
+It makes the deep sea the last biome, and it should feel like it.
+
+### What each career does down here
+
+- **Photographer** — the camera is on the vehicle, not in your hands. Framing
+  becomes piloting, and the best shot is the one the ROV was in position for.
+- **Researcher** — sampling, sensors, and the fact that most of what comes up is
+  new. This is the career the biome most rewards.
+- **Tour guide** — you cannot take anyone down. So you do the real thing instead:
+  **narrate a live feed to an audience on the surface.** That is exactly how
+  deep-sea outreach works on real research vessels, where a scientist talks the
+  public through a dive as it happens. The guide's deep-sea job is the one that
+  needed the least invention.
+
+---
+
+# THE NON-CONSERVATION QUESTS
+
+> **Ayr, 2026-08-25.** *"Unique fun and learning based quests, not conservation
+> focused ones, for mythology and fossils. Fossils should have one per era, and
+> mythology one per culture."*
+
+These do not use the impact ladder. They are not about saving anything — they are
+about **finding out**, and they are the part of the game that is purely a pleasure.
+
+---
+
+## MYTHOLOGY — one per culture
+
+### The through-line: myths are records
+
+Not "people used to be silly." **Folklore is data collected without a laboratory.**
+Three things keep turning out to be true underneath a monster:
+
+1. **Somebody found a fossil** and explained it with the animals they knew
+2. **Somebody saw a real animal** nobody had a specimen of yet
+3. **Somebody needed to keep children away from something that kills them**
+
+Each quest ends with the player able to say which of the three this one was — and
+sometimes the honest answer is that it is none of them and the story is just a
+story, which is also fine.
+
+| Culture | Creature | What it turns out to be about |
+|---|---|---|
+| **Greek / Scythian** | **Griffin** | A four-legged beaked animal guarding gold, described along trade routes that ran through beds of *Protoceratops* skeletons — beaked, four-legged, and abundant. *Adrienne Mayor's fossil-folklore work* |
+| **Chinese** | **Qilin** | In 1414 a giraffe reached the Ming court from East Africa by way of Bengal and was received as a qilin. **A court painting of it survives.** A real animal becoming an omen, documented as it happened |
+| **Norse / Scandinavian** | **Kraken** | Giant squid. Not confirmed alive on camera until 2004. "Monster" and "species nobody has photographed yet" were the same category for most of history |
+| **Irish** | **Púca** | A shapeshifter tied to Samhain and the end of harvest — after its night, what is left in the field is not fit to pick. Folklore doing the job of a date on a calendar |
+| **Japanese** | **Tanuki** | An actual living animal with enormous folklore attached. The quest is the difference between a mythical animal and **a real animal treated mythically** — and the raccoon dog is right there in the roster |
+| **Inuit** | **Qalupalik** | A creature that takes children who go to the water's edge alone. The ice edge genuinely kills children who go there alone. **Instruction, in the form that gets remembered** |
+| **Māori** | **Taniwha** | Guardians associated with particular stretches of water — frequently the dangerous ones. Still cited in New Zealand planning and consultation today, which makes this the one that is **not** past tense |
+| **Aztec / Nahua** | **Ahuizotl** | A water creature with a grasping hand on its tail, said to drown people at the lake edge. Already drawn for Safari Saga |
+| **Akan / West African** | **Anansi** | The spider who owns all stories. The quest sits beside a real orb-weaver and asks why the **trickster** role lands on this animal in so many places |
+| **Arabian / Persian** | **Roc** | A bird enormous enough to carry an elephant, reported from the Indian Ocean trade — and Madagascar had the elephant bird, whose eggs are the size of a rugby ball and were carried as curiosities |
+| **Slavic** | **Rusalka** | A water spirit at the river in early summer. Same function as the qalupalik, invented independently, thousands of miles away — which is the point of putting them in the same game |
+| **Aboriginal Australian** | **Bunyip** | A waterhole creature, sometimes linked by scholars to *Diprotodon* remains. **Flagged for consultation — see below** |
+
+### The rule this set has to follow
+
+**Do not adjudicate whether a being is real, and do not treat living cultures'
+beliefs as solved puzzles.** The Greek griffin is safe to explain because nobody
+alive holds it as belief. The taniwha and the bunyip are not in that category.
+
+For those, the game presents the folklore **as the culture presents it**, notes
+where outside scholars have proposed a connection, and says clearly that the
+proposal is an outsider's. **This set needs consultation before it ships** — which
+is the open question already parked in the doc, now with a concrete reason and a
+concrete list attached.
+
+---
+
+## FOSSILS — one per period
+
+### A terminology note first
+
+**There are only three eras** — Palaeozoic, Mesozoic, Cenozoic. Three quests is too
+few for 50 fossil species. **Periods** give twelve or thirteen, which fits. The
+game can still say "era" in dialogue, where it is the ordinary English word.
+
+### The through-line: not what lived, but how anyone knows
+
+Every one of these is a **detective story about method.** That is what makes them
+fun rather than a list, and it is the thing a museum placard never has room for.
+
+| Period | The find | What it teaches |
+|---|---|---|
+| **Ediacaran** | **Charnia**, in English rock everyone knew was too old to hold fossils. A schoolgirl reported it and was told she was mistaken; a boy found it soon after and was believed | **Who gets believed.** Also: the floor of the fossil record kept dropping |
+| **Cambrian** | **Anomalocaris**, described as three separate animals — the mouth, the arm and the body each got their own name — before anyone realised they were one | Reconstruction is **inference**, and inference can be confidently wrong |
+| **Ordovician** | The first mass extinction, and orthocone nautiloids several metres long | Extinction is **normal, enormous, and older than backbones on land** |
+| **Silurian** | Sea scorpions over two metres, and the first things to crawl out of water | The land was **empty**, and something had to be first |
+| **Devonian** | **Tiktaalik.** Predicted from the age of the rock, searched for on purpose, found on Ellesmere Island in 2004 | **Evolution makes testable predictions.** The cleanest example that exists |
+| **Carboniferous** | Dragonflies with 70cm wingspans, in forests with far more atmospheric oxygen | Deep time is physically present today — **that forest is the coal** |
+| **Permian** | The Great Dying: the largest extinction in the record. And *Dimetrodon*, which is not a dinosaur and is **more closely related to you than to one** | The biggest extinction is the one nobody has heard of |
+| **Triassic** | Crocodile-line archosaurs ruling, with dinosaurs as a minor group | **The winners were not obvious at the time** |
+| **Jurassic** | **Mary Anning** at Lyme Regis — ichthyosaur, plesiosaur, the first British pterosaur, and coprolites. Sold fossils to eat, was refused membership of the Geological Society for being a woman, and watched others publish her finds | **Whose name goes on a discovery**, and what that has to do with the science |
+| **Cretaceous** | Feathered dinosaurs from Liaoning, from 1996 — and then melanosome shape revealing **colour**, so *Sinosauropteryx* is known to have had a banded ginger-and-white tail | **We can know what colour an extinct animal was.** Almost nobody knows this |
+| **Paleogene** | Whales going back to the sea: *Pakicetus*, *Ambulocetus*, *Basilosaurus*, and an ankle bone that ties them to hippos and deer | A **complete transitional sequence**, walkable end to end |
+| **Neogene** | Megalodon, known almost entirely from teeth — and Steno realising in 1667 that "tongue stones" were shark teeth, which is where reading rock layers began | **Stratigraphy was invented by identifying a fossil correctly** |
+| **Quaternary** | Mammoths in permafrost, complete enough to have hair and stomach contents — and the live de-extinction argument | The **ethical question that is still open**, presented as open |
+
+### Why this set matters more than it looks
+
+The fossil quests are where the game explains **deep time**, and deep time is the
+single hardest idea in natural history to convey. A player who finishes these
+understands that the Permian extinction, the whale's ankle and the ginger tail are
+all things people **worked out**, from evidence, in living memory in some cases.
+
+That is the "learning based, not conservation focused" brief, delivered.
