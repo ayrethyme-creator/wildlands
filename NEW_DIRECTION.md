@@ -4647,6 +4647,17 @@ change rather than a contradiction.*
   anything. **Unlocked by documentation, not by possession**, so it does not fight
   the facility rule that keeping an animal is a failure state.
 
+- **2026-08-25 — Ambassador animals demonstrate their signature ability to
+  visitors.** Ayr, idea 73. The facility's saddest outcome becomes its education
+  programme, which is what real ambassador animals are for. The game does not
+  fight the word "zoo"; it just makes clear every animal there arrived because it
+  could not go home.
+- **2026-08-25 — The signature-ability cost estimate was wrong and is corrected.**
+  Not 832 animations: about 20 shared systems, ~140 bespoke pieces, and ~160
+  species with no showable verb who get a size reference and a cutaway instead.
+  Four of the cheapest categories — scale, light/vision shader, cutaway, audio —
+  are also among the most striking.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -4778,3 +4789,81 @@ handful of spectacular ones will hunt for more.
 - Does each career see it differently — photograph it, measure it, explain it?
 - Does an ambassador animal demonstrate its ability to visitors? That would give
   non-releasable animals a job that is not sad.
+
+---
+
+## Ambassadors, and the word "zoo"
+
+*Ayr, 2026-08-25.*
+
+**73.** *"Yes on that last question most definitely. And while there is no 'zoo' I
+did want to have animals that are non-releasable bc that's real life, and yes they
+become ambassadors. **A lot of ppl will think of that as a zoo anyway.**"*
+
+**Decided: ambassador animals demonstrate their signature ability to visitors.**
+It gives the non-releasable animals a job that is not sad, it turns the facility's
+saddest outcome into its education programme — which is exactly what real
+ambassador animals are for — and it makes the signature ability pay into all three
+pillars instead of just the codex.
+
+**And the game should not be precious about the word "zoo."** Ayr is right that
+players will read it as one regardless. The distinction that matters is not the
+label, it is that **every animal here arrived because it could not go home.** Say
+that plainly and let people call the building whatever they call it.
+
+---
+
+## Correcting the cost estimate: it was never 832 animations
+
+*Claude, 2026-08-25. Ayr asked why 832 bespoke animations is not achievable, and
+the honest answer is that the question exposed a bad assumption in my own
+estimate.*
+
+**The estimate assumed every signature is an animation. Most are not.**
+
+I classified 70 written field-guide entries by what the button would actually have
+to render. The result:
+
+| Mechanism | What it costs | Examples from the roster |
+|---|---|---|
+| **Scale reference** | One system. A transform, no animation | Weasel at 25g, kodkod at 2kg, tortoise from coin to 45kg, king cobra at 5m |
+| **Vision / light mode** | One shader with parameters | Scorpion glowing under UV, reindeer *seeing* UV, fruit bat's low-light sight, chameleon's nanocrystals, the whole deep-sea biome |
+| **Cutaway anatomy** | Illustration, not animation | Camel's hump is fat, turtle's shell is its ribs, howler's hyoid bone, langur's chambered stomach |
+| **Audio** | No visual work at all | Proboscis nose as resonator, giant otter's nine calls, meerkat's hawk-call vs jackal-call, indri duets |
+| **Shared locomotion rigs** | ~8–10 rigs total | Head-first descent (margay, genet, marbled cat, linsang), gliding (sugar glider, flying squirrel, colugo), brachiation (gibbon, siamang), prehensile tail (spider monkey, kinkajou, cuscus, binturong) |
+| **Defensive posture** | One rig | Ball python, pangolin, armadillo, hedgehog, musk ox circle |
+| **Group behaviour** | One crowd system | Coati bands, baboon troop politics, the meerkat sentry |
+| **Genuinely bespoke** | The real work | Gecko setae zoom, capuchin stone tools, holding a crocodile's jaw shut, the genet through the gap, the loris licking its elbow gland, the beaver's dam |
+
+**Roughly 19% of entries are not demonstrable at all** — "fewer than 1,500 remain",
+"it was named a panda first", "Europeans did not know it existed until 1901". Good
+field-guide writing, no verb.
+
+**Of the demonstrable ~81%, about one in five is genuinely bespoke.**
+
+### The corrected numbers
+
+Extrapolated from the sample to ~832 species:
+
+- **~20 systems** covering roughly 530 species
+- **~140 bespoke pieces** — the ones that sell the feature
+- **~160 with no showable trait**, which need a fallback
+
+**140 is a real number for a multi-year project. 832 was not, and it was never the
+right figure.**
+
+### Two things I got wrong
+
+1. **I called the shared-rig tier a compromise.** It is not. Rigging a skeleton
+   and reusing it with different parameters is simply how 2D animation is made —
+   including in games with hundreds of characters. There is no lesser version
+   here.
+2. **The four cheapest categories are also among the most spectacular.** A
+   scorpion fluorescing under UV and a weasel standing next to a human hand both
+   cost close to nothing and both land hard.
+
+### The fallback rule
+
+**Nobody is empty-handed.** Every species can at minimum be placed next to a size
+reference and shown in cutaway. The ~160 with no unique verb get that, and it is
+still worth looking at.
