@@ -4819,6 +4819,16 @@ change rather than a contradiction.*
   volunteers are who the player was as a teenager). Adds the **return report** as
   the rhythm between the two modes.
 
+- **2026-08-25 — SEQUENTIAL AUDIT: the foundation is missing.** Ayr called it —
+  detail was being designed above an undefined base. Layers 2, 4 and 5 (one quest,
+  one life stage, the whole game) are built. **Layers 0, 1 and 3 — moment to moment,
+  one encounter, one session — are empty.** The critical one is **idea 10, flagged
+  by Ayr on day one and never done: the befriend encounter mechanic.** The old game
+  used battles; this one removed them and never replaced them, so "catching" appears
+  in quotes throughout this document because nobody has said what it is. Work order
+  from here: encounter, then moment-to-moment, then session, then back to the open
+  questions. Euthanasia is deferred deliberately, not ignored.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -6463,3 +6473,76 @@ the two modes a rhythm — go away, do a quest, come back to a place that kept l
 - **Does the player lay out buildings freely, or choose from prepared plots?** Free
   layout makes the two-routes puzzle real. Prepared plots make it approachable.
 - **Can a facility fail?** Money running out, welfare collapsing, licence revoked.
+
+---
+
+## WHERE THE DESIGN ACTUALLY STANDS — A SEQUENTIAL AUDIT
+
+> **Ayr, 2026-08-25.** *"You're asking for roof tile options before we've established
+> where the roof comes from or if there even is a roof. Break it down sequentially
+> more first."*
+>
+> Correct. This audit exists so the order is visible.
+
+### First, a word I have been using badly
+
+**"Loop"** is game-design vocabulary, not programming. It means **the cycle of
+actions a player repeats.** Designers name three sizes: the **core loop** (seconds
+to minutes, the thing you do over and over), the **session loop** (one sitting), and
+the **long loop** (the whole game).
+
+**I have been calling the rehabilitation sequence a "loop" and it is not one.**
+Intake, triage, quarantine, rehabilitation, conditioning, outcome is a **pipeline** —
+an animal goes through it once and comes out. Calling it a loop hid the fact that
+**the player's actual core loop has never been designed.**
+
+### The stack, bottom to top
+
+| Layer | The question it answers | Status |
+|---|---|---|
+| **0 — Moment to moment** | How you move, what buttons exist, what the screen shows | **MISSING** |
+| **1 — One encounter** | An animal appears. What happens? What is "catching"? | **MISSING** — some camera notes for the photographer, nothing for researcher or guide |
+| **2 — One quest** | Start to finish | **BUILT** — the five-beat shape, 2026-08-24 |
+| **3 — One session** | What an hour at the keyboard contains | **MISSING** |
+| **4 — One life stage** | Twelve quests, a facility, collecting | Roughly built |
+| **5 — The whole game** | Six stages, three careers, two modes, 1000 species | **BUILT** |
+
+**Layers 2, 4 and 5 are built. Layers 0, 1 and 3 are empty — and they are the
+foundation.**
+
+### This was flagged on day one and never done
+
+**Idea 10, Ayr, in the first batch of twenty:** *"I need to design the befriend
+encounter mechanic way different from the current game."*
+
+It was recorded as a need and never returned to. Everything since — the careers, the
+collecting, the facility unlock, the signature ability, the naming rule — **assumes
+an encounter mechanic that does not exist.**
+
+### Why this one is load-bearing
+
+The old game answered it with battles. **This game removed battles and did not
+replace them.** So:
+
+- **Collecting** has no verb. "Catching" is in quotes everywhere in this document
+  because nobody has said what it is.
+- **The three careers** are supposed to be three different games. They are currently
+  three different job titles.
+- **The facility unlock** is "you catch it" — resting on the undefined thing.
+- **The signature ability** is viewed on an animal you obtained by the undefined
+  thing.
+
+**Nothing above layer 1 is safe until layer 1 exists.**
+
+### The order to work in from here
+
+1. **Layer 1 — the encounter.** What happens when you meet an animal, and what the
+   three careers each do about it. Everything else depends on it.
+2. **Layer 0 — moment to moment.** Movement, camera, controls, what is on screen.
+   Partly falls out of 1.
+3. **Layer 3 — the session.** How an hour is shaped once 0 and 1 exist.
+4. **Then** return to the open questions: euthanasia, facility failure, free layout
+   versus prepared plots, what On the Brink and the Vigil do.
+
+**Euthanasia is not being ignored — it is being deferred deliberately**, because it
+is a layer-4 question and layers 0, 1 and 3 are missing underneath it.
