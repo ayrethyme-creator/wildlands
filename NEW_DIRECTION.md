@@ -3936,6 +3936,90 @@ there are.
 
 ---
 
+## DEEP SEA — the twelfth biome
+
+> **Ayr, 2026-08-25.** Taiga would have been the northern end of Forest. Deep
+> sea is somewhere you genuinely **travel to** — a submersible descent is a
+> different expedition from a boat trip — so it earns being a region.
+
+### The ten that move out of open ocean
+
+Anglerfish · Coelacanth · Frilled Shark · Giant Squid · Goblin Shark ·
+Japanese Spider Crab · Oarfish · Pacific Hagfish · Pompeii Worm ·
+Scaly-foot Snail
+
+Open ocean drops to **23**; deep sea starts at **10**. Both need filling, which
+is fine — the deep is where the most interesting unused animals are.
+
+### Suggested additions — the extraordinary ones
+
+**Things that should not be possible**
+
+- **Giant tube worm** — grows to two metres at hydrothermal vents and has **no
+  mouth, no gut and no anus.** It farms bacteria inside itself that live on the
+  chemicals in the vent water. An animal that eats nothing.
+- **Yeti crab** — grows bacteria on the hair of its own arms and **waves them
+  over the vent to feed them**, then eats them. Farming, by a crab.
+- **Barreleye** — a **transparent head** with tubular eyes inside it, looking
+  up through its own skull.
+- **Bone-eating snot flower worm** *(Osedax)* — lives only on whale skeletons,
+  bores in with acid, and the males are microscopic and live inside the female
+  by the dozen.
+- **Blobfish** — famous for being ugly, and it is only ugly because it is
+  brought to the surface. At depth it looks like a perfectly ordinary fish.
+  The picture everybody knows is a photograph of decompression injury.
+
+**Record holders**
+
+- **Siphonophore** *(Apolemia)* — a colony that behaves as one animal, and the
+  longest one recorded was **45 metres**, longer than a blue whale.
+- **Cuvier's beaked whale** — **the deepest dive of any mammal**, nearly 3 km
+  down, for over three hours on one breath.
+- **Snailfish** — the **deepest fish ever recorded**, over 8 km down in the
+  Mariana Trench.
+- **Bristlemouth** — almost certainly **the most numerous vertebrate on Earth**,
+  and almost nobody has heard of it.
+- **Fangtooth** — the largest teeth of any fish relative to its size; it cannot
+  fully close its mouth.
+
+**Light in the dark**
+
+- **Atolla jellyfish** — when attacked it fires a **spinning burst of blue
+  light**, a burglar alarm meant to attract something bigger to eat its
+  attacker.
+- **Stoplight loosejaw** — shines **red light**, which almost nothing down
+  there can see. It hunts with an invisible torch.
+- **Hatchetfish** — lights its own underside to erase its silhouette against
+  the faint light above.
+- **Lanternfish** — rises to the surface every night and sinks again by dawn,
+  the largest animal migration on the planet, happening twice a day.
+- **Vampire squid** — neither, and it eats **marine snow**: the drifting
+  remains of everything that died higher up.
+
+**The rest worth having**
+
+Dumbo octopus · Gulper eel · Viperfish · Black swallower *(swallows prey ten
+times its own mass)* · Cookiecutter shark *(takes round plugs out of living
+whales)* · Megamouth shark · Sixgill shark · Ghost shark / chimaera · Sea pig ·
+Giant isopod · Tripod fish · Glass squid · Bigfin squid *(arms trailing seven
+metres behind it)* · Venus flower basket *(a glass sponge that traps a pair of
+shrimp inside for life — they are given as a wedding gift in Japan)* · Deep-sea
+dragonfish · Sea toad · Deep-sea cucumber
+
+**Around 40 additions**, taking deep sea to roughly 50.
+
+### Quest material
+
+- **Deep-sea mining** — the vent communities and the manganese nodule fields are
+  the live conservation fight of this decade, and almost nobody has heard of it.
+- **Whale fall** — an entire ecosystem that exists only because something huge
+  died, lasting decades. It is the deep sea's version of a forest.
+- **Bottom trawling** — flattening seafloor communities that took centuries to
+  grow.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -4125,6 +4209,9 @@ change rather than a contradiction.*
   become a micro-region type inside forest, mountains, coast and desert. The
   five cave species reassign — a bat is a forest animal that sleeps in a cave.
   Balancing floor becomes **57**, giving a final spread of 57 to 108.
+- **2026-08-25** — **DEEP SEA is the twelfth biome.** Ten species move out of
+  open ocean; both need filling, and the deep is where the most interesting
+  unused animals are.
 - **2026-08-25** — **Biomes contain varied internal terrain**, not one
   landscape: the rainforest has highlands and rivers, and so on. Species sit in
   a **sub-area** of a region. The Mountains biome therefore means specifically

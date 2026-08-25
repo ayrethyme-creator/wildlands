@@ -246,3 +246,9 @@ BIOME_BY_HAND.ibericanworm = "desert";
 BIOME_BY_HAND.beaver       = "forest";
 BIOME_BY_HAND.opossum      = "farmland";
 // raven and the deer (white-tailed, elk, moose, muntjac) are already in forest.
+
+// Ayr, 2026-08-25: DEEP SEA becomes the twelfth biome. These ten move out of
+// open ocean - they are all animals of the deep, not the surface.
+["anglerfish","coelacanth","frilledshark","giantsquid","goblinshark",
+ "spidercrab","oarfish","pacifichagfish","pompeiiworm","scalyfootsnail"
+].forEach(function (k) { BIOME_BY_HAND[k] = "deepsea"; });
