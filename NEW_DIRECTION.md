@@ -4247,6 +4247,131 @@ with them. That is the same argument that made three careers affordable.
 
 ---
 
+## THE FACILITY SYSTEM
+
+> **Claude-contributed**, 2026-08-25, researched against real wildlife
+> rehabilitation practice. Building this out from idea 18, which was one
+> paragraph holding up a third of the game.
+
+### What it is: a recovery centre, not a zoo
+
+Ayr said "real life zoos and wildlife recovery centers" — and the recovery
+centre is the stronger model, because **it has a loop and a zoo does not.** A
+zoo acquires and displays. A recovery centre takes animals in, works on them,
+and tries to give them back.
+
+### The core loop, taken straight from real practice
+
+```
+intake → triage → quarantine → rehabilitation → pre-release conditioning → outcome
+```
+
+| Stage | What really happens | The decision it creates |
+|---|---|---|
+| **Intake** | An animal arrives — injured, orphaned, confiscated | Do you have room, staff, and the right enclosure? |
+| **Triage** | Blood loss, dehydration, hypothermia first; full exam after | What do you treat first, with the vet time you have? |
+| **Quarantine** | **Two to six weeks**, species-dependent, to stop disease crossing | Quarantine space is space not used for anything else |
+| **Rehabilitation** | Treatment and recovery | How much intervention, and at what cost to wildness? |
+| **Pre-release conditioning** | **Relearning to forage, to evade predators, to navigate.** Not just healing — remembering how to be wild | Have you actually prepared it, or only healed it? |
+| **Outcome** | Release, or not | The whole game |
+
+### The outcome fork — and this is the heart of it
+
+**Release is the win. And the animal leaves.**
+
+- **Soft release** — gradual, with supplemental food and shelter while it
+  re-establishes. Expensive, slow, much higher survival.
+- **Hard release** — straight out. Cheap, fast, worse odds.
+
+**Non-releasable animals stay.** In real practice that means: blind, two or more
+damaged legs, a bird that cannot use both wings, a disease risk to wild
+populations — or **imprinted**.
+
+Those become **ambassador animals**, doing education work.
+
+### The inversion that makes this a different game
+
+**Keeping an animal is a failure state wearing the costume of a reward.**
+
+Every animal in the facility is one that could not be sent home. The collection
+built here is a record of the ones that did not make it back — which is exactly
+true of real sanctuaries, and the opposite of how every collection game works.
+
+That single reversal does more thematic work than any amount of writing.
+
+### The thing that connects it to idea 55
+
+**Imprinted animals cannot be released.**
+
+An animal hand-reared too closely stops recognising itself as wild, and there is
+no undoing it. So the most emotionally satisfying act in the game — bottle-feeding
+an orphan, the thing idea 55 exists to give back — **carries its own consequence,
+and the consequence is real rather than invented.**
+
+Raise it right and it goes home and you lose it. Raise it too close and it stays
+with you forever, and that is why. The player gets to keep the animal, and learns
+exactly what it cost.
+
+Nothing needed inventing. That is how it actually works.
+
+### Field knowledge is the husbandry manual — Ayr's idea, and the best one here
+
+Idea 18: "they all will have difficulty levels that can change as you gather
+more info from the field and from passing tests."
+
+**In Planet Zoo you look an animal's needs up in a menu.** Here you have to have
+learned them. What was seen in the field *is* the care sheet:
+
+- Watched it feeding at dawn and dusk? You know when to feed it.
+- Documented what it eats? You can build the diet.
+- Seen the burrow, the nest, the roost? You can build the enclosure.
+- Know the social structure? You know whether it can be housed alone.
+
+**An animal barely studied is one that will be kept badly.** That welds the three
+pillars into one system: field research is not a separate activity from building,
+it is the prerequisite for building well.
+
+### Not everything belongs in captivity
+
+Ayr's line, and it is true. Real welfare outcomes:
+
+- **Do badly:** elephants, cetaceans, great apes, polar bears, wide-ranging
+  carnivores, most migratory birds
+- **Do well:** small mammals, most reptiles and amphibians, many birds,
+  invertebrates
+- **Catch and release only:** the great white shark from idea 19 — nobody has
+  ever kept one alive for long
+
+The facility should **refuse** some animals, and refusing should be the correct
+play rather than a lockout.
+
+### The rest of the system
+
+- **Staff** — keepers, a vet, educators. Real roles with real limits: one vet
+  cannot triage four animals at once.
+- **Money** — visitors, grants, donations. And the honest tension: visitors pay
+  to see charismatic animals, and welfare does not care what is charismatic.
+- **Space** — quarantine, hospital, conditioning enclosures, permanent housing.
+  Every one competes with the others.
+- **Time** — animals age and die here too.
+
+### The dark mirror, already written
+
+The captive lion industry quest — 350+ farms, cubs pulled from mothers within
+days, sold as petting experiences — was parked with no home. **It belongs here.**
+Same buildings, same cubs, same claim to be hand-rearing orphans, and by then the
+player runs a place that actually does it. The contrast writes itself.
+
+### What still needs deciding
+
+- **Does the sandbox mode exist**, and is it postgame or always available?
+- **Is euthanasia in the game?** It is real, it is routine in rehabilitation, and
+  it is the heaviest thing on this list. It may be a decision the player never
+  makes but does see made.
+- **How much is per-biome?** Twelve facilities is a lot. Do they specialise?
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -4449,6 +4574,12 @@ change rather than a contradiction.*
   a **sub-area** of a region. The Mountains biome therefore means specifically
   **alpine, above the treeline** — forested mountainsides belong to forest and
   rainforest regions.
+- **2026-08-25** — **The facility is a recovery centre, not a zoo.** Loop is
+  intake, triage, quarantine, rehabilitation, pre-release conditioning, outcome.
+  **Release is the win and the animal leaves; the animals kept are the ones that
+  could not be sent home.** Imprinted animals can never be released, which gives
+  idea 55's hand-rearing its own real consequence. **Field knowledge is the
+  husbandry manual** — you can only house well what you studied well.
 - **2026-08-25** — **Three pillars, not one: story, gameplay, and building.**
   Collecting is connective tissue rather than the draw, since there are no
   battles to make a caught animal *do* anything. Facilities are a pillar, not a
