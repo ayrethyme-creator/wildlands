@@ -205,6 +205,71 @@ a few are too good to leave out.
 | **Sea hare** | Releases a purple ink that jams a predator's sense of smell |
 | **Grey seal** · **Harbour seal** | The two temperate seals, and the coast currently has neither |
 
+
+---
+
+## MOUNTAINS — proposed, ~15 species
+
+Currently 34, and heavy on hoofed herbivores and raptors. What is missing is
+**everything that makes altitude itself interesting** — the animals that live
+where there is barely any air.
+
+### The altitude records
+
+| Species | Why |
+|---|---|
+| **Himalayan jumping spider** | **The highest permanent resident of any animal on Earth**, at 6,700 m. There is nothing to eat up there, so it lives on insects blown up from below |
+| **Bar-headed goose** | **Flies over the Himalayas** at 7,000 m and above, in a third of the oxygen at sea level, in a single day's climb |
+| **Alpine chough** | **Nests higher than any bird** and has been recorded at 8,200 m on Everest, following climbers for scraps |
+| **Andean flamingo** | Feeds in salt lakes at 4,000 m that freeze solid overnight |
+
+### The specialists
+
+| Species | Why |
+|---|---|
+| **Bearded vulture** *(lammergeier)* | **Ninety percent of its diet is bone.** It carries them into the air and drops them onto rock to shatter them, then eats the marrow |
+| **Wallcreeper** | Climbs sheer cliff faces like a moth, flicking crimson wings |
+| **Himalayan monal** | Iridescent to the point of looking metallic. Nepal's national bird |
+| **Alpine salamander** | **Gestation of up to three years** at altitude, and it gives birth to live young rather than laying eggs — there is no reliable water to lay them in |
+| **Titicaca water frog** | Enormous loose folds of skin to absorb oxygen from thin high-altitude water. Critically endangered |
+| **Apollo butterfly** | A high-alpine butterfly, and one of the first insects anywhere to be legally protected |
+
+### The missing prey and grazers
+
+**Bharal** *(blue sheep — the snow leopard's main prey, and its absence is why
+snow leopards take livestock)* · **Argali** *(the largest wild sheep, with
+horns that can weigh 25 kg)* · **Himalayan tahr** · **Mountain goat**
+*(climbs near-vertical rock)* · **Chamois** · **Mountain hare**
+
+---
+
+## DESERT — proposed, ~8 species, plus 4 moves
+
+### Four reptiles moved in, not created
+
+People think of reptiles when they think of deserts, and four were filed
+elsewhere:
+
+**Blue-tongued skink** *(forest → desert)* · **Frilled lizard** *(forest →
+desert)* · **Rock monitor** *(savanna → desert)* · **Chameleon** *(rainforest →
+desert — this entry is the veiled chameleon, habitat "Mountains of Yemen and
+Saudi Arabia", which is arid)*
+
+**Fennec fox is already in desert.** Confirmed.
+
+### New
+
+| Species | Why |
+|---|---|
+| **Namib desert beetle** | Stands on a dune facing the fog and **collects water on its own back**, then tips it into its mouth. The shell texture has been copied for real water-harvesting technology |
+| **Kangaroo rat** | **Never drinks water in its entire life.** It metabolises what it needs from dry seeds |
+| **Golden mole** | Blind, **iridescent** — genuinely shimmering — and it *swims* through loose sand rather than digging tunnels |
+| **Sidewinder** | Moves sideways specifically to keep **as little of itself as possible touching burning sand** at any moment |
+| **Shovel-snouted lizard** | Does a **thermal dance**, lifting its feet off the sand in alternating pairs, and dives into the dune to escape the heat |
+| **Elf owl** | **The smallest owl in the world**, at about 40 grams, nesting in woodpecker holes in giant cactus |
+| **Addax** | Critically endangered — **fewer than a hundred left in the wild** — and it can go its whole life without drinking |
+| **Chuckwalla** | Wedges itself into a rock crack and **inflates its body** so it cannot be pulled out |
+
 ---
 
 ## POLAR — LIKELY, 25 species
@@ -251,6 +316,8 @@ nobody knows why)* · Ross's gull
 | Open ocean | ~25 confirmed |
 | Coral reef | ~20 confirmed |
 | Coast | ~12 confirmed |
+| Mountains | ~15 proposed |
+| Desert | ~8 proposed + 4 moves |
 | Polar | 25 likely |
 | **Committed so far** | **114** |
 | Budget | 121 |

@@ -274,3 +274,10 @@ BIOME_BY_HAND.pufferfish    = "reef";
 BIOME_BY_HAND.bullshark     = "wetland";   // the shark that swims 4,000km up the Amazon
 BIOME_BY_HAND.otter         = "wetland";
 BIOME_BY_HAND.nicobarpigeon = "forest";
+
+// Ayr, 2026-08-25: reptiles to desert. People think of reptiles when they think
+// of deserts, and several were sitting in forest and rainforest.
+BIOME_BY_HAND.skink         = "desert";   // blue-tongued skink - Australian arid scrub
+BIOME_BY_HAND.frilledlizard = "desert";   // northern Australian dry country
+BIOME_BY_HAND.rockmonitor   = "desert";   // African arid rocky ground
+BIOME_BY_HAND.chameleon     = "desert";   // this entry is the veiled chameleon: "Mountains of Yemen and Saudi Arabia"
