@@ -3873,6 +3873,69 @@ systems teaches that without a word of explanation.
 
 ---
 
+## Ideas — round nineteen: biomes have internal terrain
+
+*Ayr's, 2026-08-25.*
+
+**70.** Each biome is **not one open field with rocks and trees**. Every region
+contains **smaller areas of genuinely different terrain** — the rainforest has a
+mountain area and rivers, and so on for the others. *"That actually makes it
+more real and less like Pokémon."*
+
+### This is bigger than idea 40, and I had assumed less (Claude note)
+
+I had read micro-regions as **features** — a waterhole, a gorge, a cave mouth.
+Ayr means **terrain**: a region has hills, rivers, clearings, ridges,
+different-aged forest. That is a much stronger statement about the world, and it
+is right — real biomes are mosaics, not backdrops.
+
+### What it fixes
+
+**Several arguments we had stop being arguments.** Earlier passes kept hitting
+species that are "rainforest, but montane" or "forest, but by water":
+
+- **Resplendent quetzal, mountain gorilla, clouded leopard, marbled cat,
+  snub-nosed monkey** — all cloud-forest or montane-forest animals. They do not
+  need moving to the mountains biome. **They live in the rainforest's high
+  ground.**
+- **Hoatzin, pygmy hippo, capybara, giant otter** — flooded-forest and
+  riverside animals. They live along the **rainforest's rivers**, not in a
+  separate wetland.
+- **Grizzly bear** — salmon rivers *inside* forest, which is exactly what put it
+  wrongly in coast twice.
+
+So the classifier arguments about montane-versus-lowland were arguments about a
+distinction the world can now simply contain.
+
+### What it sharpens
+
+**The Mountains biome becomes specifically ALPINE** — above the treeline. Rock,
+scree, ice, high meadow. Ibex, marmot, condor, snow leopard, pika, ptarmigan.
+Anything that lives on a forested mountainside belongs in a forest region's high
+ground instead.
+
+That makes mountains a smaller, cleaner, more distinctive biome rather than a
+catch-all for "hilly".
+
+### What it costs
+
+- **Terrain art per region rises.** Each of the eleven needs several distinct
+  looks rather than one.
+- **Encounter placement gets a second layer** — species sit in a *sub-area*,
+  not just a biome. Rainforest is no longer one pool; it is canopy, floor,
+  river, and highland pools.
+- **The seed has more to do**, which was already the plan: which sub-areas
+  generate where inside a fixed region.
+
+### What it does not change
+
+The **eleven regions**, the **700/200/100 roster**, the biome counts, and the
+quest structure all stand. This is about what a region *contains*, not how many
+there are.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -4062,6 +4125,11 @@ change rather than a contradiction.*
   become a micro-region type inside forest, mountains, coast and desert. The
   five cave species reassign — a bat is a forest animal that sleeps in a cave.
   Balancing floor becomes **57**, giving a final spread of 57 to 108.
+- **2026-08-25** — **Biomes contain varied internal terrain**, not one
+  landscape: the rainforest has highlands and rivers, and so on. Species sit in
+  a **sub-area** of a region. The Mountains biome therefore means specifically
+  **alpine, above the treeline** — forested mountainsides belong to forest and
+  rainforest regions.
 - **2026-08-25** — **FINAL ROSTER SHAPE: 700 living real animals + 200 postgame
   real (Vigil 100, fossils 50, domestic 50) + 100 postgame mythology = 1000.**
 - **2026-08-25** — **The 13 invented wardens are cut from the new game** and
