@@ -4780,7 +4780,9 @@ That keeps release as the good ending and still rewards completing the roster.
 
 ### The honest cost
 
-**832 bespoke animations is not achievable.** Tiering is the only way:
+**832 bespoke animations is a lot of production time and a lot of review.**
+Tiering is how that cost comes down — see the correction below, which revises
+these numbers substantially downward:
 
 - **Bespoke** — perhaps 60–100, the genuinely unique ones that sell the feature
 - **Shared systems** — one climbing rig serves margay, genet, marbled cat, kodkod
@@ -4856,8 +4858,8 @@ Extrapolated from the sample to ~832 species:
 - **~140 bespoke pieces** — the ones that sell the feature
 - **~160 with no showable trait**, which need a fallback
 
-**140 is a real number for a multi-year project. 832 was not, and it was never the
-right figure.**
+**140 is the honest figure. 832 was never the right one, because it counted
+animations for signatures that are not animations.**
 
 ### Two things I got wrong
 
