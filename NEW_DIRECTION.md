@@ -4775,6 +4775,23 @@ change rather than a contradiction.*
   every named individual anywhere can be fed, enriched and have its ability viewed,
   but only the ones you took in carry the autobiography.
 
+- **2026-08-25 — The twelve facilities specialise by biome.** Ayr, idea 76. Each
+  needs different buildings, systems and expertise, which is true of real
+  rehabilitation and is what makes twelve worth having rather than twelve copies.
+  Consequence built in: **an animal found in the wrong place must be transported**,
+  and transport is itself a welfare cost. Specialisation decides what a facility
+  *can* hold; it does not overrule the rule that some animals should not be held at
+  all, so refusing stays a correct play.
+- **2026-08-25 — Catching a species is what unlocks it in your facility.** Ayr,
+  idea 77. The mechanic is the justification and needs no narration. This removes
+  the heaviest reading of idea 74: it is **not** 700 bespoke plot-woven narratives.
+  The intake story is flavour from the ten categories; the autobiography still works
+  because the record — what, where, when, at which life stage — is real.
+- **2026-08-25 — Open: does each life stage span all twelve biomes?** If each
+  biome's young-adult quest earns that biome's facility, then all twelve are earned
+  during young adulthood and the three later stages develop them. Fits the impact
+  ladder exactly. Flagged, not assumed.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -6075,3 +6092,89 @@ player actually chose.
 - **Euthanasia and mortality**, which arrived again through the naming rule.
 - **Do the twelve facilities specialise**, and does the player run all twelve or
   build toward a few.
+
+---
+
+## THE TWELVE FACILITIES SPECIALISE
+
+> **Ayr, 2026-08-25.** *"The 12 facilities do specialize in the animal of the biome
+> they are in. Also, all of the animals in the sanctuary are technically ones you
+> 'brought in.' That doesn't have to be part of the story, but you unlock a species
+> in your facility by successfully 'catching' it."*
+
+**76 and 77. Both decided.**
+
+### Specialisation is what makes twelve facilities worth having
+
+Without it, twelve facilities are twelve copies of one building. With it, each one
+**looks different, needs different things, and cannot do the others' jobs.**
+
+It is also simply true. Real rehabilitation is specialised — marine mammal centres,
+raptor centres, bat rescues, reptile rescues. **Nobody treats a whale at a songbird
+centre**, because the pools, the equipment, the diets and the expertise are all
+different.
+
+| Facility | What the building actually needs |
+|---|---|
+| **Polar** | Chilled water, haul-out ledges, shade from a sun the animals never evolved for |
+| **Reef / Deep sea** | Saltwater systems, filtration, pressure-tolerant holding |
+| **Desert** | Heat gradients, deep burrowing substrate, UV |
+| **Rainforest** | Height. Canopy animals housed at ground level do badly |
+| **Wetlands** | Water quality, mud, shallow margins |
+| **Mountains** | Cold-tolerant, and vertical — cliff-dwellers need to climb |
+| **Farmland** | The smallest and the busiest. Hedgehogs, owls, bees, and constant public traffic |
+
+### The consequence worth building: transport
+
+If a facility can only hold its own biome's animals, then **an animal found in the
+wrong place has to be moved** — and transport is itself a welfare risk, which is
+true of real rehabilitation, where an enormous amount of the work is driving.
+
+A stranded marine animal a long way from the coastal facility is a genuine problem
+with a real answer: stabilise first, move second, and accept that the journey costs
+the animal something.
+
+**This gives the twelve facilities a relationship instead of making them a list.**
+
+### One thing specialisation cannot fix
+
+The facility design already records that some animals **do badly in captivity at
+all** — elephants, cetaceans, great apes, polar bears, wide-ranging carnivores.
+
+So the polar facility is not "the polar bear house." Specialisation decides what a
+facility *can* hold; it does not overrule what an animal *should* be asked to
+tolerate. **Refusing an animal stays a correct play.**
+
+### Catching is the unlock — and this removes a large burden
+
+**A species appears in your facility because you caught it.** The mechanic is the
+justification, and it does not have to be narrated.
+
+That resolves something the last section left heavy. Idea 74 asked for a name and
+an intake story for every main-game animal, which read as **700 bespoke narratives
+woven into the plot.** It is not that.
+
+- **The catch is the reason it is there.** No plot justification required.
+- **The intake story is flavour**, drawn from the ten categories, giving the animal
+  a specific and readable arrival without being load-bearing.
+- **The autobiography still works**, because the record is real: what you caught,
+  where, when, at which stage of your life.
+
+**Same emotional result, a fraction of the writing.** The stories that carry real
+narrative weight are the quest animals — a much smaller set that was always going to
+be written properly.
+
+### A structural reading that follows from this, and needs confirming
+
+Four quests per biome, one per adult life stage, and the young-adult quest of each
+biome **earns that biome's facility.**
+
+That implies **each life stage spans all twelve biomes** — twelve young-adult
+quests, then twelve adult-with-skills quests, and so on. Which means:
+
+- **All twelve facilities are earned during young adulthood**, one per biome
+- The three later stages are spent **developing** them rather than acquiring them
+- Specialisation arrives with the facility, since each is earned in its own biome
+
+That fits the impact ladder exactly — local change first, everywhere, then scale,
+then programmes, then law. **Flagged for Ayr rather than assumed.**
