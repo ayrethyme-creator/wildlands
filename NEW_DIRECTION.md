@@ -4185,6 +4185,68 @@ game should keep the second and compress the first.
 
 ---
 
+## Ideas — round twenty: three pillars, not one
+
+*Ayr's, 2026-08-25.*
+
+**71.** *"I was going on the assumption that the main draw would be catching the
+animals like it is in Pokémon. But I guess that's limiting. Minecraft has modes.
+And simulators are very popular. **Story, gameplay, and building are all
+important parts of games.**"*
+
+### The game already has three pillars — they were just not named as equals
+
+| Pillar | What it is | Who it holds |
+|---|---|---|
+| **Story** | 48 quests built on documented conservation history, ending in the real event and the real people | Players who came to learn something, and to feel something |
+| **Gameplay** | Three careers that are three different games — photograph it, measure it, explain it | Players who came for the doing |
+| **Building** | A facility in every biome. Hire, house, name, decide what can be kept and what must be released | Players who never stop |
+
+**Collecting is the fourth thing, and it is the connective tissue rather than the
+draw.** It is what you *do* across all three, not a pillar in itself.
+
+### Why "catching is the main draw" was the weakest reading
+
+- **There are no battles.** Pokémon's catching is compelling because the animal
+  then *does* something — it fights, it levels, it evolves. Strip that out and
+  pure collection is a checklist.
+- **The stories are the thing nobody else has.** No other game is built on
+  sourced conservation history with the real people credited. That is the
+  defensible ground.
+- **The building is the thing with proven retention.** Planet Zoo: a 40-hour
+  career mode and a **212-hour average playtime**, because a zoo is never
+  finished.
+
+### What the Minecraft comparison actually offers
+
+Modes. Minecraft holds two completely different audiences with survival and
+creative, and neither is a lesser version of the other.
+
+The obvious candidate here is a **sandbox facility mode** — build without the
+story gates, with whatever animals you have unlocked. It fits idea 45's want for
+deep post-game content, it costs far less than new story, and it is the mode
+that would keep people playing for years.
+
+Worth considering, not decided:
+
+- **Career mode** — the 750-animal main game, the thirteen regions, the quests.
+- **Sandbox** — facilities without gates, unlocked by finishing career mode.
+- **Photo mode / free roam** — the world without objectives, which the
+  photographer career half-builds anyway.
+
+### The honest cost
+
+**Three pillars is three times the design and three times the tuning.** A game
+with one strong loop and two weak ones is worse than a game with one strong
+loop. The risk is not ambition, it is *dilution*.
+
+The mitigation is that the pillars share their parts: the same species, the same
+world, the same codex, the same art. What differs is what the player is doing
+with them. That is the same argument that made three careers affordable.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -4387,6 +4449,10 @@ change rather than a contradiction.*
   a **sub-area** of a region. The Mountains biome therefore means specifically
   **alpine, above the treeline** — forested mountainsides belong to forest and
   rainforest regions.
+- **2026-08-25** — **Three pillars, not one: story, gameplay, and building.**
+  Collecting is connective tissue rather than the draw, since there are no
+  battles to make a caught animal *do* anything. Facilities are a pillar, not a
+  side feature.
 - **2026-08-25** — **No idle waiting.** Encounters must be driven by story or
   by decisions, never by time passing. Rarity is never expressed as standing
   still.
