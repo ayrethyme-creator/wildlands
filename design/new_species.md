@@ -132,7 +132,9 @@ plate)* · **Pilot fish** · **Common dolphin** · **Striped dolphin** ·
 
 ---
 
-## CORAL REEF — proposed, ~20 species
+## CORAL REEF — CONFIRMED, ~20 species
+
+*Ayr, 2026-08-25: "especially the coral. like, of course lol."*
 
 **This one genuinely needs it, and for a specific reason: the reef has no reef.**
 There is not a single coral in the roster. Corals are animals, and they are the
@@ -184,7 +186,7 @@ vanishing all at once)* · **Titan triggerfish**
 
 ---
 
-## COAST & KELP — proposed, ~12 species
+## COAST & KELP — CONFIRMED, ~12 species
 
 **Coast needs less.** At 49 it is reasonably healthy and the list is varied. But
 a few are too good to leave out.
@@ -247,9 +249,13 @@ nobody knows why)* · Ross's gull
 |---|---|
 | Deep sea | 32 confirmed |
 | Open ocean | ~25 confirmed |
-| Coral reef | ~20 proposed |
-| Coast | ~12 proposed |
+| Coral reef | ~20 confirmed |
+| Coast | ~12 confirmed |
 | Polar | 25 likely |
-| **Committed so far** | **57** |
+| **Committed so far** | **114** |
 | Budget | 121 |
-| **Remaining** | **64** |
+| **Remaining** | **7** |
+
+**Mountains and desert are still unproposed**, and 7 slots will not cover
+them. Either those biomes get very little, or the 700 figure flexes upward.
+Worth a decision rather than a drift.
