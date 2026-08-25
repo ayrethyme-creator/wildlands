@@ -335,3 +335,21 @@ pass at both without moving the 700.
   animal and is already the subject of the desert elder quest, so two quests were
   competing for one entry. The gemsbok is the emblematic Namibian conservancy
   species and a genuinely distinct animal. Takes one of the 121 free slots.
+
+## Added 2026-08-25 - six historical extinctions for the Vigil
+
+The Vigil drops to 44 once the twelve Ice Age species move to Fossils. These six
+bring it to 50. All real, all documented, all previously missing.
+
+- **Baiji** (2006) - the first cetacean humans wiped out
+- **Golden toad** (1989) - Monteverde; emblem of the amphibian collapse
+- **Pyrenean ibex** (2000) - the only animal ever cloned back and made extinct twice
+- **Po'ouli** (2004) - last bird died in captivity while a mate was still sought
+- **Bramble Cay melomys** (2016) - first mammal extinction attributed to sea level rise
+- **Christmas Island pipistrelle** (2009) - recorded calling alone until it stopped
+
+## Outstanding 2026-08-25 - 128 new living species
+
+Biomes stand at 579 living, less 7 leaving for On the Brink = 572. The confirmed
+target is **700**, so **128 new living species remain to be invented** and placed.
+Gemsbok (above) is one of them; 127 to go.

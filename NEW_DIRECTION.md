@@ -4714,6 +4714,16 @@ change rather than a contradiction.*
   dinosaurs come out to make room for the Ice Age twelve, and the group needs
   spreading across the record rather than sitting on one era.
 
+- **2026-08-25 — THE ROSTER IS CLOSED AT 700/50/100/50/50/50 = 1000.** Ayr asked
+  for round numbers and the five moves that get there are decided: 43 living leave
+  the Vigil for On the Brink, 7 more come from the biomes, 12 Ice Age species move
+  Vigil→Fossils, 6 real historical extinctions join the Vigil, and 12 surplus
+  dinosaurs are cut. **128 new living species remain to be invented.**
+- **2026-08-25 — Open, and not an arithmetic question: which 50 fossils.** After
+  the moves the group covers 5 of the 13 periods the fossil quests need. Eight
+  periods have no animal — Ediacaran, Cambrian, Ordovician, Silurian, Devonian,
+  Carboniferous, Paleogene, Neogene. Fixing it costs no slots, only swaps.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -5434,3 +5444,116 @@ the group is better for it because it stops being Jurassic-only.
 
 Every one is more recent, better documented and more relevant to the game's
 subject than a twelfth sauropod.
+
+---
+
+# THE 1000 — FINAL, ROUND, DECIDED
+
+> **Ayr, 2026-08-25.** *"I know it's weird, but it's what I want. I want nice round
+> numbers. 100's and 50's. Please make it so."*
+>
+> It is not weird. A roster that reads **700 / 50 / 100 / 50 / 50 / 50** is legible
+> to a player, checkable at a glance, and makes every completion bar in the game a
+> clean fraction. **This is the roster. It is no longer open.**
+
+```
+700   living animals        the twelve biomes
+ 50   On the Brink          critically endangered + extinct in the wild
+100   Mythology             postgame
+ 50   Fossils               postgame
+ 50   The Vigil             postgame — the genuinely extinct
+ 50   Breeds and domestics   postgame
+────
+1000
+```
+
+## The five moves that get there
+
+### 1. Forty-three living species leave the Vigil for On the Brink
+
+13 extinct-in-the-wild + 30 critically endangered. They were sitting in a memorial
+while still alive.
+
+### 2. Seven critically endangered species leave the biomes for On the Brink
+
+**Vaquita · Axolotl · Kākāpō · Sawfish · Sunflower sea star · Pangolin · Gharial.**
+
+43 + 7 = **50.** On the Brink is complete and required nothing invented.
+
+### 3. Twelve Ice Age species leave the Vigil for the Fossils
+
+**Woolly Rhinoceros · Dire Wolf · Smilodon · Megatherium · Glyptodon · Mastodon ·
+Columbian Mammoth · Cave Lion · Short-faced Bear · Giant Beaver · Steppe Bison ·
+Irish Elk.**
+
+7,700–13,000 years old, known from exactly the same evidence as the rest of the
+fossil group. The Vigil is for extinctions in recorded time.
+
+Vigil 56 → **44.** Fossils 50 → **62.**
+
+### 4. Six real historical extinctions join the Vigil
+
+| Species | Gone | Why |
+|---|---|---|
+| **Baiji** | 2006 | The first cetacean humans wiped out. A full survey simply found none |
+| **Golden toad** | 1989 | Monteverde. The emblem of the global amphibian collapse |
+| **Pyrenean ibex** | 2000 | **The only animal ever cloned back and made extinct a second time**, minutes after birth |
+| **Po'ouli** | 2004 | The last known bird died in captivity while a mate was still being searched for |
+| **Bramble Cay melomys** | 2016 | **The first mammal declared extinct because of sea level rise** |
+| **Christmas Island pipistrelle** | 2009 | Monitored to the end. The last one was recorded calling, alone, and then stopped |
+
+Vigil 44 → **50.** All six are real, documented, and were missing.
+
+### 5. Twelve surplus dinosaurs leave the fossil group
+
+Chosen by thinning the clades that were carrying three, four or six near-identical
+entries — **not** by cutting anything the record depends on.
+
+| Cut | Kept in its place | Why this one goes |
+|---|---|---|
+| **Brontosaurus** | Apatosaurus | The same animal. The name was sunk as a synonym in 1903 and revived in 2015 — **that argument belongs in Apatosaurus's entry, not in a second slot** |
+| **Camarasaurus** | Brachiosaurus, Diplodocus | Six sauropods was three too many |
+| **Mamenchisaurus** | Diplodocus | As above; the long-neck point is already made |
+| **Ceratosaurus** | Allosaurus | Four Jurassic theropods, two survive |
+| **Cryolophosaurus** | Dilophosaurus | The crested-theropod slot is filled, and Dilophosaurus carries the famous *Jurassic Park* misdepiction |
+| **Giganotosaurus** | Tyrannosaurus, Spinosaurus | Third giant carnivore |
+| **Carnotaurus** | Tyrannosaurus | Fourth |
+| **Gallimimus** | Oviraptor | Oviraptor keeps its far better story — named "egg thief", then found to be **brooding its own eggs** |
+| **Styracosaurus** | Triceratops, Protoceratops | **Protoceratops must stay** — the griffin quest needs it |
+| **Kentrosaurus** | Stegosaurus | Two stegosaurs |
+| **Rhamphorhynchus** | Pteranodon, Quetzalcoatlus, Pterodactylus | Four pterosaurs |
+| **Ophthalmosaurus** | Shonisaurus, Plesiosaurus, Liopleurodon, Mosasaurus | Five marine reptiles. **Plesiosaurus must stay** — the Mary Anning quest needs it |
+
+Fossils 62 → **50.**
+
+### 6. The biomes
+
+579 living now, less the 7 that go to On the Brink = 572.
+
+**128 new living species to invent** to reach 700. Recorded in `new_species.md` as
+work outstanding.
+
+## The arithmetic, closed
+
+| Group | Was | Moves | **Final** |
+|---|---|---|---|
+| Biomes | 579 | −7, +128 new | **700** |
+| On the Brink | 0 | +43, +7 | **50** |
+| Mythology | 103 | −3 | **100** |
+| Fossils | 50 | +12, −12 | **50** |
+| Vigil | 99 | −43, −12, +6 | **50** |
+| Breeds | 41 + 9 fish | — | **50** |
+| | | | **1000** |
+
+## One thing still open, and it is not arithmetic
+
+The fossil group after these moves covers **Permian, Triassic, Jurassic, Cretaceous
+and Quaternary** — five of the thirteen periods the fossil quests are built on.
+
+**Still empty: Ediacaran, Cambrian, Ordovician, Silurian, Devonian, Carboniferous,
+Paleogene and Neogene.** No Anomalocaris, no Tiktaalik, no Meganeura, no
+Basilosaurus, no Megalodon.
+
+That does not change any total — it is a question of **which 50**, not how many. If
+Ayr wants the fossil quests buildable, roughly eight more dinosaurs come out and
+those eight periods get an animal each. **Flagged, not done.**

@@ -60,3 +60,17 @@ the new game will be built fresh in Godot and this is the roster it starts from.
 
 Mountains is at 34 and desert at 41, so 22 covers a real pass at both without
 moving the 700.
+
+## Cut 2026-08-25 — twelve surplus dinosaurs, to hold Fossils at 50
+
+Required to make room for the twelve Ice Age species moving in from the Vigil.
+Chosen by thinning over-represented clades, never by removing anything a quest
+depends on. **Protoceratops and Plesiosaurus were explicitly protected** (the
+griffin quest and the Mary Anning quest need them).
+
+Brontosaurus (Apatosaurus synonym) - Camarasaurus - Mamenchisaurus -
+Ceratosaurus - Cryolophosaurus - Giganotosaurus - Carnotaurus - Gallimimus -
+Styracosaurus - Kentrosaurus - Rhamphorhynchus - Ophthalmosaurus
+
+Recorded, not applied. New game only; the Safari Saga roster on `main` is
+untouched.
