@@ -4806,6 +4806,19 @@ change rather than a contradiction.*
   kept**, which gives the Vigil and fossil sets a use and puts the de-extinction
   question in the player's hands.
 
+- **2026-08-25 — Facility build mode defined for the campaign.** The core mechanic
+  is **two routes that must never cross**: the public route and the animal route.
+  Every zoo builder is about sightlines *for* visitors; this one is about sightlines
+  *away* from them, because a habituated animal cannot be released. Where the routes
+  touch, an animal loses its chance to go home. Seven building types drawn from the
+  rehab loop, each with a real constraint — quarantine shares nothing, conditioning
+  cannot be faked small, one vet treats one animal. Four constraints: **money**
+  (visitors, grants, and sponsorship of named individuals), **land** (granted by
+  each quest wave), **field knowledge** (idea 18, now mechanical — nothing is locked,
+  the penalty is the animal's chances), and **staff** (the vet is the bottleneck;
+  volunteers are who the player was as a teenager). Adds the **return report** as
+  the rhythm between the two modes.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -6326,3 +6339,127 @@ postgame sets a reason to exist.
 - **Does it include the twelve biome facilities**, or is it one unlimited site?
   Specialisation is a real constraint — the argument for keeping it is that
   building a polar facility in a desert should still fail.
+
+---
+
+# FACILITY BUILD MODE — THE CAMPAIGN VERSION
+
+> **Ayr, 2026-08-25.** *"We haven't defined facility build mode in the main campaign
+> setting yet."* Correct. The loop, the specialisation, the modes and the sandbox
+> are all defined; **what you actually place, and what stops you, is not.**
+
+## The core mechanic: two routes that must never cross
+
+Every zoo builder ever made is about **sightlines for visitors** — put the glass
+where the crowd can see the tiger.
+
+**This game is the opposite. It is about sightlines away from visitors.**
+
+An animal being rehabilitated **must not get used to people**, because a habituated
+animal cannot be released. So the site carries two flows that have to reach the
+same buildings without ever meeting:
+
+```
+PUBLIC ROUTE     car park -> education -> ambassador housing -> cafe -> exit
+ANIMAL ROUTE     ambulance bay -> intake -> quarantine -> hospital
+                   -> rehabilitation -> conditioning -> release transport
+```
+
+**Where they touch, an animal loses its chance to go home.**
+
+That is the building puzzle, and no other game has it. It is not decoration and it
+is not optimisation — it is a routing problem with an ethical result, and it comes
+straight out of how real centres are laid out.
+
+## What you place
+
+The rehab loop is the blueprint. Each stage is a real building with a real
+requirement:
+
+| Building | The rule that constrains it |
+|---|---|
+| **Ambulance bay / intake** | On the road. An animal arriving in a box has already had the worst day of its life; the journey from vehicle to table should be short |
+| **Triage / hospital** | Next to intake. Vet space, and **one vet cannot treat two animals at once** |
+| **Quarantine** | **Separate everything** — airflow, entrance, equipment, staff footwear. It cannot share a wall or a walkway with anything downstream. The hardest thing to place and the most expensive to get wrong |
+| **Rehabilitation enclosures** | **Species-appropriate, gated by what you learned in the field.** This is where the codex cashes in |
+| **Conditioning** | The biggest structures. A bird needs a flight pen long enough to actually fly; an otter needs water long enough to actually swim. **You cannot fake this with a small version** |
+| **Ambassador housing** | The only animal buildings the public may reach. Permanent, enriched, built for a lifetime rather than a stay |
+| **Education / visitor** | Where the money comes from. Deliberately far from everything that matters |
+
+## The four constraints
+
+Sandbox removes the first two and keeps the last two. **The campaign has all four.**
+
+### 1. Money
+
+Three sources, each with a real tension:
+
+- **Visitors** — pay to see ambassadors. **The animals that draw a crowd are
+  charismatic; the animals that come through the door are whatever got hit by a
+  car.** Income never matches workload.
+- **Grants** — tied to programmes, which is exactly what the *adult with power*
+  quest wave is about. Quest progress becomes facility funding, honestly.
+- **Donations** — sponsorship of **named individuals**. A visitor reads an intake
+  story and gives money. Idea 74 becomes an income mechanic without being cheapened.
+
+Rehabilitation centres are chronically broke. **That should be true here.**
+
+### 2. Land
+
+Bounded, and expanded by quests. Each of the four waves grants the biome's facility
+another parcel — so the site's shape across a career is: **earned, then widened
+three times.**
+
+### 3. Field knowledge — idea 18, finally mechanical
+
+**You cannot build a good enclosure for a species you did not study.**
+
+| What you documented in the field | What it unlocks in build mode |
+|---|---|
+| Watched it feed at dawn and dusk | The correct feeding schedule |
+| Recorded what it ate | Real diet, instead of generic food |
+| Found the burrow, nest or roost | The right shelter, instead of a box |
+| Saw who it lived with | Housing it alone, in a pair, or in a group |
+| Watched it move | Whether it needs height, depth, or distance |
+
+A barely-studied animal can still be housed — **badly, in a generic enclosure, with
+a worse outcome.** Nothing is locked. The penalty is the animal's chances, which is
+the only penalty this game should ever use.
+
+### 4. Staff
+
+| Role | Limit |
+|---|---|
+| **Keepers** | Daily care. A fixed number of animals each, and quarantine animals cost more because of the protocol |
+| **Vet** | One case at a time. **The bottleneck the whole site is built around** |
+| **Educators** | Run the ambassador programme. They are the income |
+| **Volunteers** | Cheap, limited, and need training — **and this is who the player was as a teenager.** The loop closes |
+
+## What it looks like across the campaign
+
+| Wave | The facility |
+|---|---|
+| **Young adult** | You are given a site and almost nothing on it. Intake, one enclosure, a shed. **You are the keeper, the driver and the cleaner** |
+| **Adult / skills** | Quarantine done properly, a real hospital, the first staff. You stop doing everything yourself |
+| **Adult / power** | Conditioning structures, the education wing, the visitor route. **The site becomes a place the public comes to** |
+| **Elder** | It runs without you. You are the one people visit — and the ambassador animals have been there longer than most of the staff |
+
+## The return report
+
+The facility runs while you are away, so **coming back is an event.** A short
+report, not a spreadsheet:
+
+> *Eleven days. Four intakes. **BEAV-07** cleared quarantine and moved to
+> conditioning. The barn owl with the wing did not make it. The badger you named
+> last winter is still refusing the new enclosure.*
+
+That is the shape of it: **progress, loss, and one small stubborn thing.** It gives
+the two modes a rhythm — go away, do a quest, come back to a place that kept living.
+
+## What is still open
+
+- **Euthanasia and mortality.** The return report above already implies it. This
+  question has now arrived by three separate doors and is still Ayr's.
+- **Does the player lay out buildings freely, or choose from prepared plots?** Free
+  layout makes the two-routes puzzle real. Prepared plots make it approachable.
+- **Can a facility fail?** Money running out, welfare collapsing, licence revoked.
