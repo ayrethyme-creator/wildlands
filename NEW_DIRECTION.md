@@ -3708,6 +3708,88 @@ The second is a much bigger game. Worth deciding deliberately.
 
 ---
 
+## The 700 / 300 split, and what it costs
+
+> **Ayr, 2026-08-25.** Postgame is **300**: Vigil 100, Mythology 100, breeds +
+> fossils 100. In-game living animals are **700**. Biome sizes stay unequal.
+> Common freshwater aquarium fish mostly move to the domestic area, capped at 50.
+
+### The aquarium fish move
+
+Fourteen aquarium fish are currently placed as wild animals. Splitting them by
+whether the *aquarium* form is really the animal:
+
+**To the domestic area (9)** — fully domesticated forms with no meaningful wild
+population as sold:
+
+Goldfish · Fancy Goldfish · Koi · Guppy · Platy · Oscar · Dwarf Gourami ·
+Zebra Danio · Bristlenose Pleco
+
+**Staying wild (5)** — genuine wild species with real populations and, in three
+cases, real conservation stories:
+
+Betta *(wild Siamese fighting fish are a threatened species in Thailand)* ·
+Neon Tetra · Black Skirt Tetra · Discus · and the two marine ones, Royal Gramma
+and Banggai Cardinalfish, stay on the reef *(the Banggai is endangered
+specifically because of the aquarium trade — that is a quest, not a pet)*.
+
+**41 breeds + 9 fish = exactly 50.** The domestic area lands on its cap without
+trimming.
+
+### The arithmetic
+
+```
+Postgame 300 :  Vigil 100 · Mythology 100 · Fossil 50 · Domestic 50
+In-game  700 :  the eleven biomes
+```
+
+| | |
+|---|---|
+| Live species now | 588 |
+| less the 9 aquarium fish moving to domestic | **579** |
+| target | **700** |
+| **New species needed** | **121** |
+
+### One thing that does not fit yet
+
+There are **13 wardens** and **3 untagged legendaries** (Qilin, Thunderbird,
+Phoenix) — 16 invented creatures that are neither living animals nor in any of
+the four postgame areas.
+
+- **If they join Mythology**, that area is 116 and **16 real myths have to be
+  cut** to hold it at 100. New species needed stays **121**.
+- **If they count inside the 700**, no myths are cut, and new species needed
+  drops to **105**.
+
+The first keeps the 700 purely real animals, which fits everything else about
+this game. The second is cheaper. **Not decided.**
+
+### Where the 121 would go
+
+Polar's 25 is the first call on it, leaving ~96. Spending the rest on the thin
+biomes while leaving rainforest and savanna alone:
+
+| Biome | Now | Suggested |
+|---|---|---|
+| Rainforest | 91 | 91 |
+| Savanna | 79 | 79 |
+| Forest | 66 | 70 |
+| Wetland | 59 | 65 |
+| Farmland | 58 | 62 |
+| Coast | 53 | 65 |
+| **Polar** | 28 | **53** |
+| Reef | 42 | 60 |
+| Desert | 41 | 60 |
+| Open ocean | 33 | 58 |
+| Mountains | 34 | 57 |
+| | 579 | **700** |
+
+Unequal, as asked — rainforest and savanna stay the richest, and nothing drops
+below the mid-fifties.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
