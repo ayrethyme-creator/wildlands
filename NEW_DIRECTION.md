@@ -3650,6 +3650,64 @@ that, but it lands close to the floor anyway.
 
 ---
 
+## Four postgame areas — the current counts
+
+> **Ayr, 2026-08-25.** The cat and dog breeds stay in the game after all, as
+> **postgame content**. Four areas unlock after the main story: **mythology,
+> fossil, vigil, and domestic breeds.** Still 1000 total.
+
+**The Vigil already exists in Safari Saga** and is exactly this: a
+champion-gated memorial to extinct species. Its keeper says *"The Vigil is not a
+trophy hall, ranger. Come back when you've finished the trail — and come back
+ready to be sad for a while."* Its areas are The Roll Call, The Striped Hollow
+and The Ice Wake.
+
+### The full 1000, accounted for
+
+| Bucket | Count | |
+|---|---|---|
+| **Live species** | **588** | the eleven biomes |
+| **Vigil** (extinct, extinct-in-wild, memorial) | **101** | postgame |
+| **Mythology** | **100** | postgame |
+| Juveniles / life stages | 104 | fold into their adults |
+| **Fossil** | **50** | postgame |
+| **Domestic breeds** | **41** | postgame |
+| Wardens | 13 | legendary guardians |
+| Qilin, Thunderbird, Phoenix | 3 | legendary, untagged as mythic |
+| | **1000** | |
+
+### What this changes
+
+The 41 breeds are **no longer free slots** — they stay as postgame content. And
+the 101 Vigil species were never free either. So the pool for new live species
+is only the **104 juveniles** folding into their adults:
+
+```
+1000 total
+-104 juveniles become life stages
+= 896 entries
++104 new species
+= 1000
+```
+
+**104 free slots, not 142.** Enough for the 25 polar additions with 79 left, but
+not enough to bring every biome to 57 — that needed 111.
+
+### The question this raises
+
+**Do the four postgame areas count toward the 1000, or sit outside it?**
+
+- **Inside** — as above. 104 free slots, and the eleven biomes share 588 + 104 =
+  692 species.
+- **Outside** — the 1000 is 1000 *living* species, and mythology, fossils, the
+  Vigil and the breeds are extra on top. That would mean roughly **1000 live
+  species across eleven biomes**, plus 292 postgame entries, for ~1292 total.
+
+The second is a much bigger game. Worth deciding deliberately.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
