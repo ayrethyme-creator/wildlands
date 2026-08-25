@@ -205,3 +205,26 @@ BIOME_BY_HAND.sealion       = "polar";
 
 // Two more life stages the suffix filter cannot see.
 ["eaglejuv","sealpup"].forEach(function (k) { NOT_A_SPECIES.push(k); });
+
+// --- Ayr, 2026-08-25: forest and rainforest review.
+var FR = {
+  // forest -> rainforest
+  chevrotain:"rainforest", civet:"rainforest", coati:"rainforest",
+  vampirebat:"rainforest", fossa:"rainforest", greaterbop:"rainforest",
+  hoatzin:"rainforest", jaguarundi:"rainforest", kingcobra:"rainforest",
+  militarymacaw:"rainforest", pygmyhippo:"rainforest", lorikeet:"rainforest",
+  rustyspottedcat:"rainforest", tapir:"rainforest", tayra:"rainforest",
+  velvetworm:"rainforest", victoriacrowned:"rainforest", fireskink:"rainforest",
+  chameleon:"rainforest", komododragon:"rainforest",
+  // forest -> savanna
+  dikdik:"savanna", dhole:"savanna", chital:"savanna", peacock:"savanna",
+  // forest -> mountains
+  pudu:"alpine", mara:"alpine", puma:"alpine",
+  // rainforest out
+  chicken:"farmland",
+  ringtaillemur:"desert", sifaka:"desert",          // Ayr: Madagascar spiny forest
+  bongo:"savanna", duiker:"savanna", galago:"savanna",
+  tiger:"forest", spectacledbear:"alpine"
+};
+Object.keys(FR).forEach(function (k) { BIOME_BY_HAND[k] = FR[k]; });
+NOT_A_SPECIES.push("harpyeyas");
