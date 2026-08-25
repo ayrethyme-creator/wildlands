@@ -3567,6 +3567,89 @@ missing:**
 
 ---
 
+## Polar additions — chosen for interest, not for numbers
+
+> **Claude-contributed**, 2026-08-25. Ayr: pick what is *interesting*, not what
+> balances a food web, and no plankton or krill.
+
+### The extraordinary ones
+
+- **Antarctic icefish** — **the only vertebrate on earth with no haemoglobin.**
+  Its blood is colourless and its heart is enormous to compensate. It also makes
+  antifreeze proteins. Nothing else with a backbone lives like this.
+- **Colossal squid** — **the largest eyes of any animal that has ever lived**,
+  around 27 cm across, built to catch the faintest movement in black water.
+- **Collared lemming** — the only rodent that turns white in winter, and it
+  **grows an extra pair of digging claws each autumn and sheds them in spring.**
+- **Antarctic sea spider** — polar gigantism. Elsewhere they are fingernail
+  sized; here they reach the width of a dinner plate.
+- **Bearded seal** — the males sing. A long descending spiral that carries for
+  miles under the ice, and it is one of the strangest sounds in nature.
+- **Hooded seal** — the male inflates a **bright red balloon out of one
+  nostril** to display.
+
+### The record holders
+
+- **Arctic tern** — **the longest migration of any animal.** Pole to pole and
+  back every year, so it sees two summers annually and almost no darkness.
+- **Snow petrel** — one of only three birds ever recorded at the South Pole,
+  and it nests on bare rock up to 300 km inland.
+- **South polar skua** — also seen at the Pole. A pirate that makes other birds
+  drop their food.
+- **Long-tailed duck** — dives deeper than any other duck, over 60 m.
+- **Little auk** — nests in Greenland scree **in the millions**; the colonies
+  are among the largest gatherings of any bird.
+
+### The penguins worth having separately
+
+- **Adélie** — steals stones from its neighbours' nests, constantly and
+  shamelessly.
+- **King** — the chick takes **fourteen months** to fledge and overwinters as a
+  brown woolly thing so unlike its parents that early sailors described it as a
+  different species.
+- **Gentoo** — the fastest penguin underwater, about 36 km/h.
+- **Chinstrap** — nests higher and steeper than the others, on volcanic slopes.
+
+### Fish, since the small stuff is out
+
+- **Antarctic toothfish** — sold as "Chilean sea bass," and the centre of the
+  **Ross Sea marine protected area** fight. A ready-made quest.
+- **Arctic cod** — lives *in* the sea ice, in brine channels, kept liquid by
+  antifreeze proteins.
+- **Capelin** — the fish that everything else eats. This is how the food web
+  gets represented without collecting plankton.
+- **Arctic char** — the northernmost freshwater fish in the world.
+- **Greenland halibut** — an eye migrates across its head as it grows.
+
+### The other mammals and birds
+
+- **Ringed seal** — **the polar bear's actual prey**, and it builds snow caves
+  over its breathing holes to hide its pups. The bear's whole hunting method is
+  built around finding them.
+- **Arctic wolf** — white, high Arctic, and among the least-studied wolves
+  because almost nobody goes where they live.
+- **Rock ptarmigan** — turns white in winter and grows feathers over its feet
+  as snowshoes.
+- **Ivory gull** — pure white, and it **follows polar bears around** to scavenge
+  what they leave. Declining fast and nobody is quite sure why.
+- **Ross's gull** — faintly pink, breeds in Siberian bogs, and was mysterious
+  enough that finding its nesting grounds was a minor expedition goal for
+  decades.
+
+**Twenty-five additions, which would take polar from 28 to 53.** Not chosen for
+that, but it lands close to the floor anyway.
+
+### Quest material in here
+
+- **Antarctic toothfish** — the Ross Sea MPA, the largest in the world.
+- **Antarctic icefish** — cannot survive warming water, and its whole biology
+  explains why. Climate made legible in a single animal.
+- **Ivory gull** — a sharp decline nobody has fully explained.
+- **Arctic tern** — one animal that experiences the entire planet's seasons.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
