@@ -3790,6 +3790,65 @@ below the mid-fifties.
 
 ---
 
+## FINAL ROSTER SHAPE — 700 / 200 / 100
+
+> **Ayr, 2026-08-25.** Invented creatures are cut from the new game entirely and
+> stay in Safari Saga. The 1000 becomes **700 living real animals, 200 postgame
+> real animals, 100 postgame mythology.**
+
+```
+700  living real animals      the eleven biomes
+200  postgame real animals    Vigil 100 · fossils 50 · domestic 50
+100  postgame mythology       real folklore only
+1000
+```
+
+### What gets cut
+
+**The 13 wardens** — Sarkoth, Nycterion, Cetarch, Bathynax, Solenn, Glyptor,
+Velissa, Bramwold, Pyrelynx and the rest. Invented for Safari Saga, belonging to
+no real mythology, and **they stay in Safari Saga on `main`** where they were
+built. Nothing is destroyed; they simply do not travel to the new game.
+
+**Three myths, to hold Mythology at 100.** Qilin, Thunderbird and Phoenix are
+genuine folklore and belong in that hundred, so three of the currently tagged
+hundred come out to make room. (Or the three join and three others go — same
+arithmetic, Ayr's pick which.)
+
+**One Vigil entry**, taking it from 101 to a clean 100.
+
+### The arithmetic, checked
+
+| | |
+|---|---|
+| Live species now | 588 |
+| less 9 aquarium fish → domestic | 579 |
+| Vigil | 101 → **100** |
+| Mythology (tagged) + Qilin/Thunderbird/Phoenix | 103 → **100** |
+| Fossil | **50** |
+| Domestic (41 breeds + 9 fish) | **50** |
+| Wardens | 13 → **0** |
+| Juveniles | 104 → life stages, not species |
+| **Subtotal** | **879** |
+| **New real animals needed** | **121** |
+| **Total** | **1000** |
+
+And that lands live at **579 + 121 = 700** exactly.
+
+### Why this is the right cut
+
+The invented creatures were the one thing in the roster that could not be
+sourced. Every other entry in this game — living, extinct, fossil, domestic,
+even mythological — can be **credited to something real**: a species, a
+specimen, a breed registry, a folklore tradition with a place and a people
+attached. The wardens could only ever be credited to the game itself.
+
+For a project whose central mechanic is *"here is what really happened, and here
+is who did it"*, cutting them makes the roster honest all the way through.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -3979,6 +4038,15 @@ change rather than a contradiction.*
   become a micro-region type inside forest, mountains, coast and desert. The
   five cave species reassign — a bat is a forest animal that sleeps in a cave.
   Balancing floor becomes **57**, giving a final spread of 57 to 108.
+- **2026-08-25** — **FINAL ROSTER SHAPE: 700 living real animals + 200 postgame
+  real (Vigil 100, fossils 50, domestic 50) + 100 postgame mythology = 1000.**
+- **2026-08-25** — **The 13 invented wardens are cut from the new game** and
+  stay in Safari Saga. Every entry in the new roster can be credited to
+  something real.
+- **2026-08-25** — **121 new real animals to be created.**
+- **2026-08-25** — Nine fully domesticated aquarium fish move to the domestic
+  area; betta, neon tetra, black skirt tetra, discus and the two marine ones
+  stay wild.
 - **2026-08-25** — **Unequal biome sizes are correct, not a fault.** A bigger
   biome should hold more variety. Rainforest and savanna sitting on top matches
   the real world. The floor matters; the ceiling does not.
