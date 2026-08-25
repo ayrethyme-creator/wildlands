@@ -261,3 +261,16 @@ NOT_A_SPECIES.push("sealjuv");
 BIOME_BY_HAND.falsekiller = "opensea";
 BIOME_BY_HAND.pilotwhale  = "opensea";
 BIOME_BY_HAND.rissos      = "opensea";
+
+// Ayr, 2026-08-25: marine review.
+BIOME_BY_HAND.greatwhite    = "opensea";   // coastal AND pelagic; opensea is thin
+BIOME_BY_HAND.tigershark    = "opensea";
+BIOME_BY_HAND.hammerhead    = "opensea";
+BIOME_BY_HAND.mantaray      = "opensea";   // pelagic filter feeder that visits reefs to be cleaned
+BIOME_BY_HAND.nautilus      = "deepsea";   // deep reef slopes, 300-500m, rises at night
+BIOME_BY_HAND.cuvierbeaked  = "deepsea";   // deepest dive of any mammal
+BIOME_BY_HAND.barracuda     = "coast";
+BIOME_BY_HAND.pufferfish    = "reef";
+BIOME_BY_HAND.bullshark     = "wetland";   // the shark that swims 4,000km up the Amazon
+BIOME_BY_HAND.otter         = "wetland";
+BIOME_BY_HAND.nicobarpigeon = "forest";
