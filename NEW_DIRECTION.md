@@ -4794,6 +4794,18 @@ change rather than a contradiction.*
   deep-sea conflict by making the young adult **crew on someone else's boat** —
   owning one at adult/power then reads as a promotion.
 
+- **2026-08-25 — Sandbox mode: drop the economy, keep the biology.** Money, space
+  and time limits go; welfare, species suitability, expertise and consequences stay.
+  Removing the money is a fantasy, removing the biology would be a lie. **Its real
+  purpose is to let the player try what the campaign says to refuse** — build the
+  elephant enclosure, spend what you like, and watch what happens to an animal that
+  walks fifty kilometres a day. Nothing lectures; the outcome is the argument. That
+  makes sandbox prove the thesis rather than break it. Unlocked early (it teaches),
+  separate save (no autobiography), full codex granted, release still available.
+  **Proposed and awaiting Ayr: let sandbox be the one place the extinct can be
+  kept**, which gives the Vigil and fossil sets a use and puts the de-extinction
+  question in the player's hands.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -6226,3 +6238,91 @@ reads *"you stop borrowing rides."* So as a young adult **you borrow the ride.**
 are crew on someone else's vessel, which is exactly how early marine careers
 actually work, and it makes owning your own boat later a real promotion rather than
 a purchase.
+
+---
+
+# SANDBOX MODE
+
+> **Ayr, 2026-08-25.** *"Let's do sandbox mode."* One of the three questions the
+> facility design left open.
+
+## The problem it creates, first
+
+Sandbox normally means **unlimited money, everything unlocked, no failure.** In
+Planet Zoo that is harmless. Here it walks straight into the game's central claim:
+
+> **Keeping an animal is a failure state wearing the costume of a reward.**
+
+A mode where you collect all 700 animals into enclosures with no consequence
+**undoes the argument the whole game is making.** That is the actual design problem,
+and it has a clean answer.
+
+## The fix: drop the economy, keep the biology
+
+| Removed | Kept |
+|---|---|
+| Money, budgets, grants, ticket income | **Welfare.** Animals still have real needs |
+| Space limits, planning permission | **Species limits.** A whale still does badly in a tank |
+| Staff hiring costs | **Expertise.** A reptile vet still cannot treat a cetacean |
+| Time pressure, intake queues | **Non-releasable is still non-releasable** |
+| **The knowledge gate** — the codex is fully open | **Consequences.** Bad husbandry still produces a bad outcome |
+
+**Real sanctuaries are limited by money and by biology. Removing the money is a
+fantasy. Removing the biology would be a lie**, and this game does not tell those.
+
+## What sandbox is actually FOR here
+
+This is the part that makes it worth building rather than a checkbox.
+
+**Sandbox is where you get to try the thing the campaign tells you to refuse.**
+
+The facility design says some animals do badly in captivity at all — elephants,
+cetaceans, great apes, polar bears, wide-ranging carnivores — and that **refusing
+them is the correct play.** In the campaign you refuse and move on, and you are
+taking the game's word for it.
+
+**In sandbox you can say yes.** Build the elephant enclosure. Make it enormous.
+Spend the money you do not have. And then watch what actually happens to an animal
+that walks fifty kilometres a day and lives in a family for sixty years.
+
+**Nobody stops you and nothing lectures you.** The outcome is the argument.
+
+That turns sandbox from the mode that breaks the thesis into **the mode that proves
+it** — and it does it the only way that really convinces anyone, by letting them
+find out.
+
+## The specifics
+
+| Question | Answer |
+|---|---|
+| **When is it unlocked?** | **Early, not postgame.** It teaches; teaching late is worthless. Available once the first facility is earned |
+| **Separate save?** | **Yes.** The sanctuary mode shares the campaign save because it carries the autobiography. Sandbox carries none — it is hypothetical, so it lives in its own file |
+| **All species?** | **Yes, all 700**, plus whatever Ayr decides about the sets below |
+| **Field knowledge?** | **Fully granted.** The campaign is where knowledge is earned; sandbox is where it is used. Preserving the gate here would make a worse sandbox without making the campaign better |
+| **Is there still release?** | **Yes.** You can still rehabilitate and send an animal home. It is still the good ending. You simply are not doing it on a budget |
+| **Failure?** | **Welfare failure, yes. Financial failure, no.** |
+
+## A proposal: let sandbox hold the extinct
+
+The postgame sets — the Vigil's 50 extinct, the 50 fossils — currently have no use
+beyond being looked at, and Ayr has not decided what the Vigil *does*.
+
+**Sandbox could be the one place they can be kept.**
+
+Build an enclosure for a thylacine. For a mammoth. For a great auk. **The game says
+nothing about it** — no lecture, no unlock message, no moral. It simply lets you,
+and the silence is the comment.
+
+It also lands the Quaternary fossil quest's open question — de-extinction — in the
+player's hands rather than in a paragraph. **You want to know whether we should
+bring them back? Here is what having one would actually involve.**
+
+**Ayr's call.** It is optional, it costs nothing structurally, and it gives two
+postgame sets a reason to exist.
+
+## What this leaves open
+
+- **Does sandbox include the visitor and education layer**, or only the animals?
+- **Does it include the twelve biome facilities**, or is it one unlimited site?
+  Specialisation is a real constraint — the argument for keeping it is that
+  building a polar facility in a desert should still fail.
