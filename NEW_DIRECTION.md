@@ -4209,6 +4209,11 @@ change rather than a contradiction.*
   become a micro-region type inside forest, mountains, coast and desert. The
   five cave species reassign — a bat is a forest animal that sleeps in a cave.
   Balancing floor becomes **57**, giving a final spread of 57 to 108.
+- **2026-08-25** — **Interest governs, not headcount.** The ~57 floor was a
+  working guide and is explicitly **not a target**. A biome gets what is worth
+  having in it.
+- **2026-08-25** — **All 32 proposed deep-sea species confirmed.** Running list
+  of new species lives in `design/new_species.md`.
 - **2026-08-25** — **DEEP SEA is the twelfth biome.** Ten species move out of
   open ocean; both need filling, and the deep is where the most interesting
   unused animals are.
