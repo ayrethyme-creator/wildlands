@@ -4148,6 +4148,43 @@ Narrow Places* · *The Edge* · *What Is Left*. Ayr's call.
 
 ---
 
+## Encounters must be driven, not waited out
+
+> **Ayr, 2026-08-25.** *"Waiting 20 min for 1 animal that is not driven by story
+> is not going to happen."*
+
+This corrects an assumption running through the career-loop notes above. I had
+described the photographer's loop as rewarding **patience** — position, wait,
+capture — on the model of real fieldcraft. Real fieldcraft does involve sitting
+still for hours. **A game cannot spend the player's actual time that way**
+unless something else is happening.
+
+### What this rules out
+
+- Idle waiting as a mechanic.
+- Rarity expressed as *time spent standing still*.
+- Any encounter whose interest is "eventually the animal appears".
+
+### What it points toward instead
+
+Whatever the loops end up being, the tension has to come from **something
+happening**, not from time passing:
+
+- **Story reason to be there** — you are not photographing a fox, you are
+  proving the lights work, and the fox is the evidence.
+- **Reading and acting** — tracks, wind, alarm calls, light, the guide radio.
+  Fieldcraft as a set of *decisions*, not a wait.
+- **A closing window** — the light is going, the tide is turning, the clients
+  leave at four. Pressure rather than duration.
+- **Something to do while positioned** — the researcher checks traps, the guide
+  keeps clients interested, the photographer works the light.
+
+The real professions are patient in *elapsed* time and busy in *attention*. The
+game should keep the second and compress the first.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -4350,6 +4387,9 @@ change rather than a contradiction.*
   a **sub-area** of a region. The Mountains biome therefore means specifically
   **alpine, above the treeline** — forested mountainsides belong to forest and
   rainforest regions.
+- **2026-08-25** — **No idle waiting.** Encounters must be driven by story or
+  by decisions, never by time passing. Rarity is never expressed as standing
+  still.
 - **2026-08-25** — **A thirteenth region, "On the Brink"** — 50 critically
   endangered and extinct-in-the-wild species. Unlocks only after all twelve
   biomes, is **required**, and completing it unlocks the postgame. The Vigil
