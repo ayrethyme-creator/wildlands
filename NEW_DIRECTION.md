@@ -4690,6 +4690,16 @@ change rather than a contradiction.*
   not era (three eras is too few), thirteen proposed, each a detective story about
   **how anyone knows**.
 
+- **2026-08-25 — Roster arithmetic verified from the data.** The Vigil holds 99
+  entries: **56 tagged extinct, 43 still alive.** On the Brink = those 43 + the 7
+  from the biomes = **50 exactly**, as Ayr specified. The one number that does not
+  fit is the Vigil, which is **56 not 50** — recommendation is to let it stand and
+  make the biomes 694, since the extinct count is historical record and the biomes
+  are the only group still being created. Awaiting Ayr.
+- **2026-08-25 — The On the Brink test is status, not story.** Currently CR or EW
+  is in; anything else is out. Corrects my Arabian oryx reasoning, which used a
+  narrative criterion Ayr never set. The oryx is out because it is Vulnerable.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -5255,3 +5265,91 @@ understands that the Permian extinction, the whale's ankle and the ginger tail a
 all things people **worked out**, from evidence, in living memory in some cases.
 
 That is the "learning based, not conservation focused" brief, delivered.
+
+---
+
+## THE ROSTER ARITHMETIC, VERIFIED AGAINST THE DATA
+
+> **Ayr, 2026-08-25.** *"What I was wanting was 50 in On the Brink, the ones still
+> alive (both critically endangered AND extinct in the wild) plus those 7 to make
+> it an even 50. 700 animals in the main game. 50 in On the Brink. Then 250 in post
+> game (100 mythology, 50 fossil, and 50 vigil.)"*
+
+### Counted, not assumed
+
+Every `V()` entry carries an origin tag. Extinct species are tagged with a dagger
+and a year — `"† 1936"` for the thylacine. That gives a clean split:
+
+| | |
+|---|---|
+| **Vigil entries total** | **99** |
+| **Tagged † — genuinely extinct** | **56** |
+| **Not tagged — still alive** | **43** |
+
+The 43 are the 13 extinct-in-the-wild plus the 30 critically endangered that the
+earlier audit found sitting in a memorial while still breathing.
+
+### On the Brink lands exactly
+
+```
+43   still alive, currently in the Vigil   (13 EW + 30 CR)
+ 7   critically endangered, in the biomes  (vaquita, axolotl, kakapo,
+                                            sawfish, sunflower sea star,
+                                            pangolin, gharial)
+50   On the Brink
+```
+
+**Ayr's composition is exactly right and needs nothing invented.**
+
+### The one number that does not fit: the Vigil is 56, not 50
+
+Strip the 43 living species out and what remains is **56 genuinely extinct
+animals**, not 50. Six over.
+
+Totalling it Ayr's way gives 1,006:
+
+| Group | Ayr's target | Actually available |
+|---|---|---|
+| Biomes | 700 | 572 + new |
+| On the Brink | 50 | **50 exactly** |
+| Vigil | 50 | **56** |
+| Mythology | 100 | 100 |
+| Fossil | 50 | 50 |
+| Domestic | 50 | 50 |
+
+### Recommendation: let the Vigil be 56 and the biomes be 694
+
+```
+694  biomes
+ 50  On the Brink
+ 56  Vigil
+100  Mythology
+ 50  Fossil
+ 50  Domestic
+1000
+```
+
+**Do not cut six extinct species to reach a round number.** They are real animals
+that really went, every one is already written and drawn, and the Vigil is the one
+group in the game where the count is a matter of historical record rather than
+design. The biomes are the right place to absorb it because they are the only group
+still being *created* — 694 simply means **122 new species to invent instead of
+128**, which is less work, not more.
+
+### One more thing: the postgame is four groups, not three
+
+Ayr listed mythology 100, fossil 50 and vigil 50 — that is 200. The fourth is
+**domestic 50** (41 breeds plus the 9 aquarium fish), which makes the 250.
+
+### Correcting my reasoning on the Arabian oryx
+
+The conclusion was right — it is not in On the Brink — but the reasoning was not.
+I argued it does not belong because it is *narratively* a recovery story rather
+than a decline story. **That is a criterion Ayr never set.**
+
+**The actual rule is a status test:** currently critically endangered or extinct in
+the wild means in, anything else means out. The Arabian oryx is **Vulnerable**, so
+it is out on status. Nothing to do with the shape of its story.
+
+The status test is the one to apply to all 50, because it is checkable and it does
+not drift with whoever is telling the story.
