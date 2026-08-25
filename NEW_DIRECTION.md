@@ -4741,6 +4741,16 @@ change rather than a contradiction.*
   quests, about one per fourteen. On the Brink and the Vigil are still open, which
   are exactly the two areas Ayr parked.
 
+- **2026-08-25 — Every main-game animal is a named individual with an intake
+  story.** Ayr, idea 74. 700 names and 700 short stories, separate from the species
+  field guide. The player feeds it, gives it enrichment and views its signature
+  ability. **Released animals go to a visitable place in the wild** — the beaver
+  pond, the moose field, a stretch of coast — which resolves the facility system's
+  one cruelty, that playing well meant losing the animal. Ten intake categories are
+  recorded so 700 stories do not read like 700 injuries. Open for Ayr: whether
+  releasable animals get field numbers instead of names, since real rehabilitators
+  avoid naming what they intend to send home.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -5762,3 +5772,113 @@ left open. For scale when that decision comes:
   biome pattern it would take 4, making 77.
 - **The Vigil** may want none at all. It is a memorial — you go, you read, you
   stand there. A quest chain might be the wrong shape for it entirely.
+
+---
+
+## EVERY ANIMAL IS AN INDIVIDUAL
+
+> **Ayr, 2026-08-25.** *"Every main game animal gets a name and a short story why
+> it's at a sanctuary. The idea is so the player can go to each sanctuary and
+> interact with the individual animal. Feed it, give it enrichment, and view its
+> special ability. If it's one that gets released, there'd be an area in the wild
+> you can visit it (like the beaver pond, moose field, and parts of the ocean), so
+> the player can still have those interactions."*
+
+**74.** Locked in. This is the system that turns 700 species into 700 characters.
+
+### Two texts per species, doing two different jobs
+
+| | About | Answers |
+|---|---|---|
+| **Field guide entry** | The **species** | What is a beaver? |
+| **Intake story** | **This** animal | Why is *this* beaver here, and what is its name? |
+
+The field guide is already written for 406 species and is a reference document. The
+intake story is a **character introduction**, and it is new work: **700 names and
+700 short stories.**
+
+### Release does not mean losing them — this is the important half
+
+Ayr's instruction fixes something the facility design left hurting.
+
+The facility system establishes that **release is the win and the animal leaves**,
+and that keeping one is a failure state. That is emotionally correct and it is also
+a punishment for playing well. **The wild visiting sites resolve it.**
+
+A released animal goes to **a known place in the world** — the beaver pond, the
+moose field, a stretch of coast — and you can go and find it there. You do not own
+it, you cannot feed it, and it may not come close. **But it is alive and it is
+where you put it.**
+
+That is exactly what real rehabilitators do. Released animals are checked on.
+Tagged and collared animals are followed for years. **The best possible outcome
+still lets you visit.**
+
+### What this connects to without being asked
+
+- **The childhood pet.** The beaver is one of the three childhood animals, and the
+  beaver pond is precisely where a released beaver would be. **The animal you raised
+  as a child can be visited as an adult, in the wild, doing what beavers do.**
+- **The signature ability.** It is viewable on the individual — at the sanctuary for
+  residents, at the release site for the ones that went home. Consistent with the
+  unlock rule, which is documentation rather than possession.
+- **Ambassador animals** demonstrate theirs to visitors, which is idea 73.
+
+### The sanctuary becomes an autobiography
+
+If the intake story records **where you were and what happened**, then walking
+through your own facility is walking back through your career. This one arrived
+during the vulture quest. This one you carried out yourself. This one was the first
+thing you ever treated and it never left.
+
+**Nothing else in the game does that.** A collection screen lists what you have; a
+row of named animals with dated arrival stories is a record of a life's work.
+
+### 700 stories must not read like 700 injuries
+
+The obvious failure is every animal arriving hit by a car. Real intake is far more
+varied, and the variety is what keeps 700 stories readable:
+
+| Reason | Example |
+|---|---|
+| **Injured** | Vehicle, window strike, cat, fishing gear, powerline, fence |
+| **Orphaned** | Mother killed, nest felled, separated in a storm |
+| **Confiscated** | Illegal trade, a market, a shipment intercepted |
+| **Surrendered** | A pet that outgrew its owner. **This is where the exotic pet theme lands** |
+| **Displaced** | Development, drainage, a felled roost tree |
+| **Conflict translocation** | Moved rather than shot |
+| **Imprinted** | Raised too closely by well-meaning finders and now unreleasable |
+| **Contaminated** | Oiled, poisoned, entangled |
+| **Born here** | To a resident. Not rescued at all |
+| **Aged out** | Arrived decades ago; the centre is the only home it has known |
+
+Ten categories, varied specifics, and the stories stop being repetitive.
+
+### The naming question — real practice cuts against the instruction, interestingly
+
+**Many rehabilitators deliberately do not name releasable animals.** They use
+numbers. The reason is exactly the game's own theme: **naming creates attachment,
+attachment leads to handling, handling leads to habituation, and a habituated animal
+cannot go home.**
+
+So there is a version of this where **naming an animal is a decision with a
+consequence** — the named ones are the ones staying, and naming a releasable animal
+is the mistake that keeps it.
+
+**Ayr said every animal gets a name, and that is the instruction.** This is offered
+as a possible refinement, not a correction: perhaps residents get names and
+releasable animals get field numbers until the day they leave, when you may name
+them at last, because it no longer matters. **Ayr's call.**
+
+### The cost, plainly
+
+**700 names and 700 short intake stories**, plus a release site for every species
+that goes home rather than staying.
+
+Text is the pipeline this project has already proven fastest — 406 field guide
+entries exist. **The work is not the writing, it is the review**: 700 stories have
+to be checked for repetition, and repetition is exactly what the reader notices.
+The ten-category structure above exists to make that review tractable.
+
+The release sites are the smaller job than they sound: they are **places, not
+animals**, and many species share one. A pond, a field, a stretch of reef.
