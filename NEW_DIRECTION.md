@@ -4700,6 +4700,20 @@ change rather than a contradiction.*
   is in; anything else is out. Corrects my Arabian oryx reasoning, which used a
   narrative criterion Ayr never set. The oryx is out because it is Vulnerable.
 
+- **2026-08-25 — CONFIRMED TARGET: 700 biomes + 50 On the Brink + 100 mythology
+  + 50 fossil + 50 vigil + 50 breeds = 1000.** Ayr, stated twice and precise.
+- **2026-08-25 — Twelve Ice Age species move from the Vigil to the fossil group.**
+  Smilodon, mastodon, dire wolf, glyptodon and the rest are 7,700–13,000 years old.
+  The Vigil is for extinctions in recorded time that people can be held responsible
+  for. That leaves 44 historical extinctions, so **six more real ones are added** —
+  baiji, golden toad, Pyrenean ibex, po'ouli, Bramble Cay melomys and the
+  Christmas Island pipistrelle.
+- **2026-08-25 — The fossil group is Mesozoic-only and must be rebalanced.** All 50
+  entries are Triassic, Jurassic or Cretaceous reptiles. **Nine of the thirteen
+  periods in the fossil quest design have no animals at all.** Twelve surplus
+  dinosaurs come out to make room for the Ice Age twelve, and the group needs
+  spreading across the record rather than sitting on one era.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -5353,3 +5367,70 @@ it is out on status. Nothing to do with the shape of its story.
 
 The status test is the one to apply to all 50, because it is checkable and it does
 not drift with whoever is telling the story.
+
+---
+
+## CONFIRMED: 1000, and what it costs
+
+> **Ayr, 2026-08-25.** *"I want 1000 total. 700 in game animals. 50 on the brink.
+> 100 myths. 50 fossils. 50 vigil. 50 breeds."*
+
+**700 + 50 + 100 + 50 + 50 + 50 = 1000.** Confirmed. This is the target.
+
+### The finding: twelve of the Vigil's "extinct" are not historical extinctions
+
+Listing the 56 dagger-tagged Vigil species by date splits them in two:
+
+| Group | Count | Dates |
+|---|---|---|
+| **Ice Age megafauna** | **12** | ~7,700 to ~13,000 years ago |
+| **Historical extinctions** | **44** | ~1000 CE to the present |
+
+The twelve: **Woolly Rhinoceros · Dire Wolf · Smilodon · Megatherium · Glyptodon ·
+Mastodon · Columbian Mammoth · Cave Lion · Short-faced Bear · Giant Beaver · Steppe
+Bison · Irish Elk.**
+
+**These are fossils, not memorials.** The Vigil is for animals people drove out in
+recorded time and can be held responsible for — the dodo in 1662, the great auk in
+1844, the thylacine in 1936, filmed in a cage. A sabre-toothed cat from thirteen
+thousand years ago is a different kind of object entirely, and it is known from
+exactly the same evidence as everything in the fossil group.
+
+### And the fossil group cannot support its own quests
+
+The 50 fossil entries are **Mesozoic reptiles and nothing else** — Triassic,
+Jurassic and Cretaceous. Coelophysis, Allosaurus, Archaeopteryx, Diplodocus.
+
+That means the group has **no Cambrian, no Ordovician, no Silurian, no Devonian, no
+Carboniferous, no Permian, no Paleogene, no Neogene and no Quaternary.** Nine of
+the thirteen periods in the fossil quest design have no animals in them at all.
+
+**The fossil group needs rebalancing regardless of this arithmetic.** It is
+currently a dinosaur set wearing the name of the whole fossil record.
+
+### What the 1000 costs, then
+
+| Move | Effect |
+|---|---|
+| **The 12 Ice Age species go Vigil → Fossil** | Vigil 56 → **44** · Fossil 50 → **62** |
+| **Add 6 historical extinctions to the Vigil** | Vigil 44 → **50** |
+| **Cut 12 surplus dinosaurs from the fossil group** | Fossil 62 → **50** |
+| **7 critically endangered leave the biomes for On the Brink** | Biomes 579 → 572 |
+| **Invent 128 new living species** | Biomes 572 → **700** |
+
+Nothing is cut that should not be. **The only cuts are duplicate dinosaurs**, and
+the group is better for it because it stops being Jurassic-only.
+
+### The six historical extinctions to add — all real, all missing
+
+| Species | Gone | Why it belongs |
+|---|---|---|
+| **Baiji** | 2006 | The Yangtze river dolphin. The first cetacean humans wiped out, and a survey simply failed to find any |
+| **Golden toad** | 1989 | Monteverde, Costa Rica. The emblem of the global amphibian collapse |
+| **Pyrenean ibex** | 2000 | The last one was killed by a falling tree — and it is **the only animal ever cloned back and then made extinct a second time**, minutes after birth |
+| **Po'ouli** | 2004 | Hawaiian honeycreeper. The last known bird died in captivity while a mate was still being searched for |
+| **Bramble Cay melomys** | 2016 | **The first mammal declared extinct because of sea level rise** |
+| **Christmas Island pipistrelle** | 2009 | Monitored to the very end; the last individual was recorded calling, alone, and then stopped |
+
+Every one is more recent, better documented and more relevant to the game's
+subject than a twelfth sauropod.
