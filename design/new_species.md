@@ -62,6 +62,71 @@ dragonfish · Sea toad · Deep-sea cucumber
   died, lasting decades.
 - **Bottom trawling** — flattening seafloor communities that took centuries.
 
+
+---
+
+## OPEN OCEAN — proposed, ~25 species
+
+The open ocean is the largest habitat on earth and currently reads as
+"whales and a few big fish". What is missing is everything that makes it
+*strange* — the drifting colonies, the things with sails, the one insect that
+lives out there.
+
+### The ones nobody believes
+
+| Species | Why |
+|---|---|
+| **Opah** *(moonfish)* | **The only fully warm-blooded fish known.** It circulates warm blood through its gills to keep its whole body above sea temperature. Discovered in **2015** — this is new science |
+| **Portuguese man o' war** | **Not one animal.** A colony of four kinds of specialised individuals — float, tentacle, digestion, reproduction — none of which can survive alone |
+| **Blue dragon nudibranch** | Eats the man o' war and **stores its stinging cells to use as its own weapon**. Electric blue, two centimetres long, floats upside down |
+| **By-the-wind sailor** *(Velella)* | Has **a literal sail**. Populations are left-sailed or right-sailed, so the same wind blows them to opposite shores |
+| **Violet sea snail** | Floats upside down beneath **a raft of bubbles it blows from its own mucus**. If the raft breaks, it drowns |
+| **Sea skater** *(Halobates)* | **The only insect that lives on the open ocean.** Millions of miles from land, laying eggs on floating feathers and pumice |
+| **Japanese flying squid** | **It actually flies** — jets clear of the water and glides thirty metres on spread fins |
+
+### The travellers
+
+| Species | Why |
+|---|---|
+| **Sooty tern** | Young birds leave the colony and **stay airborne for years without landing once** |
+| **Manx shearwater** | One ringed bird was over **fifty years old** and had flown an estimated eight million kilometres |
+| **Storm petrel** | Appears to **walk on the water**, pattering the surface with its feet while hovering |
+| **Olive ridley turtle** | The **arribada** — tens of thousands of females coming ashore on one beach on one night |
+| **Loggerhead turtle** | Hatchlings cross an entire ocean and come back decades later to the beach they were born on |
+| **Blue shark** | The most wide-ranging shark there is, crossing whole ocean basins |
+| **Devil ray** *(mobula)* | **Leap clear of the water in their thousands** and nobody knows why |
+
+### The Sargasso — a forest with no floor
+
+| Species | Why |
+|---|---|
+| **Sargassum fish** | Lives its whole life inside floating weed, camouflaged past recognition, and **"walks" on its fins** through the fronds |
+| **Sargassum crab** | The same trick, in a crab |
+| **Salp** | Forms chains metres long and is among the **fastest-growing animals alive** |
+
+### The fishery
+
+| Species | Why |
+|---|---|
+| **Bluefin tuna** | **The most valuable fish in the world**, warm-blooded, and the clearest quota story in conservation |
+| **Yellowfin tuna** · **Skipjack** | The tinned-tuna fishery, and the dolphin-safe argument |
+| **Mahi-mahi** | The **fastest-growing fish in the sea**, and its brilliant colours drain away within minutes of death |
+| **Wahoo** | |
+| **Oceanic whitetip** | Once **among the most abundant large animals on earth**. Now critically endangered. The shark of every shipwreck account |
+
+### The rest
+
+**Remora** *(hitchhikes on sharks with a dorsal fin modified into a suction
+plate)* · **Pilot fish** · **Common dolphin** · **Striped dolphin** ·
+**Porbeagle**
+
+### Quests this biome brings
+
+- **Bluefin quota** — the fish, the price, and the international management fight.
+- **Dolphin-safe tuna** — what the label actually means and what it does not.
+- **Sargasso Sea** — the only sea with no coastline, and the plastic that
+  gathers in it.
+
 ---
 
 ## POLAR — LIKELY, 25 species
@@ -105,6 +170,7 @@ nobody knows why)* · Ross's gull
 | | |
 |---|---|
 | Deep sea | 32 confirmed |
+| Open ocean | ~25 proposed |
 | Polar | 25 likely |
 | **Committed so far** | **57** |
 | Budget | 121 |
