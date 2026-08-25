@@ -4641,6 +4641,12 @@ change rather than a contradiction.*
 
 ---
 
+- **2026-08-25 — The signature ability is the payoff for collecting.** Every
+  species gets one demonstrable trait, triggered by a button in the individual-animal
+  space. Ayr's idea 72. It replaces what battles did in Pokemon without inventing
+  anything. **Unlocked by documentation, not by possession**, so it does not fight
+  the facility rule that keeping an animal is a failure state.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -4660,3 +4666,115 @@ python -m http.server 8000   # then open http://localhost:8000
 If the new direction gets far enough to want its own shareable link, that is
 a separate decision — a second deployment target or a separate repo — and it
 is not needed to start.
+
+---
+
+## Ideas — round twenty-one: the signature ability
+
+*Ayr's, 2026-08-25. Prompted by an Instagram video of a genet.*
+
+**72.** *"Quick idea I just had bc I watched a video on Instagram of a genet and
+learned it can climb down trees head first. I focused on having the animal guide
+listing unique facts that most descriptions of animals leave out. It would be
+cool to have a space where you interact with an individual animal (which I
+already mentioned) but you have a **special feature button** that shows off one
+of those special unique traits of that species (like bioluminescent,
+non-retractable claws, climbing down trees head first etc) and that would
+**encourage and reward catching all of the animals** so you can interact with its
+special ability. Very gamified type of thing, but also something that actually
+exists in real life — there are animals that can do something no other animal can
+do and that's super cool."*
+
+### This answers the problem left open in round twenty
+
+Round twenty said, against collecting-as-the-main-draw:
+
+> "Pokémon's catching is compelling because the animal then *does* something — it
+> fights, it levels, it evolves. Strip that out and pure collection is a
+> checklist."
+
+That was left standing with no replacement. **This is the replacement.** The
+signature ability is the thing a documented animal *does* — and unlike a battle
+stat it is not invented, so it costs the game none of its honesty to include.
+
+Collecting moves from connective tissue back to a genuine draw, without a single
+battle.
+
+### The content is already written — for about half the roster
+
+Every field-guide entry in Safari Saga already opens with exactly this kind of
+fact. This was Ayr's editorial instruction from the start and it has been
+followed for **406 of roughly 832 species.**
+
+> **margay** — *"Its ankles rotate 180 degrees, so it can run head-first down a
+> trunk and hang from a branch by one hind foot. It hunts entirely in the canopy.
+> It has been recorded imitating the call of a baby tamarin to lure the adults
+> closer — the only wild cat ever documented mimicking prey."*
+
+> **genet** — *"It is so lithe it can follow its own head through any gap — if the
+> skull fits, the genet fits. Medieval Europeans kept them as house pets to
+> control mice, centuries before cats were common there. It has semi-retractable
+> claws and hunts in trees as easily as on the ground."*
+
+The margay entry carries **two** candidate signatures. The research is done; what
+is missing is the other ~426 entries and a decision about which sentence is the
+demonstrable one.
+
+### The selection rule: it has to be a thing it DOES
+
+Not every remarkable fact can be a button. The filter is whether it is
+**showable in a few seconds without narration.**
+
+| Showable | Not showable |
+|---|---|
+| Margay running head-first down a trunk | "Fewer than 1,500 remain" |
+| Pistol shrimp's cavitation bubble | "Its eyes are six times more light-sensitive than ours" |
+| Woodpecker's tongue wrapping its skull | "Almost nothing is known about how it breeds" |
+| Wood frog thawing out of solid ice | "It is sacred in Andean tradition" |
+
+The second column is field-guide text and stays field-guide text. **The button
+needs a verb.**
+
+### The roster is full of these
+
+Rough families, with examples already on the list: **impossible movement**
+(margay, gecko adhesion, hummingbird flying backwards, sidewinder); **weapons**
+(mantis shrimp, pistol shrimp, bombardier beetle, electric eel); **impossible
+senses** (star-nosed mole's 22 tentacles, platypus electroreception, owl's
+asymmetric ears, pit vipers); **surviving the unsurvivable** (wood frog freezing
+solid, bar-headed goose over the Himalaya, icefish with no haemoglobin);
+**deception** (orchid mantis, mimic octopus, the margay's tamarin call); and
+**bodies that break the rules** (axolotl regrowing a limb, hoatzin chicks with
+claws on their wings).
+
+### The tension this creates with the facility — and it matters
+
+The facility design commits to **"keeping an animal is a failure state wearing
+the costume of a reward."** If the signature ability unlocks by *owning* the
+animal, the game now rewards hoarding, and the two systems fight.
+
+**Fix: the unlock is documentation, not possession.** You earn the ability by
+having studied the animal in the field — the same knowledge that doubles as the
+husbandry manual. The demo then lives in the codex, playable forever, whether the
+animal went home or never came in at all.
+
+That keeps release as the good ending and still rewards completing the roster.
+
+### The honest cost
+
+**832 bespoke animations is not achievable.** Tiering is the only way:
+
+- **Bespoke** — perhaps 60–100, the genuinely unique ones that sell the feature
+- **Shared systems** — one climbing rig serves margay, genet, marbled cat, kodkod
+  with different parameters; one bioluminescence shader serves the deep sea
+- **Codex-illustrated** — a diagram plus the written fact, for the rest
+
+Ship the bespoke ones first and let the tier be visible; a player who finds a
+handful of spectacular ones will hunt for more.
+
+### Open
+
+- Is it in the field, in the codex, or both?
+- Does each career see it differently — photograph it, measure it, explain it?
+- Does an ambassador animal demonstrate its ability to visitors? That would give
+  non-releasable animals a job that is not sad.
