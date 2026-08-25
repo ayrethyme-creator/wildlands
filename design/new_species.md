@@ -65,7 +65,9 @@ dragonfish · Sea toad · Deep-sea cucumber
 
 ---
 
-## OPEN OCEAN — proposed, ~25 species
+## OPEN OCEAN — CONFIRMED, ~25 species
+
+*Ayr, 2026-08-25: "those are all great great!"*
 
 The open ocean is the largest habitat on earth and currently reads as
 "whales and a few big fish". What is missing is everything that makes it
@@ -127,6 +129,80 @@ plate)* · **Pilot fish** · **Common dolphin** · **Striped dolphin** ·
 - **Sargasso Sea** — the only sea with no coastline, and the plastic that
   gathers in it.
 
+
+---
+
+## CORAL REEF — proposed, ~20 species
+
+**This one genuinely needs it, and for a specific reason: the reef has no reef.**
+There is not a single coral in the roster. Corals are animals, and they are the
+thing the entire biome is named after and built from. That is the largest single
+gap anywhere in the dex.
+
+The list is also fish-heavy — around 24 fish to 10 invertebrates — where a real
+reef is overwhelmingly invertebrate.
+
+### The reef itself
+
+| Species | Why |
+|---|---|
+| **Staghorn coral** | The reef-builder. Fast-growing, branching, and one of the two Caribbean species that collapsed by over 95% |
+| **Elkhorn coral** | The other one. Together these two *built* the Caribbean reefs |
+| **Brain coral** | Centuries old, and the individual polyps fight each other along the seams |
+| **Sea fan** *(gorgonian)* | Grows across the current to filter it, like a net |
+| **Tube sponge** | Filters its own volume of water every few seconds |
+
+### Partnerships — the reef runs on them
+
+| Species | Why |
+|---|---|
+| **Sea anemone** | **The clownfish's partner, and it is missing.** The fish is already in the game twice and the thing it lives inside is not |
+| **Pistol shrimp** | Snaps a claw so fast it **boils the water into a cavitation bubble** — briefly hotter than the surface of the sun. It also shares a burrow with a goby: the shrimp digs, the goby watches for danger, and the shrimp keeps one antenna on its tail |
+| **Cleaner shrimp** | Runs a cleaning station that predators queue at and do not eat from |
+| **Harlequin shrimp** | Eats **only starfish**. Flips them over and eats them alive, slowly, over days |
+
+### Invertebrates worth having
+
+| Species | Why |
+|---|---|
+| **Giant clam** | A metre across, over a century old, and it **farms algae inside its own tissue** for food |
+| **Blue-ringed octopus** | The size of a golf ball, and carries enough tetrodotoxin to kill twenty-six people |
+| **Coconut octopus** | **Carries coconut shell halves around and assembles them into armour.** Tool use, in an invertebrate |
+| **Flamboyant cuttlefish** | Too toxic to eat and walks on the seabed rather than swimming |
+| **Elysia** *(solar-powered sea slug)* | **Steals chloroplasts from the algae it eats and photosynthesises with them** for months |
+| **Spanish dancer** *(nudibranch)* | Swims by unrolling its body and undulating, bright red |
+| **Feather star** | Ancient, and it swims — most people do not know they can |
+| **Long-spined sea urchin** | The 1983 Caribbean die-off removed the reef's main grazer and the algae took over. A quest by itself |
+
+### Fish that earn their place
+
+**Bumphead parrotfish** *(eats coral and excretes sand — one fish makes tonnes
+of beach a year)* · **Humphead wrasse** *(a metre and a half, and changes sex)*
+· **Frogfish** *(fishes with a lure, and has the fastest strike of any
+vertebrate)* · **Garden eel** *(colonies standing out of the sand like grass,
+vanishing all at once)* · **Titan triggerfish**
+
+---
+
+## COAST & KELP — proposed, ~12 species
+
+**Coast needs less.** At 49 it is reasonably healthy and the list is varied. But
+a few are too good to leave out.
+
+| Species | Why |
+|---|---|
+| **Mudskipper** | **A fish that lives out of water.** Walks on its fins, breathes through its skin, climbs trees, and defends a territory on land |
+| **Archerfish** | **Shoots a jet of water** to knock insects off overhanging branches, correcting for refraction, and learns by watching others |
+| **Northern gannet** | **Plunge-dives from thirty metres at a hundred kilometres an hour**, with air sacs under the skin to absorb the impact |
+| **Cormorant** | Its wings are **not waterproof** — that is why it stands with them spread. It trades buoyancy for the ability to chase fish |
+| **Black skimmer** | The **lower half of its bill is longer than the upper**. It flies with it slicing the water and snaps shut on contact |
+| **Sanderling** | The small wave-chasing shorebird that runs in and out with every wave |
+| **Limpet** | Its teeth are **the strongest biological material ever measured**, stronger than spider silk |
+| **Goose barnacle** | Glued head-down for life, and medieval Europe believed barnacle geese hatched from them |
+| **Abalone** | Fished to collapse, and now the subject of one of the largest marine restoration efforts anywhere |
+| **Sea hare** | Releases a purple ink that jams a predator's sense of smell |
+| **Grey seal** · **Harbour seal** | The two temperate seals, and the coast currently has neither |
+
 ---
 
 ## POLAR — LIKELY, 25 species
@@ -170,7 +246,9 @@ nobody knows why)* · Ross's gull
 | | |
 |---|---|
 | Deep sea | 32 confirmed |
-| Open ocean | ~25 proposed |
+| Open ocean | ~25 confirmed |
+| Coral reef | ~20 proposed |
+| Coast | ~12 proposed |
 | Polar | 25 likely |
 | **Committed so far** | **57** |
 | Budget | 121 |
