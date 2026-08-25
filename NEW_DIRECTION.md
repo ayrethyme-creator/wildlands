@@ -2433,7 +2433,7 @@ do, which is exactly what idea 52 asked for.
 
 The structure already decides it. Four adult life stages x twelve biomes:
 
-- **Four quests per biome, one per adult life stage.** 48 in total.
+- **Four quests per biome, one per adult life stage.** 48 in total — **48 is the campaign, not the game.** See "How many quests, actually": postgame adds 12 mythology and 13 fossil quests, for 73 defined.
 - **Farmland & Town carries two extra** — the kid and teen tutorials — so 6.
 - **~50 authored quest lines**, of which one playthrough needs 15–20 (question
   2's threshold rule). The rest are replay and other-career content.
@@ -4734,6 +4734,13 @@ change rather than a contradiction.*
   feathered-dinosaur quest needs it. A lighter option is recorded: trim the new
   periods to one species each and hand 13 slots back to the Mesozoic.
 
+- **2026-08-25 — Quest total reconciled: 73 defined, not 48.** The campaign is 48
+  (12 biomes x 4) and remains mandatory and unchanged. Postgame adds **12 mythology
+  quests** (one per culture, over 100 species) and **13 fossil quests** (one per
+  period, over 50 species). **There is no quest per animal** — 1000 species, 73
+  quests, about one per fourteen. On the Brink and the Vigil are still open, which
+  are exactly the two areas Ayr parked.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -5694,3 +5701,64 @@ every fossil quest would still have its animal, and the group would still cover 
 whole record, just thinly at the edges.
 
 **Ayr's call. Nothing here is built yet.**
+
+---
+
+## HOW MANY QUESTS, ACTUALLY
+
+> **Ayr, 2026-08-25.** *"You keep naming quests. How many quests are you planning
+> total? Cus it seems like you're maybe under two assumptions at once: that there
+> are 4 per biome in the main game, and that there is a quest for every animal."*
+
+**Ayr is right that the doc drifted.** "48 in total" was written on 2026-08-24 and
+appears in nine places. Then on 2026-08-25 I added twelve mythology quests and
+thirteen fossil quests **without ever updating that number.** Both figures have been
+sitting in the same document contradicting each other since.
+
+### To be explicit: there is NOT a quest per animal
+
+**1000 animals. 73 quests.** Roughly one quest for every fourteen species.
+
+The confusion is fair, because in the fossil section I kept writing "the quest
+species" beside individual animals — Charnia, Anomalocaris, Tiktaalik, Dimetrodon,
+Basilosaurus. That reads like every fossil gets one. It is **one per period**: 13
+quests standing on 50 species. Same for mythology — **one per culture**: 12 quests
+standing on 100 species.
+
+An animal without a quest is not neglected. It is **encountered, documented,
+studied, drawn, given a field-guide entry and a signature ability**, and it counts
+towards the biome's completion. Questing is what a *few* species do.
+
+### The real total
+
+| Group | Quests | Species behind them | Status |
+|---|---|---|---|
+| **The twelve biomes** | **48** | 700 | The campaign. Mandatory. 4 per biome, one per adult life stage |
+| **Mythology** | **12** | 100 | Postgame. One per culture |
+| **Fossils** | **13** | 50 | Postgame. One per period |
+| **On the Brink** | **?** | 50 | **Ayr has parked this** |
+| **The Vigil** | **?** | 50 | **Ayr has parked this** |
+| **Breeds** | 0 | 50 | Collection and husbandry, not story |
+| | **73 + TBD** | **1000** | |
+
+### The nine "48" references are still correct — in their own scope
+
+Every one of them is about **the campaign**: 48 mandatory quests, ~50–55 hours,
+each ending with real named people, each following the five-beat shape. None of
+that changes.
+
+**What changed is that 48 stopped being the total.** The campaign is 48. The game
+now has 73 defined and two regions still to decide.
+
+### The two undecided ones are exactly the two Ayr parked
+
+*"I don't know yet what I want to do with the special Vigil and On the Brink areas.
+Let's do that later."*
+
+So the number is not vague by accident — it is open in precisely the places Ayr
+left open. For scale when that decision comes:
+
+- **On the Brink** is required and sits in the finale position. If it followed the
+  biome pattern it would take 4, making 77.
+- **The Vigil** may want none at all. It is a memorial — you go, you read, you
+  stand there. A quest chain might be the wrong shape for it entirely.
