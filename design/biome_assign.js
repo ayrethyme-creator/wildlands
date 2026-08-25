@@ -228,3 +228,13 @@ var FR = {
 };
 Object.keys(FR).forEach(function (k) { BIOME_BY_HAND[k] = FR[k]; });
 NOT_A_SPECIES.push("harpyeyas");
+
+// Ayr, 2026-08-25: rainforest overflow to savanna and desert. The montane
+// candidates (quetzal, mountain gorilla, clouded leopard) were declined.
+BIOME_BY_HAND.mandrill    = "savanna";
+BIOME_BY_HAND.peccary     = "savanna";
+BIOME_BY_HAND.agouti      = "savanna";
+BIOME_BY_HAND.linsang     = "savanna";
+BIOME_BY_HAND.bushdog     = "savanna";
+BIOME_BY_HAND.tegu        = "desert";
+BIOME_BY_HAND.greeniguana = "desert";
