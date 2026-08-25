@@ -3756,6 +3756,13 @@ change rather than a contradiction.*
   become a micro-region type inside forest, mountains, coast and desert. The
   five cave species reassign — a bat is a forest animal that sleeps in a cave.
   Balancing floor becomes **57**, giving a final spread of 57 to 108.
+- **2026-08-25** — **Unequal biome sizes are correct, not a fault.** A bigger
+  biome should hold more variety. Rainforest and savanna sitting on top matches
+  the real world. The floor matters; the ceiling does not.
+- **2026-08-25** — **No plankton, krill or copepods as catchable species.**
+  What the animals eat is stated in the text rather than implemented as
+  collectables. Polar and open ocean get **larger additions** instead — Arctic
+  fish and the like.
 - **2026-08-24** — **No animal appears twice in the same biome.** Four quests,
   four species.
 - **2026-08-24** — **The impact ladder:** young adult makes local change; adult
