@@ -4658,6 +4658,13 @@ change rather than a contradiction.*
   Four of the cheapest categories — scale, light/vision shader, cutaway, audio —
   are also among the most striking.
 
+- **2026-08-25 — Timeline revised to about a year, not years.** Eric's call, and
+  the repo supports it: 1,001 sprites landed across three production days, and the
+  whole of Safari Saga was built in six weeks. Content is not the bottleneck.
+  The unproven pipelines are **animation** and **3D environments** — build a
+  one-biome vertical slice early to price them. Supersedes the "may take years"
+  assumption in idea 20.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -4867,3 +4874,70 @@ right figure.**
 **Nobody is empty-handed.** Every species can at minimum be placed next to a size
 reference and shown in cutaway. The ~160 with no unique verb get that, and it is
 still worth looking at.
+
+---
+
+## The timeline: Eric is right, and the repo proves it
+
+*2026-08-25. Eric disagrees that this takes years — he says a year at most, because
+the old estimates assume the old way of making games. Rather than argue it, here is
+what this project has actually measured.*
+
+### The evidence sitting in the repository
+
+| Measurement | Value |
+|---|---|
+| First commit | **2026-07-14** |
+| Today | **2026-08-25** |
+| Total elapsed | **six weeks** |
+| Commits | 383 |
+| Sprites delivered | **1,001** |
+| Days on which sprites actually landed | **2026-08-11 (293), 08-13 (448), 08-14 (260)** |
+
+**A thousand finished, reviewed, in-game sprites in three production days.** In six
+weeks the same project also produced a playable game with 1,000 species, 48 quests
+built on sourced conservation history, and a written field guide.
+
+That is not a projection. It already happened, and Ayr reviewed all of it.
+
+### So the multi-year framing was wrong
+
+Idea 20 said *"this game may take years, and I'm ok with that"* — a reasonable
+assumption at the time, and I reinforced it yesterday by calling ~140 bespoke
+pieces "a real number for a multi-year project."
+
+**Against the observed rate that is nonsense.** 140 of anything is a fortnight in
+this repo's actual terms. **The content was never the bottleneck, and I was pricing
+content.**
+
+### What genuinely is unproven
+
+Everything delivered in those six weeks was **static images, text, and code.**
+Those are exactly the three things this pipeline has demonstrated at speed. Two of
+the new game's asset classes have **no evidence behind them at all:**
+
+1. **Animation.** Not one frame of motion has been produced by this project.
+   Diffusion models are genuinely weakest at temporal coherence — a sequence that
+   drifts between frames is the known failure mode, and it is a different problem
+   from the one the sprite pipeline solved. The signature ability is the first
+   feature that needs motion.
+2. **3D environments.** HD-2D means 2D sprites standing in **lit 3D scenes.** The
+   billboard shader is written but untested, and no environment art exists. This is
+   a new pipeline, not an extension of the sprite one.
+
+**Neither is a reason to expect years.** Both are reasons to build a vertical slice
+of one biome early — sprite, animation, 3D environment, one signature ability —
+because that slice converts the two unknowns into measured rates, exactly as the
+sprite batches did.
+
+### The one thing that does not scale
+
+**Ayr is the only reviewer.** Every sprite, every entry, every quest passes through
+one pair of eyes, and the correction rounds this project has run were not optional
+— they caught real failures the pipeline could not see itself.
+
+Six weeks of evidence says that review keeps up. It is still the ceiling, and it is
+the number to watch rather than the generation rate.
+
+**Working assumption from here: a year, not years** — with the vertical slice built
+early to price the two unproven pipelines.
