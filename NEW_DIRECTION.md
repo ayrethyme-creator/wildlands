@@ -4080,6 +4080,74 @@ back to the desert instead.
 
 ---
 
+## THE THIRTEENTH REGION — "On the Brink"
+
+> **Ayr, 2026-08-25.** A final region that unlocks only when all twelve are
+> finished. **Required, not optional.** Completing it unlocks the postgame
+> areas. Radically different and special — the final-boss position, because it
+> is the most important. **50 species.**
+
+### The arithmetic lands exactly
+
+| | |
+|---|---|
+| Extinct in the wild *(currently in the Vigil)* | **13** |
+| Critically endangered but living *(currently in the Vigil)* | **30** |
+| Critically endangered, currently in the twelve biomes | **7** |
+| | **50** |
+
+And the totals:
+
+```
+750  main game   :  twelve biomes 700 + On the Brink 50
+250  postgame    :  Mythology 100 · Vigil 50 · Fossils 50 · Domestic 50
+1000
+```
+
+The Vigil, stripped of everything still alive, becomes what it always claimed to
+be: **the genuinely extinct, and nothing else.**
+
+### The seven from the living biomes
+
+Chosen for distinct stories and full taxonomic spread — this region should not
+be all mammals.
+
+| Species | Class | Why |
+|---|---|---|
+| **Vaquita** *(required)* | Mammal | **Around ten individuals left.** The most urgent mammal on earth, drowning in nets set for a fish nobody outside China has heard of |
+| **Axolotl** *(required)* | Amphibian | **Functionally extinct in the wild** while hundreds of thousands live in tanks. The most complete captive-versus-wild paradox in the game |
+| **Kākāpō** | Bird | About 250 birds, and **every single one has a name** and an individual management plan. Conservation at the scale of individuals |
+| **Sawfish** | Fish | A shark-sized ray with a chainsaw for a face, gone from most of its range, and **almost nobody knows it is in trouble** |
+| **Sunflower sea star** | Invertebrate | Wiped out by wasting disease. It ate urchins — without it the urchins stripped the kelp forests bare. **A keystone removed, and the consequence visible from orbit** |
+| **Pangolin** | Mammal | **The most trafficked wild mammal on earth** |
+| **Gharial** | Reptile | Around 650 breeding adults, and the only crocodilian that cannot walk properly on land |
+
+That is mammal, amphibian, bird, fish, invertebrate and reptile — the whole
+tree, all at the edge.
+
+### What "radically different" could mean (Claude note, not decided)
+
+The final-boss framing suggests this region should break its own rules:
+
+- **Encounters are rare and may not repeat.** You do not grind here. If you miss
+  it, you may not get another.
+- **Every skill the career taught is required at once** — the photographer's
+  patience, the researcher's method, the guide's ability to persuade.
+- **It may not be a place at all.** These animals do not share a habitat; they
+  share a *condition*. It could be a series of last places — one corner of the
+  Gulf of California, a few predator-free islands, one canal system in Mexico
+  City.
+- **The codex beat lands hardest here.** Every quest ends by naming what really
+  happened, and in this region several of those stories have no ending yet.
+
+### Names
+
+Ayr suggested **"On the Brink"**. Also possible: *The Last Ground* · *The
+Narrow Places* · *The Edge* · *What Is Left*. Ayr's call.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
@@ -4282,7 +4350,13 @@ change rather than a contradiction.*
   a **sub-area** of a region. The Mountains biome therefore means specifically
   **alpine, above the treeline** — forested mountainsides belong to forest and
   rainforest regions.
-- **2026-08-25** — **FINAL ROSTER SHAPE: 700 living real animals + 200 postgame
+- **2026-08-25** — **A thirteenth region, "On the Brink"** — 50 critically
+  endangered and extinct-in-the-wild species. Unlocks only after all twelve
+  biomes, is **required**, and completing it unlocks the postgame. The Vigil
+  becomes the genuinely extinct only.
+- **2026-08-25** — **ROSTER: 750 main game (12 biomes 700 + On the Brink 50) +
+  250 postgame (Mythology 100, Vigil 50, Fossils 50, Domestic 50) = 1000.**
+- ~~**2026-08-25** — **FINAL ROSTER SHAPE: 700 living real animals + 200 postgame
   real (Vigil 100, fossils 50, domestic 50) + 100 postgame mythology = 1000.**
 - **2026-08-25** — **The 13 invented wardens are cut from the new game** and
   stay in Safari Saga. Every entry in the new roster can be credited to
