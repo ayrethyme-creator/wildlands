@@ -238,3 +238,11 @@ BIOME_BY_HAND.linsang     = "savanna";
 BIOME_BY_HAND.bushdog     = "savanna";
 BIOME_BY_HAND.tegu        = "desert";
 BIOME_BY_HAND.greeniguana = "desert";
+
+// Ayr, 2026-08-25. The hometown includes a small wooded patch, so town animals
+// that are not livestock live there rather than needing a separate biome.
+BIOME_BY_HAND.coyote       = "desert";
+BIOME_BY_HAND.ibericanworm = "desert";
+BIOME_BY_HAND.beaver       = "forest";
+BIOME_BY_HAND.opossum      = "farmland";
+// raven and the deer (white-tailed, elk, moose, muntjac) are already in forest.
