@@ -3849,6 +3849,30 @@ is who did it"*, cutting them makes the roster honest all the way through.
 
 ---
 
+## Parked for later — interaction modes
+
+> **Ayr, 2026-08-25.** Recorded so it is not lost. Not designed yet.
+
+**69. Two separate interaction modes:**
+
+- **A childhood interaction mode for most of the town animals** — the pets, the
+  livestock, the garden wildlife. Available during the kid stage.
+- **A separate one for animals caught in the wild.**
+
+### Note (Claude)
+
+This is idea 55's mechanism — the thing that gives back the feeling conservation
+education takes away. The childhood one is where closeness is unambiguously
+fine, and it comes **before** the player ever meets a wild-animal restriction,
+which is the sequencing already recorded further up.
+
+Keeping the two modes separate is the important part: what you may do with your
+own goat is not what you may do with a wild fox, and having them be different
+systems teaches that without a word of explanation.
+
+
+---
+
 ## Questions to come back to
 
 *Kept honest: several earlier entries have been answered by decisions above and
