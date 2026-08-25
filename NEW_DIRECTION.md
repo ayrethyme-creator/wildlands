@@ -4724,6 +4724,16 @@ change rather than a contradiction.*
   periods have no animal — Ediacaran, Cambrian, Ordovician, Silurian, Devonian,
   Carboniferous, Paleogene, Neogene. Fixing it costs no slots, only swaps.
 
+- **2026-08-25 — The fossil 50 is rebalanced across all thirteen periods.**
+  Supersedes the twelve-dinosaur cut recorded earlier the same day. 21 existing
+  entries kept, 8 Ice Age species moved in from the Vigil, **21 new species added**
+  covering the eight empty periods. **29 dinosaurs cut**, which is the honest price
+  of the group ceasing to be Mesozoic-only. Cretaceous stays the largest block at 8,
+  Quaternary 8, Jurassic 7, Triassic 6. Protoceratops and Plesiosaurus protected for
+  the griffin and Mary Anning quests; **Sinosauropteryx added** because the
+  feathered-dinosaur quest needs it. A lighter option is recorded: trim the new
+  periods to one species each and hand 13 slots back to the Mesozoic.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -5557,3 +5567,130 @@ Basilosaurus, no Megalodon.
 That does not change any total — it is a question of **which 50**, not how many. If
 Ayr wants the fossil quests buildable, roughly eight more dinosaurs come out and
 those eight periods get an animal each. **Flagged, not done.**
+
+---
+
+# THE FOSSIL 50 — REBALANCED ACROSS THE RECORD
+
+> **Ayr, 2026-08-25.** *"Yeah let's make the fossil group more rounded, but still
+> keep it to 50."*
+>
+> **This supersedes the twelve-dinosaur cut recorded earlier today.** That cut only
+> made room for the Ice Age twelve. This is the full rebalance.
+
+## The honest cost, first
+
+The group is currently **100% Mesozoic reptiles**. Covering thirteen periods in
+fifty slots means the dinosaurs stop being the whole group and become the largest
+part of it.
+
+**29 of the 50 existing entries are cut, and 4 of the 12 Ice Age arrivals are not
+used.** That is the price of the other eight periods, and there is no version of
+this where it is cheaper — the slots have to come from somewhere and the dinosaurs
+are holding all of them.
+
+**Dinosaurs still end up the biggest block in the game's fossil record**, which is
+also true of every museum.
+
+## The allocation
+
+| Period | Slots | Why this many |
+|---|---|---|
+| **Ediacaran** | 2 | The first complex life. Almost nothing to choose from |
+| **Cambrian** | 3 | The Burgess Shale is the single richest source of method stories |
+| **Ordovician** | 2 | |
+| **Silurian** | 2 | |
+| **Devonian** | 3 | Fish become tetrapods — the biggest transition in the record |
+| **Carboniferous** | 2 | |
+| **Permian** | 3 | The largest extinction, and the mammal line begins |
+| **Triassic** | 6 | Dinosaurs appear, and are not yet the ones in charge |
+| **Jurassic** | 7 | |
+| **Cretaceous** | 8 | The most famous animals in the world live here |
+| **Paleogene** | 2 | Whales go back to the sea |
+| **Neogene** | 2 | |
+| **Quaternary** | 8 | Ice Age megafauna, already drawn and already loved |
+| | **50** | |
+
+## The fifty
+
+### Kept from the existing group — 21
+
+**Triassic (6)** · Coelophysis · Eoraptor · Herrerasaurus · Postosuchus ·
+Shonisaurus · Proganochelys
+*Keeps the first dinosaurs, the crocodile-line ruler the Triassic quest is about,
+the giant marine reptile and the first turtle.*
+
+**Jurassic (7)** · Allosaurus · Archaeopteryx · Stegosaurus · Brachiosaurus ·
+Apatosaurus · **Plesiosaurus** · Pterodactylus
+*Plesiosaurus is protected — the Mary Anning quest needs it. Apatosaurus is kept
+over Diplodocus so it can carry the Brontosaurus story.*
+
+**Cretaceous (7)** · Tyrannosaurus · Triceratops · Velociraptor · Spinosaurus ·
+**Protoceratops** · Ankylosaurus · Parasaurolophus
+*Protoceratops is protected — the griffin quest needs it.*
+
+**Permian (1)** · Lystrosaurus
+*The animal that inherited the world after the Great Dying.*
+
+### Moved in from the Vigil — 8
+
+**Quaternary** · Woolly Rhinoceros · Smilodon · Mastodon · Columbian Mammoth ·
+Dire Wolf · Megatherium · Glyptodon · Irish Elk
+
+*Not used: Cave Lion, Short-faced Bear, Giant Beaver, Steppe Bison — Smilodon,
+Megatherium and the mammoth already cover those niches.*
+
+### New — 21
+
+| Period | Species | Why it earns a slot |
+|---|---|---|
+| **Ediacaran** | **Charnia** | The quest species. Found in rock everyone knew was too old for life |
+| | **Dickinsonia** | Nobody could agree for decades whether it was an animal at all — settled by finding cholesterol in it |
+| **Cambrian** | **Anomalocaris** | The quest species. Described as three separate animals |
+| | **Opabinia** | Five eyes and a grasping hose. The paper describing it was **laughed at, and the laughter was the point** |
+| | **Hallucigenia** | Reconstructed upside down *and* back to front, then corrected twice |
+| **Ordovician** | **Trilobite** | The fossil more people own than any other, and absent from the game |
+| | **Cameroceras** | A straight-shelled cephalopod several metres long |
+| **Silurian** | **Jaekelopterus** | A sea scorpion larger than a person |
+| | **Pneumodesmus** | A millipede, and **the oldest known animal to have breathed air.** The Silurian quest is about being first onto land |
+| **Devonian** | **Tiktaalik** | The quest species. Predicted, then found on purpose |
+| | **Dunkleosteus** | Armoured, enormous, and it sheared instead of biting |
+| | **Ichthyostega** | Legs, at last |
+| **Carboniferous** | **Meganeura** | The quest species. A dragonfly with a 70cm wingspan |
+| | **Arthropleura** | A two-and-a-half-metre millipede |
+| **Permian** | **Dimetrodon** | The quest species. **Not a dinosaur, and closer to you than to one** |
+| | **Gorgonops** | Sabre teeth, ninety million years before Smilodon — the same solution, invented twice |
+| **Cretaceous** | **Sinosauropteryx** | **The quest needs it.** The first dinosaur shown to have feathers, and the first whose colour was worked out — a banded ginger-and-white tail |
+| **Paleogene** | **Basilosaurus** | The quest species. A whale with legs it no longer used |
+| | **Ambulocetus** | The walking whale, midway through |
+| **Neogene** | **Megalodon** | The quest species. Known almost entirely from teeth |
+| | **Gigantopithecus** | A three-metre ape, known from jaws and teeth — and the animal every yeti story gets pointed at, which links this group to the mythology set |
+
+### Cut — 29 from the existing group
+
+**Triassic (5)** · Plateosaurus · Desmatosuchus · Tanystropheus · Cynognathus ·
+Placerias
+
+**Jurassic (4)** · Dilophosaurus · Compsognathus · Diplodocus · Liopleurodon
+
+**Cretaceous (8)** · Deinonychus · Therizinosaurus · Oviraptor ·
+Pachycephalosaurus · Iguanodon · Quetzalcoatlus · Pteranodon · Mosasaurus
+
+**Previously listed (12)** · Brontosaurus · Camarasaurus · Mamenchisaurus ·
+Ceratosaurus · Cryolophosaurus · Giganotosaurus · Carnotaurus · Gallimimus ·
+Styracosaurus · Kentrosaurus · Rhamphorhynchus · Ophthalmosaurus
+
+**The losses worth naming:** Deinonychus started the dinosaur renaissance and
+Oviraptor carries the best misidentification story in palaeontology. Both are real
+losses. **Their stories can be told inside other entries** — Velociraptor's can
+carry the renaissance, and Protoceratops sits in the same quarry Oviraptor was
+falsely accused over.
+
+## The dial, if this cuts too deep
+
+The allocation is adjustable without touching the total. **Trimming the eight new
+periods to one species each frees 13 slots** and hands them back to the Mesozoic —
+every fossil quest would still have its animal, and the group would still cover the
+whole record, just thinly at the edges.
+
+**Ayr's call. Nothing here is built yet.**

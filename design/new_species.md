@@ -353,3 +353,18 @@ bring it to 50. All real, all documented, all previously missing.
 Biomes stand at 579 living, less 7 leaving for On the Brink = 572. The confirmed
 target is **700**, so **128 new living species remain to be invented** and placed.
 Gemsbok (above) is one of them; 127 to go.
+
+## Added 2026-08-25 - 21 fossil species for the eight empty periods
+
+Ediacaran: Charnia, Dickinsonia
+Cambrian: Anomalocaris, Opabinia, Hallucigenia
+Ordovician: Trilobite, Cameroceras
+Silurian: Jaekelopterus, Pneumodesmus
+Devonian: Tiktaalik, Dunkleosteus, Ichthyostega
+Carboniferous: Meganeura, Arthropleura
+Permian: Dimetrodon, Gorgonops
+Cretaceous: Sinosauropteryx (the feathered-dinosaur quest needs it)
+Paleogene: Basilosaurus, Ambulocetus
+Neogene: Megalodon, Gigantopithecus
+
+These do not change the 1000 - they replace cut dinosaurs one for one.

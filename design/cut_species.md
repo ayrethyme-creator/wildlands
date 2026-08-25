@@ -61,7 +61,7 @@ the new game will be built fresh in Godot and this is the roster it starts from.
 Mountains is at 34 and desert at 41, so 22 covers a real pass at both without
 moving the 700.
 
-## Cut 2026-08-25 — twelve surplus dinosaurs, to hold Fossils at 50
+## Cut 2026-08-25 — twelve surplus dinosaurs (SUPERSEDED, see below)
 
 Required to make room for the twelve Ice Age species moving in from the Vigil.
 Chosen by thinning over-represented clades, never by removing anything a quest
@@ -74,3 +74,25 @@ Styracosaurus - Kentrosaurus - Rhamphorhynchus - Ophthalmosaurus
 
 Recorded, not applied. New game only; the Safari Saga roster on `main` is
 untouched.
+
+## Cut 2026-08-25 (final) — 29 dinosaurs, for a fossil group covering all 13 periods
+
+Supersedes the twelve above, which only made room for the Ice Age arrivals. Ayr
+asked for the fossil group to be "more rounded, but still keep it to 50", and it
+was 100% Mesozoic reptiles. Covering the other eight periods costs 29 slots.
+
+Triassic (5): Plateosaurus, Desmatosuchus, Tanystropheus, Cynognathus, Placerias
+Jurassic (4): Dilophosaurus, Compsognathus, Diplodocus, Liopleurodon
+Cretaceous (8): Deinonychus, Therizinosaurus, Oviraptor, Pachycephalosaurus,
+  Iguanodon, Quetzalcoatlus, Pteranodon, Mosasaurus
+Previously listed (12): Brontosaurus, Camarasaurus, Mamenchisaurus, Ceratosaurus,
+  Cryolophosaurus, Giganotosaurus, Carnotaurus, Gallimimus, Styracosaurus,
+  Kentrosaurus, Rhamphorhynchus, Ophthalmosaurus
+
+Protected and NOT cut: Protoceratops (griffin quest), Plesiosaurus (Mary Anning
+quest), Apatosaurus (carries the Brontosaurus story).
+
+Also not used: 4 of the 12 Ice Age species from the Vigil - Cave Lion,
+Short-faced Bear, Giant Beaver, Steppe Bison.
+
+New game only. The Safari Saga roster on `main` is untouched.
