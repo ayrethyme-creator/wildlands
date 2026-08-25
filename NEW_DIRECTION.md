@@ -2765,10 +2765,10 @@ income, which is why it spread.*
 |---|---|---|---|
 | **Young adult** | Local change · **earns the facility** | **Beehive fences.** Elephants raid crops and are killed for it. Elephants genuinely fear bees — they flee the sound and have an alarm call for it — so hives strung along a fence line deter 76% of elephants annually and 86% at peak crop season. **The farmers also sell the honey.** *Lucy King / Save the Elephants* | **Elephant** |
 | **Adult with skills** | The problem at scale | **The guard dogs.** A whole district shooting cheetahs over livestock. The fix is not aimed at the cheetah — Anatolian shepherds raised with the herds cut losses until shooting stops being worth it. *Cheetah Conservation Fund, Namibia, since 1994* | **Cheetah** |
-| **Adult with power** | Establishing a program | **The conservancies.** Communities given legal ownership of the wildlife on their land. Namibia: **86 communal conservancies, 20%+ of the country, $10M+ a year** returning to residents. Kenya: **two-thirds of large mammals live outside state parks** | **Oryx** |
+| **Adult with power** | Establishing a program | **The conservancies.** Communities given legal ownership of the wildlife on their land. Namibia: **86 communal conservancies, 20%+ of the country, $10M+ a year** returning to residents. Kenya: **two-thirds of large mammals live outside state parks** | **Gemsbok** |
 | **Elder** | Law and policy | **The horn question.** Rhino horn trade policy, including the genuinely unsettled argument over whether a legal trade would undercut poaching or legitimise it. **No clean answer** | **Black rhino** |
 
-Animals used: elephant, cheetah, black rhino. **Lion, wildebeest, vulture, wild
+Animals used: elephant, cheetah, gemsbok, black rhino. **Lion, wildebeest, vulture, wild
 dog and white rhino remain free** for the conservancy slot or for reserve.
 
 ### Follow-up 1 — the conservancy quest needs a representative animal
@@ -3100,7 +3100,7 @@ Each region composites the places its quests actually come from:
 | **Wetlands** | Everglades + the Danube delta + Pantanal | Cranes, otters, beavers, caimans |
 | **Coast & kelp** | California + North Atlantic | Sea otters, puffins, Project Puffin, kelp |
 | **Mountains** | Andes + Himalaya | Condors, snow leopards, ibex |
-| **Desert** | Namib + Sonoran + Australian interior | Oryx, bilby, Gila monster |
+| **Desert** | Namib + Sonoran + Australian interior | Arabian oryx, bilby, Gila monster |
 | **Coral reef** | Great Barrier + Coral Triangle + Cabo Pulmo | The reef stories are Pacific and Mexican |
 | **Open ocean** | Pacific + Southern Ocean | Whales, albatross, longlines, tuna |
 | **Polar** | Svalbard + Antarctic Peninsula | Polar bears at one end, penguins at the other |
@@ -4665,6 +4665,18 @@ change rather than a contradiction.*
   one-biome vertical slice early to price them. Supersedes the "may take years"
   assumption in idea 20.
 
+- **2026-08-25 — Gemsbok added as a species; the oryx collision fixed.** The
+  roster held one entry, "Arabian Oryx", and two quests claimed it — savanna's
+  conservancy programme and desert's elder law quest — while the biome chart put
+  it in desert, so the savanna quest was using an animal that does not live there.
+  **Gemsbok (*Oryx gazella*) takes one of the 121 free slots and goes to savanna;
+  Arabian oryx (*Oryx leucoryx*) stays in desert.** Both quests keep the animal
+  their story is actually about.
+- **2026-08-25 — Arabian oryx does not belong in On the Brink.** It is the
+  opposite story: extinct in the wild in 1972, reintroduced, and in 2011 the first
+  species ever downlisted from Extinct in the Wild. It stays a desert animal, and
+  the recovery makes its elder quest sharper — **the species was saved and its
+  sanctuary was legally dismantled for oil.**
 - **2026-08-25 — All twelve biome quest menus proposed.** Four per biome on the
   idea-67 ladder, no animal repeated within a biome, every quest ending in real
   named people. Savanna was already chosen; the other eleven await Ayr's review.

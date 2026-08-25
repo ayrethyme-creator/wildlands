@@ -327,3 +327,11 @@ nobody knows why)* · Ross's gull
 **Mountains and desert are still unproposed.** The 15 cuts recorded in
 `design/cut_species.md` bring the remaining budget to 22, which covers a real
 pass at both without moving the 700.
+
+## Added 2026-08-25 — quest requirement
+
+- **Gemsbok** (*Oryx gazella*) — **savanna**. Required by the conservancy quest.
+  The roster held only the **Arabian oryx** (*Oryx leucoryx*), which is a desert
+  animal and is already the subject of the desert elder quest, so two quests were
+  competing for one entry. The gemsbok is the emblematic Namibian conservancy
+  species and a genuinely distinct animal. Takes one of the 121 free slots.
