@@ -254,8 +254,9 @@ nobody knows why)* · Ross's gull
 | Polar | 25 likely |
 | **Committed so far** | **114** |
 | Budget | 121 |
-| **Remaining** | **7** |
+| Cuts from forest & rainforest | **+15** |
+| **Remaining** | **22** |
 
-**Mountains and desert are still unproposed**, and 7 slots will not cover
-them. Either those biomes get very little, or the 700 figure flexes upward.
-Worth a decision rather than a drift.
+**Mountains and desert are still unproposed.** The 15 cuts recorded in
+`design/cut_species.md` bring the remaining budget to 22, which covers a real
+pass at both without moving the 700.
