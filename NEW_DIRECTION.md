@@ -4751,6 +4751,15 @@ change rather than a contradiction.*
   releasable animals get field numbers instead of names, since real rehabilitators
   avoid naming what they intend to send home.
 
+- **2026-08-25 — The naming rule, decided.** Ayr, idea 75. Releasable animals are
+  **numbered on intake and named by the player at the moment of release.**
+  Non-releasable animals are named when they become residents. The player still
+  names every animal; they earn the right by letting it go. Ten intake categories
+  confirmed. Open: whether obvious cases (a wing gone at the shoulder) are named at
+  intake while uncertain ones stay numbered until the prognosis resolves — and the
+  consequence that an animal dying before an outcome never gets named, which is the
+  mortality question arriving by another door.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -5882,3 +5891,75 @@ The ten-category structure above exists to make that review tractable.
 
 The release sites are the smaller job than they sound: they are **places, not
 animals**, and many species share one. A pond, a field, a stretch of reef.
+
+---
+
+## THE NAMING RULE
+
+> **Ayr, 2026-08-25.** *"When you record an animal that the game knows it's slated
+> for release, that one just gets a number at first and then the player can name it
+> when it's released."*
+
+**75. Decided.** Releasable animals are numbered on intake. **The player names them
+at the moment of release.**
+
+### Why this is better than either half on its own
+
+It takes the real practice — rehabilitators use numbers precisely because naming
+leads to attachment, attachment leads to handling, and a handled animal cannot go
+home — and it **keeps the reward instead of only the discipline.**
+
+The player still gets to name every animal. They just have to **earn the right by
+letting it go.**
+
+### The name changes meaning depending on which way the animal goes
+
+| Outcome | When it is named | What the name is |
+|---|---|---|
+| **Released** | As it leaves | **A goodbye gift.** The last thing you do for it, and the reason you are allowed to is that you are not keeping it |
+| **Non-releasable** | When it becomes a resident | **An admission.** It gets a name because it is not going anywhere |
+
+**Same act, opposite meanings.** Nothing else in the game does that with a single
+verb.
+
+### The number is not a placeholder
+
+Field numbers are real and they carry information: species code, year, sequence —
+**BEAV-03**, **RT-2419**. A low number means early in your career. An elder walking
+past a two-digit number is looking at their first season.
+
+**Keep the number visible after naming.** Real records do. "Willow (BEAV-03)" says
+more than either half alone.
+
+### A refinement worth Ayr's decision
+
+Ayr's rule implies the game knows the outcome at intake — so a **name** at intake
+means *staying* and a **number** means *going*. The player therefore learns every
+animal's fate the moment it arrives.
+
+That is clear and it is kind. It also removes all uncertainty from the middle of
+the loop, which is where the rehabilitation actually happens.
+
+**Proposed refinement — let the injury decide which it is:**
+
+- **Obvious cases are named at intake.** A wing gone at the shoulder is never
+  flying again, and a rehabilitator knows that in the first ten minutes. Name it
+  now. The player knows where they stand and can grieve early.
+- **Uncertain cases stay numbered until the prognosis resolves.** Most intakes are
+  genuinely uncertain, and the middle of the loop is where the player's care
+  actually changes the odds.
+
+This keeps Ayr's rule exactly — **numbered means undecided, named means settled** —
+and makes the naming moment land in both directions. **Ayr's call; the simple
+version works too.**
+
+### The consequence nobody has decided yet
+
+An animal that **dies before an outcome never gets named.**
+
+That falls straight out of this mechanic and it is the heaviest thing in the
+facility design. It is also the honest one: real centres lose animals, and the ones
+they lose are the ones still carrying a number.
+
+**This is the euthanasia and mortality question, arriving by a different door.**
+Still open, still Ayr's.
