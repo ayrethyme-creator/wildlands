@@ -4926,6 +4926,21 @@ change rather than a contradiction.*
   not an undiscovered island). If Ayr wants an in-fiction answer, **a parallel Earth**
   is the only one that costs nothing. Recommended disclosure: **codex only.**
 
+- **2026-08-26 — Idea 82: the author's note, and it closes the reality question.**
+  Ayr's idea — the game ends by cutting to Ayr explaining why they made it. Every
+  in-fiction framing failed because it explained Terrane **from inside**; this
+  explains it from outside, which is allowed, because the game openly has an author.
+  **The alternate-Earth question can now close as "do nothing."** The structural
+  rhyme is the strongest part: every quest ends with *here is who really did this*,
+  and the game itself then ends with *here is who really made this* — the same move,
+  one level up, forty-nine times. Claude's suggestions, Ayr's call: place it
+  **before** the credits so it is not missed, add it to the codex as a sixth job
+  (*about this game*), keep it to 2–4 minutes, and explain the **reason** rather than
+  the story. Real video vs avatar vs both is Ayr's decision alone — it is about how
+  public they want to be, not about design. Precedent worth looking at: **Never
+  Alone** (2014), whose documentary interludes with Iñupiat elders are consistently
+  named the best part of it.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -7385,3 +7400,99 @@ five already tells the player which is which, forty-eight times.
 
 **If Ayr wants an in-fiction answer anyway, take 4** — a parallel Earth — because it
 is the only one that costs the game nothing.
+
+---
+
+# THE AUTHOR'S NOTE
+
+> **Ayr, 2026-08-26.** *"At the end of the credits it cuts to a video of me, or a
+> video of me and an avatar or something, explaining why I made the game, what it is
+> to me, and what it could mean for anyone playing."*
+
+**82. Ayr's idea, and it closes the reality question completely.**
+
+## Why it resolves Terrane
+
+Every framing tested above failed because it tried to explain Terrane **from
+inside**. This explains it from outside, and that is allowed, because **the game
+openly has an author.**
+
+Terrane is not a puzzle needing a mechanism. **It is a place a person built on
+purpose**, and at the end that person says so. Nothing needs a lore justification
+once somebody stands up and says *I made this, and here is why.*
+
+## The structural rhyme, which is the strongest part
+
+**Every one of the 48 quests ends the same way:** the story stops, and the game says
+*here is who really did this,* and names them.
+
+**The game itself then ends the same way.** The story stops, and the game says *here
+is who really made this,* and names Ayr.
+
+**Same move, one level up, forty-nine times.** That is not decoration — it is the
+game's entire method applied to itself, and almost nothing else could earn it.
+
+## It is also the one feature nobody can copy
+
+Everything else in this design could in principle be built by someone else with
+enough time. **The author's note could not.** It is the reason this game exists
+rather than a feature it has.
+
+It is also the delivery of Ayr's own stated purpose, in their words from 2026-08-24:
+
+> *"Lots of people think cubs are cute and would love to hold them... it would be so
+> great if playing my game gave people a feeling or experience to make up for that
+> loss."*
+
+**Somebody should say that out loud at the end, and it should be the person who
+meant it.**
+
+## The precedent worth looking at
+
+**Never Alone** (*Kisima Ingitchuna*, 2014) is built by an Alaska Native community
+and cuts to short documentary interludes of Iñupiat elders explaining the culture the
+game is drawn from. It is the closest existing thing to what Ayr described, and it
+works — the interludes are consistently named as the best part of that game.
+
+Nature documentaries do the same thing: **the presenter turns to camera at the end.**
+
+## Decisions this needs — Claude's suggestions, Ayr's call
+
+### Before the credits, not after
+
+*"At the end of the credits"* means most players never see it — credits get skipped.
+
+**Suggest: place it before the credits roll**, so it is the last thing the game says
+rather than a reward for patience. **And put it permanently in the codex**, which
+already has five jobs and can easily take a sixth: *about this game.* Then it is
+never missed and always re-watchable.
+
+### Real video, avatar, or both
+
+| | Strength | Cost |
+|---|---|---|
+| **Real video** | Most affecting. A person is unmistakably a person | Dates over time, harder to subtitle and localise, and it makes Ayr publicly the face of it |
+| **Avatar** | Timeless, re-recordable, private | Less affecting — it is still the game talking |
+| **Voice over stills or footage** | Ayr's real voice, real words, no face | The middle option, and the easiest to redo later |
+| **Both, as Ayr suggested** | **The avatar is who you were in the game; the person is who made it.** The cut between them is the whole idea in one shot | Most work, and the most interesting |
+
+**No recommendation on this one — it is genuinely Ayr's to make**, and it is about
+how public they want to be, not about design.
+
+### Keep it short, and explain the reason rather than the story
+
+**Two to four minutes.** And it should not explain the plot, the mechanics or the
+research — the game just did all of that for fifty hours.
+
+**It should explain why.** The strongest version is confident and brief. It says
+*here is what this is to me,* not *please understand.* Ayr's writing throughout this
+document is plain and direct, which is already the correct register — **it should
+sound like the doc, not like a trailer.**
+
+## What this changes elsewhere
+
+- **The alternate-Earth question can close as "do nothing."** No in-fiction
+  explanation is needed once the game has a visible author.
+- **The codex gains a sixth job:** *about this game* — the author's note, permanently
+  available.
+- **The ending has a shape now**, which it did not before.
