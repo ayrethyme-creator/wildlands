@@ -9024,3 +9024,55 @@ added rather than trimmed**, and the farm animals retained because the teen year
 
 **Trimming 44 dog and cat breeds is still right** - but it is now a design decision
 about how much choice the opening offers, not a spreadsheet exercise.
+
+---
+
+## WHERE THE SPECIES WORK STANDS - REBUILT ON GROUND TRUTH
+
+> **2026-08-26**, after the audit. All numbers below come from
+> `design/GROUND_TRUTH.txt`, read from the running game.
+
+### The proposals, de-duplicated against real data
+
+| Batch | Proposed | Already existed | Genuinely new |
+|---|---|---|---|
+| The Dark (deep sea) | 44 | 1 - brittle star, already in reef | **43** |
+| The Floe (polar) | 25 | 0 | **25** |
+| The Divide (mountains) | 19 | 3 - **snow leopard**, **Alpine ibex**, mountain gorilla | **16** |
+| | | | **84** |
+
+**Snow leopard and Alpine ibex were in the roster all along**, which is further fallout
+from the broken parser - the mountains quests were never missing their animals either.
+
+### The allocation, rebuilt from 519
+
+| Biome | Now | Target | New |
+|---|---|---|---|
+| Rainforest | 92 | 92 | - |
+| Savanna | 76 | 76 | - |
+| Forest | 53 | 58 | **+5** |
+| Wetlands | 46 | 56 | **+10** |
+| Desert | 44 | 56 | **+12** |
+| Coast | 43 | 56 | **+13** |
+| Farmland | 38 | 52 | **+14** |
+| Mountains | 32 | 50 | **+18** |
+| Reef | 31 | 52 | **+21** |
+| Open ocean | 29 | 52 | **+23** |
+| Polar | 24 | 50 | **+26** |
+| Deep sea | 11 | 50 | **+39** |
+| | **519** | **700** | **181** |
+
+Rainforest and savanna stay the richest, as Ayr asked, and nothing lands below 50.
+
+### What remains
+
+**84 of the 181 are on the table.** The three existing batches roughly cover deep sea,
+polar and mountains, give or take a couple each.
+
+**97 still to choose**, and they fall in five places: open ocean (+23), reef (+21),
+farmland (+14), coast (+13) and desert (+12), plus small tops-up for wetlands and
+forest.
+
+**Farmland is now the interesting one.** It is the starting town, it just gained the
+eleven North American backyard species, and it still needs about fourteen more - which
+are the animals a child meets first.
