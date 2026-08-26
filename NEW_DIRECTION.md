@@ -4911,6 +4911,21 @@ change rather than a contradiction.*
   not. Present day, real people, real conservation history intact; the map looks like
   this because continents collided. **Awaiting Ayr.**
 
+- **2026-08-26 — ALL NAMING CLOSED.** Ayr: **The Floe** (polar), **The Divide**
+  (mountains), **The Telling** (mythology), **The Kept** (breeds). With the ten
+  locked earlier plus On the Brink, The Vigil and The Record, and the world named
+  **Terrane**, every region and area in the game now has a name.
+- **2026-08-26 — The alternate-reality question may already be answered.** Beat five
+  of every quest is *"what really happened — the real event, the real place, the real
+  people, credited by name."* **The game is Terrane; the codex is Earth.** They were
+  never meant to be the same place. Terrane can simply be a fictional world with a
+  factual appendix. Of the three framings Ayr asked about, **temporal fails** (it
+  makes the conservation history ancient and kills the urgency), **transformation
+  fails** (no honest mechanism — tectonics is too slow, anything faster is magic),
+  and **hidden-on-Earth fails on scale** (twelve regions including abyssal ocean is
+  not an undiscovered island). If Ayr wants an in-fiction answer, **a parallel Earth**
+  is the only one that costs nothing. Recommended disclosure: **codex only.**
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -7272,3 +7287,101 @@ and The Canopy sit together because they collided.** That is a better answer tha
   information.
 - **In the story** — a quest about it. Expensive, and it would compete with the
   conservation stories for attention.
+
+---
+
+# WHAT KIND OF ALTERNATE REALITY — AND A THING THE DOC ALREADY SOLVED
+
+> **Ayr, 2026-08-26.** *"Alternative reality as in temporal? Or as in the Earth
+> became Terrane? Or as in Terrane exists on current day Earth, just undiscovered and
+> suddenly magically appeared?"*
+
+**Names locked first: The Floe · The Divide · The Telling · The Kept.** All naming is
+now closed.
+
+## The thing the design already answered
+
+Every one of the 48 quests ends the same way. **Beat five, decided 2026-08-24:**
+
+> *"The cutscene: **what really happened.** The real event, the real place, the real
+> people, credited by name."*
+
+So the beehive fence quest happens in **The Long Grass**, and then the cutscene says
+*this really happened, in Kenya, in 2009, and Lucy King worked it out.*
+
+**The game is Terrane. The codex is Earth.** They were never supposed to be the same
+place — the codex is the *appendix*, and it says so out loud, at the end of every
+quest.
+
+**Which means Terrane does not need to be an alternate anything.** It can simply be a
+fictional world whose animals, science and problems are ours, with a factual appendix
+that keeps pointing at the real planet and saying *this one is real.*
+
+**That is the cheapest and strongest answer, and it is already built.** Everything
+below is only needed if Ayr wants an in-fiction explanation on top of it.
+
+## If Ayr does want one — the three options, tested
+
+The test any of them has to pass: **does the sourced codex still work?** It credits
+real people for real recent events, so it needs the present day and real human
+history.
+
+### 1. Temporal — Terrane is Earth at another time
+
+**Future:** continents have reassembled. Real geology, genuinely teachable.
+**Past:** Pangaea. No humans, so no conservation history at all — ruled out
+immediately.
+
+**Fails the test.** In a deep-future Terrane, Lucy King and Mary Anning are ancient
+figures and the High Seas Treaty is archaeology. The quests stop being urgent and
+become history. **The one thing this game cannot afford to lose is urgency.**
+
+### 2. Earth became Terrane — a transformation
+
+Needs an **event**. And every available event is one of two kinds:
+
+- **Tectonic** — which takes tens of millions of years, so this collapses back into
+  option 1 and fails the same way.
+- **Sudden** — which is magic, and magic is the one thing this game has refused
+  everywhere else. The invented creatures were cut for exactly this reason.
+
+**Fails.** Not because it is a bad idea, but because it has no honest mechanism.
+
+### 3. Terrane is on present-day Earth, hidden or newly appeared
+
+**Fails on scale.** Terrane has twelve regions including polar ice, open ocean and
+abyssal deep sea. That is not an undiscovered island — **it is a planet's worth of
+world.** Nothing that size hides from satellites, and "it appeared" is magic again.
+
+### 4. A parallel Earth — the one that survives *(recommended)*
+
+**Terrane is Earth.** Not a future Earth, not a transformed Earth, not a hidden
+corner of ours. **A separate one, where the plates ended up somewhere else.**
+
+- Same century, same science, same species
+- No event, no transformation, nothing hidden, nothing to explain away
+- **The people who live there call it Terrane, the way we call ours Earth**
+- The only difference is where the land is
+
+**It passes the test because nothing about human history has to move.**
+
+## What the player is ever told
+
+**Codex only — recommended.**
+
+The game never announces it. A player just plays in a world. Anyone curious enough to
+open the geology entries finds real plate tectonics: terranes, accreted margins, and
+the fact that our own continents are assembled from fragments that arrived from
+elsewhere and stuck.
+
+**A player who never looks loses nothing. A player who looks learns something true.**
+That is how this game treats every other piece of real information, and there is no
+reason to treat its own ground differently.
+
+## Recommendation, stated plainly
+
+**Do nothing.** Terrane is a fictional world; the codex is about the real one; beat
+five already tells the player which is which, forty-eight times.
+
+**If Ayr wants an in-fiction answer anyway, take 4** — a parallel Earth — because it
+is the only one that costs the game nothing.
