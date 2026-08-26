@@ -9679,7 +9679,8 @@ says **"Uncle Albert says it all adds up"** when it is happy.
 > **Ayr, 2026-08-26.** *"The fire hawk in savanna is actually 3 different species. Check
 > all of the animals we currently have for errors like that and similar."*
 
-**Full audit at `design/SPECIES_AUDIT.md`.** Roughly **100 of the 528 real animals need a
+**Full audit at `design/SPECIES_AUDIT.md`, and as a browsable page at
+`design/species_audit.html` —** <https://claude.ai/code/artifact/c99584d9-712a-4c17-a4bc-baae7e80a895> Roughly **100 of the 528 real animals need a
 decision** — about a fifth of the roster.
 
 ### Four entries are not animals

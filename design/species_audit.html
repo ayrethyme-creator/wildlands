@@ -1,0 +1,300 @@
+<title>Species Audit</title>
+<style>
+:root{--bg:#f6f8f6;--surface:#fff;--ink:#141814;--muted:#5f6b62;--rule:#dde3de;
+ --accent:#2f6b4f;--accentsoft:#e7f0ea;--warn:#8a4a1e;--warnsoft:#f4ece3;
+ --shadow:0 1px 2px rgba(20,24,20,.06)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#0e110f;--surface:#161a17;--ink:#e7ece8;--muted:#95a29a;--rule:#242b26;
+ --accent:#74c49a;--accentsoft:#1a2a21;--warn:#d9a273;--warnsoft:#2a2119;--shadow:none}}
+:root[data-theme="dark"]{--bg:#0e110f;--surface:#161a17;--ink:#e7ece8;--muted:#95a29a;
+ --rule:#242b26;--accent:#74c49a;--accentsoft:#1a2a21;--warn:#d9a273;--warnsoft:#2a2119;--shadow:none}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);margin:0;
+ font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+ -webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px 96px}
+header.top{padding:56px 0 24px}
+h1{font:600 clamp(30px,4vw,44px)/1.1 ui-serif,Iowan Old Style,Palatino,Georgia,serif;
+ margin:0 0 12px;letter-spacing:-.01em;text-wrap:balance}
+.lede{color:var(--muted);max-width:64ch;margin:0 0 16px}
+.lede b{color:var(--ink);font-variant-numeric:tabular-nums}
+.quote{font-size:14px;color:var(--muted);border-left:2px solid var(--accent);
+ padding:4px 0 4px 13px;margin:0;max-width:64ch;font-style:italic}
+.tallies{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0}
+.tally{background:var(--surface);border:1px solid var(--rule);border-radius:8px;
+ padding:10px 14px;box-shadow:var(--shadow);min-width:132px}
+.tally b{display:block;font:600 22px/1.1 ui-serif,Georgia,serif;
+ font-variant-numeric:tabular-nums}
+.tally span{font-size:12px;color:var(--muted)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--rule);
+ padding:12px 0;margin:26px 0 4px}
+#q{width:100%;padding:10px 13px;border:1px solid var(--rule);border-radius:8px;
+ background:var(--surface);color:var(--ink);font:inherit;box-shadow:var(--shadow)}
+#q:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+section{border-top:1px solid var(--rule);padding:28px 0 6px;scroll-margin-top:72px}
+h2{font:600 22px/1.25 ui-serif,Iowan Old Style,Palatino,Georgia,serif;margin:0 0 4px;
+ letter-spacing:-.01em}
+h2 .n{color:var(--muted);font-weight:400;font-size:16px}
+.blurb{color:var(--muted);font-size:14px;margin:0 0 18px;max-width:64ch}
+.row{display:grid;grid-template-columns:minmax(140px,1fr) 2.4fr;gap:4px 20px;
+ padding:11px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.row:last-child{border-bottom:0}
+.name{font-weight:600}
+.name em{display:block;font-style:normal;font-weight:400;font-size:12px;color:var(--muted);
+ font-variant-numeric:tabular-nums}
+.what{color:var(--muted);font-size:14px}
+.what b{color:var(--ink);font-weight:600}
+.fix{display:block;margin-top:3px;color:var(--accent);font-size:13px}
+.fix::before{content:"→ ";opacity:.6}
+h3{font:600 13px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.07em;
+ text-transform:uppercase;color:var(--muted);margin:26px 0 6px}
+.list{font-size:14px;color:var(--muted);margin:0}
+.list b{color:var(--ink);font-weight:600}
+.list i{font-style:normal;color:var(--accent)}
+.hide{display:none!important}
+footer{border-top:1px solid var(--rule);margin-top:36px;padding-top:20px;
+ color:var(--muted);font-size:13px;max-width:64ch}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media (max-width:640px){.row{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+
+<header class="top">
+<h1>Species Audit</h1>
+<p class="lede">About <b>110</b> of the <b>611</b> real animals in the roster are not a
+species — they are a genus, a family, a sex, a caste, or an invention. In a game whose
+claim is that every entry can be credited to something real, each one needs a decision.</p>
+<p class="quote">"The fire hawk in savanna is actually 3 different species. Check all of
+the animals we currently have for errors like that and similar." — Ayr, 26 August</p>
+<div class="tallies">
+<div class="tally"><b>4</b><span>not an animal</span></div>
+<div class="tally"><b>11</b><span>redundant pairs</span></div>
+<div class="tally"><b>~85</b><span>a group, not a species</span></div>
+<div class="tally"><b>7</b><span>wrong biome</span></div>
+</div>
+</header>
+
+<div class="bar"><input id="q" type="search" placeholder="Search the audit…"
+ autocomplete="off" spellcheck="false" aria-label="Search the audit"></div>
+
+<section id="s1">
+<h2>Not an animal at all <span class="n">— 4</span></h2>
+<p class="blurb">These do not name a creature. They name a behaviour, a sex, or a job
+inside a colony.</p>
+
+<div class="row"><div class="name">Firehawk<em>savanna</em></div>
+<div class="what">Ayr's example. Not a species — <b>three unrelated Australian raptors</b>
+are documented carrying burning sticks to spread fire: black kite, whistling kite and
+brown falcon.
+<span class="fix">Black kite — best documented and most widespread</span></div></div>
+
+<div class="row"><div class="name">Lioness<em>savanna</em></div>
+<div class="what">A <b>sex</b>, not a species.
+<span class="fix">Merge with Maned Lion</span></div></div>
+
+<div class="row"><div class="name">Maned Lion<em>savanna</em></div>
+<div class="what">Also a sex. <b>These two entries are one animal.</b>
+<span class="fix">One entry: Lion. Male and female become an appearance state, like the
+House Cat coats</span></div></div>
+
+<div class="row"><div class="name">Mole-Rat Queen<em>savanna</em></div>
+<div class="what">A <b>caste</b>, not a species — and Naked Mole-Rat already exists as a
+life-stage entry.
+<span class="fix">One entry: Naked Mole-Rat. The queen becomes a life stage of it — and a
+remarkable one, since she grows extra vertebrae on becoming queen</span></div></div>
+</section>
+
+<section id="s2">
+<h2>Redundant pairs <span class="n">— 11</span></h2>
+<p class="blurb">The general and the specific of the same animal, both present. A player
+reads these as one creature listed twice.</p>
+
+<div class="row"><div class="name">Gibbon + Siamang</div>
+<div class="what"><b>A siamang is a gibbon.</b>
+<span class="fix">Name the other one — lar gibbon</span></div></div>
+
+<div class="row"><div class="name">Dragonet + Mandarinfish</div>
+<div class="what"><b>A mandarinfish is a dragonet.</b> Straight duplicate.
+<span class="fix">Keep Mandarinfish</span></div></div>
+
+<div class="row"><div class="name">Jackal + Black-backed Jackal</div>
+<div class="what">"Jackal" covers three species.
+<span class="fix">Keep the specific one</span></div></div>
+
+<div class="row"><div class="name">Fur Seal + Cape Fur Seal</div>
+<div class="what">Nine species of fur seal.
+<span class="fix">Keep Cape fur seal</span></div></div>
+
+<div class="row"><div class="name">Lynx + Iberian Lynx</div>
+<div class="what">Four species of lynx.
+<span class="fix">Name the general one — Eurasian lynx</span></div></div>
+
+<div class="row"><div class="name">Fruit Bat + Egyptian Fruit Bat + Spectacled Flying Fox</div>
+<div class="what">Three entries, one of which is <b>a category containing the other two</b>.
+<span class="fix">Drop the generic</span></div></div>
+
+<div class="row"><div class="name">Otter + Giant Otter + Sea Otter</div>
+<div class="what">Thirteen species of otter.
+<span class="fix">Name the generic — Eurasian otter</span></div></div>
+
+<div class="row"><div class="name">Butterflyfish + Copperband Butterflyfish</div>
+<div class="what">129 species.<span class="fix">Name it</span></div></div>
+
+<div class="row"><div class="name">Pufferfish + Porcupine Pufferfish</div>
+<div class="what">120 species.<span class="fix">Name it</span></div></div>
+
+<div class="row"><div class="name">Triggerfish + Picasso Triggerfish</div>
+<div class="what">40 species.<span class="fix">Name it</span></div></div>
+
+<div class="row"><div class="name">Hippo + Pygmy Hippo</div>
+<div class="what">Only two species, so this pair is fine.
+<span class="fix">Rename the first to common hippopotamus</span></div></div>
+</section>
+
+<section id="s3">
+<h2>A group, not a species <span class="n">— about 85</span></h2>
+<p class="blurb">The number is roughly how many real species the name covers. Almost none
+of these is hard, because in nearly every case one species carries the interesting fact —
+those are suggested in green.</p>
+
+<h3>Rainforest</h3>
+<p class="list"><b>Chameleon</b> (200) <i>— the data says veiled chameleon; name it</i> ·
+<b>Dart Frog</b> (170) <i>— golden poison frog</i> · <b>Glass Frog</b> (150) ·
+<b>Hummingbird</b> (360) <i>— bee hummingbird carries "smallest bird"</i> ·
+<b>Stick Insect</b> (3,000) · <b>Leaf Insect</b> (50) · <b>Basilisk Lizard</b> (4)
+<i>— common basilisk, the one that runs on water</i> · <b>Sloth</b> (6) ·
+<b>Tapir</b> (5) · <b>Tarsier</b> (13) · <b>Marmoset</b> (22) · <b>Capuchin</b> (8) ·
+<b>Colobus</b> (15) · <b>Langur</b> (20+) · <b>Spider Monkey</b> (7) ·
+<b>Howler Monkey</b> (15) · <b>Civet</b> (20) · <b>Coati</b> (4) · <b>Chevrotain</b> (10)</p>
+
+<h3>Savanna</h3>
+<p class="list"><b>Vulture</b> (23) <i>— Old World and New World vultures are not even
+related; pick white-backed</i> · <b>Kestrel</b> (13) <i>— common kestrel</i> ·
+<b>Hornbill</b> (60) <i>— southern ground hornbill</i> · <b>Mongoose</b> (34)
+<i>— banded or dwarf</i> · <b>Baboon</b> (5) <i>— olive or chacma</i> ·
+<b>Genet</b> (14) · <b>Galago</b> (20) · <b>Lovebird</b> (9) · <b>Duiker</b> (22)</p>
+
+<h3>Forest</h3>
+<p class="list"><b>Cicada</b> (3,000) <i>— the 17-year periodical cicada</i> ·
+<b>Jewel Beetle</b> (15,000) · <b>Hawk Moth</b> (1,450) · <b>Stag Beetle</b> (1,200) ·
+<b>Praying Mantis</b> (2,400) · <b>Tardigrade</b> (1,300) <i>— and it is a whole
+phylum</i> · <b>Macaque</b> (23) <i>— Japanese macaque</i> · <b>Bandicoot</b> (20) ·
+<b>Wallaby</b> (30+) · <b>Porcupine</b> <i>— Old and New World are different families</i> ·
+<b>Pill Millipede</b> <i>— an order</i></p>
+
+<h3>Wetlands</h3>
+<p class="list"><b>Dragonfly</b> (3,000) · <b>Damselfly</b> (2,600) ·
+<b>Kingfisher</b> (120) <i>— common kingfisher</i> · <b>Crocodile</b> (18)
+<i>— Nile or saltwater</i> · <b>Flamingo</b> (6) <i>— greater flamingo</i> ·
+<b>Terrapin</b> <i>— a vague word; diamondback</i> · <b>Mink</b> (2)
+<i>— American mink</i></p>
+
+<h3>Desert</h3>
+<p class="list"><b>Gecko</b> (1,500) <i>— leopard gecko is now a pet, so pick another:
+tokay</i> · <b>Scorpion</b> (2,500) <i>— emperor or deathstalker</i> ·
+<b>Rattlesnake</b> (36) <i>— western diamondback</i> · <b>Tarantula</b> (1,000)
+<i>— a recent addition of mine; name it</i> · <b>Camel</b> (2) <i>— the Bactrian is the
+wild endangered one</i> · <b>Jackrabbit</b> (6) · <b>Horned Lizard</b> (21)</p>
+
+<h3>Coast</h3>
+<p class="list"><b>Hermit Crab</b> (800+) · <b>Sea Squirt</b> (3,000) ·
+<b>Stingray</b> (200+) · <b>Cuttlefish</b> (120) · <b>Box Jelly</b> (50)
+<i>— Australian box jellyfish, the lethal one</i> · <b>Barracuda</b> (28) ·
+<b>Pelican</b> (8) · <b>Sea Lion</b> (6) · <b>Monk Seal</b> (2) · <b>Lobster</b></p>
+
+<h3>Mountains</h3>
+<p class="list"><b>Ibex</b> (5) <i>— Alpine ibex is the quest animal; name it that</i> ·
+<b>Pika</b> (30) · <b>Marmot</b> (15) · <b>Eagle-Owl</b> (20) <i>— Eurasian eagle-owl</i> ·
+<b>Viscacha</b> (5) · <b>Chinchilla</b> (2)</p>
+
+<h3>Reef</h3>
+<p class="list"><b>Brittle Star</b> (2,000) · <b>Sea Cucumber</b> (1,700) ·
+<b>Moray Eel</b> (200) <i>— giant moray</i> · <b>Pipefish</b> (200) ·
+<b>Parrotfish</b> (95) <i>— bumphead, the spectacular one</i> · <b>Sea Snake</b> (60) ·
+<b>Seahorse</b> (46) · <b>Wobbegong</b> (12) · <b>Cleaner Wrasse</b> (5) ·
+<b>Reef Shark</b> · <b>Boxfish</b></p>
+
+<h3>Open ocean</h3>
+<p class="list"><b>Flying Fish</b> (64) · <b>Hammerhead Shark</b> (9)
+<i>— great hammerhead</i> · <b>Manta Ray</b> (2) <i>— giant oceanic manta</i> ·
+<b>Pilot Whale</b> (2)</p>
+
+<h3>Farmland</h3>
+<p class="list"><b>Hoverfly</b> (6,000) · <b>Jumping Spider</b> (6,000) <i>— the largest
+spider family</i> · <b>Ladybug</b> (6,000) <i>— seven-spot</i> · <b>Firefly</b> (2,000) ·
+<b>Swallowtail</b> (550) · <b>Mason Bee</b> (500) · <b>Bumblebee</b> (250)
+<i>— buff-tailed</i> · <b>Gopher</b> (35) <i>— a recent addition of mine</i></p>
+
+<h3>Polar</h3>
+<p class="list"><b>Right Whale</b> (3) <i>— North Atlantic right whale is the one in the
+conservation story</i> · <b>Elephant Seal</b> (2) <i>— southern is the giant</i></p>
+
+<h3>Deep sea — from the batch just added</h3>
+<p class="list"><b>Siphonophore</b> · <b>Comb Jelly</b> · <b>Squat Lobster</b> ·
+<b>Sea Lily</b> · <b>Glass Squid</b> · <b>Vent Shrimp</b> · <b>Deep-sea Barnacle</b> ·
+<b>Bamboo Coral</b> · <b>Vent Mussel</b> <i>— all mine, all generic, all need naming</i></p>
+</section>
+
+<section id="s4">
+<h2>Wrong biome <span class="n">— 7</span></h2>
+<p class="blurb">Placement errors that are biological rather than a matter of taste.</p>
+
+<div class="row"><div class="name">Ring-tailed Lemur<em>in Desert</em></div>
+<div class="what">Madagascan gallery forest and spiny scrub. <b>Not a desert animal.</b>
+<span class="fix">Rainforest or forest</span></div></div>
+
+<div class="row"><div class="name">Sifaka<em>in Desert</em></div>
+<div class="what">Madagascan forest.<span class="fix">Rainforest or forest</span></div></div>
+
+<div class="row"><div class="name">Komodo Dragon<em>in Rainforest</em></div>
+<div class="what">Lives in <b>dry savanna woodland and grassland</b> on Indonesian islands.
+<span class="fix">Savanna</span></div></div>
+
+<div class="row"><div class="name">Coelacanth<em>in Open Ocean</em></div>
+<div class="what">Lives at <b>150–250 m in submarine caves</b>.
+<span class="fix">Deep sea</span></div></div>
+
+<div class="row"><div class="name">Agouti<em>in Savanna</em></div>
+<div class="what">Neotropical forest floor.<span class="fix">Rainforest</span></div></div>
+
+<div class="row"><div class="name">Pallas's Cat<em>in Savanna</em></div>
+<div class="what">Central Asian steppe and rocky high country.
+<span class="fix">Mountains</span></div></div>
+
+<div class="row"><div class="name">Patagonian Mara<em>in Mountains</em></div>
+<div class="what">Patagonian steppe — open plain, not mountain.
+<span class="fix">Savanna</span></div></div>
+</section>
+
+<footer>
+<p><b>Defensible but worth a look:</b> serval and jaguar in wetlands; and American bison,
+prairie dog, pronghorn and swift fox in savanna, which are North American prairie animals
+sharing a biome with African savanna.</p>
+<p>This covers every error identifiable with confidence. It is not a species-by-species
+taxonomic verification of all 611 animals. <b>The pass should run before the last 39 new
+species are written</b>, or those get made to the same standard and it has to happen twice.</p>
+</footer>
+</div>
+<script>
+var q=document.getElementById('q'),
+ rows=[].slice.call(document.querySelectorAll('.row')),
+ lists=[].slice.call(document.querySelectorAll('.list')),
+ secs=[].slice.call(document.querySelectorAll('section'));
+rows.concat(lists).forEach(function(e){e._t=e.textContent.toLowerCase();});
+[].slice.call(document.querySelectorAll('h3')).forEach(function(h){h._t=h.textContent.toLowerCase();});
+function run(){
+ var v=q.value.trim().toLowerCase();
+ rows.forEach(function(r){r.classList.toggle('hide',!!v&&r._t.indexOf(v)<0);});
+ lists.forEach(function(l){
+  var hit=!v||l._t.indexOf(v)>-1;
+  l.classList.toggle('hide',!hit);
+  var h=l.previousElementSibling;
+  if(h&&h.tagName==='H3')h.classList.toggle('hide',!hit&&!(l._t.indexOf(v)>-1));
+ });
+ secs.forEach(function(s){
+  var any=[].slice.call(s.querySelectorAll('.row,.list')).some(function(e){return !e.classList.contains('hide');});
+  s.classList.toggle('hide',!any);
+ });
+}
+q.addEventListener('input',run);run();
+</script>
