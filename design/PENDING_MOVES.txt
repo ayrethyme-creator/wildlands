@@ -127,3 +127,8 @@ new>vigil=Bachman's Warbler|Christmas Island Forest Skink|Alaotra Grebe|Tecopa P
 ! ---   nests in burrows on temperate coast - it is not a polar animal.
 new>savanna=Gemsbok
 new>coast=Little Blue Penguin
+
+! --- Ayr, 2026-08-26. The Kept was 51 because the llama joined it. Potbelly Pig goes:
+! --- "Pig" already covers pigs, and the potbelly is a bred pet variety rather than a
+! --- farm animal. The Kept is 50.
+kept>cut=Potbelly Pig

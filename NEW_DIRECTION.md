@@ -9563,3 +9563,50 @@ The Record           50
 The Breeding Centre  50
                     300
 ```
+
+---
+
+## THE BLACK SKIRT TETRA IS THE GLOFISH
+
+> **Ayr, 2026-08-26.** *"The black skirt tetra is cool bc that's how they make GloFish.
+> I want that in there somewhere."*
+
+**Recorded, and it is a better entry than it looks.**
+
+**GloFish are the first genetically modified animal ever sold as a pet.** A fluorescence
+gene — originally from a jellyfish, later from coral — is inserted into the fish, and the
+colour is heritable. They are not dyed and not injected; they are born that way and pass
+it on.
+
+The **black skirt tetra** is one of the base species, sold as the GloFish tetra. And
+**the zebra danio — also in The Kept — was the first one of all**, engineered in
+Singapore in the late 1990s to detect pollutants in water by glowing in their presence.
+**The pet came second.** The original purpose was environmental monitoring.
+
+### Why it earns a place in the game
+
+- **They are banned outright in several countries**, and were banned in California for
+  years, on the grounds that a genetically modified ornamental fish should not be sold
+  as a novelty.
+- **The Kept already contains both of them.** The first GloFish and one of its
+  successors are sitting in the childhood pet store, and nothing in the game currently
+  says so.
+- It is the honest far end of Ayr's own theme. The breeding centre asks what selective
+  breeding does to an animal over centuries. **The GloFish asks what happens when you
+  skip the centuries.**
+
+**Where it goes:** the field-guide entries for **Black Skirt Tetra** and **Zebra Danio**,
+and it is a natural fit for the breeding centre's writing once that is built.
+
+---
+
+## THE KEPT IS 50
+
+**Potbelly Pig cut.** *Pig* already covers pigs, and the potbelly is a bred pet variety
+rather than a farm animal — the odd entry in that list.
+
+```
+cat 1 · dogs 9 · reptiles 4 · freshwater fish 14
+small pets 8 · canary 1 · farm 13
+= 50
+```
