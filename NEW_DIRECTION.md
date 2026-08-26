@@ -9176,7 +9176,14 @@ Snake, bearded dragon and tortoise. Suggested species: **corn snake** (the stand
 beginner snake), **bearded dragon**, and a **Russian tortoise** — the pet tortoise
 that does not reach 45 kg, unlike the sulcata already in the desert.
 
-### 96. Parakeet moves to the child list
+### 96. Parakeet moves to the child list — and it already exists
+
+**The parakeet is the budgerigar**, already in The Dry as a wild Australian bird.
+Ayr spotted this. It needs no new entry — it is **stocked** in the child pet store,
+exactly as the hermit crab is stocked in the teen one.
+
+**The cockatiel and zebra finch are in The Dry on the same footing**, so the pet-bird
+shelf can be filled without spending a single roster slot.
 
 ### 97. Farm animals are no longer a teen pet option
 
@@ -9216,10 +9223,10 @@ the Brink.
 | Farm animals | 13 |
 | **Total** | **50** |
 
-### What needs creating — seven
+### What needs creating — five, plus a life stage
 
-**Mutt · Pit Bull · Corn Snake · Bearded Dragon · Russian Tortoise · Parakeet ·
-Kitten** *(a life stage, like the Puppy that already exists)*
+**Mutt · Pit Bull · Corn Snake · Bearded Dragon · Russian Tortoise**, and **Kitten**
+as a life stage like the Puppy that already exists.
 
 ### And the Breeding Centre drops to 34
 
@@ -9238,8 +9245,13 @@ entries. The path to 50:
 ```
 45  today, after the coat colours and Farm Dog come out
 -1  Puppy -> reclassified as a life stage, like Kitten
-+6  Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise, Parakeet
-50
++5  Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise
+49
 ```
+
+**One short.** A purchasable wild species does not take a Kept slot, so losing the
+parakeet entry costs one. The obvious fiftieth is the **leopard gecko** — the most
+commonly kept pet reptile in the world, and distinct from the wild gecko already in
+The Dry. **Or leave it at 49.** Ayr's call.
 
 The Breeding Centre holds **34** — nineteen dog breeds and **fifteen cat breeds**.
