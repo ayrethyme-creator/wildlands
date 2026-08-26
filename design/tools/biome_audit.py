@@ -69,6 +69,8 @@ for _k, _v in re.findall(r'([a-z0-9_]+)\s*:\s*"(\w+)"', _blk):
     hand.setdefault(_k, _v)
 nots = set(re.findall(r'"([a-z0-9_]+)"',
                       h[h.index('NOT_A_SPECIES'):h.index('BIOME_BY_HAND')]))
+for _m in re.finditer(r'NOT_A_SPECIES\.push\(([^)]*)\)', h):
+    nots.update(re.findall(r'"([a-z0-9_]+)"', _m.group(1)))
 
 def classify(sp):
     if sp in hand:

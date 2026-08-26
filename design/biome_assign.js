@@ -281,3 +281,132 @@ BIOME_BY_HAND.skink         = "desert";   // blue-tongued skink - Australian ari
 BIOME_BY_HAND.frilledlizard = "desert";   // northern Australian dry country
 BIOME_BY_HAND.rockmonitor   = "desert";   // African arid rocky ground
 BIOME_BY_HAND.chameleon     = "desert";   // this entry is the veiled chameleon: "Mountains of Yemen and Saudi Arabia"
+
+// ---------------------------------------------------------------------------
+// Placement pass, 2026-08-26. These species carry NO habitat sentence in the
+// game data at all, so no rule could ever reach them. Assigned by hand.
+// Found by design/tools/biome_audit.py.
+// ---------------------------------------------------------------------------
+
+// --- alpine ---
+BIOME_BY_HAND.bighorn             = "alpine";
+BIOME_BY_HAND.condor              = "alpine";
+BIOME_BY_HAND.kea                 = "alpine";   // kept in the mountains - the world's only alpine parrot
+BIOME_BY_HAND.philippineeagle     = "alpine";   // montane forest - Ayr placed it in mountains earlier
+BIOME_BY_HAND.yak                 = "alpine";
+
+// --- coast ---
+BIOME_BY_HAND.electricray         = "coast";
+BIOME_BY_HAND.fiddlercrab         = "coast";
+BIOME_BY_HAND.hermitcrab          = "coast";
+BIOME_BY_HAND.moonjelly           = "coast";
+BIOME_BY_HAND.pelican             = "coast";
+BIOME_BY_HAND.stingray            = "coast";
+BIOME_BY_HAND.weedyseadragon      = "coast";
+
+// --- desert ---
+BIOME_BY_HAND.budgie              = "desert";   // Australian arid interior
+BIOME_BY_HAND.corsacfox           = "desert";
+BIOME_BY_HAND.harrishawk          = "desert";   // Sonoran desert
+BIOME_BY_HAND.honeypotant         = "desert";
+BIOME_BY_HAND.hornedlizard        = "desert";
+BIOME_BY_HAND.jerboa              = "desert";
+BIOME_BY_HAND.roadrunner          = "desert";
+BIOME_BY_HAND.thornydevil         = "desert";
+
+// --- farmland ---
+BIOME_BY_HAND.barnowl             = "farmland";   // farmland and open country, not woodland
+BIOME_BY_HAND.peregrine           = "farmland";   // cliffs and city buildings
+
+// --- forest ---
+BIOME_BY_HAND.firesalamander      = "forest";
+BIOME_BY_HAND.goshawk             = "forest";
+BIOME_BY_HAND.lunamoth            = "forest";
+BIOME_BY_HAND.lyrebird            = "forest";
+BIOME_BY_HAND.pudu                = "forest";
+BIOME_BY_HAND.woodpecker          = "forest";
+
+// --- opensea ---
+BIOME_BY_HAND.brydeswhale         = "opensea";
+BIOME_BY_HAND.duskydolphin        = "opensea";
+BIOME_BY_HAND.flyingfish          = "opensea";
+BIOME_BY_HAND.swordfish           = "opensea";
+
+// --- polar ---
+BIOME_BY_HAND.arctichare          = "polar";
+BIOME_BY_HAND.ribbonseal          = "polar";
+BIOME_BY_HAND.snowyowl            = "polar";
+
+// --- rainforest ---
+BIOME_BY_HAND.atlasmoth           = "rainforest";
+BIOME_BY_HAND.bluegoldmacaw       = "rainforest";
+BIOME_BY_HAND.bluemorpho          = "rainforest";
+BIOME_BY_HAND.bongo               = "rainforest";   // a FOREST antelope despite the savanna look
+BIOME_BY_HAND.bushmaster          = "rainforest";
+BIOME_BY_HAND.cassowary           = "rainforest";
+BIOME_BY_HAND.gaboonviper         = "rainforest";
+BIOME_BY_HAND.glassfrog           = "rainforest";
+BIOME_BY_HAND.goliathfrog         = "rainforest";
+BIOME_BY_HAND.gorilla             = "rainforest";   // Ayr 2026-08-26 - montane forest and bamboo; Bwindi is a forest
+BIOME_BY_HAND.harpyeagle          = "rainforest";
+BIOME_BY_HAND.herculesbeetle      = "rainforest";
+BIOME_BY_HAND.hoatzin             = "rainforest";
+BIOME_BY_HAND.kingcobra           = "rainforest";
+BIOME_BY_HAND.orchidbee           = "rainforest";
+BIOME_BY_HAND.orchidmantis        = "rainforest";
+BIOME_BY_HAND.quetzal             = "rainforest";
+BIOME_BY_HAND.redeyedtreefrog     = "rainforest";
+BIOME_BY_HAND.toucan              = "rainforest";
+
+// --- reef ---
+BIOME_BY_HAND.angelfish           = "reef";
+BIOME_BY_HAND.boxfish             = "reef";
+BIOME_BY_HAND.butterflyfish       = "reef";
+BIOME_BY_HAND.eagleray            = "reef";
+BIOME_BY_HAND.grouper             = "reef";
+BIOME_BY_HAND.mandarin_dragonet   = "reef";
+BIOME_BY_HAND.mandarinfish        = "reef";
+BIOME_BY_HAND.nurseshark          = "reef";
+BIOME_BY_HAND.pipefish            = "reef";
+BIOME_BY_HAND.reefshark           = "reef";
+BIOME_BY_HAND.triggerfish         = "reef";
+BIOME_BY_HAND.zebrashark          = "reef";
+
+// --- savanna ---
+BIOME_BY_HAND.blackmamba          = "savanna";
+BIOME_BY_HAND.gazelle             = "savanna";
+BIOME_BY_HAND.hartebeest          = "savanna";
+BIOME_BY_HAND.manedlion           = "savanna";
+BIOME_BY_HAND.mara                = "savanna";   // Patagonian steppe
+BIOME_BY_HAND.ostrich             = "savanna";
+BIOME_BY_HAND.quakerparrot        = "savanna";
+BIOME_BY_HAND.secretarybird       = "savanna";
+BIOME_BY_HAND.swiftfox            = "savanna";   // North American short-grass prairie
+BIOME_BY_HAND.topi                = "savanna";
+
+// --- wetland ---
+BIOME_BY_HAND.damselfly           = "wetland";
+BIOME_BY_HAND.gharial             = "wetland";
+BIOME_BY_HAND.hellbender          = "wetland";
+BIOME_BY_HAND.loon                = "wetland";
+BIOME_BY_HAND.olm                 = "wetland";
+BIOME_BY_HAND.osprey              = "wetland";   // a fish eagle - follows the water
+BIOME_BY_HAND.salmon              = "wetland";
+BIOME_BY_HAND.shoebill            = "wetland";
+
+// Not species: life stages the earlier filter missed.
+NOT_A_SPECIES.push("cygnet", "eaglejuv", "elver", "ephyra", "glasseel", "naiad", "parr", "sealjuv", "sealpup", "smolt", "axolotlmeta");
+
+// Not living animals of any biome:
+//   mammoth    extinct - belongs in The Record, not the living roster
+//   alpaca     domesticated - belongs in The Kept
+//   llama      domesticated - belongs in The Kept
+
+// --- caves were cut as a biome (2026-08-24). The cave RULE still fires first,
+// --- so these need hand assignment to the biome the decision sent them to.
+BIOME_BY_HAND.egyptianfruitbat    = "forest";       // roosts in caves, forages in trees
+BIOME_BY_HAND.greaterhorseshoebat = "forest";       // roosts in caves, hunts over woodland
+BIOME_BY_HAND.littlebrownbat      = "forest";       // same
+BIOME_BY_HAND.freetailbat         = "desert";       // cave roosts, hunts over arid country
+BIOME_BY_HAND.giantcentipede      = "rainforest";   // its own text says rainforest floor
+BIOME_BY_HAND.hawksbill           = "reef";         // missed in the placement pass

@@ -5109,6 +5109,17 @@ change rather than a contradiction.*
   recovery from ~75,000 to ~300,000. **Kea should stay** - its whole claim to fame is
   being the world's only alpine parrot, and moving it deletes the fact.
 
+- **2026-08-26 - PLACEMENT PASS DONE; the real biome total is 461, not 579.** 98
+  unplaced resolved: 84 hand-placed, 11 reclassified as life stages, 3 excluded as
+  not-living (mammoth extinct, alpaca and llama domestic), 5 cave leftovers sent where
+  the caves-cut decision already said, 1 missed turtle caught. **Unplaced is now 3 and
+  all three are correct.** Actual counts: forest 93, rainforest 61, savanna 48, wetland
+  40, coast 39, desert 33, reef 32, polar 29, open ocean 28, mountains 27, farmland 24,
+  deep sea 7. **The 579 figure counted the 94 breeds and domestics as living animals** -
+  they are The Kept, target 50. **So the gap is 239 new species, not 128.** Roughly 170
+  remain to choose after the deep sea, polar and mountain lists. Nothing proposed is
+  wasted; the allocation table just has to be rebuilt on real numbers.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8645,3 +8656,81 @@ to rainforest does not just relocate it - **it deletes the fact that makes it wo
 having.**
 
 **Ayr's call, but this one costs something to move.**
+
+---
+
+## THE PLACEMENT PASS IS DONE - AND THE REAL NUMBER IS 461
+
+> **2026-08-26.** Ayr approved the pass. 98 unplaced species resolved; the audit now
+> runs clean and `design/tools/biome_audit.py` reproduces it.
+
+### What was done
+
+| | |
+|---|---|
+| **Hand-placed** | **84** species with no habitat sentence at all |
+| **Reclassified as life stages** | **11** - cygnet, eaglejuv, elver, ephyra, glasseel, naiad, parr, sealjuv, sealpup, smolt, axolotlmeta |
+| **Excluded as not-living** | **3** - mammoth *(extinct, belongs in The Record)*, alpaca and llama *(domesticated, belong in The Kept)* |
+| **Cave leftovers resolved** | **5** - the cave *rule* still fired even though caves were cut as a biome. The three bats to forest, the free-tailed bat to desert, the giant centipede to rainforest |
+| **Missed and caught** | **1** - hawksbill turtle to reef |
+| **Mountain gorilla** | moved to **rainforest**, per Ayr |
+
+**Unplaced went from 98 to 3, and all three are correct exclusions.**
+
+### The twelve biomes, counted honestly
+
+| Biome | Actual |
+|---|---|
+| Forest | **93** |
+| Rainforest | **61** |
+| Savanna | **48** |
+| Wetland | **40** |
+| Coast | **39** |
+| Desert | **33** |
+| Reef | **32** |
+| Polar | **29** |
+| Open ocean | **28** |
+| Mountains | **27** |
+| Farmland | **24** |
+| Deep sea | **7** |
+| **Total** | **461** |
+
+### Why the doc said 579, and why that was wrong
+
+The constructor counts settle it:
+
+```
+A  460  +  E  36  =  496   the living roster
+P   94                     breeds and domestics -> The Kept, target 50
+V   98                     Vigil + On the Brink
+MY 100                     The Telling
+FD  50                     The Record
+WA  14  EM  9              wardens and other, cut or reassigned
+```
+
+**The living roster is 496 entries, of which 461 place in a biome** (the rest are
+life stages and the three exclusions).
+
+**The 579 figure appears to have counted the 94 breeds and domestics as living
+animals.** They are not - they are The Kept, and their target is 50.
+
+### What this changes
+
+**The gap is not 128. It is 239.**
+
+```
+461   in the twelve biomes now
+700   target
+239   new living species needed
+```
+
+**67 are already proposed** (deep sea 44, polar 25... minus overlaps), and the 23
+quest animals are inside that. **Roughly 170 remain to be chosen.**
+
+**This is a much bigger content job than the doc has been assuming**, and it is better
+to know now. It also means the per-biome allocation has to be rebuilt from the real
+numbers rather than the recorded ones - forest is already at 93 and needs nothing,
+while the deep sea at 7 needs everything.
+
+**Nothing proposed so far is wasted.** Every species on the deep sea, polar and
+mountain lists still belongs where it was put. There is simply more to do after them.
