@@ -1,0 +1,19 @@
+! Design decisions NOT yet in the game data.
+!
+! GROUND_TRUTH.txt is what the running game says today. This file is what we have
+! DECIDED, and it is applied on top of ground truth when the roster page is built.
+! Each line needs a real data change later (usually clearing or setting a dom/breed
+! flag in the DEX, or a biome_assign entry).
+!
+! Format: fromgroup>togroup=Name|Name|Name
+
+! --- Idea 88, 2026-08-26. Wild reef fish kept in tanks are not domesticated breeds.
+! --- A clownfish in a tank is the same animal as a clownfish on a reef. The freshwater
+! --- aquarium trade is largely captive-bred; the marine trade is largely wild-caught.
+kept>reef=Banggai Cardinalfish|Blue Tang|Blue-Green Chromis|Copperband Butterflyfish|Firefish Goby|Flame Angelfish|Percula Clownfish|Picasso Triggerfish|Porcupine Pufferfish|Royal Gramma|Six-Line Wrasse
+
+! --- Ayr, 2026-08-26. The cat and dog breeds are NOT cut - they move to an end-game
+! --- breeding centre, which is its own group and separate from The Kept. It holds 47.
+! --- The Kept keeps the small childhood pet store: freshwater fish, small pets, farm
+! --- animals and the canary.
+kept>breeding=Akita|Alaskan Malamute|Australian Shepherd|Beagle|Bernese Mountain Dog|Border Collie|Bulldog|Chihuahua|Corgi|Dachshund|Dalmatian|Dogue de Bordeaux|Farm Dog|German Shepherd|Golden Retriever|Great Dane|Greyhound|Jack Russell|Labrador|Poodle|Pug|Puppy|Rottweiler|Saint Bernard|Samoyed|Shiba Inu|Siberian Husky|Wolfdog|Abyssinian|Bengal|Black Cat|British Shorthair|Calico Cat|Devon Rex|House Cat|Maine Coon|Norwegian Forest Cat|Oriental Shorthair|Persian|Ragdoll|Russian Blue|Savannah Cat|Scottish Fold|Siamese|Sphynx|Tabby Cat|Turkish Van

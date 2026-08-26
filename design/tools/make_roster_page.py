@@ -14,6 +14,27 @@ for line in io.open('design/GROUND_TRUTH.txt', encoding='utf-8'):
     k, v = line.split('=', 1)
     d[k] = sorted(v.split('|'))
 
+# Apply design decisions not yet in the game data.
+pending = {}
+try:
+    for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
+        line = line.rstrip('\n')
+        if not line or line.startswith('!'):
+            continue
+        route, names = line.split('=', 1)
+        src, dst = route.split('>')
+        for n in names.split('|'):
+            pending[n] = (src, dst)
+except IOError:
+    pass
+for n, (src, dst) in pending.items():
+    if src in d and n in d[src]:
+        d[src].remove(n)
+        d.setdefault(dst, []).append(n)
+for k in d:
+    d[k] = sorted(d[k])
+PENDING = set(pending)
+
 BIOMES = [('rainforest', 'Rainforest', 'The Canopy'), ('savanna', 'Savanna', 'The Long Grass'),
           ('forest', 'Forest', 'The Weald'), ('wetland', 'Wetlands', 'The Fens'),
           ('desert', 'Desert', 'The Dry'), ('coast', 'Coast', 'The Strand'),
@@ -22,8 +43,9 @@ BIOMES = [('rainforest', 'Rainforest', 'The Canopy'), ('savanna', 'Savanna', 'Th
           ('polar', 'Polar', 'The Floe'), ('deepsea', 'Deep Sea', 'The Dark')]
 GROUPS = [('vigil', 'The Vigil &amp; On the Brink', 'the extinct, and the nearly gone'),
           ('mythic', 'The Telling', 'mythology'),
-          ('kept', 'The Kept', 'breeds and domestics &mdash; target 50'),
           ('fossil', 'The Record', 'fossils'),
+          ('kept', 'The Kept', 'the childhood pet store'),
+          ('breeding', 'The Breeding Centre', 'cat and dog breeds &mdash; unlocks at end game'),
           ('lifestage', 'Life stages', 'chicks, calves, pups &mdash; not species'),
           ('unplaced', 'Unplaced', 'the 13 cut wardens, three myths needing a tag, and the mammoth')]
 
@@ -32,7 +54,8 @@ tot = sum(len(v) for v in d.values())
 
 def sec(key, name, sub, kind):
     n = d[key]
-    items = ''.join('<li class="n">%s</li>' % html.escape(x) for x in n)
+    items = ''.join('<li class="n%s">%s</li>'
+                    % (' pend' if x in PENDING else '', html.escape(x)) for x in n)
     return ('<section class="grp" id="%s" data-kind="%s"><header>'
             '<h2>%s</h2><p class="sub">%s</p>'
             '<span class="cnt"><b class="live">%d</b><i>/%d</i></span></header>'
@@ -89,6 +112,7 @@ h2 em{font-style:normal;font-weight:400;color:var(--muted);font-size:17px}
 .names li{font-size:14px;padding:2px 0}
 .names li::after{content:"\\00b7";color:var(--rule);padding:0 9px}
 .names li:last-child::after{content:""}
+.names li.pend{color:var(--accent)}
 .names li mark{background:var(--accentsoft);color:var(--accent);border-radius:3px;
  padding:1px 2px;font-weight:600}
 .hide{display:none!important}
@@ -126,6 +150,8 @@ p = ['<title>Terrane Roster</title>', '<style>%s</style>' % CSS, '<div class="wr
      '<nav>' + ''.join(nav) + '</nav>', ''.join(secs),
      '<footer><p>Twelve biomes <b>%d</b> &middot; postgame sets <b>%d</b> &middot; '
      'life stages <b>%d</b> &middot; unplaced <b>%d</b> &middot; total <b>%d</b>. '
+     'Names in <span style="color:var(--accent)">green</span> are moves already decided but '
+     'not yet applied to the game data — see design/PENDING_MOVES.txt. '
      'The gap to 700 living species is <b>%d</b>.</p></footer>'
      % (bt, len(d['vigil']) + len(d['mythic']) + len(d['kept']) + len(d['fossil']),
         len(d['lifestage']), len(d['unplaced']), tot, 700 - bt),
