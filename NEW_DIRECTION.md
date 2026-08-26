@@ -5058,6 +5058,15 @@ change rather than a contradiction.*
   share bone layout and naming from the first one**, so animation is authored once and
   retargeted — invisible and expensive to retrofit.
 
+- **2026-08-26 — The 128 new species, batch one: THE DARK, 42 proposed.** Also
+  flags that the allocation table Ayr reviewed on 2026-08-25 was built for **eleven**
+  biomes and does not include the deep sea, so it no longer closes. A twelve-biome
+  allocation is proposed totalling 700, in which rainforest, savanna, forest, wetland
+  and farmland shrink slightly — **nothing is cut**, those are counts after the seven
+  leave for On the Brink and after deep-sea reassignment. **That part needs Ayr's nod,
+  because it changes numbers already agreed.** Remaining need after this batch: coast
+  +6, reef +12, desert +13, mountains +18, open ocean +17, polar +22.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8231,3 +8240,126 @@ animated six times.
 
 **That has to be true from the first rig**, and it is invisible and expensive to
 retrofit.
+
+---
+
+# THE 128 NEW SPECIES — ALLOCATION, AND BATCH ONE
+
+> **Ayr, 2026-08-26.** Chosen as the next work. Proposals for review and correction,
+> the same way the roster passes ran.
+
+## First: the allocation table needs redoing
+
+The table Ayr reviewed on 2026-08-25 was built for **eleven biomes** and totalled
+579 → 700. **The deep sea became the twelfth biome the same day** and is not in it,
+so the arithmetic no longer closes.
+
+Current living is **579, less the 7 leaving for On the Brink = 572.** Target is
+**700**, so **128 new.**
+
+### Proposed twelve-biome allocation
+
+Keeps Ayr's instruction — unequal, rainforest and savanna richest, nothing starved.
+
+| Biome | Now | Target | New |
+|---|---|---|---|
+| Rainforest | 91 | **85** | — *(6 move to deep sea / On the Brink)* |
+| Savanna | 79 | **70** | — |
+| Forest | 66 | **64** | — |
+| Coast | 53 | **59** | **+6** |
+| Wetland | 59 | **58** | — |
+| Farmland | 58 | **55** | — |
+| Reef | 42 | **54** | **+12** |
+| Desert | 41 | **54** | **+13** |
+| Mountains | 34 | **52** | **+18** |
+| Open ocean | 33 | **50** | **+17** |
+| Polar | 28 | **50** | **+22** |
+| **Deep sea** | **~8** | **50** | **+42** |
+| | | **700** | **128** |
+
+**Note:** rainforest, savanna, forest, wetland and farmland shrink slightly rather
+than grow. Nothing is cut — those are counts after the seven leave for On the Brink
+and after the deep-sea reassignments. **Flagged for Ayr, because it is the one part
+of this that changes numbers already agreed.**
+
+## Batch one — THE DARK (deep sea), 42 new
+
+Already in the roster and staying: anglerfish · oarfish · goblin shark · frilled
+shark · Greenland shark · scaly-foot snail · Pompeii worm · giant squid.
+
+### Fish — 14
+
+| Species | Why it earns a slot |
+|---|---|
+| **Gulper eel** | A jaw bigger than the rest of it, that balloons open around prey |
+| **Fangtooth** | The largest teeth relative to body size of any fish — so long it has **sockets in its own brain case** to hold them when the mouth shuts |
+| **Viperfish** | Teeth that do not fit inside the mouth |
+| **Barreleye** | A **transparent head.** Its tubular eyes look up through its own skull |
+| **Hatchetfish** | Counter-illumination — lights along the belly **erase its silhouette** from below |
+| **Black dragonfish** | Produces **red** light, which almost nothing down there can see. It hunts with an invisible searchlight |
+| **Lanternfish** | Probably **the most abundant vertebrate on earth**, and almost nobody has heard of it |
+| **Mariana snailfish** | The deepest fish ever recorded, around **8,300 m** |
+| **Tripod fish** | Stands on three stiffened fin rays and faces the current, waiting |
+| **Cookiecutter shark** | Takes a **circular plug** out of animals many times its size and leaves |
+| **Blobfish** | **Only looks like that because of decompression.** At depth it is an ordinary fish. Ayr's own example |
+| **Coffinfish** | Holds water in its gill chambers and can **hold its breath for four minutes** |
+| **Stoplight loosejaw** | No floor to its mouth at all — the jaw is an open frame |
+| **Deep-sea lizardfish** | Every individual is **both sexes at once**, because meeting anyone at all is unlikely |
+
+### Cephalopods — 4
+
+| Species | Why |
+|---|---|
+| **Vampire squid** | Neither squid nor octopus. **Its own order, alone.** Turns itself inside out when threatened |
+| **Glass squid** | Almost perfectly transparent except for the eyes, which cannot be |
+| **Bigfin squid** | Arms trailing many times its body length, with **elbows** |
+| **Dumbo octopus** | Ear-like fins, and the animal at the centre of the deep-sea mining quest |
+
+### Crustaceans and worms — 8
+
+| Species | Why |
+|---|---|
+| **Giant isopod** | Deep-sea gigantism — and one in captivity **went five years without eating** |
+| **Yeti crab** | **Farms bacteria on its own hairy arms** and then eats them |
+| **Alicella gigantea** | The giant amphipod. Hand-sized, where its relatives are grains of rice |
+| **Vent shrimp** | Eyes **on its back**, to see the faint glow of the vent it lives on |
+| **Giant tube worm** | **No mouth and no gut.** It runs entirely on bacteria living inside it |
+| **Zombie worm** | Bores into whale bone. The **males live inside the females**, dozens at a time |
+| **Squat lobster** | Vent fields are carpeted in them |
+| **Deep-sea barnacle** | Sessile life at the bottom of the world |
+
+### Jellies and gelatinous — 7
+
+| Species | Why |
+|---|---|
+| **Siphonophore** | Not one animal but a **colony acting as one**, and the longest ever recorded at over 45 m |
+| **Atolla jellyfish** | **The burglar alarm** — attacked, it flashes to call something bigger to eat its attacker |
+| **Bloody-belly comb jelly** | A red stomach, so the glowing things it eats **cannot shine out through it** |
+| **Deepstaria** | Drifts like an open bin liner, closing around whatever enters |
+| **Comb jelly** | Rows of beating cilia that split light into a running rainbow |
+| **Helmet jellyfish** | Avoids all light, including a submersible's |
+| **Sea pig** | A sea cucumber that **walks on tube feet, in herds** |
+
+### Sessile, and the very strange — 9
+
+| Species | Why |
+|---|---|
+| **Venus flower basket** | A glass sponge. **A pair of shrimp enter as larvae, grow too big to leave, and spend their lives inside** — given in Japan as a wedding gift |
+| **Sea lily** | A crinoid. Looks like a plant, is an animal, and has been doing this since before the dinosaurs |
+| **Brittle star** | Arms that shed and regrow |
+| **Black coral** | Colonies dated at **over 4,000 years old** — the deep-sea programme quest |
+| **Xenophyophore** | **A single cell the size of your hand** |
+| **Bathydevius** | The "mystery mollusc" — a swimming sea slug with a hood, described only recently |
+| **Predatory tunicate** | A sea squirt that gave up filtering and became a trap |
+| **Bamboo coral** | Grows in alternating segments and can be read like tree rings |
+| **Vent mussel** | Builds reefs at hydrothermal vents on chemistry, not sunlight |
+
+**That is 42.** Deep sea reaches 50.
+
+### What this biome gives the game that no other does
+
+**Almost every one of these has a signature ability that is genuinely impossible-
+looking** — bioluminescence, transparency, invisible red searchlights, a single cell
+the size of a hand. Idea 72 said the signature ability is the payoff for collecting.
+**The Dark is where that feature is at full strength**, and it is also the biome the
+player reaches last and through instruments.

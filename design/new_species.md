@@ -368,3 +368,25 @@ Paleogene: Basilosaurus, Ambulocetus
 Neogene: Megalodon, Gigantopithecus
 
 These do not change the 1000 - they replace cut dinosaurs one for one.
+
+## Proposed 2026-08-26 - THE DARK (deep sea), 42 new
+
+Batch one of the 128. Already present and staying: anglerfish, oarfish, goblin
+shark, frilled shark, Greenland shark, scaly-foot snail, Pompeii worm, giant squid.
+
+FISH (14): gulper eel, fangtooth, viperfish, barreleye, hatchetfish, black
+dragonfish, lanternfish, Mariana snailfish, tripod fish, cookiecutter shark,
+blobfish, coffinfish, stoplight loosejaw, deep-sea lizardfish
+
+CEPHALOPODS (4): vampire squid, glass squid, bigfin squid, dumbo octopus
+
+CRUSTACEANS AND WORMS (8): giant isopod, yeti crab, Alicella gigantea, vent
+shrimp, giant tube worm, zombie worm, squat lobster, deep-sea barnacle
+
+JELLIES (7): siphonophore, Atolla jellyfish, bloody-belly comb jelly, Deepstaria,
+comb jelly, helmet jellyfish, sea pig
+
+SESSILE AND STRANGE (9): Venus flower basket, sea lily, brittle star, black coral,
+xenophyophore, Bathydevius, predatory tunicate, bamboo coral, vent mussel
+
+Takes deep sea from ~8 to 50. Awaiting Ayr's review.
