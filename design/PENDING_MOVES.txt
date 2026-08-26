@@ -186,3 +186,32 @@ savanna>cut=Lioness
 ! vertebrae when she becomes queen, which no other mammal does.
 lifestage>savanna=Naked Mole-Rat
 savanna>lifestage=Mole-Rat Queen
+
+! ============================================================================
+! SPECIES AUDIT - section 2, redundant pairs. Ayr 2026-08-26, all of them except
+! the otters, which stay as three distinct species.
+! ============================================================================
+
+! Four generics cut, because the specific entry beside them already covers it.
+! Dragonet: a mandarinfish IS a dragonet - a straight duplicate.
+! Jackal: covered three species; black-backed jackal stays.
+! Fur Seal: covered nine; Cape fur seal stays.
+! Fruit Bat: a category containing the Egyptian fruit bat and spectacled flying fox
+!   already in the roster.
+reef>cut=Dragonet
+savanna>cut=Jackal
+coast>cut=Fur Seal
+rainforest>cut=Fruit Bat
+
+! Seven generics named to a real species instead of being cut.
+! Otter -> Eurasian River Otter: Ayr wants three otters, and sea otter and giant
+!   otter are already distinct entries.
+! Gibbon -> Lar Gibbon: a siamang is a gibbon, so the other one needs its own name.
+! Lynx -> Eurasian Lynx: four species of lynx, and the Iberian is separately present.
+! Hippo -> Common Hippopotamus: only two species, so the pair is fine once named.
+! Butterflyfish -> Raccoon Butterflyfish: nocturnal, and the mask is a false-eye defence.
+! Pufferfish -> Tiger Pufferfish: this is fugu - lethally toxic and eaten anyway,
+!   by chefs who need a licence.
+! Triggerfish -> Titan Triggerfish: the large aggressive one that chases divers off
+!   its nest.
+RENAME=Otter::Eurasian River Otter|Gibbon::Lar Gibbon|Lynx::Eurasian Lynx|Hippo::Common Hippopotamus|Butterflyfish::Raccoon Butterflyfish|Pufferfish::Tiger Pufferfish|Triggerfish::Titan Triggerfish

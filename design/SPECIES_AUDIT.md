@@ -23,7 +23,7 @@ all 528 animals; it is every error I can identify with confidence.
 
 ---
 
-## 2. REDUNDANT PAIRS — the general and the specific of the same thing
+## 2. REDUNDANT PAIRS  ✅ ALL APPLIED 2026-08-26 (otters kept as three)
 
 Each of these is two entries for what a player will read as one animal.
 

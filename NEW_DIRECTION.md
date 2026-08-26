@@ -9785,3 +9785,35 @@ the new name. Both tools handle it.
 ~85 a group, not a species
  7  wrong biome
 ```
+
+---
+
+## SPECIES AUDIT SECTION 2 IS DONE
+
+> **Ayr, 2026-08-26.** *"Do all of your suggestions for redundant pairs except the otters.
+> I want 3 otter species: sea otter, giant otter, Eurasian river otter."*
+
+**Four generics cut**, because a specific entry beside them already covered it:
+**Dragonet** *(a mandarinfish is a dragonet — a straight duplicate)* · **Jackal** ·
+**Fur Seal** · **Fruit Bat** *(a category containing two entries already present)*.
+
+**Seven generics named to a real species instead:**
+
+| Was | Now | Why this one |
+|---|---|---|
+| Otter | **Eurasian River Otter** | Ayr keeps three otters; sea and giant were already distinct |
+| Gibbon | **Lar Gibbon** | A siamang is a gibbon, so the other needed its own name |
+| Lynx | **Eurasian Lynx** | Four species, and the Iberian is separately present |
+| Hippo | **Common Hippopotamus** | Only two species, so the pair is fine once named |
+| Butterflyfish | **Raccoon Butterflyfish** | Nocturnal, and the mask is a false-eye defence |
+| Pufferfish | **Tiger Pufferfish** | **This is fugu** — lethally toxic, eaten anyway, by chefs who need a licence |
+| Triggerfish | **Titan Triggerfish** | The large aggressive one that chases divers off its nest |
+
+**Biomes 610 → 606.** Uncle Albert passes.
+
+```
+ 0  not an animal              done
+ 0  redundant pairs            done
+~85 a group, not a species
+ 7  wrong biome
+```
