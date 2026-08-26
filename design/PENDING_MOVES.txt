@@ -24,3 +24,10 @@ kept>breeding=Akita|Alaskan Malamute|Australian Shepherd|Beagle|Bernese Mountain
 ! --- is replaced by Mutt. Puppy and Kitten are life stages.
 ! --- Still to create: Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise,
 ! --- Parakeet, Kitten.
+
+! --- Ayr, 2026-08-26: the pet cat is ONE species - House Cat - with different skins.
+! --- Tabby, calico and black are coat patterns, not breeds, so they stop being species
+! --- and become appearance options on House Cat. The named cat BREEDS all stay in the
+! --- Breeding Centre roster. Same for Farm Dog, replaced by Mutt.
+kept>cosmetic=Black Cat|Calico Cat|Tabby Cat
+kept>cut=Farm Dog

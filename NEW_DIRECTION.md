@@ -9152,12 +9152,11 @@ cats, where the pet menu in idea 23 needs roughly nine and five.
 
 ### 93. The cat is one species with cosmetic variants, and it starts as a kitten
 
-**One entry: House Cat.** Long hair, short hair and hairless become **cosmetic
-choices on the same animal**, not separate species — and it arrives as a **kitten**.
+**One entry: House Cat**, with **different skins** — and it arrives as a **kitten**.
 
-That frees the eighteen named cat breeds to sit where Ayr put them: the end-game
-breeding centre. **Tabby, calico and black stop being species and become coat
-options.**
+**Tabby, calico and black stop being species entirely** and become appearance options
+on that one animal. **Every named cat breed stays in the Breeding Centre roster**;
+none of them is a childhood pet choice.
 
 ### 94. Dogs stay small / medium / large, three each
 
@@ -9237,10 +9236,10 @@ six new species do not exist yet and the three coat colours are still separate
 entries. The path to 50:
 
 ```
-49  today
--3  tabby, calico, black -> coat options on House Cat
--1  Farm Dog -> replaced by Mutt
--1  Puppy -> reclassified as a life stage
+45  today, after the coat colours and Farm Dog come out
+-1  Puppy -> reclassified as a life stage, like Kitten
 +6  Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise, Parakeet
 50
 ```
+
+The Breeding Centre holds **34** — nineteen dog breeds and **fifteen cat breeds**.
