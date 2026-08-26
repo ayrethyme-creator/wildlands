@@ -212,7 +212,7 @@ taken.
 ## Reference: lifespans for the rescued animal
 
 > **Claude-contributed**, in answer to Ayr's question in idea 26. Facts, not
-> design proposals — the choice is hers.
+> design proposals — the choice is Ayr's.
 
 **The single most important thing here: wild and protected lifespans are not
 close.** For most small backyard mammals the wild figure is dominated by
@@ -5005,6 +5005,22 @@ change rather than a contradiction.*
   animal picks (the box turtle was chosen as "the one that outlives you" at 30–50+).
   Line 18 still lists life-stage pacing as open; this is the first draft of it.
 
+- **2026-08-26 — The child and teen years, sequenced.** Most of it was already
+  decided in round two (ideas 21–26) and never put in order. **The child ends up with
+  two opposite relationships at once — a pet that is theirs and stays, and a rescued
+  wild animal that is nobody's and leaves.** That is the entire game's thesis taught
+  before the player knows there is a game, and nothing has to explain it. First hour:
+  look at one patch of world → choose the pet at home → **find something you cannot
+  fix, because you are eight** → carry it to the mentor and watch, not allowed to help
+  → it comes back partly, living in your woods. **The Ayr NPC first appears at the
+  fence in that last beat.** Teen years: a deliberately harder second animal, unglamorous
+  volunteering where you know animals by number, the open-water certification (real
+  minimum age 15). **Proposed: the teen years hand the player all three careers in
+  turn and the choice is made at the end, having done each.** Pacing ~1h child, ~2h
+  teen. Open: whether the child names the rescued animal (suggest yes, and the teen
+  years are where they learn why that was a problem), whether the pet dies later, and
+  what happens if the first rescue fails.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -7855,3 +7871,144 @@ The player walks up to them, as they may have done a dozen times across fifty ye
 Still light: **no quests, no items, no unlocks, no gates.** Still talkable, still
 one short observation about whatever animal is in front of the player. That line pool
 is the author's voice, and the ending is the moment the player finds out.
+
+---
+
+# THE CHILD AND TEEN YEARS — THE FIRST HOURS
+
+> **Ayr, 2026-08-26.** *"Let's work on the childhood and teen years. You're right, the
+> first hour is SO important."*
+
+**Most of this was already decided in round two and never sequenced.** Ideas 21–26
+gave the pets, the first rescue, the mentor and the four rescued animals. What was
+missing was the **order**, and order is what an opening is.
+
+## What is already locked
+
+| | |
+|---|---|
+| **21** | A pet as a kid, a more exotic one as a teen |
+| **22** | The first wild encounter is in your own backyard, and it is **something you rescue** |
+| **23** | Kid pets: cat, dog, fish, reptile, small mammal — with breed, and **indoor / outdoor / stray defining personality** |
+| **24** | Teen animals: birds, chinchilla or ferret, a fish tank, farm animals |
+| **25** | **You meet the mentor when you rescue your first wild animal.** They follow your career and are the help button |
+| **26** | The rescued animal is **hand-reared as a baby but partly living wild** — box turtle, raven, beaver or white-tailed deer |
+
+## The two animals, and why this is the whole thesis in the first hour
+
+A child ends up with **two relationships at once**, and they are opposites:
+
+| | The pet | The rescued wild animal |
+|---|---|---|
+| Whose is it | **Yours** | **Nobody's** |
+| Where does it live | Your house | Your woods |
+| What does care mean | Keeping it well | **Letting it go well** |
+| How does it end | It stays | **It leaves, and it is still out there** |
+
+**That is the entire game, taught before the player knows there is a game.** The
+facility, the release, ambassadors, "keeping an animal is a failure state" — all of
+it is a restatement of the difference between the cat on the sofa and the raven in
+the trees.
+
+**Nothing has to explain it.** A child just has both.
+
+## The first hour, sequenced
+
+### 1. You are outside, and the world is one patch *(5 min)*
+No map, no menus, no goals. **Your yard and the woods behind it.** The only verb is
+**look** — and looking at things gives you their name.
+
+This teaches the core verb before any system exists, and it makes the field guide the
+first thing the player ever uses.
+
+### 2. The pet is already yours *(10 min)*
+Not a menu at a title screen — **it is at home, and choosing it is the first real
+choice.** Cat, dog, fish, reptile, small mammal, with breed and with indoor /
+outdoor / stray.
+
+**Idea 23's best detail is that outdoor-or-stray defines personality**, which quietly
+teaches that an animal's history shapes its behaviour — the exact principle the whole
+facility system runs on.
+
+### 3. You find something in trouble *(15 min)*
+Idea 22. A baby animal in the yard or the woods — one of the four.
+
+**And you cannot fix it.** You are eight. You have no vehicle, no equipment, no
+knowledge and no permission. **The first real emotional beat of the game is the limit
+of being a child**, and it is the truest possible opening for this subject, because it
+is how a very large number of real wildlife careers actually begin.
+
+### 4. You carry it to someone *(15 min)*
+Idea 25. **This is the mentor**, and it is a centre — the one you will volunteer at
+as a teen and be at the fence of for years.
+
+**You watch them work and you are not allowed to help.** That is the "at the fence"
+framing landing as an actual scene rather than a description.
+
+### 5. It comes back to you, partly *(10 min)*
+Idea 26. Hand-reared, **but it is not yours.** It lives in your woods. It turns up.
+It does not come when called.
+
+**And this is where the Ayr NPC first appears** — at the fence beside you, watching
+the same thing, saying one short thing about the animal.
+
+## The teen years
+
+### The second animal is harder on purpose
+Idea 24 — parrot, ferret, chinchilla, a saltwater tank, a goat. **Every one of these
+is a well-known "I did not realise what I was signing up for" animal**, which is the
+honest lesson and needs no lecture: a parrot outlives you, a ferret needs hours, a
+saltwater tank is chemistry.
+
+**This is Ayr's "not all of the pet industry is bad" idea doing its real work** — the
+good version is shown by making the responsibility real, not by saying so.
+
+### You volunteer, and you are trusted with almost nothing
+Cleaning, food prep, laundry, moving equipment. **Real volunteer work at a real
+centre is unglamorous**, and doing it is how you get to stay.
+
+The animals here belong to someone else, you know them by number, and **you are still
+not allowed to do the interesting part.**
+
+### You get certified
+Open water certification — **real minimum age 15**, so it belongs here. It is the
+teen years' one hard-won qualification, and it opens The Garden and The Blue in the
+stages that follow.
+
+### You try all three careers *(proposed)*
+The doc already maps the three careers onto this age:
+
+> *Photographer: first camera, learning to sit still · Researcher: collecting,
+> noticing, first notebook · Guide: knowing your own patch*
+
+**Suggest the teen years hand the player all three, one at a time**, on the same
+animals in the same woods — and the career is chosen **at the end of the teen years,
+having done each.**
+
+Reasons: teenagers genuinely try things and drop them; it sells "three different
+games" by demonstration rather than description; it makes the choice informed instead
+of a menu at the start; and it gives replay an obvious hook. **Ayr's call.**
+
+## Pacing
+
+| Stage | Proposed length |
+|---|---|
+| **Child** | **~1 hour** |
+| **Teen** | **~2 hours** |
+| Young adult onward | The remaining ~48, one per quest |
+
+Three hours before the first facility is a real investment, and it is where every
+relationship in the game is established. **It should not be skippable, but it must
+not idle** — the no-waiting rule applies hardest here, where the player has the least
+to do.
+
+## What is still open
+
+- **Does the player name the rescued animal?** Idea 75 says numbers for the
+  releasable and names at the outcome. A child would not know that rule. **Suggest
+  the child names it freely, and the teen years are where they learn why that was a
+  problem.** That is a better lesson than being told the rule up front.
+- **Is the pet still alive later?** A cat lives 15–20 years, so it dies somewhere in
+  the adult stages. That is real and it is heavy. **Ayr's decision.**
+- **What happens if the rescued animal does not make it?** A first rescue that fails
+  is also real, and it is the earliest place mortality could enter the game.
