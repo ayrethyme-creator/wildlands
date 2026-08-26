@@ -5146,6 +5146,18 @@ change rather than a contradiction.*
   Counts and provenance in `design/GROUND_TRUTH.json`; re-check by serving the repo
   and reading `window.__DEX`, never by another parser.
 
+- **2026-08-26 - The starting town is The Furrows plus The Kept.** Ayr. 27 + 94 =
+  **121 animals available to a child**, so the first two life stages are not a thin
+  prologue. Four consequences found in the data: **(1)** all four rescued-animal
+  options live in **forest**, so the starting area spans The Furrows *and* the edge of
+  The Weald - and **the box turtle is not in the roster at all** and needs creating;
+  **(2)** idea 23's **reptile pet row is empty** - no snake, bearded dragon or pet
+  tortoise in The Kept, so three species need adding; **(3) alpaca and llama sit in
+  farmland as wild animals** despite being domestic, and a Farm Alpaca already exists
+  in The Kept; **(4)** cutting The Kept 94 to 50 now touches the opening directly,
+  because **The Kept is the pet menu** - so the trim is a decision about how much
+  choice character creation offers, not a spreadsheet exercise.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8933,3 +8945,69 @@ reported.
 `design/GROUND_TRUTH.json` now holds the counts and their provenance. **The method
 for re-checking is: serve the repo, open `gallery.html`, read `window.__DEX`** - not
 another parser.
+
+---
+
+## THE STARTING TOWN IS THE FURROWS PLUS THE KEPT
+
+> **Ayr, 2026-08-26.** *"The animals in The Kept and The Furrows are in the starting
+> town, where you have access as a child and teen. Just want to make sure you know
+> that."*
+
+**Recorded.** This reframes The Furrows: it is not simply one of twelve biomes, it is
+**the first one**, and the entire opening happens inside it.
+
+```
+27  The Furrows   wild animals of the town and its gardens
+94  The Kept      the domestic animals in it
+121  available to a child
+```
+
+That is a lot of content for the first two life stages, and it means the child and
+teen years are not a thin prologue - they have a real roster.
+
+### Four things this exposes, checked against the data
+
+#### 1. The starting area has to include a slice of The Weald
+
+**All four rescued-animal options live in forest, not farmland:** Common Raven,
+Beaver and White-tailed Deer are all in The Weald, and **Box Turtle is not in the
+roster at all** (the nearest entry is Terrapin, in wetlands).
+
+That matches the opening as already sequenced - *"your yard and the woods behind
+it"* - so the child's world is **The Furrows plus the edge of The Weald.** Worth
+stating explicitly, because the rescue that starts the whole game happens in the
+woods rather than the town.
+
+**And the box turtle needs creating**, since it is one of the four locked choices.
+
+#### 2. The reptile pet options do not exist
+
+Idea 23 offers five kinds of kid pet. Four are fully stocked - cats, dogs, fish and
+small mammals all have several entries in The Kept.
+
+**The reptile row is empty.** No snake, no bearded dragon, no pet tortoise. The
+sulcata tortoise is in the desert and the ball python is in the savanna, both as wild
+animals.
+
+**Three species need adding to The Kept** for the pet menu to work as designed.
+
+#### 3. Alpaca and llama are in the wrong group
+
+Both are sitting in **farmland** as wild animals. They are domesticated, and there is
+already a **Farm Alpaca** in The Kept - the duplicate Ayr flagged earlier.
+
+**Both belong in The Kept**, which also removes them from a biome count.
+
+#### 4. Cutting The Kept from 94 to 50 now touches the opening
+
+The cut is no longer a tidy-up of a postgame list. **The Kept is the pet menu**, and
+the pet is the second thing the player ever does.
+
+So the cut has to be made **with the character-creation screen in mind**: enough cats
+and dogs to feel like a real choice, the fish and small mammals kept, **the reptiles
+added rather than trimmed**, and the farm animals retained because the teen years
+(idea 24) offer a goat, a chicken, a pig and a horse.
+
+**Trimming 44 dog and cat breeds is still right** - but it is now a design decision
+about how much choice the opening offers, not a spreadsheet exercise.
