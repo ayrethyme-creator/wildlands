@@ -45,7 +45,8 @@ BIOMES = [('rainforest', 'Rainforest', 'The Canopy'), ('savanna', 'Savanna', 'Th
           ('alpine', 'Mountains', 'The Divide'), ('reef', 'Reef', 'The Garden'),
           ('opensea', 'Open Ocean', 'The Blue'), ('farmland', 'Farmland', 'The Furrows'),
           ('polar', 'Polar', 'The Floe'), ('deepsea', 'Deep Sea', 'The Dark')]
-GROUPS = [('vigil', 'The Vigil &amp; On the Brink', 'the extinct, and the nearly gone'),
+GROUPS = [('vigil', 'The Vigil', 'the genuinely extinct &mdash; and nothing else'),
+          ('brink', 'On the Brink', 'critically endangered and extinct in the wild &mdash; the 13th region'),
           ('mythic', 'The Telling', 'mythology'),
           ('fossil', 'The Record', 'fossils'),
           ('kept', 'The Kept', 'domesticated animals &mdash; the pet store stocks from here'),

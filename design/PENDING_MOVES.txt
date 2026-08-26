@@ -95,3 +95,35 @@ vigil>cut=Columbian Mammoth|Cave Lion|Short-faced Bear|Giant Beaver|Steppe Bison
 
 ! 21 new species for the eight empty periods.
 new>fossil=Charnia|Dickinsonia|Anomalocaris|Opabinia|Hallucigenia|Trilobite|Cameroceras|Jaekelopterus|Pneumodesmus|Tiktaalik|Dunkleosteus|Ichthyostega|Meganeura|Arthropleura|Dimetrodon|Gorgonops|Sinosauropteryx|Basilosaurus|Ambulocetus|Megalodon|Gigantopithecus
+
+! ============================================================================
+! THE VIGIL / ON THE BRINK SPLIT - decided 2026-08-25, applied 2026-08-26.
+! Read from the running game: of the Vigil's 100, exactly 56 carry a dagger and a
+! year (genuinely extinct) and 44 do not (extinct in the wild, or critically
+! endangered but alive). A living species does not belong in a memorial.
+! ============================================================================
+
+! The 43 living ones go to On the Brink. Mauritius Kestrel is held back - it is
+! listed EN and recovered from four birds to several hundred, so it is a success
+! story rather than a brink story. It returns to a biome.
+vigil>brink=Addax|Amur Leopard|Angelshark|Asiatic Cheetah|Barbary Lion|California Condor|Chinese Giant Salamander|Cross River Gorilla|Dama Gazelle|Franklin's Bumblebee|Great Indian Bustard|Guam Kingfisher|Guam Rail|Hainan Gibbon|Hirola|Ivory-billed Woodpecker|Javan Rhino|Kemp's Ridley Turtle|Kihansi Spray Toad|Northern White Rhino|Orange-bellied Parrot|Partula Snail|Przewalski's Horse|Père David's Deer|Red Wolf|Regent Honeyeater|Rusty-patched Bumblebee|Saharan Cheetah|Saola|Scimitar-horned Oryx|Socorro Dove|South China Tiger|Spix's Macaw|Sumatran Orangutan|Sumatran Rhino|Sumatran Tiger|Tapanuli Orangutan|Vancouver I. Marmot|Whooping Crane|Wyoming Toad|Yangtze Finless Porpoise|Yangtze Softshell|ʻAlalā
+vigil>forest=Mauritius Kestrel
+
+! The seven critically endangered species still sitting in biomes join them.
+coast>brink=Vaquita|Sawfish|Sunflower Sea Star
+forest>brink=Kākāpō
+savanna>brink=Pangolin
+wetland>brink=Gharial
+lifestage>brink=Axolotl
+
+! That leaves the Vigil at 44 genuinely extinct species. Six more real ones, none
+! currently in the roster, take it to 50.
+new>vigil=Bachman's Warbler|Christmas Island Forest Skink|Alaotra Grebe|Tecopa Pupfish|Round Island Burrowing Boa|Little Mariana Fruit Bat
+
+! --- Two species decided earlier and never created.
+! --- Gemsbok: the savanna conservancy quest needs it; the roster only had the
+! ---   Arabian oryx, which is a desert animal and has its own elder quest.
+! --- Little blue penguin: Ayr, 2026-08-26. New Zealand and southern Australia,
+! ---   nests in burrows on temperate coast - it is not a polar animal.
+new>savanna=Gemsbok
+new>coast=Little Blue Penguin

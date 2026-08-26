@@ -5558,7 +5558,7 @@ early to price the two unproven pipelines.
 | **Young adult** · local | **The corral.** A snow leopard gets into an unroofed livestock pen and, in the panic, kills far more than it can eat — so the herder loses a year's income and kills the leopard. A wire roof ends it. Add insurance and the killing stops being rational. *Snow Leopard Trust; Shafqat Hussain, Project Snow Leopard, Baltistan* | **Snow leopard** |
 | **Adult / skills** · the pattern | **The painkiller.** South Asia's vultures fell by around 99% in a decade and nobody knew why. The cause was a veterinary anti-inflammatory in cattle carcasses, fatal to vultures in trace amounts. Then the second-order effect: no vultures, more feral dogs, more rabies. **A drug for cows became a human health crisis.** *Lindsay Oaks and Rick Watson, 2004* | **White-rumped vulture** |
 | **Adult / power** · a programme | **All from one valley.** Alpine ibex were hunted to about a hundred animals in a single royal reserve. Everything alive today descends from them — a full recovery in numbers that is still carrying the genetic narrowness of that bottleneck. **Population recovered, diversity did not.** *Gran Paradiso* | **Alpine ibex** |
-| **Elder** · law | **The one that is going up.** Mountain gorillas rose from a few hundred to over a thousand — the only great ape increasing. It took a treaty between three countries that were not always at peace, and a law that sends tourist revenue to the villages next to the park. Success, and expensive, and fragile. | **Mountain gorilla** |
+| **Elder** · law | **The shahtoosh ban.** A wool fine enough to pass through a ring, and it can only be taken from a dead animal — three or four of them per shawl. Listed on CITES Appendix I, banned, enforced, and the population went from around 75,000 back to roughly 300,000. **A law that worked, and a trade that still exists underground.** | **Tibetan antelope** |
 
 ## POLAR
 
@@ -9503,3 +9503,63 @@ entry says what its own tradition does with it** — and dull if they do not.
 **Chinese is now the heaviest tradition** at roughly ten of the hundred: Qinglong,
 Baihu, Xuanwu, Fenghuang, Bixi, Pixiu, Nian, Taotie, Sha and Qilin. Worth knowing when
 the twelve mythology quests are assigned, since only one of them can be Chinese.
+
+---
+
+## EVERY OUTSTANDING DECISION IS NOW APPLIED
+
+> **Ayr, 2026-08-26.** *"Why is it not applied? Apply it. Look for any other decisions
+> I've made that haven't been committed."*
+>
+> **The reason nothing was applied: `PENDING_MOVES.txt` did not exist until today.**
+> Decisions were written into this file as prose, with no mechanism to act on them and
+> no way to tell *decided* from *done*. That gap is now closed — every decision lives in
+> `PENDING_MOVES.txt` and the roster page renders from it.
+
+### Applied in this pass
+
+**1. The fossil rebalance.** 29 surplus dinosaurs cut, 7 Ice Age species moved in from
+the Vigil, 5 more cut as redundant, 21 new species for the eight empty periods. **The
+Record covers all thirteen periods and is 50.**
+
+**2. The Vigil / On the Brink split.** Read from the running game: of the Vigil's 100,
+**exactly 56 carry a dagger and a year** and 44 do not. The living ones move to On the
+Brink, joined by the seven critically endangered species still sitting in biomes —
+vaquita, sawfish, sunflower sea star, kākāpō, pangolin, gharial and the axolotl.
+
+**Mauritius Kestrel held back.** It is listed EN and recovered from **four birds** to
+several hundred. That is a success story, not a brink story, and it returns to a biome.
+
+**Six real extinct species added** to bring the Vigil to 50: Bachman's Warbler
+(declared extinct 2023) · Christmas Island Forest Skink (the last one, named Gump, died
+in captivity in 2014) · Alaotra Grebe · **Tecopa Pupfish — the first animal ever
+declared extinct under the US Endangered Species Act, after its hot spring was
+developed into a bathhouse** · Round Island Burrowing Boa · Little Mariana Fruit Bat.
+
+**3. Gemsbok created**, for the savanna conservancy quest.
+
+**4. Little blue penguin created**, in The Strand.
+
+**5. The mountains elder quest fixed.** It still named the mountain gorilla, which moved
+to rainforest. **It is now the Tibetan antelope and the shahtoosh ban** — a wool fine
+enough to pass through a ring, taken only from dead animals, three or four per shawl;
+CITES Appendix I; a recovery from ~75,000 to ~300,000, and a trade that still runs
+underground.
+
+### And one proposal struck as void
+
+The six historical extinctions I proposed adding to the Vigil on 2026-08-25 — baiji,
+golden toad, Pyrenean ibex, po'ouli, Bramble Cay melomys and the Christmas Island
+pipistrelle — **are every one of them already in the roster**, as is the Chinese
+paddlefish I offered as a replacement. Another artefact of the broken parser.
+
+### The five groups outside the 700 are now exact
+
+```
+The Vigil            50
+On the Brink         50
+The Telling         100
+The Record           50
+The Breeding Centre  50
+                    300
+```
