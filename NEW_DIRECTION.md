@@ -1,5 +1,18 @@
 # New Direction — working notes
 
+> ## Before trusting any species count in this document
+>
+> **Counts written into the prose below may be stale.** This file is a dated log, and
+> several numbers in it were superseded — some of them more than once on the same day.
+>
+> **`design/GROUND_TRUTH.txt` is the only authoritative source**, and it is produced by
+> running the game rather than by reading the source. The method is in
+> `design/tools/README.md`.
+>
+> Current, verified 2026-08-26: **519 living species across the twelve biomes**, out of
+> **1000** total entries. The gap to the 700 target is **181**.
+
+
 This is the initiation document for the new game. It is a **container for
 Ayr's ideas**, written down as they have them, in their words. Nothing here is
 invented or proposed by Claude unless it is explicitly marked as such.
