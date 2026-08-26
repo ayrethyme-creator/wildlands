@@ -23,11 +23,12 @@ kept>breeding=Akita|Alaskan Malamute|Australian Shepherd|Beagle|Bernese Mountain
 ! --- calico and black become COSMETIC coat options on House Cat, not species. Farm Dog
 ! --- is replaced by Mutt. Puppy and Kitten are life stages.
 ! --- Still to create: Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise,
-! --- Kitten.
+! --- Leopard Gecko, and Kitten as a life stage. That is six species, which takes
+! --- The Kept to exactly 50.
 ! --- NOT created: the parakeet IS the budgerigar, already wild in The Dry. It is
-! --- stocked in the child pet store the same way the hermit crab is stocked in the
-! --- teen one - a purchasable wild species, not a second roster entry. The cockatiel
-! --- and zebra finch sit in The Dry on the same footing.
+! --- stocked in the TEEN pet store the same way the hermit crab is - a purchasable
+! --- wild species, not a second roster entry. The cockatiel and zebra finch sit in
+! --- The Dry on the same footing.
 
 ! --- Ayr, 2026-08-26: the pet cat is ONE species - House Cat - with different skins.
 ! --- Tabby, calico and black are coat patterns, not breeds, so they stop being species

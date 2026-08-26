@@ -9170,20 +9170,28 @@ none of them is a childhood pet choice.
 dog, "farm dog" is a job rather than a breed, and **most dogs in the world, and most
 dogs in shelters, are mutts.**
 
-### 95. The three reptiles get created
+### 95. Four reptiles get created
 
-Snake, bearded dragon and tortoise. Suggested species: **corn snake** (the standard
-beginner snake), **bearded dragon**, and a **Russian tortoise** — the pet tortoise
-that does not reach 45 kg, unlike the sulcata already in the desert.
+**Corn snake** (the standard beginner snake), **bearded dragon**, a **Russian
+tortoise** — the pet tortoise that does not reach 45 kg, unlike the sulcata already
+in the desert — and the **leopard gecko**, added by Ayr and the most commonly kept
+pet reptile in the world.
 
-### 96. Parakeet moves to the child list — and it already exists
+**Reptiles are the largest single group in the child pet menu**, which is a fair
+reflection of how many children actually keep one.
 
-**The parakeet is the budgerigar**, already in The Dry as a wild Australian bird.
-Ayr spotted this. It needs no new entry — it is **stocked** in the child pet store,
-exactly as the hermit crab is stocked in the teen one.
+### 96. The budgie is a teen option, and it already exists
+
+**The parakeet is the budgerigar**, already in The Dry as a wild Australian bird —
+Ayr spotted this. It needs no new entry; it is **stocked in the teen pet store**,
+exactly as the hermit crab is.
 
 **The cockatiel and zebra finch are in The Dry on the same footing**, so the pet-bird
-shelf can be filled without spending a single roster slot.
+shelf fills without spending a single roster slot — and honestly, since those birds
+really are wild animals that people keep.
+
+**There is no bird in the child menu.** A first pet is a cat, a dog, a reptile, a
+fish or a small mammal; a bird is a step up, and it waits for the teen years.
 
 ### 97. Farm animals are no longer a teen pet option
 
@@ -9245,13 +9253,21 @@ entries. The path to 50:
 ```
 45  today, after the coat colours and Farm Dog come out
 -1  Puppy -> reclassified as a life stage, like Kitten
-+5  Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise
-49
++6  Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise, Leopard Gecko
+50
 ```
 
-**One short.** A purchasable wild species does not take a Kept slot, so losing the
-parakeet entry costs one. The obvious fiftieth is the **leopard gecko** — the most
-commonly kept pet reptile in the world, and distinct from the wild gecko already in
-The Dry. **Or leave it at 49.** Ayr's call.
+**Exactly 50.**
+
+| | |
+|---|---|
+| House Cat | 1 |
+| Dogs | 9 |
+| Reptiles | 4 |
+| Freshwater fish | 14 |
+| Small pets | 8 |
+| Canary | 1 |
+| Farm animals | 13 |
+| | **50** |
 
 The Breeding Centre holds **34** — nineteen dog breeds and **fifteen cat breeds**.
