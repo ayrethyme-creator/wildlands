@@ -4859,6 +4859,21 @@ change rather than a contradiction.*
   a third destination, **treated in the field** — darted and operated on where it
   stands, because the journey would do more harm than the delay.
 
+- **2026-08-26 — THE REHABILITATION PIPELINE IS UNCOMMITTED.** Ayr: *"I don't know
+  yet how involved, or even if, I want this mini game of capture, rehabilitation,
+  release."* Correct — idea 18 said "zoos **and** recovery centres", I chose recovery
+  centre and built six stages, a routing puzzle, a naming ritual, a return report and
+  a mortality question on a decision Ayr never made. **The committed baseline is a
+  living collection**: catch it, it appears at the right facility, go and visit it,
+  feed it, enrich it, see its ability. That requires no pipeline and is already a
+  complete game. Three shapes recorded — **A** no pipeline, **B** full simulator,
+  **C (recommended)** pipeline for story animals only, so ordinary species stay
+  visitable and release stays meaningful because it is rare and authored. **A is a
+  subset of both others, so everything can be designed while the choice stays open.**
+- **2026-08-26 — Euthanasia is no longer urgent.** It was only a question because I
+  had built a system in which animals die on the player's watch. Without a pipeline
+  the question dissolves rather than needing an answer.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -6783,3 +6798,103 @@ decision, not assumed.**
 Sandbox was going to be where you could try holding an elephant. **It still is** —
 but the question changes from *can you get one* to *should you keep the one you
 saved*, which is the more honest version of it.
+
+---
+
+# COMMITTED VERSUS ASSUMED — THE FACILITY
+
+> **Ayr, 2026-08-26.** *"This is a game. And most species in this game can be found
+> at a long term facility. I want the player to be able to interact with every animal
+> once it's 'caught.' I also don't know yet how involved, or even if, I want this
+> 'mini game' (that seems like HUGE game play) of capture, rehabilitation, release
+> thing you keep assuming will be there."*
+
+**Ayr is right. The rehabilitation pipeline is mine, not theirs.**
+
+Idea 18 said **"real zoos and wildlife recovery centers."** I chose recovery centre,
+declared it the stronger model, and then built six stages, a routing puzzle, a
+naming ritual, a return report and a mortality question on top of a decision Ayr
+never made.
+
+**It is also, as Ayr says, huge.** It is a whole second game, and it was never
+costed.
+
+## What Ayr has actually committed to
+
+This is the baseline, and **it is already a complete and coherent system:**
+
+| | |
+|---|---|
+| **Twelve facilities**, specialising by biome | Idea 76 |
+| **Catching a species puts it in the right facility** | Idea 77 |
+| **A list at each facility showing only caught species** | Idea 78 |
+| **Select one and go to its enclosure** | Idea 79 |
+| **Interact: feed it, give it enrichment, see its signature ability** | Ideas 72, 74 |
+| **Every animal has a name and a short story** | Idea 74 |
+| **Every career can do all of this** | Idea 79 |
+| **Species that would die in transport stay wild**, visited by cut scene | Idea 80 |
+| **Build mode** — you construct the facilities | Idea 18 |
+
+**Nothing above requires a rehabilitation pipeline.** It is a living collection you
+visit, care for and learn from. That is a real game, it matches every word Ayr has
+written, and it can be built without another decision.
+
+## What I invented on top
+
+| Assumed | Depends on the pipeline existing |
+|---|---|
+| Intake → triage → quarantine → rehabilitation → conditioning → outcome | **All of it** |
+| Release as the win condition | Yes |
+| Non-releasable animals becoming ambassadors | Yes |
+| Numbered on intake, named at release | Partly — the number survives, the ritual does not |
+| The two-routes building puzzle | **Yes** — it only matters if animals are going home |
+| The return report | Yes |
+| Euthanasia and mortality | Yes |
+| Ten intake categories | No — works as flavour either way |
+
+## The tension Ayr just exposed, stated plainly
+
+> **Release is the win** *(my pipeline)* — the animal leaves, and you lose access.
+>
+> **Interact with every animal once caught** *(Ayr's requirement)* — the animal stays.
+
+**These pull against each other.** I patched it with wild-visit sites, but the patch
+exists only because I created the problem. **Without the pipeline there is no
+problem:** you catch it, it is there, you can always go and see it.
+
+## Three shapes, so the choice is visible
+
+### A — No pipeline. A living collection.
+Catch it, it lives at the facility, you visit and care for it. **Everything Ayr
+asked for, nothing more.** Cheapest by a wide margin. The conservation message lives
+in the 48 quests, which is where it was always strongest.
+*Loses: release as an emotional beat.*
+
+### B — Full pipeline. A rehabilitation simulator.
+Everything I designed. Thematically the strongest and **by far the most work** — a
+second game beside the first.
+*Loses: guaranteed access to every animal, and a great deal of time.*
+
+### C — Pipeline for story animals only. *(recommended)*
+**Ordinary caught species simply live at the facility** and are always visitable.
+**Quest animals** — the 48, plus the occasional scripted rescue — go through a
+rehabilitation sequence with a real outcome.
+
+Release stays meaningful because it happens rarely, to animals the player already
+cares about, inside a story. **The collection stays intact because everything else
+just stays.**
+
+*Costs: one authored sequence per quest, not a simulation.*
+
+## What this changes right now
+
+**Nothing needs deleting.** The pipeline design is recorded and stays recorded — it
+becomes the specification for option B or C rather than an assumption underneath
+everything.
+
+**And euthanasia stops being urgent.** It was only ever a question because I had
+built a system that made animals die on the player's watch. If there is no pipeline,
+there is no such system, and the question dissolves rather than needing an answer.
+
+**Ayr does not have to decide now.** Option A is a strict subset of both others, so
+**everything below it can be designed and built while the decision stays open.**
