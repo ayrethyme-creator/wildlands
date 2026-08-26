@@ -70,3 +70,28 @@ new>breeding=Fancy Pigeon|Silkworm|English Budgie|Angora Rabbit|Ball Python Morp
 mythic>cut=Wendigo|Fairy|Cyclops
 unplaced>mythic=Qilin|Thunderbird|Phoenix
 unplaced>fossil=Woolly Mammoth
+
+! ============================================================================
+! THE FOSSIL REBALANCE - decided 2026-08-26, applied 2026-08-26.
+! The Record was 50 Mesozoic reptiles and nothing else, so nine of the thirteen
+! periods its quests are built on had no animals at all. 21 kept, 7 Ice Age species
+! move in from the Vigil, 21 new species fill the empty periods.
+! ============================================================================
+
+! 29 surplus dinosaurs out. Clades that carried three to six near-identical entries
+! are thinned; nothing a quest depends on is touched. Protoceratops (griffin quest),
+! Plesiosaurus (Mary Anning quest) and Apatosaurus (carries the Brontosaurus story)
+! are explicitly protected.
+fossil>cut=Plateosaurus|Desmatosuchus|Tanystropheus|Cynognathus|Placerias|Dilophosaurus|Compsognathus|Diplodocus|Liopleurodon|Deinonychus|Therizinosaurus|Oviraptor|Pachycephalosaurus|Iguanodon|Quetzalcoatlus|Pteranodon|Mosasaurus|Brontosaurus|Camarasaurus|Mamenchisaurus|Ceratosaurus|Cryolophosaurus|Giganotosaurus|Carnotaurus|Gallimimus|Styracosaurus|Kentrosaurus|Rhamphorhynchus|Ophthalmosaurus
+
+! Ice Age megafauna are 7,700-13,000 years old. They are fossils, not memorials -
+! the Vigil is for extinctions in recorded time that people can be held responsible
+! for. Seven join the Woolly Mammoth already moved there.
+vigil>fossil=Woolly Rhinoceros|Smilodon|Mastodon|Dire Wolf|Megatherium|Glyptodon|Irish Elk
+
+! Five more Ice Age species leave the Vigil but are not needed - Smilodon, Megatherium
+! and the mammoth already cover those niches, and Columbian Mammoth duplicates Woolly.
+vigil>cut=Columbian Mammoth|Cave Lion|Short-faced Bear|Giant Beaver|Steppe Bison
+
+! 21 new species for the eight empty periods.
+new>fossil=Charnia|Dickinsonia|Anomalocaris|Opabinia|Hallucigenia|Trilobite|Cameroceras|Jaekelopterus|Pneumodesmus|Tiktaalik|Dunkleosteus|Ichthyostega|Meganeura|Arthropleura|Dimetrodon|Gorgonops|Sinosauropteryx|Basilosaurus|Ambulocetus|Megalodon|Gigantopithecus
