@@ -4839,12 +4839,25 @@ change rather than a contradiction.*
   at the facility. Non-capturable ones (large ocean, deep sea) get **next-steps
   information**, then eventually **"visit the animal's location"** — a cut scene
   placing the player in that location without travelling there. Every career can do
-  both. **Proposed for Ayr:** treat *should not be kept* (elephants, cetaceans, great
-  apes) the same as *cannot be captured* in the campaign, and let sandbox be where
-  the difference shows — one is a choice with a consequence, the other is physics.
+  both. **WITHDRAWN 2026-08-26** — see idea 80. Ayr rejected treating *should not be
+  kept* as *cannot be captured*; that was a zoo criterion applied to a recovery
+  centre.
 - **2026-08-26 — Number at documentation, name at outcome.** The auto-assigned
   encounter number resolves cleanly against idea 75. Field records are numbered when
   made; the name is the ending.
+
+- **2026-08-26 — Idea 80: the test is TRANSPORT, not suitability.** Ayr's rule:
+  **only species that would die in transport are left in the wild** — blue whale,
+  great white, blobfish, most large whales and deep-sea species. **Everything else
+  comes in, elephants, gorillas and polar bears included.** Rehabilitation is
+  temporary and is the reason the animal survives; orphaned elephant calves are
+  hand-reared and released, gorillas receive surgery for gunshot wounds, a starving
+  polar bear is treated. My earlier proposal applied a zoo's permanent-housing list
+  to a recovery centre and is withdrawn. **The welfare question moves to the outcome
+  fork**, where it gets harder and better: a permanent hedgehog ambassador is fine, a
+  permanent elephant should cost the player something. Offered and awaiting Ayr:
+  a third destination, **treated in the field** — darted and operated on where it
+  stands, because the journey would do more harm than the delay.
 
 ## Practical notes
 
@@ -6674,3 +6687,99 @@ a different angle."*
 than travelling to it is far cheaper to build than a roaming area, it is completely
 controllable, and it is how a wildlife documentary actually feels. It also gives the
 cut scenes Ayr asked for a permanent, repeatable home.
+
+---
+
+## CORRECTION: THE TEST IS TRANSPORT, NOT SUITABILITY
+
+> **Ayr, 2026-08-26.** *"Those species are capturable in real life, and often do need
+> to be. A baby elephant by the body of its mother shot by a poacher, a gorilla with
+> a gunshot wound that would survive with surgery, a dehydrated and emaciated polar
+> bear that needs immediate care. Obviously there are species that are logistically
+> more difficult to keep at a facility compared to a smaller one, but **only the
+> species that would die in transport should be left in the wild.** Like a blue
+> whale, great white shark, and a blobfish."*
+
+**Ayr is right and the proposal is withdrawn.**
+
+### What I got wrong, exactly
+
+The "does badly in captivity" list — elephants, cetaceans, great apes, polar bears
+— is a **zoo** list. It is about **permanent display housing**, and it is correct
+about that.
+
+**This is not a zoo.** It is a recovery centre, which is the distinction the whole
+facility design was founded on, and I applied the wrong list to it anyway.
+
+Rehabilitation is not permanent captivity. **It is temporary, and it is the reason
+the animal survives.** Every one of Ayr's examples is real, documented practice:
+
+- **Orphaned elephant calves** are hand-reared and returned to the wild. That is
+  precisely what the Sheldrick Wildlife Trust in Kenya exists to do, and it works.
+- **Gorillas with snare and gunshot injuries** receive surgery. Gorilla Doctors do
+  this in Rwanda, Uganda and the DRC.
+- **A starving polar bear** needs immediate care or it dies. Nobody leaves it
+  because the species is hard to house.
+
+**Refusing to help a large animal because a zoo shouldn't keep one is a category
+error**, and it would have been the game teaching something false.
+
+### 80. The rule, in Ayr's terms
+
+> **Only species that would die in transport are left in the wild.**
+
+Physical, checkable, and it does not need a welfare argument to apply it.
+
+| Left in the wild | Why |
+|---|---|
+| **Blue whale** | Out of water its own weight crushes it. There is no vehicle and no tank |
+| **Great white shark** | Nobody has kept one alive for long. The record is measured in days |
+| **Blobfish** | **It only looks like that because of decompression.** At depth it is an ordinary-looking fish; bringing it up destroys the body. The perfect example, and its own signature ability |
+| Most large whales, most deep-sea species | Same reasons — mass, or pressure |
+
+**Everything else comes in.** Elephants, gorillas, polar bears, rhinos included.
+
+### Where the welfare question actually lives — the outcome, not the intake
+
+The concern was not wrong, it was **filed in the wrong place.**
+
+| | Governed by |
+|---|---|
+| **Intake** | **Can it survive the journey?** Physics |
+| **Outcome** | **Should this animal stay here for the rest of its life?** Welfare |
+
+An elephant comes in, is treated, and **the pressure to release it is enormous** —
+because a permanent elephant is a genuinely poor outcome and a rehabilitator knows
+it. The same is true of a gorilla, an orca, a polar bear.
+
+So the welfare question becomes **harder and more interesting**, not absent:
+keeping a hedgehog as an ambassador is fine. **Keeping an elephant is a decision
+that should cost the player something**, and be rare, and be argued about.
+
+That is a better system than a locked door.
+
+### A third category worth having: treated in the field
+
+Real practice has an option between "bring it in" and "leave it alone."
+
+**Some animals are treated where they stand.** Darted, immobilised, operated on in
+the open, woken up and left to walk away. It is standard for rhinos, elephants and
+gorillas, because **the journey would do more harm than the delay.**
+
+That gives three destinations rather than two:
+
+| | What happens |
+|---|---|
+| **Brought in** | Intake, the facility pipeline, an enclosure to visit |
+| **Treated in the field** | A vet trip to the animal. High stakes, no second chances, and **nothing to bring home but the record** |
+| **Left in the wild** | Cannot survive transport. Visit-the-location only |
+
+The middle one is dramatic, it is real, and it gives large animals a distinct kind
+of encounter instead of a smaller version of a hedgehog's. **Offered for Ayr's
+decision, not assumed.**
+
+### And it makes sandbox sharper, not weaker
+
+Sandbox was going to be where you could try holding an elephant. **It still is** —
+but the question changes from *can you get one* to *should you keep the one you
+saved*, which is the more honest version of it.
