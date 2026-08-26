@@ -41,3 +41,15 @@ kept>cut=Farm Dog
 ! --- no row in the DEX at all; everything else in this file is a move between groups.
 new>kept=Mutt|Pit Bull|Corn Snake|Bearded Dragon|Russian Tortoise|Leopard Gecko
 kept>lifestage=Puppy
+
+! --- Ayr, 2026-08-26. Two species to create and the camelid duplicate resolved.
+! --- Gopher -> The Furrows. Tarantula -> The Dry.
+new>farmland=Gopher
+new>desert=Tarantula
+
+! --- The llama and alpaca are DOMESTICATED - their wild relatives are the guanaco and
+! --- vicuna, both already in The Divide. So both belong in The Kept, not in a biome.
+! --- "Alpaca" in farmland and "Farm Alpaca" in The Kept are the same animal: they
+! --- merge into one entry, keeping the Kept row and dropping the farmland one.
+farmland>kept=Llama
+farmland>merged=Alpaca

@@ -9271,3 +9271,45 @@ entries. The path to 50:
 | | **50** |
 
 The Breeding Centre holds **34** — nineteen dog breeds and **fifteen cat breeds**.
+
+---
+
+## THE KEPT IS DOMESTICATED ANIMALS, NOT A SHOP
+
+> **Ayr, 2026-08-26.** *"The Kept is not the childhood pet store. The Kept is
+> domesticated animals. The pet store animals are taken from the Kept list."*
+
+**100.** Corrected, and it is the cleaner model.
+
+| | |
+|---|---|
+| **The Kept** | A **category** — every domesticated animal in the game |
+| **The pet store** | A **shop in the town** that stocks a subset of it |
+
+The store also stocks **wild** species — the budgie from The Dry, the hermit crab from
+The Strand — which only works because the store is a place rather than a list.
+**Stocking is a mechanic; The Kept is a taxonomy.**
+
+**101. Gopher → The Furrows. Tarantula → The Dry.** Neither is in the roster; both need
+creating.
+
+**102. The llama and alpaca are domesticated and belong in The Kept.** Their wild
+relatives are the **guanaco and vicuña, both already in The Divide** — which is exactly
+why the domestic pair should not also be sitting in a biome.
+
+**"Alpaca" in farmland and "Farm Alpaca" in The Kept are the same animal.** They merge
+into one row; the duplicate goes.
+
+### The arithmetic
+
+| | |
+|---|---|
+| The Kept | 50 → **51** *(gains Llama)* |
+| The Furrows | 38 → **37** *(loses Llama and Alpaca, gains Gopher)* |
+| The Dry | 44 → **45** *(gains Tarantula)* |
+
+**Net roster change from every pet decision:** −3 coat colours, −1 Farm Dog, −1 merged
+alpaca, +6 pet species, +2 gopher and tarantula = **+3**.
+
+Those three come out of the 170 still to be added, not out of the 1000. **The total
+stays firm.**

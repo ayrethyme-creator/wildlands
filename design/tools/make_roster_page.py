@@ -48,11 +48,12 @@ BIOMES = [('rainforest', 'Rainforest', 'The Canopy'), ('savanna', 'Savanna', 'Th
 GROUPS = [('vigil', 'The Vigil &amp; On the Brink', 'the extinct, and the nearly gone'),
           ('mythic', 'The Telling', 'mythology'),
           ('fossil', 'The Record', 'fossils'),
-          ('kept', 'The Kept', 'the childhood pet store'),
+          ('kept', 'The Kept', 'domesticated animals &mdash; the pet store stocks from here'),
           ('breeding', 'The Breeding Centre', 'cat and dog breeds &mdash; unlocks at end game'),
           ('cosmetic', 'Becoming skins, not species',
            'coat options on House Cat &mdash; these free three roster slots'),
           ('cut', 'Cut', 'replaced'),
+          ('merged', 'Merged', 'duplicate entries folded into another row'),
           ('lifestage', 'Life stages', 'chicks, calves, pups &mdash; not species'),
           ('unplaced', 'Unplaced', 'the 13 cut wardens, three myths needing a tag, and the mammoth')]
 
