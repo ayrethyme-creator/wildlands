@@ -4829,6 +4829,23 @@ change rather than a contradiction.*
   from here: encounter, then moment-to-moment, then session, then back to the open
   questions. Euthanasia is deferred deliberately, not ignored.
 
+- **2026-08-26 — The encounter CONTRACT is fixed; the mechanic stays open.** Ayr,
+  ideas 78 and 79, correcting yesterday's audit. Layer 1 never needed the mechanic,
+  it needed the contract — what an encounter hands upward. Every encounter, any
+  career: **guide page shown immediately, number auto-assigned, facility told, entry
+  added to a list that shows only caught species.** All three careers start and end
+  identically and differ only in the middle.
+- **2026-08-26 — Two species destinations.** Capturable species get an **enclosure**
+  at the facility. Non-capturable ones (large ocean, deep sea) get **next-steps
+  information**, then eventually **"visit the animal's location"** — a cut scene
+  placing the player in that location without travelling there. Every career can do
+  both. **Proposed for Ayr:** treat *should not be kept* (elephants, cetaceans, great
+  apes) the same as *cannot be captured* in the campaign, and let sandbox be where
+  the difference shows — one is a choice with a consequence, the other is physics.
+- **2026-08-26 — Number at documentation, name at outcome.** The auto-assigned
+  encounter number resolves cleanly against idea 75. Field records are numbered when
+  made; the name is the ending.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -6546,3 +6563,114 @@ replace them.** So:
 
 **Euthanasia is not being ignored — it is being deferred deliberately**, because it
 is a layer-4 question and layers 0, 1 and 3 are missing underneath it.
+
+---
+
+# THE ENCOUNTER CONTRACT
+
+> **Ayr, 2026-08-26.** *"How the encounter works is something I'm not ready to
+> tackle yet. I also don't think it's necessary to know that yet. One can design
+> (not make) an entire Pokémon game without knowing the mechanics when you encounter
+> a wild Pokémon."*
+
+**This corrects yesterday's audit, and Ayr is right.** What layer 1 needed was never
+the mechanic — it was the **contract**: what an encounter *hands to* everything
+built on top of it. A contract can be fixed while the thing behind it stays open,
+and everything above can then be designed safely.
+
+**Ayr has now specified the contract completely. The mechanic is deferred, properly
+rather than by omission.**
+
+## 78. What every encounter guarantees
+
+Regardless of career, regardless of species:
+
+```
+1  All three careers START and END an encounter the same way
+     -> they differ only in the middle
+
+2  The animal is added to the guide
+     -> and that page is shown IMMEDIATELY, so it is read right then
+
+3  A number is assigned automatically
+     -> the player is told the facility now knows about this animal
+
+4  An entry appears in the facility's list
+     -> and the list shows only species that have been caught
+```
+
+**Everything above layer 1 attaches to this output, not to the mechanic.** The
+careers, the collecting, the facility unlock, the signature ability and the naming
+rule are all safe now.
+
+## 79. Two kinds of species, and two different destinations
+
+| | **Can be brought to a facility** | **Cannot be captured** |
+|---|---|---|
+| Who | Most species | Mostly large ocean and deep-sea animals |
+| Selecting it in the list | Takes you to **its enclosure** — see it, interact with it | Gives **information about next steps** |
+| Later | — | Unlocks **"visit the animal's location"** |
+| That visit | — | **Cut scene, then you are shown in that location** — present but not actually there — and you interact from within it |
+
+**Every career can do all of this.** The divergence is in the encounter only.
+
+## Why the guide page appearing immediately is the right call
+
+The player has just met the animal. **That is the instant curiosity is highest**,
+and it is exactly when a nature documentary puts up the caption. Making the player
+go and look it up later means they never do.
+
+**Two things it needs to survive being done 700 times:**
+- **Dismissible immediately.** A player who wants to keep moving must be able to.
+- **Shown once.** A second encounter with the same species must not reopen it.
+
+## The number resolves cleanly against the naming rule
+
+Idea 75 said releasable animals are numbered and named at release. **This says the
+number is assigned automatically at the encounter**, which is better and more real:
+field records are numbered when they are made.
+
+So the sequence is: **number at documentation → name at outcome.** The number is
+the record; the name is the ending.
+
+## A distinction the roster now needs, and a question for Ayr
+
+Ayr's non-capturable list is **cannot** — physically impossible or never survives
+capture. Great white shark, whale shark, the deep sea.
+
+But the facility design already carries a *different* list: animals that **can** be
+held and **should not be** — elephants, cetaceans, great apes, polar bears,
+wide-ranging carnivores. Those are not the same category.
+
+**Proposal:** treat them the same way in the campaign. Both go to
+**visit-in-the-wild**, so the game never asks the player to be the one holding an
+elephant.
+
+**And sandbox is where the difference lives.** Sandbox is already defined as the
+place you can try what the campaign refuses — so in sandbox the *should not* list
+becomes buildable, and the *cannot* list stays impossible. **One is a choice with a
+consequence; the other is physics.**
+
+## What "eventually" implies — the visit is gated, and the ladder already exists
+
+Ayr wrote that the location visit becomes available *eventually*. That gate is
+already designed: **the water ladder.** To visit a great white you need the boat and
+the cage. To visit a deep-sea animal you need the submersible, which is an elder
+capability.
+
+**So the non-capturable species become long-term goals rather than dead entries.**
+The list tells you what is coming, and the "next steps" text is the game telling you
+what you still have to become.
+
+## Two things this quietly buys
+
+**The careers diverge only where they must.** Same start, same end, same guide, same
+facility, same enclosure, same visits — different middle. That is a large saving,
+and it is exactly Ayr's original instruction: *"the quests be the same in each
+career, the map and progression and people you meet be the same, just you come from
+a different angle."*
+
+**The wild-visit is a vignette, not a place.** Being *shown in* a location rather
+than travelling to it is far cheaper to build than a roaming area, it is completely
+controllable, and it is how a wildlife documentary actually feels. It also gives the
+cut scenes Ayr asked for a permanent, repeatable home.
