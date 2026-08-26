@@ -9671,3 +9671,49 @@ python design/tools/uncle_albert.py
 **Run it after any change to `PENDING_MOVES.txt`, and before quoting any number.** It
 exits non-zero on failure, so it can be trusted without reading the output — and it
 says **"Uncle Albert says it all adds up"** when it is happy.
+
+---
+
+## SPECIES AUDIT — Ayr was right, and it is not one entry
+
+> **Ayr, 2026-08-26.** *"The fire hawk in savanna is actually 3 different species. Check
+> all of the animals we currently have for errors like that and similar."*
+
+**Full audit at `design/SPECIES_AUDIT.md`.** Roughly **100 of the 528 real animals need a
+decision** — about a fifth of the roster.
+
+### Four entries are not animals
+
+**Firehawk** — Ayr's example. Three unrelated Australian raptors are documented
+carrying burning sticks to spread fire: black kite, whistling kite, brown falcon.
+**Lioness** and **Maned Lion** — a sex, twice, for one species. **Mole-Rat Queen** — a
+caste.
+
+### Eleven redundant pairs
+
+The general and the specific of the same animal, both present. **A siamang is a gibbon.
+A mandarinfish is a dragonet.** Jackal and black-backed jackal. Fur seal and Cape fur
+seal. Lynx and Iberian lynx. Fruit bat, Egyptian fruit bat *and* spectacled flying fox.
+
+### About 85 name a group rather than a species
+
+Gecko covers 1,500 species. Scorpion 2,500. Jewel Beetle 15,000. Hummingbird 360. Vulture
+23 — **and Old World and New World vultures are not even related.** Tardigrade is a whole
+phylum.
+
+**Almost none of these is hard**, because in nearly every case one species carries the
+interesting fact: the 17-year periodical cicada, the bee hummingbird, the common basilisk
+that runs on water, the Australian box jellyfish, the Bactrian camel that is the
+endangered wild one.
+
+### Seven are in the wrong biome
+
+**Ring-tailed lemur and sifaka are in the desert** — both Madagascan forest animals.
+**Komodo dragon is in rainforest** — it lives in dry savanna woodland. **Coelacanth is in
+the open ocean** — it lives at 150–250 m in submarine caves, and **the deep sea badly
+needs species anyway.**
+
+### This should happen before the 122 new animals
+
+Otherwise the new ones get written to the same standard as the old ones, and the pass has
+to run twice.
