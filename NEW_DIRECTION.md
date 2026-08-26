@@ -4874,6 +4874,15 @@ change rather than a contradiction.*
   had built a system in which animals die on the player's watch. Without a pipeline
   the question dissolves rather than needing an answer.
 
+- **2026-08-26 — DECIDED: option C, idea 81.** Rehabilitation is **authored, not
+  simulated.** Ordinary caught species live at the facility permanently and are
+  always visitable; **quest animals and scripted rescues** go through a real sequence
+  with a real outcome. Release stays meaningful because it is rare and happens to
+  animals the player already cares about. Cost is one authored sequence per rescue
+  quest rather than a simulation. Euthanasia becomes an authored story beat used once
+  or twice at full weight, not a system running in the background. The pipeline
+  design stays as the **specification** for those sequences.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -6898,3 +6907,52 @@ there is no such system, and the question dissolves rather than needing an answe
 
 **Ayr does not have to decide now.** Option A is a strict subset of both others, so
 **everything below it can be designed and built while the decision stays open.**
+
+---
+
+## DECIDED: OPTION C — THE PIPELINE IS FOR STORY ANIMALS ONLY
+
+> **Ayr, 2026-08-26.** *"I really like C."*
+
+**81. Decided.** The rehabilitation sequence exists, and it is **authored rather
+than simulated.**
+
+| | What happens |
+|---|---|
+| **Ordinary caught species** | Live at the facility. Always there, always visitable, fed, enriched, ability viewable. **They never leave.** |
+| **Quest animals, and occasional scripted rescues** | Go through a real rehabilitation sequence with a real outcome — released, or kept because they cannot go |
+
+### Why this is the right shape
+
+**Release stays meaningful precisely because it is rare.** A player who releases
+forty animals a session feels nothing. A player who releases *one*, at the end of a
+quest, having watched it come in — that lands.
+
+And it happens to **animals the player already cares about**, because the quest just
+spent an hour making them care.
+
+**The collection stays whole**, which was Ayr's actual requirement: every caught
+animal remains interactable, forever.
+
+### What this settles
+
+- **Cost.** One authored sequence per rescue quest. **Not a simulation.** The
+  difference is enormous and it is the difference between a feature and a second
+  game.
+- **Ambassadors** still exist — as quest animals that could not be released. Rarer,
+  and each one is somebody.
+- **The naming ritual** (idea 75) applies to quest animals. Number at documentation,
+  name at outcome. Ordinary species keep their name and story from idea 74.
+- **Euthanasia** becomes what it should always have been: **something the player
+  sees inside a story, not something a system does to them on a Tuesday.** An
+  authored beat, used once or twice, at full weight.
+- **The two-routes building puzzle** survives but is optional. It only matters where
+  animals are going home, which under C is the quest wing. Ayr can take it or leave
+  it without anything else moving.
+
+### What is still true from the pipeline design
+
+Everything recorded stays as the **specification for those authored sequences** —
+the six stages, quarantine's separateness, conditioning that cannot be faked small,
+the outcome fork, the ten intake categories. It stops being a system the player
+operates and becomes **the structure the story beats are built from.**
