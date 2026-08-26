@@ -410,3 +410,26 @@ BIOME_BY_HAND.littlebrownbat      = "forest";       // same
 BIOME_BY_HAND.freetailbat         = "desert";       // cave roosts, hunts over arid country
 BIOME_BY_HAND.giantcentipede      = "rainforest";   // its own text says rainforest floor
 BIOME_BY_HAND.hawksbill           = "reef";         // missed in the placement pass
+
+// --- Ayr, 2026-08-26: the North American backyard split.
+// The line inside "forest" is not forest TYPE, it is wilderness versus the edge of
+// where people live. A white-tailed deer, a chipmunk and a gray fox are things you
+// see from a suburban window; a grizzly, a moose and a wolverine are not. These move
+// to The Furrows, which is also the starting town, and it puts three of the four
+// rescued-animal options (raven, beaver, deer) where the childhood story needs them.
+// Porcupine was proposed and DROPPED - more woodland than backyard. It stays.
+BIOME_BY_HAND.chipmunk        = "farmland";
+BIOME_BY_HAND.raven           = "farmland";
+BIOME_BY_HAND.flyingsquirrel  = "farmland";
+BIOME_BY_HAND.grayfox         = "farmland";
+BIOME_BY_HAND.littlebrownbat  = "farmland";
+BIOME_BY_HAND.lunamoth        = "farmland";
+BIOME_BY_HAND.monarch         = "farmland";
+BIOME_BY_HAND.woodpecker      = "farmland";
+BIOME_BY_HAND.whitetail       = "farmland";
+BIOME_BY_HAND.woodthrush      = "farmland";
+BIOME_BY_HAND.beaver          = "farmland";   // the beaver pond is the childhood release site
+
+// --- Domesticated animals wrongly sitting in a biome. Both belong in The Kept,
+// --- which already holds a Farm Alpaca (the duplicate Ayr flagged).
+// alpaca, llama -> The Kept  (needs a dom:true flag in the DEX, not a biome)
