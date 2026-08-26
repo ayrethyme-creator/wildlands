@@ -5171,6 +5171,17 @@ change rather than a contradiction.*
   because **The Kept is the pet menu** - so the trim is a decision about how much
   choice character creation offers, not a spreadsheet exercise.
 
+- **2026-08-26 - Ideas 88-92: the pet store, the breeding centre, and flexible
+  targets.** The **eleven saltwater aquarium fish move to The Garden** (they are wild
+  reef fish, not breeds; data change pending on their `dom` flag). **A pet store exists
+  in the child phase**; **no breeding centre until end game**; **everything in The
+  Furrows and The Kept is reachable in childhood and teenagehood**; and **the per-biome
+  targets are flexible at Ayr's discretion — only 1000 is firm.** Consequence: **The
+  Kept is the childhood pet store inventory, not postgame content**, so its size is a
+  question about how rich the opening is, traded against wild animals elsewhere. The
+  breeding centre needs **no species of its own** — it reuses the animals the player met
+  as a child, so its whole cost is writing.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -9076,3 +9087,59 @@ forest.
 **Farmland is now the interesting one.** It is the starting town, it just gained the
 eleven North American backyard species, and it still needs about fourteen more - which
 are the animals a child meets first.
+
+---
+
+## THE PET STORE, THE BREEDING CENTRE, AND WHO CAN REACH WHAT
+
+> **Ayr, 2026-08-26.** Four decisions.
+
+**88.** **The eleven saltwater aquarium fish move to The Garden.** They are wild reef
+fish that people keep in tanks, not domesticated breeds — a clownfish in a tank is the
+same animal as a clownfish on a reef. Blue Tang · Percula Clownfish · Royal Gramma ·
+Flame Angelfish · Firefish Goby · Six-Line Wrasse · Copperband Butterflyfish ·
+Blue-Green Chromis · Banggai Cardinalfish · Picasso Triggerfish · Porcupine Pufferfish.
+
+*Data change pending: these carry a `dom`/`breed` flag in the DEX and need it cleared
+when the new game's data is built. `GROUND_TRUTH.txt` still shows them in The Kept
+because it reflects the running game, not the target.*
+
+**89.** **A pet store exists in the child phase.**
+
+**90.** **No breeding centre until end game.**
+
+**91.** **Everything in The Furrows and The Kept is accessible during childhood and
+teenagehood.**
+
+**92.** **The per-biome target numbers are flexible, at Ayr's discretion.** They are a
+starting point for balance, not a constraint. The only firm number is **1000 total.**
+
+### What follows from 89–91
+
+**The Kept is not postgame content. It is the childhood pet store inventory.**
+
+That changes the question about its size completely. It was never "how many breeds do
+we want in a collection" — it is **"how rich should the pet store be in the first
+hour"**, traded against wild animals elsewhere, because 1000 is firm.
+
+### And the breeding centre needs no species of its own
+
+It opens at end game and uses **the same animals the player met as a child.** You buy a
+pet at eight; you come back forty years later and see where it came from.
+
+**No new slots. The whole cost is the writing**, and the subject is already there:
+responsible breeding against puppy mills, and the fact that the breeds people find
+cutest — pugs, bulldogs, dachshunds, Persians — are frequently the ones that suffer
+most for it.
+
+### The Kept after the move
+
+```
+94  now
+-11  saltwater fish -> The Garden
+83  available in the childhood pet store
+```
+
+**Whether 83 stays or trims is Ayr's call**, and it is a straight trade: every breed
+kept is a wild animal not added. The surplus is dog and cat breeds — 28 dogs and 19
+cats, where the pet menu in idea 23 needs roughly nine and five.
