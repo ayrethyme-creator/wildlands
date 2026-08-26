@@ -4972,6 +4972,22 @@ change rather than a contradiction.*
   in-game years. Suggested and awaiting Ayr: **let them age** across the six life
   stages, which makes them a person rather than an easter egg.
 
+- **2026-08-26 — Prop mechanism, corrected.** There is **no toggle**. `gen_runner.py`
+  holds two prompt strings and `pick_composition(desc)` picks between them by matching
+  the species description against 19 keywords. **263 of 1009 species (26%) take the
+  prop path** — a known, listable set. Turning it off is a one-line change to that
+  function, and it **cannot** be done in the prompt, because a description reading "no
+  branch" still contains "branch".
+- **2026-08-26 — Recommended: the Ayr NPC ages past Ayr's real age.** The game asks
+  the player to live a whole life and end old; an author asking that and refusing to
+  imagine it for themselves is asking for something they will not give. The image is
+  hopeful — still there, still turning up, still watching animals. **Vanishing is the
+  one to avoid** (ambiguous, sad without earning it). Nice detail: let the NPC be
+  exactly Ayr-as-they-are at the **adult-with-power** stage, which is Ayr's real stage
+  now, so the author's-note face connects to the version the player met when they were
+  briefly the same age. **Caveat: this is personal, not design** — if Ayr does not want
+  to be depicted old, that settles it and the NPC stays an adult.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -7702,3 +7718,64 @@ are a person. If they never change, they are an easter egg.**
 
 Ageing is the more affecting version and it fits a game whose whole structure is a
 life passing. **Ayr's call.**
+
+---
+
+## THE NPC'S AGE, AND THE PROP MECHANISM CORRECTED
+
+> **Ayr, 2026-08-26.** *"I would be considered an adult with power, not an elderly
+> mentor yet. Do I stay in the late game as an adult, do I vanish, or do I make myself
+> aging to a point I haven't in real life?"* and *"What do you mean a terrain on and
+> off toggle?"*
+
+### Correction: there is no toggle
+
+I said the pipeline had a switch. **It does not.** Checked in `gen_runner.py`:
+
+- `COMPOSITION` — *"no ground, no shadow, no rocks, no props"*
+- `PROP_COMPOSITION` — *"only the minimal prop needed for the pose"*
+- `pick_composition(desc)` chooses between them by matching the species description
+  against **19 keywords**: branch, perch, web, nest, burrow, log, vine, leaf, ledge,
+  coil, coiled, wrapped, clinging, cling, gripping, grips, grip, hanging from, roost.
+
+**263 of 1009 species — 26% — take the prop path.** The set is knowable and listable.
+
+Turning props off means making `pick_composition` always return `COMPOSITION`. **One
+line.** Wrong in letter, right in effort.
+
+**And it cannot be fixed in the prompt.** A description reading *"no branch"* still
+contains "branch" and still gets the prop. It has to be the code.
+
+### The NPC's age — recommendation: age them past Ayr's real age
+
+| Option | Assessment |
+|---|---|
+| **Stay an adult throughout** | The player ages thirty-plus years and the NPC does not. That is not a person, it is a **glitch the player learns to ignore.** It also throws away the best thing about the character |
+| **Vanish in the late game** | **Avoid.** Ambiguous and sad without earning it — did they die, did they move, did something happen? The player has come to like this person and then they are simply gone. A cost with no payoff |
+| **Age past Ayr's real age** | **Recommended** |
+
+**The reason is the game itself.** This entire design asks the player to live a whole
+life — child to elder, across decades, ending old. **An author asking that of a
+player and refusing to imagine it for themselves is asking for something they will
+not give.**
+
+And the image is hopeful rather than morbid: **a future in which you are still there,
+still turning up, still watching animals.** That is the same future the game offers
+the player.
+
+### One detail that makes it land better
+
+The player's **adult-with-power** stage is Ayr's actual stage right now.
+
+So let the NPC be **younger early, exactly Ayr-as-they-are at that middle stage, and
+older after.** Then the face in the author's note connects to the version the player
+met when the two of them were, briefly, the same age.
+
+**Three or four drawn ages across six life stages** covers it. Not expensive.
+
+### And the honest caveat
+
+**This is a personal question, not a design one.** If Ayr simply does not want to see
+themselves depicted old, that is a complete reason and nothing above outweighs it.
+The fallback that costs least is then **staying an adult** — the small inconsistency
+is worth less than Ayr's comfort with their own game.
