@@ -9474,3 +9474,32 @@ I have quoted **128**, then **239**, then **181**, then **170**. All of them tre
 nowhere, which is what makes 700 + 300 = 1000 close exactly.
 
 **119 is the number.**
+
+---
+
+## THE TELLING IS 100
+
+> **Ayr, 2026-08-26.** *"Get rid of Wendigo for sure. Fairy and Cyclops."*
+
+**Out:** Wendigo · Fairy · Cyclops.
+**In:** Qilin · Thunderbird · Phoenix, which were sitting unplaced.
+
+| | |
+|---|---|
+| **Wendigo** | **Algonquian communities have asked explicitly that it not be used in entertainment.** This doc already commits to not treating living traditions as solved puzzles, and this is the entry most likely to cause real harm |
+| **Fairy** | Not a creature but a **category** spanning a thousand traditions — the one entry on the list that could mean anything. Humanoid, in a game about animals |
+| **Cyclops** | A giant man, from the most over-represented tradition on the list. Greek keeps Griffin, Chimera, Hydra, Pegasus, Sphinx, Harpy, Cerberus, Manticore and Hippocampus |
+
+**The Telling is now exactly 100.** The woolly mammoth also leaves unplaced for The
+Record, taking unplaced down to **the thirteen wardens** — which are cut from this game
+and go nowhere.
+
+### Two notes for whoever writes these entries
+
+**Firebird and Phoenix are both in.** They are the same creature in different
+traditions, and so are Bennu, Fenghuang and Simurgh. **Five firebirds is fine if each
+entry says what its own tradition does with it** — and dull if they do not.
+
+**Chinese is now the heaviest tradition** at roughly ten of the hundred: Qinglong,
+Baihu, Xuanwu, Fenghuang, Bixi, Pixiu, Nian, Taotie, Sha and Qilin. Worth knowing when
+the twelve mythology quests are assigned, since only one of them can be Chinese.

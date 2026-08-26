@@ -59,3 +59,14 @@ new>breeding=Domestic Fox|Bred Axolotl
 
 ! --- Ayr's picks, 2026-08-26. Fourteen, taking the Breeding Centre to exactly 50.
 new>breeding=Fancy Pigeon|Silkworm|English Budgie|Angora Rabbit|Ball Python Morph|Anatolian Shepherd|Manx|Munchkin|Cornish Rex|Burmese|Egyptian Mau|American Curl|French Bulldog|Bull Terrier
+
+! --- Ayr, 2026-08-26. Three out of The Telling to make room for Qilin, Thunderbird
+! --- and Phoenix, which are genuine folklore and were sitting unplaced.
+! --- Wendigo: Algonquian communities have asked explicitly that it not be used in
+! ---   entertainment, and this doc already commits to consultation on living traditions.
+! --- Fairy: not a creature but a category spanning a thousand traditions, and humanoid.
+! --- Cyclops: a giant man, in a game about animals, from the most over-represented
+! ---   tradition on the list.
+mythic>cut=Wendigo|Fairy|Cyclops
+unplaced>mythic=Qilin|Thunderbird|Phoenix
+unplaced>fossil=Woolly Mammoth
