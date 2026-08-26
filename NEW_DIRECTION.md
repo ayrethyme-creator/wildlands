@@ -4941,6 +4941,23 @@ change rather than a contradiction.*
   Alone** (2014), whose documentary interludes with Iñupiat elders are consistently
   named the best part of it.
 
+- **2026-08-26 — Idea 83: Ayr as a character.** Suggested shape is a **minor
+  recurring background NPC** who then turns out to be the face in the author's note
+  — the reveal being *the person who kept showing up made all of this*, which is
+  quieter and better than making them the mentor. The mentor and parent roles fuse
+  with characters the design already has; the never-seen funder gives the ending
+  nothing to connect to. **Ayr's call — taste, not design.**
+- **2026-08-26 — Sprite props will break HD-2D billboards, and the fix is free.**
+  Ayr spotted that some sprites carry baked-in ground, sticks and leaves. Verified:
+  all 1001 are 256x256 RGBA cut-outs on transparency, no painted backgrounds, but the
+  generator added props by keyword match on **branch/perch/leaf/burrow**. Billboarding
+  would **swivel the leaf to face the camera**, the animal could not walk without
+  dragging it, and its baked lighting would not match the 3D scene. **But the prop is
+  right for a codex plate and wrong only for a game billboard.** Recommendation:
+  **treat the current 1001 as the finished codex plates**, and make game sprites a
+  separate later pass — higher resolution, no props, built for animation. Costs
+  nothing now and wastes none of the existing work.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -7496,3 +7513,122 @@ sound like the doc, not like a trailer.**
 - **The codex gains a sixth job:** *about this game* — the author's note, permanently
   available.
 - **The ending has a shape now**, which it did not before.
+
+---
+
+## AYR AS A CHARACTER IN THE GAME
+
+> **Ayr, 2026-08-26.** *"Maybe I become an avatar, a person who shows up in the game
+> as an NPC. Like a constant easter egg. Or, I could be someone more important... the
+> funder of the main character you only ever hear the name of or see very briefly,
+> the mentor, the parent..."*
+
+**83.** Recorded. This pairs with idea 82 rather than competing with it, **if the
+role stays small.**
+
+### The version that uses both ideas at once
+
+**A minor recurring NPC — and then their face in the author's note at the end.**
+
+Someone who turns up across the regions and the years. Not a quest giver, not
+important, just there: at the fence when you are a child, at a different centre when
+you are a teen, in the background of a conservancy meeting thirty years later.
+
+**And then the game ends, and it is them speaking to camera.**
+
+The reveal is not *"the mentor was the author"* — it is quieter and better than that:
+**the person who kept showing up was the person who made all of this.** It rewards
+attention, it costs almost nothing, and it makes the author's note land as a payoff
+rather than an epilogue.
+
+### The bigger roles, honestly assessed
+
+| Role | The problem with it |
+|---|---|
+| **The mentor** | **The design already has a mentor**, from round two. Making that character the author fuses two jobs and makes the most emotionally loaded relationship in the game a self-portrait |
+| **The parent** | Same, more so |
+| **The funder, only ever named** | Interesting and understated — **but if the player never sees them, the reveal at the end has nothing to connect to.** The idea's power is recognition, and recognition needs a face |
+
+**Suggested: the recurring background figure.** It is the only version where the two
+ideas strengthen each other instead of one swallowing the other. **Ayr's call, and
+this is a taste question, not a design one.**
+
+---
+
+# THE PROP PROBLEM IN THE SPRITES
+
+> **Ayr, 2026-08-26.** *"Some of the art has environment and others do not. Ground,
+> sticks, plants. Does that mess with animating for the actual game?"*
+
+**Yes, and Ayr spotted it before it cost anything.**
+
+## What the files actually are
+
+Checked directly, not assumed. All **1001 sprites** are **256×256 RGBA**, cut out on
+transparency, with nothing touching the bottom edge and subject coverage between 12%
+and 46%.
+
+So there is no painted background anywhere. **The environment is baked into the
+subject** — the kestrel is a clean cut-out, the jewel beetle is standing on a leaf
+that is part of the same image.
+
+This was deliberate: the generator adds props by keyword, matching **branch, perch,
+leaf, burrow** in the prompt. That is why birds got perches and insects got leaves.
+
+## Why it breaks an HD-2D game sprite
+
+HD-2D means the animal is a **2D sprite billboarded inside a lit 3D scene** — it
+turns to face the camera as you move around it.
+
+| Problem | What the player sees |
+|---|---|
+| **Billboarding turns the prop too** | Walk around the beetle and **the leaf swivels to follow you.** Animals turning to face the camera reads fine; ground turning to face the camera does not |
+| **The animal cannot move** | A beetle welded to a leaf slides the leaf along with it in any walk cycle |
+| **Lighting will not match** | The scene has a real sun and real shadows. The painted leaf has baked lighting pointing somewhere else, and receives no shadow |
+| **It intersects the real ground** | You place the sprite on actual 3D terrain and a painted leaf floats through it |
+| **Two scales of the same object** | The painted leaf is sized to the beetle. The scene's real foliage has its own size. Both are on screen at once |
+
+## But it is only a problem for one of the two uses
+
+**The prop is wrong for a game billboard and right for a field guide plate.**
+
+A natural history illustration *should* show the animal in context — perched, on a
+leaf, at a burrow mouth. That is what those plates are for, and the beetle on its
+leaf is a better codex image than the beetle alone.
+
+**So the answer is two assets, not one fixed asset:**
+
+| Use | Prop |
+|---|---|
+| **Codex / field guide plate** | **Keep it.** It is better with it |
+| **In-game billboard** | **Removed** |
+
+## The affected set is knowable, not a mystery
+
+The generator chose props by keyword match. **So the sprites carrying props are
+exactly the ones whose prompts contained branch, perch, leaf or burrow** — findable
+from the generation records rather than by inspecting a thousand images by eye.
+
+Three ways to fix them, cheapest first:
+
+1. **Regenerate the affected set with props off.** The pipeline already has the
+   switch; this is a batch, and batches on this project run at hundreds per day.
+2. **Mask the props out** of the existing files. Faster still where the prop is
+   cleanly separated, fiddly where a foot rests on it.
+3. **Leave them** and accept the artefact. Not recommended — swivelling ground is
+   the kind of thing a player notices immediately and cannot un-see.
+
+## The larger question underneath, and a recommendation
+
+**256×256 is small for HD-2D**, and these sprites are **single static frames.** A
+game sprite needs to be larger and to have motion.
+
+There is also already a known plan to restyle the first ~293 painted-style species
+once the current pass finishes.
+
+**Suggest treating the current 1001 as the codex plates** — finished, valuable, and
+exactly what a field guide needs — **and treating game sprites as a separate later
+pass** at higher resolution, without props, built for animation.
+
+That costs nothing today, it means none of the existing work is wasted or blocked,
+and it stops the prop question from being a problem at all. **Ayr's call.**
