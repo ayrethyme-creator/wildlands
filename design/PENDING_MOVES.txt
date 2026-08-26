@@ -56,3 +56,6 @@ farmland>merged=Alpaca
 
 ! --- Ayr, 2026-08-26. The Breeding Centre goes to 50. Two named directly.
 new>breeding=Domestic Fox|Bred Axolotl
+
+! --- Ayr's picks, 2026-08-26. Fourteen, taking the Breeding Centre to exactly 50.
+new>breeding=Fancy Pigeon|Silkworm|English Budgie|Angora Rabbit|Ball Python Morph|Anatolian Shepherd|Manx|Munchkin|Cornish Rex|Burmese|Egyptian Mau|American Curl|French Bulldog|Bull Terrier

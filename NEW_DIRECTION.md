@@ -9379,9 +9379,30 @@ two places, and the difference between them is the whole point.**
 | **Egyptian Mau** | The only naturally spotted domestic cat |
 | **American Curl** | Ears that curl backwards, from one stray in 1981 |
 
-### 36 + 12 + 14 = 62 — twelve more than needed
+### CHOSEN — Ayr, 2026-08-26. The Breeding Centre is 50.
 
-**Deliberately.** Ayr picks fourteen and the rest fall away. If it helps, the ones I
-would keep first are **fancy pigeon, silkworm, English budgie, angora rabbit, ball
-python morph and Anatolian Shepherd** — each carries a fact the breeding centre exists
-to tell.
+**Fancy Pigeon · Silkworm · English Budgie · Angora Rabbit · Ball Python Morph ·
+Anatolian Shepherd · Manx · Munchkin · Cornish Rex · Burmese · Egyptian Mau ·
+American Curl · French Bulldog · Bull Terrier**
+
+```
+34  before
++2  domestic fox, bred axolotl
++14 chosen above
+50
+```
+
+### What the chosen fifty add up to
+
+The set divides into two halves that do different jobs, and the split was not planned:
+
+**Six carry the science and the history.** The fancy pigeon is Darwin's own evidence.
+The silkworm is total dependence. The English budgie is a controlled comparison against
+a wild bird already in the game. The domestic fox is domestication observed in real
+time. The angora rabbit and the ball python morph are the modern trade.
+
+**Eight carry the welfare argument, and they do it without a word of commentary** —
+the **Manx** and its spine, the **Munchkin** and its legs, the **French Bulldog** and
+its airway, the **Bull Terrier** and its skull. Put those beside the Anatolian
+Shepherd, a working dog bred for a job it still does, and the breeding centre makes its
+case by arrangement rather than by lecture.
