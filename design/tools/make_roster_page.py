@@ -15,18 +15,28 @@ for line in io.open('design/GROUND_TRUTH.txt', encoding='utf-8'):
     d[k] = sorted(v.split('|'))
 
 # Apply design decisions not yet in the game data.
-pending = {}
+pending, renames = {}, {}
 try:
     for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
         line = line.rstrip('\n')
         if not line or line.startswith('!'):
             continue
         route, names = line.split('=', 1)
+        if route == 'RENAME':
+            for pair in names.split('|'):
+                a, b = pair.split('::')
+                renames[a] = b
+            continue
         src, dst = route.split('>')
         for n in names.split('|'):
             pending[n] = (src, dst)
 except IOError:
     pass
+# renames apply first, so any later move refers to the new name
+for k in d:
+    d[k] = [renames.get(x, x) for x in d[k]]
+pending = {renames.get(k, k): v for k, v in pending.items()}
+RENAMED = set(renames.values())
 TOCREATE = set()
 for n, (src, dst) in pending.items():
     if src == 'new':                      # does not exist in the DEX at all
@@ -65,7 +75,7 @@ real = tot - len(TOCREATE)
 def sec(key, name, sub, kind):
     n = d[key]
     items = ''.join('<li class="n%s">%s</li>'
-                    % (' make' if x in TOCREATE else ' pend' if x in PENDING
+                    % (' make' if x in TOCREATE else ' pend' if x in PENDING or x in RENAMED
                        else '', html.escape(x)) for x in n)
     return ('<section class="grp" id="%s" data-kind="%s"><header>'
             '<h2>%s</h2><p class="sub">%s</p>'

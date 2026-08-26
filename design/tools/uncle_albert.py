@@ -30,16 +30,24 @@ def load():
             continue
         k, v = line.split('=', 1)
         d[k] = list(v.split('|'))
-    pend, order = {}, []
+    pend, order, renames = {}, [], {}
     for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
         line = line.rstrip('\n')
         if not line or line.startswith('!'):
             continue
         route, names = line.split('=', 1)
+        if route == 'RENAME':
+            for pair in names.split('|'):
+                a, b = pair.split('::')
+                renames[a] = b
+            continue
         s, t = route.split('>')
         for n in names.split('|'):
             pend[n] = (s, t)
             order.append(n)
+    for k in d:
+        d[k] = [renames.get(x, x) for x in d[k]]
+    pend = {renames.get(k, k): v for k, v in pend.items()}
     made = set()
     for n, (s, t) in pend.items():
         if s == 'new':

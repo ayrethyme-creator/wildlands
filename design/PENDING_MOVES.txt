@@ -164,3 +164,25 @@ new>polar=Antarctic Icefish|Colossal Squid|Collared Lemming|Antarctic Sea Spider
 ! THE DIVIDE - 15. Snow Leopard and Ibex already exist; the mountain gorilla moved to
 ! rainforest and was replaced by the Tibetan antelope, already added.
 new>alpine=White-rumped Vulture|Bar-headed Goose|Lammergeier|Alpine Chough|Wallcreeper|Himalayan Monal|Argali|Chamois|Mountain Goat|Kiang|Rock Hyrax|Alpine Salamander|Apollo Butterfly|Woolly Flying Squirrel|Himalayan Jumping Spider
+
+! ============================================================================
+! SPECIES AUDIT - section 1, "not an animal at all". All four, Ayr 2026-08-26.
+! RENAME lines use  RENAME=Old Name::New Name|Old::New
+! ============================================================================
+
+! Firehawk is not a species. Three unrelated Australian raptors are documented
+! carrying burning sticks to spread fire - black kite, whistling kite, brown falcon.
+! The black kite is the best documented and the most widespread.
+RENAME=Firehawk::Black Kite|Maned Lion::Lion
+
+! Lioness and Maned Lion are a SEX, listed twice, for one species. One entry: Lion.
+! Male and female become an appearance state, the same way the House Cat coats do.
+savanna>cut=Lioness
+
+! Mole-Rat Queen is a CASTE, not a species - and the roster has it backwards. The
+! species "Naked Mole-Rat" is filed as a life stage while the queen sits in savanna
+! as though she were the animal. Swapped: the species goes to savanna, the queen
+! becomes a life stage of it. She earns it - a naked mole-rat queen grows extra
+! vertebrae when she becomes queen, which no other mammal does.
+lifestage>savanna=Naked Mole-Rat
+savanna>lifestage=Mole-Rat Queen

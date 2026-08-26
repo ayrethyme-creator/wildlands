@@ -9756,3 +9756,32 @@ Several of the deep-sea additions are **generic names** — Siphonophore, Comb J
 Lobster, Sea Lily, Glass Squid, Vent Shrimp, Deep-sea Barnacle, Bamboo Coral, Vent
 Mussel. They are on the `SPECIES_AUDIT.md` list and need naming to a real species, along
 with the ~100 already there.
+
+---
+
+## SPECIES AUDIT SECTION 1 IS DONE
+
+> **Ayr, 2026-08-26.** *"Commit all 4 of your suggestions for the section not an animal at
+> all."*
+
+| Was | Now |
+|---|---|
+| **Firehawk** | **Black Kite.** Three unrelated Australian raptors are documented carrying burning sticks to spread fire — black kite, whistling kite, brown falcon. The black kite is the best documented and the most widespread |
+| **Lioness** + **Maned Lion** | **One entry: Lion.** They were a sex, listed twice. Male and female become an appearance state, the same way the House Cat coats do |
+| **Mole-Rat Queen** | **Naked Mole-Rat**, with the queen as a life stage of it. The roster had it backwards — the species was filed as a life stage while the caste sat in savanna as though it were the animal. **She earns the life stage: a naked mole-rat queen grows extra vertebrae on becoming queen, which no other mammal does** |
+
+**Savanna 76 → 75.** Uncle Albert passes.
+
+### `PENDING_MOVES.txt` now supports renames
+
+`RENAME=Old Name::New Name|Old::New`, applied before any move, so later lines refer to
+the new name. Both tools handle it.
+
+### Remaining on the audit list
+
+```
+ 0  not an animal        DONE
+11  redundant pairs
+~85 a group, not a species
+ 7  wrong biome
+```

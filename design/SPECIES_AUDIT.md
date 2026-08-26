@@ -12,7 +12,7 @@ all 528 animals; it is every error I can identify with confidence.
 
 ---
 
-## 1. NOT AN ANIMAL AT ALL — 4 entries
+## 1. NOT AN ANIMAL AT ALL — 4 entries  ✅ ALL FOUR APPLIED 2026-08-26
 
 | Entry | Problem | Fix |
 |---|---|---|
