@@ -5021,6 +5021,28 @@ change rather than a contradiction.*
   years are where they learn why that was a problem), whether the pet dies later, and
   what happens if the first rescue fails.
 
+- **2026-08-26 — Idea 85: the opening, in Ayr's order.** Supersedes my sequence.
+  **Title + hook scene → choose and name the pet → design the child and choose your
+  name → the first scene is the two of you meeting → the codex opens on your pet AND
+  the ones you did not choose → then the house and the interface.** Pet-before-self is
+  a statement about what the game is, made structurally in ninety seconds. **The codex
+  showing unchosen pets is the strongest detail** — it establishes in five minutes that
+  the codex is a reference that already knows things, not a log of your own experience.
+  Naming the pet instantly also sets up idea 75 to land later: the game lets the player
+  do the easy thing first and explains it afterwards.
+- **2026-08-26 — Appearance changes at every life stage, gender included.** Ayr's
+  requirement: new choices each stage, **gender change available at every one, present
+  but not announced** — same list as hair and clothing, no ceremony, no confirmation,
+  no NPC ever remarking on it. Player chooses their name. **Cost flagged:** six life
+  stages x options x animation states multiplies fast, so the character must be built
+  as a **layered/modular sprite** rather than baked variants — and that decision has to
+  be made before the first character art is drawn.
+- **2026-08-26 — Hook scene proposed: a release.** Hands opening a crate, an animal
+  going, someone watching and not following, with no context at all. The last beat of
+  the game shown as the first. Alternatives recorded: a signature ability ("wait, is
+  that true?") and a child at a fence ("how do I get in there?"). Suggest the release
+  first and the fence as the second scene, since they are the two ends of the game.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8012,3 +8034,123 @@ to do.
   the adult stages. That is real and it is heavy. **Ayr's decision.**
 - **What happens if the rescued animal does not make it?** A first rescue that fails
   is also real, and it is the earliest place mortality could enter the game.
+
+---
+
+# THE OPENING — CORRECTED AND SEQUENCED
+
+> **Ayr, 2026-08-26.** Corrections to the sequence proposed above. **This supersedes
+> it.**
+
+**85. The opening, in Ayr's order:**
+
+```
+1  TITLE + HOOK SCENE      enticing, strong music, leaves the player with questions
+2  CHOOSE THE PET          customisable, detailed, and you name it
+3  DESIGN THE CHILD        your own appearance, and your name
+4  FIRST SCENE             the player character and the pet meeting, interacting
+5  THE CODEX OPENS         your pet's entry, AND the pets you did not choose
+6  THE HOUSE               your room, then walk out, learn the interface
+```
+
+## Why pet-before-self is the right order, and I had it backwards
+
+I had the pet arriving after the world. **Choosing the animal before choosing
+yourself is a statement about what this game is**, made in the first ninety seconds,
+and made by the structure rather than by dialogue.
+
+Almost every game opens by asking who *you* are. This one asks who you are **second**.
+
+## The codex showing the pets you did not choose
+
+**This is the strongest single detail in the sequence.**
+
+It establishes in the first five minutes that **the codex is not a log of your own
+experience — it is a reference that already knows things.** That is exactly what it
+has to be for the remaining fifty hours, and teaching it here costs nothing.
+
+It also plants the first curiosity of the game: **you can see what you did not
+take.** A player learns immediately that this book is bigger than they are.
+
+## Naming the pet, and why it pays off later
+
+The player names the pet instantly, without thinking, because that is what you do
+with a pet.
+
+**Then idea 75 arrives much later:** releasable animals get numbers, and naming is a
+decision with a consequence. **The game let the player do the easy thing first, and
+explains it afterwards** — which is a far better lesson than a rule stated up front.
+
+The rescued wild animal in the same childhood then sits in between, which is where
+the question first becomes real.
+
+## Appearance, across the whole life
+
+Ayr's requirement, recorded exactly:
+
+- **Every life stage presents new appearance choices.** People do change how they
+  look across a life; making the player re-choose at each stage makes each one feel
+  like a beginning rather than a stat increase.
+- **Gender change is an option at every stage.** *Not stated loudly, but present.*
+  Design consequence: it sits in the same list as hair and clothing, with **no
+  ceremony, no confirmation dialogue, no achievement, and no NPC ever remarking on
+  it.** It is simply one of the options, at every stage, the same as the others.
+- **The player chooses their name.**
+
+### The cost, honestly
+
+The player character is a sprite that has to exist at **six life stages × the
+appearance options × every animation state.** That multiplies faster than any other
+art in the game.
+
+**The standard answer is a layered/modular character** — one body rig per life stage,
+with hair, clothing and features as swappable layers rather than baked-in variants.
+It is more setup and far less total art, and it is the only approach that makes
+"change your appearance at every stage" affordable. **Flagged now because it is a
+decision that has to be made before the first character sprite is drawn**, not after.
+
+## The hook scene — three options
+
+Ayr's brief: *enticing, good music, makes the player have questions they want answers
+to.*
+
+The reliable mechanism is **showing something you cannot yet explain, that pays off
+later.**
+
+### A — A release *(recommended)*
+Hands opening a crate. An animal going. Someone watching it leave, and not following.
+
+**No context: who, where, why, what happened before.** It is the last beat of the
+entire game shown as the first, and it is the game's whole thesis before the player
+can possibly understand it. When they finally do it themselves, thirty hours in, they
+recognise the shot.
+
+### B — A signature ability
+Something that looks impossible and is real — a margay running head-first down a
+trunk, a scorpion lighting up under UV, an octopus becoming a rock.
+
+**Question generated: "wait, is that true?"** Which is the exact habit the game
+exists to build. Cheaper than A and it sells the collection immediately.
+
+### C — The fence
+A child's hands on a wire fence, an adult inside doing something with an animal, and
+the child not allowed in.
+
+**Question generated: "how do I get in there?"** — which is literally the whole
+career arc. The most thematically precise and the least spectacular.
+
+**Suggest A, with C as the second scene rather than an alternative.** They are the
+two ends of the game and they would rhyme.
+
+## Music
+
+Already flagged by Ayr as important. **The hook scene is the one place where the
+music does the work rather than supports it** — no dialogue, no UI, no explanation.
+Worth treating as a piece to be written first rather than last.
+
+## What this changes upstream
+
+The earlier sequence had **look at the world** as beat one. It is now beat six, and
+the tutorial for the interface rather than the emotional opening. **Everything after
+the house is unchanged** — the pet, the rescue you cannot fix, the mentor, watching
+from the fence, and the animal that comes back partly.
