@@ -16,4 +16,11 @@ kept>reef=Banggai Cardinalfish|Blue Tang|Blue-Green Chromis|Copperband Butterfly
 ! --- breeding centre, which is its own group and separate from The Kept. It holds 47.
 ! --- The Kept keeps the small childhood pet store: freshwater fish, small pets, farm
 ! --- animals and the canary.
-kept>breeding=Akita|Alaskan Malamute|Australian Shepherd|Beagle|Bernese Mountain Dog|Border Collie|Bulldog|Chihuahua|Corgi|Dachshund|Dalmatian|Dogue de Bordeaux|Farm Dog|German Shepherd|Golden Retriever|Great Dane|Greyhound|Jack Russell|Labrador|Poodle|Pug|Puppy|Rottweiler|Saint Bernard|Samoyed|Shiba Inu|Siberian Husky|Wolfdog|Abyssinian|Bengal|Black Cat|British Shorthair|Calico Cat|Devon Rex|House Cat|Maine Coon|Norwegian Forest Cat|Oriental Shorthair|Persian|Ragdoll|Russian Blue|Savannah Cat|Scottish Fold|Siamese|Sphynx|Tabby Cat|Turkish Van
+kept>breeding=Akita|Alaskan Malamute|Australian Shepherd|Beagle|Bernese Mountain Dog|Border Collie|Bulldog|Dalmatian|Dogue de Bordeaux|Great Dane|Greyhound|Jack Russell|Labrador|Poodle|Rottweiler|Saint Bernard|Samoyed|Shiba Inu|Wolfdog|Abyssinian|Bengal|British Shorthair|Devon Rex|Maine Coon|Norwegian Forest Cat|Oriental Shorthair|Persian|Ragdoll|Russian Blue|Savannah Cat|Scottish Fold|Siamese|Sphynx|Turkish Van
+
+! --- Ayr, 2026-08-26, ideas 93-99. The child can buy nine dog breeds and a house cat,
+! --- so those stay in the pet store rather than the end-game breeding centre. Tabby,
+! --- calico and black become COSMETIC coat options on House Cat, not species. Farm Dog
+! --- is replaced by Mutt. Puppy and Kitten are life stages.
+! --- Still to create: Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise,
+! --- Parakeet, Kitten.

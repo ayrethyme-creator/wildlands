@@ -9143,3 +9143,104 @@ most for it.
 **Whether 83 stays or trims is Ayr's call**, and it is a straight trade: every breed
 kept is a wild animal not added. The surplus is dog and cat breeds — 28 dogs and 19
 cats, where the pet menu in idea 23 needs roughly nine and five.
+
+---
+
+## THE PET SYSTEM — DESIGNED
+
+> **Ayr, 2026-08-26.** Ideas 93–99, replacing the sketch in ideas 23 and 24.
+
+### 93. The cat is one species with cosmetic variants, and it starts as a kitten
+
+**One entry: House Cat.** Long hair, short hair and hairless become **cosmetic
+choices on the same animal**, not separate species — and it arrives as a **kitten**.
+
+That frees the eighteen named cat breeds to sit where Ayr put them: the end-game
+breeding centre. **Tabby, calico and black stop being species and become coat
+options.**
+
+### 94. Dogs stay small / medium / large, three each
+
+| Size | Options |
+|---|---|
+| **Small** | Chihuahua · Dachshund · Pug |
+| **Medium** | Corgi · **Mutt** *(new)* · **Pit Bull** *(new)* |
+| **Large** | Siberian Husky · Golden Retriever · German Shepherd |
+
+**Basset hound is dropped. Mutt replaces Farm Dog** — a mutt is the honest generic
+dog, "farm dog" is a job rather than a breed, and **most dogs in the world, and most
+dogs in shelters, are mutts.**
+
+### 95. The three reptiles get created
+
+Snake, bearded dragon and tortoise. Suggested species: **corn snake** (the standard
+beginner snake), **bearded dragon**, and a **Russian tortoise** — the pet tortoise
+that does not reach 45 kg, unlike the sulcata already in the desert.
+
+### 96. Parakeet moves to the child list
+
+### 97. Farm animals are no longer a teen pet option
+
+They stay in the game and in the town; a teenager simply does not choose one as their
+animal.
+
+### 98. Most teen animals come from the wild
+
+| Teen option | Where it comes from |
+|---|---|
+| **Rescued macaw** | The wild macaws already in The Canopy |
+| **Rescued cockatoo** | The wild cockatoos already in The Canopy and The Weald |
+| **Chinchilla** | The wild one in The Divide |
+| **Hermit crab** | The wild one in The Strand — **and also stocked in the teen pet store** |
+| **Ferret** | **Pet Ferret already exists** in the roster |
+| **Freshwater fish** | Teen pet store only |
+| **Eels** | **Cut.** |
+
+### 99. The axolotl is in the wild *and* in the breeding centre
+
+Ayr's instruction, and it is exactly right — **the axolotl is functionally extinct in
+the wild while hundreds of thousands live in tanks.** Putting it in both places makes
+that paradox literal instead of explaining it. It also keeps its required place in On
+the Brink.
+
+## The Kept lands on 50 exactly
+
+| | |
+|---|---|
+| House Cat | 1 |
+| Dogs | 9 |
+| Reptiles | 3 |
+| Freshwater fish | 14 |
+| Small pets | 8 |
+| Parakeet | 1 |
+| Canary | 1 |
+| Farm animals | 13 |
+| **Total** | **50** |
+
+### What needs creating — seven
+
+**Mutt · Pit Bull · Corn Snake · Bearded Dragon · Russian Tortoise · Parakeet ·
+Kitten** *(a life stage, like the Puppy that already exists)*
+
+### And the Breeding Centre drops to 34
+
+47, less the nine dogs a child can buy, less House Cat, less Farm Dog, less Puppy,
+less tabby/calico/black which become coat options.
+
+**34 is not round.** It tops to 50 with sixteen more real breeds — there is no shortage
+of them — or it stays at 34. **Ayr's call.**
+
+### Where the numbers stand today versus the target
+
+The published list shows **The Kept 49** and **the Breeding Centre 34**, because the
+six new species do not exist yet and the three coat colours are still separate
+entries. The path to 50:
+
+```
+49  today
+-3  tabby, calico, black -> coat options on House Cat
+-1  Farm Dog -> replaced by Mutt
+-1  Puppy -> reclassified as a life stage
++6  Mutt, Pit Bull, Corn Snake, Bearded Dragon, Russian Tortoise, Parakeet
+50
+```
