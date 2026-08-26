@@ -53,3 +53,6 @@ new>desert=Tarantula
 ! --- merge into one entry, keeping the Kept row and dropping the farmland one.
 farmland>kept=Llama
 farmland>merged=Alpaca
+
+! --- Ayr, 2026-08-26. The Breeding Centre goes to 50. Two named directly.
+new>breeding=Domestic Fox|Bred Axolotl

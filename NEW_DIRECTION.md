@@ -9313,3 +9313,75 @@ alpaca, +6 pet species, +2 gopher and tarantula = **+3**.
 
 Those three come out of the 170 still to be added, not out of the 1000. **The total
 stays firm.**
+
+---
+
+## FILLING THE BREEDING CENTRE TO 50
+
+> **Ayr, 2026-08-26.** *"Add axolotl. Add domestic fox. Make some suggestions for bred
+> animals that aren't dogs, cats, or common farm animals. Then suggest more cat and dog
+> breeds."*
+
+**34 + domestic fox + bred axolotl = 36. Fourteen to find.**
+
+### Ayr's two, and why they are strong picks
+
+**Domestic fox** is the single most important domestication experiment ever run.
+Beginning in 1959, Dmitri Belyaev selected silver foxes for one trait — tameness — and
+within a few generations got **floppy ears, curly tails, piebald coats and shortened
+muzzles nobody selected for.** That cluster is called domestication syndrome, and it is
+the closest thing to watching a dog being made.
+
+**Bred axolotl** is the other half of idea 99. The wild axolotl is in On the Brink; the
+leucistic and albino strains in tanks worldwide are a bred animal. **The same species in
+two places, and the difference between them is the whole point.**
+
+### Bred animals that are not dogs, cats or farm animals — twelve suggested
+
+| Species | Why it earns a slot |
+|---|---|
+| **Fancy pigeon** | **Darwin bred these himself**, and used them in *On the Origin of Species* as his opening proof of artificial selection. Pouters, fantails, tumblers — all one species. The most historically important bred animal there is |
+| **Silkworm** | **Completely dependent on humans.** After 5,000 years of breeding it cannot fly and cannot survive without being fed. It no longer exists in the wild in any form |
+| **English budgie** | The show form, **beside the wild budgie already in The Dry.** Twice the size, half the lifespan. The clearest before-and-after in the game |
+| **Angora rabbit** | Bred purely for wool, and it **cannot shed** — an unsheared angora dies of its own coat |
+| **Flemish Giant rabbit** | Bred to the size of a dog |
+| **Skinny pig** | A hairless guinea pig. Bred for looks, and it needs supplementary heat to live |
+| **Peruvian guinea pig** | Hair that grows past 50 cm and drags |
+| **Ball python morph** | The modern reptile trade — **hundreds of colour morphs**, some carrying neurological defects that came with the colour |
+| **Silkie chicken** | Black skin, black bones, fur-like feathers, and it cannot fly |
+| **Roller canary** | **Bred for its song rather than its appearance** — judged with the bird out of sight |
+| **Falabella** | The smallest horse in the world, bred down to under 80 cm |
+| **Laboratory mouse** | The most-used animal in the history of science, and a genuinely bred strain |
+
+### More cat and dog breeds — fourteen suggested
+
+**Dogs**
+
+| Breed | Why |
+|---|---|
+| **Anatolian Shepherd** | **The dog in the savanna cheetah quest.** It is already in the game's story and not in its roster |
+| **French Bulldog** | The most popular dog in several countries and one of the least able to breathe |
+| **Basset Hound** | Dropped from the pet menu, belongs here |
+| **Shar Pei** | Skin folds bred to the point of eye and infection problems |
+| **Basenji** | Ancient African, and **it cannot bark** |
+| **Xoloitzcuintli** | Mexican hairless, pre-Columbian, older than most European breeds |
+| **Afghan Hound** | Ancient sighthound |
+| **Bull Terrier** | The skull shape was bred, not inherited |
+
+**Cats**
+
+| Breed | Why |
+|---|---|
+| **Manx** | Taillessness comes from a gene that can also shorten the spine — **Manx syndrome** |
+| **Munchkin** | Short legs, and the most contested breed in the cat fancy |
+| **Cornish Rex** | Curled coat from a single 1950 farm kitten |
+| **Burmese** | |
+| **Egyptian Mau** | The only naturally spotted domestic cat |
+| **American Curl** | Ears that curl backwards, from one stray in 1981 |
+
+### 36 + 12 + 14 = 62 — twelve more than needed
+
+**Deliberately.** Ayr picks fourteen and the rest fall away. If it helps, the ones I
+would keep first are **fancy pigeon, silkworm, English budgie, angora rabbit, ball
+python morph and Anatolian Shepherd** — each carries a fact the breeding centre exists
+to tell.
