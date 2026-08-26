@@ -5075,6 +5075,22 @@ change rather than a contradiction.*
   approximate (~8) from a keyword scan, which is why the new-species total reads 128
   in one place and 129 in another.
 
+- **2026-08-26 — AUDIT: 23 of the 48 quest animals are not in the roster.** The
+  quests were picked against real conservation history, not against the species list.
+  **This is good news** — 23 of the 128 new species are therefore not a choice. It
+  shifts four biomes I had listed as needing nothing (forest +3, wetland +1, coast +1,
+  farmland +2) and takes the deep sea batch from 42 to **44** (sixgill shark and orange
+  roughy were in neither list).
+- **2026-08-26 — Little blue penguin added to THE STRAND, not polar.** Ayr's request.
+  It lives in New Zealand and southern Australia and nests in burrows on temperate
+  coast; it quietly teaches that most penguins do not live on ice. Coast → 55.
+- **2026-08-26 — Correction: the Pyrenean ibex is already in the Vigil.** It was wrongly
+  proposed on 2026-08-25 as a new addition. **Replaced with the Yangtze paddlefish**,
+  declared extinct 2020, up to seven metres, gone inside one human lifetime.
+- **2026-08-26 — THE DIVIDE: 19 proposed**, of which 4 are quest animals (snow leopard,
+  white-rumped vulture, Alpine ibex, mountain gorilla) and 15 are altitude specialists.
+  Mountains reaches 53.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8411,3 +8427,95 @@ Deep sea's current count is **approximate (~8)**, taken from a keyword scan rath
 than a proper classification. **Everything else here is exact**; this one should be
 confirmed before the totals are treated as final, and it is the reason the new-species
 figure reads 128 in one place and 129 in another.
+
+---
+
+## AUDIT: 23 OF THE 48 QUEST ANIMALS DO NOT EXIST YET
+
+> **2026-08-26.** Found while checking mountain candidates for duplicates.
+
+The 48 campaign quests were picked on 2026-08-25 against real conservation stories,
+not against the roster. **Checked now, and 23 of the 48 animals are not in it.**
+
+| Biome | Missing quest animals |
+|---|---|
+| **Forest** | red deer · Iberian lynx · northern spotted owl |
+| **Wetlands** | sandhill crane |
+| **Coast** | loggerhead turtle |
+| **Reef** | staghorn coral · humphead wrasse |
+| **Open ocean** | bluefin tuna |
+| **Deep sea** | bluntnose sixgill shark · orange roughy |
+| **Desert** | desert tortoise · fennec fox · dorcas gazelle |
+| **Mountains** | snow leopard · white-rumped vulture · Alpine ibex · mountain gorilla |
+| **Farmland** | hedgehog · black-tailed godwit |
+| **Savanna** | gemsbok *(already recorded)* |
+
+**This is good news, not bad.** It means **23 of the 128 new species are not a
+choice** — the campaign requires them, and they were going to be needed whatever
+else got picked.
+
+### The allocation shifts slightly again
+
+Four biomes I had listed as needing nothing now need a few, because their quests do:
+
+| Biome | Was | Now | Why |
+|---|---|---|---|
+| Forest | 64, +0 | **67, +3** | red deer, Iberian lynx, spotted owl |
+| Wetland | 58, +0 | **59, +1** | sandhill crane |
+| Coast | 53, +0 | **54, +1** | loggerhead |
+| Farmland | 55, +0 | **57, +2** | hedgehog, black-tailed godwit |
+
+And **the deep sea batch goes from 42 to 44** — sixgill shark and orange roughy were
+named as quest animals and proposed in neither list.
+
+**Plus the little blue penguin**, which Ayr asked for: it lives in New Zealand and
+southern Australia, nests in burrows on temperate coast, and is **not a polar
+animal** — so it goes to **The Strand**, taking coast to 55.
+
+### And one correction to the Vigil additions
+
+**The Pyrenean ibex is already in the roster**, in the Vigil. It was proposed on
+2026-08-25 as one of six historical extinctions to add, and that was wrong.
+
+**Replacement: the Yangtze paddlefish**, declared extinct in 2020. Up to seven metres
+long, one of the largest freshwater fish that ever lived, and gone inside a single
+human lifetime from dams and overfishing.
+
+---
+
+## THE DIVIDE (mountains) — 19 new
+
+Already present and staying: bighorn sheep · chinchilla · condor · golden eagle ·
+guanaco · kea · klipspringer · markhor · marmot · Pallas's cat · pika · takin ·
+Tibetan fox · vicuña · mountain viscacha · yak.
+
+### Required by the quests — 4
+
+| Species | Quest |
+|---|---|
+| **Snow leopard** | The corral. Young adult, local change |
+| **White-rumped vulture** | The painkiller. Adult with skills |
+| **Alpine ibex** | All from one valley. Adult with power |
+| **Mountain gorilla** | The one that is going up. Elder, law |
+
+### The altitude specialists — 15
+
+| Species | Why it earns a slot |
+|---|---|
+| **Bar-headed goose** | Crosses the Himalaya at over 7,000 m. **A haemoglobin variant that grips oxygen harder than any other bird's.** The definitive altitude animal |
+| **Lammergeier** | **70–90% of its diet is bone.** It carries them up and drops them on rock to break them open |
+| **Alpine chough** | Recorded at **8,200 m on Everest.** The highest-nesting bird in the world |
+| **Wallcreeper** | Climbs sheer rock faces, flashing crimson wings like a butterfly |
+| **Himalayan monal** | Iridescent to the point of looking metallic, and Nepal's national bird |
+| **Argali** | The largest wild sheep on earth |
+| **Chamois** | The alpine goat-antelope, and the origin of the word chamois |
+| **Mountain goat** | **Not a goat.** Hooves with rubbery pads that grip like climbing shoes |
+| **Kiang** | The largest wild ass |
+| **Tibetan antelope** | The **shahtoosh** trade — a wool so fine it is woven from animals that have to be killed to get it |
+| **Rock hyrax** | Looks like a guinea pig. **Its closest living relative is the elephant** |
+| **Alpine salamander** | Gives birth to live young after a gestation that can last **three years** at altitude |
+| **Apollo butterfly** | An alpine butterfly, protected across Europe and vanishing upward as it warms |
+| **Woolly flying squirrel** | **Thought extinct for seventy years**, rediscovered in 1994 in Pakistani cliffs |
+| **Himalayan jumping spider** | Lives at **6,700 m on Everest — the highest permanent resident animal on earth.** It eats insects blown up from below |
+
+**Mountains reaches 53.**
