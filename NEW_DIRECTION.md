@@ -9,9 +9,11 @@ invented or proposed by Claude unless it is explicitly marked as such.
 ## Status
 
 Brainstorming, 2026-08-24. **58 ideas captured and 26 decisions logged.** The
-shape is settled: real-world map with a sourced codex, twelve biomes, three
-careers that are three different games, six life stages, quests built on
-documented conservation history.
+shape is settled: an **invented world with its own map and names** (this line
+originally said "real-world map" and was superseded the same day — see "The map
+decision" and "Clarification: an invented world still has a map"), a sourced
+codex, twelve biomes, three careers that are three different games, six life
+stages, quests built on documented conservation history.
 
 Still genuinely open: how the life stages are paced, what the researcher and
 tour-guide loops do minute to minute, and the platform question.
@@ -4883,6 +4885,16 @@ change rather than a contradiction.*
   or twice at full weight, not a system running in the background. The pipeline
   design stays as the **specification** for those sequences.
 
+- **2026-08-26 — Naming proposals on the table, nothing decided.** Register chosen
+  by three existing constraints: read-aloud means every name must be sayable first
+  try, the sourced ethos rules out fantasy naming, and Ayr's own *"On the Brink"*
+  already set the target — plain English, concrete, slightly grave. Model is how
+  real English regions are named: plain nouns with a definite article (The Fens, The
+  Weald, The Downs). Twelve regions proposed with two alternates each, plus the four
+  postgame areas and five world names. **Awaiting Ayr on all of it.** Also corrected
+  the doc summary, which still claimed a real-world map after that was superseded on
+  2026-08-24.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -6956,3 +6968,102 @@ Everything recorded stays as the **specification for those authored sequences** 
 the six stages, quarantine's separateness, conditioning that cannot be faked small,
 the outcome fork, the ten intake categories. It stops being a system the player
 operates and becomes **the structure the story beats are built from.**
+
+---
+
+# NAMING THE WORLD AND THE REGIONS
+
+> **Ayr, 2026-08-26.** Chosen as the next piece of work. **These are proposals for
+> Ayr to pick from and overrule — nothing here is decided.**
+
+## The constraint that rules out most fantasy naming
+
+Three things this game has already committed to decide the register:
+
+1. **Read-aloud is one of the codex's five jobs.** Every name has to be sayable by
+   a child on the first try. That removes apostrophes, invented consonant clusters
+   and anything needing a pronunciation guide.
+2. **The whole ethos is sourced and honest.** A region called *Verdantia* or
+   *Frosthelm* fights everything else in the document — it announces "fantasy" in a
+   game whose selling point is that everything in it is real.
+3. **Ayr's own instinct already picked the register.** *"On the Brink"* is plain
+   English, concrete, and slightly grave. That is the target, and the rest should
+   match it.
+
+## The model: how English place names actually work
+
+Real English regions are **plain nouns with a definite article** — The Fens, The
+Weald, The Downs, The Broads, The Wash, The Marches, The Peak.
+
+They are unglamorous, ancient-sounding, and instantly evocative because they
+describe the ground rather than decorating it. **They also sound like somewhere
+people live and work**, which matters for a game about people who work with animals.
+
+## The slate — three options per region
+
+Recommended pick in **bold**.
+
+| Region | Recommended | Also | Also |
+|---|---|---|---|
+| **Savanna** | **The Long Grass** | The Open | The Sweep |
+| **Forest** | **The Weald** *(a real old English word for wooded country)* | The Timber | The Understory |
+| **Rainforest** | **The Canopy** | The Green | The Steam |
+| **Wetlands** | **The Fens** | The Soak | The Slow Water |
+| **Coast** | **The Strand** | The Margin | The Tideline |
+| **Reef** | **The Garden** *(reefs really are called gardens by the people who work them)* | The Shallows | The Coral Shelf |
+| **Open ocean** | **The Blue** | The Open Water | The Wide |
+| **Deep sea** | **The Dark** | The Under | The Trench |
+| **Desert** | **The Dry** | The Sands | The Long Thirst |
+| **Mountains** | **The Heights** | The Spine | The Roof |
+| **Polar** | **The White** | The Ice | The Cold Ground |
+| **Farmland** | **The Holdings** | The Furrows | The Worked Land |
+
+### Notes on three of them
+
+- **The Weald** is a real word and a real place in England, meaning forest country.
+  It is the one borrowed word on the list and it earns its place — it sounds ancient
+  because it is.
+- **The Garden** for the reef is not decoration. Reef workers and fishermen really do
+  call them gardens, and it sets up the quest about coral gardening perfectly.
+- **The Dark** and **The Blue** sitting next to each other gives the two ocean
+  regions an obvious relationship: you go from the blue into the dark.
+
+## The thirteenth region
+
+**On the Brink** — Ayr's own, and it is better than anything on this list. **Keep it.**
+
+It is also the only region name that describes a *condition* rather than a *place*,
+which is exactly right, because that region is the only one whose animals share a
+condition rather than a habitat.
+
+## The postgame areas
+
+| Area | Recommended | Note |
+|---|---|---|
+| The extinct 50 | **The Vigil** | Already named, already right. A vigil is held *for* someone |
+| Mythology 100 | **The Told** | Things that are true because they are told. *Also:* The Stories · The Long Telling |
+| Fossils 50 | **The Record** | As in the fossil record. Plain, and it points at the quests' theme of *how anyone knows* |
+| Breeds 50 | **The Kept** | The 50 animals humans made and keep. Sits deliberately uneasily beside The Vigil |
+
+## The world itself — five options, in different registers
+
+| Name | Register | Why it might work |
+|---|---|---|
+| **Wildlands** | Plain, and it is the title | **The title stops being a label and becomes a place.** The old game's world was never named; naming this one after the series makes the second game the one that has ground under it |
+| **The Reach** | Plain English | Somewhere that extends further than you can see. Works for a single continent |
+| **Terrane** | Real geology | A *terrane* is a fragment of crust with its own history, later joined to a larger mass. **That is literally what this world is** — twelve regions assembled from pieces that never touched in reality. A real technical word doing honest work |
+| **Halloway** | English toponym | Sounds like a real place on a map. Pretty, and says nothing |
+| **The Compass** | Plain | A world defined by its twelve directions |
+
+**My pick: Terrane.** It is real, it is pronounceable, it means precisely what this
+world is, and it is the kind of word that rewards a player who looks it up — which
+is the entire habit this game is trying to build.
+
+**Second: Wildlands**, for the reason in the table. Ayr's call, and this is the one
+decision on this page that everything else hangs off.
+
+## One question this raises
+
+Does the new game keep the **Wildlands** name with a new subtitle, the way *Safari
+Saga* was the first? That has not been decided and it interacts with the world name
+directly.
