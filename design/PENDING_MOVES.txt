@@ -36,3 +36,8 @@ kept>breeding=Akita|Alaskan Malamute|Australian Shepherd|Beagle|Bernese Mountain
 ! --- Breeding Centre roster. Same for Farm Dog, replaced by Mutt.
 kept>cosmetic=Black Cat|Calico Cat|Tabby Cat
 kept>cut=Farm Dog
+
+! --- Species that do NOT exist yet and need creating. "new>group" means the entry has
+! --- no row in the DEX at all; everything else in this file is a move between groups.
+new>kept=Mutt|Pit Bull|Corn Snake|Bearded Dragon|Russian Tortoise|Leopard Gecko
+kept>lifestage=Puppy

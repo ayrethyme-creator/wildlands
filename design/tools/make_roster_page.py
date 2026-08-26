@@ -27,8 +27,12 @@ try:
             pending[n] = (src, dst)
 except IOError:
     pass
+TOCREATE = set()
 for n, (src, dst) in pending.items():
-    if src in d and n in d[src]:
+    if src == 'new':                      # does not exist in the DEX at all
+        d.setdefault(dst, []).append(n)
+        TOCREATE.add(n)
+    elif src in d and n in d[src]:
         d[src].remove(n)
         d.setdefault(dst, []).append(n)
 for k in d:
@@ -54,11 +58,13 @@ GROUPS = [('vigil', 'The Vigil &amp; On the Brink', 'the extinct, and the nearly
 
 bt = sum(len(d[k]) for k, _, _ in BIOMES)
 tot = sum(len(v) for v in d.values())
+real = tot - len(TOCREATE)
 
 def sec(key, name, sub, kind):
     n = d[key]
     items = ''.join('<li class="n%s">%s</li>'
-                    % (' pend' if x in PENDING else '', html.escape(x)) for x in n)
+                    % (' make' if x in TOCREATE else ' pend' if x in PENDING
+                       else '', html.escape(x)) for x in n)
     return ('<section class="grp" id="%s" data-kind="%s"><header>'
             '<h2>%s</h2><p class="sub">%s</p>'
             '<span class="cnt"><b class="live">%d</b><i>/%d</i></span></header>'
@@ -116,6 +122,7 @@ h2 em{font-style:normal;font-weight:400;color:var(--muted);font-size:17px}
 .names li::after{content:"\\00b7";color:var(--rule);padding:0 9px}
 .names li:last-child::after{content:""}
 .names li.pend{color:var(--accent)}
+.names li.make{color:var(--accent);border-bottom:1px dashed var(--accent)}
 .names li mark{background:var(--accentsoft);color:var(--accent);border-radius:3px;
  padding:1px 2px;font-weight:600}
 .hide{display:none!important}
@@ -142,22 +149,24 @@ q.addEventListener('input',run);run();
 
 p = ['<title>Terrane Roster</title>', '<style>%s</style>' % CSS, '<div class="wrap">',
      '<header class="top"><h1>Terrane Roster</h1>'
-     '<p class="lede">Every creature in the game data &mdash; <b>%d</b> entries, '
+     '<p class="lede">Every creature in the game data &mdash; <b>%d</b> entries today, '
      'of which <b>%d</b> sit in the twelve biomes against a target of <b>700</b>.</p>'
      '<p class="prov">Read from the running game, not parsed from source. Three separate '
      'attempts to extract these numbers with regular expressions returned 461, 516 and 465, '
-     'all wrong, because DEX entries come in two different shapes.</p></header>' % (tot, bt),
+     'all wrong, because DEX entries come in two different shapes.</p></header>' % (real, bt),
      '<div class="bar"><div class="row">'
      '<input id="q" type="search" placeholder="Search %d creatures\u2026" autocomplete="off" '
      'spellcheck="false" aria-label="Search creatures"><span id="tally"></span></div></div>' % tot,
      '<nav>' + ''.join(nav) + '</nav>', ''.join(secs),
      '<footer><p>Twelve biomes <b>%d</b> &middot; postgame sets <b>%d</b> &middot; '
-     'life stages <b>%d</b> &middot; unplaced <b>%d</b> &middot; total <b>%d</b>. '
-     'Names in <span style="color:var(--accent)">green</span> are moves already decided but '
-     'not yet applied to the game data — see design/PENDING_MOVES.txt. '
+     'life stages <b>%d</b> &middot; unplaced <b>%d</b> &middot; <b>%d</b> in the data today, '
+     'plus <b>%d</b> designed but not yet made. '
+     'Names in <span style="color:var(--accent)">green</span> are decided but not yet in the '
+     'game data; <span style="color:var(--accent);border-bottom:1px dashed">underlined</span> ones '
+     'do not exist yet and need creating. See design/PENDING_MOVES.txt. '
      'The gap to 700 living species is <b>%d</b>.</p></footer>'
      % (bt, len(d['vigil']) + len(d['mythic']) + len(d['kept']) + len(d['fossil']),
-        len(d['lifestage']), len(d['unplaced']), tot, 700 - bt),
+        len(d['lifestage']), len(d['unplaced']), real, len(TOCREATE), 700 - bt),
      '</div>', '<script>%s</script>' % JS]
 
 out = sys.argv[1] if len(sys.argv) > 1 else 'roster.html'
