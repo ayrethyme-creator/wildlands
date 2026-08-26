@@ -4988,6 +4988,23 @@ change rather than a contradiction.*
   briefly the same age. **Caveat: this is personal, not design** — if Ayr does not want
   to be depicted old, that settles it and the NPC stays an adult.
 
+- **2026-08-26 — DECIDED, idea 84: the Ayr NPC does not age, and becomes the video.**
+  Ayr's call, and better than every alternative proposed. The NPC appears at the same
+  age throughout; at the end the player walks up to them and the sprite becomes the
+  author's video. **The non-ageing stops being an inconsistency and becomes the clue**
+  — the author is not subject to the story's clock because the author is not in the
+  story. It also removes the "presumptuous" problem (no invented life, no written
+  role) and settles Terrane, since the author is now visibly outside the world.
+  Requirements: **appear at least once per life stage** so the constancy is noticed,
+  stay visually consistent, **never acknowledge it**, echo an earlier approach in the
+  final shot, and keep the transition plain. Still light — no quests, no gates, one
+  short observation about the animal in front of the player.
+- **2026-08-26 — Life stage ages, first draft, needed for the above.** Kid 8–12, teen
+  13–17, young adult 18–25, adult/skills 26–40, adult/power 40–55, elder 60+. **The
+  game spans roughly age 10 to 65 — about 55 years**, which checks against Ayr's own
+  animal picks (the box turtle was chosen as "the one that outlives you" at 30–50+).
+  Line 18 still lists life-stage pacing as open; this is the first draft of it.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -7779,3 +7796,62 @@ met when the two of them were, briefly, the same age.
 themselves depicted old, that is a complete reason and nothing above outweighs it.
 The fallback that costs least is then **staying an adult** — the small inconsistency
 is worth less than Ayr's comfort with their own game.
+
+---
+
+## DECIDED: THE NPC DOES NOT AGE, AND TURNS INTO AYR
+
+> **Ayr, 2026-08-26.** *"I like the idea of my NPC visiting in certain scenes as the
+> same age the whole game. And at the end at the reveal, the PC approaches my NPC in
+> a cut scene and then my NPC turns into the video of me. Not as symbolic and
+> meaningful as all your suggestions. But reality. **I'm watching the game develop
+> because I'm making it.**"*
+
+**84. Decided — and it is better than every version proposed above.**
+
+### Why it beats the alternatives
+
+Each of my suggestions tried to make Ayr a **character inside the fiction** — an
+observer, a late starter, someone who arrived sideways. All of them required
+inventing a life to justify the presence.
+
+**Ayr's version requires no invention.** The NPC does not age **because the author is
+not subject to the story's clock.** They are outside it, watching, because that is
+literally what is happening.
+
+- **The non-ageing stops being an inconsistency and becomes the clue.** Everything
+  flagged earlier as reading like a glitch now reads like a glitch *until the
+  ending*, and then reads as the point.
+- **It removes the "presumptuous" problem entirely.** No claimed life, no invented
+  arc, no role written for oneself. Presence, because the presence is real.
+- **It settles Terrane as well.** The author is visibly outside the world, which is
+  exactly the from-outside explanation the world needed. Idea 82 and this are the
+  same move, and now the player *sees* it.
+
+### The ending
+
+The player walks up to them, as they may have done a dozen times across fifty years.
+**The sprite becomes the video.** One shot.
+
+### What this needs to work
+
+- **Appear often enough to be noticed.** Three appearances across fifty-five years
+  and nobody clocks the non-ageing. It has to recur — **at least once per life
+  stage**, ideally more, so the constancy is legible.
+- **Stay visually consistent.** Same figure, same read, every time. The
+  recognisability *is* the mechanism.
+- **Never acknowledge it.** They do not comment on time, on not changing, on the
+  player growing older. No winks.
+- **Keep the voice constant across fifty-five years.** Easy to do, and it is itself
+  part of the clue.
+- **Echo an earlier approach in the final cutscene.** If the player has walked up to
+  them before, the last time should look like those times — so the change is the
+  only thing that changed.
+- **Keep the transition plain.** A hold and a dissolve. The moment does not need an
+  effect; it needs to be unmistakable.
+
+### Unchanged from before
+
+Still light: **no quests, no items, no unlocks, no gates.** Still talkable, still
+one short observation about whatever animal is in front of the player. That line pool
+is the author's voice, and the ending is the moment the player finds out.
