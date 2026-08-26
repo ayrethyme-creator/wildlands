@@ -5043,6 +5043,21 @@ change rather than a contradiction.*
   that true?") and a child at a fence ("how do I get in there?"). Suggest the release
   first and the fence as the second scene, since they are the two ends of the game.
 
+- **2026-08-26 — Idea 86: the hook is animal-led, scene deliberately unchosen.** No
+  human focus. Of the three proposals, the release survives if shot from the animal's
+  side and the signature ability survives entirely; **the fence does not** — it is a
+  scene about a person being outside — but it stands as the second scene. **Consequence:
+  an animal-led opening needs no character art at all, so the hook can be prototyped
+  first**, before any appearance decision, and it is also where the music leads.
+- **2026-08-26 — Idea 87: one body shape per life stage, details as layers.** Ayr
+  confirmed. Six rigs, with hair, face, skin, clothing and accessories swappable.
+  **This is what makes the gender requirement free** — with two body types a change
+  means a new rig, a new silhouette and re-exporting every animation; with one body it
+  is a layer swap, the same cost as a hairstyle, which is exactly the weight Ayr asked
+  for. The six differ by **proportion, not shape**. Production note: **all six rigs must
+  share bone layout and naming from the first one**, so animation is authored once and
+  retargeted — invisible and expensive to retrofit.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8154,3 +8169,65 @@ The earlier sequence had **look at the world** as beat one. It is now beat six, 
 the tutorial for the interface rather than the emotional opening. **Everything after
 the house is unchanged** — the pet, the rescue you cannot fix, the mentor, watching
 from the fence, and the animal that comes back partly.
+
+---
+
+## THE HOOK IS ANIMAL-LED; THE CHARACTER IS ONE BODY PER AGE
+
+> **Ayr, 2026-08-26.** *"The opening scene should be animal mainly. I don't know what
+> yet. I don't want to pick yet."* and *"Yes, one body shape for every age change with
+> options for details being the choices."*
+
+### 86. The hook is animal-led — constraint set, scene not chosen
+
+**No human focus.** Whatever the scene turns out to be, the animal carries it.
+
+Applying that as a filter to the three proposals already recorded, without choosing
+between them:
+
+| Proposal | Survives? |
+|---|---|
+| **A release** | **Yes, if shot from the animal's side.** Hands and a watcher at the edge of frame at most, and the animal leaving is the shot |
+| **A signature ability** | **Yes, completely.** Nothing but the animal doing the impossible-looking thing |
+| **The fence** | **No.** It is a scene about a person being outside, so it cannot be animal-led |
+
+**The fence survives as the second scene** — as a human beat immediately after an
+animal one — but not as the hook.
+
+### And this unblocks the hook from everything else
+
+An animal-led opening **needs no character art**: no body rig, no layers, no
+appearance system, no player sprite at all.
+
+**So the hook can be built first**, before a single character decision is made. Given
+it is also the piece where the music does the work rather than supporting it, the
+opening is now the one part of this game that could be prototyped on its own.
+
+### 87. The player character: one body per age, details are the choices
+
+**Confirmed by Ayr.** Six body shapes — one per life stage — with everything else as
+swappable layers: hair, face, skin, clothing, accessories.
+
+**This is not just the cheap answer, it is the one that makes Ayr's gender
+requirement free.**
+
+With two body types, changing presentation means a different rig, a different
+silhouette and a re-export of every animation. **With one body per age, it is a layer
+swap** — the same cost as changing a hairstyle, which is exactly the weight Ayr asked
+for: *present, not announced.* The structure delivers the intent without the game
+ever needing to handle it as a special case.
+
+### What the six bodies actually differ by
+
+Proportion, not shape: a child's head is proportionally larger, limbs shorter; an
+adult is at full height; an elder carries a slight change of posture. **Real, visible
+at a glance, and cheap.**
+
+### One production note that follows
+
+If all six rigs share the same **bone layout and naming**, animation can be authored
+once and retargeted across every age with proportion adjustments, rather than
+animated six times.
+
+**That has to be true from the first rig**, and it is invisible and expensive to
+retrofit.
