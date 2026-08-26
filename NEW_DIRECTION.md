@@ -5067,6 +5067,14 @@ change rather than a contradiction.*
   because it changes numbers already agreed.** Remaining need after this batch: coast
   +6, reef +12, desert +13, mountains +18, open ocean +17, polar +22.
 
+- **2026-08-26 — Allocation reconciled; polar was already proposed.** The 25 polar
+  additions from 2026-08-25 stand and take polar to **53**, which is a better number
+  than the 50 I had. Final twelve-biome allocation totals 700. **67 of the ~128 are
+  now on the table** (deep sea 42, polar 25); **62 remain** — reef +11, desert +12,
+  mountains +19, open ocean +20. One figure to verify: deep sea's current count is
+  approximate (~8) from a keyword scan, which is why the new-species total reads 128
+  in one place and 129 in another.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8363,3 +8371,43 @@ looking** — bioluminescence, transparency, invisible red searchlights, a singl
 the size of a hand. Idea 72 said the signature ability is the payoff for collecting.
 **The Dark is where that feature is at full strength**, and it is also the biome the
 player reaches last and through instruments.
+
+---
+
+## THE ALLOCATION, RECONCILED AGAINST THE POLAR 25
+
+> **2026-08-26.** Ayr asked for polar next. **Polar was already done** — 25 additions
+> proposed 2026-08-25 and never signed off. This reconciles the numbers rather than
+> duplicating the work.
+
+The polar proposal takes it to **53**, not the 50 in my table. 53 is the better
+number — it matches Ayr's "nothing below the mid-fifties" and the 25 were chosen for
+interest rather than to hit a target.
+
+### Final twelve-biome allocation
+
+| Biome | Now | Target | New | Status |
+|---|---|---|---|---|
+| Rainforest | 91 | **85** | — | — |
+| Savanna | 79 | **70** | — | — |
+| Forest | 66 | **64** | — | — |
+| Wetland | 59 | **58** | — | — |
+| Farmland | 58 | **55** | — | — |
+| Coast | 53 | **53** | — | — |
+| **Deep sea** | ~8 | **50** | **+42** | **Proposed 2026-08-26** |
+| **Polar** | 28 | **53** | **+25** | **Proposed 2026-08-25** |
+| **Reef** | 42 | **53** | **+11** | Outstanding |
+| **Desert** | 41 | **53** | **+12** | Outstanding |
+| **Mountains** | 34 | **53** | **+19** | Outstanding |
+| **Open ocean** | 33 | **53** | **+20** | Outstanding |
+| | | **700** | **~129** | |
+
+**67 of the ~128 are now on the table** — deep sea and polar between them.
+**62 remain**, across reef, desert, mountains and open ocean.
+
+### One number to verify
+
+Deep sea's current count is **approximate (~8)**, taken from a keyword scan rather
+than a proper classification. **Everything else here is exact**; this one should be
+confirmed before the totals are treated as final, and it is the reason the new-species
+figure reads 128 in one place and 129 in another.
