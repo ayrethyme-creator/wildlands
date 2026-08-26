@@ -4958,6 +4958,20 @@ change rather than a contradiction.*
   separate later pass — higher resolution, no props, built for animation. Costs
   nothing now and wastes none of the existing work.
 
+- **2026-08-26 — ART WORKFLOW: fix errors, ignore terrain.** Ayr is finding errors
+  now that the art can be viewed larger. **Errors are permanent value; terrain is
+  cosmetics that gets thrown away twice.** Do not add it, do not strip it — the only
+  free move is flipping props off on any sprite being regenerated anyway. That the
+  errors only became visible at larger size argues the game-sprite pass needs higher
+  resolution regardless.
+- **2026-08-26 — The Ayr NPC is talkable but weightless.** Interactive, because
+  otherwise the author's-note reveal has no memory to pay off. But **no quests, no
+  items, no unlocks, no gates**, and they never speak about themselves — they give one
+  short observation about the animal being looked at. That line pool *is* the author's
+  voice, so the ending reveals the player has been hearing it in passing for thirty
+  in-game years. Suggested and awaiting Ayr: **let them age** across the six life
+  stages, which makes them a person rather than an easter egg.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -7632,3 +7646,59 @@ pass** at higher resolution, without props, built for animation.
 
 That costs nothing today, it means none of the existing work is wasted or blocked,
 and it stops the prop question from being a problem at all. **Ayr's call.**
+
+---
+
+## TWO ANSWERS: THE NPC, AND WHAT TO DO ABOUT TERRAIN
+
+> **Ayr, 2026-08-26.** *"Am I an interactive NPC though? Or they can't talk to me?"*
+> and *"Now that I can look at the art bigger, I'm finding lots of errors. Should I
+> add terrain to all of the ones I edit? Or get rid of it now?"*
+
+### Terrain: neither. Do not spend effort on it.
+
+**Errors are permanent value. Terrain is temporary cosmetics.**
+
+An anatomically wrong animal is wrong in every version, at every resolution, for
+ever — that fix is never thrown away. **Terrain gets thrown away twice:** add it now
+and it has to come off for the game sprite; strip it now and the codex plate loses
+the context it wanted.
+
+| Do | Do not |
+|---|---|
+| **Fix the errors** | Add terrain to anything |
+| **If a sprite is being regenerated anyway, turn props off** — free, and it moves that one toward game-ready | Regenerate *in order to* change terrain |
+| Let the current 1001 settle into being **codex plates** | Try to make 1001 plates consistent with each other |
+
+**And the fact that the errors only became visible at larger size is itself a
+finding.** 256×256 viewed small was hiding them — which argues the game-sprite pass
+needs higher resolution regardless, and that makes the terrain question moot for
+those sprites entirely.
+
+### The NPC: interactive, but they never advance anything
+
+**Talkable — otherwise the ending has nothing to pay off.** A player who never
+interacted with them has no memory to be rewarded.
+
+But the role holds only if the character stays weightless:
+
+- **No quests, no items, no unlocks, no gates.** Talking to them is always optional
+  and never advances the game by a single step.
+- **They never talk about themselves.** No backstory, no name offered, no hints.
+- **They comment on the animal you are looking at.** One short observation — not
+  quest-relevant, not plot-relevant. The kind of thing a stranger says on a viewing
+  platform.
+
+**That last rule is the whole idea.** A pool of short observational lines *is* the
+author's voice — and when the game ends and that face appears, the player realises
+they have been hearing it the entire time, in passing, for thirty in-game years.
+
+Cheap to build: a line pool, no branching, no state.
+
+### One suggestion: let them age
+
+The player moves through six life stages across decades. **If the NPC ages too, they
+are a person. If they never change, they are an easter egg.**
+
+Ageing is the more affecting version and it fits a game whose whole structure is a
+life passing. **Ayr's call.**
