@@ -53,6 +53,7 @@ onto `window`. Asking the running game is the only reliable source.
 |---|---|
 | `read_ground_truth.js` | **The snippet to paste in the browser.** The only sanctioned way to produce species counts |
 | `make_roster_page.py` | Builds the browsable roster page **from `GROUND_TRUTH.txt`**. Reads no `.jsx` |
+| **`uncle_albert.py`** | **The roster check &mdash; "run it by Uncle Albert."** Verifies group targets, the 1000 total, duplicate species, species marked new that already exist, and quest animals that do not exist. Exits non-zero on failure. Run after any change to `PENDING_MOVES.txt` |
 | `sprite_audit.py` | Measures sprite bounding boxes and bottom gaps |
 | `hd2d_billboard.gdshader` | Y-locked billboard shader for Godot. **Untested** — there is no Godot in this environment |
 

@@ -9658,5 +9658,16 @@ THE 300   Vigil 50 · On the Brink 50 · The Telling 100
 duplicates 0   ·   phantom new species 0   ·   missing quest animals 0
 ```
 
-**Run `python design/tools/validate.py` after any change to `PENDING_MOVES.txt`.** It
-exits non-zero on failure, so it can be trusted without reading the output.
+### It is called Uncle Albert
+
+> **Ayr, 2026-08-26.** *"Let's call this check something easier for me to remember. Run
+> it by Uncle Albert."*
+
+```
+uncle-albert.bat                      double-click it, or run it from a terminal
+python design/tools/uncle_albert.py
+```
+
+**Run it after any change to `PENDING_MOVES.txt`, and before quoting any number.** It
+exits non-zero on failure, so it can be trusted without reading the output — and it
+says **"Uncle Albert says it all adds up"** when it is happy.

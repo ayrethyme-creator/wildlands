@@ -1,4 +1,12 @@
-"""Check the roster holds together. Run after any change to PENDING_MOVES.txt.
+"""UNCLE ALBERT - the roster check.
+
+Ayr's name for it: "run it by Uncle Albert". Run after any change to
+PENDING_MOVES.txt, and any time a number is about to be quoted.
+
+    uncle-albert.bat                      (from the repo root, or double-click it)
+    python design/tools/uncle_albert.py
+
+Exits non-zero if anything is wrong, so it can be trusted without reading the output.
 
 Verifies:
   1. every group hits its target
@@ -140,9 +148,9 @@ for x in missing:
 print()
 print('=' * 52)
 if FAIL:
-    print('  %d PROBLEM(S)' % len(FAIL))
+    print('  UNCLE ALBERT FOUND %d PROBLEM(S)' % len(FAIL))
     for f in FAIL:
         print('   - ' + f)
     sys.exit(1)
-print('  ALL CHECKS PASS')
+print('  UNCLE ALBERT SAYS IT ALL ADDS UP')
 print('=' * 52)
