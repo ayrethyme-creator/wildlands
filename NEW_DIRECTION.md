@@ -5091,6 +5091,24 @@ change rather than a contradiction.*
   white-rumped vulture, Alpine ibex, mountain gorilla) and 15 are altitude specialists.
   Mountains reaches 53.
 
+- **2026-08-26 - PROPER ROSTER AUDIT: the biome counts do not reconcile.** Tool saved
+  at `design/tools/biome_audit.py`. Found and fixed a bug of mine: `biome_assign.js`
+  holds **284** hand assignments, 237 inside the object literal, and I was reading only
+  the 47 dot-assignments. With all 284: **496 living species, 377 classified, 98
+  unplaced, 97 of which have no habitat sentence at all.** **The per-biome counts do
+  not match the doc** - forest 84 vs 66, savanna 38 vs 79, farmland 22 vs 58 - and 97
+  unplaced cannot explain a gap that size. **The allocation targets every species
+  proposal has been built against are not trustworthy until this is resolved.** The
+  species lists themselves are unaffected. Concrete work exposed: ~85 species need a
+  habitat sentence or hand assignment; **twelve life stages are missing from
+  `NOT_A_SPECIES`**; and **the mammoth is being counted as a living species.**
+- **2026-08-26 - Mountain gorilla moves to rainforest; kea recommended to stay.** Ayr
+  is right that the gorilla is montane forest - Bwindi is literally the Impenetrable
+  Forest. **The elder quest moves with it**, so mountains needs a new one: proposed
+  **Tibetan antelope** and the shahtoosh trade, a CITES Appendix I ban followed by
+  recovery from ~75,000 to ~300,000. **Kea should stay** - its whole claim to fame is
+  being the world's only alpine parrot, and moving it deletes the fact.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8519,3 +8537,111 @@ Tibetan fox · vicuña · mountain viscacha · yak.
 | **Himalayan jumping spider** | Lives at **6,700 m on Everest — the highest permanent resident animal on earth.** It eats insects blown up from below |
 
 **Mountains reaches 53.**
+
+---
+
+## PROPER ROSTER AUDIT — AND THE COUNTS DO NOT RECONCILE
+
+> **Ayr, 2026-08-26.** *"Please check the roster properly, not just for the
+> conservation story animals."*
+>
+> Done. The tool is saved at `design/tools/biome_audit.py` so this is repeatable
+> rather than a one-off.
+
+### First, a bug of mine
+
+`biome_assign.js` holds **284 hand assignments**, not the 47 I was reading. **237 of
+them sit inside the `BIOME_BY_HAND = {...}` object literal** and my parser only
+matched the dot-assignments after it. Fixed; the audit below uses all 284.
+
+### What the data actually says
+
+| | |
+|---|---|
+| Living species (`A`/`E` constructors) | **496** |
+| Habitat sentences that exist at all | **402** |
+| Classified | **377** |
+| **Unplaced** | **98** |
+
+**Of the 98 unplaced, 97 have no habitat sentence in the game data at all.** Only one
+fails on the rules.
+
+### And the counts do not match the doc
+
+| Biome | This audit | Recorded in the doc |
+|---|---|---|
+| Forest | **84** | 66 |
+| Rainforest | **41** | 91 |
+| Savanna | **38** | 79 |
+| Wetland | **32** | 59 |
+| Coast | **32** | 53 |
+| Polar | **26** | 28 |
+| Desert | **24** | 41 |
+| Open ocean | **24** | 33 |
+| Mountains | **23** | 34 |
+| Farmland | **22** | 58 |
+| Reef | **19** | 42 |
+| Deep sea | **7** | ~8 |
+
+**These are not close.** The allocation table every species proposal has been built
+against cannot be reproduced from the data as it stands, and **97 unplaced species is
+not enough to explain a gap this size.** The recorded numbers came from an earlier
+session using a different method, and one of the two is wrong.
+
+**This does not invalidate the species proposals** — the deep sea, polar and mountain
+lists are good animals for those biomes regardless of the totals. **It does mean the
+targets are not yet trustworthy**, and they are what decides how many more are needed.
+
+### The concrete work this exposes
+
+**1. About 85 living species have no habitat sentence** and need one, or need hand
+assignment. A listable, finishable set — including kea, yak, bighorn, harpy eagle,
+Philippine eagle, condor, gharial, olm, hoatzin, shoebill, ostrich, cassowary,
+snowy owl, arctic hare and swift fox.
+
+**2. About twelve entries in that list are life stages, not species**, and
+`NOT_A_SPECIES` misses them: **cygnet · eaglejuv · elver · ephyra · glasseel · naiad ·
+parr · sealjuv · sealpup · smolt · axolotlmeta · mandarin_dragonet.**
+
+**3. The mammoth is being counted as living.** It is extinct and belongs in The
+Record.
+
+### Recommendation
+
+**Do not treat any biome total as settled until the 97 are placed.** Placing them is
+mechanical rather than creative, it is one pass, and afterwards the audit can be
+re-run from `design/tools/biome_audit.py` and the numbers will mean something.
+
+---
+
+## KEA AND MOUNTAIN GORILLA
+
+> **Ayr, 2026-08-26.** *"Kea and mountain gorilla live in mountains in the rainforest
+> and everything else in here lives on traditional rocky or snowy mountains right?
+> Now that each biome has terrain, maybe we should move those 2 to rainforest."*
+
+### Mountain gorilla — Ayr is right
+
+It lives at **2,200-4,300 m in montane forest and bamboo**, and Bwindi is literally
+called the Impenetrable *Forest*. It is forest that happens to be on a mountain, and
+with terrain inside biomes there is no reason it cannot be rainforest.
+
+**But the quest moves with it.** "The one that is going up" is the mountains **elder**
+quest, so mountains needs a new one.
+
+**Proposed replacement: the Tibetan antelope**, already on the mountains list. The
+**shahtoosh** trade is a genuine law-and-policy story - a wool so fine it can only be
+taken from dead animals, banned under CITES Appendix I, followed by a recovery from
+roughly 75,000 to around 300,000. It is a real success with a hard question inside it,
+which is exactly what the elder slot wants.
+
+### Kea - recommend keeping it in the mountains
+
+It lives in **alpine and subalpine country on New Zealand's South Island**, and above
+the treeline in summer.
+
+**Its entire claim to fame is that it is the world's only alpine parrot.** Moving it
+to rainforest does not just relocate it - **it deletes the fact that makes it worth
+having.**
+
+**Ayr's call, but this one costs something to move.**
