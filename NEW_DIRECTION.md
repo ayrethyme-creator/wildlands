@@ -9717,3 +9717,41 @@ needs species anyway.**
 
 Otherwise the new ones get written to the same standard as the old ones, and the pass has
 to run twice.
+
+---
+
+## THE THREE APPROVED BATCHES ARE APPLIED
+
+> **Ayr, 2026-08-26.** *"Why is deep sea at 11? I already approved a bunch of animals.
+> For polar and mountain too."*
+
+**Correct, and I had not applied any of them** — the same class of miss Ayr caught an
+hour earlier with the fossil rebalance. Approved on the 25th and 26th, sitting in prose,
+never written to `PENDING_MOVES.txt`.
+
+| Batch | Added | Now |
+|---|---|---|
+| **The Dark** | **43** | 11 → **54** |
+| **The Floe** | **25** | 24 → **49** |
+| **The Divide** | **15** | 33 → **48** |
+
+The Dark was the emptiest biome in the game at 11 and is now the fourth-fullest.
+
+**The Divide got 15 rather than 19** because snow leopard and ibex already existed, the
+mountain gorilla moved to rainforest, and the Tibetan antelope was added earlier today
+when it became the elder quest animal.
+
+### Where the 700 stands
+
+```
+biomes 611 + The Kept 50 = 661        39 still to create
+```
+
+**From 122 to 39.** Uncle Albert passes.
+
+### One caveat carried forward
+
+Several of the deep-sea additions are **generic names** — Siphonophore, Comb Jelly, Squat
+Lobster, Sea Lily, Glass Squid, Vent Shrimp, Deep-sea Barnacle, Bamboo Coral, Vent
+Mussel. They are on the `SPECIES_AUDIT.md` list and need naming to a real species, along
+with the ~100 already there.

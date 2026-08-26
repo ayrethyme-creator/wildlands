@@ -146,3 +146,21 @@ forest>merged=King Cobra
 ! ---   and a recovery from ~75,000 to ~300,000.
 new>forest=Iberian Lynx
 new>alpine=Tibetan Antelope
+
+! ============================================================================
+! THE THREE APPROVED SPECIES BATCHES - proposed 2026-08-25/26, approved by Ayr,
+! and not applied until 2026-08-26. Ayr caught the omission.
+! NOTE: some of these are generic names (Siphonophore, Comb Jelly, Squat Lobster,
+! Sea Lily, Glass Squid, Vent Shrimp, Deep-sea Barnacle, Bamboo Coral, Vent Mussel).
+! They are on the SPECIES_AUDIT list to be named to a real species.
+! ============================================================================
+
+! THE DARK - 43. Brittle Star was dropped from the original 44; it is already in reef.
+new>deepsea=Gulper Eel|Fangtooth|Viperfish|Barreleye|Hatchetfish|Black Dragonfish|Lanternfish|Mariana Snailfish|Tripod Fish|Cookiecutter Shark|Blobfish|Coffinfish|Stoplight Loosejaw|Deep-sea Lizardfish|Vampire Squid|Glass Squid|Bigfin Squid|Dumbo Octopus|Giant Isopod|Yeti Crab|Alicella|Vent Shrimp|Giant Tube Worm|Zombie Worm|Squat Lobster|Deep-sea Barnacle|Siphonophore|Atolla|Bloody-belly Comb Jelly|Deepstaria|Comb Jelly|Helmet Jellyfish|Sea Pig|Venus Flower Basket|Sea Lily|Black Coral|Xenophyophore|Bathydevius|Predatory Tunicate|Bamboo Coral|Vent Mussel|Bluntnose Sixgill Shark|Orange Roughy
+
+! THE FLOE - 25.
+new>polar=Antarctic Icefish|Colossal Squid|Collared Lemming|Antarctic Sea Spider|Bearded Seal|Hooded Seal|Arctic Tern|Snow Petrel|South Polar Skua|Long-tailed Duck|Little Auk|Adélie Penguin|King Penguin|Gentoo Penguin|Chinstrap Penguin|Antarctic Toothfish|Arctic Cod|Capelin|Arctic Char|Greenland Halibut|Ringed Seal|Arctic Wolf|Rock Ptarmigan|Ivory Gull|Ross's Gull
+
+! THE DIVIDE - 15. Snow Leopard and Ibex already exist; the mountain gorilla moved to
+! rainforest and was replaced by the Tibetan antelope, already added.
+new>alpine=White-rumped Vulture|Bar-headed Goose|Lammergeier|Alpine Chough|Wallcreeper|Himalayan Monal|Argali|Chamois|Mountain Goat|Kiang|Rock Hyrax|Alpine Salamander|Apollo Butterfly|Woolly Flying Squirrel|Himalayan Jumping Spider
