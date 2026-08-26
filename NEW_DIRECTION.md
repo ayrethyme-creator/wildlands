@@ -9610,3 +9610,53 @@ cat 1 · dogs 9 · reptiles 4 · freshwater fish 14
 small pets 8 · canary 1 · farm 13
 = 50
 ```
+
+---
+
+## A VALIDATOR, AND THREE THINGS IT CAUGHT
+
+> **Ayr, 2026-08-26.** *"Please make sure we don't have to come back and fix any of
+> this."*
+
+Rather than assert it was fine, I wrote **`design/tools/validate.py`** and ran it. It
+checks six things and **it found three real problems** that would otherwise have
+surfaced weeks from now.
+
+### What it checks
+
+1. Every group hits its target
+2. The whole thing sums to 1000
+3. **No species appears in two groups, or twice in one**
+4. **Nothing marked "new" already exists** — the mistake that produced the void Vigil
+   proposal and the phantom missing quest animals
+5. **Every quest animal exists or is scheduled to be created**
+6. Nothing cut is still referenced as living
+
+### What it caught
+
+**1. Two DEX entries are both called "King Cobra."** The starter-era `cobra` in
+`game.part3.jsx` and the later `kingcobra` in `game.part9.jsx` — one classified to
+forest, one to rainforest. Exactly the Alpaca / Farm Alpaca pattern, and it would have
+shipped as two identical snakes. **Merged; the forest one goes.**
+
+**2. The Iberian lynx does not exist**, and it is the forest **adult-with-power** quest
+animal — down to about 94 animals in 2002, recovered past 2,000 by 2023.
+
+**3. The Tibetan antelope does not exist**, and it is the mountains **elder** quest
+animal as of an hour ago, when the shahtoosh ban replaced the mountain gorilla.
+
+**Both quests were written against animals that were not in the game.** Nothing would
+have flagged that until someone tried to build them.
+
+### Now passing
+
+```
+THE 700   biomes 528 + The Kept 50 = 578      122 still to create
+THE 300   Vigil 50 · On the Brink 50 · The Telling 100
+          The Record 50 · The Breeding Centre 50      exact
+
+duplicates 0   ·   phantom new species 0   ·   missing quest animals 0
+```
+
+**Run `python design/tools/validate.py` after any change to `PENDING_MOVES.txt`.** It
+exits non-zero on failure, so it can be trusted without reading the output.

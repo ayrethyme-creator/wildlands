@@ -132,3 +132,17 @@ new>coast=Little Blue Penguin
 ! --- "Pig" already covers pigs, and the potbelly is a bred pet variety rather than a
 ! --- farm animal. The Kept is 50.
 kept>cut=Potbelly Pig
+
+! --- Found by design/tools/validate.py, 2026-08-26.
+! --- TWO DEX entries are both named "King Cobra": the starter-era object literal
+! --- `cobra` in game.part3.jsx and the later `kingcobra` in game.part9.jsx. The
+! --- second is the proper entry. They merge; the forest one goes.
+forest>merged=King Cobra
+
+! --- Two quest animals did not exist. Both are required by quests already written.
+! --- Iberian Lynx: The Weald, adult-with-power. Down to ~94 animals in 2002,
+! ---   recovered past 2,000 by 2023 - captive breeding, rabbit restoration, underpasses.
+! --- Tibetan Antelope: The Divide, elder. The shahtoosh ban, CITES Appendix I,
+! ---   and a recovery from ~75,000 to ~300,000.
+new>forest=Iberian Lynx
+new>alpine=Tibetan Antelope
