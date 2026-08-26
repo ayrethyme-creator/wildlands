@@ -4895,6 +4895,22 @@ change rather than a contradiction.*
   the doc summary, which still claimed a real-world map after that was superseded on
   2026-08-24.
 
+- **2026-08-26 — THE WORLD IS CALLED TERRANE.** Ayr. Ten region names locked: The
+  Long Grass, The Weald, The Canopy, The Fens, The Strand, The Garden, The Blue, The
+  Dark, The Dry, The Furrows — plus On the Brink, The Vigil and The Record. **Still
+  open: polar, mountains, mythology**, with six candidates each. My picks are **The
+  Floe** (the only one that is also fragile, and the region's quests are about ice
+  going away), **The Divide** (carries an idea, and the region's quests are about
+  things separating) and **The Telling**. Names implying myths were mistakes are
+  ruled out, since the doc already commits to not treating living cultures' beliefs
+  as solved puzzles.
+- **2026-08-26 — Terrane turns out to be a mechanism, not just a name.** A terrane
+  is a real crustal fragment with its own history, later joined to a larger landmass
+  — literally what this world is. Four alternate-Earth variants recorded.
+  **Recommended: C, with B's vocabulary** — the geology diverged, the history did
+  not. Present day, real people, real conservation history intact; the map looks like
+  this because continents collided. **Awaiting Ayr.**
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -7067,3 +7083,192 @@ decision on this page that everything else hangs off.
 Does the new game keep the **Wildlands** name with a new subtitle, the way *Safari
 Saga* was the first? That has not been decided and it interacts with the world name
 directly.
+
+---
+
+# THE NAMES — LOCKED, AND THE THREE STILL OPEN
+
+> **Ayr, 2026-08-26.** First category for all but mountains, polar and farmland.
+> Farmland takes **The Furrows**. **Terrane** confirmed for the world.
+
+## Locked
+
+| Region | Name |
+|---|---|
+| Savanna | **The Long Grass** |
+| Forest | **The Weald** |
+| Rainforest | **The Canopy** |
+| Wetlands | **The Fens** |
+| Coast | **The Strand** |
+| Reef | **The Garden** |
+| Open ocean | **The Blue** |
+| Deep sea | **The Dark** |
+| Desert | **The Dry** |
+| Farmland | **The Furrows** |
+| Thirteenth region | **On the Brink** |
+| Extinct 50 | **The Vigil** |
+| Fossils 50 | **The Record** |
+| **THE WORLD** | **TERRANE** |
+
+## Still open — polar
+
+| Name | Why |
+|---|---|
+| **The Floe** | Sea ice that drifts. Short, real, and it is the ground the walrus quest is about losing |
+| **The Rime** | Frost formed from freezing fog. Beautiful, plain, and almost nobody uses it |
+| **The Glare** | The light off ice, which is genuinely blinding. Names the *experience* rather than the material |
+| **The Pack** | Pack ice. Blunt and cold, and it doubles as what wolves and orcas travel in |
+| **The Silence** | Polar regions are famously, unnervingly quiet |
+| **The Hard Water** | Plain to the point of bluntness |
+
+**My pick: The Floe.** It is the only one that is also *fragile* — a floe melts, and
+the whole region's quests are about ice going away.
+
+## Still open — mountains
+
+| Name | Why |
+|---|---|
+| **The Divide** | A real geographic term — the line where water chooses which ocean to reach. Plain, and it means something |
+| **The Uplands** | Real English geography, unglamorous, sounds inhabited |
+| **The Tops** | What high ground is actually called in northern England. Very plain |
+| **The Backbone** | A range as the spine of a landmass |
+| **The Scree** | Loose rock on a slope. Harsh and specific |
+| **The Tors** | A tor is a rock peak. Short and old |
+
+**My pick: The Divide.** It is the only one carrying an idea rather than a
+description, and it fits a region whose quests are about **things separating** —
+populations cut off, a bottleneck at Gran Paradiso, borders between three countries
+around the gorillas.
+
+## Still open — mythology, on the theme of understanding through stories
+
+| Name | Why |
+|---|---|
+| **The Telling** | Plain, active, and it names the *method* — these things are known because they were told |
+| **The Handed Down** | Emphasises transmission. What survives is what somebody bothered to pass on |
+| **The Long Telling** | Same, with time in it |
+| **The Remembering** | Softer. Puts the emphasis on holding on rather than explaining |
+| **The Old Answers** | Precise — a myth *is* an answer to a question. **But it implies the answers are superseded** |
+| **The Understanding** | Ayr's brief, literally. Abstract, and it slightly oversells |
+
+**My pick: The Telling.**
+
+**And one caution that rules out a whole family of names.** The mythology section
+already commits to not treating living cultures' beliefs as solved puzzles — the
+taniwha and the bunyip are not in the same category as the griffin. So anything
+meaning *first guesses*, *old mistakes* or *what they used to think* is out, however
+neat it sounds. **The Telling** and **The Handed Down** describe how the knowledge
+travels, not whether it is right, which keeps the game out of that argument
+entirely.
+
+## The Kept — still needs Ayr
+
+Not mentioned in Ayr's reply. **The Kept** for the 50 breeds and domestics stands as
+a proposal, deliberately uneasy next to The Vigil.
+
+---
+
+# TERRANE AS AN ALTERNATE EARTH
+
+> **Ayr, 2026-08-26.** *"When it comes to designing the origin of the world... its
+> own unique planet? Alternate reality of Earth? I want to explore that second
+> idea."*
+
+## First — the name already agreed to this
+
+A **terrane** is a real plate-tectonics term: **a fragment of crust with its own
+separate geological history, later joined onto a larger landmass.** Terranes are how
+continents are actually built. Much of western North America is a stack of terranes
+that arrived from elsewhere and stuck.
+
+**That is exactly what this world is** — twelve regions with separate histories,
+assembled into one landmass, holding species that never shared ground in reality.
+
+The name was chosen for its meaning. **It turns out to also be a mechanism**, and it
+points hard at one of the options below.
+
+## Why an alternate Earth is the right instinct
+
+Ayr's original reason, from the map debate: *"it would be nice if the mistakes had a
+somewhat legitimate excuse."*
+
+An alternate Earth buys three things at once:
+
+1. **The compositing becomes true instead of tolerated.** A rainforest holding both
+   jaguars and orangutans stops being an error and becomes a fact about this world.
+2. **The sourced codex still works**, because the animals, the science and the
+   conservation history are all still ours.
+3. **Nothing has to be explained to the player.** It can sit entirely in the codex
+   for whoever wants it.
+
+## Four variants
+
+### A — A parallel Earth
+History diverged at some unstated point. Same physics, same species, different
+geography. Never explained in play.
+
+**Buys:** total freedom, zero cost, no lore burden.
+**Costs:** it explains nothing. It is really just "invented world" with a label.
+
+### B — Earth after the continents moved *(the ambitious one)*
+Deep future. Plate tectonics has reassembled the landmasses into a supercontinent —
+which is **a real scientific projection**, not a fantasy. Geologists model the next
+one and argue about its shape.
+
+**Buys:** the compositing is not merely excused, it is *caused*. Continents collided,
+so forests that were an ocean apart now touch. **Terrane is literally the mechanism.**
+It is also the single most educational framing available: a player learns that
+continents move, are still moving, and have done this before.
+
+**Costs:** it puts the real conservation history in the deep past. Richard Turere and
+Mary Anning become ancient figures. That could be beautiful — **the codex becomes a
+surviving record** — or it could make the quests feel like history rather than
+something urgent. **This is the real risk and it needs deciding, not hand-waving.**
+
+### C — Earth where the geology diverged, not the history *(recommended)*
+The continents assembled differently, but **the present day is our present day.**
+Same century, same science, same people, same conservation history — a world where
+the landmasses happen to sit in different places.
+
+**Buys:** everything B buys about the map, while **protecting the codex completely.**
+Lucy King's beehive fences happened this decade. The vulture collapse is recent. The
+High Seas Treaty was signed in 2023 and it still matters.
+
+**It is the minimum viable divergence** — change one thing, geology, and leave
+everything that carries the game's weight untouched.
+
+**Costs:** less spectacular than B. A player who never opens the codex will not
+notice it at all — which is arguably the point.
+
+### D — A remembered Earth
+The world is a reconstruction assembled from records; the player is inside the
+archive.
+
+**Buys:** it makes the codex literal.
+**Costs:** it is a frame story, and a frame story tells the player none of this is
+happening. **This game's power comes from the events being real. Do not put a pane
+of glass in front of them.**
+
+## Recommendation
+
+**C, with B's vocabulary.**
+
+Keep the present day and the real people. Let the *reason* the map looks like this be
+plate tectonics — terranes, accreted margins, continents that arrived from elsewhere
+and joined on. **The player who reads the codex learns real geology; the player who
+does not simply plays in a world that works.**
+
+And it means the twelve regions can each have a genuine geological story: **The Weald
+and The Canopy sit together because they collided.** That is a better answer than
+"because it is a game," and it is true of somewhere.
+
+## The one question underneath all four
+
+**Does the player ever find out?**
+
+- **Never** — it is background, and the world is simply the world.
+- **In the codex only** — available to anyone curious, invisible to everyone else.
+  **Recommended**, and consistent with how the game treats every other piece of real
+  information.
+- **In the story** — a quest about it. Expensive, and it would compete with the
+  conservation stories for attention.
