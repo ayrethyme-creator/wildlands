@@ -9,8 +9,9 @@
 > running the game rather than by reading the source. The method is in
 > `design/tools/README.md`.
 >
-> Current, verified 2026-08-26: **519 living species across the twelve biomes**, out of
-> **1000** total entries. The gap to the 700 target is **181**.
+> Current, verified 2026-08-26: **530 in the twelve biomes plus 51 in The Kept = 581**
+> against the 700 target. **119 new species are needed.** Life stages are not species and
+> count nowhere. Earlier figures of 128, 239, 181 and 170 were all wrong.
 
 
 This is the initiation document for the new game. It is a **container for
@@ -9406,3 +9407,70 @@ the **Manx** and its spine, the **Munchkin** and its legs, the **French Bulldog*
 its airway, the **Bull Terrier** and its skull. Put those beside the Anatolian
 Shepherd, a working dog bred for a job it still does, and the breeding centre makes its
 case by arrangement rather than by lecture.
+
+---
+
+## THE ANSWER: 119 NEW SPECIES
+
+> **Ayr, 2026-08-26.** *"All of the lists count towards the 700 except the myths, the
+> fossils, On the Brink, the Vigil, and the breeding centre."* and *"I thought we had
+> already agreed to get rid of the life stages? They are being added to the current
+> animals."*
+>
+> Both correct, and the second was already decided — the doc has recorded since
+> 2026-08-25 that **juveniles fold into their adults and are not separate placements.**
+
+### Life stages are not species
+
+**121 entries** in the data are chicks, calves, cubs and pups. **They count nowhere.**
+Each becomes a baby form of the animal it belongs to, so a Lion Cub is the Lion at a
+younger age rather than a second row.
+
+### The 700 — biomes plus The Kept
+
+| | |
+|---|---|
+| Rainforest 92 · Savanna 76 · Forest 53 · Wetlands 46 · Desert 45 · Coast 43 | |
+| The Garden 42 · The Furrows 37 · The Divide 32 · The Blue 29 · The Floe 24 · The Dark 11 | **530** |
+| **The Kept** | **51** |
+| **Subtotal** | **581** |
+| **Target** | **700** |
+| **NEEDED** | **+119** |
+
+### The 300 — the five excluded groups
+
+| | Now | Target | |
+|---|---|---|---|
+| The Vigil | 50 | 50 | |
+| On the Brink | 50 | 50 | |
+| The Telling | 103 | 100 | **cut 3** |
+| The Record | 51 | 50 | **cut 1** |
+| The Breeding Centre | 50 | 50 | |
+| | **304** | **300** | **cut 4** |
+
+The Telling is over because qilin, thunderbird and phoenix join it from unplaced; The
+Record is over because the mammoth does. **Both were already flagged in the roster
+shape section — three myths come out to make room, and one fossil does.**
+
+### Also leaving the roster — 18
+
+Five from the pet decisions (three coat colours, Farm Dog, the merged alpaca) and
+**the thirteen wardens**, which were cut from this game on 2026-08-25.
+
+### So
+
+```
+119  new species needed for the 700
+-84  already proposed  (deep sea 43, polar 25, mountains 16)
+ 35  still to choose
+```
+
+**Plus four to trim from the excluded groups.** Nothing else.
+
+### And the earlier figures were wrong
+
+I have quoted **128**, then **239**, then **181**, then **170**. All of them treated the
+700 as the twelve biomes alone. **The 700 includes The Kept**, and the life stages count
+nowhere, which is what makes 700 + 300 = 1000 close exactly.
+
+**119 is the number.**
