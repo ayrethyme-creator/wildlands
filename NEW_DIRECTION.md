@@ -5133,6 +5133,19 @@ change rather than a contradiction.*
   to The Kept. **The real need is 239 new species, not 128.** Full listing checked in
   at `design/BIOME_LISTING.md`.
 
+- **2026-08-26 - GROUND TRUTH: 519 in the twelve biomes, 1000 DEX keys exactly.**
+  Read from the running game via `gallery.html` and `window.__DEX`, not parsed. My
+  three earlier answers (461, 516, 465) were all wrong for the same reason: **DEX
+  entries come in two shapes** - object literals like `fennec: { n: "Fennec Fox" ... }`
+  and constructor calls like `aardvark: A(...)` - and my parser only matched the
+  second, finding 861 of 1000. **That is also why I wrongly reported 23 quest animals
+  as missing; they were always there.** Real counts: rainforest 92, savanna 76, forest
+  64, wetland 46, desert 44, coast 43, mountains 32, reef 31, open ocean 29, farmland
+  27, polar 24, deep sea 11 = **519**. Postgame: Vigil 100, Telling 100, Kept 94,
+  Record 50. Life stages 120, unplaced 17. **The gap to 700 is 181 new species.**
+  Counts and provenance in `design/GROUND_TRUTH.json`; re-check by serving the repo
+  and reading `window.__DEX`, never by another parser.
+
 ## Practical notes
 
 **Switching between the two games:**
@@ -8827,3 +8840,96 @@ to The Kept.
 committed script.** The two that were not - the biome counts and the allocation
 targets - are exactly the two that turned out to be wrong. `biome_listing.py` is now
 committed, and the listing it generates is checked in beside it.
+
+---
+
+## GROUND TRUTH, FINALLY - READ FROM THE RUNNING GAME
+
+> **Ayr, 2026-08-26.** *"The target is 700 across those 12 biomes. It tallies 461.
+> That number is way too low, something is wrong."*
+>
+> **Right again.** 461 was wrong, 516 was wrong, 465 was wrong. All three came from
+> me parsing JavaScript with regular expressions, and all three were different.
+
+### What was actually wrong
+
+**DEX entries come in two completely different shapes**, and I only ever read one:
+
+```js
+fennec:   { n: "Fennec Fox", art: "fennec", ... }    object literal (game.part3.jsx)
+aardvark: A("Aardvark", ...)                          constructor call (added later)
+```
+
+The original roster - every starter, much of the savanna, the fennec, the hedgehog,
+the cheetah, the beaver - is written as **object literals**. My parser matched only
+constructor calls, so it found 861 of 1000 species and quietly dropped the rest.
+
+**That is also why I reported 23 quest animals as missing. They were never missing.**
+Fennec fox, hedgehog, cheetah, loggerhead and the rest are all in the roster; my
+parser could not see them.
+
+### How the number was finally settled
+
+There is no JavaScript runtime in this environment, so the parser could not be
+checked against anything. But **`gallery.html` already loads the game and exports
+`window.__DEX`** - so the answer was available all along by running the game and
+asking it.
+
+Served the repo, opened the gallery, and read the live object.
+
+### The real numbers
+
+```
+1000 DEX keys exactly
+```
+
+| | |
+|---|---|
+| **In the twelve biomes** | **519** |
+| The Vigil & On the Brink | 100 |
+| The Telling (mythology) | 100 |
+| The Kept (breeds) | 94 |
+| The Record (fossils) | 50 |
+| Life stages (chicks, calves, pups) | 120 |
+| Unplaced | 17 |
+| **Total** | **1000** |
+
+| Biome | Count |
+|---|---|
+| Rainforest | **92** |
+| Savanna | **76** |
+| Forest | **64** |
+| Wetlands | **46** |
+| Desert | **44** |
+| Coast | **43** |
+| Mountains | **32** |
+| Reef | **31** |
+| Open ocean | **29** |
+| Farmland | **27** |
+| Polar | **24** |
+| Deep sea | **11** |
+| | **519** |
+
+**The 17 unplaced are the 13 wardens, plus qilin, thunderbird and phoenix** (which
+need the Mythic tag to join The Telling) **and the woolly mammoth** (which belongs in
+The Record).
+
+### So the gap is 181
+
+```
+519  in the twelve biomes now
+700  target
+181  new living species needed
+```
+
+Not 128, not 239. **181.**
+
+### The lesson, and it is the third time today
+
+**Do not parse a language with regular expressions when the language has a runtime
+available.** Three separate wrong answers came from that, each one confidently
+reported.
+
+`design/GROUND_TRUTH.json` now holds the counts and their provenance. **The method
+for re-checking is: serve the repo, open `gallery.html`, read `window.__DEX`** - not
+another parser.

@@ -1,16 +1,26 @@
-"""Every living animal, by biome. Re-runnable; nothing is typed by hand.
+"""Every creature in the DEX, grouped by biome or postgame set. Re-runnable.
 
-IMPORTANT: biome_assign.js holds FOUR assignment blocks plus dot-assignments,
-applied in file order with later winning:
+TWO THINGS THIS TOOL MUST NOT NARROW AGAIN, both of which caused wrong numbers:
 
-    var BIOME_BY_HAND = {...}   hand assignments for species with no habitat text
-    var BIOME_FIX     = {...}   corrections where the habitat RULES misfired
-    var BIOME_MOVE    = {...}   Ayr's redistribution pass, 2026-08-24
-    var FR            = {...}   Ayr's forest/rainforest review, 2026-08-25
-    BIOME_BY_HAND.x = "y";      later one-offs
+1. DEX entries come in two styles. Reading only the constructor form finds 861 of
+   ~1000 species and silently drops every starter and much of the savanna:
 
-Earlier versions of this tool read only the first block, which silently threw
-away every correction Ayr had made. Do not narrow this again.
+       fennec:   { n: "Fennec Fox", art: "fennec", ... }   object literal
+       aardvark: A("Aardvark", ...)                         constructor call
+
+2. biome_assign.js holds FOUR assignment blocks plus dot-assignments, applied in
+   file order with later winning. Reading only the first throws away every
+   correction Ayr has made:
+
+       var BIOME_BY_HAND = {...}   species with no habitat sentence
+       var BIOME_FIX     = {...}   where the habitat RULES misfired
+       var BIOME_MOVE    = {...}   Ayr's redistribution, 2026-08-24
+       var FR            = {...}   Ayr's forest/rainforest review, 2026-08-25
+       BIOME_BY_HAND.x = "y";      later one-offs
+
+Group membership follows the game's own groupOf() in game.part59.jsx:
+mem -> Vigil, type "Fossil" -> The Record, type "Mythic" -> The Telling,
+dom/breed -> The Kept, otherwise living.
 """
 import io, re, glob, os
 from collections import defaultdict
@@ -21,46 +31,75 @@ src = ''.join(io.open(f, encoding='utf-8', errors='replace').read()
 BS = chr(92)
 
 
-def args_at(s, i):
+def _scan(s, i, opens, closes):
     depth, j, instr, esc = 0, i, None, False
     while j < len(s):
         c = s[j]
         if instr is not None:
-            if esc:
-                esc = False
-            elif c == BS:
-                esc = True
-            elif c == instr:
-                instr = None
+            if esc: esc = False
+            elif c == BS: esc = True
+            elif c == instr: instr = None
         else:
-            if c in ('"', "'"):
-                instr = c
-            elif c == '(':
-                depth += 1
-            elif c == ')':
+            if c in ('"', "'", '`'): instr = c
+            elif c in opens: depth += 1
+            elif c in closes:
                 depth -= 1
-                if depth == 0:
-                    return s[i + 1:j]
+                if depth == 0: return s[i + 1:j], j
         j += 1
-    return ''
+    return '', len(s)
 
 
+def entries(body):
+    """(key, value_text) pairs at depth 0 of an object body."""
+    out, depth, j, instr, esc, start, key = [], 0, 0, None, False, None, None
+    while j < len(body):
+        c = body[j]
+        if instr is not None:
+            if esc: esc = False
+            elif c == BS: esc = True
+            elif c == instr: instr = None
+            j += 1; continue
+        if c in ('"', "'", '`'): instr = c
+        elif c in '{[(': depth += 1
+        elif c in '}])': depth -= 1
+        elif depth == 0:
+            if c == ',' and key is not None:
+                out.append((key, body[start:j])); key = None
+            else:
+                m = re.match(r'([A-Za-z_][A-Za-z0-9_]*)\s*:', body[j:])
+                if m and (j == 0 or body[j - 1] in ',\n\r \t'):
+                    key = m.group(1); j += m.end(); start = j; continue
+        j += 1
+    if key is not None: out.append((key, body[start:]))
+    return out
+
+
+DEX = {}
+spots = []
+for m in re.finditer(r'(?:const|var)\s+DEX\s*=\s*\{', src):
+    spots.append(m.end() - 1)
+for m in re.finditer(r'Object\.assign\(\s*DEX\s*,\s*\{', src):
+    spots.append(m.end() - 1)
+for i in sorted(spots):
+    body, _ = _scan(src, i, '{', '}')
+    for k, v in entries(body):
+        # A real DEX entry is either a constructor call or an object with n:/art:.
+        # Without this, prose inside nested strings leaks in as fake keys.
+        if re.match(r'\s*[A-Za-z][A-Za-z0-9_]*\s*\(', v) or re.search(r'(n|art):', v):
+            DEX[k] = v
+
+hab, disp = {}, {}
 STR = re.compile('"([^"]*)"')
-hab, disp, ctor = {}, {}, {}
 for m in re.finditer(r'\b(note2?|fnote)\s*\(', src):
-    a = STR.findall(args_at(src, m.end() - 1))
-    if len(a) >= 3:
-        hab.setdefault(a[0], a[2])
+    a = STR.findall(_scan(src, m.end() - 1, '(', ')')[0])
+    if len(a) >= 3: hab.setdefault(a[0], a[2])
 for m in re.finditer(r'([a-z0-9_]+):\s*\{', src):
     seg = src[m.end() - 1:m.end() + 800]
-    hh = re.search(r'\bh:\s*"([^"]*)"', seg)
-    if hh:
-        hab.setdefault(m.group(1), hh.group(1))
-for m in re.finditer(r'([a-z0-9_]+):\s*([A-Z]{1,2})\("([^"]*)"', src):
-    ctor.setdefault(m.group(1), m.group(2))
-    disp.setdefault(m.group(1), m.group(3))
-for m in re.finditer(r'([a-z0-9_]+):\s*([A-Z]{1,2})\(', src):
-    ctor.setdefault(m.group(1), m.group(2))
+    h = re.search(r'\bh:\s*"([^"]*)"', seg)
+    if h: hab.setdefault(m.group(1), h.group(1))
+for k, v in DEX.items():
+    n = re.search(r'\bn:\s*"([^"]*)"', v) or re.search(r'^\s*[A-Za-z]+\("([^"]*)"', v)
+    disp[k] = n.group(1) if n else k
 
 d = io.open('design/biomes.js', encoding='utf-8').read()
 rules = [(m.group(1), m.group(2)) for m in re.finditer(r'\["([a-z]+)",\s*/(.+?)/i\]', d)]
@@ -70,22 +109,16 @@ h = io.open('design/biome_assign.js', encoding='utf-8').read()
 VALID = {"forest", "rainforest", "savanna", "wetland", "coast", "desert", "reef",
          "polar", "opensea", "alpine", "farmland", "deepsea", "cave", "taiga",
          "kelp", "polarsea", "tundra"}
-
-# every var NAME = { ... }; block, in file order, later winning
 hand, blocks = {}, []
 for m in re.finditer(r'var\s+(\w+)\s*=\s*\{', h):
-    body = h[m.end() - 1:]
-    body = body[:body.index('};')]
-    pairs = [(k, v) for k, v in re.findall(r'([a-z0-9_]+)\s*:\s*"(\w+)"', body)
-             if v in VALID]
+    body, _ = _scan(h, m.end() - 1, '{', '}')
+    pairs = [(k, v) for k, v in re.findall(r'([a-z0-9_]+)\s*:\s*"(\w+)"', body) if v in VALID]
     if pairs:
         blocks.append((m.group(1), len(pairs)))
         hand.update(pairs)
 for k, v in re.findall(r'BIOME_BY_HAND\.(\w+)\s*=\s*"(\w+)"', h):
     hand[k] = v
-
-nots = set(re.findall('"([a-z0-9_]+)"',
-                      h[h.index('NOT_A_SPECIES'):h.index('BIOME_BY_HAND')]))
+nots = set(re.findall('"([a-z0-9_]+)"', h[h.index('NOT_A_SPECIES'):h.index('BIOME_BY_HAND')]))
 for m in re.finditer(r'NOT_A_SPECIES\.push\(([^)]*)\)', h):
     nots.update(re.findall('"([a-z0-9_]+)"', m.group(1)))
 for m in re.finditer(r'\[([^\]]*)\]\.forEach\(function \(k\) \{ NOT_A_SPECIES\.push', h):
@@ -94,75 +127,75 @@ for m in re.finditer(r'\[([^\]]*)\]\.forEach\(function \(k\) \{ NOT_A_SPECIES\.p
 NOT_LIVING = {"mammoth": "extinct - belongs in The Record",
               "alpaca": "domesticated - belongs in The Kept",
               "llama": "domesticated - belongs in The Kept"}
-living = sorted(k for k, c in ctor.items() if c in ('A', 'E'))
+
+
+def group_of(k, v):
+    if re.search(r'\bmem:\s*true', v) or re.match(r'\s*V\(', v): return 'vigil'
+    if re.match(r'\s*MY\(', v) or '"Mythic"' in v: return 'mythic'
+    if re.match(r'\s*FD\(', v) or '"Fossil"' in v: return 'fossil'
+    if re.match(r'\s*WD\(', v): return 'warden'
+    if re.match(r'\s*P\(', v) or re.search(r'\b(dom|breed):\s*true', v): return 'kept'
+    return 'living'
 
 
 def classify(sp):
-    if sp in hand:
-        return hand[sp]
+    if sp in hand: return hand[sp]
     t = hab.get(sp, '')
     for name, pat in rules:
-        if re.search(pat, t, re.I):
-            return name
+        if re.search(pat, t, re.I): return name
     return None
 
 
-NICE = {"alpine": "MOUNTAINS (The Divide)", "coast": "COAST (The Strand)",
-        "deepsea": "DEEP SEA (The Dark)", "desert": "DESERT (The Dry)",
-        "farmland": "FARMLAND (The Furrows)", "forest": "FOREST (The Weald)",
-        "opensea": "OPEN OCEAN (The Blue)", "polar": "POLAR (The Floe)",
-        "rainforest": "RAINFOREST (The Canopy)", "reef": "REEF (The Garden)",
-        "savanna": "SAVANNA (The Long Grass)", "wetland": "WETLANDS (The Fens)"}
+NICE = {"alpine": ("Mountains", "The Divide"), "coast": ("Coast", "The Strand"),
+        "deepsea": ("Deep Sea", "The Dark"), "desert": ("Desert", "The Dry"),
+        "farmland": ("Farmland", "The Furrows"), "forest": ("Forest", "The Weald"),
+        "opensea": ("Open Ocean", "The Blue"), "polar": ("Polar", "The Floe"),
+        "rainforest": ("Rainforest", "The Canopy"), "reef": ("Reef", "The Garden"),
+        "savanna": ("Savanna", "The Long Grass"), "wetland": ("Wetlands", "The Fens")}
+GNAME = {"vigil": ("The Vigil & On the Brink", "the extinct, and the nearly gone"),
+         "mythic": ("The Telling", "mythology"), "fossil": ("The Record", "fossils"),
+         "kept": ("The Kept", "breeds and domestics"),
+         "warden": ("Wardens", "invented for Safari Saga - cut from this game")}
 
 by = defaultdict(list)
 stages, excluded, unplaced = [], [], []
-for sp in living:
-    if sp in nots or re.search(r'_(j|c|f|p|j2|i)$', sp):
-        stages.append(sp)
-        continue
-    if sp in NOT_LIVING:
-        excluded.append(sp)
-        continue
-    b = classify(sp)
-    if b is None:
-        unplaced.append(sp)
-        continue
-    by[merge.get(b, b)].append(sp)
+for k, v in sorted(DEX.items()):
+    g = group_of(k, v)
+    if g != 'living':
+        by['G:' + g].append(k); continue
+    if k in nots or re.search(r'\bjuv:\s*true', v) or re.search(r'_(j|c|f|p|i|e|j2)$', k):
+        stages.append(k); continue
+    if k in NOT_LIVING:
+        excluded.append(k); continue
+    b = classify(k)
+    if b is None: unplaced.append(k); continue
+    by['B:' + merge.get(b, b)].append(k)
 
-placed = sum(len(v) for v in by.values())
-o = ["# EVERY LIVING ANIMAL, BY BIOME", "",
-     "Generated by `design/tools/biome_listing.py`, 2026-08-26. Re-runnable.", "",
-     "Assignment blocks applied in file order, later winning: " +
-     " -> ".join("**%s** (%d)" % b for b in blocks) + ", then one-off dot-assignments.",
-     "", "## The count", "", "| | |", "|---|---|",
-     "| Living roster (`A` + `E`) | **%d** |" % len(living),
-     "| less life stages | -%d |" % len(stages),
-     "| less not-living | -%d |" % len(excluded),
-     "| less unplaced | -%d |" % len(unplaced),
-     "| **Placed in the twelve biomes** | **%d** |" % placed, "",
-     "| Biome | Count |", "|---|---|"]
-for b in sorted(by, key=lambda x: -len(by[x])):
-    o.append("| %s | **%d** |" % (NICE.get(b, b), len(by[b])))
-o += ["| **Total** | **%d** |" % placed, "", "---"]
-for b in sorted(by, key=lambda x: -len(by[x])):
-    o += ["", "## %s - %d" % (NICE.get(b, b), len(by[b])), ""]
-    names = sorted(disp.get(s, s) for s in by[b])
-    for i in range(0, len(names), 4):
-        o.append("- " + " - ".join(names[i:i + 4]))
-o += ["", "---", "", "## Excluded, and why", "",
-      "**Life stages (%d)** - these follow their adult:" % len(stages), "",
-      "- " + " - ".join(sorted(disp.get(s, s) for s in stages)), "",
-      "**Not living animals of any biome (%d):**" % len(excluded), ""]
-for s in sorted(excluded):
-    o.append("- **%s** - %s" % (disp.get(s, s), NOT_LIVING[s]))
-if unplaced:
-    o += ["", "**Still unplaced (%d):** %s" % (len(unplaced), ", ".join(unplaced))]
-io.open('design/BIOME_LISTING.md', 'w', encoding='utf-8').write("\n".join(o) + "\n")
+border = ['B:' + x for x in ['rainforest', 'forest', 'savanna', 'wetland', 'coast',
+                             'desert', 'reef', 'opensea', 'polar', 'alpine',
+                             'farmland', 'deepsea']]
+gorder = ['G:' + x for x in ['vigil', 'mythic', 'fossil', 'kept', 'warden']]
+biome_total = sum(len(by[k]) for k in border if k in by)
 
-print("assignment blocks read:", blocks)
-print("living %d = placed %d + stages %d + not-living %d + unplaced %d"
-      % (len(living), placed, len(stages), len(excluded), len(unplaced)))
-print("check:", placed + len(stages) + len(excluded) + len(unplaced) == len(living))
-print()
-for b in sorted(by, key=lambda x: -len(by[x])):
-    print("  %-26s %d" % (NICE.get(b, b), len(by[b])))
+if __name__ == '__main__':
+    print('DEX entries parsed :', len(DEX))
+    print('assignment blocks  :', blocks)
+    print()
+    print('IN THE TWELVE BIOMES')
+    for k in border:
+        if k in by: print('  %-12s %-16s %d' % (NICE[k[2:]][0], NICE[k[2:]][1], len(by[k])))
+    print('  %-29s %d' % ('TOTAL', biome_total))
+    print()
+    print('POSTGAME GROUPS')
+    for k in gorder:
+        if k in by: print('  %-29s %d' % (GNAME[k[2:]][0], len(by[k])))
+    print()
+    print('  %-29s %d' % ('life stages (not species)', len(stages)))
+    print('  %-29s %d' % ('excluded (extinct/domestic)', len(excluded)))
+    print('  %-29s %d' % ('UNPLACED', len(unplaced)))
+    tot = biome_total + sum(len(by[k]) for k in gorder if k in by) + len(stages) + len(excluded) + len(unplaced)
+    print()
+    print('  check: %d == %d DEX entries -> %s' % (tot, len(DEX), tot == len(DEX)))
+    if unplaced:
+        print()
+        print('  unplaced:', ', '.join(unplaced[:40]))
