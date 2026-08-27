@@ -10759,3 +10759,42 @@ filed under the wrong concept.
 
 **Option 2 is better** and it costs nothing, because tiering means the fifty can absorb a
 swap. But it is a badge slot, so it is Ayr's to spend.
+
+---
+
+## DECISION — THERE ARE ITEMS IN THE WORLD, AND YOU FIND THEM BY EXPLORING
+
+> **Ayr, 2026-08-27.** *"Items should be added to encourage map exploration. They can be
+> things that help in the encounters or whatever the mechanisms of the game end up being.
+> I don't need ideas for that yet, just commit that the game should have items you can
+> find in the world."*
+
+**Committed as a principle. No item list yet, deliberately.**
+
+### What is settled
+
+| | |
+|---|---|
+| **Items exist** | The game has findable objects, not only animals |
+| **They are found in the world** | Placed on the map, discovered by going somewhere. Not only bought, not only given |
+| **Exploration is the reason they exist** | Their job is to make walking off the path worth doing |
+| **They hook into the mechanics** | Encounters, or whatever the systems turn out to be |
+
+### What is deliberately not decided
+
+**What the items are.** Ayr has asked for the principle only. **No item ideas are to be
+proposed until Ayr asks**, and this note exists partly so a later session does not fill
+the gap on its own.
+
+### Why it is worth recording now, before the mechanics exist
+
+**Because it constrains map design, and map design comes first.** A world built to be
+looked at and a world built to be searched are not the same world &mdash; the second one
+needs dead ends that pay off, sightlines that hide things, and reasons to come back to a
+place once you can reach further into it.
+
+**Recording it now means the maps get built to hold things.** Deciding it later would mean
+retrofitting hiding places into terrain that has none, which is the expensive version.
+
+**It also gives the biomes a second job.** Right now a biome is where its species live.
+This makes it somewhere you comb.
