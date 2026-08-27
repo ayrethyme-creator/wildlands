@@ -393,3 +393,76 @@ RENAME=Crocodile::Saltwater Crocodile|Dragonfly::Globe Skimmer|Damselfly::Banded
 ! Horned Lizard-> Texas Horned Lizard: squirts blood from its own eyes at canids, up
 !                 to a metre and a half.
 RENAME=Gecko::Web-footed Gecko|Scorpion::Deathstalker|Rattlesnake::Sidewinder|Tarantula::Mexican Redknee|Camel::Wild Bactrian Camel|Jackrabbit::Black-tailed Jackrabbit|Horned Lizard::Texas Horned Lizard
+
+! ============================================================================
+! SPECIES AUDIT - section 3, THE STRAND. Ayr 2026-08-27. Ten generics named.
+! ============================================================================
+! Monk Seal   -> Hawaiian Monk Seal: about 1,500 left. There were three monk seals;
+!                the Caribbean one is already in the Vigil, extinct since 1952.
+! Sea Lion    -> California Sea Lion: one of these, Ronan, was the first non-human
+!                mammal shown to keep a beat - she bobs in time to music she has
+!                never heard before.
+! Pelican     -> Brown Pelican: the only pelican that plunge-dives, and it was very
+!                nearly wiped out by DDT before recovering.
+! Hermit Crab -> Caribbean Hermit Crab: forms VACANCY CHAINS - they queue by size
+!                beside a new shell and swap in order, largest first, so one arriving
+!                shell rehouses a dozen crabs.
+! Lobster     -> European Lobster: the animal in the Lamlash Bay no-take zone quest.
+! Stingray    -> Southern Stingray: the ones at Stingray City in the Caymans, entirely
+!                habituated to people.
+! Sea Squirt  -> Star Ascidian: its larva has a brain and a notochord, then settles,
+!                takes root, and DIGESTS ITS OWN BRAIN because it no longer needs one.
+! Barracuda   -> Great Barracuda: attracted to anything shiny, which is why divers are
+!                told to leave jewellery behind.
+! Box Jelly   -> Australian Box Jellyfish: 24 eyes in four clusters, some with lenses
+!                and retinas, and it swims deliberately rather than drifting.
+! Cuttlefish  -> Common Cuttlefish: COLOURBLIND, and still the best colour-changer
+!                alive - it reads polarised light instead.
+RENAME=Monk Seal::Hawaiian Monk Seal|Sea Lion::California Sea Lion|Pelican::Brown Pelican|Hermit Crab::Caribbean Hermit Crab|Lobster::European Lobster|Stingray::Southern Stingray|Sea Squirt::Star Ascidian|Barracuda::Great Barracuda|Box Jelly::Australian Box Jellyfish|Cuttlefish::Common Cuttlefish
+
+! ============================================================================
+! SPECIES AUDIT - section 3, THE BLUE. Ayr 2026-08-27. Four generics named.
+! ============================================================================
+! Flying Fish     -> Atlantic Flyingfish: glides over 200 m and can beat its tail on
+!                    the surface to relaunch without re-entering.
+! Hammerhead      -> Scalloped Hammerhead: schools in hundreds over seamounts by day
+!                    for reasons nobody has explained. Critically Endangered.
+! Manta Ray       -> Giant Oceanic Manta: the largest ray, seven metres across, with
+!                    the largest brain of any fish - and it appears to recognise itself
+!                    in a mirror.
+! Pilot Whale     -> Short-finned Pilot Whale: ONE OF ONLY SIX SPECIES ON EARTH WHOSE
+!                    FEMALES GO THROUGH MENOPAUSE - with humans, orcas, belugas,
+!                    narwhals and false killer whales. The old females lead.
+RENAME=Flying Fish::Atlantic Flyingfish|Hammerhead Shark::Scalloped Hammerhead|Manta Ray::Giant Oceanic Manta|Pilot Whale::Short-finned Pilot Whale
+
+! ============================================================================
+! SPECIES AUDIT - section 3, THE GARDEN. Ayr 2026-08-27. Eleven generics named.
+! ============================================================================
+! Brittle Star   -> Common Brittle Star: sheds an arm to escape and grows it back.
+! Sea Cucumber   -> Tiger Tail Sea Cucumber: fires sticky white threads out of its anus
+!                   to entangle whatever is attacking it, then regrows them.
+! Moray Eel      -> Giant Moray: has a SECOND SET OF JAWS in its throat that shoot
+!                   forward to drag prey down. No other vertebrate does this.
+! Pipefish       -> Ornate Ghost Pipefish: hangs head-down and is indistinguishable
+!                   from a piece of drifting weed or a crinoid arm.
+! Parrotfish     -> Stoplight Parrotfish: eats coral and excretes it as sand - a large
+!                   one makes hundreds of kilos of white beach a year - and it changes
+!                   sex from female to male partway through life, which is what the
+!                   name refers to. CORRECTED from bumphead parrotfish, which is
+!                   Indo-Pacific: the parrotfish-protection quest is Bonaire and
+!                   Belize, so it has to be the Caribbean species.
+! Sea Snake      -> Banded Sea Krait: comes ashore to digest and lay eggs, and hunts
+!                   cooperatively with trevally and goatfish - flushing prey out of
+!                   crevices for fish that are not its relatives.
+! Seahorse       -> Pygmy Seahorse: two centimetres, lives on one species of gorgonian
+!                   and matches it exactly. Nobody knew it existed until a gorgonian
+!                   was put in an aquarium and the coral turned out to have residents.
+! Wobbegong      -> Tasselled Wobbegong: recorded swallowing a bamboo shark nearly its
+!                   own size.
+! Cleaner Wrasse -> Bluestreak Cleaner Wrasse: runs a cleaning station where predators
+!                   queue and do not eat it - and it may recognise itself in a mirror.
+! Reef Shark     -> Whitetip Reef Shark: one of the few sharks that can pump water over
+!                   its own gills, so it rests motionless on the bottom by day.
+! Boxfish        -> Yellow Boxfish: secretes a toxin when stressed that can kill
+!                   everything in a tank, including itself.
+RENAME=Brittle Star::Common Brittle Star|Sea Cucumber::Tiger Tail Sea Cucumber|Moray Eel::Giant Moray|Pipefish::Ornate Ghost Pipefish|Parrotfish::Stoplight Parrotfish|Sea Snake::Banded Sea Krait|Seahorse::Pygmy Seahorse|Wobbegong::Tasselled Wobbegong|Cleaner Wrasse::Bluestreak Cleaner Wrasse|Reef Shark::Whitetip Reef Shark|Boxfish::Yellow Boxfish

@@ -10042,3 +10042,58 @@ protein.
 ```
 ~33 a group, not a species     five biomes done, seven to go
 ```
+
+---
+
+## THE STRAND, THE BLUE AND THE GARDEN — twenty-five species
+
+### Uncle Albert earned his keep here
+
+The renames broke two quests, and **he caught both**: the coast quest pointed at
+"Lobster" and the reef quest at "Parrotfish", neither of which existed any more.
+
+**And one was a real error, not a stale label.** I had picked the **bumphead
+parrotfish** — which is Indo-Pacific, while the parrotfish-protection quest is
+**Bonaire and Belize**. Corrected to the **stoplight parrotfish**, the Caribbean
+species the ban actually covers, which changes sex from female to male partway through
+life. That is what the name refers to.
+
+The validator's quest list now tracks the current names, which is the point of it.
+
+### The Strand — 10
+
+**Hawaiian Monk Seal** *(about 1,500 left — and there were three monk seals; the
+Caribbean one is already in the Vigil)* · **California Sea Lion** *(one of them, Ronan,
+was the first non-human mammal shown to keep a beat)* · **Brown Pelican** *(the only
+pelican that plunge-dives, nearly wiped out by DDT)* · **Caribbean Hermit Crab**
+*(**vacancy chains** — they queue by size beside a new shell and swap in order, so one
+arriving shell rehouses a dozen crabs)* · **European Lobster** · **Southern Stingray** ·
+**Star Ascidian** *(its larva has a brain and a notochord, then settles, takes root, and
+**digests its own brain**)* · **Great Barracuda** · **Australian Box Jellyfish** *(24
+eyes, some with lenses and retinas)* · **Common Cuttlefish** *(**colourblind**, and
+still the best colour-changer alive)*
+
+### The Blue — 4
+
+**Atlantic Flyingfish** · **Scalloped Hammerhead** *(schools in hundreds over seamounts
+for reasons nobody has explained)* · **Giant Oceanic Manta** *(the largest brain of any
+fish, and it appears to recognise itself in a mirror)* · **Short-finned Pilot Whale**
+*(**one of only six species on earth whose females go through menopause** — with humans,
+orcas, belugas, narwhals and false killer whales)*
+
+### The Garden — 11
+
+**Common Brittle Star** · **Tiger Tail Sea Cucumber** *(fires sticky threads out of its
+anus and regrows them)* · **Giant Moray** *(**a second set of jaws in its throat** that
+shoot forward to drag prey down — no other vertebrate does this)* · **Ornate Ghost
+Pipefish** · **Stoplight Parrotfish** · **Banded Sea Krait** *(hunts cooperatively with
+trevally and goatfish — animals it is not related to)* · **Pygmy Seahorse** *(two
+centimetres, and nobody knew it existed until a gorgonian was put in an aquarium and the
+coral turned out to have residents)* · **Tasselled Wobbegong** · **Bluestreak Cleaner
+Wrasse** *(runs a station where predators queue and do not eat it)* · **Whitetip Reef
+Shark** · **Yellow Boxfish** *(secretes a toxin when stressed that can kill everything in
+a tank, itself included)*
+
+```
+~8 a group, not a species     eight biomes done, four to go
+```

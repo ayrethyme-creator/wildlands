@@ -139,8 +139,11 @@ for x in bogus:
     FAIL.append('marked new but already exists: ' + x)
 
 # 5. quest animals
+# Quest animals, by their CURRENT name. Update when a rename touches one -
+# that is the point: this check exists to catch a quest pointing at nothing.
 QUEST = ['Pine Marten', 'Iberian Lynx', 'Siamang', 'Orangutan', 'Jaguar', 'Harpy Eagle',
-         'Beaver', 'Lobster', 'Horseshoe Crab', 'Parrotfish', 'Spinner Dolphin',
+         'Beaver', 'European Lobster', 'Horseshoe Crab', 'Stoplight Parrotfish',
+         'Spinner Dolphin',
          'Blue Whale', 'Fennec Fox', 'Arabian Oryx', 'Snow Leopard', 'Polar Bear',
          'Walrus', 'Bowhead Whale', 'Hedgehog', 'Bumblebee', 'White Stork', 'Gemsbok',
          'Cheetah', 'African Elephant', 'Black Rhinoceros', 'Tibetan Antelope',
