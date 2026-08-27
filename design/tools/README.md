@@ -63,3 +63,16 @@ onto `window`. Asking the running game is the only reliable source.
    asked it" is solid.
 2. **Smell-test the output.** A 1000-animal wildlife game reporting no fennec fox, no
    hedgehog and no cheetah is not a surprising finding — it is a broken tool.
+
+## Field-guide writing rule (Ayr, 2026-08-27)
+
+**Every entry states how many relatives the animal has** — the genus count, plus the
+wider group where that is the more useful number.
+
+> Panther Chameleon — one of about 23 *Furcifer* chameleons, and one of roughly 200
+> chameleons.
+
+It answers a question readers always have and field guides rarely do: is this a one-off
+or one of a crowd? It also surfaces the animals that are **the last of a whole branch** —
+the aardvark is the only living species in its *order*, and the tuatara is the only
+survivor of Rhynchocephalia.

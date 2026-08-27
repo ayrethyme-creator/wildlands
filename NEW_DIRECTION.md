@@ -9891,3 +9891,55 @@ on it.** Nothing was added or removed; The Canopy stays at 93.
  0  wrong biome                done
 ~66 a group, not a species     rainforest done, eleven biomes to go
 ```
+
+---
+
+## FIELD-GUIDE RULE: SAY WHAT IT IS ONE OF
+
+> **Ayr, 2026-08-27.** *"When the text for each animal description is finalized, please
+> make sure you include the number of how many other species is in that genus. That
+> context really helps me."*
+
+**103. Every field-guide entry states how many relatives the animal has.**
+
+It answers a question a reader always has and a field guide almost never does: **is this
+a one-off, or one of a crowd?**
+
+### The format
+
+Give the **genus** count, and where the wider group is the more useful number, give that
+too:
+
+> **Panther Chameleon** — one of about 23 *Furcifer* chameleons, and one of roughly 200
+> chameleons.
+
+> **Golden Poison Frog** — one of three *Phyllobates* frogs that carry batrachotoxin,
+> out of about 170 poison dart frogs.
+
+> **Sword-billed Hummingbird** — the only species in *Ensifera*, out of some 360
+> hummingbirds.
+
+That last one shows why the pair matters: **the genus number and the family number tell
+different stories**, and here the interesting one is that it is alone in its genus while
+belonging to an enormous family.
+
+### And it surfaces something the roster was never going to say by itself
+
+Applying this rule finds the animals that are **the last of an entire branch** —
+
+- **Aardvark** — the only living species in its **order**. Not its genus, not its family:
+  its order. Everything else in Tubulidentata is gone.
+- **Tuatara** — the only survivor of **Rhynchocephalia**, which was diverse alongside the
+  first dinosaurs. It is not a lizard, and its nearest relatives died 60 million years ago.
+- **Aye-aye** · **Platypus** · **Walrus** · **Narwhal** · **Okapi** · **Kinkajou** ·
+  **Pronghorn** — each alone in its genus, and several alone in their family.
+- **Coelacanth** — two species, in an order thought extinct for 65 million years.
+
+**Nothing in the game currently tells the player that.** The rule Ayr asked for delivers
+it for free, and it turns "one of X" from a statistic into the game's quietest recurring
+fact: **some of these animals are the end of something.**
+
+### Where it applies
+
+All **~1,000** entries — the 406 already written and every one still to come. It is a
+sentence, not a rewrite.
