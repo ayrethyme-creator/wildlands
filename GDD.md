@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 13.0 — thirteenth pass over the full record, 2026-08-27**
+**Version 14.0 — fourteenth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -471,6 +471,22 @@ and rainforest regions. Without this the classifier fights itself over every mon
 **Caves are a micro-region type, not a biome** — inside forest, mountains, coast and desert.
 Ten species was too thin for a facility and an arc, and the reassignment is honest anyway:
 **a bat is a forest animal that sleeps in a cave.**
+
+### Placement can delete a fact — **[v14]**
+
+**A species in the wrong region does not just sit oddly; it can erase the thing it is famous
+for.**
+
+- **The kea stays in the mountains.** Its entire claim to fame is being **the world's only
+  alpine parrot** — move it to forest and the fact goes with it
+- **The mountain gorilla moves to rainforest**, because Bwindi is literally the
+  *Impenetrable Forest*, and **the elder quest moves with it** — which is why the mountains
+  quest became the Tibetan antelope and the shahtoosh ban
+- **The little blue penguin belongs on temperate coast, not polar.** It nests in burrows in
+  New Zealand and southern Australia, and putting it there **quietly teaches that most
+  penguins do not live on ice**
+
+**So placement is a content decision, not a filing decision.**
 
 ### Every biome must read as a functioning ecosystem — **[v5]**
 
@@ -1847,6 +1863,27 @@ player has seen (§6).
 deliberately **only animals that genuinely thrive as pets**; the teen list requires more
 responsibility.
 
+## The Kept is a taxonomy; the pet store is a mechanic — **[v14]**
+
+> **Ayr:** *"The Kept is not the childhood pet store. The Kept is domesticated animals. The
+> pet store animals are taken from the Kept list."*
+
+| | |
+|---|---|
+| **The Kept** | **A category** — every domesticated animal in the game |
+| **The pet store** | **A shop in the town** that stocks a subset of it |
+
+**And the store also stocks wild species** — the budgie from The Dry, the hermit crab from
+The Strand — **which only works because the store is a place rather than a list.**
+
+**Stocking is a mechanic. The Kept is a taxonomy.** Conflating them makes the pet menu and
+the roster fight each other; separating them lets the shop hold whatever a shop would
+plausibly hold.
+
+**One consequence worth noting:** the llama and alpaca are domesticated and belong in The
+Kept, **not in a biome** — their wild relatives, the guanaco and vicuña, are already in The
+Divide, which is exactly why the domestic pair should not also be sitting out there.
+
 ## The menus, as designed — **[v7]**
 
 **The cat is one species with cosmetic variants, and it arrives as a kitten.** One entry —
@@ -1972,6 +2009,34 @@ The player gets *"black cats are feared for no reason"* and **then** *"that was 
 
 `design/BADGES.txt` is the only source. The page is generated from it and **Uncle Albert
 verifies every member is a real species.**
+
+---
+
+# 12b. Literal-name skins — **[v14]**
+
+> **Ayr, from a rendering error:** *"The image for the Spectacled Bear rendered a black bear
+> with glasses on. If we could find the species that have noun names like that, we could make
+> a skin option that applies that option for a reward."*
+
+**A rendering error turned out to be a feature.** The model read *spectacled* as **wearing
+spectacles** — and it is funny because it is **almost right**: the bear's face markings
+really are called spectacles.
+
+**Unlockable joke skins.** A hat, a beard, a pair of glasses, a cape. **And the entry then
+says what the name actually refers to, so the joke lands twice.**
+
+### The roster already holds about forty
+
+| Theme | Animals |
+|---|---|
+| **Eyewear and beards** | Spectacled Bear · Spectacled Flying Fox · Lammergeier *(the bearded vulture)* · Bearded Seal · Bearded Dragon · Bearded Capuchin |
+| **Rank and vestments** | Kingfisher · King Cobra · King Penguin · Emperor Penguin · Emperor Angelfish · Royal Gramma · Hawaiian Monk Seal · Northern Cardinal · Mandarinfish · Mandarin Duck · **Secretary Bird — whose name may come from the quill pens clerks tucked behind the ear** |
+| **Weapons and tools** | Swordfish · Sword-billed Hummingbird · Sawfish · Scalloped Hammerhead · Yellow Boxfish |
+| **The supernatural** | Vampire Squid · Ornate Ghost Pipefish · Ghost Octopus · Zombie Worm · Deathstalker · Angelshark · Thorny Devil · Tasmanian Devil |
+| **An animal inside an animal** | California Sea Lion · Pygmy Seahorse · Zebra Shark · Tiger Shark · Leopard Seal · Southern Elephant Seal · Stoplight Parrotfish · Raccoon Butterflyfish · Tawny Frogmouth · Cockatoo Squid |
+
+**It costs nothing to design and it makes an animal memorable in exactly the way its name
+was trying to.**
 
 ---
 
