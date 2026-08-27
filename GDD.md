@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 16.0 — sixteenth pass over the full record, 2026-08-27**
+**Version 17.0 — seventeenth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -2450,31 +2450,72 @@ do a quest, **come back to a place that kept living.**
   makes the two-routes puzzle real; prepared plots make it approachable
 - **Can a facility fail?** Money running out, welfare collapsing, licence revoked
 
-## Sandbox mode — **[v11]**
+## Sandbox mode — **[v17]**
 
-**Drop the economy, keep the biology.** Money, space and time limits go; welfare, species
-suitability, expertise and consequences stay. **Removing the money is a fantasy. Removing
-the biology would be a lie.**
+### What is dropped, and what is kept
+
+| Dropped | Kept |
+|---|---|
+| Money, budgets, grants, ticket income | **Welfare.** Animals still have real needs |
+| Space limits, planning permission | **Species limits.** A whale still does badly in a tank |
+| Staff hiring costs | **Expertise.** A reptile vet still cannot treat a cetacean |
+| Time pressure, intake queues | **Non-releasable is still non-releasable** |
+| **The knowledge gate** — the codex is fully open | **Consequences.** Bad husbandry still produces a bad outcome |
+
+**Real sanctuaries are limited by money and by biology. Removing the money is a fantasy.
+Removing the biology would be a lie**, and this game does not tell those.
 
 ### What it is actually for
 
-**To let the player try what the campaign tells them to refuse.**
+**Sandbox is where you get to try the thing the campaign tells you to refuse.**
 
-Build the elephant enclosure. Spend what you like. Then watch what happens to an animal that
-walks fifty kilometres a day.
+The facility design says some animals do badly in captivity at all, and that **refusing them
+is the correct play.** In the campaign you refuse and move on — **and you are taking the
+game's word for it.**
 
-**Nothing lectures. The outcome is the argument.** Which means sandbox **proves the thesis
-rather than breaking it** — and that is the opposite of what a free-build mode usually does
-to a game with a conscience.
+**In sandbox you can say yes.** Build the elephant enclosure. Make it enormous. Spend the
+money you do not have. **Then watch what actually happens to an animal that walks fifty
+kilometres a day and lives in a family for sixty years.**
 
-| | |
+**Nobody stops you and nothing lectures you. The outcome is the argument.**
+
+That turns sandbox from the mode that breaks the thesis into **the mode that proves it** —
+and it does it the only way that really convinces anyone, **by letting them find out.**
+
+### The specifics
+
+| Question | Answer |
 |---|---|
-| **Unlocked early** | Because it teaches |
-| **Separate save** | So it carries no autobiography |
-| **Full codex granted** | You are not gathering knowledge here, you are using it |
-| **Release still available** | The win condition does not change |
+| **When is it unlocked?** | **Early, not postgame.** It teaches, and teaching late is worthless. Available once the first facility is earned |
+| **Separate save?** | **Yes.** The sanctuary shares the campaign save *because it carries the autobiography*. **Sandbox carries none — it is hypothetical, so it lives in its own file** |
+| **All species?** | **Yes, all 700**, plus whatever is decided about the sets below |
+| **Field knowledge?** | **Fully granted.** The campaign is where knowledge is earned; sandbox is where it is used. **Keeping the gate here would make a worse sandbox without making the campaign better** |
+| **Is there still release?** | **Yes**, and it is still the good ending. You simply are not doing it on a budget |
+| **Failure?** | **Welfare failure, yes. Financial failure, no** |
 
-**PROPOSED, not ruled on:** letting sandbox hold species from The Vigil.
+### **PROPOSED** — let sandbox be the one place the extinct can be kept
+
+The Vigil's 50 and the 50 fossils currently have no use beyond being looked at, and **Ayr
+has not decided what the Vigil *does*.**
+
+**Build an enclosure for a thylacine. For a mammoth. For a great auk.**
+
+**The game says nothing about it** — no lecture, no unlock message, no moral. It simply lets
+you, **and the silence is the comment.**
+
+**It also lands the de-extinction question in the player's hands rather than in a
+paragraph.** *You want to know whether we should bring them back? Here is what having one
+would actually involve.*
+
+**Optional, costs nothing structurally, and it gives two postgame sets a reason to exist.**
+Ayr's call.
+
+### **OPEN** — two sandbox questions
+
+- **Does sandbox include the visitor and education layer**, or only the animals?
+- **Does it include the twelve specialised facilities, or is it one unlimited site?**
+  Specialisation is a real constraint, and the argument for keeping it is that **building a
+  polar facility in a desert should still fail**
 
 ---
 
@@ -2567,6 +2608,8 @@ designed.**
 | 16 | **Free building layout, or prepared plots?** Free makes the two-routes puzzle real; plots make it approachable | The facility |
 | 17 | **Can a facility fail?** | The facility |
 | 18 | **Does the teen try all three careers** before choosing? | The teen years |
+| 19a | **Does sandbox include the visitor and education layer**, or only the animals? | Sandbox |
+| 19b | **Does sandbox use the twelve specialised facilities, or one unlimited site?** | Sandbox |
 | 19 | **The naming rule reveals each animal's fate on arrival** — a name means staying, a number means going. Right, or does it give away an ending that should be earned? | The facility |
 
 ## Parked deliberately — do not restart unprompted
