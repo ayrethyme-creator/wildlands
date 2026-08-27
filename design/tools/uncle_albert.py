@@ -142,10 +142,10 @@ for x in bogus:
 # Quest animals, by their CURRENT name. Update when a rename touches one -
 # that is the point: this check exists to catch a quest pointing at nothing.
 QUEST = ['Pine Marten', 'Iberian Lynx', 'Siamang', 'Orangutan', 'Jaguar', 'Harpy Eagle',
-         'Beaver', 'European Lobster', 'Horseshoe Crab', 'Stoplight Parrotfish',
+         'Eurasian Beaver', 'European Lobster', 'Horseshoe Crab', 'Stoplight Parrotfish',
          'Spinner Dolphin',
          'Blue Whale', 'Fennec Fox', 'Arabian Oryx', 'Snow Leopard', 'Polar Bear',
-         'Walrus', 'Bowhead Whale', 'Hedgehog', 'Buff-tailed Bumblebee', 'White Stork', 'Gemsbok',
+         'Walrus', 'Bowhead Whale', 'European Hedgehog', 'Buff-tailed Bumblebee', 'White Stork', 'Gemsbok',
          'Cheetah', 'African Elephant', 'Black Rhinoceros', 'Tibetan Antelope',
          'Crown-of-thorns Starfish', 'Protoceratops', 'Plesiosaurus', 'Tiktaalik']
 alln = {n for g, v in d.items() if g not in ('cut', 'cosmetic', 'merged') for n in v}
@@ -155,6 +155,50 @@ print('QUEST ANIMALS MISSING: %d' % len(missing))
 for x in missing:
     print('   ' + x)
     FAIL.append('quest animal missing: ' + x)
+
+# 7. generic names - a bare group word is not a species
+# Words that really are multi-species groups. Deliberately narrow: aardvark, cheetah,
+# jaguar, koala, lion, platypus, tiger, walrus, wolverine and swordfish are each exactly
+# ONE species, so a bare name is correct for them. Only list terms where a bare name is
+# genuinely ambiguous. This is a WARNING, not a failure.
+GROUP_WORDS = {
+ 'shark','whale','dolphin','seal','eagle','owl','hawk','falcon','kestrel','vulture',
+ 'frog','toad','newt','salamander','snake','python','viper','cobra','lizard','gecko',
+ 'skink','iguana','chameleon','turtle','tortoise','terrapin','crocodile','beetle','moth',
+ 'butterfly','spider','scorpion','crab','lobster','shrimp','jellyfish','jelly','worm',
+ 'ant','bee','wasp','fish','eel','ray','monkey','ape','lemur','bat','rat','mouse',
+ 'squirrel','deer','bear','fox','wolf','hyena','jackal','mongoose','civet','genet',
+ 'antelope','gazelle','camel','duck','goose','swan','crane','heron','stork','gull',
+ 'tern','penguin','parrot','macaw','cockatoo','pigeon','dove','sparrow','finch',
+ 'woodpecker','kingfisher','hornbill','flamingo','pelican','cuttlefish','octopus',
+ 'squid','nautilus','urchin','starfish','coral','sponge','anemone','barnacle','mussel',
+ 'snail','millipede','centipede','cicada','dragonfly','damselfly','mantis','baboon',
+ 'macaque','gibbon','marmoset','capuchin','colobus','langur','tarsier','sloth','tapir',
+ 'porcupine','hedgehog','shrew','mole','vole','hare','pika','marmot','chinchilla',
+ 'viscacha','ibex','chamois','lynx','hippo','rhino','kangaroo','wallaby','possum',
+ 'bandicoot','wombat','echidna','anteater','armadillo','pangolin','weasel','badger',
+ 'raccoon','coati','marten','beaver','gopher','chipmunk','lemming','hamster','gerbil',
+ 'firefly','ladybug','ladybird','hoverfly','bumblebee','honeybee','seahorse','pipefish',
+ 'wrasse','grouper','triggerfish','pufferfish','boxfish','angelfish','butterflyfish',
+ 'parrotfish','barracuda','salmon','tetra','danio','gourami','goby',
+}
+generic = []
+for g, v in d.items():
+    if g in GONE:
+        continue
+    for n in v:
+        if n.lower().replace('-', '').replace(' ', '') in GROUP_WORDS:
+            generic.append('%s  (%s)' % (n, g))
+print()
+print('WARNING - bare group names (not a failure, but check them): %d' % len(generic))
+for x in sorted(generic):
+    print('   ' + x)
+
+# 8. where the shortfall falls
+print()
+print('WHERE THE %d STILL TO CREATE WOULD GO' % (700 - seven_hundred))
+for k in sorted(BIOMES, key=lambda x: len(d[x])):
+    print('   %-12s %3d' % (k, len(d[k])))
 
 print()
 print('=' * 52)

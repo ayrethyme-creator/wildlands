@@ -10211,3 +10211,57 @@ Barnacle · Deep-sea Bamboo Coral · Deep-sea Vent Mussel
 
 **Uncle Albert caught one more** — the farmland quest pointed at "Bumblebee", which had
 become the buff-tailed. Third time he has caught a rename orphaning a quest.
+
+---
+
+## UNCLE ALBERT'S FINAL CHECK BEFORE THE NEW SPECIES
+
+> **Ayr, 2026-08-27.** *"Please have Uncle Albert do one last check before we make any
+> new species."*
+
+Two checks were added for this, because the risk before a creation phase is different:
+**a bare-group-name detector**, so a new species cannot reintroduce what the audit just
+removed, and **a per-biome shortfall report**, so the 44 land where they are needed.
+
+### The detector found thirteen the audit had missed
+
+**Beaver · Chamois · Chipmunk · Echidna · Gerbil · Hamster · Hedgehog · Honeybee ·
+Nautilus · Pangolin · Raccoon · Wolf · Wombat** — all named now.
+
+The best of them: **every pet Syrian hamster alive descends from one female and her
+litter dug out of a field near Aleppo in 1930.** And the **short-beaked echidna** has
+electroreception, which with the platypus makes exactly two mammals on earth that do.
+
+**And it correctly did NOT flag ten others.** Aardvark, cheetah, jaguar, koala, lion,
+platypus, tiger, walrus, wolverine and swordfish are each **exactly one species**, so a
+bare name is right for them. The first version of the check failed all ten; it was
+narrowed rather than left to cry wolf.
+
+### One flagged for Ayr
+
+**The beaver is now the Eurasian beaver**, because the Devon Beaver Trial quest is
+British. **But it is also a childhood rescue animal** — if the starting town reads as
+North American, it should be the North American beaver and the quest note should move.
+**Ayr's call.**
+
+### Where the 44 go
+
+| | | | |
+|---|---|---|---|
+| Open ocean | **28** | Mountains | 48 |
+| Farmland | **37** | Polar | 49 |
+| Coast | **40** | Forest | 53 |
+| Reef | **41** | Deep sea | 55 |
+| Desert | **43** | Savanna | 74 |
+| Wetlands | **45** | Rainforest | 93 |
+
+**The Blue is the thinnest biome in the game at 28** and the obvious first call. Farmland
+at 37 is second — and it is the starting town, so it is the one the player sees most.
+
+### Clean
+
+```
+targets       all exact          duplicates            0
+1000 total    closes             phantom new species   0
+quest animals all present        bare group names      0
+```

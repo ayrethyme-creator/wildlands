@@ -536,3 +536,34 @@ RENAME=Elephant Seal::Southern Elephant Seal|Right Whale::North Atlantic Right W
 ! Vent Mussel       -> Deep-sea Vent Mussel: houses bacteria in its gills and lives on
 !                      chemistry rather than sunlight.
 RENAME=Siphonophore::Giant Siphonophore|Comb Jelly::Venus's Girdle|Squat Lobster::Vent Squat Lobster|Sea Lily::Stalked Sea Lily|Glass Squid::Cockatoo Squid|Vent Shrimp::Eyeless Vent Shrimp|Deep-sea Barnacle::Vent Barnacle|Bamboo Coral::Deep-sea Bamboo Coral|Vent Mussel::Deep-sea Vent Mussel
+
+! ============================================================================
+! Found by Uncle Albert's bare-group-name check, 2026-08-27. Thirteen names that
+! looked specific but are not. Note he also flagged aardvark, cheetah, jaguar, koala,
+! lion, platypus, tiger, walrus, wolverine and swordfish - each of which really IS
+! exactly one species, so those stay as they are and the check was narrowed.
+! ============================================================================
+! Beaver    -> Eurasian Beaver: two species. The Devon Beaver Trial quest is the
+!              Eurasian one. FLAGGED FOR AYR - it is also a childhood rescue animal,
+!              so if the starting town reads as North American this should be the
+!              North American beaver instead and the quest note adjusted.
+! Chamois   -> Alpine Chamois
+! Chipmunk  -> Eastern Chipmunk: carries close to its own body weight in its cheeks.
+! Echidna   -> Short-beaked Echidna: the only echidna outside New Guinea, and the one
+!              with electroreception - which with the platypus makes two mammals on
+!              earth that have it.
+! Gerbil    -> Mongolian Gerbil: the pet species.
+! Hamster   -> Syrian Hamster: EVERY PET SYRIAN HAMSTER ALIVE descends from one female
+!              and her litter dug out of a field near Aleppo in 1930.
+! Hedgehog  -> European Hedgehog: the Hedgehog Street quest is British. Quest animal.
+! Honeybee  -> Western Honeybee: one of about a dozen honeybee species, and the only
+!              one kept at scale.
+! Nautilus  -> Chambered Nautilus
+! Pangolin  -> Sunda Pangolin: Critically Endangered, and the most trafficked of the
+!              eight pangolin species.
+! Raccoon   -> Common Raccoon
+! Wolf      -> Grey Wolf: needed, because the red wolf, Ethiopian wolf and maned wolf
+!              are all separately in the roster.
+! Wombat    -> Common Wombat: produces cube-shaped droppings, and is the only animal
+!              known to.
+RENAME=Beaver::Eurasian Beaver|Chamois::Alpine Chamois|Chipmunk::Eastern Chipmunk|Echidna::Short-beaked Echidna|Gerbil::Mongolian Gerbil|Hamster::Syrian Hamster|Hedgehog::European Hedgehog|Honeybee::Western Honeybee|Nautilus::Chambered Nautilus|Pangolin::Sunda Pangolin|Raccoon::Common Raccoon|Wolf::Grey Wolf|Wombat::Common Wombat
