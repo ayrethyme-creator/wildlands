@@ -10265,3 +10265,150 @@ targets       all exact          duplicates            0
 1000 total    closes             phantom new species   0
 quest animals all present        bare group names      0
 ```
+
+---
+
+## IDEA 105 — LITERAL-NAME SKINS
+
+> **Ayr, 2026-08-27.** *"The image for the Spectacled Bear rendered a black bear with
+> glasses on. If we could find the species that have noun names like that, we could make
+> a skin option that applies that option for a reward."*
+
+**A rendering error turned out to be a feature.** The model read "spectacled" as
+*wearing spectacles*, and it is funny because it is **almost right** — the bear's face
+markings really are called spectacles.
+
+These are unlockable joke skins, and they make an animal memorable in exactly the way
+its name was trying to.
+
+### The roster is already full of them — about 40
+
+| Theme | Animals |
+|---|---|
+| **Eyewear and beards** | Spectacled Bear · Spectacled Flying Fox · Lammergeier *(the bearded vulture)* · Bearded Seal · Bearded Dragon · Bearded Capuchin |
+| **Rank and vestments** | Kingfisher · King Cobra · King Penguin · Emperor Penguin · Emperor Angelfish · Royal Gramma · Hawaiian Monk Seal · Northern Cardinal · Mandarinfish · Mandarin Duck · **Secretary Bird — whose name may come from the quill pens clerks tucked behind the ear** |
+| **Weapons and tools** | Swordfish · Sword-billed Hummingbird · Sawfish · Scalloped Hammerhead · Yellow Boxfish |
+| **The supernatural** | Vampire Squid · Ornate Ghost Pipefish · Ghost Octopus · Zombie Worm · Deathstalker · Angelshark · Thorny Devil · Tasmanian Devil |
+| **An animal inside an animal** | California Sea Lion · Pygmy Seahorse · Zebra Shark · Tiger Shark · Leopard Seal · Southern Elephant Seal · Stoplight Parrotfish · Raccoon Butterflyfish · Tawny Frogmouth · Cockatoo Squid |
+
+A hat, a beard, a pair of glasses, a cape. **And the entry can then say what the name
+actually refers to — so the joke lands twice.**
+
+---
+
+## IDEA 106 — FIFTY BADGES
+
+> **Ayr, 2026-08-27.** *"Find concepts in the animal kingdom that would make good
+> badges... a high number is fine, as long as there are some that are easy and some that
+> are hard. Make it an even number."*
+
+**Fifty.** Round one below, all named, with sets and difficulty. Any of them can be
+replaced in later rounds.
+
+**Difficulty is set by the rarest animal in the set**, not the size of it. **E** = met
+early. **M** = spread across biomes. **H** = needs the deep sea, the postgame, or On the
+Brink.
+
+### Reproduction — 10
+
+| Badge | Concept | Set | |
+|---|---|---|---|
+| **The Granny** | Menopause, and the grandmother hypothesis | Orca · Beluga · Narwhal · Short-finned Pilot Whale · False Killer Whale | M |
+| **Blood Queen** | Menstruation — about 1.5% of mammals | Gorilla · Chimpanzee · Bonobo · Olive Baboon · Japanese Macaque | M |
+| **No Father Required** | Parthenogenesis in vertebrates | Komodo Dragon · Zebra Shark · Ball Python | M |
+| **The Switch** | Sequential hermaphroditism | Percula Clownfish · Stoplight Parrotfish · Bluestreak Cleaner Wrasse · Goliath Grouper | E |
+| **Dad's Turn** | Male pregnancy | Pygmy Seahorse · Ornate Ghost Pipefish · Leafy Seadragon · Weedy Seadragon | M |
+| **On Pause** | Embryonic diapause — a stoat can mate in summer and give birth ten months later | Stoat · Fisher · Black Bear · Sea Otter · Red Kangaroo | M |
+| **One Shot** | Semelparity — breed once, then die | Sockeye Salmon · Giant Pacific Octopus · Atlas Moth | M |
+| **The Colony** | Eusociality — and the naked mole-rat is the only mammal in the room | Naked Mole-Rat · Western Honeybee · Leafcutter Ant | E |
+| **Til Death** | Lifelong monogamy | Wandering Albatross · Rosy-faced Lovebird · Mute Swan · Grey Wolf | E |
+| **Nursery in the Mouth** | Mouthbrooding | Banggai Cardinalfish · Discus · *(third needed — see round two)* | M |
+
+### Senses — 8
+
+| Badge | Concept | Set | |
+|---|---|---|---|
+| **The Sixth Sense** | Electroreception — and platypus and echidna are the only mammals with it | Platypus · Short-beaked Echidna · Electric Ray · Scalloped Hammerhead | M |
+| **Seeing With Sound** | Echolocation, evolved separately in bats and toothed whales | Little Brown Bat · Greater Horseshoe Bat · Bottlenose Dolphin · Sperm Whale | E |
+| **Heat Vision** | Infrared pit organs | Sidewinder · Boa Constrictor · Bushmaster | M |
+| **Beyond Violet** | Ultraviolet vision | Common Kestrel · Reindeer · Mantis Shrimp | M |
+| **True North** | Magnetoreception | Loggerhead Turtle · Arctic Tern · European Robin | M |
+| **Through the Glare** | Polarised-light vision | Common Cuttlefish · Mantis Shrimp | E |
+| **Blacklight** | Biofluorescence | Deathstalker · Epaulette Shark · Atlantic Puffin | M |
+| **Lights On** | Bioluminescence | Anglerfish · Black Dragonfish · Atolla · Common Eastern Firefly | H |
+
+### The body — 8
+
+| Badge | Concept | Set | |
+|---|---|---|---|
+| **Grow It Back** | Regeneration | Axolotl · Common Brittle Star · Tiger Tail Sea Cucumber · Sunflower Sea Star | M |
+| **Rare Poison** | Venomous mammals — there are barely any | Platypus · Slow Loris | M |
+| **See-Through** | Transparency | Glass Frog · Glasswing Butterfly · Cockatoo Squid · Barreleye | H |
+| **Sub-Zero** | Antifreeze proteins | Antarctic Icefish · Arctic Cod · *(wood frog — needs adding)* | H |
+| **Second Bite** | A second set of jaws in the throat | Giant Moray · Stoplight Parrotfish | E |
+| **Built Wrong on Purpose** | Extreme selective breeding, and what it costs | French Bulldog · Manx · Munchkin · Bull Terrier | H |
+| **No Bones About It** | Invertebrate giants | Giant Squid · Colossal Squid · Japanese Spider Crab · Coconut Crab | H |
+| **Armour** | Convergent armour plating | Nine-banded Armadillo · Sunda Pangolin · Common Wombat · Glyptodon | H |
+
+### Evolution — 8
+
+| Badge | Concept | Set | |
+|---|---|---|---|
+| **Same Answer Twice** | Convergent evolution | Sugar Glider + Flying Squirrel · Thylacine + Grey Wolf · **Smilodon + Gorgonops, ninety million years apart** | H |
+| **The Island Rule** | Insular dwarfism *and* gigantism | Komodo Dragon · Coconut Crab · Pygmy Hippo | M |
+| **Grounded** | Flightlessness where nothing hunts on the ground — **and the hard half: most of these are the ones that are gone** | Kākāpō · Kiwi · Cassowary · Dodo · Giant Moa | H |
+| **Unchanged** | Living fossils | Coelacanth · Chambered Nautilus · Tuatara · Horseshoe Crab | H |
+| **End of the Line** | The last of an entire branch | Aardvark · Tuatara · Platypus · Aye-aye · Okapi | M |
+| **Made By Us** | Domestication, and what it does to a body | Domestic Fox · Silkworm · English Budgie · Angora Rabbit | H |
+| **Back From the Dead** | Lazarus taxa — written off, then found | Coelacanth · Silver-backed Chevrotain · Woolly Flying Squirrel | H |
+| **Not What It Looks Like** | Misleading names — a red panda is neither | Red Panda · Raccoon Dog · Aardwolf · Maned Wolf | E |
+
+### Behaviour — 8
+
+| Badge | Concept | Set | |
+|---|---|---|---|
+| **The Toolkit** | Tool use | Bearded Capuchin · Sea Otter · Common Raven · Giant Pacific Octopus | M |
+| **Passed Down** | Culture — behaviour taught rather than inherited | Japanese Macaque · Orca · Chimpanzee | M |
+| **Strange Allies** | Cooperation between unrelated species | Banded Sea Krait · Honey Badger · Bluestreak Cleaner Wrasse | M |
+| **The Impostor** | Mimicry | Mimic Octopus · Orchid Mantis · Ornate Ghost Pipefish · Marmalade Hoverfly | M |
+| **Who's That** | Mirror self-recognition | Giant Oceanic Manta · Bluestreak Cleaner Wrasse · Asian Elephant | M |
+| **The Village** | Cooperative breeding | Meerkat · Banded Mongoose · African Wild Dog | E |
+| **The Long Way** | Migration extremes | Arctic Tern · Globe Skimmer · Bar-tailed Godwit · Humpback Whale | M |
+| **The Long Sleep** | Hibernation and torpor | Alpine Marmot · Black Bear · Sword-billed Hummingbird | E |
+
+### Conservation — 4
+
+| Badge | Concept | Set | |
+|---|---|---|---|
+| **Only In Captivity** | Extinct in the wild | Any five from On the Brink tagged EW | H |
+| **Back From the Brink** | Recoveries that worked | California Condor · Przewalski's Horse · Whooping Crane · Mauritius Kestrel | H |
+| **The Linchpin** | Keystone species | Eurasian Beaver · Sea Otter · Grey Wolf · Stoplight Parrotfish | M |
+| **The Trade** | The most trafficked animals on earth | Sunda Pangolin · Tiger · Black Rhinoceros · Saiga | M |
+
+### Extremes — 4
+
+| Badge | Concept | Set | |
+|---|---|---|---|
+| **The Old Ones** | Extreme longevity | Greenland Shark · Bowhead Whale · Deep-sea Bamboo Coral · Sulcata Tortoise | H |
+| **The Smallest** | Miniature record-holders | Pygmy Marmoset · Pygmy Seahorse · Least Weasel · Rusty-spotted Cat | M |
+| **The Deepest** | Depth records | Mariana Snailfish · Cuvier's Beaked Whale · Southern Elephant Seal | H |
+| **The Highest** | Altitude records | Rüppell's Vulture · Bar-headed Goose · Alpine Chough · Himalayan Jumping Spider | M |
+
+### The spread
+
+```
+E  12    met early, sets often inside one or two biomes
+M  24    spread across biomes
+H  14    needs the deep sea, the postgame, or On the Brink
+      50
+```
+
+### Two to fix in round two
+
+**Nursery in the Mouth** needs a third member — mouthbrooding is real but thin in the
+current roster.
+
+**Sub-Zero** needs the **wood frog**, which is not in the roster: it **freezes solid,
+stops its heart, and thaws.** That makes it a strong candidate for one of the 44 still
+to create — a badge now has a say in which species get made, which is exactly what idea
+104 predicted.
