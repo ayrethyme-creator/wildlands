@@ -17,6 +17,7 @@ written for the new game yet.
 | **`design/BADGES.txt`** | Badge membership, the only source. The page is generated from it |
 | **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
 | **`NEW_DIRECTION.md`** | The design record, ~11,000 lines, append-only with dated headers |
+| **`design/tools/cousin_bob.py`** | **The document check.** *"Run it by Cousin Bob."* Verifies the docs still agree with the data |
 | **`design/tools/README.md`** | **Read this before quoting any number.** Documents both traps and the correct method |
 | **`design/new_species.md`** | The running list of species still to create |
 | **`design/cut_species.md`** | What was cut, and why. Check before proposing a removal |
@@ -36,6 +37,8 @@ uncle-albert.bat                       (double-click, or from the repo root)
 python design/tools/uncle_albert.py    (exits non-zero if anything is wrong)
 python design/tools/make_badge_page.py  (rebuilds badges.html from BADGES.txt)
 python design/tools/make_roster_page.py (rebuilds the roster page)
+cousin-bob.bat                          (checks the DOCS still match the data)
+python design/tools/cousin_bob.py
 ```
 
 Three wrong species counts were published to Ayr in one session — 461, 516, 465 — all
@@ -46,6 +49,13 @@ three times. That is what the tool is for.
 **Never hand-edit the badge data inside `design/badges.html`.** It is generated from
 `design/BADGES.txt` by `make_badge_page.py` and will be overwritten. Edit the txt, rebuild,
 then run it by Uncle Albert.
+
+**Run both before quoting anything.** Albert checks the data adds up. **Bob checks that
+what is written about the data is still true** — the numbers in this file, the file paths
+in every current-truth doc, whether a document has been cut off mid-sentence, and any
+sentence claiming a species is in a badge. Bob exists because on 2026-08-27 four
+statements in these documents had quietly stopped being true and no amount of re-reading
+was going to reliably find the next one.
 
 **2. Never regex-parse `game.part*.jsx`.** Serve the repo and read `window.__DEX` from
 `gallery.html`. `design/tools/read_ground_truth.js` is the sanctioned snippet.
@@ -97,7 +107,7 @@ it. Ayr decides.
 
 ## Where things stand, 2026-08-27
 
-Run Uncle Albert for the live version. As of this writing:
+Run Uncle Albert for the live version. **Cousin Bob checks these exact numbers**, so if they drift he fails rather than letting them rot:
 
 ```
 THE 700     biomes 606 + The Kept 50 = 656        44 still to create

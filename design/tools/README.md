@@ -55,8 +55,25 @@ onto `window`. Asking the running game is the only reliable source.
 | `make_roster_page.py` | Builds the browsable roster page **from `GROUND_TRUTH.txt`**. Reads no `.jsx` |
 | **`uncle_albert.py`** | **The check &mdash; "run it by Uncle Albert."** Covers **the roster and the badges**: group targets, the 1000 total, duplicate species, species marked new that already exist, quest animals that do not exist, and every badge member being a real species with tiers that match the set. Exits non-zero on failure. Run after any change to `PENDING_MOVES.txt` or `BADGES.txt` |
 | `make_badge_page.py` | Builds `design/badges.html` **from `BADGES.txt`**. Never hand-edit the data in the page &mdash; it is overwritten |
+| **`cousin_bob.py`** | **The document check &mdash; "run it by Cousin Bob."** Asserts that the docs still agree with the data: file paths that exist, the numbers in `HANDOFF.md`, stale badge counts, documents cut off mid-sentence, artifact links, and sentences claiming a species is in a badge. Exits non-zero on failure |
 | `sprite_audit.py` | Measures sprite bounding boxes and bottom gaps |
 | `hd2d_billboard.gdshader` | Y-locked billboard shader for Godot. **Untested** — there is no Godot in this environment |
+
+## Why there are two checkers
+
+**Uncle Albert checks the data. Cousin Bob checks the sentences about the data.**
+
+They exist for the same reason, found twice. Prose does not converge: re-reading a
+document is sampling, not scanning, so each pass turns up different things and nobody can
+ever say it is finished. A list of assertions converges, because it passes or it does not
+and it says the same thing twice.
+
+**So the rule is: anything a checker can assert should stop being something a person has
+to re-read.** When a fact keeps going stale, do not resolve to be more careful with it -
+move it somewhere a script can see it.
+
+Bob cannot check whether a statement is true about the *world*. "Elephants have menopause"
+is false and no tool will say so. That still needs knowing biology.
 
 ## Two rules that would have prevented every error of 2026-08-26
 
