@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 14.0 — fourteenth pass over the full record, 2026-08-27**
+**Version 15.0 — fifteenth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -1804,11 +1804,36 @@ never has room for.
 **Every entry states how many relatives the animal has** — the genus count, plus the wider
 group where that is more useful.
 
-> Panther Chameleon — one of about 23 *Furcifer* chameleons, and one of roughly 200
+It answers a question a reader always has and a field guide almost never does: **is this a
+one-off, or one of a crowd?**
+
+**Give the genus count, and where the wider group is the more useful number, give that too:**
+
+> **Panther Chameleon** — one of about 23 *Furcifer* chameleons, and one of roughly 200
 > chameleons.
 
-It answers a question readers always have and field guides rarely do: **is this a one-off, or
-one of a crowd?**
+> **Golden Poison Frog** — one of three *Phyllobates* frogs that carry batrachotoxin, out of
+> about 170 poison dart frogs.
+
+> **Sword-billed Hummingbird** — the only species in *Ensifera*, out of some 360
+> hummingbirds.
+
+**That last one shows why the pair matters.** The genus number and the family number tell
+different stories, and here the interesting one is that **it is alone in its genus while
+belonging to an enormous family.**
+
+### What the rule surfaces that the roster never would — **[v15]**
+
+Applying it finds **the animals that are the last of an entire branch:**
+
+- **Aardvark** — the only living species in its **order**. Not its genus, not its family:
+  **its order.** Everything else in Tubulidentata is gone
+- **Tuatara** — the only survivor of **Rhynchocephalia**, which was diverse alongside the
+  first dinosaurs. **It is not a lizard**, and its nearest relatives died 60 million years ago
+- **Aye-aye · Platypus · Walrus · Narwhal · Okapi · Kinkajou · Pronghorn** — each alone in
+  its genus, several alone in their family
+
+**That is where the *End of the Line* badge came from** — the writing rule found the set.
 
 ## The sources-and-changes layer — **[v2]**
 
@@ -1981,6 +2006,29 @@ Controlled / Baited / Lured). One idea serving two systems.
 **An achievement system that is actually a curriculum.** Each badge is a concept in biology,
 and **the set you must assemble to earn it is the lesson.**
 
+### The problem it solves, which the design had not named — **[v15]**
+
+**The game holds a lot of ideas that are too big for one animal's entry and too dry for a
+chapter.** Ayr's fix is to make the concept **a collectible instead of a lesson.**
+
+> **The badge is the reward. The concept is the payload.**
+
+A player collects a set because the badge is funny and displayable. **The concept arrives as
+the explanation of why those five animals belong together — and it arrives *after* they have
+already noticed the pattern themselves, which is the only order that teaches.**
+
+### Three layers of reward, doing three different jobs — **[v15]**
+
+| Layer | Scope | What it gives |
+|---|---|---|
+| **Signature ability** | **One animal** | A thing it *does* |
+| **Quest** | **48 animals** | A story and a real person |
+| **Badge** | **A set** | **A concept no single animal could carry** |
+
+**And it gives a species a second reason to exist.** Until badges, the 700 were spread for
+ecosystem balance. **Now a species can also be there because it completes a set** — which is
+exactly why the wood frog and the bumblebee bat are on the create list.
+
 Seven categories: Reproduction, Senses, The body, Evolution, Behaviour, Conservation,
 Extremes.
 
@@ -2004,6 +2052,24 @@ up on its own.**
 
 The player gets *"black cats are feared for no reason"* and **then** *"that was a badge."*
 **A tutorial that opens with an achievement menu is a menu.**
+
+### Badges are held to the same accuracy bar as everything else — **[v15]**
+
+**A badge is a claim about biology, so a near-miss is an error rather than a shortcut.**
+Two worked examples from the record:
+
+- **Menstruation and menopause are different things, and both deserve a badge.**
+  Menstruation is roughly **1.5% of mammals** — humans, apes, most Old World monkeys, a few
+  bats, elephant shrews and spiny mice; nearly every other mammal reabsorbs the lining.
+  **Menopause is known in six species on earth**: humans, orca, beluga, narwhal,
+  short-finned pilot whale and false killer whale
+- **The elephant belongs in the mirror-recognition badge and not in the menopause one.**
+  Elephant matriarchs keep breeding into old age. **They are the textbook case for why old
+  females matter, and they get there without menopause** — and blurring the two would break
+  the one concept the badge exists to teach
+
+**Fluorescence and bioluminescence are the same class of distinction**, which is why the
+Deathstalker had to come out of *Lights On*.
 
 ### Governance
 
