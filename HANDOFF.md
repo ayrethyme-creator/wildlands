@@ -8,7 +8,7 @@ written for the new game yet.
 
 ---
 
-## The five files that are authoritative
+## The files that are authoritative
 
 | File | What it is |
 |---|---|
@@ -17,6 +17,9 @@ written for the new game yet.
 | **`design/BADGES.txt`** | Badge membership, the only source. The page is generated from it |
 | **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
 | **`NEW_DIRECTION.md`** | The design record, ~10,000 lines, append-only with dated headers |
+| **`design/tools/README.md`** | **Read this before quoting any number.** Documents both traps and the correct method |
+| **`design/new_species.md`** | The running list of species still to create |
+| **`design/cut_species.md`** | What was cut, and why. Check before proposing a removal |
 
 **`NEW_DIRECTION.md` is too long to read.** Read the last few hundred lines for current
 state, and search it for a topic when you need one. **Its prose counts go stale** — the
@@ -32,6 +35,7 @@ banner at the top says so. Numbers come from Uncle Albert, never from the doc.
 uncle-albert.bat                       (double-click, or from the repo root)
 python design/tools/uncle_albert.py    (exits non-zero if anything is wrong)
 python design/tools/make_badge_page.py  (rebuilds badges.html from BADGES.txt)
+python design/tools/make_roster_page.py (rebuilds the roster page)
 ```
 
 Three wrong species counts were published to Ayr in one session — 461, 516, 465 — all
@@ -45,6 +49,19 @@ then run it by Uncle Albert.
 
 **2. Never regex-parse `game.part*.jsx`.** Serve the repo and read `window.__DEX` from
 `gallery.html`. `design/tools/read_ground_truth.js` is the sanctioned snippet.
+
+---
+
+## Two documents at the root that will mislead you
+
+**`README.md` describes the wrong game.** It is *Safari Saga* — eight biomes, eight gyms,
+an Elite Four. That is `main`, the finished game. **It is not what is being built.**
+
+**`ROADMAP.md` is from 2026-08-05 and has not been touched since.** It predates the
+1000-species restructure, the badges, the three careers, the facility system and the life
+stages. Some of its direction still holds — observation instead of battling, life stages
+instead of gyms — but **treat it as history, not as a plan.** `NEW_DIRECTION.md` supersedes
+it everywhere the two disagree.
 
 ---
 
@@ -62,6 +79,19 @@ These are in memory too, but they matter enough to repeat:
   and catch real bugs; take their reports seriously and check them.
 - **Never cut a species Ayr may already have caught** in the old game.
 - **Round numbers are firm.** 1000 total: 700 in-game, and 50/50/100/50/50 after.
+
+### Two rules that bite as soon as work resumes
+
+**Every field-guide entry states how many relatives the animal has** — the genus count,
+plus the wider group where that is more useful. Ayr asked for this on 2026-08-27 because
+it answers a question readers always have: *is this a one-off, or one of a crowd?*
+
+> Panther Chameleon — one of about 23 *Furcifer* chameleons, and one of roughly 200
+> chameleons.
+
+**Interest governs which species get made, not headcount.** The per-biome floor was a
+working guide and is **explicitly not a target** — a biome gets what is worth having in
+it. Ayr decides.
 
 ---
 
