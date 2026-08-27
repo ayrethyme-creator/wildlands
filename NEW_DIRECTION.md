@@ -9817,3 +9817,39 @@ the new name. Both tools handle it.
 ~85 a group, not a species
  7  wrong biome
 ```
+
+---
+
+## SPECIES AUDIT SECTION 4 IS DONE
+
+> **Ayr, 2026-08-27.** *"Do the moves now."*
+
+Seven pure moves, no naming decisions.
+
+| Animal | From | To | |
+|---|---|---|---|
+| **Ring-tailed Lemur** | Desert | **Rainforest** | Madagascan gallery forest and spiny scrub |
+| **Sifaka** | Desert | **Rainforest** | Madagascan forest |
+| **Agouti** | Savanna | **Rainforest** | Neotropical forest floor |
+| **Komodo Dragon** | Rainforest | **Savanna** | Dry savanna woodland and grassland on Indonesian islands — the opposite habitat |
+| **Pallas's Cat** | Savanna | **Mountains** | Central Asian steppe and rocky high country, and the most cold-adapted small cat there is |
+| **Patagonian Mara** | Mountains | **Savanna** | Patagonian steppe — open plain, not mountain |
+| **Coelacanth** | Open ocean | **Deep sea** | 150–250 m, in submarine caves |
+
+**The coelacanth is the best of the seven to have moved.** It was thought extinct for
+65 million years until one turned up in a South African fish market in 1938, and it
+belongs in the biome the player reaches last, through instruments — not in the open
+water where anyone might swim past it.
+
+```
+Rainforest 93 · Savanna 74 · Desert 43 · Mountains 48 · Open ocean 28 · Deep sea 55
+```
+
+**Three of the four audit sections are done.**
+
+```
+ 0  not an animal              done
+ 0  redundant pairs            done
+ 0  wrong biome                done
+~85 a group, not a species     all that is left
+```

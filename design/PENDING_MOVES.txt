@@ -215,3 +215,30 @@ rainforest>cut=Fruit Bat
 ! Triggerfish -> Titan Triggerfish: the large aggressive one that chases divers off
 !   its nest.
 RENAME=Otter::Eurasian River Otter|Gibbon::Lar Gibbon|Lynx::Eurasian Lynx|Hippo::Common Hippopotamus|Butterflyfish::Raccoon Butterflyfish|Pufferfish::Tiger Pufferfish|Triggerfish::Titan Triggerfish
+
+! ============================================================================
+! SPECIES AUDIT - section 4, wrong biome. Ayr 2026-08-27. Pure moves, no naming.
+! ============================================================================
+
+! Ring-tailed lemur and sifaka were in the DESERT. Both are Madagascan forest
+! animals - gallery forest and spiny scrub for the lemur, forest for the sifaka.
+desert>rainforest=Ring-tailed Lemur|Sifaka
+
+! Komodo dragon was in RAINFOREST. It lives in dry savanna woodland and grassland
+! on Indonesian islands, which is the opposite habitat.
+rainforest>savanna=Komodo Dragon
+
+! Agouti was in SAVANNA. Neotropical forest floor.
+savanna>rainforest=Agouti
+
+! Pallas's cat was in SAVANNA. Central Asian steppe and rocky high country, and it
+! is already the most cold-adapted small cat there is.
+savanna>alpine=Pallas's Cat
+
+! Patagonian mara was in MOUNTAINS. Patagonian steppe - open plain, not mountain.
+alpine>savanna=Patagonian Mara
+
+! Coelacanth was in the OPEN OCEAN. It lives at 150-250 m in submarine caves, which
+! is the deep sea - and it is the better home for the animal thought extinct for
+! 65 million years until one turned up in a South African fish market in 1938.
+opensea>deepsea=Coelacanth

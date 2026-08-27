@@ -117,7 +117,7 @@ Atlantic right whale is the one in the conservation story*
 
 ---
 
-## 4. BIOLOGICALLY WRONG PLACEMENT
+## 4. BIOLOGICALLY WRONG PLACEMENT  ✅ ALL SEVEN APPLIED 2026-08-27
 
 | Animal | Currently | Should be | Why |
 |---|---|---|---|
