@@ -242,3 +242,44 @@ alpine>savanna=Patagonian Mara
 ! is the deep sea - and it is the better home for the animal thought extinct for
 ! 65 million years until one turned up in a South African fish market in 1938.
 opensea>deepsea=Coelacanth
+
+! ============================================================================
+! SPECIES AUDIT - section 3, THE CANOPY. Ayr 2026-08-27. Nineteen generics named
+! to a real species. In every case the species chosen is the one carrying the fact.
+! ============================================================================
+! Chameleon        -> Panther Chameleon: males from different regions are so
+!                     differently coloured they were long thought separate species.
+! Civet            -> Asian Palm Civet: the kopi luwak animal, already the subject
+!                     of its existing field-guide entry.
+! Langur           -> Red-shanked Douc: called the costumed ape.
+! Marmoset         -> Pygmy Marmoset: the smallest monkey on earth, fits in a hand.
+! Sloth            -> Brown-throated Sloth: descends to the ground once a week to
+!                     defecate, and moths living in its fur lay eggs in the dung.
+! Tapir            -> Malayan Tapir: black and white in halves, and the calves are
+!                     striped and spotted like a watermelon.
+! Tarsier          -> Philippine Tarsier: eyes larger than its brain, and it cannot
+!                     move them - so the head turns 180 degrees instead.
+! Capuchin         -> Bearded Capuchin: the stone-tool users. Brazilian groups have
+!                     cracked nuts with anvils for 3,000 years and the layers can be
+!                     excavated. This is the animal the existing entry describes.
+! Colobus          -> Black-and-white Colobus: no thumbs at all.
+! Dart Frog        -> Golden Poison Frog: the most poisonous animal on earth - one
+!                     frog carries enough to kill ten people.
+! Glass Frog       -> Fleischmann's Glass Frog: you can watch its heart beat through
+!                     its skin.
+! Hummingbird      -> Sword-billed Hummingbird: the only bird with a bill longer than
+!                     its own body, and it has to preen with its feet.
+! Stick Insect     -> Chan's Megastick: the longest insect ever recorded, 56 cm of
+!                     body, found in Borneo.
+! Leaf Insect      -> Giant Leaf Insect: not only leaf-shaped but marked with fake
+!                     bite holes, and it rocks as it walks to mimic a leaf in wind.
+! Coati            -> White-nosed Coati: females band in noisy groups of thirty and
+!                     males live alone, so naturalists described them as two species.
+! Chevrotain       -> Silver-backed Chevrotain: lost to science for nearly 30 years
+!                     and photographed again in Vietnam in 2019.
+! Spider Monkey    -> Black Spider Monkey: the tail is a fifth limb with its own
+!                     fingerprint-like ridges and can pick a grape.
+! Howler Monkey    -> Mantled Howler: an enlarged hollow hyoid bone turns the call
+!                     into a roar audible five kilometres away.
+! Basilisk Lizard  -> Common Basilisk: the one that runs across water.
+RENAME=Chameleon::Panther Chameleon|Civet::Asian Palm Civet|Langur::Red-shanked Douc|Marmoset::Pygmy Marmoset|Sloth::Brown-throated Sloth|Tapir::Malayan Tapir|Tarsier::Philippine Tarsier|Capuchin::Bearded Capuchin|Colobus::Black-and-white Colobus|Dart Frog::Golden Poison Frog|Glass Frog::Fleischmann's Glass Frog|Hummingbird::Sword-billed Hummingbird|Stick Insect::Chan's Megastick|Leaf Insect::Giant Leaf Insect|Coati::White-nosed Coati|Chevrotain::Silver-backed Chevrotain|Spider Monkey::Black Spider Monkey|Howler Monkey::Mantled Howler|Basilisk Lizard::Common Basilisk

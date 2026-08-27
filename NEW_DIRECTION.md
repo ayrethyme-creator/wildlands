@@ -9853,3 +9853,41 @@ Rainforest 93 · Savanna 74 · Desert 43 · Mountains 48 · Open ocean 28 · Dee
  0  wrong biome                done
 ~85 a group, not a species     all that is left
 ```
+
+---
+
+## THE CANOPY IS NAMED — nineteen species
+
+> **Ayr, 2026-08-27.** *"Ok so the rainforest one please."*
+
+| Was | Now | The fact that earned it |
+|---|---|---|
+| Chameleon | **Panther Chameleon** | Males from different regions are so differently coloured they were long thought separate species |
+| Civet | **Asian Palm Civet** | The kopi luwak animal — already the subject of its existing entry |
+| Langur | **Red-shanked Douc** | Called *the costumed ape* |
+| Marmoset | **Pygmy Marmoset** | **The smallest monkey on earth.** Fits in a cupped hand |
+| Sloth | **Brown-throated Sloth** | Comes down once a week to defecate — and **moths living in its fur lay their eggs in the dung** |
+| Tapir | **Malayan Tapir** | Black and white in halves, and the calves are striped and spotted like a watermelon |
+| Tarsier | **Philippine Tarsier** | **Eyes larger than its brain**, and it cannot move them — so the head turns 180° instead |
+| Capuchin | **Bearded Capuchin** | The stone-tool users. Brazilian groups have cracked nuts with anvils for **3,000 years**, and the layers can be excavated |
+| Colobus | **Black-and-white Colobus** | No thumbs at all |
+| Dart Frog | **Golden Poison Frog** | **The most poisonous animal on earth.** One frog carries enough to kill ten people |
+| Glass Frog | **Fleischmann's Glass Frog** | You can watch its heart beat through its skin |
+| Hummingbird | **Sword-billed Hummingbird** | **The only bird with a bill longer than its own body** — it has to preen with its feet |
+| Stick Insect | **Chan's Megastick** | The longest insect ever recorded. 56 cm of body, found in Borneo |
+| Leaf Insect | **Giant Leaf Insect** | Not just leaf-shaped but **marked with fake bite holes**, and it rocks as it walks to mimic a leaf in wind |
+| Coati | **White-nosed Coati** | Females band in noisy groups of thirty and males live alone, so naturalists described them as two species |
+| Chevrotain | **Silver-backed Chevrotain** | **Lost to science for nearly thirty years** and photographed again in Vietnam in 2019 |
+| Spider Monkey | **Black Spider Monkey** | The tail is a fifth limb with its own fingerprint-like ridges, and it can pick a grape |
+| Howler Monkey | **Mantled Howler** | An enlarged hollow hyoid bone turns the call into a roar audible five kilometres away |
+| Basilisk Lizard | **Common Basilisk** | The one that runs across water |
+
+**Every one of these was already a real animal in the game — it just had the wrong name
+on it.** Nothing was added or removed; The Canopy stays at 93.
+
+```
+ 0  not an animal              done
+ 0  redundant pairs            done
+ 0  wrong biome                done
+~66 a group, not a species     rainforest done, eleven biomes to go
+```
