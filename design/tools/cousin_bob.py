@@ -24,7 +24,7 @@ So: anything Bob can assert should stop being something anyone has to re-read.
 
 Verifies:
   1. every file path mentioned in a current-truth doc actually exists
-  2. every number in HANDOFF.md matches what the data says right now
+  2. every number in HANDOFF.md and GDD.md matches what the data says right now
   3. every "N badges" claim in a current-truth doc is the real number
   4. no current-truth doc ends mid-sentence (the LINKS.md failure)
   5. artifact links are well formed, and none is duplicated under two names
@@ -42,7 +42,7 @@ os.chdir("C:/Claude/wildlands")
 FAIL, WARN = [], []
 
 # Documents that claim to describe the CURRENT state. Held to the numbers.
-STRICT = ['HANDOFF.md', 'design/LINKS.md', 'design/tools/README.md',
+STRICT = ['HANDOFF.md', 'GDD.md', 'design/LINKS.md', 'design/tools/README.md',
           'design/new_species.md', 'design/cut_species.md']
 
 # Append-only history. Old entries are SUPPOSED to contain superseded numbers -
@@ -95,6 +95,7 @@ TRUTH = {
     'exist': len(allbadge) - len(tocreate),
     'tocreate': len(tocreate),
 }
+TRUTH['badrep'] = len(dict(badges)['Bad Reputation'])
 TRUTH['subtotal'] = TRUTH['biomes'] + TRUTH['kept']
 TRUTH['shortfall'] = 700 - TRUTH['subtotal']
 
@@ -169,6 +170,27 @@ for rx, keys in CHECKS:
         print('   %-20s doc %-6s data %-6s %s' % (k, got, want, 'ok' if ok else 'WRONG'))
         if not ok:
             FAIL.append('HANDOFF.md says %s is %d, the data says %d' % (k, got, want))
+
+# ------------------------------------------------ 2b. the numbers inside GDD.md
+g = read('GDD.md')
+GDD_CHECKS = [
+    (r'(\d+) of the 700 exist and (\d+) remain', ['subtotal', 'shortfall']),
+    (r'\*\*Bad Reputation\*\*, (\d+) members', ['badrep']),
+]
+print()
+print('NUMBERS IN GDD.md')
+for rx, keys in GDD_CHECKS:
+    m = re.search(rx, g)
+    if not m:
+        WARN.append('GDD.md no longer states: %s' % keys)
+        print('   %-38s NOT STATED' % ', '.join(keys))
+        continue
+    for i, k in enumerate(keys):
+        got, want = int(m.group(i + 1)), TRUTH[k]
+        ok = got == want
+        print('   %-20s doc %-6s data %-6s %s' % (k, got, want, 'ok' if ok else 'WRONG'))
+        if not ok:
+            FAIL.append('GDD.md says %s is %d, the data says %d' % (k, got, want))
 
 # --------------------------------------- 3. "N badges" anywhere in a live doc
 print()
