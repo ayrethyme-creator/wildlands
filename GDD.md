@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 8.0 — eighth pass over the full record, 2026-08-27**
+**Version 9.0 — ninth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -264,6 +264,24 @@ because it tried to explain the world from inside. **The game openly has an auth
 author explains it from outside** (§14). It is a place a person built on purpose, and at
 the end that person says so.
 
+### Why it is called Terrane — **[v9]**
+
+**A *terrane* is a fragment of crust with its own separate history, later joined to a larger
+mass.** That is literally what this world is: **twelve regions assembled from pieces that
+never touched in reality.**
+
+**A real technical word doing honest work** — which is the same standard every other name in
+the game is held to.
+
+### The names of the postgame areas mean something too
+
+| Area | Why |
+|---|---|
+| **The Vigil** | **A vigil is held *for* someone** |
+| **The Record** | As in the fossil record. Plain, and it points at the quests' theme of *how anyone knows* |
+| **The Kept** | The animals humans made and keep. **Sits deliberately uneasily beside The Vigil** |
+| **On the Brink** | **The only region name that describes a condition rather than a place** — which is exactly right, because it is the only region whose animals share a condition rather than a habitat |
+
 ### What the player is ever told — **[v7]**
 
 **Nothing. Codex only.**
@@ -330,6 +348,33 @@ exists.
 **And the pattern is already built.** Safari Saga's `runSeed` already deals each species an
 abundance tier per save on a fixed map, so a save stays consistent with itself across
 sessions. **This keeps what works rather than replacing it.**
+
+## One home region, eleven field regions — **[v9]**
+
+**A biome is a category, not a place.** Savanna exists in Kenya, Namibia, Brazil and
+northern Australia; *"go to the savanna"* is not a destination the way *"go to Nairobi"* is.
+**Terrane resolves that by making each biome one named, bounded, walkable region.**
+
+- **Home is The Furrows** — where the player grows up, where the child and teen stages
+  happen, and **where they come back between field seasons.** It is also the biome humans
+  actually live in
+- **Eleven field regions**, one per remaining biome
+
+### Travel is a life event, not a menu
+
+**You travel the way the professions actually do:** field seasons, flights, boats, a posting
+that lasts months. That is what makes returning to a place across decades mean something.
+
+### What is inside a region
+
+Each is a **contiguous scrolling area** — not a screen, not a menu — containing:
+
+- **Micro-regions**: a waterhole, a burnt block, a village edge, a gorge
+- **The facility**, established during the young adult stage
+- **Four quests**, one per adult life stage
+- **Guaranteed-encounter sites**: the beaver pond, the moose field
+- **Seeded content**: which micro-regions generate where, which animals are present this
+  run, the weather, the season
 
 ### Biomes are mosaics, not backdrops — **[v2]**
 
@@ -1083,17 +1128,47 @@ sanctuary**, consistent with the unlock rule being documentation rather than pos
 **The childhood beaver closes its own loop here** — the animal you raised as a child can be
 visited as an adult, in the wild, doing what beavers do.
 
-### The naming rule
+### The naming rule — **expanded in [v9]**
 
 ```
 number at documentation   →   name at outcome
 ```
 
-**Field records really are numbered when they are made.** Animals slated for release stay
-numbered; the player names them at release. The number is the record; the name is the ending.
+**Releasable animals are numbered on intake. The player names them at the moment of
+release.**
+
+It takes the real practice — **rehabilitators use numbers precisely because naming leads to
+attachment, attachment leads to handling, and a handled animal cannot go home** — and keeps
+the reward instead of only the discipline. **The player still names every animal. They just
+have to earn the right by letting it go.**
+
+### The same act, with opposite meanings
+
+| Outcome | When it is named | What the name *is* |
+|---|---|---|
+| **Released** | As it leaves | **A goodbye gift.** The last thing you do for it — and the reason you are allowed to is that **you are not keeping it** |
+| **Non-releasable** | When it becomes a resident | **An admission.** It gets a name because **it is not going anywhere** |
+
+**Nothing else in the game does that with a single verb.**
+
+### The number is not a placeholder
+
+Field numbers are real and they carry information — species code, year, sequence.
+**BEAV-03. RT-2419.** A low number means early in your career, so **an elder walking past a
+two-digit number is looking at their first season.**
+
+**Keep the number visible after naming**, as real records do. *"Willow (BEAV-03)"* says more
+than either half alone.
+
+### **OPEN** — the rule tells the player the outcome
+
+The rule implies **the game knows at intake** whether an animal is going home, because a
+name means staying and a number means going. So the player learns each animal's fate the
+moment it arrives. **That may be exactly right — or it may give away an ending that should
+be earned.** Ayr's call.
 
 **Suggested names are drawn from the language of the place the animal actually comes from**,
-as zoos really do. **OPEN / deferred** — this needs sourcing properly rather than automating.
+as zoos really do. **Deferred** — this needs sourcing properly rather than automating.
 
 ---
 
@@ -2003,6 +2078,7 @@ designed.**
 | 16 | **Free building layout, or prepared plots?** Free makes the two-routes puzzle real; plots make it approachable | The facility |
 | 17 | **Can a facility fail?** | The facility |
 | 18 | **Does the teen try all three careers** before choosing? | The teen years |
+| 19 | **The naming rule reveals each animal's fate on arrival** — a name means staying, a number means going. Right, or does it give away an ending that should be earned? | The facility |
 
 ## Parked deliberately — do not restart unprompted
 
