@@ -466,3 +466,8 @@ RENAME=Flying Fish::Atlantic Flyingfish|Hammerhead Shark::Scalloped Hammerhead|M
 ! Boxfish        -> Yellow Boxfish: secretes a toxin when stressed that can kill
 !                   everything in a tank, including itself.
 RENAME=Brittle Star::Common Brittle Star|Sea Cucumber::Tiger Tail Sea Cucumber|Moray Eel::Giant Moray|Pipefish::Ornate Ghost Pipefish|Parrotfish::Stoplight Parrotfish|Sea Snake::Banded Sea Krait|Seahorse::Pygmy Seahorse|Wobbegong::Tasselled Wobbegong|Cleaner Wrasse::Bluestreak Cleaner Wrasse|Reef Shark::Whitetip Reef Shark|Boxfish::Yellow Boxfish
+
+! --- Ayr, 2026-08-27: the pet-store hermit crab. It is already in the roster - the
+! --- Caribbean hermit crab (Coenobita clypeatus), the "purple pincher", is the species
+! --- sold in almost every North American pet store. No new entry: it is STOCKED in the
+! --- pet store the way the budgie and the wild hermit crab already are.

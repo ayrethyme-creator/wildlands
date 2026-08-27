@@ -10097,3 +10097,74 @@ a tank, itself included)*
 ```
 ~8 a group, not a species     eight biomes done, four to go
 ```
+
+---
+
+## IDEA 104 — BADGES THAT TEACH A CONCEPT
+
+> **Ayr, 2026-08-27.** *"I like the idea of having a section dedicated to concepts in the
+> animal kingdom. But that can be really boring and heavy for the player that is just
+> there to play a fun game... maybe an achievement-like system that is more about
+> education than people realise. Catch these 5 animals, unlock a special badge, and that
+> badge is something funny they can display, but teaches a concept."*
+
+**This is the answer to a problem the design had and had not named.** The game holds a
+lot of ideas that are too big for one animal's entry and too dry for a chapter. Ayr's
+fix is to make the concept **a collectible instead of a lesson.**
+
+### The mechanism
+
+**The badge is the reward. The concept is the payload.**
+
+A player collects a set because the badge is funny and displayable. The concept arrives
+as the explanation of why those five animals belong together — and it arrives *after*
+they have already noticed the pattern themselves, which is the only order that teaches.
+
+### Why it matters structurally
+
+The roster now has **three layers of reward**, and they do different jobs:
+
+| Layer | Scope | What it gives |
+|---|---|---|
+| **Signature ability** | One animal | A thing it *does* |
+| **Quest** | 48 animals | A story and a real person |
+| **Badge** | A *set* | **A concept that no single animal could carry** |
+
+It also gives a second reason for a species to exist. Until now the 700 were spread for
+ecosystem balance; **a species can now also be there because it completes a set.**
+
+### The correction that makes the first badge better
+
+Ayr said menstruation; the pilot whale fact is **menopause**. They are different things
+and **both are worth a badge**:
+
+- **Menstruation** — roughly **1.5% of mammals**. Humans, apes, most Old World monkeys,
+  a few bats, elephant shrews, spiny mice. Nearly every other mammal reabsorbs the lining.
+- **Menopause** — **six species on earth.** Humans, orca, beluga, narwhal, short-finned
+  pilot whale, false killer whale.
+
+### Twelve badges, and eight of the sets are already complete
+
+| Badge | Concept | The set |
+|---|---|---|
+| **The Granny** | **Menopause**, and the grandmother hypothesis — evolution keeping post-reproductive females alive because the pod needs what they know | Orca · Beluga · Narwhal · Short-finned Pilot Whale · False Killer Whale — **all five already in the game** |
+| **Blood Queen** | Menstruation, and how rare it is | Gorilla · Chimpanzee · Bonobo · Olive Baboon · Japanese Macaque |
+| **No Father Required** | **Parthenogenesis** — virgin birth in vertebrates | Komodo Dragon · Zebra Shark · Ball Python |
+| **The Switch** | **Sequential hermaphroditism** | Percula Clownfish · Stoplight Parrotfish · Bluestreak Cleaner Wrasse · Goliath Grouper — *and the game already has a Clownfish Matriarch life stage, so the mechanic exists* |
+| **Same Answer Twice** | **Convergent evolution** | Sugar Glider + Flying Squirrel · Thylacine + Wolf · Echidna + Hedgehog + Porcupine · Fennec + Black-tailed Jackrabbit · Smilodon + Gorgonops, **90 million years apart** |
+| **Grounded** | **Flightlessness where there are no ground predators** — and the hard half: the flightless island birds are disproportionately the ones that are gone | Kākāpō · Kiwi · Cassowary · **Dodo and Giant Moa, from the Vigil** |
+| **On Pause** | **Embryonic diapause** — a stoat can mate in summer and give birth ten months later because the embryo simply stops | Stoat · Fisher · Black Bear · Sea Otter · Red Kangaroo |
+| **The Sixth Sense** | **Electroreception** — and the platypus and echidna are the only mammals that have it | Platypus · Echidna · Electric Ray · Scalloped Hammerhead |
+| **The Colony** | **Eusociality**, and the naked mole-rat is the only mammal in the room | Naked Mole-Rat · Honeybee · Leafcutter Ant |
+| **Rare Poison** | **Venomous mammals** — there are barely any | Platypus · Slow Loris |
+| **The Island Rule** | Insular **dwarfism and gigantism**, in both directions | Komodo Dragon · Coconut Crab — **needs more species; a candidate reason to add some** |
+| **Lights On** | Bioluminescence and biofluorescence | Most of The Dark, plus the Deathstalker |
+
+### Where this changes the writing
+
+The badge text is where the **funny** lives; the concept sits underneath it. *"The
+Granny"* is a joke until the player reads why an orca pod follows a female who stopped
+breeding thirty years ago.
+
+**And the badge is the natural place to state the genus counts from idea 103.** "One of
+six species on earth" is exactly the sentence a badge exists to deliver.
