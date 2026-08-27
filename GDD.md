@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 3.0 — third pass over the full record, 2026-08-27**
+**Version 4.0 — fourth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -229,6 +229,40 @@ the end that person says so.
 | Polar | **The Floe** |
 | Farmland | **The Furrows** |
 
+## The map is handmade. Only its contents are seeded — **[v4]**
+
+> **Ayr:** *"I don't know if I want a new world map generated every time."*
+
+**The doubt was right, and it overturns the original seeded-world idea.**
+
+**This game is about attachment to a place across a lifetime** — six life stages, returning
+to the same biome four times, the beaver pond widening over decades, the raven's descendants
+recognising you. **Randomisation fights every one of those.** You cannot return somewhere
+that was never the same place. *"Come back to the savanna as an elder"* only lands if it is
+**the** savanna — the same ridge, the same waterhole, the same crooked tree that was already
+old when you were an apprentice.
+
+Three more reasons: **beloved game worlds are specific** (Hyrule, Pelican Town, Hallownest —
+procedural worlds are admired for their systems and almost never loved as geography);
+**48 authored quests need somewhere to be**, and placing fixed story into generated terrain
+is one of the hardest problems in the field; and **replay value is already solved** by three
+careers that are three different games, so generation was solving a problem that no longer
+exists.
+
+| Fixed and authored | Seeded per save |
+|---|---|
+| The world map, and where the twelve regions sit | Which animals are present this run, and how abundant |
+| Each region's terrain, coastline and landmarks | Where individuals are on a given day |
+| Micro-region *locations* — the waterhole, the gorge | Weather, and how a season runs this year |
+| Where the facility goes | Which quest reaches you first |
+| The 48 quests and their places | The rarity tier each species is dealt |
+
+**So the ridge is always the ridge. What is standing on it is not.**
+
+**And the pattern is already built.** Safari Saga's `runSeed` already deals each species an
+abundance tier per save on a fixed map, so a save stays consistent with itself across
+sessions. **This keeps what works rather than replacing it.**
+
 ### Biomes are mosaics, not backdrops — **[v2]**
 
 > **Ayr, idea 70:** each biome is **not one open field with rocks and trees**. Every region
@@ -252,8 +286,8 @@ palette swaps to fake them.**
 
 | Area | What it holds |
 |---|---|
-| **On the Brink** | 50 species still alive — critically endangered and extinct-in-the-wild. Unlocks after all twelve young-adult quests |
-| **The Vigil** | 50 species that are gone. A memorial, not a collection |
+| **On the Brink** | **The thirteenth region, and it is required, not optional.** 50 species still alive — critically endangered and extinct-in-the-wild. Unlocks when all twelve biomes are finished, and **completing it is what unlocks the postgame.** The final-boss position, because it is the most important |
+| **The Vigil** | 50 species that are gone. **A memorial, not a collection** — and stripped of everything still alive, it finally becomes what it always claimed to be |
 | **The Telling** | 100 mythological creatures, one per culture, themed on understanding through stories |
 | **The Record** | 50 fossil species across 13 geological periods |
 | **The Breeding Centre** | 50 domestic breeds. Endgame unlock, appears in town |
@@ -365,7 +399,7 @@ rather than one story told three times.**
 
 | Shared across all three | Built three times |
 |---|---|
-| The world, terrain and generation | The core encounter loop |
+| The world, terrain and the handmade map | The core encounter loop |
 | All species, art and field-guide text | The "how do you reach caught" mechanic |
 | The twelve biomes and their terrain | The interface for that loop |
 | The conservation stories and their real history | Career-specific tools and progression |
@@ -396,7 +430,7 @@ the photographer *feels*, not a model to copy.
 
 | | The loop | "Caught" means |
 |---|---|---|
-| **Photographer** | **Observational.** Scout, read light and wind, position, wait, take the shot when the animal does something worth photographing | **A publishable frame** — sharp, well lit, ideally showing *behaviour* rather than a portrait |
+| **Photographer** | **Observational.** Scout, read light and wind, position, and work the moment | **A publishable frame** — sharp, well lit, ideally showing *behaviour* rather than a portrait |
 | **Researcher** | **Systematic.** Design a survey, run transects, place camera traps, identify individuals, and **return** until a picture accumulates | **A completed record.** Identified, re-sighted, placed in a population — not a single encounter |
 | **Tour guide** | **Performative.** Find it reliably, on schedule, with people watching and safe | A successful outing — found, shown, explained, everyone safe |
 
@@ -414,6 +448,32 @@ Nothing needs inventing to make the careers feel different.
   work needs large sample numbers: **a natural grind loop that is true to life.**
 - **Tour guide.** Client management and safety, which no other career has. The **guide radio
   network** — real guides share sightings constantly.
+
+### Encounters are driven, never waited out — **[v4]**
+
+> **Ayr:** *"Waiting 20 min for 1 animal that is not driven by story is not going to
+> happen."*
+
+**This corrects an assumption that keeps creeping back in**, including into earlier drafts
+of this document. Real fieldcraft does involve sitting still for hours. **A game cannot
+spend the player's actual time that way.**
+
+**Ruled out:** idle waiting as a mechanic · rarity expressed as time spent standing still ·
+any encounter whose interest is *"eventually the animal appears."*
+
+**What the tension comes from instead — something happening, not time passing:**
+
+- **A story reason to be there.** You are not photographing a fox, you are proving the
+  lights work, and the fox is the evidence
+- **Reading and acting.** Tracks, wind, alarm calls, light, the guide radio. **Fieldcraft as
+  a set of decisions, not a wait**
+- **A closing window.** The light is going, the tide is turning, the clients leave at four.
+  **Pressure rather than duration**
+- **Something to do while positioned.** The researcher checks traps, the guide keeps clients
+  interested, the photographer works the light
+
+**The real professions are patient in elapsed time and busy in attention. The game keeps the
+second and compresses the first.**
 
 ### The verb is constant; the biome changes the tools
 
@@ -517,6 +577,20 @@ then *does* something. The signature ability is the thing a documented animal ge
 
 **Collecting becomes a real draw again, without a single battle.**
 
+### Most signature abilities are not animations — **[v4]**
+
+An early estimate assumed every signature needed a bespoke animation and produced a
+frightening number. **It was wrong.** Classifying real field-guide entries by what the button
+would actually have to render:
+
+| Mechanism | What it costs | Examples |
+|---|---|---|
+| **Scale reference** | **One system.** A transform, no animation | Weasel at 25g, kodkod at 2kg, king cobra at 5m |
+| **Vision / light mode** | **One shader with parameters** | Scorpion under UV, reindeer *seeing* UV, the fruit bat's low-light sight, the whole deep-sea biome |
+| **Cutaway anatomy** | **Illustration, not animation** | The camel's hump is fat, the turtle's shell is its ribs, the howler's hyoid bone |
+| **Audio** | **No visual work at all** | Proboscis nose as resonator, the giant otter's nine calls, the meerkat's hawk-call versus jackal-call |
+| **Shared locomotion rigs** | **~8–10 rigs total** | Head-first descent (margay, genet, marbled cat), gliding (sugar glider, colugo), brachiation (gibbon, siamang), prehensile tail (kinkajou, binturong) |
+
 ## Two kinds of species
 
 | | Can be brought to a facility | Cannot be captured |
@@ -597,6 +671,18 @@ So the most emotionally satisfying act available — bottle-feeding an orphan, t
 emotional thesis exists to give back — **carries its own real consequence.** Raise it right
 and it goes home and you lose it. Raise it too close and it stays forever, and now you know
 why.
+
+### Ambassadors demonstrate their signature ability — **[v4]**
+
+**The facility's saddest outcome becomes its education programme**, which is exactly what
+real ambassador animals are for. It gives the non-releasable animals **a job that is not
+sad**, and it makes the signature ability pay into all three pillars instead of only the
+codex.
+
+**And the game should not be precious about the word "zoo."** Players will read it as one
+regardless. **The distinction that matters is not the label — it is that every animal here
+arrived because it could not go home.** Say that plainly and let people call the building
+whatever they call it.
 
 ### Field knowledge is the husbandry manual
 
@@ -682,6 +768,46 @@ change the law.
 
 The water ladder gates the wet biomes: reef and kelp need the **teen open-water
 certification**, and the deep sea needs instruments and a boat.
+
+### The quest template — **[v4]**
+
+**The shape every one of the 48 follows.** Ayr's, and four of its five beats are inherited
+from Safari Saga rather than invented.
+
+```
+1 Learn the problem -> 2 Find the clues -> 3 Choose the solution -> 4 Build it -> 5 Cutscene
+```
+
+| Beat | What it is |
+|---|---|
+| **1. Learn the problem** | Meet the person whose problem it is. **This is also what opens the case** — findings stay inert until you have heard it |
+| **2. Find the clues** | Field evidence gathered **in your career's own way** — photographed, measured, or learned from the people who live there |
+| **3. Choose the solution** | Several plausible proposals, argued properly. Wrong answers fail for **specific stated reasons**. Length and position are randomised, so neither is a tell |
+| **4. Build it** | Actually put it in. The lights go on the boma, the dogs go to the farms, the conservancy is registered |
+| **5. The cutscene** | **What really happened.** The real event, the real place, the real people, credited by name |
+
+### Beat 5 is the whole design landing somewhere the player will see it
+
+**The sourced codex is not a menu nobody opens — it is the payoff at the end of every
+quest.** All 48 end with real people named. The fictional characters carry the playable
+story; **the closing scene hands the credit back to whoever actually did it.**
+
+**It also solves a tone problem for free.** A quest that ends *"and then it worked"* is a
+fairy tale. A quest that ends *"this is the part that is true, here is who did it, and here
+is what is still unresolved"* is the game Ayr is actually making.
+
+**The codex entry is the companion, not the substitute** — the cutscene gives the feeling,
+the codex gives the detail, the dates and the sources.
+
+### The quest with no right answer
+
+Where a quest has no clean answer, all five beats still run. **Beat 3 offers several partial
+answers, each of which helps something and costs something else**, and the outcome states
+plainly what was traded. **Scoring is on whether the player argued from the evidence they
+gathered, not on which side they took.**
+
+Beat 5 then does something no other quest does: **it says the argument is still going on.**
+Ending the elder stage on an open question is a stronger last thing to teach than a win.
 
 ### Quest scale — **[v2]**
 
@@ -1127,6 +1253,18 @@ created. Checked by Uncle Albert, not asserted here.
 
 **Per-biome targets are flexible at Ayr's discretion** — a guide, not a quota. **Interest
 governs which species get made, not headcount.**
+
+### But the floor exists for a reason — **[v4]**
+
+> **Ayr:** *"Stop worrying about continents. What's more important is that each biome is a
+> functional ecosystem."*
+
+**This replaced region-based gap analysis entirely.** Europe being thin does not matter in an
+invented world. **A biome with five species does matter, because it is not an ecosystem — it
+is a corridor with some bats in it.**
+
+That reasoning is also what cut caves as a biome, and it is why the thinnest biomes are the
+ones the remaining species work should go to.
 
 ---
 
