@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 11.0 — eleventh pass over the full record, 2026-08-27**
+**Version 12.0 — twelfth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -274,6 +274,30 @@ because it tried to explain the world from inside. **The game openly has an auth
 author explains it from outside** (§14). It is a place a person built on purpose, and at
 the end that person says so.
 
+### How the names were chosen — **[v12]**
+
+**Three existing constraints picked the register before any name was proposed:**
+
+1. **Read-aloud** means every name must be **sayable first try**
+2. **The sourced ethos rules out fantasy naming** — no invented syllables
+3. **Ayr's own *"On the Brink"* had already set the target** — plain English, concrete,
+   slightly grave
+
+**The model is how real English regions are actually named: plain nouns with a definite
+article.** The Fens, The Weald, The Downs.
+
+**Two picks worth their reasoning:**
+
+- **The Floe** — the only candidate that is **itself fragile**, and the region's quests are
+  about ice going away
+- **The Divide** — it **carries an idea**, and the region's quests are about things
+  separating
+
+**And one rule the mythology name had to obey:** names implying that myths were *mistakes*
+were ruled out, because the design already commits to **not treating living cultures'
+beliefs as solved puzzles.** *The Telling* says the stories are told, not that they are
+wrong.
+
 ### Why it is called Terrane — **[v9]**
 
 **A *terrane* is a fragment of crust with its own separate history, later joined to a larger
@@ -291,6 +315,24 @@ the game is held to.
 | **The Record** | As in the fossil record. Plain, and it points at the quests' theme of *how anyone knows* |
 | **The Kept** | The animals humans made and keep. **Sits deliberately uneasily beside The Vigil** |
 | **On the Brink** | **The only region name that describes a condition rather than a place** — which is exactly right, because it is the only region whose animals share a condition rather than a habitat |
+
+### The game is Terrane; the codex is Earth — **[v12]**
+
+**They were never meant to be the same place.** Beat five of every quest already says *what
+really happened — the real event, the real place, the real people.* **So Terrane can simply
+be a fictional world with a factual appendix**, and no in-fiction mechanism is required.
+
+**Every attempt at one failed**, which is why:
+
+| Framing | Why it fails |
+|---|---|
+| **Temporal** — a distant past or future | **It makes the conservation history ancient and kills the urgency.** The whole point is that these things happened and are happening |
+| **Transformation** — Earth became Terrane | **No honest mechanism.** Tectonics is far too slow, and anything faster is magic in a game that does not do magic |
+| **Hidden on Earth** — undiscovered land | **Fails on scale.** Twelve regions including abyssal ocean is not an undiscovered island |
+| **A parallel Earth** | The only one that costs nothing — **available if Ayr ever wants an in-fiction answer** |
+
+**And the author's note closed the question entirely**, because it explains the world from
+*outside*, which is allowed: the game openly has an author.
 
 ### What the player is ever told — **[v7]**
 
@@ -1043,6 +1085,25 @@ second, and accept that the journey costs the animal something.**
 *can* hold; it does not overrule what an animal *should* be asked to tolerate. **Refusing an
 animal stays a correct play.**
 
+### The welfare question lives at the outcome fork — **[v12]**
+
+Since the test for coming in is **transport**, almost everything comes in — and that is
+correct, because rehabilitation is temporary and is the reason the animal survives. Orphaned
+elephant calves are hand-reared and released. Gorillas receive surgery for gunshot wounds. A
+starving polar bear is treated.
+
+**So the welfare question is not "may it come in?" — it is "may it stay?"**, and that is a
+harder and better place for it:
+
+> **A permanent hedgehog ambassador is fine. A permanent elephant should cost the player
+> something.**
+
+### **PROPOSED** — a third destination: treated in the field
+
+Darted and operated on where it stands, **because the journey would do more harm than the
+delay.** Real, and it would give the transport rule a third answer instead of two. Awaiting
+Ayr.
+
 ## Catching is the unlock — and it removes a large burden — **[v5]**
 
 > **Ayr:** *"All of the animals in the sanctuary are technically ones you 'brought in.' That
@@ -1081,6 +1142,24 @@ play** — unlocked early, running alongside, no completion requirement, no uppe
 
 **Authored, not simulated.** It exists for **story animals only** — not a systemic mini-game
 applied to all 700 species, which Ayr never committed to.
+
+**Ordinary caught species live at the facility permanently and are always visitable. Quest
+animals and scripted rescues go through a real sequence with a real outcome.** Release stays
+meaningful **because it is rare and happens to animals the player already cares about.**
+
+**The cost is one authored sequence per rescue quest rather than a simulation** — and the
+full pipeline design in §17 stays as the **specification** for those sequences rather than
+being discarded.
+
+### What this does to euthanasia
+
+**It becomes an authored story beat, used once or twice at full weight, rather than a system
+running in the background.**
+
+It was only ever an urgent question because a design had been built in which animals die on
+the player's watch as a matter of course. **Without the simulation, the question dissolves
+rather than needing an answer** — which is the cleanest possible resolution of something
+that had arrived by three separate doors.
 
 ## Every animal is an individual — **[v2]**
 
@@ -2031,9 +2110,16 @@ shape across a career is **earned, then widened three times.**
 **Nothing is locked.** A barely-studied animal can still be housed — badly, in a generic
 enclosure, with a worse outcome. **The penalty is the animal's chances.**
 
-### 4. The two routes
+### 4. Staff — **[v12]**
 
-Above. It is the one that never relaxes.
+**The vet is the bottleneck.** One vet cannot treat two animals at once, and no amount of
+money or land changes that.
+
+**And the volunteers are who the player was as a teenager** — which quietly closes the loop
+on the teen years: the unglamorous work you did for somebody else is now being done for you
+by somebody who wants what you have.
+
+*(The two routes are the core mechanic above, not a fifth constraint.)*
 
 ## The facility runs while you are away — and that is what fixes quarantine — **[v11]**
 
@@ -2173,7 +2259,7 @@ designed.**
 | 8 | **`Only In Captivity`** needs an `EW` tag that does not exist in the data | The badge |
 | 9 | ~~**Sprite terrain**~~ — **answered in v7.** Two assets: the current 1001 become codex plates, game sprites are a later pass without props. **Ayr's call to accept** | The HD-2D look |
 | 10 | **Sandbox holding extinct species** — proposed, not ruled | No |
-| 11 | **Euthanasia** — deferred, less urgent under authored rehabilitation | No |
+| 11 ~~**Euthanasia**~~ — **effectively resolved by option C.** It becomes an authored beat used once or twice at full weight, not a background system. What remains is only *whether to write those beats at all* | No |
 | 12 | **What the items are** | No |
 | 13 | **Layers 0, 1 and 3 are empty** — moment-to-moment, the encounter, and what an hour contains. **The foundation of the whole thing** | Everything eventually |
 | 14 | **Does the child name the rescued animal**, before learning why that is a problem? | The childhood |
