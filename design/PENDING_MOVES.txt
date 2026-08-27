@@ -283,3 +283,29 @@ opensea>deepsea=Coelacanth
 !                     into a roar audible five kilometres away.
 ! Basilisk Lizard  -> Common Basilisk: the one that runs across water.
 RENAME=Chameleon::Panther Chameleon|Civet::Asian Palm Civet|Langur::Red-shanked Douc|Marmoset::Pygmy Marmoset|Sloth::Brown-throated Sloth|Tapir::Malayan Tapir|Tarsier::Philippine Tarsier|Capuchin::Bearded Capuchin|Colobus::Black-and-white Colobus|Dart Frog::Golden Poison Frog|Glass Frog::Fleischmann's Glass Frog|Hummingbird::Sword-billed Hummingbird|Stick Insect::Chan's Megastick|Leaf Insect::Giant Leaf Insect|Coati::White-nosed Coati|Chevrotain::Silver-backed Chevrotain|Spider Monkey::Black Spider Monkey|Howler Monkey::Mantled Howler|Basilisk Lizard::Common Basilisk
+
+! ============================================================================
+! SPECIES AUDIT - section 3, THE LONG GRASS. Ayr 2026-08-27. Nine generics named.
+! ============================================================================
+! Vulture   -> Ruppell's Vulture: THE HIGHEST-FLYING BIRD EVER RECORDED - one struck
+!              an aircraft at 11,300 m. Also Critically Endangered, down more than 90%.
+!              Note: Old World and New World vultures are not related at all; this is
+!              an Old World one, and the resemblance is convergent.
+! Kestrel   -> Common Kestrel: it sees ultraviolet, and vole urine reflects UV - so it
+!              hunts by reading the trails they leave across a field.
+! Hornbill  -> Southern Ground Hornbill: walks rather than flies, lives to seventy, and
+!              breeds so slowly that a pair raises roughly one chick every nine years.
+! Galago    -> Senegal Bushbaby: leaps over two metres, and urinates on its own hands
+!              to grip the branches.
+! Mongoose  -> Banded Mongoose: every female in a group gives birth on the SAME DAY,
+!              so no mother can tell which pups are hers - which is what stops the
+!              infanticide.
+! Genet     -> Common Genet: the animal its existing entry already describes - if the
+!              skull fits, the genet fits, and medieval Europeans kept them as mousers.
+! Lovebird  -> Rosy-faced Lovebird: carries nesting material tucked into its rump
+!              feathers and flies home with it.
+! Duiker    -> Common Duiker: the only duiker that lives outside forest. The name is
+!              Afrikaans for "diver", after the way they plunge into cover.
+! Baboon    -> Olive Baboon: the troop politics its existing entry describes - decades
+!              of alliances, grudges and reconciliation - were studied in olive baboons.
+RENAME=Vulture::Rüppell's Vulture|Kestrel::Common Kestrel|Hornbill::Southern Ground Hornbill|Galago::Senegal Bushbaby|Mongoose::Banded Mongoose|Genet::Common Genet|Lovebird::Rosy-faced Lovebird|Duiker::Common Duiker|Baboon::Olive Baboon

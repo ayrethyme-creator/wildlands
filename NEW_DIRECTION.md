@@ -9943,3 +9943,29 @@ fact: **some of these animals are the end of something.**
 
 All **~1,000** entries — the 406 already written and every one still to come. It is a
 sentence, not a rewrite.
+
+---
+
+## THE LONG GRASS IS NAMED — nine species
+
+| Was | Now | The fact that earned it |
+|---|---|---|
+| Vulture | **Rüppell's Vulture** | **The highest-flying bird ever recorded** — one struck an aircraft at 11,300 m. Also Critically Endangered, down more than 90% |
+| Kestrel | **Common Kestrel** | **It sees ultraviolet, and vole urine reflects UV** — so it hunts by reading the trails they leave across a field |
+| Hornbill | **Southern Ground Hornbill** | Walks rather than flies, lives to seventy, and breeds so slowly a pair raises **roughly one chick every nine years** |
+| Galago | **Senegal Bushbaby** | Leaps over two metres, and **urinates on its own hands to grip the branches** |
+| Mongoose | **Banded Mongoose** | **Every female in a group gives birth on the same day**, so no mother can tell which pups are hers — which is what stops the infanticide |
+| Genet | **Common Genet** | The animal its existing entry already describes — if the skull fits, the genet fits |
+| Lovebird | **Rosy-faced Lovebird** | Carries nesting material **tucked into its rump feathers** and flies home with it |
+| Duiker | **Common Duiker** | The only duiker that lives outside forest. The name is Afrikaans for *diver* |
+| Baboon | **Olive Baboon** | The troop politics its existing entry describes — decades of alliances, grudges and reconciliation — were studied in olive baboons |
+
+**One thing worth carrying into the writing:** Old World and New World vultures are **not
+related at all.** They look alike through convergence — bare heads, soaring, carrion —
+and are as distantly related as a vulture and a stork. Rüppell's is an Old World one,
+and that distinction is a better field-guide fact than anything about its diet.
+
+```
+ 0  not an animal / redundant pairs / wrong biome     done
+~57 a group, not a species     rainforest and savanna done, ten biomes to go
+```
