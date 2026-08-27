@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 15.0 — fifteenth pass over the full record, 2026-08-27**
+**Version 16.0 — sixteenth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -1053,6 +1053,24 @@ most striking.**
 in real life and often need to be. The ones that stay wild are those that **would die in
 transport** — blue whale, great white shark, blobfish.
 
+### The visit is gated, and the gate already exists — **[v16]**
+
+**The water ladder is the gate.** To visit a great white you need the boat and the cage. To
+visit a deep-sea animal you need the submersible, which is an elder capability.
+
+**So the non-capturable species become long-term goals rather than dead entries.** The list
+tells you what is coming, and **the "next steps" text is the game telling you what you still
+have to become.**
+
+### The wild visit is a vignette, not a place — **[v16]**
+
+Being *shown in* a location rather than travelling to it is **far cheaper to build than a
+roaming area**, completely controllable, and **it is how a wildlife documentary actually
+feels.**
+
+**It also gives the cutscenes a permanent, repeatable home** rather than making them
+one-shot set pieces.
+
 ## Two interaction modes, deliberately separate — **[v2]**
 
 | | |
@@ -1214,6 +1232,58 @@ main-game animal sounded like **700 bespoke narratives woven into the plot.** It
 **Same emotional result, a fraction of the writing.** The stories carrying real narrative
 weight are the quest animals, a much smaller set that was always going to be written
 properly.
+
+## The committed baseline, and what was built on top — **[v16]**
+
+> **Ayr:** *"I don't know yet how involved, or even if, I want this mini game of capture,
+> rehabilitation, release."*
+
+**A GDD that cannot tell load-bearing from optional is dangerous to build from**, so the
+separation is recorded here rather than left implicit.
+
+### What is committed — and it is already a complete system
+
+| | |
+|---|---|
+| **Twelve facilities**, specialising by biome | |
+| **Catching a species puts it in the right facility** | |
+| **A list at each facility showing only caught species** | |
+| **Select one and go to its enclosure** | |
+| **Interact — feed it, give it enrichment, see its signature ability** | |
+| **Every animal has a name and a short story** | |
+| **Every career can do all of this** | |
+| **Species that would die in transport stay wild**, visited by cut scene | |
+| **Build mode** — you construct the facilities | |
+
+**None of that requires a rehabilitation pipeline.** It is a living collection you visit,
+care for and learn from — **a real game that matches every word Ayr has written, buildable
+without another decision.**
+
+### What the pipeline adds, and therefore what depends on it
+
+| Depends on the pipeline | |
+|---|---|
+| Intake → triage → quarantine → rehabilitation → conditioning → outcome | **All of it** |
+| Release as the win condition | Yes |
+| Non-releasable animals becoming ambassadors | Yes |
+| **The two-routes building puzzle** | **Yes** — it only matters if animals are going home |
+| The return report | Yes |
+| Euthanasia and mortality | Yes |
+| Numbered on intake, named at outcome | Partly — the number survives, the ritual does not |
+| The ten intake categories | **No** — they work as flavour either way |
+
+### The tension, stated plainly
+
+> **Release is the win** — the animal leaves, and you lose access.
+>
+> **Interact with every animal once caught** — the animal stays.
+
+**These pull against each other**, and the wild-visit sites were a patch for a problem the
+pipeline created. **Without a pipeline there is no problem at all:** you catch it, it is
+there, you can always go and see it.
+
+**Option C is what resolves it** (below): ordinary species stay, story animals go home, and
+the wild-visit sites stop being a patch and become the reward for the rare case.
 
 ## The sanctuary is a mode, not a second campaign
 
