@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 6.0 — sixth pass over the full record, 2026-08-27**
+**Version 7.0 — seventh pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -68,6 +68,12 @@ the fighting out of Pokémon's catching and pure collection is a checklist.
 Every resident of a facility is one that could not be sent home. The collection is a record
 of the ones that did not make it back — exactly true of real sanctuaries, and the opposite
 of how every other collection game works.
+
+## Elevator
+
+> **You will spend fifty hours photographing, identifying and caring for real animals — and
+> then the game tells you that the real version of everything you just did is open to you,
+> today, and is used by actual researchers.**
 
 ## The emotional thesis — **[v2]**
 
@@ -186,6 +192,52 @@ and a tractable one.
 | **Smaller adult** — most reptiles, fish, many birds | **Scale the adult sprite.** Free |
 | **Never seen young** — deep sea, planktonic, hidden | **Nothing** |
 
+### Sprite props and terrain — **ANSWERED, Ayr's call** — **[v7]**
+
+Some sprites were generated with ground, sticks and leaves baked in. **In a lit 3D scene
+that breaks in five separate ways:** billboarding swivels the leaf to follow the camera;
+the animal cannot move without sliding the leaf with it; the painted lighting points
+somewhere the scene's sun does not; the prop intersects the real 3D ground; and the painted
+leaf and the scene's real foliage are two different scales on screen at once.
+
+**But the prop is only wrong for one of its two uses.**
+
+| Use | Prop |
+|---|---|
+| **Codex / field-guide plate** | **Keep it.** A natural history plate *should* show the animal in context, and the beetle on its leaf is a better codex image than the beetle alone |
+| **In-game billboard** | **Removed** |
+
+**So the answer is two assets, not one fixed asset.**
+
+**The affected set is knowable, not a mystery.** The generator chose props by keyword, so
+the sprites carrying them are exactly those whose prompts contained *branch*, *perch*,
+*leaf* or *burrow* — findable from the generation records rather than by eye.
+
+### The recommendation, which costs nothing today
+
+**Treat the current 1001 as the codex plates** — finished, valuable, and exactly what a
+field guide needs — **and treat game sprites as a separate later pass**: higher resolution,
+no props, built for animation.
+
+**None of the existing work is wasted or blocked, and the prop question stops being a
+problem at all.**
+
+### And the terrain policy while art is being fixed
+
+**Fix the errors. Do not add terrain.**
+
+**Errors are permanent value; terrain is temporary cosmetics.** An anatomically wrong animal
+is wrong in every version at every resolution for ever, and that fix is never thrown away.
+**Terrain gets thrown away twice** — add it now and it must come off for the game sprite;
+strip it now and the codex plate loses the context it wanted.
+
+If a sprite is being regenerated anyway, **turn props off** — free, and it moves that one
+toward game-ready. **Do not regenerate in order to change terrain.**
+
+**And the fact that the errors only became visible at larger size is itself a finding.**
+256×256 viewed small was hiding them, which argues the game-sprite pass needs higher
+resolution regardless.
+
 ### The budget sequence — **[v2]**
 
 **Engine now, because it is free and gates the work. Money later, when there is something
@@ -211,6 +263,22 @@ The player is never lectured about it.
 because it tried to explain the world from inside. **The game openly has an author, and the
 author explains it from outside** (§14). It is a place a person built on purpose, and at
 the end that person says so.
+
+### What the player is ever told — **[v7]**
+
+**Nothing. Codex only.**
+
+The game never announces the world. A player just plays in it. Anyone curious enough to open
+the geology entries finds **real plate tectonics: terranes are accreted fragments, and our
+own continents are assembled from pieces that arrived from elsewhere and stuck.**
+
+**A player who never looks loses nothing. A player who looks learns something true.** That is
+how this game treats every other piece of real information, and there is no reason to treat
+its own ground differently.
+
+**The recommendation is to do nothing further.** Terrane is a fictional world, the codex is
+about the real one, and beat five already tells the player which is which — forty-eight
+times.
 
 ### The twelve biomes and their names
 
@@ -1452,6 +1520,58 @@ player has seen (§6).
 deliberately **only animals that genuinely thrive as pets**; the teen list requires more
 responsibility.
 
+## The menus, as designed — **[v7]**
+
+**The cat is one species with cosmetic variants, and it arrives as a kitten.** One entry —
+**House Cat** — with different skins. **Tabby, calico and black stop being species entirely**
+and become appearance options on that one animal. **Every named cat breed lives in the
+Breeding Centre**; none is a childhood pet choice.
+
+**Dogs stay small / medium / large, three each:**
+
+| Size | Options |
+|---|---|
+| **Small** | Chihuahua · Dachshund · Pug |
+| **Medium** | Corgi · **Mutt** · **Pit Bull** |
+| **Large** | Siberian Husky · Golden Retriever · German Shepherd |
+
+**Mutt replaces Farm Dog**, because a mutt is the honest generic dog, "farm dog" is a job
+rather than a breed, and **most dogs in the world — and most dogs in shelters — are mutts.**
+
+**Four reptiles:** corn snake (the standard beginner snake), bearded dragon, **Russian
+tortoise** (the pet tortoise that does *not* reach 45kg, unlike the sulcata already in the
+desert), and leopard gecko — **the most commonly kept pet reptile in the world.**
+
+**Reptiles are the largest single group in the child menu**, which is a fair reflection of
+how many children actually keep one.
+
+**There is no bird in the child menu.** A first pet is a cat, a dog, a reptile, a fish or a
+small mammal. **A bird is a step up, and it waits for the teen years.**
+
+### Most teen animals come from the wild
+
+| Teen option | Where it comes from |
+|---|---|
+| **Rescued macaw / cockatoo** | The wild birds already in The Canopy and The Weald |
+| **Chinchilla** | The wild one in The Divide |
+| **Hermit crab** | The wild one in The Strand — **and also stocked in the teen pet store** |
+| **Budgie** | **It is the budgerigar**, already a wild Australian bird in The Dry. Stocked, not duplicated |
+| **Ferret** | Already in the roster |
+| **Freshwater fish** | Teen pet store only |
+
+**The cockatiel and zebra finch sit on the same footing**, so the pet-bird shelf fills
+without spending a roster slot — **and honestly, since those birds really are wild animals
+that people keep.**
+
+**Farm animals are no longer a teen pet option.** They stay in the game and in the town; a
+teenager simply does not choose one as their animal.
+
+### The axolotl is in the wild *and* in the breeding centre
+
+**Exactly right, and it makes the paradox literal instead of explaining it.** The axolotl is
+functionally extinct in the wild while hundreds of thousands live in tanks. It also keeps
+its required place in On the Brink.
+
 ## Where you get them is part of the lesson
 
 > **Ayr, idea 58:** *"Maybe you go to the humane society for the cats and dogs, but you go
@@ -1590,6 +1710,20 @@ itself — and it is the one feature nobody else could copy.
 
 The NPC is **not made important to the plot**. A constant easter egg, not a character with a
 role.
+
+### Interactive, but weightless — **[v7]**
+
+**Talkable — otherwise the ending has nothing to pay off.** A player who never interacted
+with them has no memory to be rewarded.
+
+But the role only holds if the character stays weightless:
+
+- **No quests, no items, no unlocks, no gates.** Talking to them is always optional and
+  **never advances the game by a single step**
+- **They never talk about themselves.** No backstory, no name offered, no hints
+- **They comment on the animal you are looking at** — one short observation, not
+  quest-relevant, not plot-relevant. **The kind of thing a stranger says on a viewing
+  platform**
 
 ---
 
@@ -1814,7 +1948,7 @@ designed.**
 | 6 | **Fluorescence** — restore *Blacklight*, or drop it | No |
 | 7 | **The 44 remaining species** — some already claimed by badges | The roster |
 | 8 | **`Only In Captivity`** needs an `EW` tag that does not exist in the data | The badge |
-| 9 | **Sprite terrain** — some sprites have ground baked in, which breaks billboarding. Scoped, unscheduled | The HD-2D look |
+| 9 | ~~**Sprite terrain**~~ — **answered in v7.** Two assets: the current 1001 become codex plates, game sprites are a later pass without props. **Ayr's call to accept** | The HD-2D look |
 | 10 | **Sandbox holding extinct species** — proposed, not ruled | No |
 | 11 | **Euthanasia** — deferred, less urgent under authored rehabilitation | No |
 | 12 | **What the items are** | No |
