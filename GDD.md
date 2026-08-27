@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 17.0 — seventeenth pass over the full record, 2026-08-27**
+**Version 18.0 — eighteenth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -1021,6 +1021,48 @@ then *does* something. The signature ability is the thing a documented animal ge
 
 **Collecting becomes a real draw again, without a single battle.**
 
+### The selection rule: it has to be a thing it *does* — **[v18]**
+
+**Not every remarkable fact can be a button.** The filter is whether it is **showable in a
+few seconds without narration.**
+
+| Showable | Not showable |
+|---|---|
+| Margay running head-first down a trunk | *"Fewer than 1,500 remain"* |
+| The pistol shrimp's cavitation bubble | *"Its eyes are six times more light-sensitive than ours"* |
+| A woodpecker's tongue wrapping its skull | *"Almost nothing is known about how it breeds"* |
+| The wood frog thawing out of solid ice | *"It is sacred in Andean tradition"* |
+
+**The second column is field-guide text and stays field-guide text. The button needs a
+verb.**
+
+### Six families the roster already fills
+
+**Impossible movement** *(margay, gecko adhesion, hummingbird flying backwards, sidewinder)*
+· **Weapons** *(mantis shrimp, pistol shrimp, bombardier beetle, electric eel)* ·
+**Impossible senses** *(star-nosed mole's 22 tentacles, platypus electroreception, an owl's
+asymmetric ears)* · **Surviving the unsurvivable** *(wood frog freezing solid, bar-headed
+goose over the Himalaya, icefish with no haemoglobin)* · **Deception** *(orchid mantis, mimic
+octopus, the margay imitating a baby tamarin to lure the adults in)* · **Bodies that break
+the rules** *(axolotl regrowing a limb, hoatzin chicks with claws on their wings)*
+
+**And the research is largely done.** Every field-guide entry already opens with exactly this
+kind of fact — Ayr's editorial instruction from the start, followed for **406 entries so
+far.** What remains is the rest, **plus a decision on which sentence is the demonstrable
+one.** Some entries carry two candidates.
+
+### The unlock is documentation, not possession — and this matters — **[v18]**
+
+**If the ability unlocked by *owning* the animal, the game would reward hoarding** — and it
+would fight the facility rule that keeping an animal is a failure state. The two systems
+would pull against each other.
+
+**So you earn it by having studied the animal in the field** — the same knowledge that
+doubles as the husbandry manual. **The demonstration then lives in the codex, playable
+forever, whether the animal went home or never came in at all.**
+
+**That keeps release as the good ending and still rewards completing the roster.**
+
 ### Most signature abilities are not animations — **[v4]**
 
 An early estimate assumed every signature needed a bespoke animation and produced a
@@ -1036,7 +1078,10 @@ would actually have to render:
 | **Shared locomotion rigs** | **~8–10 rigs total** | Head-first descent (margay, genet, marbled cat), gliding (sugar glider, colugo), brachiation (gibbon, siamang), prehensile tail (kinkajou, binturong) |
 
 **The corrected total: about 20 shared systems, ~140 bespoke pieces, and ~160 species with
-no showable verb at all**, who get a size reference and a cutaway instead. **Four of the
+no showable verb at all**, who get a size reference and a cutaway instead.
+
+**Ship the bespoke ones first and let the tier be visible.** A player who finds a handful of
+spectacular ones **will hunt for more** — which is the whole mechanic working. **Four of the
 cheapest categories — scale, light and vision shaders, cutaway, audio — are also among the
 most striking.**
 
@@ -2576,6 +2621,41 @@ designed.**
 
 **This was flagged on day one and never done.** Idea 10, in Ayr's first batch of twenty:
 *"I need to design the befriend encounter mechanic way different from the current game."*
+
+### Why layer 1 is the load-bearing one
+
+**The old game answered it with battles. This game removed battles and did not replace
+them.** So:
+
+- **Collecting has no verb.** *"Catching"* is in quotes throughout this document because
+  nobody has said what it is
+- **The three careers are supposed to be three different games.** Right now **they are three
+  different job titles**
+- **The facility unlock is "you catch it"** — resting on the undefined thing
+- **The signature ability** is viewed on an animal obtained by the undefined thing
+
+### The order to work in — **[v18]**
+
+```
+1  Layer 1 - the encounter        what happens when you meet an animal,
+                                  and what each career does about it
+2  Layer 0 - moment to moment     movement, camera, controls, what is on screen.
+                                  Partly falls out of 1
+3  Layer 3 - the session          how an hour is shaped, once 0 and 1 exist
+4  then  the open questions       facility failure, free layout vs plots,
+                                  what On the Brink and the Vigil do
+```
+
+**Euthanasia is not being ignored — it is deferred deliberately**, because it is a layer-4
+question and layers 0, 1 and 3 are missing underneath it.
+
+### And the contract is why the gap is survivable
+
+**What layer 1 needed was never the mechanic — it was the contract** (§7): what an encounter
+*hands to* everything built on top of it. **A contract can be fixed while the thing behind it
+stays open**, which is why the rest of this document is not resting on air.
+
+**The mechanic is deferred properly, rather than by omission.**
 
 **Everything above layer 1 attaches to the encounter contract rather than to the mechanic**
 (§7), which is why the rest of the design survives the gap. But the gap is the gap.
