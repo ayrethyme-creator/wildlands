@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 4.0 — fourth pass over the full record, 2026-08-27**
+**Version 5.0 — fifth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -290,13 +290,24 @@ palette swaps to fake them.**
 | **The Vigil** | 50 species that are gone. **A memorial, not a collection** — and stripped of everything still alive, it finally becomes what it always claimed to be |
 | **The Telling** | 100 mythological creatures, one per culture, themed on understanding through stories |
 | **The Record** | 50 fossil species across 13 geological periods |
-| **The Breeding Centre** | 50 domestic breeds. Endgame unlock, appears in town |
+| **The Breeding Centre** | 50 domestic breeds. Endgame unlock, appears in town. **Breeds came out of the species roster** — a breed is a customisation option on Dog and House Cat, which is what a breed is. **Generics stay** (House Cat, Tabby, Calico, Black Cat, Farm Dog, Puppy) and **all wild cats and dogs stay** |
 
-### Caves — **CUT as a biome**
+### Two definitions that stop arguments — **[v5]**
 
-Ten species is too thin for a facility and an arc. **Caves become a site type inside other
-biomes** — a place where a guaranteed encounter happens, alongside beaver ponds and moose
-fields.
+**Mountains means alpine, above the treeline.** Forested mountainsides belong to the forest
+and rainforest regions. Without this the classifier fights itself over every montane species.
+
+**Caves are a micro-region type, not a biome** — inside forest, mountains, coast and desert.
+Ten species was too thin for a facility and an arc, and the reassignment is honest anyway:
+**a bat is a forest animal that sleeps in a cave.**
+
+### Every biome must read as a functioning ecosystem — **[v5]**
+
+Not just a headcount. The composition rule is **apex predator, mesopredators, large and
+small herbivores, scavengers, invertebrates, birds.**
+
+**Deep sea became the twelfth biome** when ten species moved out of open ocean — both needed
+filling, and the deep is where the most interesting unused animals were.
 
 ---
 
@@ -378,6 +389,101 @@ Fox, raccoon and squirrel were dropped on the numbers: 3–5, 2–3 and ~6 years
 Hand-reared deer that lose their fear of people are a serious problem in rehabilitation —
 bucks become genuinely dangerous at the rut, and habituated deer often end up destroyed.
 *The animal you loved cannot stay tame, and raising it wrong is what makes it dangerous.*
+
+---
+
+# 4b. The opening hour — **DECIDED** — **restored in [v5], expanded**
+
+> **Lost in the v2 rewrite.** V1 had this section; the restructure dropped it. **The first
+> hour decides whether anyone plays the rest.**
+
+```
+1  TITLE + HOOK SCENE   animal-led, no player character. Music. Questions you want answered
+2  CHOOSE THE PET       customisable, detailed, and you name it
+3  DESIGN THE CHILD     your own appearance, your name, your gender
+4  FIRST SCENE          the player character and the pet meeting, interacting
+5  THE CODEX OPENS      your pet's entry, AND the pets you did not choose
+6  THE HOUSE            your room, then walk out, learn the interface
+```
+
+### Why pet-before-self is the right order
+
+**Almost every game opens by asking who *you* are. This one asks second.**
+
+The player commits to something they care about **before** they are asked who they are, so
+the character's identity becomes an answer to a relationship rather than a form to fill in.
+It is a statement about what this game is, made in the first ninety seconds, **by the
+structure rather than by dialogue.**
+
+### The codex showing the pets you did not choose
+
+**The strongest single detail in the sequence.** It establishes in the first five minutes
+that **the codex is not a log of your own experience — it is a reference that already knows
+things.** That is exactly what it must be for the next fifty hours, and teaching it here
+costs nothing.
+
+It also plants the game's first curiosity: **you can see what you did not take.** The player
+learns immediately that this book is bigger than they are.
+
+### Naming the pet, and why it pays off much later
+
+**The player names the pet instantly, without thinking, because that is what you do with a
+pet.** Then, far later, releasable animals arrive with numbers and naming becomes a decision
+with a consequence.
+
+**The game let the player do the easy thing first and explains it afterwards** — a far
+better lesson than a rule stated up front. The rescued wild animal of the same childhood
+sits in between, which is where the question first becomes real.
+
+### The hook scene — **OPEN**
+
+Animal-led and music-forward is decided. **Which animal, and what happens, is not.** The
+reliable mechanism is **showing something you cannot yet explain, that pays off later.**
+
+| | | Question it generates |
+|---|---|---|
+| **A — A release** *(recommended)* | Hands opening a crate. An animal going. Someone watching it leave, and not following. **No context at all** | It is **the last beat of the game shown as the first** — the whole thesis before the player can understand it. Thirty hours later they do it themselves and recognise the shot |
+| **B — A signature ability** | Something that looks impossible and is real — a margay running head-first down a trunk, a scorpion lighting up under UV | ***"Wait, is that true?"*** — the exact habit the game exists to build. Cheaper, and it sells the collection immediately |
+| **C — The fence** | A child's hands on a wire fence, an adult inside working with an animal, and the child not allowed in | ***"How do I get in there?"*** — which is literally the whole career arc. The most thematically precise, the least spectacular |
+
+**Suggested: A, with C as the second scene rather than an alternative.** They are the two
+ends of the game and they would rhyme.
+
+**The hook scene is the one place where music does the work rather than supports it** — no
+dialogue, no UI, no explanation. Worth treating as a piece to be written first rather than
+last.
+
+### Appearance, across the whole life
+
+- **Every life stage presents new appearance choices**, so each stage feels like a beginning
+  rather than a stat increase
+- **Gender change is an option at every stage** — *not stated loudly, but present.* It sits
+  in the same list as hair and clothing, with **no ceremony, no confirmation dialogue, no
+  achievement, and no NPC ever remarking on it**
+- **The player chooses their name**
+
+**The cost, honestly.** The player character has to exist at six life stages × the appearance
+options × every animation state, which multiplies faster than any other art in the game.
+**The answer is a layered, modular character** — one body rig per life stage with hair,
+clothing and features as swappable layers rather than baked variants. **This has to be
+decided before the first character sprite is drawn**, not after.
+
+### The starting town is The Furrows plus the edge of The Weald — **[v5]**
+
+> **Ayr:** *"The animals in The Kept and The Furrows are in the starting town, where you have
+> access as a child and teen."*
+
+**The Furrows is not simply one of twelve biomes — it is the first one, and the entire
+opening happens inside it.** With The Kept, that is a substantial roster available to a
+child: **the childhood years are not a thin prologue.**
+
+**But the starting area must include a slice of The Weald**, because **all four
+rescued-animal options live in forest, not farmland.** That matches the opening as
+sequenced — *your yard and the woods behind it* — so the child's world is **The Furrows plus
+the edge of The Weald.** Worth stating plainly, because **the rescue that starts the whole
+game happens in the woods rather than the town.**
+
+**The box turtle still needs creating**, since it is one of the four locked choices.
 
 ---
 
@@ -690,6 +796,63 @@ whatever they call it.
 them.** What was observed in the field *is* the care sheet, and difficulty changes as the
 player gathers information and passes assessments.
 
+## The twelve facilities specialise — **[v5]**
+
+> **Ayr:** *"The 12 facilities do specialize in the animal of the biome they are in."*
+
+**Without this, twelve facilities are twelve copies of one building.** With it, each looks
+different, needs different things, and **cannot do the others' jobs.**
+
+It is also simply true. Real rehabilitation is specialised — marine mammal centres, raptor
+centres, bat rescues, reptile rescues. **Nobody treats a whale at a songbird centre.**
+
+| Facility | What the building actually needs |
+|---|---|
+| **Polar** | Chilled water, haul-out ledges, **shade from a sun the animals never evolved for** |
+| **Reef / deep sea** | Saltwater systems, filtration, pressure-tolerant holding |
+| **Desert** | Heat gradients, deep burrowing substrate, UV |
+| **Rainforest** | **Height.** Canopy animals housed at ground level do badly |
+| **Wetlands** | Water quality, mud, shallow margins |
+| **Mountains** | Cold-tolerant, and vertical — cliff-dwellers need to climb |
+| **Farmland** | **The smallest and the busiest.** Hedgehogs, owls, bees, constant public traffic |
+
+### The consequence worth building: transport
+
+If a facility only holds its own biome's animals, **an animal found in the wrong place has
+to be moved** — and **transport is itself a welfare risk**, which is true of real
+rehabilitation, where an enormous amount of the work is driving. **Stabilise first, move
+second, and accept that the journey costs the animal something.**
+
+**This gives the twelve facilities a relationship instead of making them a list.**
+
+### What specialisation cannot fix
+
+**The polar facility is not "the polar bear house."** Specialisation decides what a facility
+*can* hold; it does not overrule what an animal *should* be asked to tolerate. **Refusing an
+animal stays a correct play.**
+
+## Catching is the unlock — and it removes a large burden — **[v5]**
+
+> **Ayr:** *"All of the animals in the sanctuary are technically ones you 'brought in.' That
+> doesn't have to be part of the story, but you unlock a species in your facility by
+> successfully catching it."*
+
+**A species appears in your facility because you caught it. The mechanic is the
+justification, and it does not have to be narrated.**
+
+That resolves something that read as enormous. A name and an intake story for every
+main-game animal sounded like **700 bespoke narratives woven into the plot.** It is not.
+
+- **The catch is the reason it is there.** No plot justification required
+- **The intake story is flavour**, drawn from the ten intake categories — specific and
+  readable without being load-bearing
+- **The autobiography still works**, because the record is real: what you caught, where,
+  when, and at which stage of your life
+
+**Same emotional result, a fraction of the writing.** The stories carrying real narrative
+weight are the quest animals, a much smaller set that was always going to be written
+properly.
+
 ## The sanctuary is a mode, not a second campaign
 
 A genuine design error, caught by Ayr. Three things were broken: **the fiction** (700 species
@@ -743,7 +906,39 @@ as zoos really do. **OPEN / deferred** — this needs sourcing properly rather t
 
 # 9. The campaign — **DECIDED**
 
-## 48 quests, four waves of twelve
+## 73 quests, of which 48 are the campaign — **[v5]**
+
+> **Ayr:** *"You keep naming quests. How many quests are you planning total? It seems like
+> you're maybe under two assumptions at once."*
+
+**Ayr was right, and this document made the same mistake.** "48" is the campaign. The
+mythology and fossil quests were added later and the total was never updated.
+
+| Group | Quests | Species behind them | |
+|---|---|---|---|
+| **The twelve biomes** | **48** | 700 | The campaign. Mandatory. Four per biome, one per adult life stage |
+| **Mythology** | **12** | 100 | Postgame. One per culture |
+| **Fossils** | **13** | 50 | Postgame. One per period |
+| **On the Brink** | **?** | 50 | **Parked by Ayr** |
+| **The Vigil** | **?** | 50 | **Parked by Ayr** |
+| **Breeds** | 0 | 50 | Collection and husbandry, not story |
+| | **73 + TBD** | **1000** | |
+
+### There is not a quest per animal
+
+**1000 animals, 73 quests — roughly one quest per fourteen species.**
+
+Writing "the quest species" beside individual fossils made it read as though each got one.
+**It is one per period:** 13 quests standing on 50 species. Mythology is **one per culture**:
+12 quests on 100.
+
+**An animal without a quest is not neglected.** It is encountered, documented, studied,
+drawn, given a field-guide entry and a signature ability, and it counts toward its biome's
+completion. **Questing is what a few species do.**
+
+**The number is open in exactly the two places Ayr parked** — On the Brink and The Vigil.
+
+## The campaign: four waves of twelve
 
 ```
 Young adult        12 quests, one per biome    local change             -> earns all 12 facilities
@@ -1456,6 +1651,10 @@ tool can check whether a claim is true of the world.**
 |---|---|---|
 | 1 | **The hook scene** — which animal, and what happens | The first hour |
 | 2 | **The encounter mechanic** — deliberately deferred | Nothing yet |
+| 2b | **What the researcher and tour-guide loops do minute to minute.** The photographer has a real-world reference *and* a game one; the other two have real references and **no worked design at all. This is the largest undesigned space in the project** | Two of the three careers |
+| 2c | **What the codex actually is as a UI.** It carries the sourcing, the field guide, read-aloud, practice quizzes, badges and the resource section. **A lot of jobs for one system** | The codex |
+| 2d | **When cultural consultation happens.** Early enough to shape the writing rather than review it afterwards — but it costs money, so it interacts with funding | Writing the quests |
+| 2e | **The modular character rig** — must be settled before the first player sprite is drawn | Character art |
 | 3 | **Can the player fail to advance?** Retake with a time cost is the middle path | Assessments |
 | 4 | **Origin-language naming** for individual animals — needs proper sourcing | No |
 | 5 | **The badge count** breaks the round-number rule | No |
