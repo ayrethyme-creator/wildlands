@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 9.0 — ninth pass over the full record, 2026-08-27**
+**Version 10.0 — tenth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -238,6 +238,16 @@ toward game-ready. **Do not regenerate in order to change terrain.**
 256×256 viewed small was hiding them, which argues the game-sprite pass needs higher
 resolution regardless.
 
+### Build a one-biome vertical slice early — **[v10]**
+
+**The timeline is about a year, not years**, and the repo supports it: **1,001 sprites landed
+across three production days, and the whole of Safari Saga was built in six weeks.**
+
+**Content is not the bottleneck.** The unproven pipelines are **animation** and **3D
+environments** — so **build a one-biome vertical slice early to price them.** Everything
+else in this document is already costed by work that has actually been done; those two are
+not.
+
 ### The budget sequence — **[v2]**
 
 **Engine now, because it is free and gates the work. Money later, when there is something
@@ -399,7 +409,7 @@ palette swaps to fake them.**
 
 | Area | What it holds |
 |---|---|
-| **On the Brink** | **The thirteenth region, and it is required, not optional.** 50 species still alive — critically endangered and extinct-in-the-wild. Unlocks when all twelve biomes are finished, and **completing it is what unlocks the postgame.** The final-boss position, because it is the most important |
+| **On the Brink** | **The thirteenth region, and it is required, not optional.** *(The Arabian oryx deliberately is not in it — it is the opposite story.)* 50 species still alive — critically endangered and extinct-in-the-wild. Unlocks when all twelve biomes are finished, and **completing it is what unlocks the postgame.** The final-boss position, because it is the most important |
 | **The Vigil** | 50 species that are gone. **A memorial, not a collection** — and stripped of everything still alive, it finally becomes what it always claimed to be |
 | **The Telling** | 100 mythological creatures, one per culture, themed on understanding through stories |
 | **The Record** | 50 fossil species across 13 geological periods |
@@ -894,6 +904,11 @@ would actually have to render:
 | **Audio** | **No visual work at all** | Proboscis nose as resonator, the giant otter's nine calls, the meerkat's hawk-call versus jackal-call |
 | **Shared locomotion rigs** | **~8–10 rigs total** | Head-first descent (margay, genet, marbled cat), gliding (sugar glider, colugo), brachiation (gibbon, siamang), prehensile tail (kinkajou, binturong) |
 
+**The corrected total: about 20 shared systems, ~140 bespoke pieces, and ~160 species with
+no showable verb at all**, who get a size reference and a cutaway instead. **Four of the
+cheapest categories — scale, light and vision shaders, cutaway, audio — are also among the
+most striking.**
+
 ## Two kinds of species
 
 | | Can be brought to a facility | Cannot be captured |
@@ -1338,17 +1353,23 @@ impact ladder, no animal used twice in a biome.
 
 ### The Long Grass · savanna
 
+> **Ayr chose these four directly from a menu**, and this document previously carried an
+> earlier illustration instead. **Corrected in v10** — Uncle Albert's quest list agrees with
+> the table below.
+
 | Stage | Story | Animal |
 |---|---|---|
-| **Local** | **The lights on the boma.** Herders killing lions that take cattle at night. Everyone is reasonable, and the answer belongs to a thirteen-year-old with flashing LEDs. **Solving it earns the savanna facility.** *Richard Turere, Kitengela, ~2011* | Lion |
-| **Pattern** | **The dogs.** Not one farm but a district shooting cheetahs. The answer is not aimed at the cheetah at all — it is Anatolian shepherds placed with the herds. *Cheetah Conservation Fund, Namibia, since 1994* | Cheetah |
-| **Programme** | **The poisoned carcass.** Poachers poison carcasses deliberately, because circling vultures show rangers where a kill happened. **Hundreds die at once, and several African species are down over 90%.** The work is building the institution — a poison-response unit, carcass monitoring, trained teams. **Villain: yes** | Vulture |
-| **Law** | **The burn.** The ivory trade and the fight to change it internationally, culminating in the 1989 CITES ban and Kenya burning twelve tonnes of confiscated ivory in public **to prove the stockpile would never be sold.** **Villain: yes** | Elephant |
+| **Local** | **Beehive fences.** Elephants raid crops and are killed for it. **Elephants genuinely fear bees** — they flee the sound and have an alarm call for it — so hives strung along a fence line deter **76% of elephants annually and 86% at peak crop season.** **And the farmers sell the honey.** **Solving it earns the savanna facility.** *Lucy King / Save the Elephants* | Elephant |
+| **Pattern** | **The guard dogs.** A whole district shooting cheetahs over livestock. **The fix is not aimed at the cheetah** — Anatolian shepherds raised with the herds cut losses until shooting stops being worth it. *Cheetah Conservation Fund, Namibia, since 1994* | Cheetah |
+| **Programme** | **The conservancies.** Communities given legal ownership of the wildlife on their land. Namibia: **86 communal conservancies, over 20% of the country, $10M+ a year** returning to residents. Kenya: **two-thirds of large mammals live outside state parks.** *(The gemsbok was created specifically for this quest — the roster had only "Arabian Oryx", which lives in desert, and two quests were claiming it.)* | Gemsbok |
+| **Law** | **The horn question.** Rhino horn trade policy, including the genuinely unsettled argument over whether a legal trade would undercut poaching or legitimise it. **No clean answer** — and this is the quest where beat 3 offers partial answers that each trade something, scored on **whether the player argued from evidence** rather than which side they took | Black rhino |
 
-**The captive lion industry quest is deliberately not here, and it has no home yet.** It
-would repeat the lion and break the no-animal-twice rule. It was moved to The Furrows and
-then moved back — **that biome is the home and the tutorial ground, and the tone is wrong.**
-It sits in the reserve pile **pending a better home.**
+**Lion, wildebeest, vulture, wild dog and white rhino stay free** in the savanna for reserve
+and for later slots.
+
+**The captive lion industry quest has no home yet.** It was moved to The Furrows and then
+moved back — **that biome is the home and the tutorial ground, and the tone is wrong.** It
+sits in the reserve pile **pending a better home.**
 
 ### The Weald · forest
 
@@ -1420,7 +1441,7 @@ It sits in the reserve pile **pending a better home.**
 | **Local** | **Head-starting.** Ravens eat hatchling tortoises, and raven numbers exploded because of landfill and powerlines. **You are not fixing a raven problem, you are fixing a rubbish problem** — while raising hatchlings until their shells harden | Desert tortoise |
 | **Pattern** | **The solar farm.** Desert sun is the best climate solution available, and utility-scale solar sterilises the ground it covers. **Two things you believe in, on the same hectare** | Fennec fox |
 | **Programme** | **The trees that were already there.** The Great Green Wall planned to plant a forest and most of the planting died. What worked was noticing living rootstock already under the fields and protecting the shoots — millions of hectares for almost nothing. *Tony Rinaudo, Niger* | Dorcas gazelle |
-| **Law** | **Protection, removed.** Oman's Arabian Oryx Sanctuary was the first place ever struck off the World Heritage list, cut by 90% for oil prospecting in 2007. **Every other quest is about winning protection. This one is about losing it, legally and on purpose** | Arabian oryx |
+| **Law** | **Protection, removed.** Oman's Arabian Oryx Sanctuary was the first place ever struck off the World Heritage list, cut by 90% for oil prospecting in 2007. **Every other quest is about winning protection. This one is about losing it, legally and on purpose** — and it is sharper because the oryx is a *success* story: extinct in the wild in 1972, reintroduced, and in 2011 **the first species ever downlisted from Extinct in the Wild.** **The species was saved and its sanctuary was legally dismantled for oil** | Arabian oryx |
 
 ### The Divide · mountains
 
@@ -1778,6 +1799,26 @@ THE 300   On the Brink 50 · The Vigil 50 · The Telling 100
 
 **Round numbers are firm.** As of consolidation, **656 of the 700 exist and 44 remain** to be
 created. Checked by Uncle Albert, not asserted here.
+
+### Everything in the roster is real — **[v10]**
+
+**The thirteen invented wardens are cut** and stay in Safari Saga. **Every entry in the new
+roster can be credited to something real** — a living species, an extinct one, a fossil, or
+a myth that a culture actually tells. Nothing is made up to fill a slot.
+
+### Unequal biomes are correct, not a fault — **[v10]**
+
+**A bigger biome should hold more variety**, and rainforest and savanna sitting on top
+matches the real world. **The floor matters; the ceiling does not.**
+
+### No plankton, krill or copepods as catchable species — **[v10]**
+
+**What the animals eat is stated in the text rather than implemented as collectables.**
+Polar and open ocean get larger additions instead — Arctic fish and the like.
+
+> **This document was breaking that rule.** Antarctic krill had been written into *Lights
+> On* and *The Linchpin*. **Both are corrected** — lanternfish and viperfish take the
+> bioluminescence slot, and The Linchpin stands at seven without it.
 
 **Per-biome targets are flexible at Ayr's discretion** — a guide, not a quota. **Interest
 governs which species get made, not headcount.**

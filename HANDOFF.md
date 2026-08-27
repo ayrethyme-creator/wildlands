@@ -114,7 +114,7 @@ THE 700     biomes 606 + The Kept 50 = 656        44 still to create
 THE 300     Vigil 50 · On the Brink 50 · The Telling 100
             The Record 50 · The Breeding Centre 50
 BADGES      52        easy 10 · medium 26 · hard 16 · 4 tiered
-            300 species referenced, 218 exist, 82 to create
+            301 species referenced, 220 exist, 81 to create
 ```
 
 **Thinnest biomes:** open ocean, farmland, coast, reef.

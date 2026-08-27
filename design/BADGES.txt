@@ -26,7 +26,7 @@ Senses :: Heat Vision :: M ::  :: Infrared pit organs &mdash; seeing warmth as a
 Senses :: Beyond Violet :: M ::  :: Ultraviolet vision &mdash; reindeer use it to see lichen on snow :: Common Kestrel|Reindeer|Mantis Shrimp|Western Honeybee|Blue Tit*
 Senses :: True North :: M ::  :: Magnetoreception :: Green Sea Turtle|Arctic Tern|European Robin|Monarch Butterfly|Sockeye Salmon|Rock Dove
 Senses :: Through the Glare :: E ::  :: Polarised-light vision :: Common Cuttlefish|Mantis Shrimp|Giant Pacific Octopus|Common Octopus*
-Senses :: Lights On :: H :: 2,5,8 :: Bioluminescence &mdash; light the animal makes itself :: Anglerfish|Black Dragonfish|Atolla|Common Eastern Firefly|Vampire Squid|Hawaiian Bobtail Squid*|Antarctic Krill*|Cookiecutter Shark
+Senses :: Lights On :: H :: 3,6,9 :: Bioluminescence &mdash; light the animal makes itself :: Anglerfish|Black Dragonfish|Atolla|Common Eastern Firefly|Vampire Squid|Hawaiian Bobtail Squid*|Lanternfish|Viperfish|Cookiecutter Shark
 
 The body :: Grow It Back :: M ::  :: Regeneration :: Axolotl|Common Brittle Star|Tiger Tail Sea Cucumber|Sunflower Sea Star|Leopard Gecko|Spiny Mouse*|Planarian*
 The body :: Rare Poison :: M ::  :: Venomous mammals &mdash; there are barely any :: Platypus|Slow Loris|Solenodon*|Northern Short-tailed Shrew*|Eurasian Water Shrew*
@@ -58,7 +58,7 @@ Behaviour :: Bad Reputation :: H :: 8,16,24 :: Animals feared for their name, th
 
 Conservation :: Only In Captivity :: H ::  :: Extinct in the wild &mdash; nowhere left to go home to :: ~any five from On the Brink tagged EW
 Conservation :: Back From the Brink :: H ::  :: Recoveries that actually worked :: California Condor|Przewalski's Horse|Whooping Crane|Mauritius Kestrel|Arabian Oryx|American Bison|Golden Tamarin|Black-footed Ferret|Iberian Lynx
-Conservation :: The Linchpin :: M ::  :: Keystone species &mdash; pull one out and the system falls :: Eurasian Beaver|Sea Otter|Grey Wolf|Stoplight Parrotfish|African Elephant|Prairie Dog|American Bison|Antarctic Krill*
+Conservation :: The Linchpin :: M ::  :: Keystone species &mdash; pull one out and the system falls :: Eurasian Beaver|Sea Otter|Grey Wolf|Stoplight Parrotfish|African Elephant|Prairie Dog|American Bison
 Conservation :: The Trade :: M ::  :: The most trafficked animals on earth :: Sunda Pangolin|Tiger|Black Rhinoceros|Saiga|African Grey|Helmeted Hornbill*|European Eel*|Ploughshare Tortoise*
 
 Extremes :: The Largest :: M :: 3,6,11 :: Biggest of its kind, right across the tree of life :: Blue Whale|African Elephant|Whale Shark|Ostrich|Japanese Spider Crab|Giant Siphonophore|Saltwater Crocodile|Colossal Squid|Capybara|Goliath Frog|Titan Beetle*
