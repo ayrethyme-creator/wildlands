@@ -1,0 +1,320 @@
+<title>The Fifty Badges</title>
+<style>
+:root{
+  --paper:#EFF1EC; --raised:#F8F9F6; --ink:#161B15; --ink-soft:#4B5449;
+  --faint:#87907F; --rule:#D6DBD0; --brass:#9A6318; --brass-soft:#C39A4E;
+  --e:#3B6E42; --m:#9E6C12; --h:#94362B;
+  --e-bg:#E1EDE1; --m-bg:#F4E9D2; --h-bg:#F4DEDA;
+  --serif:ui-serif,"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:ui-sans-serif,-apple-system,"Segoe UI",system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#121610; --raised:#1B211A; --ink:#E9ECE5; --ink-soft:#AEB7AA;
+  --faint:#77816E; --rule:#2B3328; --brass:#D6A055; --brass-soft:#8B6529;
+  --e:#84B584; --m:#DCB165; --h:#DC9084;
+  --e-bg:#1D2A1D; --m-bg:#2C2515; --h-bg:#2F1E1A;
+}}
+:root[data-theme="dark"]{
+  --paper:#121610; --raised:#1B211A; --ink:#E9ECE5; --ink-soft:#AEB7AA;
+  --faint:#77816E; --rule:#2B3328; --brass:#D6A055; --brass-soft:#8B6529;
+  --e:#84B584; --m:#DCB165; --h:#DC9084;
+  --e-bg:#1D2A1D; --m-bg:#2C2515; --h-bg:#2F1E1A;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+  line-height:1.55;margin:0;padding:0 20px 100px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0}
+.lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--faint)}
+
+header{padding:64px 0 32px;border-bottom:1px solid var(--rule)}
+h1{font-family:var(--serif);font-size:clamp(40px,7vw,68px);line-height:1;
+  font-weight:600;letter-spacing:-.02em;margin-top:14px}
+.sub{font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.2vw,21px);
+  color:var(--ink-soft);max-width:60ch;margin:18px 0 0}
+.sub em{font-style:normal;font-weight:600;color:var(--ink)}
+.tally{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.t{background:var(--raised);border:1px solid var(--rule);border-radius:2px;
+  padding:9px 14px;display:flex;align-items:baseline;gap:9px}
+.t b{font-family:var(--mono);font-size:17px;font-variant-numeric:tabular-nums}
+
+.first{margin:34px 0 0;background:var(--raised);border:1px solid var(--rule);
+  border-left:3px solid var(--brass);border-radius:2px;padding:26px 28px}
+.first h2{font-family:var(--serif);font-size:25px;font-weight:600;margin:8px 0 0}
+.first p{color:var(--ink-soft);max-width:66ch;margin:12px 0 0}
+.first strong{color:var(--ink)}
+.first em{font-style:italic}
+.trig{font-family:var(--mono);font-size:12.5px;line-height:2;margin-top:18px;
+  padding-top:16px;border-top:1px solid var(--rule);color:var(--ink-soft)}
+.trig i{color:var(--brass);font-style:normal}
+
+.bar{position:sticky;top:0;z-index:9;background:var(--paper);
+  border-bottom:1px solid var(--rule);padding:14px 0;margin:44px 0 0;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+input[type=search]{font-family:var(--sans);font-size:14px;padding:8px 12px;
+  border:1px solid var(--rule);border-radius:2px;background:var(--raised);
+  color:var(--ink);min-width:230px;flex:1}
+input[type=search]:focus-visible,button:focus-visible{outline:2px solid var(--brass);
+  outline-offset:1px}
+button{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;padding:9px 13px;border:1px solid var(--rule);
+  border-radius:2px;background:var(--raised);color:var(--ink-soft);cursor:pointer}
+button[aria-pressed=true]{background:var(--ink);color:var(--paper);
+  border-color:var(--ink)}
+.hits{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-left:auto}
+
+section{margin-top:52px}
+.shead{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;
+  border-bottom:1px solid var(--rule)}
+.shead h2{font-family:var(--serif);font-size:29px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+  gap:14px;margin-top:20px}
+
+.card{background:var(--raised);border:1px solid var(--rule);border-radius:2px;
+  padding:20px 20px 18px;display:flex;flex-direction:column;gap:11px}
+.card.tier{border-color:var(--brass-soft)}
+.top{display:flex;align-items:flex-start;gap:13px}
+.med{width:34px;height:34px;border-radius:50%;flex:none;margin-top:2px;
+  display:grid;place-items:center;font-family:var(--mono);font-size:12px;
+  font-weight:700;border:2px solid}
+.med.E{color:var(--e);border-color:var(--e);background:var(--e-bg)}
+.med.M{color:var(--m);border-color:var(--m);background:var(--m-bg)}
+.med.H{color:var(--h);border-color:var(--h);background:var(--h-bg)}
+.card h3{font-family:var(--serif);font-size:20.5px;font-weight:600;line-height:1.2}
+.n{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:3px}
+.concept{color:var(--ink-soft);font-size:14.5px;margin:0}
+.concept em{color:var(--ink);font-style:italic}
+.mem{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:4px}
+.mem span{font-size:12px;padding:3px 8px;border:1px solid var(--rule);
+  border-radius:2px;color:var(--ink-soft);background:var(--paper)}
+.mem span.new{border-style:dashed;color:var(--brass)}
+.tiers{font-family:var(--mono);font-size:11px;color:var(--brass);
+  border-top:1px solid var(--rule);padding-top:10px;letter-spacing:.04em}
+
+.br{margin-top:52px;background:var(--raised);border:1px solid var(--rule);
+  border-radius:2px;padding:28px}
+.br h2{font-family:var(--serif);font-size:29px;font-weight:600;margin-top:8px}
+.br>p{color:var(--ink-soft);max-width:68ch;margin:12px 0 0}
+.br strong{color:var(--ink)}
+.mech{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+  gap:18px;margin-top:24px}
+.mech h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 10px;
+  padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.mech ul{list-style:none;margin:0;padding:0;display:flex;
+  flex-direction:column;gap:9px}
+.mech li{font-size:13.5px;color:var(--ink-soft);line-height:1.45}
+.mech li b{color:var(--ink);font-weight:600;font-size:14px}
+.note{margin-top:26px;padding-top:18px;border-top:1px solid var(--rule);
+  color:var(--ink-soft);max-width:68ch}
+footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule);
+  color:var(--faint);font-size:13px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}header{padding-top:40px}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="lab">Wildlands &middot; design record &middot; for approval</div>
+  <h1>The Fifty Badges</h1>
+  <p class="sub">An achievement system that is actually a curriculum. Each badge is a
+  concept in biology, and the set you have to assemble to earn it <em>is</em> the lesson.</p>
+  <div class="tally" id="tally"></div>
+</header>
+
+<div class="first">
+  <div class="lab">Start here</div>
+  <h2>The Black Cat teaches the player what a badge is</h2>
+  <p>The black cat is a <strong>coat option on House Cat</strong>, not a species &mdash; so
+  this badge needs no catching at all. It fires off a choice the player already made in
+  the first ten minutes, which is exactly what lets it carry the tutorial.</p>
+  <p>The order is the point. The player gets <em>&ldquo;black cats are feared for no
+  reason&rdquo;</em> and <strong>then</strong> <em>&ldquo;that was a badge, and here is what
+  badges are.&rdquo;</em> A tutorial that opens with the achievement menu is a menu. One
+  that opens with a fact about the animal in your arms is a hook.</p>
+  <p>And the fact is real: black cats are <strong>adopted less and euthanised more</strong>
+  than cats of any other colour. Superstition with a measurable body count, in a house
+  pet &mdash; the same lesson as the aye-aye and the vulture, carried by an animal the
+  player chose to love before the game had asked anything of them.</p>
+  <div class="trig">
+    <i>&rsaquo;</i> choose the black coat &nbsp;&rarr;&nbsp; fires immediately<br>
+    <i>&rsaquo;</i> or read the House Cat codex entry &nbsp;&rarr;&nbsp; fires<br>
+    <i>&rsaquo;</i> or neither, by the end of the tutorial &nbsp;&rarr;&nbsp; the badge lights up on its own
+  </div>
+</div>
+
+<div class="bar">
+  <input type="search" id="q" placeholder="Search a badge, a concept, or an animal" aria-label="Search badges">
+  <button data-d="all" aria-pressed="true">All</button>
+  <button data-d="E" aria-pressed="false">Easy</button>
+  <button data-d="M" aria-pressed="false">Medium</button>
+  <button data-d="H" aria-pressed="false">Hard</button>
+  <span class="hits" id="hits"></span>
+</div>
+
+<div id="out"></div>
+
+<div class="br">
+  <div class="lab">The hard one &middot; 25 members &middot; tiered</div>
+  <h2>Bad Reputation</h2>
+  <p>Every other badge teaches a mechanism. <strong>This one teaches that fear has a body
+  count</strong> &mdash; and it is the only badge in the fifty whose lesson is about the
+  player rather than the animal. It covers three separate reasons an animal gets feared,
+  which is why it is large enough to tier.</p>
+  <div class="mech">
+    <div>
+      <h4>Feared for the name &middot; 8</h4>
+      <ul>
+        <li><b>Vampire Squid</b> &mdash; its name means &ldquo;vampire squid from hell&rdquo;. It eats marine snow, which is detritus</li>
+        <li><b>Hellbender</b> &mdash; also snot otter, devil dog, Allegheny alligator. A harmless salamander</li>
+        <li><b>Basilisk Lizard</b> &mdash; named for a monster whose gaze killed</li>
+        <li><b>Thorny Devil</b> &mdash; eats ants</li>
+        <li><b>Tasmanian Devil</b> &mdash; named for the screaming</li>
+        <li><b>Giant Oceanic Manta</b> &mdash; sailors called it the devilfish</li>
+        <li><b>Zombie Worm</b> &middot; <b>Goblin Shark</b></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Feared for the face &middot; 9</h4>
+      <ul>
+        <li><b>Maned Wolf</b> &mdash; at night, a red silhouette on impossibly long legs. Neither wolf nor fox, and it eats mostly fruit</li>
+        <li><b>Anglerfish</b> &mdash; most are under 20&nbsp;cm. The nightmare image everyone has seen is a magnified photograph</li>
+        <li><b>Blobfish</b> &mdash; it only looks like that because of decompression. At depth it is an ordinary fish</li>
+        <li><b>Giant Moray</b> &mdash; it opens and closes its mouth to pump water over its gills. It is breathing, and every diver reads it as threat</li>
+        <li><b>Fangtooth</b> &mdash; 16&nbsp;cm long</li>
+        <li><b>Aye-aye</b> &middot; <b>Gulper Eel</b> &middot; <b>Giant Isopod</b> &middot; <b>Pacific Hagfish</b></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Feared by folklore &middot; 8</h4>
+      <ul>
+        <li><b>Black Cat</b> &mdash; the tutorial badge, and the one with shelter statistics behind it</li>
+        <li><b>Aye-aye</b> &mdash; killed on sight in parts of Madagascar as an omen of death</li>
+        <li><b>R&uuml;ppell&rsquo;s Vulture</b> &mdash; stomach acid near pH&nbsp;1 destroys anthrax and botulism, which is exactly why India&rsquo;s vulture collapse caused a rabies crisis</li>
+        <li><b>Spotted Hyena</b> &mdash; the scavenger reputation is backwards. Lions steal from them more often than the reverse</li>
+        <li><b>Common Vampire Bat</b> &mdash; shares blood with roostmates who failed to feed, and remembers who helped it</li>
+        <li><b>Barn Owl</b> &mdash; an omen across Europe, and the best rodent control a farmer can have</li>
+        <li><b>Grey Wolf</b> &middot; <b>Common Raven</b></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note"><strong>It loops back into a quest.</strong> A player who earns this
+  meets the vulture argument twice &mdash; once as prejudice, and once as the mountains
+  quest, where 99% of South Asia&rsquo;s vultures died to diclofenac and human rabies deaths
+  rose behind them. The badge is why that quest makes sense.</div>
+</div>
+
+<footer>Wildlands &mdash; design record, not final copy. Dashed chips mark species not yet
+in the roster.</footer>
+</div>
+
+<script>
+var B=[
+["Reproduction",[
+["The Granny","Menopause, and the grandmother hypothesis","M",["Orca","Beluga","Narwhal","Short-finned Pilot Whale","False Killer Whale"]],
+["Blood Queen","Menstruation &mdash; only about 1.5% of mammals do it","M",["Gorilla","Chimpanzee","Bonobo","Olive Baboon","Japanese Macaque"]],
+["No Father Required","Parthenogenesis in vertebrates &mdash; eggs that develop with no male at all","M",["Komodo Dragon","Zebra Shark","Ball Python"]],
+["The Switch","Sequential hermaphroditism &mdash; changing sex partway through life","E",["Percula Clownfish","Stoplight Parrotfish","Bluestreak Cleaner Wrasse","Goliath Grouper"]],
+["Dad&rsquo;s Turn","Male pregnancy","M",["Pygmy Seahorse","Ornate Ghost Pipefish","Leafy Seadragon","Weedy Seadragon"]],
+["On Pause","Embryonic diapause &mdash; a stoat can mate in summer and give birth ten months later","M",["Stoat","Fisher","Black Bear","Sea Otter","Red Kangaroo"]],
+["One Shot","Semelparity &mdash; breed once, then die","M",["Sockeye Salmon","Giant Pacific Octopus","Atlas Moth"]],
+["The Colony","Eusociality &mdash; and the naked mole-rat is the only mammal in the room","E",["Naked Mole-Rat","Western Honeybee","Leafcutter Ant"]],
+["Til Death","Lifelong monogamy","E",["Wandering Albatross","Rosy-faced Lovebird","Mute Swan","Grey Wolf"]]]],
+["Senses",[
+["The Sixth Sense","Electroreception &mdash; platypus and echidna are the only mammals with it","M",["Platypus","Short-beaked Echidna","Electric Ray","Scalloped Hammerhead"]],
+["Seeing With Sound","Echolocation, evolved separately in bats and in toothed whales","E",["Little Brown Bat","Greater Horseshoe Bat","Bottlenose Dolphin","Sperm Whale"]],
+["Heat Vision","Infrared pit organs &mdash; seeing warmth as an image","M",["Sidewinder","Boa Constrictor","Bushmaster"]],
+["Beyond Violet","Ultraviolet vision &mdash; reindeer use it to see lichen on snow","M",["Common Kestrel","Reindeer","Mantis Shrimp"]],
+["True North","Magnetoreception","M",["Loggerhead Turtle","Arctic Tern","European Robin"]],
+["Through the Glare","Polarised-light vision","E",["Common Cuttlefish","Mantis Shrimp"]],
+["Lights On","Bioluminescence &mdash; light the animal makes itself","H",["Anglerfish","Black Dragonfish","Atolla","Common Eastern Firefly","Deathstalker"],[2,4,5]]]],
+["The body",[
+["Grow It Back","Regeneration","M",["Axolotl","Common Brittle Star","Tiger Tail Sea Cucumber","Sunflower Sea Star"]],
+["Rare Poison","Venomous mammals &mdash; there are barely any","M",["Platypus","Slow Loris"]],
+["See-Through","Transparency","H",["Glass Frog","Glasswing Butterfly","Cockatoo Squid","Barreleye"]],
+["Sub-Zero","Antifreeze proteins &mdash; the wood frog freezes solid, stops its heart, and thaws","H",["Antarctic Icefish","Arctic Cod","Wood Frog*"]],
+["Second Bite","Pharyngeal jaws &mdash; a second set of teeth down in the throat","E",["Giant Moray","Stoplight Parrotfish"]],
+["Built Wrong on Purpose","Extreme selective breeding, and what it costs the animal","H",["French Bulldog","Manx","Munchkin","Bull Terrier"]],
+["No Bones About It","Invertebrate giants","H",["Giant Squid","Colossal Squid","Japanese Spider Crab","Coconut Crab"]],
+["Armour","Convergent armour plating","H",["Nine-banded Armadillo","Sunda Pangolin","Common Wombat","Glyptodon"]]]],
+["Evolution",[
+["Same Answer Twice","Convergent evolution &mdash; the same solution found twice, independently","H",["Sugar Glider","Flying Squirrel","Thylacine","Grey Wolf","Smilodon","Gorgonops"],[2,4,6]],
+["The Island Rule","Insular dwarfism <em>and</em> gigantism &mdash; islands push both ways","M",["Komodo Dragon","Coconut Crab","Pygmy Hippo"]],
+["Grounded","Flightlessness where nothing hunts on the ground &mdash; and the hard half is that most of these are gone","H",["K&#257;k&#257;p&#333;","Kiwi","Cassowary","Dodo","Giant Moa"]],
+["Unchanged","Ancient lineages &mdash; how long the <em>shape</em> has lasted","H",["Coelacanth","Chambered Nautilus","Tuatara","Horseshoe Crab"]],
+["End of the Line","The last surviving member of an entire branch","M",["Aardvark","Tuatara","Platypus","Aye-aye","Okapi"]],
+["Made By Us","Domestication, and what it does to a body","H",["Domestic Fox","Silkworm","English Budgie","Angora Rabbit"]],
+["Back From the Dead","Lazarus taxa &mdash; written off, then found alive","H",["Coelacanth","Silver-backed Chevrotain","Woolly Flying Squirrel"]],
+["Not What It Looks Like","Misleading names &mdash; a red panda is neither","E",["Red Panda","Raccoon Dog","Aardwolf","Maned Wolf"]]]],
+["Behaviour",[
+["The Toolkit","Tool use","M",["Bearded Capuchin","Sea Otter","Common Raven","Giant Pacific Octopus"]],
+["Passed Down","Culture &mdash; behaviour taught rather than inherited","M",["Japanese Macaque","Orca","Chimpanzee"]],
+["Strange Allies","Cooperation between unrelated species","M",["Banded Sea Krait","Honey Badger","Bluestreak Cleaner Wrasse"]],
+["The Impostor","Mimicry","M",["Mimic Octopus","Orchid Mantis","Ornate Ghost Pipefish","Marmalade Hoverfly"]],
+["Who&rsquo;s That","Mirror self-recognition","M",["Giant Oceanic Manta","Bluestreak Cleaner Wrasse","Asian Elephant"]],
+["The Village","Cooperative breeding &mdash; raising young that are not yours","E",["Meerkat","Banded Mongoose","African Wild Dog"]],
+["The Long Way","Migration extremes","M",["Arctic Tern","Globe Skimmer","Bar-tailed Godwit","Humpback Whale"]],
+["The Long Sleep","Hibernation and torpor","E",["Alpine Marmot","Black Bear","Sword-billed Hummingbird"]],
+["Bad Reputation","Animals feared for their name, their face, or their folklore &mdash; and fear kills them","H",["25 species &mdash; listed below"],[8,16,25]]]],
+["Conservation",[
+["Only In Captivity","Extinct in the wild &mdash; nowhere left to go home to","H",["Any five from On the Brink tagged EW"]],
+["Back From the Brink","Recoveries that actually worked","H",["California Condor","Przewalski&rsquo;s Horse","Whooping Crane","Mauritius Kestrel"]],
+["The Linchpin","Keystone species &mdash; pull one out and the system falls","M",["Eurasian Beaver","Sea Otter","Grey Wolf","Stoplight Parrotfish"]],
+["The Trade","The most trafficked animals on earth","M",["Sunda Pangolin","Tiger","Black Rhinoceros","Saiga"]]]],
+["Extremes",[
+["The Largest","Biggest of its kind, right across the tree of life","M",["Blue Whale","African Elephant","Whale Shark","Ostrich","Japanese Spider Crab","Giant Siphonophore"],[2,4,6]],
+["The Smallest","Miniature record-holders","M",["Pygmy Marmoset","Pygmy Seahorse","Least Weasel","Rusty-spotted Cat"]],
+["The Deepest","Depth records","H",["Mariana Snailfish","Cuvier&rsquo;s Beaked Whale","Southern Elephant Seal"]],
+["The Highest","Altitude records","M",["R&uuml;ppell&rsquo;s Vulture","Bar-headed Goose","Alpine Chough","Himalayan Jumping Spider"]],
+["The Old Ones","Extreme longevity &mdash; how long one <em>individual</em> lives","H",["Greenland Shark","Bowhead Whale","Deep-sea Bamboo Coral","Sulcata Tortoise"]]]]
+];
+var DN={E:"Easy",M:"Medium",H:"Hard"};
+var out=document.getElementById("out");
+var total=0,cnt={E:0,M:0,H:0},tiered=0;
+B.forEach(function(g){
+  var s=document.createElement("section");
+  var h='<div class="shead"><h2>'+g[0]+'</h2><span class="lab">'+g[1].length+' badges</span></div><div class="grid">';
+  g[1].forEach(function(b){
+    total++;cnt[b[2]]++;if(b[4])tiered++;
+    var chips=b[3].map(function(m){
+      var nw=m.slice(-1)==="*";
+      return '<span class="'+(nw?"new":"")+'">'+(nw?m.slice(0,-1)+" &middot; to create":m)+'</span>';
+    }).join("");
+    var tiers=b[4]?'<div class="tiers">bronze '+b[4][0]+' &nbsp;&middot;&nbsp; silver '+b[4][1]+' &nbsp;&middot;&nbsp; gold '+b[4][2]+'</div>':'';
+    h+='<article class="card'+(b[4]?" tier":"")+'" data-d="'+b[2]+'" data-s="'+
+      (b[0]+" "+b[1]+" "+b[3].join(" ")).replace(/&[a-z0-9#]+;/g,"").toLowerCase()+'">'+
+      '<div class="top"><div class="med '+b[2]+'">'+b[2]+'</div><div><h3>'+b[0]+
+      '</h3><div class="n">'+DN[b[2]]+' &middot; '+(b[4]?b[4][2]:b[3].length)+' to collect</div></div></div>'+
+      '<p class="concept">'+b[1]+'</p><div class="mem">'+chips+'</div>'+tiers+'</article>';
+  });
+  s.innerHTML=h+'</div>';out.appendChild(s);
+});
+document.getElementById("tally").innerHTML=
+  '<div class="t"><b>'+total+'</b><span class="lab">badges</span></div>'+
+  '<div class="t"><b style="color:var(--e)">'+cnt.E+'</b><span class="lab">easy</span></div>'+
+  '<div class="t"><b style="color:var(--m)">'+cnt.M+'</b><span class="lab">medium</span></div>'+
+  '<div class="t"><b style="color:var(--h)">'+cnt.H+'</b><span class="lab">hard</span></div>'+
+  '<div class="t"><b>'+tiered+'</b><span class="lab">tiered</span></div>'+
+  '<div class="t"><b>7</b><span class="lab">categories</span></div>';
+
+var dif="all",q="";
+function apply(){
+  var n=0;
+  document.querySelectorAll(".card").forEach(function(c){
+    var ok=(dif==="all"||c.dataset.d===dif)&&(!q||c.dataset.s.indexOf(q)>-1);
+    c.hidden=!ok;if(ok)n++;
+  });
+  document.querySelectorAll("section").forEach(function(s){
+    s.hidden=!s.querySelector(".card:not([hidden])");
+  });
+  document.getElementById("hits").textContent=(n===total)?"":n+" of "+total;
+}
+document.querySelectorAll(".bar button").forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll(".bar button").forEach(function(o){o.setAttribute("aria-pressed","false")});
+    b.setAttribute("aria-pressed","true");dif=b.dataset.d;apply();
+  };
+});
+document.getElementById("q").oninput=function(e){q=e.target.value.toLowerCase().trim();apply()};
+</script>
