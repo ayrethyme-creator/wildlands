@@ -15,7 +15,7 @@ written for the new game yet.
 | **`design/GROUND_TRUTH.txt`** | The species that exist, by group. **Read from the running game, never parsed from `.jsx`** |
 | **`design/PENDING_MOVES.txt`** | Decisions made but not yet in game data. Every fix lives here until applied |
 | **`design/BADGES.txt`** | Badge membership, the only source. The page is generated from it |
-| **`design/tools/uncle_albert.py`** | The validator. Ayr calls it *"run it by Uncle Albert"* |
+| **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
 | **`NEW_DIRECTION.md`** | The design record, ~10,000 lines, append-only with dated headers |
 
 **`NEW_DIRECTION.md` is too long to read.** Read the last few hundred lines for current
@@ -31,12 +31,17 @@ banner at the top says so. Numbers come from Uncle Albert, never from the doc.
 ```
 uncle-albert.bat                       (double-click, or from the repo root)
 python design/tools/uncle_albert.py    (exits non-zero if anything is wrong)
+python design/tools/make_badge_page.py  (rebuilds badges.html from BADGES.txt)
 ```
 
 Three wrong species counts were published to Ayr in one session — 461, 516, 465 — all
 from regex-parsing JavaScript. **The DEX exists in two shapes** (object literals *and*
 constructor calls) and a regex that matches one silently drops the other. Ayr caught it
 three times. That is what the tool is for.
+
+**Never hand-edit the badge data inside `design/badges.html`.** It is generated from
+`design/BADGES.txt` by `make_badge_page.py` and will be overwritten. Edit the txt, rebuild,
+then run it by Uncle Albert.
 
 **2. Never regex-parse `game.part*.jsx`.** Serve the repo and read `window.__DEX` from
 `gallery.html`. `design/tools/read_ground_truth.js` is the sanctioned snippet.
