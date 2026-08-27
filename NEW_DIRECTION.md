@@ -10006,3 +10006,39 @@ leaks — or the **king vulture**, which is the spectacular one.
 ```
 ~47 a group, not a species     three biomes done, nine to go
 ```
+
+---
+
+## THE FENS AND THE DRY ARE NAMED — fourteen species
+
+**The water bear entry is approved too** — the tardigrade keeps its name and gets an
+entry saying it is a phylum of ~1,300, naming *Ramazzottius varieornatus* and its Dsup
+protein.
+
+### The Fens
+
+| Was | Now | The fact |
+|---|---|---|
+| Crocodile | **Saltwater Crocodile** | The animal its entry already describes. Also **rides ocean currents between islands rather than swimming** — one was tracked doing 590 km |
+| Dragonfly | **Globe Skimmer** | **The longest migration of any insect** — an 18,000 km round trip across the Indian Ocean, run in generations |
+| Damselfly | **Banded Demoiselle** | Males hold territory over the water and court with a fluttering display flight |
+| Kingfisher | **Common Kingfisher** | **The nose of the Japanese bullet train was redesigned after its beak**, to stop the sonic boom the train made leaving tunnels |
+| Terrapin | **Diamondback Terrapin** | **The only turtle that lives exclusively in brackish water** — and it was eaten nearly to extinction as a delicacy until Prohibition saved it, because the recipe called for sherry |
+| Flamingo | **Lesser Flamingo** | Breeds on **Lake Natron, alkaline enough to burn the skin off most animals that enter it** |
+| Mink | **American Mink** | Invasive across Europe from fur-farm escapes, and the main driver of Britain's water vole collapse |
+
+### The Dry
+
+| Was | Now | The fact |
+|---|---|---|
+| Gecko | **Web-footed Gecko** | Namib. Translucent, **swims through loose sand on webbed feet, and licks its own eyeballs clean** because it has no eyelids |
+| Scorpion | **Deathstalker** | Its venom contains **chlorotoxin, in trials to make brain tumours glow during surgery** so the surgeon can see their edge |
+| Rattlesnake | **Sidewinder** | Moves sideways across loose sand with **only two points touching at a time**, leaving J-shaped tracks |
+| Tarantula | **Mexican Redknee** | Flicks urticating hairs off its own abdomen at whatever is bothering it |
+| Camel | **Wild Bactrian Camel** | Fewer than 1,000 left, Critically Endangered, surviving in the Gobi **partly inside a former nuclear test range — and it drinks salt water.** Not the same animal as the domestic camel |
+| Jackrabbit | **Black-tailed Jackrabbit** | The ears are radiators — **the same solution the fennec fox uses**, on the other side of the world |
+| Horned Lizard | **Texas Horned Lizard** | **Squirts blood from its own eyes** at canids, up to a metre and a half |
+
+```
+~33 a group, not a species     five biomes done, seven to go
+```

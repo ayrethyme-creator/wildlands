@@ -346,3 +346,50 @@ RENAME=Macaque::Japanese Macaque|Cicada::Seventeen-year Cicada|Praying Mantis::E
 ! rename but an entry that says so, and names the studied one - Ramazzottius
 ! varieornatus, whose Dsup protein was inserted into human cells and made them
 ! resistant to radiation. Flagged for the writing, not for the roster.
+
+! ============================================================================
+! SPECIES AUDIT - section 3, THE FENS. Ayr 2026-08-27. Seven generics named.
+! ============================================================================
+! Crocodile  -> Saltwater Crocodile: the animal its existing entry describes - the
+!               strongest measured bite of anything alive, and jaw-opening muscles so
+!               weak a person can hold them shut. Also swims between islands by riding
+!               ocean currents rather than paddling; one was tracked doing 590 km.
+! Dragonfly  -> Globe Skimmer: THE LONGEST MIGRATION OF ANY INSECT - an 18,000 km
+!               round trip across the Indian Ocean, in generations, and it is found on
+!               every continent except Antarctica.
+! Damselfly  -> Banded Demoiselle: the males hold territory over the water and court
+!               with a fluttering display flight.
+! Kingfisher -> Common Kingfisher: the nose of the Japanese bullet train was redesigned
+!               after its beak, to stop the sonic boom the train made leaving tunnels.
+! Terrapin   -> Diamondback Terrapin: THE ONLY TURTLE THAT LIVES EXCLUSIVELY IN
+!               BRACKISH WATER, and it was eaten nearly to extinction as a delicacy
+!               until Prohibition saved it - the recipe called for sherry.
+! Flamingo   -> Lesser Flamingo: breeds on Lake Natron, where the water is alkaline
+!               enough to burn skin off most animals that enter it.
+! Mink       -> American Mink: invasive across Europe from fur-farm escapes, and the
+!               main driver of Britain's water vole collapse.
+RENAME=Crocodile::Saltwater Crocodile|Dragonfly::Globe Skimmer|Damselfly::Banded Demoiselle|Kingfisher::Common Kingfisher|Terrapin::Diamondback Terrapin|Flamingo::Lesser Flamingo|Mink::American Mink
+
+! ============================================================================
+! SPECIES AUDIT - section 3, THE DRY. Ayr 2026-08-27. Seven generics named.
+! ============================================================================
+! Gecko        -> Web-footed Gecko: Namib. Translucent-skinned, swims through loose
+!                 sand on webbed feet, and licks its own eyeballs clean because it has
+!                 no eyelids. The leopard gecko is now a pet-store entry, so this is a
+!                 different animal rather than a duplicate.
+! Scorpion     -> Deathstalker: its venom contains chlorotoxin, which is in trials to
+!                 make brain tumours glow during surgery so the surgeon can see the
+!                 edge of them. The UV-glow fact in its existing entry is true of all
+!                 scorpions and still holds.
+! Rattlesnake  -> Sidewinder: moves sideways across loose sand and leaves J-shaped
+!                 tracks, with only two points touching the ground at a time.
+! Tarantula    -> Mexican Redknee: flicks urticating hairs off its own abdomen at
+!                 whatever is bothering it.
+! Camel        -> Wild Bactrian Camel: fewer than 1,000 left, Critically Endangered,
+!                 surviving in the Gobi partly inside a former nuclear test range -
+!                 AND IT DRINKS SALT WATER. Not the same animal as the domestic camel.
+! Jackrabbit   -> Black-tailed Jackrabbit: the ears are radiators, dumping heat into
+!                 the air - the same solution the fennec fox uses.
+! Horned Lizard-> Texas Horned Lizard: squirts blood from its own eyes at canids, up
+!                 to a metre and a half.
+RENAME=Gecko::Web-footed Gecko|Scorpion::Deathstalker|Rattlesnake::Sidewinder|Tarantula::Mexican Redknee|Camel::Wild Bactrian Camel|Jackrabbit::Black-tailed Jackrabbit|Horned Lizard::Texas Horned Lizard
