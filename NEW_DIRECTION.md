@@ -10485,3 +10485,70 @@ Idea 82 ends the game with Ayr explaining why they made it. **The resource secti
 what a player reaches for immediately afterwards**, if that note has done its job.
 
 They should sit next to each other in the codex.
+
+---
+
+## BADGES — ROUND TWO
+
+> **Ayr, 2026-08-27.** *"I like the extremes category. The largest should be one. Is The
+> Old Ones animals that live a long time, or ones that haven't evolved much but been here
+> a long time? Both of those should be a badge. Also, I want a badge for 'looks creepy or
+> the name sounds scary, actually isn't'."*
+
+### Both already existed — I labelled them badly
+
+| Badge | Means | Set |
+|---|---|---|
+| **The Old Ones** | **How long one animal lives.** Individual longevity | Greenland Shark *(400 years)* · Bowhead Whale · Deep-sea Bamboo Coral *(4,000-year colonies)* · Sulcata Tortoise |
+| **Unchanged** | **How long the shape has lasted.** Ancient lineages — living fossils | Coelacanth · Chambered Nautilus · Tuatara · Horseshoe Crab |
+
+Same word, two different kinds of old. **The descriptions now say which**, and they stay
+as two badges.
+
+### Two added
+
+| Badge | Concept | Set | |
+|---|---|---|---|
+| **The Largest** | Biggest of its kind, across the whole tree | **Blue Whale** *(largest animal that has ever lived)* · **African Elephant** *(largest on land)* · **Whale Shark** *(largest fish)* · **Ostrich** *(largest bird)* · **Japanese Spider Crab** *(largest arthropod)* · **Giant Siphonophore** *(longest animal ever recorded)* | M |
+| **Bad Reputation** | **Animals feared for their name or their face — and fear kills them.** Aye-ayes are killed on sight in parts of Madagascar as omens of death. Vultures are poisoned. Bats are culled | **Maned Wolf** *(not a wolf, not a fox, and it eats mostly fruit)* · **Common Vampire Bat** *(shares blood with roostmates who failed to feed, and remembers who helped it)* · **Vampire Squid** *(its name means "vampire squid from hell" — it eats marine snow)* · **Aye-aye** · **Hellbender** · **Giant Oceanic Manta** *(sailors called it the devilfish)* · **Basilisk Lizard** | M |
+
+**Bad Reputation is the one with the highest educational payload in the whole set.**
+Every other badge teaches a mechanism. This one teaches that **a name can be a
+conservation threat**, which is not obvious and is genuinely true.
+
+### Two removed, to hold at fifty
+
+Ayr asked for a round number and 52 is not one, so the two weakest go:
+
+- **Nursery in the Mouth** — already flagged as broken. Mouthbrooding is real but the
+  roster only supports two members honestly.
+- **Blacklight** — biofluorescence. It overlapped **Lights On** and was thin. **The
+  Deathstalker\\'s UV glow moves into Lights On**, which is where it belonged.
+
+```
+50 badges
+E  11    M  25    H  14
+```
+
+### The full list, for approval
+
+**Reproduction (9)** — The Granny · Blood Queen · No Father Required · The Switch ·
+Dad\\'s Turn · On Pause · One Shot · The Colony · Til Death
+
+**Senses (7)** — The Sixth Sense · Seeing With Sound · Heat Vision · Beyond Violet ·
+True North · Through the Glare · Lights On
+
+**The body (8)** — Grow It Back · Rare Poison · See-Through · Sub-Zero · Second Bite ·
+Built Wrong on Purpose · No Bones About It · Armour
+
+**Evolution (8)** — Same Answer Twice · The Island Rule · Grounded · **Unchanged**
+*(ancient lineages)* · End of the Line · Made By Us · Back From the Dead · Not What It
+Looks Like
+
+**Behaviour (9)** — The Toolkit · Passed Down · Strange Allies · The Impostor · Who\\'s
+That · The Village · The Long Way · The Long Sleep · **Bad Reputation**
+
+**Conservation (4)** — Only In Captivity · Back From the Brink · The Linchpin · The Trade
+
+**Extremes (5)** — **The Largest** · The Smallest · The Deepest · The Highest · **The Old
+Ones** *(longevity)*
