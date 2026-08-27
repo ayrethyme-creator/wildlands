@@ -10523,7 +10523,7 @@ Ayr asked for a round number and 52 is not one, so the two weakest go:
 - **Nursery in the Mouth** — already flagged as broken. Mouthbrooding is real but the
   roster only supports two members honestly.
 - **Blacklight** — biofluorescence. It overlapped **Lights On** and was thin. **The
-  Deathstalker\\'s UV glow moves into Lights On**, which is where it belonged.
+  Deathstalker's UV glow moves into Lights On**, which is where it belonged.
 
 ```
 50 badges
@@ -10533,7 +10533,7 @@ E  11    M  25    H  14
 ### The full list, for approval
 
 **Reproduction (9)** — The Granny · Blood Queen · No Father Required · The Switch ·
-Dad\\'s Turn · On Pause · One Shot · The Colony · Til Death
+Dad's Turn · On Pause · One Shot · The Colony · Til Death
 
 **Senses (7)** — The Sixth Sense · Seeing With Sound · Heat Vision · Beyond Violet ·
 True North · Through the Glare · Lights On
@@ -10545,7 +10545,7 @@ Built Wrong on Purpose · No Bones About It · Armour
 *(ancient lineages)* · End of the Line · Made By Us · Back From the Dead · Not What It
 Looks Like
 
-**Behaviour (9)** — The Toolkit · Passed Down · Strange Allies · The Impostor · Who\\'s
+**Behaviour (9)** — The Toolkit · Passed Down · Strange Allies · The Impostor · Who's
 That · The Village · The Long Way · The Long Sleep · **Bad Reputation**
 
 **Conservation (4)** — Only In Captivity · Back From the Brink · The Linchpin · The Trade
@@ -10587,11 +10587,11 @@ Manta** *(sailors called it the devilfish)* · **Goblin Shark**
 
 **Feared for the face — 9**
 
-**Maned Wolf** *(Ayr\\'s: at night it is a red silhouette on impossibly long legs. It is
+**Maned Wolf** *(Ayr's: at night it is a red silhouette on impossibly long legs. It is
 neither wolf nor fox, eats mostly fruit, and its urine smells of cannabis)* ·
 **Aye-aye** · **Anglerfish** *(**most are under 20 cm** — the nightmare image everyone
 has seen is a magnified photograph)* · **Fangtooth** *(16 cm long)* · **Gulper Eel** ·
-**Blobfish** *(voted the world\\'s ugliest animal in 2013, and **it only looks like that
+**Blobfish** *(voted the world's ugliest animal in 2013, and **it only looks like that
 because of decompression** — at depth it is an ordinary fish)* · **Giant Isopod** ·
 **Pacific Hagfish** · **Giant Moray** *(**it opens and closes its mouth to pump water
 over its gills** — it is breathing, and every diver reads it as a threat display)*
@@ -10604,9 +10604,9 @@ control a farmer can have)* · **Grey Wolf** *(the villain of European folklore;
 on people are vanishingly rare)* · **Spotted Hyena** *(**the scavenger reputation is
 backwards** — they kill most of what they eat, and lions steal from them more often than
 the reverse)* · **Common Vampire Bat** *(it does drink blood, and it also shares its
-meal with roostmates who failed to feed, and remembers who helped it)* · **Rüppell\\'s
+meal with roostmates who failed to feed, and remembers who helped it)* · **Rüppell's
 Vulture** *(stomach acid near pH 1 destroys anthrax and botulism, so vultures stop
-disease spreading — **which is exactly why India\\'s vulture collapse caused a rabies
+disease spreading — **which is exactly why India's vulture collapse caused a rabies
 crisis**, and that is already the mountains quest)*
 
 ### Why this badge is worth more than the others
@@ -10616,7 +10616,7 @@ and it is the only badge whose lesson is about the player rather than the animal
 
 **It also loops back into a quest.** A player who earns Bad Reputation has met the
 vulture argument twice: once as a badge about prejudice, and once as the diclofenac
-quest where 99% of South Asia\\'s vultures died and rabies deaths rose behind them.
+quest where 99% of South Asia's vultures died and rabies deaths rose behind them.
 
 ### A mechanic this suggests: tiered badges
 
@@ -10630,3 +10630,59 @@ That gives Ayr both halves of what they asked for **inside a single badge** — 
 first rung that pulls a player in, and a hard last one that means finishing the deep sea.
 **Suggest applying the same to The Largest, Lights On and Same Answer Twice**, which are
 all naturally large.
+
+---
+
+## IDEA 108 — THE BLACK CAT IS THE TUTORIAL BADGE
+
+> **Ayr, 2026-08-27.** *"Black cat needs its own entry in feared by folklore. That one
+> can unlock when a player chooses cat as their pet, or if they chose that pet, when they
+> read the cat entry. That can trigger explaining the badge system and start the
+> curiosity. If it isn't triggered by a certain time in the tutorial, it can light up on
+> its own to get the player's attention."*
+
+**This is the best possible way to introduce the badge system**, and it works because of
+a decision made earlier today: **the black cat is a coat option on House Cat, not a
+species.** So this badge needs no catching at all. It fires off a choice the player has
+already made in the first ten minutes.
+
+### It teaches the concept before it teaches the system
+
+The player gets *"black cats are feared for no reason"* — **and then** *"that was a
+badge, and here is what badges are."*
+
+**That order matters.** A tutorial that opens with "here is the achievement system" is
+a menu. One that opens with a fact about the animal in your arms is a hook.
+
+### The fact is real, and it is uncomfortable
+
+Black cats are **adopted less and euthanised more** in shelters than cats of any other
+colour — documented across many years of shelter data, and usually attributed to a mix
+of superstition and the plain fact that they photograph badly for adoption listings.
+
+**Superstition with a measurable body count, in a house pet.** It is the same lesson as
+the aye-aye and the vulture, delivered by an animal the player chose to love in the first
+ten minutes.
+
+### The trigger, as Ayr specified
+
+```
+choose the black coat                    -> badge fires immediately
+or read the House Cat codex entry        -> badge fires
+or neither, by the end of the tutorial   -> the badge icon lights up on its own
+```
+
+**That last rule is worth generalising: no player should finish the tutorial without
+knowing badges exist.** The game does not force the discovery, it just refuses to let it
+be missed.
+
+### Bad Reputation is now 25
+
+```
+name      8      face      9      folklore  8       (+ Black Cat)
+                                                   25
+bronze 8   ·   silver 16   ·   gold 25
+```
+
+And the first rung of the game's hardest badge is **the pet you picked before you knew
+what a badge was.**
