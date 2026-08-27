@@ -10412,3 +10412,76 @@ current roster.
 stops its heart, and thaws.** That makes it a strong candidate for one of the 44 still
 to create — a badge now has a say in which species get made, which is exactly what idea
 104 predicted.
+
+---
+
+## IDEA 107 — THE RESOURCE SECTION
+
+> **Ayr, 2026-08-27.** *"A reference and resource section in the Codex for people who
+> want to learn about research institutions, places to donate, and where to learn more."*
+
+**This is where the game stops being a game and becomes useful**, and it is where Ayr's
+stated purpose finally has somewhere to land:
+
+> *"I like the idea of the game being a road map for youth wanting to get into the animal
+> industry."* — Ayr, 2026-08-24
+
+Everything else in the design gestures at that. **This section is the only part that
+actually does it.**
+
+### It is already half-written
+
+**Every one of the 48 quests ends by naming real people and real organisations** — that
+is beat five, decided on 2026-08-24. The section is therefore a **collation, not new
+research**: Save the Elephants · Cheetah Conservation Fund · Rainforest Connection ·
+Sheldrick Wildlife Trust · Gorilla Doctors · Snow Leopard Trust · COAST · Coral
+Restoration Foundation · Global Fishing Watch · Froglife · PTES · RSPB · Knepp · Nature
+Iraq · the Alaska Eskimo Whaling Commission, and thirty more.
+
+**The quests already did the vetting**, because an organisation only appears if it is
+part of the documented historical record.
+
+### Five things it should hold
+
+| | |
+|---|---|
+| **The organisations from the quests** | Already named, already sourced. The player has *met* these before they see the list, which is the whole reason it will be read |
+| **What you actually study** | The real qualification ladders. The tour-guide career already uses **FGASA NQF2 → NQF4**; the researcher and photographer routes have equivalents. This is the roadmap in literal form |
+| **What you can do this weekend, for free** | **The most useful page in the section.** eBird · iNaturalist · Zooniverse · local ringing and toad-patrol groups · beach cleans · whale-shark photo-ID, where a holiday snapshot genuinely enters a research database |
+| **Where to give** | See the caution below |
+| **Where to read and watch next** | Books, papers behind the quests, and the documentaries that got there first |
+
+### The citizen-science page matters most, and here is why
+
+A young player reading this does not need a donate button — **they have no money.** What
+they need is the answer to *"what can I do now?"*, and citizen science is the only honest
+answer that does not require being eighteen, employed, or somewhere else.
+
+**And it closes the loop the game is built on.** The player spends fifty hours
+photographing, measuring and identifying animals — and then learns that **the real
+version of exactly that activity exists, is open to them today, and is used by actual
+researchers.** The game stops being a simulation of the work and becomes an advert for it.
+
+### Two cautions, both real
+
+**1. Recommending charities is a responsibility, not a listing.**
+
+Organisations merge, drift, and occasionally turn out to be badly run — and a
+recommendation inside a game aimed at young people carries weight. **Suggest: name the
+organisations that appear in the quests, because their inclusion is a matter of
+historical record rather than an endorsement**, and point at charity evaluators for the
+judgement rather than making it. Say plainly that the list is *"organisations this game
+tells stories about"*, not *"organisations we vouch for"*.
+
+**2. Links rot, and this game has a multi-year life.**
+
+A URL written in 2027 is broken by 2031. **Names survive; addresses do not.** Suggest
+naming every organisation in full and using **one maintained page** as the single
+outbound link, so the game itself never carries an address that can die.
+
+### And it interacts with the author's note
+
+Idea 82 ends the game with Ayr explaining why they made it. **The resource section is
+what a player reaches for immediately afterwards**, if that note has done its job.
+
+They should sit next to each other in the codex.
