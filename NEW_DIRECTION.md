@@ -10168,3 +10168,46 @@ breeding thirty years ago.
 
 **And the badge is the natural place to state the genus counts from idea 103.** "One of
 six species on earth" is exactly the sentence a badge exists to deliver.
+
+---
+
+## THE SPECIES AUDIT IS COMPLETE
+
+**All four sections done.** About 110 entries that named a genus, a family, a sex, a
+caste or a behaviour now name a real animal.
+
+```
+ 0  not an animal
+ 0  redundant pairs
+ 0  a group, not a species
+ 0  wrong biome
+```
+
+### The last four biomes — 25 more
+
+**The Divide** — Alpine Ibex *(the quest animal)* · **American Pika** *(cuts hay piles
+all summer, and cannot survive a few hours above 25 °C, which makes it one of the
+clearest climate indicators anywhere)* · Alpine Marmot · Eurasian Eagle-Owl · **Southern
+Viscacha** *(the Andean cat's near-total diet — that cat exists because this rodent
+does)* · **Long-tailed Chinchilla** *(up to 60 hairs from a single follicle, which is
+exactly why it was nearly wiped out)*
+
+**The Furrows** — Buff-tailed Bumblebee · **Common Eastern Firefly** *(females of a
+different firefly genus mimic this species' flash pattern to lure its males in and eat
+them)* · **Plains Pocket Gopher** *(fur-lined cheek pouches on the outside of its face,
+turned inside out to empty)* · Marmalade Hoverfly · Zebra Jumping Spider · **Seven-spot
+Ladybird** *(bleeds from its own knees; the name is for Our Lady)* · Red Mason Bee ·
+Old World Swallowtail
+
+**The Floe** — **Southern Elephant Seal** *(four tonnes, dives to 2,000 m for two
+hours)* · **North Atlantic Right Whale** *(about 370 left, and called "right" because
+it was the right one to kill — slow, coastal, and it floats when dead)*
+
+**The Dark** — Giant Siphonophore · Venus's Girdle · Vent Squat Lobster · Stalked Sea
+Lily · **Cockatoo Squid** *(transparent but for eyes and gut, which it holds vertical
+so they cast the smallest possible shadow)* · **Eyeless Vent Shrimp** *(a
+light-sensing organ on its back instead of eyes, to read the vent's glow)* · Vent
+Barnacle · Deep-sea Bamboo Coral · Deep-sea Vent Mussel
+
+**Uncle Albert caught one more** — the farmland quest pointed at "Bumblebee", which had
+become the buff-tailed. Third time he has caught a rename orphaning a quest.

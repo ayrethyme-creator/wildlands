@@ -471,3 +471,68 @@ RENAME=Brittle Star::Common Brittle Star|Sea Cucumber::Tiger Tail Sea Cucumber|M
 ! --- Caribbean hermit crab (Coenobita clypeatus), the "purple pincher", is the species
 ! --- sold in almost every North American pet store. No new entry: it is STOCKED in the
 ! --- pet store the way the budgie and the wild hermit crab already are.
+
+! ============================================================================
+! SPECIES AUDIT - section 3, the last four biomes. Ayr 2026-08-27.
+! ============================================================================
+
+! THE DIVIDE - 6
+! Ibex       -> Alpine Ibex: the quest animal. Everything alive descends from about a
+!               hundred survivors in one royal reserve at Gran Paradiso.
+! Pika       -> American Pika: cuts and dries hay piles all summer, and cannot survive
+!               a few hours above 25 C - so it is one of the clearest climate indicators
+!               anywhere.
+! Marmot     -> Alpine Marmot: hibernates eight months, and the whole family sleeps in a
+!               heap with the young in the middle.
+! Eagle-Owl  -> Eurasian Eagle-Owl: the largest owl there is, and it takes foxes.
+! Viscacha   -> Southern Viscacha: the Andean cat's near-total diet, which is why that
+!               cat's existence depends on this rodent.
+! Chinchilla -> Long-tailed Chinchilla: the densest fur of any land mammal, up to 60
+!               hairs from a single follicle - which is exactly why it was nearly wiped out.
+RENAME=Ibex::Alpine Ibex|Pika::American Pika|Marmot::Alpine Marmot|Eagle-Owl::Eurasian Eagle-Owl|Viscacha::Southern Viscacha|Chinchilla::Long-tailed Chinchilla
+
+! THE FURROWS - 8
+! Bumblebee     -> Buff-tailed Bumblebee: the one reared commercially by the million and
+!                  shipped into greenhouses to pollinate tomatoes.
+! Firefly       -> Common Eastern Firefly: females of a DIFFERENT firefly genus mimic
+!                  this species' flash pattern to lure its males in and eat them.
+! Gopher        -> Plains Pocket Gopher: fur-lined cheek pouches on the OUTSIDE of its
+!                  face, which it turns inside out to empty.
+! Hoverfly      -> Marmalade Hoverfly: mimics a wasp, has no sting at all, and crosses
+!                  Europe in migrations of billions.
+! Jumping Spider-> Zebra Jumping Spider: jumping spiders see in more colour channels
+!                  than we do, from eyes the size of a full stop.
+! Ladybug       -> Seven-spot Ladybird: bleeds from its own knee joints when handled.
+!                  The name is for the Virgin Mary - "Our Lady's bird".
+! Mason Bee     -> Red Mason Bee: solitary, stingless in practice, and pollinates far
+!                  more per bee than a honeybee does.
+! Swallowtail   -> Old World Swallowtail: the caterpillar everts a forked orange organ
+!                  behind its head that smells of rotten pineapple.
+RENAME=Bumblebee::Buff-tailed Bumblebee|Firefly::Common Eastern Firefly|Gopher::Plains Pocket Gopher|Hoverfly::Marmalade Hoverfly|Jumping Spider::Zebra Jumping Spider|Ladybug::Seven-spot Ladybird|Mason Bee::Red Mason Bee|Swallowtail::Old World Swallowtail
+
+! THE FLOE - 2
+! Elephant Seal -> Southern Elephant Seal: the largest carnivoran alive at four tonnes,
+!                  and it dives to 2,000 m for two hours at a time.
+! Right Whale   -> North Atlantic Right Whale: about 370 left. Called "right" because it
+!                  was the right one to kill - slow, coastal, and it floats when dead.
+RENAME=Elephant Seal::Southern Elephant Seal|Right Whale::North Atlantic Right Whale
+
+! THE DARK - 9, all of them mine from the batch applied on the 26th.
+! Several deep-sea invertebrates genuinely have no species-level common name, so these
+! land at genus where that is the honest limit.
+! Siphonophore      -> Giant Siphonophore: a colony, and the longest animal ever
+!                      recorded - one filmed off Australia measured over 45 m.
+! Comb Jelly        -> Venus's Girdle: a metre and a half of transparent ribbon.
+! Squat Lobster     -> Vent Squat Lobster: vent fields are carpeted in them.
+! Sea Lily          -> Stalked Sea Lily: looks like a plant, is an animal, and has been
+!                      doing this since before the dinosaurs.
+! Glass Squid       -> Cockatoo Squid: transparent except the eyes and gut, which it
+!                      holds vertical so they cast the smallest possible shadow.
+! Vent Shrimp       -> Eyeless Vent Shrimp: no eyes, and a light-sensing organ on its
+!                      BACK instead, to read the faint glow of the vent.
+! Deep-sea Barnacle -> Vent Barnacle.
+! Bamboo Coral      -> Deep-sea Bamboo Coral: grows in segments that can be read like
+!                      tree rings, and some colonies are 4,000 years old.
+! Vent Mussel       -> Deep-sea Vent Mussel: houses bacteria in its gills and lives on
+!                      chemistry rather than sunlight.
+RENAME=Siphonophore::Giant Siphonophore|Comb Jelly::Venus's Girdle|Squat Lobster::Vent Squat Lobster|Sea Lily::Stalked Sea Lily|Glass Squid::Cockatoo Squid|Vent Shrimp::Eyeless Vent Shrimp|Deep-sea Barnacle::Vent Barnacle|Bamboo Coral::Deep-sea Bamboo Coral|Vent Mussel::Deep-sea Vent Mussel

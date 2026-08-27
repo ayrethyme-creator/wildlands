@@ -145,7 +145,7 @@ QUEST = ['Pine Marten', 'Iberian Lynx', 'Siamang', 'Orangutan', 'Jaguar', 'Harpy
          'Beaver', 'European Lobster', 'Horseshoe Crab', 'Stoplight Parrotfish',
          'Spinner Dolphin',
          'Blue Whale', 'Fennec Fox', 'Arabian Oryx', 'Snow Leopard', 'Polar Bear',
-         'Walrus', 'Bowhead Whale', 'Hedgehog', 'Bumblebee', 'White Stork', 'Gemsbok',
+         'Walrus', 'Bowhead Whale', 'Hedgehog', 'Buff-tailed Bumblebee', 'White Stork', 'Gemsbok',
          'Cheetah', 'African Elephant', 'Black Rhinoceros', 'Tibetan Antelope',
          'Crown-of-thorns Starfish', 'Protoceratops', 'Plesiosaurus', 'Tiktaalik']
 alln = {n for g, v in d.items() if g not in ('cut', 'cosmetic', 'merged') for n in v}
