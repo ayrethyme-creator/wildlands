@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 12.0 — twelfth pass over the full record, 2026-08-27**
+**Version 13.0 — thirteenth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -209,9 +209,15 @@ leaf and the scene's real foliage are two different scales on screen at once.
 
 **So the answer is two assets, not one fixed asset.**
 
-**The affected set is knowable, not a mystery.** The generator chose props by keyword, so
-the sprites carrying them are exactly those whose prompts contained *branch*, *perch*,
-*leaf* or *burrow* — findable from the generation records rather than by eye.
+**The affected set is knowable, not a mystery, and it has been counted.** The art
+pipeline's generator script (which lives outside this repo) holds two prompt strings, and its
+composition picker chooses between them by matching the
+species description against **19 keywords** — *branch*, *perch*, *leaf*, *burrow* and
+others. **263 of 1009 species (26%) take the prop path.** A known, listable set.
+
+**There is no toggle — turning it off is a one-line change to that picker.** And it
+**cannot** be done in the prompt, because a description reading *"no branch"* still contains
+the word *branch*.
 
 ### The recommendation, which costs nothing today
 
@@ -490,6 +496,23 @@ game starts at young adult.
 Appearance is customisable at **every** stage — **including gender, offered quietly rather
 than announced.** One body shape per age, with details chosen.
 
+### The ages — **[v13]**
+
+| Stage | Age |
+|---|---|
+| Child | **8–12** |
+| Teen | **13–17** |
+| Young adult | **18–25** |
+| Adult with skills | **26–40** |
+| Adult with influence | **40–55** |
+| Elder | **60+** |
+
+**The game spans roughly age 10 to 65 — about 55 years.**
+
+That number is load-bearing rather than decorative: it is what makes **the box turtle "the
+one that outlives you"** literally true, and it is why the raven's *descendants* can
+recognise you.
+
 ### Pacing — **[v2]**
 
 | Stage | Hours | What it is |
@@ -515,6 +538,30 @@ idle.** The no-waiting rule applies hardest here, where the player has the least
 
 **The child stage** establishes every relationship in the game: the pet, the first rescue,
 the mentor.
+
+### The child ends up with two opposite relationships at once — **[v13]**
+
+**A pet that is theirs and stays. A rescued wild animal that is nobody's and leaves.**
+
+**That is the entire game's thesis, taught before the player knows there is a game — and
+nothing has to explain it.**
+
+The first hour, beat by beat:
+
+```
+1  look at one patch of world
+2  choose the pet, at home
+3  find something you cannot fix, because you are eight
+4  carry it to the mentor - and watch, not allowed to help
+5  it comes back partly, and lives in your woods
+```
+
+**Beat 3 is the one that matters.** The player's first encounter with a wild animal is a
+failure they are too young to prevent, and beat 4 makes them stand still through it. **The
+entire career that follows is the answer to being eight and not allowed to help.**
+
+**And the Ayr NPC first appears at the fence in that last beat** — which is where the
+thirty-year easter egg begins.
 
 **The teen stage is where responsibility arrives, and it is deliberately harder.**
 
@@ -655,10 +702,20 @@ reliable mechanism is **showing something you cannot yet explain, that pays off 
 |---|---|---|
 | **A — A release** *(recommended)* | Hands opening a crate. An animal going. Someone watching it leave, and not following. **No context at all** | It is **the last beat of the game shown as the first** — the whole thesis before the player can understand it. Thirty hours later they do it themselves and recognise the shot |
 | **B — A signature ability** | Something that looks impossible and is real — a margay running head-first down a trunk, a scorpion lighting up under UV | ***"Wait, is that true?"*** — the exact habit the game exists to build. Cheaper, and it sells the collection immediately |
-| **C — The fence** | A child's hands on a wire fence, an adult inside working with an animal, and the child not allowed in | ***"How do I get in there?"*** — which is literally the whole career arc. The most thematically precise, the least spectacular |
+| **C — The fence** | A child's hands on a wire fence, an adult inside working with an animal, and the child not allowed in | ***"How do I get in there?"*** — which is literally the whole career arc |
 
-**Suggested: A, with C as the second scene rather than an alternative.** They are the two
-ends of the game and they would rhyme.
+### The hook is animal-led — which rules one of these out — **[v13]**
+
+**No human focus.** That decision survives the release (shot from the animal's side) and
+survives the signature ability entirely — **but the fence does not, because it is a scene
+about a person being outside.** It stands as **the second scene**, not the hook.
+
+**And this has a production consequence worth having:** an animal-led opening **needs no
+character art at all.**
+
+**So the hook can be prototyped first** — before any appearance decision, before the
+character rigs exist. It is also where the music leads, which makes it the natural first
+thing to actually build.
 
 **The hook scene is the one place where music does the work rather than supports it** — no
 dialogue, no UI, no explanation. Worth treating as a piece to be written first rather than
@@ -675,9 +732,25 @@ last.
 
 **The cost, honestly.** The player character has to exist at six life stages × the appearance
 options × every animation state, which multiplies faster than any other art in the game.
-**The answer is a layered, modular character** — one body rig per life stage with hair,
-clothing and features as swappable layers rather than baked variants. **This has to be
-decided before the first character sprite is drawn**, not after.
+
+### One body shape per life stage, details as layers — **DECIDED** — **[v13]**
+
+**Six rigs**, with hair, face, skin, clothing and accessories swappable. **The six differ by
+proportion, not shape.**
+
+**This is what makes the gender requirement free**, and that is the point of it:
+
+| Two body types | One body type |
+|---|---|
+| A gender change means **a new rig, a new silhouette, and re-exporting every animation** | **A layer swap — the same cost as a hairstyle** |
+
+**Which is exactly the weight Ayr asked for**: present at every stage, no ceremony, no
+confirmation, nothing remarking on it. The design makes that cheap instead of making it a
+feature.
+
+> **Production note, invisible and expensive to retrofit:** all six rigs must share **bone
+> layout and naming** from the first one, so animation is authored once and retargeted
+> across the whole life.
 
 ### The starting town is The Furrows plus the edge of The Weald — **[v5]**
 
@@ -1962,6 +2035,21 @@ to anyone playing.
 > **Ayr:** *"Not as symbolic and meaningful as all your suggestions. But reality. I'm
 > watching the game develop because I'm making it."*
 
+### The format — **[v13]**
+
+| | |
+|---|---|
+| **Placement** | **Before the credits**, so it is not missed |
+| **Length** | **2–4 minutes** |
+| **Content** | **The reason, not the story.** Why it was made, not what happened |
+| **Also** | Add it to the codex as **a sixth job — *about this game*** — so it can be returned to |
+
+**Real video, an avatar, or both is Ayr's decision alone.** It is a question about how public
+they want to be, not a design question.
+
+**A precedent worth looking at:** *Never Alone* (2014), whose documentary interludes with
+Iñupiat elders are consistently named the best part of the game.
+
 ### Why the non-ageing is the point
 
 Every alternative tried to make Ayr a character *inside* the fiction, and all of them
@@ -1998,6 +2086,17 @@ But the role only holds if the character stays weightless:
 - **They comment on the animal you are looking at** — one short observation, not
   quest-relevant, not plot-relevant. **The kind of thing a stranger says on a viewing
   platform**
+
+**That line pool *is* the author's voice** — so the ending reveals the player has been
+hearing it in passing for thirty in-game years.
+
+### What the NPC has to do for the ending to work — **[v13]**
+
+- **Appear at least once per life stage**, so the constancy is noticed
+- **Stay visually consistent** — the non-ageing is the clue
+- **Never acknowledge it.** No wink, no hint, no dialogue about time
+- **Echo an earlier approach in the final shot**, so the last scene rhymes with a first one
+- **Keep the transition plain.** No effect does this better than a cut
 
 ---
 
@@ -2250,7 +2349,7 @@ designed.**
 | 2b | **What the researcher and tour-guide loops do minute to minute.** The photographer has a real-world reference *and* a game one; the other two have real references and **no worked design at all. This is the largest undesigned space in the project** | Two of the three careers |
 | 2c | **What the codex actually is as a UI.** It carries the sourcing, the field guide, read-aloud, practice quizzes, badges and the resource section. **A lot of jobs for one system** | The codex |
 | 2d | **When cultural consultation happens.** Early enough to shape the writing rather than review it afterwards — but it costs money, so it interacts with funding | Writing the quests |
-| 2e | **The modular character rig** — must be settled before the first player sprite is drawn | Character art |
+| 2e | ~~**The modular character rig**~~ — **decided.** Six rigs, one per life stage, differing by proportion not shape, with details as layers. What remains is the production discipline: **all six must share bone layout and naming from the first one** | Character art |
 | 3 | **Can the player fail to advance?** Retake with a time cost is the middle path | Assessments |
 | 4 | **Origin-language naming** for individual animals — needs proper sourcing | No |
 | 5 | **The badge count** breaks the round-number rule | No |
