@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 7.0 — seventh pass over the full record, 2026-08-27**
+**Version 8.0 — eighth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -403,12 +403,12 @@ than announced.** One body shape per age, with details chosen.
 | Adult with skills | | Qualified. Your own projects, your own name on them |
 | Adult with influence | | Professional. Money, access, power to change policy |
 | Elder | | Mentor. Teaching, handing over, the long view |
-| **Adult stages** | **~48** | **Roughly one hour per quest, 48 quests** |
-| | **~51** | |
+| **Adult stages** | **~52** | **48 quests at ~45 min each is ~36h, plus ~20h of world, travel, encounters and facilities** |
+| | **~55** | **All 48 mandatory** |
 
-**The campaign target moved from ~40 hours to ~50–55** once the 48 quests were costed at
-about an hour each. **An earlier table in the record gives 1.5 and 2.5 for the childhood
-stages and a ~37-hour total; it is superseded by the figures above.**
+**The campaign target moved from ~40 hours to ~50–55** once all 48 quests became mandatory
+and were costed at about 45 minutes each. **An earlier table gives 1.5 and 2.5 for the
+childhood stages and a ~37-hour total; it is superseded by the figures above.**
 
 **Three hours before the first facility is a real investment, and it is where every
 relationship in the game is established.** It should not be skippable — **but it must not
@@ -610,11 +610,14 @@ game happens in the woods rather than the town.**
 **Three complete campaigns, one per career, each playing the full arc through all six life
 stages.**
 
-> **A discrepancy in the record, flagged rather than resolved.** Option B was decided at
-> **~40 hours per campaign, ~120 for everything.** The 48 quests were later costed at about
-> an hour each, which puts one campaign at **~50–55 hours** and all three nearer **150–165**.
-> **Both figures are in the record and neither supersedes the other explicitly.** The larger
-> one follows from the quest count, so it is probably the real number — **Ayr's call.**
+> **Settled — v7 flagged this as an open discrepancy and it is not one.** Option B was
+> decided at ~40 hours per campaign, but the record then makes the call explicitly:
+> **let the campaign land at 50–55 hours rather than 40. The 40-hour figure was a market
+> comparison, not a requirement**, and the market's own examples run right through it —
+> Witcher 3 at ~52, Stardew at ~52, Fire Emblem: Three Houses at 35–80 per route.
+>
+> **So: ~50–55 hours per career, and Ayr has already said 120+ across three is the goal
+> rather than the fear.**
 
 The earlier recommendation was one campaign with guest chapters, on the assumption that the
 split-perspective theme was the point and 120 hours was too much to ask. **Ayr's answer:
@@ -750,11 +753,40 @@ better options in the researcher's defence, raises what the photographer's portf
 notices, and gives the guide better things to say. **The player who skips every quiz simply
 finds the assessments harder, rather than being locked out.**
 
-### Threshold, not checklist
+### All 48 are mandatory — the threshold was withdrawn — **[v8]**
 
-The player must log enough qualifying work to be assessed, but **chooses where**. All 48
-quests exist; a single playthrough might need **15–20**. The remainder is replay content and
-content for the other two careers.
+**An earlier design let the player log enough qualifying work and choose where, so a
+playthrough might need only 15–20 of the 48. That was withdrawn**, and this document was
+still teaching it.
+
+**The threshold was solving a problem that no longer exists.** It was proposed when the
+quest count looked like it might run to the high dozens per stage. Once it settled at **one
+per biome per adult stage — twelve per age, 48 total** — the pressure went away. **And it
+duplicated something already decided:** replay was the other argument for it, and three
+careers that are three different games already provide replay, so different quest routes
+were solving a solved problem **at the cost of players never seeing content that exists.**
+
+### Why mandatory is actually better here
+
+1. **The stories are the point of the game.** Letting a player skip them is letting them
+   skip the reason it exists
+2. **Nothing authored goes unseen.** 48 hand-researched quests is a great deal of work to
+   leave optional
+3. **Returning to a place across a life is the whole emotional structure.** Visiting the
+   savanna four times is not repetition — **it is the point.** You arrive as an apprentice
+   keeping lions off cattle and come back decades later as an elder to change the law. The
+   seasons have turned, your standing has changed, the animals you knew have died, and their
+   descendants are still there. **A threshold would let players opt out of exactly the thing
+   the life-stage structure exists to deliver**
+
+### What it changes
+
+- **Advancement simplifies.** A stage ends when its **twelve quests are done** and the
+  assessment is passed. **No threshold arithmetic**
+- **The four quests in a biome must be genuinely different from one another**, since
+  everyone plays all four. **No filler**
+- **The writing cost is now fixed and known: 48 quests, all shipped, all played.** The
+  single largest content commitment in the project
 
 ### **OPEN** — can the player fail to advance?
 
@@ -1125,6 +1157,18 @@ change the law.
 The water ladder gates the wet biomes: reef and kelp need the **teen open-water
 certification**, and the deep sea needs instruments and a boat.
 
+### The working method: story menus, not story picks — **[v8]**
+
+> **Ayr:** *"We can come up with possible stories based on different real life stories you
+> research and I can choose if I like them or not."*
+
+**Research offers options per slot; Ayr chooses.** Each of the 48 slots gets a menu of real
+candidate histories with the animal listed against each, **and the choices interact** —
+because no animal may repeat within a biome, picking one option closes others.
+
+**This is the method that produced the 48 above**, and it is the method for anything still
+unfilled.
+
 ### The quest template — **[v4]**
 
 **The shape every one of the 48 follows.** Ayr's, and four of its five beats are inherited
@@ -1226,9 +1270,10 @@ impact ladder, no animal used twice in a biome.
 | **Programme** | **The poisoned carcass.** Poachers poison carcasses deliberately, because circling vultures show rangers where a kill happened. **Hundreds die at once, and several African species are down over 90%.** The work is building the institution — a poison-response unit, carcass monitoring, trained teams. **Villain: yes** | Vulture |
 | **Law** | **The burn.** The ivory trade and the fight to change it internationally, culminating in the 1989 CITES ban and Kenya burning twelve tonnes of confiscated ivory in public **to prove the stockpile would never be sold.** **Villain: yes** | Elephant |
 
-**The captive lion industry quest is deliberately not here.** It would repeat the lion and
-break the no-animal-twice rule, and captive lion farms are **agricultural operations, not
-wild savanna** — so it sits in The Furrows instead.
+**The captive lion industry quest is deliberately not here, and it has no home yet.** It
+would repeat the lion and break the no-animal-twice rule. It was moved to The Furrows and
+then moved back — **that biome is the home and the tutorial ground, and the tone is wrong.**
+It sits in the reserve pile **pending a better home.**
 
 ### The Weald · forest
 
