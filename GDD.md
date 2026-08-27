@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 10.0 — tenth pass over the full record, 2026-08-27**
+**Version 11.0 — eleventh pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -409,7 +409,7 @@ palette swaps to fake them.**
 
 | Area | What it holds |
 |---|---|
-| **On the Brink** | **The thirteenth region, and it is required, not optional.** *(The Arabian oryx deliberately is not in it — it is the opposite story.)* 50 species still alive — critically endangered and extinct-in-the-wild. Unlocks when all twelve biomes are finished, and **completing it is what unlocks the postgame.** The final-boss position, because it is the most important |
+| **On the Brink** | **The thirteenth region, and it is required, not optional.** **Admission is by conservation status, not by story: Critically Endangered or Extinct in the Wild is in, anything else is out.** *(The Arabian oryx is out because it is Vulnerable — not because of its narrative.)* 50 species still alive — critically endangered and extinct-in-the-wild. Unlocks when all twelve biomes are finished, and **completing it is what unlocks the postgame.** The final-boss position, because it is the most important |
 | **The Vigil** | 50 species that are gone. **A memorial, not a collection** — and stripped of everything still alive, it finally becomes what it always claimed to be |
 | **The Telling** | 100 mythological creatures, one per culture, themed on understanding through stories |
 | **The Record** | 50 fossil species across 13 geological periods |
@@ -1124,6 +1124,23 @@ varied, and **the variety is what keeps 700 stories readable.**
 repetition, and repetition is exactly what a reader notices. **The ten-category structure
 exists to make that review tractable.**
 
+### Interaction is universal; ownership is earned — **[v11]**
+
+**Every named individual anywhere can be fed, given enrichment, and have its signature
+ability viewed** — at your facility, at someone else's, or at a release site in the wild.
+
+**But only the ones you took in carry the autobiography.**
+
+That splits cleanly across the life stages, and it is what gives the childhood years
+something real to do:
+
+| Stage | Your relationship to a facility |
+|---|---|
+| **Child** | **Watches at the fence** |
+| **Teen** | **Volunteers at someone else's centre** — the animals belong to other people and you know them by number |
+| **Young adult** | **Earns the first facility** |
+| **Elder** | **Is the person others visit** |
+
 ### The sanctuary becomes an autobiography
 
 If the intake story records **where you were and what happened**, then walking through your
@@ -1174,6 +1191,13 @@ two-digit number is looking at their first season.**
 
 **Keep the number visible after naming**, as real records do. *"Willow (BEAV-03)"* says more
 than either half alone.
+
+### The consequence nobody designed on purpose
+
+**An animal that dies before an outcome never gets named.**
+
+It arrives as a number and it stays one. **That is the mortality question arriving by
+another door** — and it is the third door it has come through.
 
 ### **OPEN** — the rule tells the player the outcome
 
@@ -1246,6 +1270,11 @@ change the law.
 
 The water ladder gates the wet biomes: reef and kelp need the **teen open-water
 certification**, and the deep sea needs instruments and a boat.
+
+**That created one conflict and its fix is good.** The deep sea's young-adult quest is the
+dropcam, which needs a boat — but the water ladder puts *owning* a boat at adult with power.
+**So the young adult crews on somebody else's boat**, which is exactly how that career stage
+works anyway, and **owning one later then reads as a promotion** rather than a purchase.
 
 ### The working method: story menus, not story picks — **[v8]**
 
@@ -1442,6 +1471,11 @@ sits in the reserve pile **pending a better home.**
 | **Pattern** | **The solar farm.** Desert sun is the best climate solution available, and utility-scale solar sterilises the ground it covers. **Two things you believe in, on the same hectare** | Fennec fox |
 | **Programme** | **The trees that were already there.** The Great Green Wall planned to plant a forest and most of the planting died. What worked was noticing living rootstock already under the fields and protecting the shoots — millions of hectares for almost nothing. *Tony Rinaudo, Niger* | Dorcas gazelle |
 | **Law** | **Protection, removed.** Oman's Arabian Oryx Sanctuary was the first place ever struck off the World Heritage list, cut by 90% for oil prospecting in 2007. **Every other quest is about winning protection. This one is about losing it, legally and on purpose** — and it is sharper because the oryx is a *success* story: extinct in the wild in 1972, reintroduced, and in 2011 **the first species ever downlisted from Extinct in the Wild.** **The species was saved and its sanctuary was legally dismantled for oil** | Arabian oryx |
+
+> **A criterion worth stating, because this document got it wrong.** The oryx is not in On
+> the Brink **because it is Vulnerable**, which fails the status test. It is tempting to
+> reach for the narrative reason — *it is the opposite story* — but **On the Brink admits on
+> status alone**, and a story-based criterion was never set.
 
 ### The Divide · mountains
 
@@ -2001,6 +2035,15 @@ enclosure, with a worse outcome. **The penalty is the animal's chances.**
 
 Above. It is the one that never relaxes.
 
+## The facility runs while you are away — and that is what fixes quarantine — **[v11]**
+
+Quarantine is **two to six weeks**, which collides head-on with the no-idle-waiting rule.
+
+**The resolution is that the campaign is what the player does while those weeks pass.** Real
+durations are preserved exactly; nothing is compressed, and nothing is waited on. **The two
+modes need each other** — the quest gives the facility time to run, and the facility gives
+the quest somewhere to come back to.
+
 ## The return report — **[v6]**
 
 **The facility runs while you are away, so coming back is an event.** A short report, not a
@@ -2021,10 +2064,29 @@ do a quest, **come back to a place that kept living.**
   makes the two-routes puzzle real; prepared plots make it approachable
 - **Can a facility fail?** Money running out, welfare collapsing, licence revoked
 
-## Sandbox mode
+## Sandbox mode — **[v11]**
 
-A free-build mode alongside the campaign, **with the economy dropped and the biology kept**
-— constraints that are ecological rather than financial.
+**Drop the economy, keep the biology.** Money, space and time limits go; welfare, species
+suitability, expertise and consequences stay. **Removing the money is a fantasy. Removing
+the biology would be a lie.**
+
+### What it is actually for
+
+**To let the player try what the campaign tells them to refuse.**
+
+Build the elephant enclosure. Spend what you like. Then watch what happens to an animal that
+walks fifty kilometres a day.
+
+**Nothing lectures. The outcome is the argument.** Which means sandbox **proves the thesis
+rather than breaking it** — and that is the opposite of what a free-build mode usually does
+to a game with a conscience.
+
+| | |
+|---|---|
+| **Unlocked early** | Because it teaches |
+| **Separate save** | So it carries no autobiography |
+| **Full codex granted** | You are not gathering knowledge here, you are using it |
+| **Release still available** | The win condition does not change |
 
 **PROPOSED, not ruled on:** letting sandbox hold species from The Vigil.
 
