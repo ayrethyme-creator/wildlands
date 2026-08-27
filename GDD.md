@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 5.0 — fifth pass over the full record, 2026-08-27**
+**Version 6.0 — sixth pass over the full record, 2026-08-27**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -329,16 +329,62 @@ than announced.** One body shape per age, with details chosen.
 
 | Stage | Hours | What it is |
 |---|---|---|
-| Kid | ~1.5 | Choose a pet, make the first wild rescue, meet the mentor |
-| Teen | ~2.5 | Choose the career, learn its verbs, choose friends. Second animal |
-| Young adult | ~8 | Apprentice. Working under someone else's permit and name |
-| Adult with skills | ~9 | Qualified. Your own projects, your own name on them |
-| Adult with influence | ~10 | Professional. Money, access, power to change policy |
-| Elder | ~6 | Mentor. Teaching, handing over, the long view |
-| | **~37** | plus slack toward 40 |
+| **Child** | **~1** | Choose a pet, make the first wild rescue, meet the mentor |
+| **Teen** | **~2** | Volunteer, get certified, choose the career. The second animal |
+| Young adult | | Apprentice. Working under someone else's permit and name |
+| Adult with skills | | Qualified. Your own projects, your own name on them |
+| Adult with influence | | Professional. Money, access, power to change policy |
+| Elder | | Mentor. Teaching, handing over, the long view |
+| **Adult stages** | **~48** | **Roughly one hour per quest, 48 quests** |
+| | **~51** | |
 
-**Childhood is four hours of a forty-hour game** — enough to matter, short enough that a
-replaying player is not trapped in it.
+**The campaign target moved from ~40 hours to ~50–55** once the 48 quests were costed at
+about an hour each. **An earlier table in the record gives 1.5 and 2.5 for the childhood
+stages and a ~37-hour total; it is superseded by the figures above.**
+
+**Three hours before the first facility is a real investment, and it is where every
+relationship in the game is established.** It should not be skippable — **but it must not
+idle.** The no-waiting rule applies hardest here, where the player has the least to do.
+
+### The childhood and teen years, in detail — **[v6]**
+
+**The child stage** establishes every relationship in the game: the pet, the first rescue,
+the mentor.
+
+**The teen stage is where responsibility arrives, and it is deliberately harder.**
+
+- **The second animal is harder on purpose.** A parrot, a ferret, a chinchilla, a saltwater
+  tank, a goat — **every one is a well-known "I did not realise what I was signing up for"
+  animal.** That is the honest lesson and it needs no lecture. **This is where "not all of
+  the pet industry is bad" does its real work:** the good version is shown by making the
+  responsibility real, not by saying so
+- **You volunteer, and you are trusted with almost nothing.** Cleaning, food prep, laundry,
+  moving equipment. **Real volunteer work at a real centre is unglamorous, and doing it is
+  how you get to stay.** The animals belong to someone else, you know them by number, and
+  **you are still not allowed to do the interesting part**
+- **You get certified.** Open water, real minimum age 15. **The teen years' one hard-won
+  qualification**, and it opens The Garden and The Blue for the stages that follow
+
+### **PROPOSED** — the teen tries all three careers
+
+The three careers already map onto this age. **Suggest the teen years hand the player all
+three, one at a time, on the same animals in the same woods — and the career is chosen at
+the end, having done each.**
+
+Teenagers genuinely try things and drop them; it sells "three different games" **by
+demonstration rather than description**; it makes the choice informed instead of a menu at
+the start; and it gives replay an obvious hook. **Ayr's call.**
+
+### Three things the childhood leaves open
+
+- **Does the player name the rescued animal?** The naming rule says numbers for the
+  releasable. **A child would not know that rule.** Suggested: the child names it freely,
+  and the teen years are where they learn why that was a problem — **a better lesson than
+  being told the rule up front**
+- **Is the pet still alive later?** A cat lives 15–20 years, so it dies somewhere in the
+  adult stages. **Real, and heavy**
+- **What happens if the rescued animal does not make it?** A first rescue that fails is also
+  real, and it is **the earliest place mortality could enter the game**
 
 ### How time passes — **[v2]**
 
@@ -493,8 +539,14 @@ game happens in the woods rather than the town.**
 
 > **Ayr, idea 50:** *"Each career is more like a different game."* Not different classes.
 
-**Three complete campaigns of roughly 40 hours each, ~120 hours for everything.** Each
-plays the full arc through all six life stages.
+**Three complete campaigns, one per career, each playing the full arc through all six life
+stages.**
+
+> **A discrepancy in the record, flagged rather than resolved.** Option B was decided at
+> **~40 hours per campaign, ~120 for everything.** The 48 quests were later costed at about
+> an hour each, which puts one campaign at **~50–55 hours** and all three nearer **150–165**.
+> **Both figures are in the record and neither supersedes the other explicitly.** The larger
+> one follows from the quest count, so it is probably the real number — **Ayr's call.**
 
 The earlier recommendation was one campaign with guest chapters, on the assumption that the
 split-perspective theme was the point and 120 hours was too much to ask. **Ayr's answer:
@@ -889,6 +941,47 @@ The facility design establishes that release is the win and the animal leaves �
 correct, and also **a punishment for playing well.** The wild visiting sites resolve it: a
 released animal goes to **a known place in the world** — the beaver pond, the moose field,
 stretches of ocean — where the player can still visit and interact.
+
+### 700 stories must not read like 700 injuries
+
+**The obvious failure is every animal arriving hit by a car.** Real intake is far more
+varied, and **the variety is what keeps 700 stories readable.**
+
+| Reason | Example |
+|---|---|
+| **Injured** | Vehicle, window strike, cat, fishing gear, powerline, fence |
+| **Orphaned** | Mother killed, nest felled, separated in a storm |
+| **Confiscated** | Illegal trade, a market, a shipment intercepted |
+| **Surrendered** | A pet that outgrew its owner. **This is where the exotic pet theme lands** |
+| **Displaced** | Development, drainage, a felled roost tree |
+| **Conflict translocation** | Moved rather than shot |
+| **Imprinted** | Raised too closely by well-meaning finders, and now unreleasable |
+| **Contaminated** | Oiled, poisoned, entangled |
+| **Born here** | To a resident. **Not rescued at all** |
+| **Aged out** | Arrived decades ago; the centre is the only home it has known |
+
+**The work is not the writing — it is the review.** 700 stories have to be checked for
+repetition, and repetition is exactly what a reader notices. **The ten-category structure
+exists to make that review tractable.**
+
+### The sanctuary becomes an autobiography
+
+If the intake story records **where you were and what happened**, then walking through your
+own facility is walking back through your career. *This one arrived during the vulture
+quest. This one you carried out yourself. This one was the first thing you ever treated and
+it never left.*
+
+**A collection screen lists what you have. A row of named animals with dated arrival stories
+is a record of a life's work.** Nothing else in the game does that.
+
+### Release sites are places, not animals
+
+A smaller job than it sounds: **many species share one.** A pond, a field, a stretch of
+reef. And the signature ability is viewable **at the release site as well as at the
+sanctuary**, consistent with the unlock rule being documentation rather than possession.
+
+**The childhood beaver closes its own loop here** — the animal you raised as a child can be
+visited as an adult, in the wild, doing what beavers do.
 
 ### The naming rule
 
@@ -1613,6 +1706,26 @@ enclosure, with a worse outcome. **The penalty is the animal's chances.**
 
 Above. It is the one that never relaxes.
 
+## The return report — **[v6]**
+
+**The facility runs while you are away, so coming back is an event.** A short report, not a
+spreadsheet:
+
+> *Eleven days. Four intakes. **BEAV-07** cleared quarantine and moved to conditioning. The
+> barn owl with the wing did not make it. The badger you named last winter is still refusing
+> the new enclosure.*
+
+**Progress, loss, and one small stubborn thing.** It gives the two modes a rhythm — go away,
+do a quest, **come back to a place that kept living.**
+
+### Three things the facility leaves open
+
+- **Euthanasia and mortality.** The return report already implies it. **This question has
+  now arrived by three separate doors** and is still Ayr's
+- **Does the player lay out buildings freely, or choose from prepared plots?** Free layout
+  makes the two-routes puzzle real; prepared plots make it approachable
+- **Can a facility fail?** Money running out, welfare collapsing, licence revoked
+
 ## Sandbox mode
 
 A free-build mode alongside the campaign, **with the economy dropped and the biology kept**
@@ -1645,6 +1758,46 @@ tool can check whether a claim is true of the world.**
 
 ---
 
+# 18b. Where the design actually stands — **[v6]**
+
+> **Ayr:** *"You're asking for roof tile options before we've established where the roof
+> comes from or if there even is a roof. Break it down sequentially more first."*
+
+**This audit exists so the order is visible, and no earlier version of this document had
+it — which made the design read as more finished than it is.**
+
+### A word that was being used badly
+
+**"Loop" is game-design vocabulary, not programming.** It means **the cycle of actions a
+player repeats**, and designers name three sizes: the **core loop** (seconds to minutes),
+the **session loop** (one sitting), and the **long loop** (the whole game).
+
+**The rehabilitation sequence is not a loop. It is a pipeline** — intake, triage,
+quarantine, rehabilitation, conditioning, outcome. An animal goes through it once and comes
+out. **Calling it a loop hid the fact that the player's actual core loop has never been
+designed.**
+
+### The stack, bottom to top
+
+| Layer | The question it answers | Status |
+|---|---|---|
+| **0 — Moment to moment** | How you move, what buttons exist, what the screen shows | **MISSING** |
+| **1 — One encounter** | An animal appears. What happens? What is "catching"? | **MISSING** — some camera notes for the photographer, **nothing for researcher or guide** |
+| **2 — One quest** | Start to finish | **BUILT** — the five-beat template |
+| **3 — One session** | What an hour at the keyboard actually contains | **MISSING** |
+| **4 — One life stage** | Twelve quests, a facility, collecting | Roughly built |
+| **5 — The whole game** | Six stages, three careers, two modes, 1000 species | **BUILT** |
+
+**Layers 2, 4 and 5 are built. Layers 0, 1 and 3 are empty — and they are the foundation.**
+
+**This was flagged on day one and never done.** Idea 10, in Ayr's first batch of twenty:
+*"I need to design the befriend encounter mechanic way different from the current game."*
+
+**Everything above layer 1 attaches to the encounter contract rather than to the mechanic**
+(§7), which is why the rest of the design survives the gap. But the gap is the gap.
+
+---
+
 # 19. Every open question, in one place
 
 | # | Question | Blocking? |
@@ -1665,6 +1818,12 @@ tool can check whether a claim is true of the world.**
 | 10 | **Sandbox holding extinct species** — proposed, not ruled | No |
 | 11 | **Euthanasia** — deferred, less urgent under authored rehabilitation | No |
 | 12 | **What the items are** | No |
+| 13 | **Layers 0, 1 and 3 are empty** — moment-to-moment, the encounter, and what an hour contains. **The foundation of the whole thing** | Everything eventually |
+| 14 | **Does the child name the rescued animal**, before learning why that is a problem? | The childhood |
+| 15 | **Is the childhood pet still alive later?** A cat dies somewhere in the adult stages | Mortality |
+| 16 | **Free building layout, or prepared plots?** Free makes the two-routes puzzle real; plots make it approachable | The facility |
+| 17 | **Can a facility fail?** | The facility |
+| 18 | **Does the teen try all three careers** before choosing? | The teen years |
 
 ## Parked deliberately — do not restart unprompted
 
