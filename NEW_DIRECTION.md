@@ -10552,3 +10552,81 @@ That · The Village · The Long Way · The Long Sleep · **Bad Reputation**
 
 **Extremes (5)** — **The Largest** · The Smallest · The Deepest · The Highest · **The Old
 Ones** *(longevity)*
+
+---
+
+## BAD REPUTATION — WIDENED, AND MADE ONE OF THE HARD ONES
+
+> **Ayr, 2026-08-27.** *"The maned wolf isn't just a misnomer, it looks terrifying at
+> night too. Just want to make sure it's not just about names. And 7 seems a little
+> small? Surely there are more animals with scary but wrong reputations? Some of these
+> badges are meant to be challenging. They encourage catching more, thus learning more."*
+
+**Right on both counts, and the second follows from the first.** Once the badge covers
+**faces and folklore** as well as names, the set roughly triples — and it becomes one of
+the hardest in the game, which is what it should be.
+
+### It teaches three different mechanisms, not one
+
+| Why it is feared | What is actually true |
+|---|---|
+| **The name** | Somebody in the 1800s reached for the most alarming word available |
+| **The face** | It looks wrong to a primate that reads faces for threat |
+| **The folklore** | It became an omen, and omens get killed |
+
+### The set — 24
+
+**Feared for the name — 8**
+
+**Vampire Squid** *(Vampyroteuthis infernalis, "vampire squid from hell" — it eats marine
+snow, which is detritus)* · **Zombie Worm** · **Hellbender** *(also called snot otter,
+devil dog and Allegheny alligator — it is a harmless salamander)* · **Basilisk Lizard**
+*(named for a monster whose gaze killed)* · **Thorny Devil** *(eats ants)* ·
+**Tasmanian Devil** *(named for the screaming; it is a scavenger)* · **Giant Oceanic
+Manta** *(sailors called it the devilfish)* · **Goblin Shark**
+
+**Feared for the face — 9**
+
+**Maned Wolf** *(Ayr\\'s: at night it is a red silhouette on impossibly long legs. It is
+neither wolf nor fox, eats mostly fruit, and its urine smells of cannabis)* ·
+**Aye-aye** · **Anglerfish** *(**most are under 20 cm** — the nightmare image everyone
+has seen is a magnified photograph)* · **Fangtooth** *(16 cm long)* · **Gulper Eel** ·
+**Blobfish** *(voted the world\\'s ugliest animal in 2013, and **it only looks like that
+because of decompression** — at depth it is an ordinary fish)* · **Giant Isopod** ·
+**Pacific Hagfish** · **Giant Moray** *(**it opens and closes its mouth to pump water
+over its gills** — it is breathing, and every diver reads it as a threat display)*
+
+**Feared by folklore — 7**
+
+**Aye-aye** *(counted once — **killed on sight in parts of Madagascar as an omen of
+death**)* · **Common Raven** · **Barn Owl** *(an omen across Europe, and the best rodent
+control a farmer can have)* · **Grey Wolf** *(the villain of European folklore; attacks
+on people are vanishingly rare)* · **Spotted Hyena** *(**the scavenger reputation is
+backwards** — they kill most of what they eat, and lions steal from them more often than
+the reverse)* · **Common Vampire Bat** *(it does drink blood, and it also shares its
+meal with roostmates who failed to feed, and remembers who helped it)* · **Rüppell\\'s
+Vulture** *(stomach acid near pH 1 destroys anthrax and botulism, so vultures stop
+disease spreading — **which is exactly why India\\'s vulture collapse caused a rabies
+crisis**, and that is already the mountains quest)*
+
+### Why this badge is worth more than the others
+
+Every other badge teaches a mechanism. **This one teaches that fear has a body count** —
+and it is the only badge whose lesson is about the player rather than the animal.
+
+**It also loops back into a quest.** A player who earns Bad Reputation has met the
+vulture argument twice: once as a badge about prejudice, and once as the diclofenac
+quest where 99% of South Asia\\'s vultures died and rabies deaths rose behind them.
+
+### A mechanic this suggests: tiered badges
+
+24 is too many for one unlock. **Suggest the large badges tier:**
+
+```
+Bad Reputation      8 -> bronze     16 -> silver     24 -> gold
+```
+
+That gives Ayr both halves of what they asked for **inside a single badge** — an easy
+first rung that pulls a player in, and a hard last one that means finishing the deep sea.
+**Suggest applying the same to The Largest, Lights On and Same Answer Twice**, which are
+all naturally large.
