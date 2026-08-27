@@ -16,7 +16,7 @@ written for the new game yet.
 | **`design/PENDING_MOVES.txt`** | Decisions made but not yet in game data. Every fix lives here until applied |
 | **`design/BADGES.txt`** | Badge membership, the only source. The page is generated from it |
 | **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
-| **`NEW_DIRECTION.md`** | The design record, ~10,000 lines, append-only with dated headers |
+| **`NEW_DIRECTION.md`** | The design record, ~11,000 lines, append-only with dated headers |
 | **`design/tools/README.md`** | **Read this before quoting any number.** Documents both traps and the correct method |
 | **`design/new_species.md`** | The running list of species still to create |
 | **`design/cut_species.md`** | What was cut, and why. Check before proposing a removal |
@@ -115,9 +115,13 @@ BADGES      52        easy 10 · medium 26 · hard 16 · 4 tiered
   *Sub-Zero*, the bumblebee bat by *The Smallest*. A New World vulture is wanted.
 - **52 badges breaks Ayr's round-number rule.** They said record them anyway and settle
   the count later. Not resolved.
-- **The Deathstalker is in *Lights On* and should not be** — a scorpion glows under UV,
-  which is fluorescence, not light it makes. Recommended restoring *Blacklight* as its
-  own badge. **Ayr has not ruled yet.**
+- **Fluorescence has no badge, and that was not decided — it happened.** The Deathstalker
+  was in *Lights On*, which is wrong (a scorpion glows because a UV lamp is pointed at it;
+  that is fluorescence, not light the animal makes). It was **dropped when the badge sets
+  were expanded, without Ayr being told** — so it now sits in no badge at all, and
+  *Blacklight* was never restored. **Ayr's ruling is still owed:** restore *Blacklight*
+  with the puffin bill, chameleon bones and platypus fur, or let fluorescence go
+  unmentioned.
 - **`Only In Captivity`** depends on an `EW` tag that does not exist in the data.
 - **Items in the world** — committed as a principle. **No item ideas until Ayr asks.**
 
