@@ -309,3 +309,40 @@ RENAME=Chameleon::Panther Chameleon|Civet::Asian Palm Civet|Langur::Red-shanked 
 ! Baboon    -> Olive Baboon: the troop politics its existing entry describes - decades
 !              of alliances, grudges and reconciliation - were studied in olive baboons.
 RENAME=Vulture::Rüppell's Vulture|Kestrel::Common Kestrel|Hornbill::Southern Ground Hornbill|Galago::Senegal Bushbaby|Mongoose::Banded Mongoose|Genet::Common Genet|Lovebird::Rosy-faced Lovebird|Duiker::Common Duiker|Baboon::Olive Baboon
+
+! ============================================================================
+! SPECIES AUDIT - section 3, THE WEALD. Ayr 2026-08-27. Ten named; see the note on
+! the tardigrade, which is the one entry that cannot honestly take a common name.
+! ============================================================================
+! Macaque        -> Japanese Macaque: the snow monkeys. The only primate besides us
+!                   living that far north, and the potato-washing habit that spread
+!                   through a troop from one young female in 1953 is the first
+!                   documented case of culture in a non-human animal.
+! Cicada         -> Seventeen-year Cicada: spends seventeen years underground and
+!                   emerges in billions at once. Thirteen and seventeen are both prime,
+!                   which is thought to be why no predator can time its cycle to them.
+! Praying Mantis -> European Mantis: it has ONE ear, in the middle of its chest, tuned
+!                   to bat echolocation - and it power-dives out of the air on hearing one.
+! Hawk Moth      -> Death's-head Hawkmoth: mimics the scent of honeybees to raid their
+!                   hives unchallenged, and squeaks by forcing air through its proboscis.
+! Stag Beetle    -> European Stag Beetle: the largest beetle in Europe, and the males'
+!                   antlers are jaws grown too big to bite with properly.
+! Jewel Beetle   -> Green Jewel Beetle: its wing cases were used in embroidery and
+!                   jewellery for centuries and have not faded, because the colour is
+!                   structural rather than pigment.
+! Bandicoot      -> Eastern Barred Bandicoot: down to roughly 150 animals, and brought
+!                   back using Maremma guardian dogs on Australian islands. Its existing
+!                   entry - the shortest pregnancy of any mammal - still holds.
+! Wallaby        -> Red-necked Wallaby: and there is a feral population living in England.
+! Porcupine      -> North American Porcupine: Old World and New World porcupines are
+!                   different families. This is the tree-climbing one, and the one the
+!                   fisher's existing entry describes killing.
+! Pill Millipede -> European Pill Millipede: rolls into a ball, and is constantly
+!                   mistaken for a woodlouse, which does the same thing by convergence.
+RENAME=Macaque::Japanese Macaque|Cicada::Seventeen-year Cicada|Praying Mantis::European Mantis|Hawk Moth::Death's-head Hawkmoth|Stag Beetle::European Stag Beetle|Jewel Beetle::Green Jewel Beetle|Bandicoot::Eastern Barred Bandicoot|Wallaby::Red-necked Wallaby|Porcupine::North American Porcupine|Pill Millipede::European Pill Millipede
+
+! TARDIGRADE - LEFT AS IS, DELIBERATELY. It is a phylum of ~1,300 species and they have
+! no common names at species level; "water bear" is the group. The honest fix is not a
+! rename but an entry that says so, and names the studied one - Ramazzottius
+! varieornatus, whose Dsup protein was inserted into human cells and made them
+! resistant to radiation. Flagged for the writing, not for the roster.

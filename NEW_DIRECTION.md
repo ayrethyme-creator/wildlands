@@ -9969,3 +9969,40 @@ and that distinction is a better field-guide fact than anything about its diet.
  0  not an animal / redundant pairs / wrong biome     done
 ~57 a group, not a species     rainforest and savanna done, ten biomes to go
 ```
+
+---
+
+## THE WEALD IS NAMED — ten species, and one deliberate exception
+
+| Was | Now | The fact that earned it |
+|---|---|---|
+| Macaque | **Japanese Macaque** | The snow monkeys. The only primate besides us living that far north — and **the potato-washing habit that spread through a troop from one young female in 1953 is the first documented case of culture in a non-human animal** |
+| Cicada | **Seventeen-year Cicada** | Seventeen years underground, then billions at once. **Thirteen and seventeen are both prime**, which is thought to be why no predator can time its cycle to them |
+| Praying Mantis | **European Mantis** | **It has one ear, in the middle of its chest**, tuned to bat echolocation — and it power-dives out of the air on hearing one |
+| Hawk Moth | **Death's-head Hawkmoth** | **Mimics the scent of honeybees to raid their hives unchallenged**, and squeaks by forcing air through its proboscis |
+| Stag Beetle | **European Stag Beetle** | The largest beetle in Europe, and the males' antlers are **jaws grown too big to bite with properly** |
+| Jewel Beetle | **Green Jewel Beetle** | Its wing cases were used in embroidery for centuries and **have not faded, because the colour is structural rather than pigment** |
+| Bandicoot | **Eastern Barred Bandicoot** | Down to about 150 animals, brought back using **Maremma guardian dogs** on Australian islands |
+| Wallaby | **Red-necked Wallaby** | And there is a feral population living in England |
+| Porcupine | **North American Porcupine** | Old and New World porcupines are different families. This is the tree-climbing one — **and the one the fisher's existing entry describes killing** |
+| Pill Millipede | **European Pill Millipede** | Rolls into a ball, and is constantly mistaken for a woodlouse, **which does the same thing by convergence** |
+
+### The tardigrade stays as it is, on purpose
+
+It is **a phylum of about 1,300 species**, and they have no common names at species
+level — "water bear" is the group, not an animal.
+
+**The honest fix is not a rename but an entry that says so**, and names the studied
+one: *Ramazzottius varieornatus*, **whose Dsup protein was inserted into human cells
+and made them resistant to radiation.** Flagged for the writing rather than the roster.
+
+### Noted for the new-animal phase
+
+**A New World vulture is to be added.** Ayr, 2026-08-27. Candidates: the **turkey
+vulture**, which is one of very few birds with a real sense of smell — gas companies
+added mercaptan to pipelines and watched for circling turkey vultures to find the
+leaks — or the **king vulture**, which is the spectacular one.
+
+```
+~47 a group, not a species     three biomes done, nine to go
+```
