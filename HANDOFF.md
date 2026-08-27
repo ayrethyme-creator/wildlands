@@ -8,6 +8,25 @@ written for the new game yet.
 
 ---
 
+## Read `GDD.md` before anything else
+
+**`GDD.md` is the design.** ~2,700 lines, **organised by system rather than by date**, and
+it holds only what is currently true. Every section is marked **DECIDED**, **OPEN** or
+**PROPOSED**, and all the open questions are collected again at the end.
+
+**It is the answer to "what is this game?"** — read it, and you do not need to navigate the
+record.
+
+> **`NEW_DIRECTION.md` is the *record*, not the design.** 11,000 lines, append-only, in the
+> order decisions were actually made, including the reversals. It holds every *why* — and it
+> is too long to read. Search it for a topic when the GDD says something you want the
+> history of.
+
+**Where the two disagree, the GDD is current** — it has been reconciled against the full
+record eighteen times, and each pass is listed in its own version note.
+
+---
+
 ## The files that are authoritative
 
 | File | What it is |
@@ -16,15 +35,16 @@ written for the new game yet.
 | **`design/PENDING_MOVES.txt`** | Decisions made but not yet in game data. Every fix lives here until applied |
 | **`design/BADGES.txt`** | Badge membership, the only source. The page is generated from it |
 | **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
-| **`NEW_DIRECTION.md`** | The design record, ~11,000 lines, append-only with dated headers |
+| **`GDD.md`** | **The design.** By system, current-only, everything marked decided / open / proposed. **Start here** |
+| **`NEW_DIRECTION.md`** | The design *record*, ~11,000 lines, append-only with dated headers. Every *why*, including the reversals |
 | **`design/tools/cousin_bob.py`** | **The document check.** *"Run it by Cousin Bob."* Verifies the docs still agree with the data |
 | **`design/tools/README.md`** | **Read this before quoting any number.** Documents both traps and the correct method |
 | **`design/new_species.md`** | The running list of species still to create |
 | **`design/cut_species.md`** | What was cut, and why. Check before proposing a removal |
 
-**`NEW_DIRECTION.md` is too long to read.** Read the last few hundred lines for current
-state, and search it for a topic when you need one. **Its prose counts go stale** — the
-banner at the top says so. Numbers come from Uncle Albert, never from the doc.
+**Numbers come from Uncle Albert, never from either document.** `NEW_DIRECTION.md`'s prose
+counts go stale — the banner at the top says so — and the GDD's numbers are only current
+because **Cousin Bob asserts them against live data on every run.**
 
 ---
 
@@ -51,7 +71,8 @@ three times. That is what the tool is for.
 then run it by Uncle Albert.
 
 **Run both before quoting anything.** Albert checks the data adds up. **Bob checks that
-what is written about the data is still true** — the numbers in this file, the file paths
+what is written about the data is still true** — the numbers in this file **and in
+`GDD.md`**, the file paths
 in every current-truth doc, whether a document has been cut off mid-sentence, and any
 sentence claiming a species is in a badge. Bob exists because on 2026-08-27 four
 statements in these documents had quietly stopped being true and no amount of re-reading
@@ -119,6 +140,25 @@ BADGES      52        easy 10 · medium 26 · hard 16 · 4 tiered
 
 **Thinnest biomes:** open ocean, farmland, coast, reef.
 
+### The next work, and the order for it
+
+**Three layers of the design are empty, and they are the foundation.** The GDD's *Where the
+design actually stands* section has the full audit; the short version:
+
+```
+Layer 0  moment to moment    MISSING
+Layer 1  one encounter       MISSING  <- start here
+Layer 3  one session         MISSING
+Layers 2, 4, 5               built
+```
+
+**Layer 1 first** — what happens when you meet an animal, and what each of the three careers
+does about it. **Everything else depends on it**, and it was flagged on day one as idea 10
+and never done. Then layer 0, then layer 3, then the open questions.
+
+**The encounter *contract* is fixed even though the mechanic is not**, which is why the rest
+of the design is safe to keep building. Do not confuse the two.
+
 ### In flight
 
 - **The 44 remaining species.** Some are already claimed by badges — the wood frog by
@@ -137,8 +177,12 @@ BADGES      52        easy 10 · medium 26 · hard 16 · 4 tiered
 
 ### Parked — do not restart unprompted
 
-The people / ranger-avatar redraw. The art restyle of the first ~293 painted-style
-species. Euthanasia.
+The people / ranger-avatar redraw. The art restyle of the first ~293 painted-style species.
+
+**Euthanasia is no longer the open question it was.** Choosing an authored rehabilitation
+pipeline rather than a simulated one dissolved it: it becomes a story beat used once or
+twice at full weight, not a system running in the background. Do not reopen it as a systems
+question.
 
 ---
 
@@ -160,4 +204,6 @@ GIT_TERMINAL_PROMPT=0 timeout 90 git push origin wildlands-next
 
 ## The published pages
 
-Kept in `design/LINKS.md`. The badge book and the roster are the two worth opening.
+Kept in `design/LINKS.md`. **The GDD is published as a readable page** — that link is the
+one to send anybody who asks what the game is. The badge book and the roster are the other
+two worth opening.
