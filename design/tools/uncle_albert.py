@@ -15,6 +15,7 @@ Verifies:
   4. nothing marked "new>" already exists
   5. every quest animal exists or is scheduled to be created
   6. nothing in cut / cosmetic / merged is still referenced as living
+  7. every badge member is a real species, and nothing marked * already exists
 """
 import io, os, sys, re
 
@@ -199,6 +200,97 @@ print()
 print('WHERE THE %d STILL TO CREATE WOULD GO' % (700 - seven_hundred))
 for k in sorted(BIOMES, key=lambda x: len(d[x])):
     print('   %-12s %3d' % (k, len(d[k])))
+
+# 9. THE BADGES
+# Every badge member must be a real species in the roster. A trailing * means the
+# species is scheduled to be created; Albert checks those do NOT already exist, so
+# the star cannot be left on after the animal is made. A leading ~ is a rule, not
+# a species, and is skipped. Duplicates ACROSS badges are correct and expected -
+# an animal that shows four concepts should earn four badges.
+print()
+print('=' * 52)
+print('THE BADGES')
+print('=' * 52)
+badges, bcat, bdif, btier = [], {}, {'E': 0, 'M': 0, 'H': 0}, 0
+bad_missing, bad_star = [], []
+allbadge, tocreate = set(), set()
+for line in io.open('design/BADGES.txt', encoding='utf-8'):
+    line = line.strip()
+    if not line or line.startswith('!'):
+        continue
+    parts = [p.strip() for p in line.split('::')]
+    if len(parts) != 6:
+        FAIL.append('BADGES.txt line is malformed: ' + line[:60])
+        continue
+    cat, name, dif, tiers, concept, mem = parts
+    members = [m.strip() for m in mem.split('|') if m.strip()]
+    real = []
+    for m in members:
+        if m.startswith('~'):
+            continue
+        if m.endswith('*'):
+            m = m[:-1]
+            tocreate.add(m)
+            if m in alln:
+                bad_star.append('%s  (in "%s", but it already exists)' % (m, name))
+        elif m not in alln:
+            bad_missing.append('%s  (in "%s")' % (m, name))
+        real.append(m)
+        allbadge.add(m)
+    badges.append((cat, name, dif, tiers, real))
+    bcat[cat] = bcat.get(cat, 0) + 1
+    if dif in bdif:
+        bdif[dif] += 1
+    else:
+        FAIL.append('badge "%s" has difficulty "%s", expected E/M/H' % (name, dif))
+    if tiers:
+        btier += 1
+        try:
+            th = [int(x) for x in tiers.split(',')]
+        except ValueError:
+            FAIL.append('badge "%s" has unreadable tiers "%s"' % (name, tiers))
+            th = []
+        if th and th[-1] != len(real):
+            FAIL.append('badge "%s": gold tier is %d but the set has %d members'
+                        % (name, th[-1], len(real)))
+        if th != sorted(th):
+            FAIL.append('badge "%s": tiers are not ascending' % name)
+
+print('   %-24s %4d' % ('badges', len(badges)))
+for c in ['Reproduction', 'Senses', 'The body', 'Evolution', 'Behaviour',
+          'Conservation', 'Extremes']:
+    print('      %-21s %4d' % (c, bcat.get(c, 0)))
+print('   %-24s %4d' % ('tiered', btier))
+print('   difficulty   easy %d   medium %d   hard %d'
+      % (bdif['E'], bdif['M'], bdif['H']))
+print('   %-24s %4d   (%d already exist, %d to create)'
+      % ('distinct species used', len(allbadge),
+         len(allbadge) - len(tocreate), len(tocreate)))
+
+thin = [(n, len(r)) for c, n, dd, t, r in badges if len(r) < 4]
+print()
+print('BADGES WITH FEWER THAN 4 MEMBERS: %d' % len(thin))
+for n, k in sorted(thin, key=lambda x: x[1]):
+    print('   %-26s %d' % (n, k))
+
+print()
+print('BADGE MEMBERS NOT IN THE ROSTER: %d' % len(bad_missing))
+for x in sorted(bad_missing):
+    print('   ' + x)
+    FAIL.append('badge member not in roster: ' + x)
+
+print()
+print('BADGE MEMBERS MARKED * THAT ALREADY EXIST: %d' % len(bad_star))
+for x in sorted(bad_star):
+    print('   ' + x)
+    FAIL.append('badge member starred but exists: ' + x)
+
+# how much of the roster the badges actually reach
+have = len(allbadge) - len(tocreate)
+print()
+print('BADGE REACH')
+print('   species with at least one badge   %4d' % have)
+print('   species with none                 %4d' % (len(alln) - have))
 
 print()
 print('=' * 52)

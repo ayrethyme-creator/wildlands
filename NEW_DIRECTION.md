@@ -10798,3 +10798,119 @@ retrofitting hiding places into terrain that has none, which is the expensive ve
 
 **It also gives the biomes a second job.** Right now a biome is where its species live.
 This makes it somewhere you comb.
+
+---
+
+## BADGES — ROUND THREE. THE SETS ARE FILLED OUT, AND UNCLE ALBERT NOW CHECKS THEM
+
+> **Ayr, 2026-08-27.** *"There are missing animals in the category. It's OK if there are
+> duplicates. Like doesn't elephant belong in granny and mirror recognition? I know
+> bottlenosed dolphins belong in more badges. Bumblebee bat in the smallest too. There
+> should be a fastest and slowest badges too. I know it breaks the 50 rule, but just
+> record them for now anyway. Have Uncle Albert check the badges."*
+
+### The overlap rule is now written down
+
+**Duplicates across badges are correct and expected.** An animal that demonstrates four
+concepts should earn four badges. That is recorded at the top of `design/BADGES.txt` so
+no later session "tidies" it away.
+
+**The bottlenose dolphin now appears in six** — *Seeing With Sound*, *The Toolkit*
+(sponging), *Passed Down* (sponging is taught, mother to daughter), *Who's That* (it
+passes the mirror mark test), *Same Answer Twice* (against the ichthyosaur), and
+*The Deepest* by way of its relatives. **That is what Ayr meant, and it was right.**
+
+### Ayr's elephant call was half right, and the half that was wrong is interesting
+
+| | |
+|---|---|
+| **Mirror recognition** | **Correct, and already there.** Asian elephant was in *Who's That*. African elephant has now been added beside it |
+| **The Granny** | **No.** *The Granny* is menopause, and **elephants do not have it** — matriarchs keep breeding into old age. The five confirmed non-human cases are all toothed whales, and the badge already has all five |
+
+**The elephant is the textbook case for *why old females matter*** — a matriarch holds
+the memory of where water is in a drought — **but it gets there without menopause.** That
+is a genuinely different mechanism, and blurring them would break the one concept the
+badge exists to teach.
+
+**Suggest: that is worth its own badge later** — matriarchal knowledge, the animals whose
+survival depends on an old female remembering something. Elephant, orca, sperm whale,
+bison. **Not adding it now**, because Ayr has not asked for it.
+
+**A related fact worth using somewhere:** the **elephant shrew menstruates**. The elephant
+does not.
+
+### Two badges added, as asked
+
+| Badge | | |
+|---|---|---|
+| **The Fastest** | Speed records, and each is fastest at a *different* thing | Peregrine Falcon *(in a stoop)* · Cheetah *(on land)* · Mantis Shrimp *(the strike)* · Sailfish · Pronghorn *(over distance)* · Common Swift · Brazilian Free-tailed Bat *(level flight)* |
+| **The Slowest** | The other end. **Slow is a strategy, not a failure** | Brown-throated Sloth · Greenland Shark · Sulcata Tortoise · Garden Snail · Dwarf Seahorse · Sea Anemone |
+
+**One caution on *The Fastest*.** The famous sailfish figure of 68 mph traces back to a
+single 1940s reel-tension estimate and **has never been properly replicated**. If the
+badge quotes a number for the sailfish, it should say that the number is disputed —
+which is a better lesson than the number.
+
+**This puts the total at 52, which breaks the round-number rule.** Ayr has said to record
+them anyway and settle the count later.
+
+### UNCLE ALBERT NOW CHECKS THE BADGES
+
+**This is the part that matters.** `design/BADGES.txt` is machine readable, and Albert
+verifies:
+
+- **every badge member is a real species in the living roster** — not a name typed from memory
+- **anything marked `*` does not already exist**, so the star cannot be left on after the animal is made
+- **the gold tier equals the size of the set**, and tiers ascend
+- difficulty is E, M or H; categories are the seven known ones
+- and it reports **which badges have fewer than four members**
+
+`design/tools/make_badge_page.py` then builds the page from that same file, so **the
+readable page cannot disagree with the checked data.**
+
+### What it caught, first run: 36 problems
+
+**Twenty-three badge members were not in the roster.** Most were name drift, which is
+exactly the failure this tool exists to stop:
+
+```
+Kakapo                 -> Kakapo, with macrons
+Ruppell's Vulture      -> Rüppell's, with the umlaut
+Glass Frog             -> Fleischmann's Glass Frog   (renamed in the audit)
+Basilisk Lizard        -> Common Basilisk            (renamed in the audit)
+Lion's Mane Jellyfish  -> Lion's Mane Jelly
+African Grey Parrot    -> African Grey
+Golden Lion Tamarin    -> Golden Tamarin
+Yak                    -> Wild Yak
+Ichthyosaurus          -> Shonisaurus                (the roster's actual ichthyosaur)
+Loggerhead Turtle      -> Green Sea Turtle           (no loggerhead in the roster)
+```
+
+**Eleven more were marked "to create" but already existed** — chicken, pronghorn, numbat,
+hoatzin, velvet worm, frilled shark, goliath frog, rock dove, dumbo octopus, cookiecutter
+shark, elephant bird. **Every one of those would have become a duplicate species** if the
+badge list had been trusted.
+
+**And two tier counts were wrong**, including the one that matters:
+
+### Bad Reputation is 24, not 25
+
+**The aye-aye appears twice** — feared for its face, *and* killed as an omen. It is one
+animal. The three lists add to 25; the badge is **24**, and gold sits at 24.
+
+**Nobody would have caught that by reading.** Albert caught it in a second.
+
+### Where the badges now stand
+
+```
+52 badges        easy 10   medium 26   hard 16        4 tiered
+300 species referenced      218 exist      82 still to create
+```
+
+**The badges now reach 218 of the roster.** That is a useful number in itself: it says
+roughly a fifth of the animals currently carry a concept, and **the other 871 are just
+animals.** Worth deciding later whether that ratio is right.
+
+**One badge is still thin: *Only In Captivity*** has no fixed list, because it is a rule —
+any five from On the Brink tagged EW. **Albert flags it every run.** That is acceptable,
+but the tag it depends on does not exist in the data yet.

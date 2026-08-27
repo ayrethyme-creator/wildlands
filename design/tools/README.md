@@ -76,3 +76,16 @@ It answers a question readers always have and field guides rarely do: is this a 
 or one of a crowd? It also surfaces the animals that are **the last of a whole branch** —
 the aardvark is the only living species in its *order*, and the tuatara is the only
 survivor of Rhynchocephalia.
+
+## The badges
+
+ is the only source for badge membership.  builds
+ from it; Uncle Albert checks it. Never edit the data inside
+badges.html - it gets overwritten.
+
+Duplicates across badges are deliberate. An animal that shows four concepts earns four
+badges. Do not tidy them away.
+
+A trailing  on a member means the species does not exist yet. Albert fails if a
+starred species already exists, which is how the star gets removed once the animal is
+made.
