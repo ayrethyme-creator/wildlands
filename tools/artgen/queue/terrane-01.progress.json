@@ -1,0 +1,8 @@
+{
+ "job": "terrane-01",
+ "batch": "batch_terrane_01.json",
+ "started": "2026-08-28T13:36:50Z",
+ "species": 44,
+ "done": 0,
+ "state": "running"
+}
