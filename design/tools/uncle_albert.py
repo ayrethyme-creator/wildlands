@@ -16,6 +16,14 @@ Verifies:
   5. every quest animal exists or is scheduled to be created
   6. nothing in cut / cosmetic / merged is still referenced as living
   7. every badge member is a real species, and nothing marked * already exists
+  8. no badge member and no quest animal is merely a LIFE STAGE
+
+Check 8 was added 2026-08-28 and fired immediately. Three badges and one quest
+cited "Orangutan", which is not a species in this data - it sits in the lifestage
+group, and the species are Sumatran Orangutan and Tapanuli Orangutan. It had
+passed every previous run because the roster set used here included life stages,
+while Cousin Bob's equivalent set had always excluded them. The two tools
+disagreeing about what counts as a species is what hid it.
 """
 import io, os, sys, re
 
@@ -142,7 +150,7 @@ for x in bogus:
 # 5. quest animals
 # Quest animals, by their CURRENT name. Update when a rename touches one -
 # that is the point: this check exists to catch a quest pointing at nothing.
-QUEST = ['Pine Marten', 'Iberian Lynx', 'Siamang', 'Orangutan', 'Jaguar', 'Harpy Eagle',
+QUEST = ['Pine Marten', 'Iberian Lynx', 'Siamang', 'Sumatran Orangutan', 'Jaguar', 'Harpy Eagle',
          'Eurasian Beaver', 'European Lobster', 'Horseshoe Crab', 'Stoplight Parrotfish',
          'Spinner Dolphin',
          'Blue Whale', 'Fennec Fox', 'Arabian Oryx', 'Snow Leopard', 'Polar Bear',
@@ -150,12 +158,28 @@ QUEST = ['Pine Marten', 'Iberian Lynx', 'Siamang', 'Orangutan', 'Jaguar', 'Harpy
          'Cheetah', 'African Elephant', 'Black Rhinoceros', 'Tibetan Antelope',
          'Crown-of-thorns Starfish', 'Protoceratops', 'Plesiosaurus', 'Tiktaalik']
 alln = {n for g, v in d.items() if g not in ('cut', 'cosmetic', 'merged') for n in v}
-missing = [q for q in QUEST if q not in alln]
+
+# A LIFE STAGE IS NOT A SPECIES, and a badge or a quest may not point at one.
+# Found 2026-08-28: three badges and one quest cited "Orangutan", which sits in the
+# lifestage group - the species are Sumatran Orangutan and Tapanuli Orangutan. It
+# passed every run because this set included life stages. Cousin Bob had always
+# excluded them; Albert had not, and the two disagreeing is what hid it.
+LIFE = set(d.get('lifestage', []))
+alln_sp = alln - LIFE
+
+missing = [q for q in QUEST if q not in alln_sp]
+quest_life = [q for q in QUEST if q in LIFE]
 print()
 print('QUEST ANIMALS MISSING: %d' % len(missing))
 for x in missing:
     print('   ' + x)
     FAIL.append('quest animal missing: ' + x)
+
+print()
+print('QUEST ANIMALS THAT ARE ONLY A LIFE STAGE: %d' % len(quest_life))
+for x in quest_life:
+    print('   %s  (a life stage, not a species)' % x)
+    FAIL.append('quest animal is a life stage: ' + x)
 
 # 7. generic names - a bare group word is not a species
 # Words that really are multi-species groups. Deliberately narrow: aardvark, cheetah,
@@ -212,7 +236,7 @@ print('=' * 52)
 print('THE BADGES')
 print('=' * 52)
 badges, bcat, bdif, btier = [], {}, {'E': 0, 'M': 0, 'H': 0}, 0
-bad_missing, bad_star = [], []
+bad_missing, bad_star, bad_life = [], [], []
 allbadge, tocreate = set(), set()
 for line in io.open('design/BADGES.txt', encoding='utf-8'):
     line = line.strip()
@@ -233,7 +257,9 @@ for line in io.open('design/BADGES.txt', encoding='utf-8'):
             tocreate.add(m)
             if m in alln:
                 bad_star.append('%s  (in "%s", but it already exists)' % (m, name))
-        elif m not in alln:
+        elif m in LIFE:
+            bad_life.append('%s  (in "%s")' % (m, name))
+        elif m not in alln_sp:
             bad_missing.append('%s  (in "%s")' % (m, name))
         real.append(m)
         allbadge.add(m)
@@ -278,6 +304,12 @@ print('BADGE MEMBERS NOT IN THE ROSTER: %d' % len(bad_missing))
 for x in sorted(bad_missing):
     print('   ' + x)
     FAIL.append('badge member not in roster: ' + x)
+
+print()
+print('BADGE MEMBERS THAT ARE ONLY A LIFE STAGE: %d' % len(bad_life))
+for x in sorted(bad_life):
+    print('   ' + x)
+    FAIL.append('badge member is a life stage: ' + x)
 
 print()
 print('BADGE MEMBERS MARKED * THAT ALREADY EXIST: %d' % len(bad_star))

@@ -77,9 +77,26 @@ that makes it strange, so the picks are all from that half rather than the fishe
 Nudibranch** *(eats the man o' war and keeps its stings)* · **By-the-wind Sailor** *(has a
 literal sail, and populations are left- or right-handed)* · **Violet Sea Snail** *(floats
 under a raft of its own bubbles and drowns if it breaks)* · **Sea Skater** *(the only insect
-on the open ocean)* · **Japanese Flying Squid** *(genuinely flies)* · Salp · **Bluefin
+on the open ocean)* · **Japanese Flying Squid** *(genuinely flies)* · **Bluefin
 Tuna** *(the quota fight)* · **Oceanic Whitetip** *(once among the most abundant large
 animals on earth)*
+
+> **The salp was in this list and is cut.** It breaks **GDD §13 — no plankton, krill or
+> copepods as catchable species.** A salp is a planktonic tunicate. That rule already cost
+> the Antarctic krill its place in *Lights On* and *The Linchpin*, and it applies here too.
+> The slot goes to the Indian giant squirrel below.
+
+> **A fair criticism of these ten, from *The Last Forty-Four*:** the open ocean holds ten
+> whales and dolphins and seven sharks, and **not one schooling fish.** The predators
+> already placed there have no prey base under them. These ten add the strange half but no
+> middle to the food web. **Chub Mackerel** and **Atlantic Herring** would fix it, and
+> would cost two of the stranger picks. Worth Ayr's ruling.
+
+### Forest — 1
+
+**Indian Giant Squirrel** — nearly a metre nose to tail, maroon and orange, and the
+largest squirrel there is, which earns it a place beside the capybara in *The Largest*.
+Takes the slot the salp vacated; forest goes to 56.
 
 ### Coast — 6
 
