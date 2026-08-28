@@ -114,12 +114,25 @@ def preflight(verbose=True):
         problems.append("Pillow missing, so background removal cannot run: %s\n"
                         "      pip install pillow" % PILLOW_ERR)
 
-    try:
-        os.makedirs(ARTDIR, exist_ok=True)
-    except Exception as e:                   # noqa: BLE001
-        problems.append("Cannot write sprites to ARTDIR %s (%s).\n"
-                        "      Set WILDLANDS_ART to a directory that exists."
-                        % (ARTDIR, type(e).__name__))
+    # Check the output directory without conjuring it. `makedirs` on the default
+    # Windows path succeeds on Linux by making a literal "C:" folder in the
+    # working directory, which reports success and then hides the real problem —
+    # this is not the machine that draws.
+    if os.path.isdir(ARTDIR):
+        if not os.access(ARTDIR, os.W_OK):
+            problems.append("ARTDIR %s exists but is not writable." % ARTDIR)
+    elif os.path.isdir(os.path.dirname(ARTDIR.rstrip("/\\")) or "."):
+        try:
+            os.makedirs(ARTDIR, exist_ok=True)
+        except Exception as e:               # noqa: BLE001
+            problems.append("Cannot create ARTDIR %s (%s)." % (ARTDIR, type(e).__name__))
+    else:
+        problems.append(
+            "ARTDIR %s does not exist and neither does the directory above it.\n"
+            "      That default is a path on the machine that draws the sprites; a\n"
+            "      different machine should set WILDLANDS_ART to its own checkout,\n"
+            "      e.g. WILDLANDS_ART=../../art to write straight into git."
+            % ARTDIR)
 
     if verbose:
         if problems:

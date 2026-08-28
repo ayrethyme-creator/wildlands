@@ -5,3 +5,6 @@ __pycache__/
 # Raw pre-postprocess renders. gen_runner writes these next to itself and
 # they are disposable — only the finished PNGs in art/ are kept.
 tools/artgen/raw/
+
+# The queue runner keeps its liveness marker inside the clone it owns.
+.queue_runner.heartbeat

@@ -43,6 +43,29 @@ After a batch, add each new species to `PHOTO_ART` in `game.part2.jsx`. Any spec
 not listed there keeps its hand-drawn SVG art, so a missing entry is a silent
 no-op rather than a break.
 
+## Running a batch from a machine that cannot reach the GPU
+
+Only the tailnet machine can draw. A Claude session in a cloud container can
+write descriptions but cannot submit a single one of them, so the two used to
+have to be the same session. They no longer do — the repository carries the
+request instead:
+
+```
+the chat      writes tools/artgen/queue/<name>.job.json, pushes
+queue_runner  sees it, runs gen_runner, pushes back the PNGs and the log
+the chat      fetches, reads the log, reports what came out
+```
+
+On the drawing machine, once: `git clone <this repo> C:\Claude\wildlands-artqueue`.
+Then start `tools/artgen/start-queue-runner.bat` and leave it open. It polls
+every minute, runs one batch at a time, pushes progress every few sprites, and
+refuses to start if another copy is alive. It works only in that dedicated
+clone, never in a checkout somebody is editing.
+
+Full protocol in `queue/README.md`. It polls git, not ComfyUI: submission still
+goes gen_runner -> gen_steward -> Scrying Glass, and nothing here starts,
+stops, or queues around the card.
+
 ## Requirements
 
 - The ComfyUI host must be up. Check first:
