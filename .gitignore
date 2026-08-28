@@ -1,0 +1,7 @@
+# Python bytecode from the art pipeline in tools/artgen.
+__pycache__/
+*.pyc
+
+# Raw pre-postprocess renders. gen_runner writes these next to itself and
+# they are disposable — only the finished PNGs in art/ are kept.
+tools/artgen/raw/
