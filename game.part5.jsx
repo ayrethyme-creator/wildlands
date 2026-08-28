@@ -2202,6 +2202,75 @@
                 ))}
               </div>
             )}
+            {S.menu === "cases" && (() => {
+              // Amara's desk. Every case she is currently willing to discuss,
+              // in her own road order, with the state of each one on the row —
+              // so a case you cannot pitch yet no longer hides the ones you can.
+              //
+              // Cases you have not been out to are not all listed: she names
+              // the next one and keeps count of the rest, which is what she did
+              // in conversation before this menu existed. The point of the menu
+              // is to stop the queue blocking, not to hand over the whole map.
+              const ids = (S.casesList || []).filter((id) => ARCS[id]);
+              const shown = []; let unstarted = 0, suggested = false;
+              ids.forEach((id) => {
+                if (arcMet(S, id)) { shown.push(id); return; }
+                if (!suggested) { suggested = true; shown.push(id); return; }
+                unstarted++;
+              });
+              const doneCount = ids.filter((id) => arcState(S, id).stage === "done").length;
+              return (
+                <div>
+                  <b>🗂️ Prof. Amara's desk</b>
+                  <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 8 }}>
+                    She funds evidence, not feelings. Pitch whichever case you can argue —
+                    they do not have to be in order.
+                  </div>
+                  {!shown.length && (
+                    <div style={{ fontSize: 12, color: "#c9b88a", marginTop: 10 }}>
+                      Nothing open. Everything she has funded is built and holding.
+                    </div>
+                  )}
+                  {shown.map((id) => {
+                    const A = ARCS[id], cur = arcState(S, id), met = arcMet(S, id);
+                    const ev = arcEvidenceCount(S, id), tot = arcTotalEvidence(id);
+                    const done = cur.stage === "done", build = cur.stage === "build";
+                    return (
+                      <div key={id} style={{ padding: "8px 4px", borderBottom: "1px solid #5c5344", opacity: done ? 0.55 : 1 }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 8 }}>
+                          <div style={{ fontWeight: 700, fontSize: 12 }}>{done ? "✔ " : ""}{A.title}</div>
+                          <div style={{ fontSize: 10, color: "#8a7f68", whiteSpace: "nowrap" }}>Region {A.region}</div>
+                        </div>
+                        <div style={{ fontSize: 10, color: "#c9b88a", margin: "3px 0 6px" }}>
+                          {done ? "Funded, built, and holding."
+                            : build ? "Funded — go and put it in. She does not pay people to plan things."
+                            : met ? `${ev} of ${tot} findings recorded.${ev >= tot ? " Enough to argue with." : ev ? " She will notice what is missing." : ""}`
+                            : "You have not been out to this one. She suggests it next."}
+                        </div>
+                        {met && !done && !build && (
+                          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                            <button style={btn(ev ? "#5c8a3a" : "#7d735f")}
+                              onClick={() => { setS((p) => ({ ...p, menu: null })); openPitch(id); }}>
+                              Pitch this
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                  {!!unstarted && (
+                    <div style={{ fontSize: 10, color: "#8a7f68", marginTop: 8 }}>
+                      …and {unstarted} more she has not sent you out on yet.
+                    </div>
+                  )}
+                  {!!doneCount && (
+                    <div style={{ fontSize: 10, color: "#8a7f68", marginTop: 4 }}>
+                      {doneCount} finished.
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
             {S.menu === "learn" && learner && (
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>

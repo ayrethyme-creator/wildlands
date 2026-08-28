@@ -126,6 +126,11 @@
         + "Go out to Beeloud Clearing. Thabo Sithole has been losing beehives for a month and telling anyone "
         + "who will listen, and not one person from this station has asked him a single useful question. "
         + "Go and ask him something useful. Then come back and tell me what it costs.",
+    // What she says once you have actually worked a case. The speech above is
+    // an introduction and reads badly on the ninth visit.
+    deskLine: "Back. Good. Everything I have open is on the desk — take whichever one "
+        + "you can argue today, and leave the ones you cannot. I would rather hear a "
+        + "short case that holds than a long one that does not.",
     pitchArc: "beeloud",
     // She takes whichever arc is live, in order, so one benefactor serves the
     // whole map rather than needing a copy of her in every region. The last

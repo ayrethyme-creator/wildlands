@@ -1024,25 +1024,34 @@ function Wildlands() {
         return;
       }
       if (tr.pitchArc) {
-        // She works whichever arc is still open, in order — so one benefactor
-        // serves all twelve regions without needing twelve copies of her.
+        // Her desk is a menu now, not a queue.
+        //
+        // She used to work exactly one case — the first in road order that was
+        // not finished — and would not discuss any other. Three ways that went
+        // wrong, and Ayr hit all of them:
+        //
+        //   * a case you had not gathered evidence for still occupied the slot,
+        //     so the only thing she would take was the one pitch certain to be
+        //     refused;
+        //   * a case already funded returned a single line and nothing else, so
+        //     one unbuilt fence silently closed the whole rest of her caseload;
+        //   * cases begun out of road order could not be handed in at all,
+        //     which is easy to do because the regions are walkable in any order
+        //     and the people in them talk to you the moment you arrive.
+        //
+        // The list is still hers and still in road order. What changed is that
+        // the player says which case they are here about.
         const list = tr.pitchArcs || [tr.pitchArc];
-        // Four arcs do not open until the summit is behind you. Same gate the
-        // Vigil uses, so the game has one idea of "finished" rather than two.
+        // The hub arcs do not open until the summit is behind you. Same gate
+        // the Vigil uses, so the game has one idea of "finished", not two.
         const champion = !!st.trainersBeaten["summit:7,1"];
         const open = list.filter((id) => ARCS[id] && !(ARCS[id].postgame && !champion));
-        const live = open.find((id) => arcState(st, id).stage !== "done")
-          || open[open.length - 1] || list[list.length - 1];
-        const A = ARCS[live];
-        const cur = arcState(st, live);
-        if (cur.stage === "done") { say(`👩🏿‍🏫 ${tr.name}: "The hives are holding. Write down what you did and when — in three years neither of us will remember."`); return; }
-        if (cur.stage === "build") {
-          say(`👩🏿‍🏫 ${tr.name}: "It is funded. Go and put it in — I do not pay people to plan things."`);
-          return;
-        }
-        say(`👩🏿‍🏫 ${tr.name}: "${tr.line}"`, [
-          { label: `Pitch: ${A.title}`, act: () => openPitch(live) },
-          { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
+        // The long speech is an introduction, and it should stop being one once
+        // you have actually worked a case.
+        const started = open.some((id) => arcMet(st, id));
+        say(`👩🏿‍🏫 ${tr.name}: "${started && tr.deskLine ? tr.deskLine : tr.line}"`, [
+          { label: "Her desk", act: () => setS((p) => ({ ...p, dialog: null, menu: "cases", casesList: open })) },
+          { label: "Not now", act: () => setS((p) => ({ ...p, dialog: null })) },
         ]);
         return;
       }
