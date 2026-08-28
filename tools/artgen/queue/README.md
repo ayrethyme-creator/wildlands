@@ -21,7 +21,7 @@ chat            fetches, reads the log, reports what came out
 On the GPU machine, once:
 
 ```
-git clone https://github.com/ayrethyme-creator/wildlands C:\Claude\wildlands-artqueue
+git clone -b claude/handoff-md-review-u6uaf3 https://github.com/ayrethyme-creator/wildlands C:\Claude\wildlands-artqueue
 ```
 
 Then, whenever it should be listening, double-click

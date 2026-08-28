@@ -56,7 +56,7 @@ queue_runner  sees it, runs gen_runner, pushes back the PNGs and the log
 the chat      fetches, reads the log, reports what came out
 ```
 
-On the drawing machine, once: `git clone <this repo> C:\Claude\wildlands-artqueue`.
+On the drawing machine, once: `git clone -b <the working branch> <this repo> C:\Claude\wildlands-artqueue`.
 Then start `tools/artgen/start-queue-runner.bat` and leave it open. It polls
 every minute, runs one batch at a time, pushes progress every few sprites, and
 refuses to start if another copy is alive. It works only in that dedicated

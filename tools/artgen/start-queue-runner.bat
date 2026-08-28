@@ -7,7 +7,7 @@ REM finished PNGs back. Leave this window open; Ctrl+C stops it cleanly between
 REM species.
 REM
 REM First time only, make the clone it works in:
-REM     git clone https://github.com/ayrethyme-creator/wildlands C:\Claude\wildlands-artqueue
+REM     git clone -b claude/handoff-md-review-u6uaf3 https://github.com/ayrethyme-creator/wildlands C:\Claude\wildlands-artqueue
 
 setlocal
 if "%WILDLANDS_QUEUE_REPO%"=="" set WILDLANDS_QUEUE_REPO=C:\Claude\wildlands-artqueue

@@ -90,8 +90,10 @@ def ensure_clone(repo, branch):
             url = git(HERE, "remote", "get-url", "origin")
         except Exception:
             url = "https://github.com/ayrethyme-creator/wildlands"
+        # -b, because the queue and this runner may not be on the default
+        # branch, and a clone without it lands somewhere that has neither.
         print("No clone at %s.\n\nMake one and then start this again:\n\n"
-              "    git clone %s \"%s\"\n" % (repo, url, repo))
+              "    git clone -b %s %s \"%s\"\n" % (repo, branch, url, repo))
         sys.exit(2)
     git(repo, "fetch", "origin", branch)
     current = git(repo, "rev-parse", "--abbrev-ref", "HEAD")
