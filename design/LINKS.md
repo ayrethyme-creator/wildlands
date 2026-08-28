@@ -10,7 +10,7 @@ Updated 2026-08-27.
 | Page | What it is | Link |
 |---|---|---|
 | **Wildlands GDD** | The design document, organised by system. Every section marked decided, open or proposed | <https://claude.ai/code/artifact/f4e04f48-b944-4162-899b-0bea8018b967> |
-| **The Badge Book** | All 52 badges, their concepts and their full sets. Searchable, filterable by difficulty. Generated from `design/BADGES.txt` | <https://claude.ai/code/artifact/b89bce32-b71e-4d6a-aac5-eef8f10c8754> |
+| **The Badge Book** | All 50 badges, their concepts and their full sets. Searchable, filterable by difficulty. Generated from `design/BADGES.txt` | <https://claude.ai/code/artifact/b89bce32-b71e-4d6a-aac5-eef8f10c8754> |
 | **Terrane Roster** | All 1000 species by group. Green = decided, underlined = still to create | <https://claude.ai/code/artifact/3d46ca35-16d8-4d17-ad09-21f81c1b16e9> |
 | **Species Audit** | The errors found and fixed. All four sections struck as done | <https://claude.ai/code/artifact/c99584d9-712a-4c17-a4bc-baae7e80a895> |
 

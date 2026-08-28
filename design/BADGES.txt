@@ -29,13 +29,11 @@ Senses :: Through the Glare :: E ::  :: Polarised-light vision :: Common Cuttlef
 Senses :: Lights On :: H :: 4,8,12 :: Bioluminescence &mdash; light the animal makes itself :: Anglerfish|Black Dragonfish|Atolla|Common Eastern Firefly|Vampire Squid|Lanternfish|Viperfish|Cookiecutter Shark|Hatchetfish|Stoplight Loosejaw|Bloody-belly Comb Jelly|Helmet Jellyfish
 
 The body :: Grow It Back :: M ::  :: Regeneration :: Axolotl|Common Brittle Star|Tiger Tail Sea Cucumber|Sunflower Sea Star|Leopard Gecko|Great Crested Newt|Star Ascidian|Sea Lamprey|Ochre Sea Star
-The body :: Rare Poison :: M ::  :: Venomous mammals &mdash; there are barely any :: Platypus|Slow Loris|Solenodon*|Eurasian Water Shrew*
 The body :: See-Through :: H ::  :: Transparency :: Fleischmann's Glass Frog|Glasswing Butterfly|Cockatoo Squid|Barreleye|Venus's Girdle|Moon Jelly|Deepstaria
-The body :: Sub-Zero :: H ::  :: Antifreeze proteins &mdash; the wood frog freezes solid, stops its heart, and thaws :: Antarctic Icefish|Arctic Cod|Antarctic Toothfish|Arctic Char|Wood Frog*
+The body :: Sub-Zero :: H ::  :: Antifreeze proteins &mdash; the wood frog freezes solid, stops its heart, and thaws :: Antarctic Icefish|Arctic Cod|Antarctic Toothfish|Arctic Char|Wood Frog
 The body :: Second Bite :: E ::  :: Pharyngeal jaws &mdash; a second set of teeth down in the throat :: Giant Moray|Stoplight Parrotfish|Bluestreak Cleaner Wrasse|Discus
 The body :: Built Wrong on Purpose :: H ::  :: Extreme selective breeding, and what it costs the animal :: French Bulldog|Manx|Munchkin|Bull Terrier|Pug|Persian|Scottish Fold|Bulldog
 The body :: No Bones About It :: H ::  :: Invertebrate giants :: Giant Squid|Colossal Squid|Japanese Spider Crab|Coconut Crab|Lion's Mane Jelly|Giant Siphonophore|Giant Isopod|Giant Gippsland Earthworm|Goliath Beetle|Chan's Megastick|Antarctic Sea Spider
-The body :: Armour :: H ::  :: Convergent armour plating :: Nine-banded Armadillo|Sunda Pangolin|Common Wombat|Glyptodon|Yellow Boxfish|Ankylosaurus|Giant Armadillo|Scaly-foot Snail|European Pill Millipede
 
 Evolution :: Same Answer Twice :: H :: 4,8,11 :: Convergent evolution &mdash; the same solution found twice, independently :: Sugar Glider|Flying Squirrel|Thylacine|Grey Wolf|Smilodon|Gorgonops|Shonisaurus|Bottlenose Dolphin|Giant Anteater|Sunda Pangolin|Aardvark
 Evolution :: The Island Rule :: M ::  :: Insular dwarfism <em>and</em> gigantism &mdash; islands push both ways :: Komodo Dragon|Coconut Crab|Pinta Island Tortoise|Bali Tiger|Haast's Eagle|Elephant Bird
@@ -62,7 +60,7 @@ Conservation :: The Linchpin :: M ::  :: Keystone species &mdash; pull one out a
 Conservation :: The Trade :: M ::  :: The most trafficked animals on earth :: Sunda Pangolin|Tiger|Black Rhinoceros|Saiga|African Grey|Slow Loris|Ball Python|Hyacinth Macaw|Spix's Macaw
 
 Extremes :: The Largest :: M :: 4,10,16 :: Biggest of its kind, right across the tree of life :: Blue Whale|African Elephant|Whale Shark|Ostrich|Japanese Spider Crab|Giant Siphonophore|Saltwater Crocodile|Colossal Squid|Capybara|Goliath Frog|Goliath Beetle|Ocean Sunfish|Oarfish|Wandering Albatross|Leatherback Turtle|Chinese Giant Salamander
-Extremes :: The Smallest :: M ::  :: Miniature record-holders :: Pygmy Marmoset|Pygmy Seahorse|Least Weasel|Rusty-spotted Cat|Pudú|Volcano Rabbit|Kodkod|Black-footed Cat|Dik-dik|Honduran White Bat|Bumblebee Bat*
+Extremes :: The Smallest :: M ::  :: Miniature record-holders :: Pygmy Marmoset|Pygmy Seahorse|Least Weasel|Rusty-spotted Cat|Pudú|Volcano Rabbit|Kodkod|Black-footed Cat|Dik-dik|Honduran White Bat|Bumblebee Bat
 Extremes :: The Deepest :: H ::  :: Depth records :: Mariana Snailfish|Cuvier's Beaked Whale|Southern Elephant Seal|Sperm Whale|Giant Isopod|Dumbo Octopus
 Extremes :: The Highest :: M ::  :: Altitude records :: Rüppell's Vulture|Bar-headed Goose|Alpine Chough|Himalayan Jumping Spider|Snow Leopard|Wild Yak|Andean Condor|Vicuña|Kiang|Gelada|Alpine Ibex
 Extremes :: The Old Ones :: H ::  :: Extreme longevity &mdash; how long one <em>individual</em> lives :: Greenland Shark|Bowhead Whale|Deep-sea Bamboo Coral|Sulcata Tortoise|Tuatara|Orange Roughy|Black Coral|Giant Barrel Sponge|Pinta Island Tortoise

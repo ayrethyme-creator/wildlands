@@ -134,11 +134,11 @@ it. Ayr decides.
 Run Uncle Albert for the live version. **Cousin Bob checks these exact numbers**, so if they drift he fails rather than letting them rot:
 
 ```
-THE 700     biomes 606 + The Kept 50 = 656        44 still to create
+THE 700     biomes 608 + The Kept 50 = 658        42 still to create
 THE 300     Vigil 50 · On the Brink 50 · The Telling 100
             The Record 50 · The Breeding Centre 50
-BADGES      52        easy 10 · medium 26 · hard 16 · 4 tiered
-            329 species referenced, 319 exist, 10 to create
+BADGES      50        easy 10 · medium 25 · hard 15 · 4 tiered
+            320 species referenced, 314 exist, 6 to create
 ```
 
 **Thinnest biomes:** open ocean, farmland, coast, reef.
@@ -166,8 +166,8 @@ of the design is safe to keep building. Do not confuse the two.
 
 - **The 44 remaining species.** Some are already claimed by badges — the wood frog by
   *Sub-Zero*, the bumblebee bat by *The Smallest*. A New World vulture is wanted.
-- **52 badges breaks Ayr's round-number rule.** They said record them anyway and settle
-  the count later. Not resolved.
+- **The badge count is settled at 50.** Ayr cut *Armour* and *Rare Poison* on 2026-08-28,
+  which took 52 to 50 and closed the round-number question.
 - **Fluorescence has no badge, and that was not decided — it happened.** The Deathstalker
   was in *Lights On*, which is wrong (a scorpion glows because a UV lamp is pointed at it;
   that is fluorescence, not light the animal makes). It was **dropped when the badge sets

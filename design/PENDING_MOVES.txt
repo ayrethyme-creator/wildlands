@@ -582,3 +582,10 @@ RENAME=Beaver::Eurasian Beaver|Chamois::Alpine Chamois|Chipmunk::Eastern Chipmun
 !             needed by "No Father Required" - and a bare generic already flagged
 !             on the audit list.
 RENAME=Peccary::Chacoan Peccary|Dormouse::Edible Dormouse|Sawfish::Smalltooth Sawfish
+
+! --- Ayr, 2026-08-28. Two species made, both claimed by badges.
+! --- Bumblebee Bat (Kitti's hog-nosed bat): about 2 g, the smallest mammal on earth.
+! ---   Limestone caves in dry deciduous forest, western Thailand and Myanmar.
+! --- Wood Frog: freezes solid every winter - heart stopped, no breathing, up to 65%
+! ---   of its body water ice - and thaws in spring. Ranges above the Arctic Circle.
+new>forest=Bumblebee Bat|Wood Frog

@@ -2229,7 +2229,7 @@ THE 300   On the Brink 50 · The Vigil 50 · The Telling 100
           The Record 50 · The Breeding Centre 50
 ```
 
-**Round numbers are firm.** As of consolidation, **656 of the 700 exist and 44 remain** to be
+**Round numbers are firm.** As of consolidation, **658 of the 700 exist and 42 remain** to be
 created. Checked by Uncle Albert, not asserted here.
 
 ### Everything in the roster is real — **[v10]**
@@ -2674,7 +2674,7 @@ stays open**, which is why the rest of this document is not resting on air.
 | 2e | ~~**The modular character rig**~~ — **decided.** Six rigs, one per life stage, differing by proportion not shape, with details as layers. What remains is the production discipline: **all six must share bone layout and naming from the first one** | Character art |
 | 3 | **Can the player fail to advance?** Retake with a time cost is the middle path | Assessments |
 | 4 | **Origin-language naming** for individual animals — needs proper sourcing | No |
-| 5 | **The badge count** breaks the round-number rule | No |
+| 5 | ~~**The badge count** breaks the round-number rule~~ **SETTLED at 50**, 2026-08-28 | No |
 | 6 | **Fluorescence** — restore *Blacklight*, or drop it | No |
 | 7 | **The 44 remaining species** — some already claimed by badges | The roster |
 | 8 | **`Only In Captivity`** needs an `EW` tag that does not exist in the data | The badge |
