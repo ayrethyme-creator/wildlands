@@ -567,3 +567,18 @@ RENAME=Siphonophore::Giant Siphonophore|Comb Jelly::Venus's Girdle|Squat Lobster
 ! Wombat    -> Common Wombat: produces cube-shaped droppings, and is the only animal
 !              known to.
 RENAME=Beaver::Eurasian Beaver|Chamois::Alpine Chamois|Chipmunk::Eastern Chipmunk|Echidna::Short-beaked Echidna|Gerbil::Mongolian Gerbil|Hamster::Syrian Hamster|Hedgehog::European Hedgehog|Honeybee::Western Honeybee|Nautilus::Chambered Nautilus|Pangolin::Sunda Pangolin|Raccoon::Common Raccoon|Wolf::Grey Wolf|Wombat::Common Wombat
+
+! ============================================================================
+! Ayr, 2026-08-28. Three renames that retire a badge star each, found by Cousin
+! Bob's new near-miss check. In every case the badge wanted a specific species
+! and the roster held the bare generic, so no new animal is needed.
+! ============================================================================
+! Peccary  -> Chacoan Peccary: known from fossils and thought long extinct until
+!             it was found alive in the Gran Chaco in 1975. That is precisely the
+!             Lazarus story "Back From the Dead" is built on.
+! Dormouse -> Edible Dormouse: hibernates up to ELEVEN MONTHS, the longest of any
+!             mammal, which is the fact "The Long Sleep" wants.
+! Sawfish  -> Smalltooth Sawfish: the species with documented parthenogenesis,
+!             needed by "No Father Required" - and a bare generic already flagged
+!             on the audit list.
+RENAME=Peccary::Chacoan Peccary|Dormouse::Edible Dormouse|Sawfish::Smalltooth Sawfish

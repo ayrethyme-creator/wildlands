@@ -2153,7 +2153,7 @@ hard last one inside one badge.
 
 ### The hardest one
 
-**Bad Reputation**, 24 members across three mechanisms: feared for the name, feared for the
+**Bad Reputation**, 23 members across three mechanisms: feared for the name, feared for the
 face, feared by folklore. **The only badge whose lesson is about the player rather than the
 animal — fear has a body count.** It loops into the mountains quest, where 99% of South
 Asia's vultures died to diclofenac and human rabies deaths rose behind them.
