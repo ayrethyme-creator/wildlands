@@ -7,11 +7,29 @@ is not a safe place for the only copy of 976 hand-written species descriptions.
 Nothing in the game imports any of this. It is run by hand, offline, and the only
 thing it touches in the repo is `art/`.
 
+## Before you run anything
+
+```powershell
+python gen_runner.py --check
+```
+
+Reports, in about a second, whether this machine can run a batch at all: the
+Scrying Glass client importable, a route to the GPU host, Pillow installed, and
+a writable output directory. `run_batch` runs the same check and refuses to
+start if it fails, because a machine without a route does not get a refusal from
+the GPU — the connection is blackholed and every species sits until the 1800s
+fetch timeout. That is half a day of nothing before you learn the host was
+unreachable.
+
 ## Running a batch
 
 ```powershell
 python gen_runner.py batch_normal_04.json batch_normal_04_log.json
 ```
+
+Sprites land in `ARTDIR`, which defaults to `C:/Claude/wildlands/art` and can be
+pointed anywhere with the `WILDLANDS_ART` environment variable — set it to a
+repo checkout's `art/` to write straight into git.
 
 Resumable and idempotent: it skips any species already logged `true`, retries twice
 on failure, and rewrites the log after every species — so it can be interrupted and
