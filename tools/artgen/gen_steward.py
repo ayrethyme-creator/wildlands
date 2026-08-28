@@ -19,14 +19,11 @@ retries; a second one just fights it.
 """
 from __future__ import annotations
 
-import sys
 import time
 import uuid
 from pathlib import Path
 
-CLIENT_DIR = Path(r"C:\Users\ayr\.claude")
-sys.path.insert(0, str(CLIENT_DIR))
-import halo_scrying_client as sg  # noqa: E402
+import scrying_glass_client as sg
 
 BASE = sg.DEFAULT_BASE_URL if hasattr(sg, "DEFAULT_BASE_URL") else None
 MODEL = "flux-2-klein-9b-Q4_K_M.gguf"   # what the 795 committed sprites were drawn with
@@ -40,20 +37,6 @@ def _base() -> str:
     return sg.build_parser().get_default("base_url")
 
 
-def _outputs(limit: int = 8) -> list:
-    r = sg._request(_base(), "GET", "/api/outputs/list",
-                    query={"limit": limit}, timeout=120.0)
-    return r.get("outputs", []) if isinstance(r, dict) else []
-
-
-def _names(outs) -> set:
-    out = set()
-    for o in outs:
-        for im in o.get("images", []):
-            out.add(im["filename"])
-    return out
-
-
 def submit(prompt, seed, w=1024, h=1024, steps=20, guidance=3.5):
     """Queue one image. Returns {'prompt_id': ...} like the old client did."""
     payload = {
@@ -64,16 +47,10 @@ def submit(prompt, seed, w=1024, h=1024, steps=20, guidance=3.5):
         "media_type": "image", "mode": "text", "input_image": "",
         "denoise": 1.0, "frames": 49, "fps": 24.0, "loras": [],
     }
-    # Remember what already existed so the new file can be told apart. Requests
-    # are made one at a time, so the newest unseen output is ours.
-    submit._before = _names(_outputs(8))
     r = sg._request(_base(), "POST", "/api/queue", payload=payload, timeout=120.0)
     if not isinstance(r, dict) or not r.get("ok"):
         return {"error": str(r)[:200]}
     return {"prompt_id": str(r.get("gpu_job_id") or r.get("prompt_id") or "")}
-
-
-submit._before = set()
 
 
 def wait_and_fetch(prompt_id, out_path, timeout=1800):
@@ -97,18 +74,30 @@ def wait_and_fetch(prompt_id, out_path, timeout=1800):
         if st == "done":
             final = items[0]
             break
-        if st in ("error", "cancelled", "failed"):
+        if st in ("error", "errored", "cancelled", "failed"):
             return "ERROR:" + str(items[0].get("detail") or "")[:200]
         time.sleep(5)
     if final is None:
         return "TIMEOUT"
 
-    # The listing can lag a moment behind completion.
-    for _ in range(30):
-        new = _names(_outputs(8)) - submit._before
-        if new:
-            fn = sorted(new)[-1]
-            sg._download(_base(), f"/api/outputs/media/{fn}", Path(out_path))
-            return True
-        time.sleep(2)
-    return "NO_OUTPUT"
+    # The durable job record names its exact output, avoiding any chance that
+    # simultaneous Ninetails jobs get mistaken for one another.
+    outputs = final.get("outputs") if isinstance(final, dict) else []
+    images = [
+        item for item in (outputs or [])
+        if isinstance(item, dict) and item.get("media_type", "image") == "image"
+    ]
+    if not images:
+        return "NO_OUTPUT"
+    output = images[0]
+    filename = str(output.get("filename") or "")
+    subfolder = str(output.get("subfolder") or "")
+    if not filename:
+        return "NO_OUTPUT"
+    sg._download(
+        _base(),
+        f"/api/outputs/media/{filename}",
+        Path(out_path),
+        query={"workspace": sg.WORKSPACE, "subfolder": subfolder},
+    )
+    return True
