@@ -16,12 +16,12 @@ Reproduction :: No Father Required :: M ::  :: Parthenogenesis in vertebrates &m
 Reproduction :: The Switch :: E ::  :: Sequential hermaphroditism &mdash; changing sex partway through life :: Percula Clownfish|Stoplight Parrotfish|Bluestreak Cleaner Wrasse|Goliath Grouper|Bluehead Wrasse*|Asian Sheepshead Wrasse*
 Reproduction :: Dad's Turn :: M ::  :: Male pregnancy :: Pygmy Seahorse|Ornate Ghost Pipefish|Leafy Seadragon|Weedy Seadragon|Common Seahorse*
 Reproduction :: On Pause :: M ::  :: Embryonic diapause &mdash; a stoat can mate in summer and give birth ten months later :: Stoat|Fisher|Black Bear|Sea Otter|Red Kangaroo|Roe Deer*|Nine-banded Armadillo|European Badger*
-Reproduction :: One Shot :: M ::  :: Semelparity &mdash; breed once, then die :: Sockeye Salmon|Giant Pacific Octopus|Atlas Moth|Antechinus*|Mayfly*|Periodical Cicada*
+Reproduction :: One Shot :: M ::  :: Semelparity &mdash; breed once, then die :: Sockeye Salmon|Giant Pacific Octopus|Atlas Moth|Antechinus*|Mayfly*|Seventeen-year Cicada
 Reproduction :: The Colony :: E ::  :: Eusociality &mdash; and the naked mole-rat is the only mammal in the room :: Naked Mole-Rat|Western Honeybee|Leafcutter Ant|Damaraland Mole-Rat*|Termite*|Pistol Shrimp*
 Reproduction :: Til Death :: E ::  :: Lifelong monogamy :: Wandering Albatross|Rosy-faced Lovebird|Mute Swan|Grey Wolf|Siamang|Bald Eagle|Laysan Albatross*
 
 Senses :: The Sixth Sense :: M ::  :: Electroreception &mdash; platypus and echidna are the only mammals with it :: Platypus|Short-beaked Echidna|Electric Ray|Scalloped Hammerhead|Great White Shark|Paddlefish*|Guiana Dolphin*
-Senses :: Seeing With Sound :: E ::  :: Echolocation, evolved separately in bats and in toothed whales :: Little Brown Bat|Greater Horseshoe Bat|Bottlenose Dolphin|Sperm Whale|Beluga|Harbour Porpoise*|Oilbird*
+Senses :: Seeing With Sound :: E ::  :: Echolocation, evolved separately in bats and in toothed whales :: Little Brown Bat|Greater Horseshoe Bat|Bottlenose Dolphin|Sperm Whale|Beluga|Harbor Porpoise|Oilbird*
 Senses :: Heat Vision :: M ::  :: Infrared pit organs &mdash; seeing warmth as an image :: Sidewinder|Boa Constrictor|Bushmaster|Common Vampire Bat|Green Tree Python*|Western Diamondback Rattlesnake*
 Senses :: Beyond Violet :: M ::  :: Ultraviolet vision &mdash; reindeer use it to see lichen on snow :: Common Kestrel|Reindeer|Mantis Shrimp|Western Honeybee|Blue Tit*
 Senses :: True North :: M ::  :: Magnetoreception :: Green Sea Turtle|Arctic Tern|European Robin|Monarch Butterfly|Sockeye Salmon|Rock Dove
@@ -30,7 +30,7 @@ Senses :: Lights On :: H :: 3,6,9 :: Bioluminescence &mdash; light the animal ma
 
 The body :: Grow It Back :: M ::  :: Regeneration :: Axolotl|Common Brittle Star|Tiger Tail Sea Cucumber|Sunflower Sea Star|Leopard Gecko|Spiny Mouse*|Planarian*
 The body :: Rare Poison :: M ::  :: Venomous mammals &mdash; there are barely any :: Platypus|Slow Loris|Solenodon*|Northern Short-tailed Shrew*|Eurasian Water Shrew*
-The body :: See-Through :: H ::  :: Transparency :: Fleischmann's Glass Frog|Glasswing Butterfly|Cockatoo Squid|Barreleye|Comb Jelly*|Salp*|Glass Catfish*
+The body :: See-Through :: H ::  :: Transparency :: Fleischmann's Glass Frog|Glasswing Butterfly|Cockatoo Squid|Barreleye|Venus's Girdle|Salp*|Glass Catfish*
 The body :: Sub-Zero :: H ::  :: Antifreeze proteins &mdash; the wood frog freezes solid, stops its heart, and thaws :: Antarctic Icefish|Arctic Cod|Wood Frog*|Arctic Woolly Bear Moth*|Painted Turtle*
 The body :: Second Bite :: E ::  :: Pharyngeal jaws &mdash; a second set of teeth down in the throat :: Giant Moray|Stoplight Parrotfish|Bluestreak Cleaner Wrasse|Discus
 The body :: Built Wrong on Purpose :: H ::  :: Extreme selective breeding, and what it costs the animal :: French Bulldog|Manx|Munchkin|Bull Terrier|Pug|Persian|Scottish Fold|Bulldog
@@ -38,18 +38,18 @@ The body :: No Bones About It :: H ::  :: Invertebrate giants :: Giant Squid|Col
 The body :: Armour :: H ::  :: Convergent armour plating :: Nine-banded Armadillo|Sunda Pangolin|Common Wombat|Glyptodon|Yellow Boxfish|Ankylosaurus|Three-banded Armadillo*
 
 Evolution :: Same Answer Twice :: H :: 4,8,11 :: Convergent evolution &mdash; the same solution found twice, independently :: Sugar Glider|Flying Squirrel|Thylacine|Grey Wolf|Smilodon|Gorgonops|Shonisaurus|Bottlenose Dolphin|Giant Anteater|Sunda Pangolin|Aardvark
-Evolution :: The Island Rule :: M ::  :: Insular dwarfism <em>and</em> gigantism &mdash; islands push both ways :: Komodo Dragon|Coconut Crab|Pygmy Hippo|Galapagos Giant Tortoise*|Aldabra Giant Tortoise*|Pygmy Three-toed Sloth*
+Evolution :: The Island Rule :: M ::  :: Insular dwarfism <em>and</em> gigantism &mdash; islands push both ways :: Komodo Dragon|Coconut Crab|Pygmy Hippo|Pinta Island Tortoise|Aldabra Giant Tortoise*|Pygmy Three-toed Sloth*
 Evolution :: Grounded :: H ::  :: Flightlessness where nothing hunts on the ground &mdash; and the hard half is that most of these are gone :: Kākāpō|Kiwi|Cassowary|Dodo|Giant Moa|Emu|Ostrich|Takahe*|Flightless Cormorant*|Elephant Bird
 Evolution :: Unchanged :: H ::  :: Ancient lineages &mdash; how long the <em>shape</em> has lasted :: Coelacanth|Chambered Nautilus|Tuatara|Horseshoe Crab|Frilled Shark|Australian Lungfish*|Velvet Worm
 Evolution :: End of the Line :: M ::  :: The last surviving member of an entire branch :: Aardvark|Tuatara|Platypus|Aye-aye|Okapi|Maned Wolf|Numbat|Hoatzin
-Evolution :: Made By Us :: H ::  :: Domestication, and what it does to a body :: Domestic Fox|Silkworm|English Budgie|Angora Rabbit|Goldfish|Chicken|Domestic Pigeon*
+Evolution :: Made By Us :: H ::  :: Domestication, and what it does to a body :: Domestic Fox|Silkworm|English Budgie|Angora Rabbit|Goldfish|Chicken|Fancy Pigeon
 Evolution :: Back From the Dead :: H ::  :: Lazarus taxa &mdash; written off, then found alive :: Coelacanth|Silver-backed Chevrotain|Woolly Flying Squirrel|Lord Howe Island Stick Insect*|Bermuda Petrel*|Takahe*|Chacoan Peccary*
 Evolution :: Not What It Looks Like :: E ::  :: Misleading names &mdash; a red panda is neither :: Red Panda|Raccoon Dog|Aardwolf|Maned Wolf|Electric Eel*|Mountain Goat|Prairie Dog|Common Eastern Firefly
 
 Behaviour :: The Toolkit :: M ::  :: Tool use :: Bearded Capuchin|Sea Otter|Common Raven|Giant Pacific Octopus|Bottlenose Dolphin|Chimpanzee|New Caledonian Crow*|Egyptian Vulture*
 Behaviour :: Passed Down :: M ::  :: Culture &mdash; behaviour taught rather than inherited :: Japanese Macaque|Orca|Chimpanzee|Bottlenose Dolphin|Sperm Whale|Humpback Whale|Meerkat
 Behaviour :: Strange Allies :: M ::  :: Cooperation between unrelated species :: Banded Sea Krait|Honey Badger|Bluestreak Cleaner Wrasse|Percula Clownfish|Greater Honeyguide*|Yellow-billed Oxpecker*|Pistol Shrimp*
-Behaviour :: The Impostor :: M ::  :: Mimicry :: Mimic Octopus|Orchid Mantis|Ornate Ghost Pipefish|Marmalade Hoverfly|Common Cuckoo*|Viceroy Butterfly*|Leaf Insect*|Bluestriped Fangblenny*
+Behaviour :: The Impostor :: M ::  :: Mimicry :: Mimic Octopus|Orchid Mantis|Ornate Ghost Pipefish|Marmalade Hoverfly|Common Cuckoo*|Viceroy Butterfly*|Giant Leaf Insect|Bluestriped Fangblenny*
 Behaviour :: Who's That :: M ::  :: Mirror self-recognition :: Giant Oceanic Manta|Bluestreak Cleaner Wrasse|Asian Elephant|African Elephant|Bottlenose Dolphin|Orca|Chimpanzee|Bonobo|Orangutan|Eurasian Magpie*
 Behaviour :: The Village :: E ::  :: Cooperative breeding &mdash; raising young that are not yours :: Meerkat|Banded Mongoose|African Wild Dog|Naked Mole-Rat|Common Marmoset*|Florida Scrub-Jay*
 Behaviour :: The Long Way :: M ::  :: Migration extremes :: Arctic Tern|Globe Skimmer|Bar-tailed Godwit|Humpback Whale|Monarch Butterfly|Leatherback Turtle|Reindeer|Wildebeest
@@ -66,5 +66,5 @@ Extremes :: The Smallest :: M ::  :: Miniature record-holders :: Pygmy Marmoset|
 Extremes :: The Deepest :: H ::  :: Depth records :: Mariana Snailfish|Cuvier's Beaked Whale|Southern Elephant Seal|Sperm Whale|Giant Isopod|Dumbo Octopus
 Extremes :: The Highest :: M ::  :: Altitude records :: Rüppell's Vulture|Bar-headed Goose|Alpine Chough|Himalayan Jumping Spider|Snow Leopard|Wild Yak|Andean Condor|Himalayan Tahr*
 Extremes :: The Old Ones :: H ::  :: Extreme longevity &mdash; how long one <em>individual</em> lives :: Greenland Shark|Bowhead Whale|Deep-sea Bamboo Coral|Sulcata Tortoise|Tuatara|Aldabra Giant Tortoise*|Ocean Quahog*|Rougheye Rockfish*
-Extremes :: The Fastest :: M ::  :: Speed records &mdash; and each one is fastest at a different thing :: Peregrine Falcon|Cheetah|Mantis Shrimp|Sailfish|Pronghorn|Common Swift*|Brazilian Free-tailed Bat*
+Extremes :: The Fastest :: M ::  :: Speed records &mdash; and each one is fastest at a different thing :: Peregrine Falcon|Cheetah|Mantis Shrimp|Sailfish|Pronghorn|Common Swift*|Mexican Free-tailed Bat
 Extremes :: The Slowest :: E ::  :: The other end. Slow is a strategy, not a failure :: Brown-throated Sloth|Greenland Shark|Sulcata Tortoise|Aldabra Giant Tortoise*|Garden Snail*|Dwarf Seahorse*|Sea Anemone*

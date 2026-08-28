@@ -29,6 +29,23 @@ Verifies:
   4. no current-truth doc ends mid-sentence (the LINKS.md failure)
   5. artifact links are well formed, and none is duplicated under two names
   6. reports every sentence that claims a species is in a badge, with a verdict
+  7. every CONFIRMED batch in new_species.md has reached PENDING_MOVES.txt
+  8. no badge star is an animal the roster already holds under another name
+
+Checks 7 and 8 were added 2026-08-28, and both fired immediately.
+
+Seven is the same failure as the others, one level up: Ayr approved the open
+ocean, coral reef and coast batches by name, with a quote, on 2026-08-25. They
+were written into new_species.md and never transcribed into PENDING_MOVES.txt -
+61 species, sitting in prose, invisible to Uncle Albert because he only reads
+the pipeline. The biomes then showed up in HANDOFF.md as "thinnest", which read
+as a design gap rather than a filing one.
+
+Eight is what happens when a rename lands and the badge file does not follow.
+Albert checks that a starred member is ABSENT from the roster, and it always is,
+because the animal is filed under its new name - "Leaf Insect*" while the roster
+holds Giant Leaf Insect. Six of these were found at once; four were renames the
+generics audit had already applied.
 
 What Bob CANNOT check
 ---------------------
@@ -262,6 +279,140 @@ for doc in STRICT:
 print('SENTENCES PAIRING A SPECIES WITH A BADGE: %d' % len(claims))
 print('   (read these - prose may be discussing a removal, which is fine)')
 for x in claims:
+    print('   ' + x)
+
+# ------------------------------- 7. approvals that never reached the pipeline
+# The failure of 2026-08-25/26: three batches Ayr approved BY NAME, with a quote,
+# were written into design/new_species.md and never transcribed into
+# PENDING_MOVES.txt. Open ocean and coral reef had no new> line at all, and coast
+# had one. Nothing could see it, because an approval sitting in prose is exactly
+# the thing no tool was checking - which is the reason Bob exists.
+#
+# Deliberately checked at BATCH level, not species level. Pulling species names
+# out of prose gives false positives by the dozen; a section heading either has a
+# matching destination in the pipeline or it does not, and that converges.
+SECTION_BIOME = {
+    'DEEP SEA': 'deepsea', 'OPEN OCEAN': 'opensea', 'CORAL REEF': 'reef',
+    'COAST & KELP': 'coast', 'MOUNTAINS': 'alpine', 'DESERT': 'desert',
+    'POLAR': 'polar', 'FARMLAND': 'farmland',
+}
+pipeline = {}
+for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
+    line = line.rstrip('\n')
+    if not line or line.startswith('!') or '=' not in line:
+        continue
+    route, names = line.split('=', 1)
+    if route.startswith('new>'):
+        pipeline.setdefault(route[4:], []).extend(names.split('|'))
+
+print()
+print('APPROVED BATCHES vs THE PIPELINE')
+ns = read('design/new_species.md')
+batches = re.findall(r'^##\s+([A-Z][A-Z &\']+?)\s*[-—]+\s*'
+                     r'(CONFIRMED|LIKELY|proposed)[^\n]*?(\d+)\s*species', ns, re.M | re.I)
+if not batches:
+    WARN.append('new_species.md no longer has parseable batch headings')
+    print('   NO BATCH HEADINGS FOUND')
+for name, status, want in batches:
+    key = SECTION_BIOME.get(name.strip())
+    if key is None:
+        WARN.append('new_species.md batch "%s" has no biome mapping in Bob' % name.strip())
+        continue
+    got = len(pipeline.get(key, []))
+    want = int(want)
+    firm = status.upper() == 'CONFIRMED'
+    if got == 0:
+        verdict = 'NOTHING IN THE PIPELINE'
+        if firm:
+            FAIL.append('new_species.md marks %s CONFIRMED (~%d species) but '
+                        'PENDING_MOVES.txt has no "new>%s" line at all'
+                        % (name.strip(), want, key))
+    elif got < want:
+        verdict = 'short by %d' % (want - got)
+        if firm:
+            WARN.append('%s is CONFIRMED at ~%d but the pipeline holds %d'
+                        % (name.strip(), want, got))
+    else:
+        verdict = 'ok'
+    print('   %-13s %-9s doc ~%-4d pipeline %-4d %s'
+          % (name.strip(), status.upper(), want, got, verdict))
+
+# --------------------------- 8. badge stars for species that already exist
+# Uncle Albert checks that a starred badge member is absent from the roster, and
+# it always is - because the same animal is filed under another name. Four of the
+# eight found on 2026-08-28 were renames the generics audit had already applied:
+# "Leaf Insect*" while the roster holds Giant Leaf Insect. This recurs every time
+# a rename touches a badge member, so it needs a check rather than a re-read.
+SYNONYMS = {           # curated: no algorithm finds these, they are real synonyms
+    'Brazilian Free-tailed Bat': 'Mexican Free-tailed Bat',
+    'Periodical Cicada': 'Seventeen-year Cicada',
+    'Galapagos Giant Tortoise': 'Pinta Island Tortoise',
+    'Domestic Pigeon': 'Fancy Pigeon',
+    'Comb Jelly': "Venus's Girdle",
+}
+rename_src = {}
+for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
+    line = line.rstrip('\n')
+    if line.startswith('RENAME='):
+        for pair in line.split('=', 1)[1].split('|'):
+            a, b = pair.split('::')
+            rename_src[a] = b
+
+
+def flat(s):
+    return re.sub(r'[^a-z]', '', s.lower())
+
+
+def dist(a, b):
+    if abs(len(a) - len(b)) > 2:
+        return 99
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a):
+        cur = [i + 1]
+        for j, cb in enumerate(b):
+            cur.append(min(prev[j + 1] + 1, cur[j] + 1, prev[j] + (ca != cb)))
+        prev = cur
+    return prev[-1]
+
+
+def toks(s):
+    return [w for w in re.sub(r'[^a-z ]', ' ', s.lower()).split() if w]
+
+
+# A shared HEAD NOUN plus a token subset is how animal names actually differ:
+# "Peccary" / "Chacoan Peccary", "Sawfish" / "Smalltooth Sawfish". Matching raw
+# substrings instead finds "Sheep" inside "Sheepshead" and buries the real hits.
+def kin(a, b):
+    ta, tb = toks(a), toks(b)
+    if not ta or not tb or ta[-1] != tb[-1]:
+        return False
+    return set(ta) <= set(tb) or set(tb) <= set(ta)
+
+
+stale, nearmiss = [], []
+for m in sorted(tocreate):
+    if m in SYNONYMS and SYNONYMS[m] in alln:
+        stale.append('%-28s is %s, already in the roster' % (m, SYNONYMS[m]))
+        continue
+    if m in rename_src and rename_src[m] in alln:
+        stale.append('%-28s was renamed to %s, which exists'
+                     % (m, rename_src[m]))
+        continue
+    for real in sorted(alln):
+        if kin(m, real) or dist(flat(m), flat(real)) <= 2:
+            nearmiss.append('%-28s looks like %s' % (m, real))
+            break
+
+print()
+print('BADGE STARS FOR SPECIES THAT ALREADY EXIST: %d' % len(stale))
+for x in stale:
+    print('   ' + x)
+    FAIL.append('badge star already exists: ' + x.strip())
+
+print()
+print('BADGE STARS THAT RESEMBLE SOMETHING IN THE ROSTER: %d' % len(nearmiss))
+print('   (a warning - read them; a near name may be a genuinely different animal)')
+for x in nearmiss:
     print('   ' + x)
 
 # ------------------------------------------------------------------- the verdict
