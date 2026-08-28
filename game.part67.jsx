@@ -359,9 +359,22 @@ console.log("[part67] set dressing placed:", placeDressing());
 // floor tile with no walkable neighbour at all becomes terrain. That is a
 // pocket by definition - a tile you could only stand on by teleporting - and
 // filling it in costs the player nothing.
+//
+// The neighbour test has to know about the tiles that are solid NOW and open
+// LATER, or it walls off the map's own corridors. A tile is only a pocket if
+// nothing beside it can ever be walked through, and part4 lets you through
+// four kinds of tile once a condition is met: "X" on badges, "D" once the
+// puzzle is solved, "R"/"V" once that person is beaten, and any tile the map
+// registers an exit on. Counting those as solid is what sealed the Summit
+// Citadel: its Elite Four stand in a one-tile corridor, so every square
+// between them has two people above and below it and rock either side, and
+// all four read as unreachable. They were filled in, which walled the player
+// out of Elites two, three and four, the Champion behind them, and the myth
+// rift past the top of the stair.
 const sealPockets = () => {
   if (typeof MAPS === "undefined") return 0;
   const WALK = ".gGp*W" + (typeof MAP_MARKS !== "undefined" ? MAP_MARKS : "");
+  const GATED = "XDRV";   // solid until a badge, a puzzle or a battle opens it
   let sealed = 0;
   Object.keys(MAPS).forEach((mk) => {
     const m = MAPS[mk];
@@ -372,10 +385,16 @@ const sealPockets = () => {
       return r.charAt(x);
     };
     const walkable = (x, y) => { const c = at(x, y); return c !== "" && WALK.includes(c); };
+    // Everything a player can ever get through, not just what is open today.
+    const passable = (x, y) => {
+      const c = at(x, y);
+      if (c === "") return false;
+      return WALK.includes(c) || GATED.includes(c) || !!(m.exits && m.exits[`${x},${y}`]);
+    };
     for (let y = 0; y < m.rows.length; y++) {
       for (let x = 0; x < m.rows[y].length; x++) {
         if (!walkable(x, y)) continue;
-        const open = [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => walkable(x + dx, y + dy));
+        const open = [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => passable(x + dx, y + dy));
         if (open) continue;
         // Fill with whatever is already crowding it, so it disappears rather
         // than becoming a lone rock in the middle of a tree line.
