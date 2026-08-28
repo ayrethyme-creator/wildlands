@@ -1,4 +1,4 @@
-import sys, os, json, random, time
+import sys, os, json, random, re, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_steward as g
 import postprocess as pp
@@ -23,9 +23,25 @@ PROP_KEYWORDS = (
     "grips", "grip ", "hanging from", "roost",
 )
 
+# Match on whole words, not substrings.
+#
+# A plain `in` test reads "webbed feet" as the keyword "web" and hands the
+# animal the prop composition, which drops the "no rocks, no props" clause it
+# should have kept. That caught every animal with webbed feet - otter, duck,
+# platypus, blue-footed booby, turtle, fishing cat, goliath frog - plus
+# "rooster" on "roost", "loggerhead" on "log", and "branching" on "branch":
+# ten sprites already generated with the looser composition by accident.
+#
+# Common inflections still count, because those are genuine prop poses:
+# perched, gripping, nesting, roosting, clinging all want the thing they are
+# on to be in frame.
+_PROP_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(k.strip()) for k in PROP_KEYWORDS if k.strip())
+    + r")(?:s|es|ed|ing)?\b")
+
+
 def pick_composition(desc):
-    d = desc.lower()
-    if any(kw in d for kw in PROP_KEYWORDS):
+    if _PROP_RE.search(desc.lower()):
         return PROP_COMPOSITION
     return COMPOSITION
 
