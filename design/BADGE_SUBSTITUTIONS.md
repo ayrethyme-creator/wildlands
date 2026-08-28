@@ -182,15 +182,95 @@ Python** instead.
 
 ---
 
+## 7. The fact check, 2026-08-28
+
+Ayr asked whether the California condor is really parthenogenetic. **It is** — San Diego
+Zoo Wildlife Alliance confirmed two chicks, SB260 and SB517, by genetic analysis in the
+*Journal of Heredity* in 2021. What makes it the strongest entry in that badge is that
+**both mothers had been housed with fertile males and had already bred sexually**; every
+earlier vertebrate case involved an isolated female.
+
+The full pass found ten members that were wrong. **All ten are removed.** Four of them
+were introduced earlier the same day by the substitution work above, which is worth
+recording — a substitution is a biological claim, and picking one from memory is exactly
+how the badges got their existing errors.
+
+| Badge | Removed | Why |
+|---|---|---|
+| No Bones About It | **Xenophyophore** | A foraminiferan **protist**. Not an invertebrate, not an animal at all |
+| The Trade | **Vaquita** | Not trafficked. It drowns in gillnets set for **totoaba**, which is the trafficked animal and is not in the roster |
+| Rare Poison | **Common Vampire Bat** | Draculin is an anticoagulant in saliva. Vampire bats are not classified as venomous |
+| Who's That | **African Elephant** | The mirror test was passed by **Asian** elephants (Plotnik 2006). African elephants never have. The Asian elephant was already a member and stays |
+| The Island Rule | **Pygmy Hippo** | A mainland West African forest animal in its own genus. The island dwarf hippos were Cretan, Cypriot and Maltese, and all are extinct |
+| Heat Vision | **Boa Constrictor** | Most boids have labial pits. *Boa constrictor* does not |
+| Heat Vision | **Common Vampire Bat** | It does sense infrared, but through TRPV1 receptors on the nose leaf — not pit organs, which is what the badge is about |
+| Strange Allies | **Honey Badger** | The honeyguide/honey badger partnership is **largely unsubstantiated**; attempts to document it have failed. The evidenced honeyguide relationship is with **humans** |
+| The Toolkit | **Giant Pacific Octopus** | The tool user is the **coconut octopus**, which assembles shell halves into armour — and it is in the stranded reef batch |
+
+**One species had to be added back.** Removing two members took *Heat Vision* to three,
+below the four-member floor, so **Green Tree Python*** returns as a star — it has the
+deepest and most numerous labial pits of any snake. Species to create goes 9 → 10.
+
+**One concept line was false and is rewritten.** *The Sixth Sense* claimed *"platypus and
+echidna are the only mammals with it"*. The **Guiana dolphin** has electroreception too,
+through vibrissal crypts, published in 2011 — and it was a starred member of this very
+badge until that morning. It now reads *"barely any mammal has it, and the platypus
+carries 40,000 receptors in its bill"*.
+
+### Sub-Zero — **OPEN, awaiting Ayr**
+
+The badge reads *"Antifreeze proteins — the wood frog freezes solid, stops its heart, and
+thaws."* **Those are two opposite strategies and the line contains both.** Antifreeze
+proteins *prevent* freezing, which is the icefish and the toothfish. The wood frog has no
+antifreeze proteins: it *lets itself freeze* and survives it, flooding its tissues with
+glucose as a cryoprotectant.
+
+So it is either:
+
+- **antifreeze proteins** — keep Antarctic Icefish, Arctic Cod, Antarctic Toothfish,
+  Arctic Char, and the wood frog does not belong; or
+- **surviving being frozen** — keep the wood frog, and the fish do not belong.
+
+Ayr is thinking about it. **Nothing has been changed.**
+
+### Contested — known, not acted on
+
+These are not errors, but none is as solid as it reads. Recorded so nobody has to
+rediscover them:
+
+- **Common Kestrel** in *Beyond Violet* — the vole-urine-reflects-UV story (Viitala 1995)
+  has been challenged and may not hold. The reindeer in the same badge is solid.
+- **Anglerfish** in *Lights On* — its light is made by **symbiotic bacteria**, which sits
+  awkwardly under a concept line reading *"light the animal makes itself"*.
+- **Goliath Grouper** in *The Switch* — protogyny in this species is equivocal in the
+  literature, unlike the wrasses and parrotfish beside it.
+- **Okapi** in *End of the Line* — Giraffidae has two living members, so it is the last of
+  its genus rather than its branch.
+- **Orca** in *Who's That* — one 2001 study, never replicated. Weaker than the others.
+- **The Old Ones** counts **Black Coral**, **Deep-sea Bamboo Coral** and **Giant Barrel
+  Sponge**, which are *colonies*, against a concept line reading *"how long one
+  **individual** lives"*.
+- **Grounded** says *"flightlessness where nothing hunts on the ground"*, which does not
+  describe the ostrich, emu or cassowary — ratite flightlessness has a different cause.
+- **The Smallest** — the volcano rabbit loses "smallest rabbit" to the pygmy rabbit, and
+  the dik-dik loses "smallest antelope" to the royal antelope. Neither is in the roster.
+
+---
+
 ## What this comes to
 
 | | |
 |---|---|
-| Badge species currently to create | **81** |
-| Already exist under another name | **8** |
-| Replaceable by an existing species | **~62** |
-| Genuinely worth creating | **6** |
-| Freed by landing the stranded batches | **5** |
+| Badge species to create, before | **81** |
+| Badge species to create, after | **10** |
+| Already existed under another name | **8** |
+| Members removed as factually wrong | **10** |
+| Badges reaching the roster, before → after | **227 → 319** |
+| Freed if the stranded batches land | **5** |
+
+The ten still to create: **wood frog** *(pending the Sub-Zero ruling)*, **termite**,
+**oilbird**, **bumblebee bat**, **solenodon**, **a water shrew**, **elephant shrew**,
+**spiny mouse**, **common seahorse**, **green tree python**.
 
 If most of this is accepted, the badges stop competing with the 44 remaining slots
 almost entirely — and the roster gets denser rather than wider, which is the point of

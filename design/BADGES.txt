@@ -20,25 +20,25 @@ Reproduction :: One Shot :: M ::  :: Semelparity &mdash; breed once, then die ::
 Reproduction :: The Colony :: E ::  :: Eusociality &mdash; and the naked mole-rat is the only mammal in the room :: Naked Mole-Rat|Western Honeybee|Leafcutter Ant|Honeypot Ant|Buff-tailed Bumblebee|Termite*
 Reproduction :: Til Death :: E ::  :: Lifelong monogamy :: Wandering Albatross|Rosy-faced Lovebird|Mute Swan|Grey Wolf|Siamang|Bald Eagle|Red-crowned Crane|Atlantic Puffin|Indri
 
-Senses :: The Sixth Sense :: M ::  :: Electroreception &mdash; platypus and echidna are the only mammals with it :: Platypus|Short-beaked Echidna|Electric Ray|Scalloped Hammerhead|Great White Shark|Coelacanth|Olm|Sea Lamprey
+Senses :: The Sixth Sense :: M ::  :: Electroreception &mdash; barely any mammal has it, and the platypus carries 40,000 receptors in its bill :: Platypus|Short-beaked Echidna|Electric Ray|Scalloped Hammerhead|Great White Shark|Coelacanth|Olm|Sea Lamprey
 Senses :: Seeing With Sound :: E ::  :: Echolocation, evolved separately in bats and in toothed whales :: Little Brown Bat|Greater Horseshoe Bat|Bottlenose Dolphin|Sperm Whale|Beluga|Harbor Porpoise|Egyptian Fruit Bat|Greater Bulldog Bat|Ganges River Dolphin|Oilbird*
-Senses :: Heat Vision :: M ::  :: Infrared pit organs &mdash; seeing warmth as an image :: Sidewinder|Boa Constrictor|Bushmaster|Common Vampire Bat|Ball Python
+Senses :: Heat Vision :: M ::  :: Infrared pit organs &mdash; seeing warmth as an image :: Sidewinder|Bushmaster|Ball Python|Green Tree Python*
 Senses :: Beyond Violet :: M ::  :: Ultraviolet vision &mdash; reindeer use it to see lichen on snow :: Common Kestrel|Reindeer|Mantis Shrimp|Western Honeybee|Great Tit|Budgerigar|Common Starling
 Senses :: True North :: M ::  :: Magnetoreception :: Green Sea Turtle|Arctic Tern|European Robin|Monarch Butterfly|Sockeye Salmon|Rock Dove
 Senses :: Through the Glare :: E ::  :: Polarised-light vision :: Common Cuttlefish|Mantis Shrimp|Giant Pacific Octopus|Mimic Octopus|Western Honeybee|Monarch Butterfly
 Senses :: Lights On :: H :: 4,8,12 :: Bioluminescence &mdash; light the animal makes itself :: Anglerfish|Black Dragonfish|Atolla|Common Eastern Firefly|Vampire Squid|Lanternfish|Viperfish|Cookiecutter Shark|Hatchetfish|Stoplight Loosejaw|Bloody-belly Comb Jelly|Helmet Jellyfish
 
 The body :: Grow It Back :: M ::  :: Regeneration :: Axolotl|Common Brittle Star|Tiger Tail Sea Cucumber|Sunflower Sea Star|Leopard Gecko|Great Crested Newt|Star Ascidian|Sea Lamprey|Ochre Sea Star
-The body :: Rare Poison :: M ::  :: Venomous mammals &mdash; there are barely any :: Platypus|Slow Loris|Common Vampire Bat|Solenodon*|Eurasian Water Shrew*
+The body :: Rare Poison :: M ::  :: Venomous mammals &mdash; there are barely any :: Platypus|Slow Loris|Solenodon*|Eurasian Water Shrew*
 The body :: See-Through :: H ::  :: Transparency :: Fleischmann's Glass Frog|Glasswing Butterfly|Cockatoo Squid|Barreleye|Venus's Girdle|Moon Jelly|Deepstaria
 The body :: Sub-Zero :: H ::  :: Antifreeze proteins &mdash; the wood frog freezes solid, stops its heart, and thaws :: Antarctic Icefish|Arctic Cod|Antarctic Toothfish|Arctic Char|Wood Frog*
 The body :: Second Bite :: E ::  :: Pharyngeal jaws &mdash; a second set of teeth down in the throat :: Giant Moray|Stoplight Parrotfish|Bluestreak Cleaner Wrasse|Discus
 The body :: Built Wrong on Purpose :: H ::  :: Extreme selective breeding, and what it costs the animal :: French Bulldog|Manx|Munchkin|Bull Terrier|Pug|Persian|Scottish Fold|Bulldog
-The body :: No Bones About It :: H ::  :: Invertebrate giants :: Giant Squid|Colossal Squid|Japanese Spider Crab|Coconut Crab|Lion's Mane Jelly|Giant Siphonophore|Giant Isopod|Xenophyophore|Giant Gippsland Earthworm|Goliath Beetle|Chan's Megastick|Antarctic Sea Spider
+The body :: No Bones About It :: H ::  :: Invertebrate giants :: Giant Squid|Colossal Squid|Japanese Spider Crab|Coconut Crab|Lion's Mane Jelly|Giant Siphonophore|Giant Isopod|Giant Gippsland Earthworm|Goliath Beetle|Chan's Megastick|Antarctic Sea Spider
 The body :: Armour :: H ::  :: Convergent armour plating :: Nine-banded Armadillo|Sunda Pangolin|Common Wombat|Glyptodon|Yellow Boxfish|Ankylosaurus|Giant Armadillo|Scaly-foot Snail|European Pill Millipede
 
 Evolution :: Same Answer Twice :: H :: 4,8,11 :: Convergent evolution &mdash; the same solution found twice, independently :: Sugar Glider|Flying Squirrel|Thylacine|Grey Wolf|Smilodon|Gorgonops|Shonisaurus|Bottlenose Dolphin|Giant Anteater|Sunda Pangolin|Aardvark
-Evolution :: The Island Rule :: M ::  :: Insular dwarfism <em>and</em> gigantism &mdash; islands push both ways :: Komodo Dragon|Coconut Crab|Pygmy Hippo|Pinta Island Tortoise|Bali Tiger|Haast's Eagle|Elephant Bird
+Evolution :: The Island Rule :: M ::  :: Insular dwarfism <em>and</em> gigantism &mdash; islands push both ways :: Komodo Dragon|Coconut Crab|Pinta Island Tortoise|Bali Tiger|Haast's Eagle|Elephant Bird
 Evolution :: Grounded :: H ::  :: Flightlessness where nothing hunts on the ground &mdash; and the hard half is that most of these are gone :: Kākāpō|Kiwi|Cassowary|Dodo|Giant Moa|Emu|Ostrich|Elephant Bird|Guam Rail|Great Auk
 Evolution :: Unchanged :: H ::  :: Ancient lineages &mdash; how long the <em>shape</em> has lasted :: Coelacanth|Chambered Nautilus|Tuatara|Horseshoe Crab|Frilled Shark|Velvet Worm|Pacific Hagfish|Stalked Sea Lily|Bluntnose Sixgill Shark
 Evolution :: End of the Line :: M ::  :: The last surviving member of an entire branch :: Aardvark|Tuatara|Platypus|Aye-aye|Okapi|Maned Wolf|Numbat|Hoatzin
@@ -46,11 +46,11 @@ Evolution :: Made By Us :: H ::  :: Domestication, and what it does to a body ::
 Evolution :: Back From the Dead :: H ::  :: Lazarus taxa &mdash; written off, then found alive :: Coelacanth|Silver-backed Chevrotain|Woolly Flying Squirrel|Chacoan Peccary
 Evolution :: Not What It Looks Like :: E ::  :: Misleading names &mdash; a red panda is neither :: Red Panda|Raccoon Dog|Aardwolf|Maned Wolf|Mountain Goat|Prairie Dog|Common Eastern Firefly|Horseshoe Crab|Mantis Shrimp|Guinea Pig|Binturong|Sea Pig
 
-Behaviour :: The Toolkit :: M ::  :: Tool use :: Bearded Capuchin|Sea Otter|Common Raven|Giant Pacific Octopus|Bottlenose Dolphin|Chimpanzee|Kea|Satin Bowerbird|Orangutan|Asian Elephant
+Behaviour :: The Toolkit :: M ::  :: Tool use :: Bearded Capuchin|Sea Otter|Common Raven|Bottlenose Dolphin|Chimpanzee|Kea|Satin Bowerbird|Orangutan|Asian Elephant
 Behaviour :: Passed Down :: M ::  :: Culture &mdash; behaviour taught rather than inherited :: Japanese Macaque|Orca|Chimpanzee|Bottlenose Dolphin|Sperm Whale|Humpback Whale|Meerkat
-Behaviour :: Strange Allies :: M ::  :: Cooperation between unrelated species :: Banded Sea Krait|Honey Badger|Bluestreak Cleaner Wrasse|Percula Clownfish|Venus Flower Basket|Banded Mongoose
+Behaviour :: Strange Allies :: M ::  :: Cooperation between unrelated species :: Banded Sea Krait|Bluestreak Cleaner Wrasse|Percula Clownfish|Venus Flower Basket|Banded Mongoose
 Behaviour :: The Impostor :: M ::  :: Mimicry :: Mimic Octopus|Orchid Mantis|Ornate Ghost Pipefish|Marmalade Hoverfly|Giant Leaf Insect|Superb Lyrebird|Great Potoo|Tawny Frogmouth
-Behaviour :: Who's That :: M ::  :: Mirror self-recognition :: Giant Oceanic Manta|Bluestreak Cleaner Wrasse|Asian Elephant|African Elephant|Bottlenose Dolphin|Orca|Chimpanzee|Bonobo|Orangutan|Horse
+Behaviour :: Who's That :: M ::  :: Mirror self-recognition :: Giant Oceanic Manta|Bluestreak Cleaner Wrasse|Asian Elephant|Bottlenose Dolphin|Orca|Chimpanzee|Bonobo|Orangutan|Horse
 Behaviour :: The Village :: E ::  :: Cooperative breeding &mdash; raising young that are not yours :: Meerkat|Banded Mongoose|African Wild Dog|Naked Mole-Rat|Pygmy Marmoset|Golden Tamarin|Dhole
 Behaviour :: The Long Way :: M ::  :: Migration extremes :: Arctic Tern|Globe Skimmer|Bar-tailed Godwit|Humpback Whale|Monarch Butterfly|Leatherback Turtle|Reindeer|Wildebeest
 Behaviour :: The Long Sleep :: E ::  :: Hibernation and torpor :: Alpine Marmot|Black Bear|Sword-billed Hummingbird|Edible Dormouse|Groundhog|European Hedgehog|Tawny Frogmouth|Little Brown Bat|Eastern Chipmunk
@@ -59,7 +59,7 @@ Behaviour :: Bad Reputation :: H :: 8,16,23 :: Animals feared for their name, th
 Conservation :: Only In Captivity :: H ::  :: Extinct in the wild &mdash; nowhere left to go home to :: Spix's Macaw|Guam Kingfisher|Socorro Dove|ʻAlalā|Kihansi Spray Toad|Wyoming Toad|Barbary Lion|Père David's Deer|Northern White Rhino|South China Tiger
 Conservation :: Back From the Brink :: H ::  :: Recoveries that actually worked :: California Condor|Przewalski's Horse|Whooping Crane|Mauritius Kestrel|Arabian Oryx|American Bison|Golden Tamarin|Black-footed Ferret|Iberian Lynx
 Conservation :: The Linchpin :: M ::  :: Keystone species &mdash; pull one out and the system falls :: Eurasian Beaver|Sea Otter|Grey Wolf|Stoplight Parrotfish|African Elephant|Prairie Dog|American Bison|Ochre Sea Star|Purple Sea Urchin|Sunflower Sea Star
-Conservation :: The Trade :: M ::  :: The most trafficked animals on earth :: Sunda Pangolin|Tiger|Black Rhinoceros|Saiga|African Grey|Slow Loris|Ball Python|Hyacinth Macaw|Spix's Macaw|Vaquita
+Conservation :: The Trade :: M ::  :: The most trafficked animals on earth :: Sunda Pangolin|Tiger|Black Rhinoceros|Saiga|African Grey|Slow Loris|Ball Python|Hyacinth Macaw|Spix's Macaw
 
 Extremes :: The Largest :: M :: 4,10,16 :: Biggest of its kind, right across the tree of life :: Blue Whale|African Elephant|Whale Shark|Ostrich|Japanese Spider Crab|Giant Siphonophore|Saltwater Crocodile|Colossal Squid|Capybara|Goliath Frog|Goliath Beetle|Ocean Sunfish|Oarfish|Wandering Albatross|Leatherback Turtle|Chinese Giant Salamander
 Extremes :: The Smallest :: M ::  :: Miniature record-holders :: Pygmy Marmoset|Pygmy Seahorse|Least Weasel|Rusty-spotted Cat|Pudú|Volcano Rabbit|Kodkod|Black-footed Cat|Dik-dik|Honduran White Bat|Bumblebee Bat*

@@ -1,7 +1,10 @@
 # HANDOFF — read this first
 
-You are on **`wildlands-next`**, the new game. `main` is the finished *Safari Saga* and is
+You are on **`Terrane_try1`**, the new game. `main` is the finished *Safari Saga* and is
 **not** what is being worked on. Check the branch before anything else.
+
+> Renamed from `wildlands-next` on 2026-08-28. `origin/wildlands-next` still exists and is
+> not being updated — if a session is working there, it is on the old name.
 
 This is **design work, not game code.** Nothing here compiles. No game code has been
 written for the new game yet.
@@ -135,7 +138,7 @@ THE 700     biomes 606 + The Kept 50 = 656        44 still to create
 THE 300     Vigil 50 · On the Brink 50 · The Telling 100
             The Record 50 · The Breeding Centre 50
 BADGES      52        easy 10 · medium 26 · hard 16 · 4 tiered
-            333 species referenced, 324 exist, 9 to create
+            329 species referenced, 319 exist, 10 to create
 ```
 
 **Thinnest biomes:** open ocean, farmland, coast, reef.
