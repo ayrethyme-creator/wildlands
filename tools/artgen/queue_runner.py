@@ -224,7 +224,7 @@ def count_true(log_obj):
     return sum(1 for v in (log_obj or {}).values() if v is True)
 
 
-def stage_results(repo, batch_stem, log_rel, log_obj, stem):
+def stage_results(repo, batch_stem, log_rel, log_obj, stem, status_rel=None):
     """Add only the PNGs the log says are finished.
 
     gen_runner writes the log entry after postprocess has closed the file, so
@@ -240,6 +240,8 @@ def stage_results(repo, batch_stem, log_rel, log_obj, stem):
             git(repo, "add", "--", rel, check=False, quiet=True)
             added += 1
     git(repo, "add", "--", log_rel, check=False, quiet=True)
+    if status_rel:
+        git(repo, "add", "--", status_rel, check=False, quiet=True)
     git(repo, "add", "--", "%s/%s.progress.json" % (QUEUE_REL, stem), check=False, quiet=True)
     git(repo, "add", "--", "%s/%s.done.json" % (QUEUE_REL, stem), check=False, quiet=True)
     return added
@@ -288,6 +290,10 @@ def run_job(repo, branch, job, push_every):
     log_name = job.get("log") or batch.replace(".json", "_log.json")
     log_path = os.path.join(artgen, log_name)
     log_rel = "tools/artgen/" + log_name
+    # gen_runner writes this before it starts waiting on the card, so it names
+    # the species in flight during the long silences the log cannot cover.
+    status_rel = ("tools/artgen/" + log_name[: -len("_log.json")] + "_status.json"
+                  if log_name.endswith("_log.json") else None)
 
     env = dict(os.environ)
     # Straight into this clone, so the sprites are already staged where the
@@ -303,7 +309,7 @@ def run_job(repo, branch, job, push_every):
         log("preflight failed, leaving %s on the queue:\n%s" % (stem, check.stdout.strip()))
         note = {"job": stem, "at": now(), "preflight": check.stdout.strip()}
         write_side_file(repo, stem, ".progress.json", note)
-        stage_results(repo, batch, log_rel, {}, stem)
+        stage_results(repo, batch, log_rel, {}, stem, status_rel)
         commit_push(repo, branch, "artgen: %s cannot run here yet" % stem)
         return
 
@@ -313,25 +319,33 @@ def run_job(repo, branch, job, push_every):
                     {"job": stem, "batch": batch, "started": now(),
                      "species": total, "done": count_true(read_json(log_path)),
                      "state": "running"})
-    stage_results(repo, batch, log_rel, read_json(log_path), stem)
+    stage_results(repo, batch, log_rel, read_json(log_path), stem, status_rel)
     commit_push(repo, branch, "artgen: start %s" % stem)
 
     proc = subprocess.Popen([sys.executable, "-u", "gen_runner.py", batch_path, log_path],
                             cwd=artgen, env=env)
     pushed_at = count_true(read_json(log_path))
+    last_push = time.time()
+    status_path = os.path.join(artgen, os.path.basename(status_rel)) if status_rel else None
     try:
         while proc.poll() is None:
             time.sleep(15)
             beat(repo)
             done = count_true(read_json(log_path))
-            if done - pushed_at >= push_every:
+            # Push on new sprites, and also on a timer. One species can wait
+            # half an hour for the steward, and the log gains nothing through
+            # all of it - so a count-only trigger goes silent during exactly
+            # the stretch somebody is watching to see whether the run is alive.
+            if done - pushed_at >= push_every or time.time() - last_push >= 300:
                 write_side_file(repo, stem, ".progress.json",
                                 {"job": stem, "batch": batch, "started": now(),
-                                 "species": total, "done": done, "state": "running"})
-                n = stage_results(repo, batch, log_rel, read_json(log_path), stem)
+                                 "species": total, "done": done, "state": "running",
+                                 "current": read_json(status_path) if status_path else None})
+                n = stage_results(repo, batch, log_rel, read_json(log_path), stem, status_rel)
                 if commit_push(repo, branch, "artgen: %s, %d/%d sprites" % (stem, done, total)):
                     log("  pushed %d/%d (%d files staged)" % (done, total, n))
                 pushed_at = done
+                last_push = time.time()
     except KeyboardInterrupt:
         proc.terminate()
         raise
@@ -349,7 +363,7 @@ def run_job(repo, branch, job, push_every):
     if os.path.exists(prog):
         os.remove(prog)
         git(repo, "add", "--", "%s/%s.progress.json" % (QUEUE_REL, stem), check=False, quiet=True)
-    stage_results(repo, batch, log_rel, final, stem)
+    stage_results(repo, batch, log_rel, final, stem, status_rel)
     commit_push(repo, branch, "artgen: %s finished, %d of %d drawn" % (stem, ok, total))
     log("finished %s: %d ok, %d failed" % (stem, ok, len(failed)))
 

@@ -21,8 +21,20 @@ PROP_KEYWORDS = (
     "ledge", "coil", "coiled", "wrapped", "clinging", "cling", "gripping",
     "grips", "grip ", "hanging from", "roost",
 )
+# Inflect only the keywords that still name a thing the animal is on when
+# inflected. "perched on a rocky outcrop", "roosting in a hollow" and "nesting
+# on a ledge" all want that thing in frame, and a bare \bperch\b misses every
+# one of them - 28 species across the roster.
+#
+# The rest must stay exact. "branching antlers" on six deer, "a long coiling
+# body" on seven serpents and "a great burrowing rodent" describe the animal
+# itself, not a prop; and ratatoskr's description ends "no tree, no trunk, no
+# branches", where matching "branches" hands it the one composition that
+# permits the thing it is asking not to have.
+INFLECTED = {"perch", "roost", "nest"}
 PROP_PATTERNS = tuple(
-    re.compile(r"\b" + re.escape(keyword.strip()) + r"\b")
+    re.compile(r"\b" + re.escape(keyword.strip())
+               + (r"(?:s|es|ed|ing)?\b" if keyword.strip() in INFLECTED else r"\b"))
     for keyword in PROP_KEYWORDS
 )
 
@@ -73,27 +85,58 @@ def gen_one(dexKey, desc, attempt=0):
         return "POSTPROCESS_FAIL:" + str(e)[:200]
     return True
 
+# The log only gains an entry when a species finishes, and a species can wait
+# half an hour for the steward to admit it. Watching the log therefore shows
+# nothing at all through the exact stretch you most want to know the run is
+# alive. This writes what it is doing right now, before it starts waiting.
+def _status(path, **fields):
+    if not path:
+        return
+    try:
+        fields["at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(fields, f, indent=1)
+    except Exception:                        # noqa: BLE001 - never kill a run over this
+        pass
+
+
 def run_batch(batch_path, log_path):
+    status_path = (log_path[: -len("_log.json")] + "_status.json"
+                   if log_path.endswith("_log.json") else log_path + ".status")
     batch = json.load(open(batch_path, encoding="utf-8"))
     log = {}
     if os.path.exists(log_path):
         log = json.load(open(log_path, encoding="utf-8"))
-    for dexKey, desc in batch.items():
+    keys = list(batch)
+    for i, dexKey in enumerate(keys, 1):
+        desc = batch[dexKey]
         if log.get(dexKey) is True:
             continue
         t0 = time.time()
+        _status(status_path, species=dexKey, index=i, of=len(keys),
+                attempt=1, state="waiting for the card",
+                done=sum(1 for v in log.values() if v is True))
+        print(f"{dexKey}: submitted ({i}/{len(keys)})", flush=True)
         result = gen_one(dexKey, desc, attempt=0)
         tries = 1
-        while result is not True and tries <= 2:
-            print(f"  {dexKey}: attempt{tries} failed ({str(result)[:100]}), retrying...")
+        # A TIMEOUT is not a bad request - it means the steward has not admitted
+        # the job yet. Resubmitting only puts a second copy behind the first, so
+        # three attempts turn one busy card into ninety minutes on one species.
+        while result is not True and tries <= 2 and not str(result).startswith("TIMEOUT"):
+            print(f"  {dexKey}: attempt{tries} failed ({str(result)[:100]}), retrying...", flush=True)
+            _status(status_path, species=dexKey, index=i, of=len(keys),
+                    attempt=tries + 1, state="retrying after " + str(result)[:60],
+                    done=sum(1 for v in log.values() if v is True))
             result = gen_one(dexKey, desc, attempt=tries)
             tries += 1
         elapsed = time.time() - t0
         log[dexKey] = result if result is True else str(result)
         status = "OK" if result is True else "FAIL:" + str(result)[:100]
-        print(f"{dexKey}: {status} ({elapsed:.1f}s)")
+        print(f"{dexKey}: {status} ({elapsed:.1f}s)", flush=True)
         with open(log_path, "w", encoding="utf-8") as f:
             json.dump(log, f, indent=1)
+    _status(status_path, state="finished", of=len(keys),
+            done=sum(1 for v in log.values() if v is True))
     n_ok = sum(1 for v in log.values() if v is True)
     n_fail = len(log) - n_ok
     print(f"\nBATCH DONE: {n_ok} ok, {n_fail} failed/skipped out of {len(log)}")
