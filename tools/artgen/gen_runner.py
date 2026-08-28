@@ -1,4 +1,4 @@
-import sys, os, json, random, time
+import sys, os, json, random, time, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_steward as g
 
@@ -21,17 +21,21 @@ PROP_KEYWORDS = (
     "ledge", "coil", "coiled", "wrapped", "clinging", "cling", "gripping",
     "grips", "grip ", "hanging from", "roost",
 )
+PROP_PATTERNS = tuple(
+    re.compile(r"\b" + re.escape(keyword.strip()) + r"\b")
+    for keyword in PROP_KEYWORDS
+)
 
 def pick_composition(desc):
     d = desc.lower()
-    if any(kw in d for kw in PROP_KEYWORDS):
+    if any(pattern.search(d) for pattern in PROP_PATTERNS):
         return PROP_COMPOSITION
     return COMPOSITION
 
 SCRATCH = os.path.dirname(os.path.abspath(__file__))
 RAWDIR = os.path.join(SCRATCH, "raw")
 REPO_ROOT = os.path.dirname(os.path.dirname(SCRATCH))
-ARTDIR = os.path.join(REPO_ROOT, "art")
+ARTDIR = os.environ.get("WILDLANDS_ART", os.path.join(REPO_ROOT, "art"))
 os.makedirs(RAWDIR, exist_ok=True)
 os.makedirs(ARTDIR, exist_ok=True)
 

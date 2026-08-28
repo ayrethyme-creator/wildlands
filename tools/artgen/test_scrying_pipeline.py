@@ -12,10 +12,21 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 import gen_steward
+import gen_runner
 import scrying_glass_client
 
 
 class ScryingPipelineTests(unittest.TestCase):
+    def test_prop_detection_uses_words_not_species_name_substrings(self):
+        self.assertEqual(
+            gen_runner.pick_composition("lean loggerhead turtle swimming"),
+            gen_runner.COMPOSITION,
+        )
+        self.assertEqual(
+            gen_runner.pick_composition("small fox perched on a fallen log"),
+            gen_runner.PROP_COMPOSITION,
+        )
+
     def test_cloud_config_selects_public_gateway_and_token(self):
         with tempfile.TemporaryDirectory() as directory:
             config = Path(directory) / "wildlands_scrying.json"
