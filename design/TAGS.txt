@@ -92,8 +92,15 @@
 !      and Moorea from those populations. "Partula Snail" is EX, EW and CR
 !      simultaneously depending which species is meant - so NO single tag is right
 !      while the name stays generic.
-!   3. IT SITS IN THE VIGIL, which is the memorial for what is gone. If the entry
-!      means a species that survives in captivity, it is in the wrong group.
+!   3. CORRECTED 2026-08-29: an earlier version of this note said it sits in The
+!      Vigil and is therefore in the wrong group. THAT WAS WRONG. GROUND_TRUTH.txt
+!      has it in vigil, but PENDING_MOVES.txt already moves it to "brink", and On
+!      the Brink admits Critically Endangered OR Extinct in the Wild - so EW is
+!      exactly right for it there and there is no group conflict at all. The claim
+!      was made by reading the ground truth without applying the pipeline on top,
+!      which is the one thing every tool in here exists to stop a person doing.
+!      (The GAME's entry text still calls it "the clearest entry in the Vigil", so
+!      that prose is now stale and needs a pass when the species is named.)
 !
 ! It is not tagged EW here, because tagging a genus would be asserting something
 ! this file exists to prevent. THE FIX IS TO NAME THE SPECIES, and the tag follows
