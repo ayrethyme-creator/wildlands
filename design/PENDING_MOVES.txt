@@ -791,3 +791,39 @@ RENAME=Anglerfish::Humpback Anglerfish|Atolla::Alarm Jellyfish|Barreleye::Macrop
 ! ---   Chambered Nautilus - flagged in error. It is the standard common name of
 ! ---     Nautilus pompilius, one species. It only looked generic beside the family
 ! ---     Nautilidae. Record the binomial in the entry and leave the name alone.
+
+! --- Ayr, 2026-08-29. NAMING THE SNAIL. Found by Uncle Albert check 11 when the
+! --- game's own status field became readable: the game called "Partula Snail" EW
+! --- and design/TAGS.txt would not tag a genus.
+! ---
+! --- Partula Snail -> Partula nodosa. The entry that already exists is about this
+! ---   species' programme and nobody had noticed: London Zoo and partners kept it
+! ---   alive in cupboards for forty years, and over 20,000 have gone back to Tahiti
+! ---   and Moorea since 2015, into valleys fenced against the rosy wolfsnail, each
+! ---   snail marked with a dot of UV paint so surveyors can find them at night.
+! ---   It is formally EXTINCT IN THE WILD, so it belongs exactly where it already
+! ---   sits, in On the Brink, which admits CR or EW.
+! ---
+! --- The binomial IS the name, the same call already made for Deepstaria,
+! --- Bathydevius and Elrathia. Ayr's two-name rule then does the reading work: the
+! --- card leads with the plain name and puts Partula nodosa beside it.
+! ---
+! --- NOT CHOSEN: Partula faba, "Captain Cook's snail", collected on the 1769
+! ---   voyage and declared Extinct in 2016 when the last one died at Edinburgh Zoo
+! ---   - extinct in the wild and then extinct in captivity, the safety net failing.
+! ---   A harder story, and it is EX, so it would belong in The Vigil and would take
+! ---   Vigil to 51 and On the Brink to 49. The roster is closed, so it is not free.
+RENAME=Partula Snail::Partula nodosa
+
+! ============================================================================
+! ART-KEY BUG, found 2026-08-29 by the art audit. Not a roster change.
+! ============================================================================
+! SOCKEYE SALMON points at art key "salmonadult". THERE IS NO salmonadult.png.
+! The sprite that exists is art/salmon.png, and parr.png and smolt.png are its two
+! life stages. So the art is finished and the entry points at a filename that is
+! not there - which renders as a missing image rather than as an error.
+!
+! It was the ONLY species in the whole roster sitting in the "described but not
+! drawn" bucket, and it turned out not to be. Fix the key when the new game data
+! is built: salmonadult -> salmon.
+! ============================================================================

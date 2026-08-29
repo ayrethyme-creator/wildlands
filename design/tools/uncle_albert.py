@@ -441,6 +441,14 @@ else:
 # and the game data has not caught up. So this does not fail on a disagreement. It
 # fails on an UNDOCUMENTED one: every species where the two differ must be named
 # somewhere in TAGS.txt, which is where the reasoning lives.
+renames_for_status = {}
+for _line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
+    _line = _line.rstrip('\n')
+    if _line.startswith('RENAME='):
+        for _pair in _line.split('=', 1)[1].split('|'):
+            _a, _b = _pair.split('::')
+            renames_for_status[_a] = _b
+
 fg_status = {}
 if os.path.exists('design/FIELD_GUIDE.txt'):
     for line in io.open('design/FIELD_GUIDE.txt', encoding='utf-8'):
@@ -449,7 +457,12 @@ if os.path.exists('design/FIELD_GUIDE.txt'):
             continue
         parts = [p.strip() for p in line.split('::')]
         if len(parts) >= 3:
-            fg_status[parts[0]] = parts[1]
+            # FIELD_GUIDE.txt holds the name the GAME uses. The design has renamed
+            # a couple of hundred of those, so the rename map has to be applied here
+            # or every rename looks like a status disagreement. Without this, naming
+            # the Partula snail immediately produced two phantom rows - the old name
+            # "unmatched by the design" and the new one "unmatched by the game".
+            fg_status[renames_for_status.get(parts[0], parts[0])] = parts[1]
 
 if fg_status:
     tags_text = io.open('design/TAGS.txt', encoding='utf-8').read()

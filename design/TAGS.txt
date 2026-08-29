@@ -75,8 +75,14 @@
 !                         "functionally extinct in the wild", which is the honest one.
 !
 ! ----------------------------------------------------------------------------
-! UNRESOLVED - Partula Snail. FLAGGED FOR AYR, 2026-08-29.
+! RESOLVED - Partula nodosa. Ayr, 2026-08-29.
 ! ----------------------------------------------------------------------------
+! THE SPECIES IS NAMED and the tag follows: Partula nodosa is formally Extinct
+! in the Wild, sits in On the Brink where EW belongs, and joins Only In
+! Captivity. No roster count moves. The record of the problem is kept below,
+! because it is the only case so far where the GAME data was right about a
+! status and the DESIGN had no way to say so.
+!
 ! Found by Uncle Albert check 11 the moment the game's own status field became
 ! readable: THE GAME DATA CALLS IT EW AND THIS FILE DOES NOT TAG IT. Three separate
 ! problems are stacked in one entry, which is why it is written down rather than
@@ -102,11 +108,9 @@
 !      (The GAME's entry text still calls it "the clearest entry in the Vigil", so
 !      that prose is now stale and needs a pass when the species is named.)
 !
-! It is not tagged EW here, because tagging a genus would be asserting something
-! this file exists to prevent. THE FIX IS TO NAME THE SPECIES, and the tag follows
-! from whichever one is chosen. Ayr's call.
+! Naming it resolved all of that: a genus cannot be tagged, a species can.
 !
 ! IUCN listings move. When one does, change it here and Albert will tell you which
 ! badge stopped being true.
 ! ============================================================================
-EW=Spix's Macaw|Guam Kingfisher|Socorro Dove|ʻAlalā|Kihansi Spray Toad|Wyoming Toad|Père David's Deer|Barbary Lion|Northern White Rhino|South China Tiger
+EW=Spix's Macaw|Guam Kingfisher|Socorro Dove|ʻAlalā|Kihansi Spray Toad|Wyoming Toad|Père David's Deer|Barbary Lion|Northern White Rhino|South China Tiger|Partula nodosa
