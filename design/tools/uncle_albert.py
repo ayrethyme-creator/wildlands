@@ -21,6 +21,8 @@ Verifies:
      "Only In Captivity" badge exactly
  10. every badge member card points at a real membership, none is written
      twice, and how far that writing has got
+ 11. every disagreement between the EW tag and the status the GAME holds
+     is explained in TAGS.txt rather than being an accident
 
 Check 8 was added 2026-08-28 and fired immediately. Three badges and one quest
 cited "Orangutan", which is not a species in this data - it sits in the lifestage
@@ -427,6 +429,55 @@ else:
         side = 'in the badge, not tagged EW' if x in oic else 'tagged EW, not in the badge'
         print('   %-26s %s' % (x, side))
         FAIL.append('Only In Captivity and the EW tag disagree: %s (%s)' % (x, side))
+
+# 12. THE EW TAG vs THE GAME'S OWN STATUS FIELD
+# design/FIELD_GUIDE.txt carries the IUCN status the GAME holds for every species,
+# read out of the running game. design/TAGS.txt carries the status the DESIGN holds.
+# They are two independent sources for the same fact, and check 8 is the standing
+# lesson about what happens when two sources quietly disagree.
+#
+# The disagreements here are real and mostly deliberate - Przewalski's Horse, the
+# scimitar-horned oryx and the Guam rail were all EW and have been downlisted since,
+# and the game data has not caught up. So this does not fail on a disagreement. It
+# fails on an UNDOCUMENTED one: every species where the two differ must be named
+# somewhere in TAGS.txt, which is where the reasoning lives.
+fg_status = {}
+if os.path.exists('design/FIELD_GUIDE.txt'):
+    for line in io.open('design/FIELD_GUIDE.txt', encoding='utf-8'):
+        line = line.rstrip('\n')
+        if not line.strip() or line.lstrip().startswith('!'):
+            continue
+        parts = [p.strip() for p in line.split('::')]
+        if len(parts) >= 3:
+            fg_status[parts[0]] = parts[1]
+
+if fg_status:
+    tags_text = io.open('design/TAGS.txt', encoding='utf-8').read()
+    game_ew = {n for n, st in fg_status.items() if st == 'EW'}
+    design_ew = set(TAGS.get('EW', []))
+    undocumented = []
+    print()
+    print('=' * 52)
+    print("THE EW TAG vs THE GAME'S OWN STATUS")
+    print('=' * 52)
+    print('   %-30s %4d' % ('game data says EW', len(game_ew)))
+    print('   %-30s %4d' % ('design tag says EW', len(design_ew)))
+    diffs = sorted((game_ew | design_ew) - (game_ew & design_ew))
+    print('   %-30s %4d' % ('they disagree on', len(diffs)))
+    print()
+    for n in diffs:
+        side = ('game EW, design does not tag it' if n in game_ew
+                else 'design tags EW, game says %s' % fg_status.get(n, '?'))
+        ok = n in tags_text
+        print('   %-26s %-34s %s' % (n, side, 'explained' if ok else 'NOT EXPLAINED'))
+        if not ok:
+            undocumented.append(n)
+    print()
+    print('DISAGREEMENTS NOT EXPLAINED IN TAGS.txt: %d' % len(undocumented))
+    for n in undocumented:
+        FAIL.append('the game calls %s "%s" and design/TAGS.txt does not say why it '
+                    'differs - write the reason into TAGS.txt or change the tag'
+                    % (n, fg_status.get(n, '?')))
 
 # how much of the roster the badges actually reach
 have = len(allbadge) - len(tocreate)

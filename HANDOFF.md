@@ -42,6 +42,7 @@ record eighteen times, and each pass is listed in its own version note.
 | **`design/tools/the_librarian.py`** | **The fact check.** *"Run it by The Librarian."* It cannot tell whether a claim is true — it tracks **who checked what, against what source**, and fails when a checked sentence is edited underneath its check |
 | **`design/CLAIMS.txt`** | The claims register, and the **TRAP** list: the distinctions this project has already got wrong once |
 | **`design/BADGE_CARDS.txt`** | One card per badge membership. 430 to write, 3 written |
+| **`design/FIELD_GUIDE.txt`** | **All 999 field-guide entries with their IUCN status, read from the running game.** Do not hand-edit and do not regex-parse the `.jsx` to rebuild it — `design/tools/read_field_guide.js` |
 | **`GDD.md`** | **The design.** By system, current-only, everything marked decided / open / proposed. **Start here** |
 | **`NEW_DIRECTION.md`** | The design *record*, ~11,000 lines, append-only with dated headers. Every *why*, including the reversals |
 | **`design/tools/cousin_bob.py`** | **The document check.** *"Run it by Cousin Bob."* Verifies the docs still agree with the data |
@@ -242,9 +243,24 @@ of the design is safe to keep building. Do not confuse the two.
   runs **both ways**, and **pair badges name their partner** (*Same Answer Twice*, *The
   Switch*, *The Island Rule*). Albert reports coverage — **3 of 430**. Full reasoning and
   the worked examples are in GDD §12.
-- **The Librarian is new and mostly unused.** 20 claims sit untriaged in its queue, 9 of
-  them superlatives. **That is a work queue, not a fault**, and it is the honest picture:
-  almost nothing in this project has ever been formally fact-checked.
+- **The Librarian now reads the field guide, and the queue is the real one.** Exporting
+  all 999 entries took it from 27 claims to **980**, of which **974 are untriaged and 358
+  make a superlative or absolute claim**. **That is a work queue, not a fault** — it is
+  simply the first honest measurement of how much of this game has never been checked.
+  Run `librarian.bat` for the live figure.
+- **The entries are superlative-heavy on purpose, which is why this matters.** Ayr asked
+  from the start for *unique* facts rather than the usual ones, so the writing reaches for
+  "the only", "the largest", "the first". **The most distinctive content in the game is
+  therefore also its highest-risk content**, and a wrong superlative in a game about facts
+  is the most damaging error available.
+- **`EW` existed in the game data the whole time, and this file said it did not.** The
+  status lives on every entry as `.s`, and the game holds **13** EW species against the
+  design's **10**. The five disagreements are now listed by **Uncle Albert check 11**, which
+  fails unless each one is explained in `TAGS.txt`. Three are deliberate (Przewalski's
+  Horse, the scimitar-horned oryx and the Guam rail were EW and have been downlisted since;
+  the game data is stale). **One is unresolved and is Ayr's: `Partula Snail`** — a genus
+  name covering species that are simultaneously extinct, extinct-in-the-wild and
+  reintroduced, sitting in The Vigil. The fix is to name the species.
 - **Items in the world** — committed as a principle. **No item ideas until Ayr asks.**
 
 ### Parked — do not restart unprompted

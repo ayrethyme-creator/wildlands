@@ -74,6 +74,31 @@
 !                         population left in Xochimilco. The GDD's phrase is
 !                         "functionally extinct in the wild", which is the honest one.
 !
+! ----------------------------------------------------------------------------
+! UNRESOLVED - Partula Snail. FLAGGED FOR AYR, 2026-08-29.
+! ----------------------------------------------------------------------------
+! Found by Uncle Albert check 11 the moment the game's own status field became
+! readable: THE GAME DATA CALLS IT EW AND THIS FILE DOES NOT TAG IT. Three separate
+! problems are stacked in one entry, which is why it is written down rather than
+! decided quietly.
+!
+!   1. THE NAME IS A GENUS, NOT A SPECIES. Partula holds something over a hundred
+!      described species. It is the same fault the generics audit spent a week
+!      removing, and it slipped through because Albert's bare-name check looks for
+!      the single word "snail" and this reads as specific.
+!   2. THE GENUS SPANS THREE STATUSES AT ONCE. Introduced rosy wolfsnails wiped out
+!      Partula across Pacific islands. Some species are extinct outright, some
+!      survive only in zoo populations, and some have been reintroduced to Tahiti
+!      and Moorea from those populations. "Partula Snail" is EX, EW and CR
+!      simultaneously depending which species is meant - so NO single tag is right
+!      while the name stays generic.
+!   3. IT SITS IN THE VIGIL, which is the memorial for what is gone. If the entry
+!      means a species that survives in captivity, it is in the wrong group.
+!
+! It is not tagged EW here, because tagging a genus would be asserting something
+! this file exists to prevent. THE FIX IS TO NAME THE SPECIES, and the tag follows
+! from whichever one is chosen. Ayr's call.
+!
 ! IUCN listings move. When one does, change it here and Albert will tell you which
 ! badge stopped being true.
 ! ============================================================================

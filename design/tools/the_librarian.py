@@ -57,7 +57,7 @@ FAIL, WARN = [], []
 # Files whose prose makes claims about the world. Deliberately NOT the whole doc
 # set: HANDOFF, LINKS and the species lists are about the project, and Cousin Bob
 # already owns their numbers.
-SOURCES = ['GDD.md', 'design/BADGE_CARDS.txt']
+SOURCES = ['GDD.md', 'design/BADGE_CARDS.txt', 'design/FIELD_GUIDE.txt']
 
 REGISTER = 'design/CLAIMS.txt'
 
@@ -151,6 +151,29 @@ def sentences(path):
     # slip past the species filter. The card is one claim, so it is read whole and
     # the species comes from the key. This is the file the tool exists for: 430
     # cards, every one an assertion about biology.
+    # FIELD_GUIDE.txt is "Name :: status :: text", read out of the running game by
+    # read_field_guide.js. It is the largest body of claims in the project - 999
+    # entries averaging 303 characters - and it is the reason this tool exists.
+    #
+    # Each entry holds several DISTINCT claims, so it is split into sentences and
+    # each one is tracked separately: verifying "the aardvark's closest relatives
+    # are elephants and manatees" should not silently vouch for the sentence next
+    # to it about how fast it digs.
+    if path.endswith('FIELD_GUIDE.txt'):
+        for line in io.open(path, encoding='utf-8'):
+            line = line.rstrip('\n')
+            if not line.strip() or line.lstrip().startswith('!'):
+                continue
+            parts = [p.strip() for p in line.split('::')]
+            if len(parts) < 3:
+                continue
+            name, body = parts[0], '::'.join(parts[2:])
+            for sent in re.split(r'(?<=[.!?])\s+', body):
+                t = ' '.join(sent.split())
+                if 25 < len(t) < 400:
+                    yield ('%s — %s' % (name, t), name)
+        return
+
     if path.endswith('BADGE_CARDS.txt'):
         for line in io.open(path, encoding='utf-8'):
             line = line.rstrip('\n')
@@ -221,7 +244,12 @@ print('THE LIBRARIAN - the fact check')
 print('=' * 56)
 print('reading %s' % ', '.join(SOURCES))
 print()
+by_source = {}
+for fp, (path, t, sp) in found.items():
+    by_source[path] = by_source.get(path, 0) + 1
 print('CLAIM-SHAPED SENTENCES FOUND: %d' % len(found))
+for path in SOURCES:
+    print('   %-26s %4d' % (path.split('/')[-1], by_source.get(path, 0)))
 print('   %-22s %4d' % ('checked and verified', counts['VERIFIED']))
 print('   %-22s %4d' % ('dismissed as design', counts['DESIGN']))
 print('   %-22s %4d' % ('disputed / caveated', counts['DISPUTED']))
@@ -231,7 +259,18 @@ print('   %-22s %4d' % ('NOT YET TRIAGED', len(unchecked)))
 # from them - The Largest, The Smallest, The Fastest, The Deepest, End of the Line.
 # "The only X" is a claim that nothing else in the world beats it, which is the
 # hardest kind to be sure of and the easiest to repeat from a bad source.
-SUPER_RX = re.compile(SUPERLATIVE, re.I)
+# The first version of this marked 746 of 974 as priority, which is the same as
+# marking none: "most people can dig with a shovel" is not a claim about an animal.
+# What is actually risky is a superlative IN CLAIM POSITION - "the only", "the
+# largest", "no other", "the first to". Those assert that nothing else on earth
+# beats it, which is the hardest thing to be sure of and the easiest to repeat from
+# a bad source. Bare "most" and "every" are ordinary English and are not marked.
+SUPER_RX = re.compile(
+    r'\b(?:the\s+(?:only|first|last|largest|biggest|smallest|fastest|slowest|'
+    r'deepest|highest|longest|oldest|heaviest|strongest|rarest|worst|best)'
+    r'|only\s+(?:known|living|surviving|animal|species|one|mammal|bird|fish|place)'
+    r"|no\s+other|nothing\s+else|never\s+been|first\s+ever|world.?s\s+\w+est"
+    r'|one\s+of\s+(?:only|the\s+few)|unlike\s+any)\b', re.I)
 world = sorted(unchecked, key=lambda x: (not SUPER_RX.search(x[1][1]), x[1][2], x[1][1]))
 prio = [x for x in world if SUPER_RX.search(x[1][1])]
 print()

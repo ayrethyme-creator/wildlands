@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wildlands-static",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8009"],
+      "port": 8009
+    }
+  ]
+}

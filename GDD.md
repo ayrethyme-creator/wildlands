@@ -2726,7 +2726,7 @@ Ayr's call.
 |---|---|
 | **`uncle-albert.bat`** | **The data check.** Group targets, the 1000 total, duplicates, species marked new that already exist, quest animals, and every badge member being real with tiers that match |
 | **`cousin-bob.bat`** | **The document check.** File paths, the numbers in `HANDOFF.md` and this file, stale counts, documents cut off mid-sentence, artifact links, and sentences claiming a species is in a badge |
-| **`librarian.bat`** | **The fact check.** Every claim-shaped sentence that names a roster species, and whether anybody has ever checked it. **It cannot tell whether a claim is true** — it makes the checking visible and durable, and **a verified sentence that is later edited stops being verified on its own** |
+| **`librarian.bat`** | **The fact check.** Every claim-shaped sentence that names a roster species, across the GDD, the badge cards and **all 999 field-guide entries**, and whether anybody has ever checked it. **It cannot tell whether a claim is true** — it makes the checking visible and durable, and **a verified sentence that is later edited stops being verified on its own** |
 
 All three exit non-zero on failure and return identical output across runs.
 
@@ -2746,6 +2746,7 @@ the next edit is worse than none, because it looks like coverage.
 | `design/BADGES.txt` | Badge membership, the only source |
 | `design/BADGE_CARDS.txt` | One card per membership — why *this* species meets *this* concept |
 | `design/CLAIMS.txt` | The claims register: what has been fact-checked, by whom, against what |
+| `design/FIELD_GUIDE.txt` | All 999 entries and their IUCN status, read from the running game |
 | `design/TAGS.txt` | Conservation tags. `EW`, checked against On the Brink and the badge |
 | `NEW_DIRECTION.md` | The design record — every *why* |
 | `HANDOFF.md` | Orientation for a new session |
