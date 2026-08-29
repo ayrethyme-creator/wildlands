@@ -1950,6 +1950,81 @@ Applying it finds **the animals that are the last of an entire branch:**
 
 **That is where the *End of the Line* badge came from** — the writing rule found the set.
 
+## Two names on the card, and the number that makes them mean something — **DECIDED, Ayr's call** — **[v19]**
+
+> **Ayr, 2026-08-29:** *"When average people, including me, think of animals that are less
+> known — like the tapir or even the orangutan — people aren't really aware that there are
+> two or three species of orangutan and four species of tapir, and it kind of is too much
+> information and doesn't matter as much."*
+
+**The roster data does not change and the generics audit stands.** The entry *is* the
+Malayan Tapir. What changes is **which name leads on the card.**
+
+```
+TAPIR                    the name the reader already has        <- the hook
+  Malayan Tapir          the species it actually is             <- the precision
+  one of 4 tapirs        how crowded the name is                <- the context
+```
+
+**Three jobs, in the order a reader can actually take them.** Leading with *Malayan Tapir*
+spends the reader's attention on a distinction they did not know existed, before they have
+any reason to care about it. Leading with **Tapir** costs nothing and loses nothing,
+because the species is right there.
+
+**Badges keep the specific name.** *The Switch* means the Humphead Wrasse, not "wrasse",
+and a badge is a claim about biology (§12) — the precision is the whole point there. The
+card is where the reader is met; the badge is where the claim is made.
+
+### The count is the payload, and it is what makes *End of the Line* land
+
+**A badge cannot explain itself.** *"The aardvark is the only living species in its order"*
+is a sentence that lands on nobody who has not already learned that most animals are one of
+a crowd.
+
+**So the badge is not explained by the badge. It is explained by every card the player read
+before it.** One of 4 tapirs. One of 8 pangolins. One of about 200 chameleons. One of some
+360 hummingbirds. **Then** the aardvark says *the only one*, and it has somewhere to land.
+
+> **Ayr:** *"A big part of where education fails, in general and not just with animals, is
+> context. People need more than info — they need to know why it's important or cool or
+> interesting or worth learning. And children are more insightful than we generally treat
+> them."*
+
+**This is the same principle the signature ability already runs on** (§7): the fact has to
+arrive as something the reader can *do something with*, not as a number to be told. It is
+also why the field-guide rule above was asked for in the first place — this makes it
+visible instead of leaving it in a sentence.
+
+### The form is open; the floor is a number
+
+Ayr: *"a diagram, list, or even just a number."* **The number is the commitment**; a list
+of the four tapirs or a small branching diagram is an upgrade, not a requirement. Worth
+noting that the cheapest version is also the one that reads at a glance on every card,
+which is the version that actually teaches the pattern by repetition.
+
+### What it costs
+
+**One number per species — about 1000 values**, plus a plain name where it differs from the
+species name. **A large part already exists as prose:** the field-guide writing rule above
+has been followed for **406 entries**, each of which already states the count in a sentence.
+Lifting those into a field is transcription rather than research; the remainder is
+research, and it is the ordinary kind — a genus or family count is a lookup, not a judgement.
+
+**The display itself is a label, not a system** — the same cheapest tier as the
+scale-reference signature ability (§7).
+
+### Where the two names collapse into one — **an idea, not a decision**
+
+**Some animals have no plain name distinct from their species name.** Aardvark. Platypus.
+Okapi. Tuatara. Numbat. Hoatzin. Aye-aye.
+
+**Those are disproportionately the last-of-their-line animals** — and they are, almost
+exactly, the *End of the Line* membership. So the display rule may signal the badge on its
+own: **a card with only one name is telling you something before it says anything.** The
+rule degrades gracefully either way — show one name where there is only one — but if that
+collapse were made deliberate and legible, the badge would be foreshadowed by the layout
+rather than announced. **Ayr's call, and it costs nothing to decline.**
+
 ## The sources-and-changes layer — **[v2]**
 
 **The strongest protection this project has, and it is procedural rather than fictional.**
@@ -2694,7 +2769,7 @@ stays open**, which is why the rest of this document is not resting on air.
 | 3 | **Can the player fail to advance?** Retake with a time cost is the middle path | Assessments |
 | 4 | **Origin-language naming** for individual animals — needs proper sourcing | No |
 | 5 | ~~**The badge count** breaks the round-number rule~~ **SETTLED at 50**, 2026-08-28 | No |
-| 6 | **Fluorescence** — restore *Blacklight*, or drop it | No |
+| 6 | ~~**Fluorescence** — restore *Blacklight*, or drop it~~ **RULED, 2026-08-29: leave it.** Fluorescence goes unmentioned in the badges and the Deathstalker carries none. The *Lights On* correction stands — it is bioluminescence only | No |
 | 7 | ~~**The 44 remaining species**~~ **CLOSED**, 2026-08-29. All 42 outstanding slots transcribed into the pipeline from *The Last Forty-Four*; the roster stands at 1000 | No |
 | 8 | ~~**`Only In Captivity`** needs an `EW` tag~~ **CLOSED**, 2026-08-29. The tag is `design/TAGS.txt`; Uncle Albert checks the badge against it | No |
 | 9 | ~~**Sprite terrain**~~ — **answered in v7.** Two assets: the current 1001 become codex plates, game sprites are a later pass without props. **Ayr's call to accept** | The HD-2D look |

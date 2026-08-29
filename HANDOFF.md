@@ -124,6 +124,21 @@ it answers a question readers always have: *is this a one-off, or one of a crowd
 > Panther Chameleon — one of about 23 *Furcifer* chameleons, and one of roughly 200
 > chameleons.
 
+**And from 2026-08-29 that count is on the card, not only in the prose — with two names
+above it.** GDD §10 has the full rule:
+
+```
+TAPIR                    the plain name leads
+  Malayan Tapir          the species beside it
+  one of 4 tapirs        the context
+```
+
+**The roster data does not change and the generics audit stands** — the entry *is* the
+Malayan Tapir, and **badges keep the specific name.** What changed is which name the reader
+meets first. **The count is the payload:** *End of the Line* only means anything to a player
+who has already read "one of 4 tapirs" on a dozen other cards. A badge cannot explain
+itself.
+
 **Interest governs which species get made, not headcount.** The per-biome floor was a
 working guide and is **explicitly not a target** — a biome gets what is worth having in
 it. Ayr decides.
@@ -193,13 +208,14 @@ of the design is safe to keep building. Do not confuse the two.
   because Ball Python already sat in the badge. **Heat Vision was not put to Ayr** — it is
   the same shape of call, applied for consistency, and it is reversible. Albert warns on
   both and does not fail.
-- **Fluorescence has no badge, and that was not decided — it happened.** The Deathstalker
-  was in *Lights On*, which is wrong (a scorpion glows because a UV lamp is pointed at it;
-  that is fluorescence, not light the animal makes). It was **dropped when the badge sets
-  were expanded, without Ayr being told** — so it now sits in no badge at all, and
-  *Blacklight* was never restored. **Ayr's ruling is still owed:** restore *Blacklight*
-  with the puffin bill, chameleon bones and platypus fur, or let fluorescence go
-  unmentioned.
+- **Fluorescence — ruled 2026-08-29: leave it.** *Blacklight* is not restored and
+  fluorescence goes unmentioned in the badges. The Deathstalker carries no badge, and that
+  is intended rather than an oversight. **The accuracy half stands and is not reopenable:**
+  *Lights On* is bioluminescence only — light the animal makes — and a scorpion glows
+  because a UV lamp is pointed at it. **Do not put the Deathstalker back.** The six species
+  that would have carried the badge all exist (Deathstalker, Platypus, Panther Chameleon,
+  Atlantic Puffin, Flying Squirrel, Epaulette Shark), so restoring it later costs no new
+  art — it costs a badge slot out of the fifty, which is why it was declined.
 - **`Only In Captivity` is closed.** The `EW` tag now exists —
   **`design/TAGS.txt`**, added 2026-08-29 on Ayr's instruction. Ten species are tagged,
   seven formally listed Extinct in the Wild and three that are EW as a population rather
