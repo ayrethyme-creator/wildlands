@@ -2315,23 +2315,25 @@ flavour — **each one is a checkable claim about biology, and a wrong one is an
 educational core.** Uncle Albert can verify that a member exists; **no tool can verify that
 the reason given is true.** That is the cost, and it is review time rather than writing time.
 
-### **OPEN** — two small things this needs
+### Settled, 2026-08-29 — all three of these are yes
 
-- **Where the text lives.** `design/BADGES.txt` is the only source and has no room for a
-  per-membership paragraph. It needs a companion file keyed by *badge + species*, so
-  Albert can check that every membership has exactly one card and no card is orphaned.
-- **Whether the link runs both ways.** Ayr specified member card → species card. The
-  reverse — the species card listing its badges, each opening that member card — is what
-  lets a player who met a Malayan Tapir in the field ever discover the badge material at
-  all. Worth deciding, and cheap either way.
+**Where the text lives: `design/BADGE_CARDS.txt`**, keyed `Badge :: Species :: text`. One
+line per membership. **Uncle Albert check 11** verifies every card points at a real
+membership, that none is written twice, and reports coverage — 3 of 430 today. The file
+carries the writing brief at the top, because the card answers exactly one question:
+**why this species and not its cousin?** It is not a second field-guide entry.
 
-### An idea, not a decision: pair badges may need the partner named
+**The link runs both ways.** Member card → the animal's own card, as Ayr specified, *and*
+the animal's card lists its badges, each opening that member card. Without the return leg
+a player who meets a Malayan Tapir in the field can never reach the badge material at all.
 
-**Same Answer Twice** is tiered at 4 / 8 / 11, so a player can hold four members and have
-demonstrated nothing — sugar glider and thylacine are two marsupials, not a convergence.
-**If a member card on a pair badge named its partner, the badge would teach at every step
-instead of only at gold.** It is the one badge whose structure the flat list actively
-fights. **Ayr's call, and it costs nothing to decline.**
+**Pair badges name their partner.** Where a badge is built of pairs or of opposing
+directions, the card says which one it is paired with or which way it runs — because
+otherwise a player can hold four members of *Same Answer Twice* and have demonstrated
+nothing, sugar glider and thylacine being two marsupials rather than a convergence. **It
+applies to three badges:** *Same Answer Twice* (pairs), *The Switch* (two opposite
+directions) and *The Island Rule* (dwarfism **and** gigantism). The badge then teaches at
+every step instead of only at gold.
 
 ### Governance
 
@@ -2724,18 +2726,26 @@ Ayr's call.
 |---|---|
 | **`uncle-albert.bat`** | **The data check.** Group targets, the 1000 total, duplicates, species marked new that already exist, quest animals, and every badge member being real with tiers that match |
 | **`cousin-bob.bat`** | **The document check.** File paths, the numbers in `HANDOFF.md` and this file, stale counts, documents cut off mid-sentence, artifact links, and sentences claiming a species is in a badge |
+| **`librarian.bat`** | **The fact check.** Every claim-shaped sentence that names a roster species, and whether anybody has ever checked it. **It cannot tell whether a claim is true** — it makes the checking visible and durable, and **a verified sentence that is later edited stops being verified on its own** |
 
-Both exit non-zero on failure and return identical output across runs.
+All three exit non-zero on failure and return identical output across runs.
 
-**The rule behind both:** anything a checker can assert should stop being something a person
-has to re-read. Re-reading prose is sampling, not scanning — it never converges. **Neither
-tool can check whether a claim is true of the world.**
+**The rule behind them:** anything a checker can assert should stop being something a person
+has to re-read. Re-reading prose is sampling, not scanning — it never converges.
+
+**No tool can check whether a claim is true of the world** — that needs knowing biology, and
+it needs a person. **The Librarian does the next best thing**, which turned out to be the
+thing actually missing: it records *who checked what, against what source*, and it notices
+when a checked sentence changes underneath its check. A fact check that does not survive
+the next edit is worse than none, because it looks like coverage.
 
 | File | Role |
 |---|---|
 | `design/GROUND_TRUTH.txt` | The species that exist. **Read from the running game, never parsed from `.jsx`** |
 | `design/PENDING_MOVES.txt` | Decisions made but not yet in game data |
 | `design/BADGES.txt` | Badge membership, the only source |
+| `design/BADGE_CARDS.txt` | One card per membership — why *this* species meets *this* concept |
+| `design/CLAIMS.txt` | The claims register: what has been fact-checked, by whom, against what |
 | `design/TAGS.txt` | Conservation tags. `EW`, checked against On the Brink and the badge |
 | `NEW_DIRECTION.md` | The design record — every *why* |
 | `HANDOFF.md` | Orientation for a new session |

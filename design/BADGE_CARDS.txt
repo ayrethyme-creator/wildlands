@@ -1,0 +1,46 @@
+! THE BADGE MEMBER CARDS - one per MEMBERSHIP, not one per species.
+!
+! Ayr, 2026-08-29: "Not every species in a genus qualifies for the badge, and that's
+! why an individual species had to be assigned. These concepts actually do need to be
+! spelled out and explained somewhere, which is really what the badge system is for -
+! it's not just a title with names."
+!
+! Format:  Badge :: Species :: the card text
+!
+! One line per line of BADGES.txt membership. A species in four badges has four
+! cards here, because it is being claimed for four different reasons. Uncle Albert
+! checks every card names a real membership, reports coverage, and fails on a card
+! for a membership that does not exist.
+!
+! 430 memberships across 324 species. This file is the work queue for all of them.
+!
+! ----------------------------------------------------------------------------
+! HOW TO WRITE ONE
+! ----------------------------------------------------------------------------
+! The card answers ONE question: why THIS species and not its cousin? It is not a
+! second field-guide entry and it must not repeat the animal's own card - the reader
+! got here from that card, or is about to go to it by the link.
+!
+! Say the mechanism. "It changes sex" is the badge title. "Born male, and when the
+! female dies the dominant male becomes her" is the card.
+!
+! Every sentence here is a checkable claim about biology, so The Librarian reads
+! this file. A wrong card is an error in the educational core, not a typo.
+!
+! ----------------------------------------------------------------------------
+! PAIR BADGES NAME THEIR PARTNER - Ayr, 2026-08-29
+! ----------------------------------------------------------------------------
+! Where a badge is built of pairs or of opposing directions, the card SAYS WHICH
+! ONE it is paired with or which direction it runs. Otherwise a player can hold four
+! members of "Same Answer Twice" and have demonstrated nothing - a sugar glider and
+! a thylacine are two marsupials, not a convergence.
+!
+! The badges this applies to: Same Answer Twice (pairs), The Switch (two opposite
+! directions), The Island Rule (dwarfism AND gigantism).
+!
+! ============================================================================
+! THE FIRST THREE, written as the worked examples in GDD s12
+! ============================================================================
+The Switch :: Percula Clownfish :: It runs the OPPOSITE WAY to the wrasses in this badge. A clownfish is born male. The largest fish in an anemone is the breeding female and the second largest is her mate; when she dies, HE BECOMES HER, and the next male up moves into his place. Protandry - male first. The parrotfish and the wrasses beside it in this badge go female first, and the badge holds both.
+The Switch :: Stoplight Parrotfish :: Born female, and some later become male - protogyny, the opposite direction to the clownfish in this same badge. The change is not only reproductive: the terminal-phase male is so differently coloured from the female that the two were originally described as SEPARATE SPECIES, which is where the name comes from.
+Same Answer Twice :: Sugar Glider :: Paired with the FLYING SQUIRREL in this badge, and the pairing is the point. One is a marsupial, one is a placental mammal, and their lineages separated well over a hundred million years ago. Neither inherited gliding from the other - both arrived at the same membrane between wrist and ankle because the problem was the same one.

@@ -1,0 +1,52 @@
+! THE CLAIMS REGISTER - what has been fact-checked, by whom, and against what.
+!
+! Read by design/tools/the_librarian.py. Ayr, 2026-08-29: a fact check is one of
+! the most important tools this project has.
+!
+! Format:  STATUS :: fingerprint :: source :: the exact sentence that was checked
+!
+! STATUS
+!   VERIFIED   somebody checked it against a real source, named in the source field
+!   DISPUTED   checked, and the honest answer is that it is contested. SAY SO IN
+!              THE ENTRY TEXT ITSELF rather than picking a side quietly
+!   DESIGN     not a claim about the world at all - about the game, the roster or
+!              the process. Dismissed, and it stays dismissed
+!   TRAP       not tied to any sentence. A distinction this project has ALREADY
+!              got wrong once, kept here as a reading list for whoever triages
+!
+! THE FINGERPRINT IS THE POINT. It is a hash of the sentence with case and
+! whitespace removed, so reflowing a paragraph is not an edit but changing a word
+! is. EDIT A VERIFIED SENTENCE AND IT STOPS MATCHING - the claim falls out of the
+! register and The Librarian says so. That is the one thing a fact check has to do
+! that a person cannot: notice that the thing they checked last month is not the
+! thing on the page today.
+!
+! To verify a claim: check it properly, then copy the fingerprint and the exact
+! sentence out of the Librarian's work queue into a line here, and NAME YOUR
+! SOURCE. "I am fairly sure" is not a source. If it is contested, use DISPUTED and
+! make the entry itself say it is contested.
+!
+! ============================================================================
+! THE TRAPS - real things that got filed under the wrong concept
+! ============================================================================
+! Every accuracy failure in this project so far has been the same shape. Not a
+! false fact - a TRUE fact in the wrong place. That is why re-reading never caught
+! them: each sentence is correct on its own.
+!
+TRAP :: trap-fluorescence :: 2026-08-27 :: FLUORESCENCE IS NOT BIOLUMINESCENCE. Bioluminescence is light the animal makes by a chemical reaction. Fluorescence is the animal absorbing one colour and re-emitting another - a scorpion glows because a UV lamp is pointed at it. The Deathstalker was in "Lights On" and had to come out.
+TRAP :: trap-menopause :: 2026-08-27 :: MENOPAUSE IS NOT MENSTRUATION, and neither is "old females matter". Menstruation is about 1.5% of mammals. Menopause is known in six species. Elephant matriarchs are the textbook case for old females mattering AND THEY KEEP BREEDING - so the elephant belongs in the mirror badge, not the menopause one.
+TRAP :: trap-plankton :: 2026-08-26 :: NO PLANKTON, KRILL OR COPEPODS as catchable species. What animals eat is stated in the text. Antarctic krill had been written into two badges under this rule and both had to be corrected.
+TRAP :: trap-firehawk :: 2026-08-26 :: THE FIRE HAWK IS REAL and was still filed wrong. Raptors spreading fire is documented; that did not make the entry correct. A true fact does not excuse the wrong concept.
+TRAP :: trap-subspecies :: 2026-08-29 :: A SUBSPECIES OR A POPULATION IS NOT A SPECIES. The Barbary Lion is a population of a Vulnerable species; the Northern White Rhino and South China Tiger are subspecies. All three are tagged EW because the badge concept is true of them, and design/TAGS.txt says so out loud rather than flattening it.
+TRAP :: trap-ew-loose :: 2026-08-29 :: "EXTINCT IN THE WILD" IS A LISTING, NOT A FIGURE OF SPEECH. The axolotl is Critically Endangered however often it is called extinct in the wild; the Arabian oryx was the first species ever downlisted FROM Extinct in the Wild. Check the listing before using the phrase.
+TRAP :: trap-generic-claim :: 2026-08-29 :: A GENERIC NAME CANNOT CARRY A CLAIM. "Tapir" cannot be in a badge because tapirs as a group do not all do the thing. This is why individual species had to be assigned, and why every badge membership gets its own card.
+!
+! ============================================================================
+! THE REGISTER
+! ============================================================================
+DESIGN :: 02b750798dc9 :: about the project, not the world :: Mutt replaces Farm Dog , because a mutt is the honest generic dog, "farm dog" is a job rather than a breed, and most dogs in the world — and most dogs in shelters — are mutts.
+DESIGN :: 4a0566e1247a :: about the project, not the world :: 6 ~~ Fluorescence — restore Blacklight , or drop it~~ RULED, 2026-08-29: leave it. Fluorescence goes unmentioned in the badges and the Deathstalker carries none.
+DESIGN :: 6ed6ea366286 :: about the project, not the world :: Closing it took the last 42 biome species from the design record The Last Forty-Four , one cut (Black Cockatoo, a bare group name, to make room for the Indian Giant Squirrel), and the deep-sea naming pass — 21 renames that turned a genus, a family or a phylum into a species.
+DESIGN :: af52247b3ab1 :: about the project, not the world :: Choosing the black coat, or reading the House Cat entry, fires the player's first badge and explains the system.
+VERIFIED :: 091fef73c741 :: Ensifera is monotypic; hummingbird species counts run ~360-370 depending on authority :: Sword-billed Hummingbird — the only species in Ensifera , out of some 360 hummingbirds.
+VERIFIED :: 35dcbff29118 :: Tubulidentata is monotypic - standard mammalogy, and the IUCN account for Orycteropus afer :: - Aardvark — the only living species in its order .

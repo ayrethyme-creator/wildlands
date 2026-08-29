@@ -39,6 +39,9 @@ record eighteen times, and each pass is listed in its own version note.
 | **`design/BADGES.txt`** | Badge membership, the only source. The page is generated from it |
 | **`design/TAGS.txt`** | Conservation tags. `EW` today; Albert checks every tagged species is real, is in On the Brink, and matches the *Only In Captivity* badge exactly |
 | **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
+| **`design/tools/the_librarian.py`** | **The fact check.** *"Run it by The Librarian."* It cannot tell whether a claim is true — it tracks **who checked what, against what source**, and fails when a checked sentence is edited underneath its check |
+| **`design/CLAIMS.txt`** | The claims register, and the **TRAP** list: the distinctions this project has already got wrong once |
+| **`design/BADGE_CARDS.txt`** | One card per badge membership. 430 to write, 3 written |
 | **`GDD.md`** | **The design.** By system, current-only, everything marked decided / open / proposed. **Start here** |
 | **`NEW_DIRECTION.md`** | The design *record*, ~11,000 lines, append-only with dated headers. Every *why*, including the reversals |
 | **`design/tools/cousin_bob.py`** | **The document check.** *"Run it by Cousin Bob."* Verifies the docs still agree with the data |
@@ -230,14 +233,18 @@ of the design is safe to keep building. Do not confuse the two.
   *"people only know them by those names."* The phylum fact goes in the **description**,
   not the name. Worth remembering as a general principle: the naming rule exists to help a
   reader, so **a name nobody recognises is not more specific, it is just quieter.**
-- **The badge member card, decided 2026-08-29.** Every *membership* gets a card explaining
-  how that species meets that concept, linking back to the animal's own card — **430 cards
-  across 324 species**, because a species in four badges is claimed for four reasons. Ayr:
-  *"it's not just a title with names."* **This is what the generics audit was for** — a
+- **The badge member card, decided 2026-08-29 — and it is the next real body of work.**
+  Every *membership* gets a card explaining how that species meets that concept — **430
+  cards across 324 species**, because a species in four badges is claimed for four reasons.
+  Ayr: *"it's not just a title with names."* **This is what the generics audit was for** — a
   generic name cannot carry a claim, which is why individual species had to be assigned.
-  Two small things still open: **where the text lives** (BADGES.txt has no room for it and
-  needs a companion keyed by badge + species) and **whether the link runs both ways**. Full
-  reasoning and the three worked examples are in GDD §12.
+  **All three follow-ups are settled:** the text lives in `design/BADGE_CARDS.txt`, the link
+  runs **both ways**, and **pair badges name their partner** (*Same Answer Twice*, *The
+  Switch*, *The Island Rule*). Albert reports coverage — **3 of 430**. Full reasoning and
+  the worked examples are in GDD §12.
+- **The Librarian is new and mostly unused.** 20 claims sit untriaged in its queue, 9 of
+  them superlatives. **That is a work queue, not a fault**, and it is the honest picture:
+  almost nothing in this project has ever been formally fact-checked.
 - **Items in the world** — committed as a principle. **No item ideas until Ayr asks.**
 
 ### Parked — do not restart unprompted

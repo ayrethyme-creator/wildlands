@@ -19,6 +19,8 @@ Verifies:
   8. no badge member and no quest animal is merely a LIFE STAGE
   9. every species tagged EW is real, sits in On the Brink, and matches the
      "Only In Captivity" badge exactly
+ 10. every badge member card points at a real membership, none is written
+     twice, and how far that writing has got
 
 Check 8 was added 2026-08-28 and fired immediately. Three badges and one quest
 cited "Orangutan", which is not a species in this data - it sits in the lifestage
@@ -318,6 +320,58 @@ print('BADGE MEMBERS MARKED * THAT ALREADY EXIST: %d' % len(bad_star))
 for x in sorted(bad_star):
     print('   ' + x)
     FAIL.append('badge member starred but exists: ' + x)
+
+# 11. THE BADGE MEMBER CARDS
+# design/BADGE_CARDS.txt, added 2026-08-29. One card per MEMBERSHIP - a species in
+# four badges is claimed for four different reasons and needs four cards. Albert
+# cannot judge whether a card is any good; he checks that it points at a real
+# membership, that no membership has two, and reports how far the work has got.
+CARDS = {}
+card_orphan, card_dupe = [], []
+if os.path.exists('design/BADGE_CARDS.txt'):
+    for line in io.open('design/BADGE_CARDS.txt', encoding='utf-8'):
+        line = line.rstrip('\n')
+        if not line.strip() or line.lstrip().startswith('!'):
+            continue
+        parts = [p.strip() for p in line.split('::')]
+        if len(parts) < 3:
+            FAIL.append('BADGE_CARDS.txt line is malformed: ' + line[:60])
+            continue
+        key = (parts[0], parts[1])
+        if key in CARDS:
+            card_dupe.append('%s :: %s' % key)
+        CARDS[key] = '::'.join(parts[2:])
+
+memberships = set()
+for cat, name, dif, tiers, real in badges:
+    for m in real:
+        memberships.add((name, m))
+
+for key in CARDS:
+    if key not in memberships:
+        card_orphan.append('%s :: %s' % key)
+
+print()
+print('=' * 52)
+print('THE BADGE MEMBER CARDS')
+print('=' * 52)
+print('   %-24s %4d' % ('memberships', len(memberships)))
+print('   %-24s %4d' % ('cards written', len(CARDS)))
+print('   %-24s %4d' % ('still to write', len(memberships) - len(CARDS)))
+if memberships:
+    print('   %-24s %3d%%' % ('coverage', round(100.0 * len(CARDS) / len(memberships))))
+
+print()
+print('CARDS FOR A MEMBERSHIP THAT DOES NOT EXIST: %d' % len(card_orphan))
+for x in sorted(card_orphan):
+    print('   ' + x)
+    FAIL.append('badge card points at no such membership: ' + x)
+
+print()
+print('MEMBERSHIPS WITH MORE THAN ONE CARD: %d' % len(card_dupe))
+for x in sorted(card_dupe):
+    print('   ' + x)
+    FAIL.append('badge card written twice: ' + x)
 
 # 10. THE CONSERVATION TAGS
 # design/TAGS.txt, added 2026-08-29. "Only In Captivity" was written as a RULE -
