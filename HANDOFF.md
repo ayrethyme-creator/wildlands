@@ -261,6 +261,13 @@ of the design is safe to keep building. Do not confuse the two.
   the game data is stale). **One is unresolved and is Ayr's: `Partula Snail`** — a genus
   name covering species that are simultaneously extinct, extinct-in-the-wild and
   reintroduced, sitting in The Vigil. The fix is to name the species.
+- **The art is being made now, and the deep sea is parked.** All 183 outstanding species
+  have descriptions in `design/art_prompts/`, and `design/art_pipeline/run_all.py` is
+  rendering the rest of the roster unattended. **The deep sea batch is finished and Ayr
+  has ruled the whole set wrong** — *"I think the deep sea ones will take careful one by
+  one building."* **Do not bulk-regenerate it**; `design/art_prompts/REVIEW_deepsea.md`
+  records the ruling and why the review that preceded it was too lenient. Every other
+  biome continues as a normal batch.
 - **Items in the world** — committed as a principle. **No item ideas until Ayr asks.**
 
 ### Parked — do not restart unprompted

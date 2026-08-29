@@ -1,12 +1,30 @@
 # Deep sea — first review, 2026-08-29
 
-43 rendered, 0 render failures. **Ten need regenerating.** Reviewed from the contact
-sheet at `design/art_pipeline/sheets/deepsea.png`, not one at a time — a sheet is the
-only way to catch species that came out looking like each other, and colour drift only
-reads against neighbours.
+43 rendered, 0 render failures.
 
-**Ayr has not seen these yet.** This is my own pass; the list below is what I would
-re-roll before asking anyone to look.
+## Ayr's ruling, 2026-08-29 — THE WHOLE BATCH IS DEFERRED
+
+> *"I'm fairly certain all of those are incorrect. I think the deep sea ones will take
+> careful one by one building."*
+
+**This batch is not a re-roll job and the list below is not the plan.** The deep sea is
+being set aside for individual work later, species by species. Do not bulk-regenerate
+it, and do not treat my ten as the fix list.
+
+**My review below was too soft and is kept only as evidence of how.** Calling 27 of 43
+"good, no action" was pattern-matching a plausible-looking creature and moving on —
+precisely what the rule about never judging a sprite on silhouette alone exists to
+prevent. On a second look the "good" list was carrying things like an Atolla with a
+smooth bell when the scalloped rim IS the animal, a sixgill shark with a great white's
+mid-body dorsal, a fangtooth drawn long when the real one is nearly as deep as it is
+long, a vent mussel in the wrong colour entirely, and a vent "shrimp" that is an isopod.
+
+**Why the deep sea is the hard case, and why the rest of the roster is not.** These are
+obscure animals with thin reference behind them, and several have no agreed look at all.
+Penguins, seals, magpies and dogs are common and heavily illustrated. The bulk pass
+continues on the rest of the roster; the deep sea comes back one at a time.
+
+The original pass follows.
 
 ## The lesson this batch taught
 
