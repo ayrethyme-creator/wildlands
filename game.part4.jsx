@@ -759,7 +759,14 @@ function Wildlands() {
       (typeof MAP_MARKS !== "undefined" && MAP_MARKS.indexOf(ch) >= 0) ||
       (ch === "X" && st.badges >= (GYMS[st.map]?.id ?? GYM_COUNT)) ||
       (ch === "D" && o.solved) ||
-      ((ch === "R" || ch === "V") && st.trainersBeaten[idKey]) ||
+      // A chat NPC is never "beaten", so a stale beaten-flag must not clear one.
+      // Route trainers are placed procedurally (part20) but findings are placed
+      // afterwards (part65), so a coordinate that held a trainer in an older
+      // build can hold a finding now - and an old save still lists it as beaten.
+      // The finding then became bare walkable floor: invisible and uninteractable.
+      // Late regions carry the most beaten coordinates, so they lost the most.
+      ((ch === "R" || ch === "V") && st.trainersBeaten[idKey]
+        && !(TRAINERS[idKey] || {}).chat) ||
       (ch === "W" && st.swimming);
     if (walk) {
       // step counts every completed footfall. The avatar and the grass both

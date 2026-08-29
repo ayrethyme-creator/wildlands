@@ -859,7 +859,10 @@
             let ch2 = ch;
             const idKey = `${S.map}:${x},${y}`;
             if (ch === "X" && S.badges >= (GYMS[S.map]?.id ?? GYM_COUNT)) ch2 = ".";
-            if ((ch === "R" || ch === "V") && S.trainersBeaten[idKey]) ch2 = ".";
+            // Must match the walkability rule in part4 - see the note there on
+            // why a chat NPC is exempt from the beaten-flag.
+            if ((ch === "R" || ch === "V") && S.trainersBeaten[idKey]
+                && !(TRAINERS[idKey] || {}).chat) ch2 = ".";
             if (ch === "D" && o.solved) ch2 = ".";
             const t = TILE_STYLE(ch2, pal);
             let em = t.em, bg = t.bg;
