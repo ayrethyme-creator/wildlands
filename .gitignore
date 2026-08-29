@@ -1,2 +1,6 @@
 # 1024x1024 intermediates from the sprite runner - the 256x256 results go to art/
 design/art_pipeline/raw/
+
+# Python bytecode from the pipeline scripts
+__pycache__/
+*.pyc

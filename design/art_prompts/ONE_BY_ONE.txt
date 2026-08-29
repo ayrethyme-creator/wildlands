@@ -1,0 +1,114 @@
+ONE AT A TIME
+==============================================================
+Species the bulk passes could not get right. Rebuild these individually,
+with reference pictures open. Regenerate with:
+    python design/art_pipeline/one_by_one.py
+
+79 species in total.
+
+--------------------------------------------------------------
+CIRCLED BY AYR AFTER ITS FIX PASSES   (12)
+--------------------------------------------------------------
+Still wrong after bulk fixing, so bulk fixing is not going to do it.
+
+  americancurl             American Curl                      circled on fixes_05
+  beardedseal              Bearded Seal                       circled on fixes_05
+  bluemussel               Blue Mussel                        circled on fixes_05
+  chinstrappenguin         Chinstrap Penguin                  circled on fixes_05
+  colossalsquid            Colossal Squid                     circled on fixes_05
+  englishbudgie            English Budgie                     circled on fixes_05
+  himalayanmonal           Himalayan Monal                    circled on fixes_05
+  hoodedseal               Hooded Seal                        circled on fixes_05
+  littlemarianafruitbat    Little Mariana Fruit Bat           circled on fixes_05
+  plainspocketgopher       Plains Pocket Gopher               circled on fixes_05
+  portuguesemanowar        Portuguese Man o' War              circled on fixes_05
+  remora                   Remora                             circled on fixes_05
+
+--------------------------------------------------------------
+DEEP SEA - SET ASIDE FROM THE START   (43)
+--------------------------------------------------------------
+Never entered bulk fixing. Ayr reserved these for individual work.
+
+  alarmjellyfish           Alarm Jellyfish
+  australiancoffinfish     Australian Coffinfish
+  bathydevius              Bathydevius
+  bigfinsquid              Bigfin Squid
+  blackdragonfish          Black Dragonfish
+  blobfish                 Blobfish
+  bloodybellycombjelly     Bloody-belly Comb Jelly
+  bluntnosesixgillshark    Bluntnose Sixgill Shark
+  commonfangtooth          Common Fangtooth
+  cookiecuttershark        Cookiecutter Shark
+  deepsealizardfish        Deep-sea Lizardfish
+  deepstaria               Deepstaria
+  dumbooctopus             Dumbo Octopus
+  eyelessventshrimp        Eyeless Vent Shrimp
+  giantamphipod            Giant Amphipod
+  giantisopod              Giant Isopod
+  giantsiphonophore        Giant Siphonophore
+  gianttubeworm            Giant Tube Worm
+  giantxenophyophore       Giant Xenophyophore
+  glacierlanternfish       Glacier Lanternfish
+  googlyeyedglasssquid     Googly-eyed Glass Squid
+  gulpereel                Gulper Eel
+  helmetjellyfish          Helmet Jellyfish
+  hoffcrab                 Hoff Crab
+  isidellabamboocoral      Isidella Bamboo Coral
+  japanesesealily          Japanese Sea Lily
+  leiopathesblackcoral     Leiopathes Black Coral
+  macropinnabarreleye      Macropinna Barreleye
+  marianasnailfish         Mariana Snailfish
+  munidopsissquatlobster   Munidopsis Squat Lobster
+  neolepasventbarnacle     Neolepas Vent Barnacle
+  orangeroughy             Orange Roughy
+  predatorytunicate        Predatory Tunicate
+  seapig                   Sea Pig
+  silverhatchetfish        Silver Hatchetfish
+  stoplightloosejaw        Stoplight Loosejaw
+  tripodfish               Tripod Fish
+  vampiresquid             Vampire Squid
+  ventmussel               Vent Mussel
+  venusflowerbasket        Venus Flower Basket
+  venussgirdle             Venus's Girdle
+  viperfish                Viperfish
+  zombieworm               Zombie Worm
+
+--------------------------------------------------------------
+FOSSIL - SET ASIDE FROM THE START   (21)
+--------------------------------------------------------------
+Never entered bulk fixing. Ayr reserved these for individual work.
+
+  ambulocetus              Ambulocetus
+  anomalocaris             Anomalocaris
+  arthropleura             Arthropleura
+  basilosaurus             Basilosaurus
+  cameroceras              Cameroceras
+  charnia                  Charnia
+  dickinsonia              Dickinsonia
+  dimetrodon               Dimetrodon
+  dunkleosteus             Dunkleosteus
+  elrathia                 Elrathia
+  gigantopithecus          Gigantopithecus
+  gorgonops                Gorgonops
+  hallucigenia             Hallucigenia
+  ichthyostega             Ichthyostega
+  jaekelopterus            Jaekelopterus
+  megalodon                Megalodon
+  meganeura                Meganeura
+  opabinia                 Opabinia
+  pneumodesmus             Pneumodesmus
+  sinosauropteryx          Sinosauropteryx
+  tiktaalik                Tiktaalik
+
+--------------------------------------------------------------
+OUT OF BULK ATTEMPTS   (3)
+--------------------------------------------------------------
+At or past three renders, never circled but never approved either -
+they have not come back on a sheet Ayr has graded. Check one against its
+sprite before spending time on it. 18 others are past three renders and
+already approved, so they are finished and not listed here.
+
+  blueshark                Blue Shark                         3 attempts
+  sargassumfrogfish        Sargassum Frogfish                 3 attempts
+  sootyshearwater          Sooty Shearwater                   3 attempts
+
