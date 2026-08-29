@@ -31,6 +31,7 @@ Verifies:
   6. reports every sentence that claims a species is in a badge, with a verdict
   7. every CONFIRMED batch in new_species.md has reached PENDING_MOVES.txt
   8. no badge star is an animal the roster already holds under another name
+  9. every species named in the badge page's hand-written prose is real
 
 Checks 7 and 8 were added 2026-08-28, and both fired immediately.
 
@@ -423,6 +424,48 @@ print('BADGE STARS THAT RESEMBLE SOMETHING IN THE ROSTER: %d' % len(nearmiss))
 print('   (a warning - read them; a near name may be a genuinely different animal)')
 for x in nearmiss:
     print('   ' + x)
+
+# ------------------- 9. the hand-written prose inside the generated badge page
+# make_badge_page.py regenerates ONLY the JS data array in design/badges.html.
+# The "Bad Reputation" essay above it is hand-written and is preserved untouched
+# on every rebuild - so when the roster renamed Basilisk Lizard, Anglerfish and
+# Fangtooth, the data array followed and the essay did not. Three names sat wrong
+# on the published page and nothing was looking at them, because Bob only read
+# the .md documents.
+#
+# Every <b>Name</b> in the prose is a claim that the roster holds that species.
+BADGE_PAGE = 'design/badges.html'
+PROSE_OK = {
+    # The page's own opening section explains this one: the black cat is a coat
+    # option on House Cat, not a species, which is exactly why it needs no catching.
+    'Black Cat',
+}
+
+
+def unent(x):
+    for a, b in [('&uuml;', '\u00fc'), ('&rsquo;', "'"), ('&eacute;', '\u00e9'),
+                 ('&amp;', '&'), ('&middot;', '\u00b7'), ('&mdash;', '\u2014'),
+                 ('\u2019', "'")]:
+        x = x.replace(a, b)
+    return x.strip()
+
+
+print()
+prose_bad = []
+if os.path.exists(BADGE_PAGE):
+    page = read(BADGE_PAGE)
+    prose = page.split('<script>')[0]          # everything above the data array
+    names = {unent(m) for m in re.findall(r'<b>([^<]{3,40})</b>', prose)}
+    for n in sorted(names):
+        if n in PROSE_OK or n in alln:
+            continue
+        prose_bad.append('%s is named in the badge page prose, '
+                         'and no such species is in the roster' % n)
+print('SPECIES NAMED IN THE BADGE PAGE PROSE: %d checked, %d wrong'
+      % (len(names) if os.path.exists(BADGE_PAGE) else 0, len(prose_bad)))
+for x in prose_bad:
+    print('   ' + x)
+    FAIL.append(x)
 
 # ------------------------------------------------------------------- the verdict
 print()
