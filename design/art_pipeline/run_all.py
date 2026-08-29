@@ -84,7 +84,7 @@ def git(*args, quiet=True):
 
 def publish(name, n):
     """Ayr's standing permission: commit and push sprites live as they finish."""
-    git("add", "art", "design/art_prompts")
+    git("add", "art", "design/art_prompts", "design/art_pipeline/sheets")
     if git("diff", "--cached", "--quiet") == 0:
         return                                   # nothing new
     msg = ("Sprites: %s, %d rendered\n\n"
@@ -116,6 +116,28 @@ def wait_for_running_batch():
         time.sleep(60)
 
 
+def sheet(name):
+    """A CONTACT SHEET FOR EVERY BATCH, ALWAYS.
+
+    Ayr, 2026-08-29: "please create a sheet like that from now on for every batch
+    you render. it makes chasing fixes much better."
+
+    This is not a convenience. Reviewing sprites one at a time hides the two faults
+    that matter most across a set - species that came out looking like each other
+    when they must not, and colour drift, which only reads against neighbours. The
+    deep sea review was too soft precisely because it was done without one in hand
+    for long enough.
+    """
+    batch_p, _ = paths(name)
+    try:
+        subprocess.run([sys.executable,
+                        os.path.join(HERE, "contact_sheet.py"), batch_p],
+                       cwd=HERE, timeout=300)
+        say("sheet built for %s" % name)
+    except Exception as e:
+        say("sheet failed for %s: %s" % (name, str(e)[:120]))
+
+
 def run(name):
     batch_p, log_p = paths(name)
     todo = outstanding(name)
@@ -126,6 +148,7 @@ def run(name):
     left = outstanding(name)
     done = todo - left
     say("%s: %d rendered, %d still outstanding" % (name, done, left))
+    sheet(name)
     publish(name, done)
     return left
 

@@ -84,6 +84,23 @@ The craft rules, learned across roughly 140 corrective renders:
    confused, say what it must NOT be — four penguins in one batch need four different
    diagnostics or they all come out as the same bird.
 
+## Every batch gets a contact sheet. Always.
+
+Ayr, 2026-08-29: *"please create a sheet like that from now on for every batch you
+render. it makes chasing fixes much better."*
+
+`run_all.py` builds one after each batch and commits it with the sprites, so it is
+never a thing anyone has to remember. Build one by hand with:
+
+```
+python design/art_pipeline/contact_sheet.py design/art_prompts/batch_<name>.json
+```
+
+They land in `design/art_pipeline/sheets/`. **Review from the sheet, never from the
+folder** — one sprite at a time hides the two faults that matter most across a set:
+species that came out looking like each other when they must not, and colour drift,
+which only reads against its neighbours.
+
 ## Known defect, still open
 
 `postprocess.py` only clears background-coloured regions connected to an edge, so a
