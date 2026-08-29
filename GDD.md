@@ -2229,8 +2229,14 @@ THE 300   On the Brink 50 · The Vigil 50 · The Telling 100
           The Record 50 · The Breeding Centre 50
 ```
 
-**Round numbers are firm.** As of consolidation, **658 of the 700 exist and 42 remain** to be
-created. Checked by Uncle Albert, not asserted here.
+**Round numbers are firm, and the roster closed on 2026-08-29.**
+**700 of the 700 exist and 0 remain** to be created. With the 300 complete, that is
+**1000, and it is shut.** Checked by Uncle Albert, not asserted here.
+
+Closing it took the last 42 biome species from the design record *The Last Forty-Four*,
+one cut (Black Cockatoo, a bare group name, to make room for the Indian Giant Squirrel),
+and the deep-sea naming pass — 21 renames that turned a genus, a family or a phylum into
+a species. **If a species is added now, one comes out.**
 
 ### Everything in the roster is real — **[v10]**
 

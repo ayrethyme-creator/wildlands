@@ -129,19 +129,21 @@ it. Ayr decides.
 
 ---
 
-## Where things stand, 2026-08-27
+## Where things stand, 2026-08-29 — **the roster is closed**
 
 Run Uncle Albert for the live version. **Cousin Bob checks these exact numbers**, so if they drift he fails rather than letting them rot:
 
 ```
-THE 700     biomes 608 + The Kept 50 = 658        42 still to create
+THE 700     biomes 650 + The Kept 50 = 700        0 still to create
 THE 300     Vigil 50 · On the Brink 50 · The Telling 100
             The Record 50 · The Breeding Centre 50
 BADGES      50        easy 10 · medium 25 · hard 15 · 4 tiered
-            320 species referenced, 314 exist, 6 to create
+            324 species referenced, 324 exist, 0 to create
 ```
 
-**Thinnest biomes:** open ocean, farmland, coast, reef.
+**The floor is 45 and every biome clears it.** Coast and open ocean sit exactly on it;
+rainforest 93 and savanna 75 sit well above, which is true to the world rather than
+overweight. **Do not reopen the counts** — if a species is added, one comes out.
 
 ### The next work, and the order for it
 
@@ -164,10 +166,19 @@ of the design is safe to keep building. Do not confuse the two.
 
 ### In flight
 
-- **The 44 remaining species.** Some are already claimed by badges — the wood frog by
-  *Sub-Zero*, the bumblebee bat by *The Smallest*. A New World vulture is wanted.
+- **The roster is shut and the badges are grounded.** Closed 2026-08-29. Every slot in the
+  700 and the 300 has a name, and **every badge member is a real species — 324 referenced,
+  324 exist, none starred.** For the first time there is nothing on either list waiting to
+  be invented. What remains is *making* them: art and field-guide entries. That is
+  production, not design, and it does not move a number.
 - **The badge count is settled at 50.** Ayr cut *Armour* and *Rare Poison* on 2026-08-28,
   which took 52 to 50 and closed the round-number question.
+- **Two badges now hold three members: *Dad's Turn* and *Heat Vision*.** Ayr ruled on
+  2026-08-29 that Dad's Turn stands at three rather than invent a fourth male-pregnancy
+  species. Heat Vision fell to three the same way, when *Green Tree Python* was dropped
+  because Ball Python already sat in the badge. **Heat Vision was not put to Ayr** — it is
+  the same shape of call, applied for consistency, and it is reversible. Albert warns on
+  both and does not fail.
 - **Fluorescence has no badge, and that was not decided — it happened.** The Deathstalker
   was in *Lights On*, which is wrong (a scorpion glows because a UV lamp is pointed at it;
   that is fluorescence, not light the animal makes). It was **dropped when the badge sets
@@ -175,7 +186,13 @@ of the design is safe to keep building. Do not confuse the two.
   *Blacklight* was never restored. **Ayr's ruling is still owed:** restore *Blacklight*
   with the puffin bill, chameleon bones and platypus fur, or let fluorescence go
   unmentioned.
-- **`Only In Captivity`** depends on an `EW` tag that does not exist in the data.
+- **`Only In Captivity`** depends on an `EW` tag that does not exist in the data. This is
+  the last thing on the badge side that is not merely production work.
+- **One rename is flagged for review: `Tardigrade` → `Water Bear`.** It came from the
+  deep-sea naming pass, which everywhere else replaced a genus or a phylum with a species.
+  This one does not obviously gain specificity — "water bear" is also used for the whole
+  phylum — even though the species meant is *Milnesium tardigradum*, the one that went to
+  orbit. Reversing it is a one-line change in `design/PENDING_MOVES.txt`.
 - **Items in the world** — committed as a principle. **No item ideas until Ayr asks.**
 
 ### Parked — do not restart unprompted

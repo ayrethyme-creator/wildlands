@@ -1,15 +1,20 @@
 # New species to create
 
-Running list for the new game. **Interest governs, not headcount** — the ~57
-floor was a working guide and is explicitly not a target. A biome gets what is
-worth having in it.
+Running list for the new game. **Interest governs, not headcount** — the floor
+was a working guide and is explicitly not a target. A biome gets what is worth
+having in it.
+
+> **The roster closed on 2026-08-29 at 1000.** Every batch below is final and
+> its count is the number actually in `design/PENDING_MOVES.txt`. Cousin Bob
+> checks each heading against the pipeline, so a batch cannot quietly drift
+> again. If a species is added now, one comes out.
 
 Status: **CONFIRMED** = Ayr has approved it. **LIKELY** = approved in principle,
 not finally.
 
 ---
 
-## DEEP SEA — CONFIRMED, 32 species
+## DEEP SEA — CONFIRMED, 43 species
 
 *Ayr, 2026-08-25: "all of those should be included definitely."*
 Deep sea currently holds 10 moved out of open ocean, so this takes it to **42**.
@@ -65,150 +70,159 @@ dragonfish · Sea toad · Deep-sea cucumber
 
 ---
 
-## OPEN OCEAN — CONFIRMED, ~25 species
+## OPEN OCEAN — CONFIRMED, 17 species
 
-*Ayr, 2026-08-25: "those are all great great!"*
+*Ayr, 2026-08-25: "those are all great great!"* — batch finalised at **17** on
+2026-08-29 by **The Last Forty-Four**, which trimmed it from ~25 to the number
+that lands the biome on 45.
 
-The open ocean is the largest habitat on earth and currently reads as
-"whales and a few big fish". What is missing is everything that makes it
-*strange* — the drifting colonies, the things with sails, the one insect that
-lives out there.
-
-### The ones nobody believes
-
-| Species | Why |
-|---|---|
-| **Opah** *(moonfish)* | **The only fully warm-blooded fish known.** It circulates warm blood through its gills to keep its whole body above sea temperature. Discovered in **2015** — this is new science |
-| **Portuguese man o' war** | **Not one animal.** A colony of four kinds of specialised individuals — float, tentacle, digestion, reproduction — none of which can survive alone |
-| **Blue dragon nudibranch** | Eats the man o' war and **stores its stinging cells to use as its own weapon**. Electric blue, two centimetres long, floats upside down |
-| **By-the-wind sailor** *(Velella)* | Has **a literal sail**. Populations are left-sailed or right-sailed, so the same wind blows them to opposite shores |
-| **Violet sea snail** | Floats upside down beneath **a raft of bubbles it blows from its own mucus**. If the raft breaks, it drowns |
-| **Sea skater** *(Halobates)* | **The only insect that lives on the open ocean.** Millions of miles from land, laying eggs on floating feathers and pumice |
-| **Japanese flying squid** | **It actually flies** — jets clear of the water and glides thirty metres on spread fins |
-
-### The travellers
+**28 → 45. The middle of the food web was missing.** Of 28 entries, ten were
+whales and dolphins and seven were sharks. Not one schooling fish, not one
+invertebrate, and a single seabird — a highlight reel rather than an ocean.
 
 | Species | Why |
 |---|---|
-| **Sooty tern** | Young birds leave the colony and **stay airborne for years without landing once** |
-| **Manx shearwater** | One ringed bird was over **fifty years old** and had flown an estimated eight million kilometres |
-| **Storm petrel** | Appears to **walk on the water**, pattering the surface with its feet while hovering |
-| **Olive ridley turtle** | The **arribada** — tens of thousands of females coming ashore on one beach on one night |
-| **Loggerhead turtle** | Hatchlings cross an entire ocean and come back decades later to the beach they were born on |
-| **Blue shark** | The most wide-ranging shark there is, crossing whole ocean basins |
-| **Devil ray** *(mobula)* | **Leap clear of the water in their thousands** and nobody knows why |
-
-### The Sargasso — a forest with no floor
-
-| Species | Why |
-|---|---|
-| **Sargassum fish** | Lives its whole life inside floating weed, camouflaged past recognition, and **"walks" on its fins** through the fronds |
-| **Sargassum crab** | The same trick, in a crab |
-| **Salp** | Forms chains metres long and is among the **fastest-growing animals alive** |
-
-### The fishery
-
-| Species | Why |
-|---|---|
-| **Bluefin tuna** | **The most valuable fish in the world**, warm-blooded, and the clearest quota story in conservation |
-| **Yellowfin tuna** · **Skipjack** | The tinned-tuna fishery, and the dolphin-safe argument |
-| **Mahi-mahi** | The **fastest-growing fish in the sea**, and its brilliant colours drain away within minutes of death |
-| **Wahoo** | |
-| **Oceanic whitetip** | Once **among the most abundant large animals on earth**. Now critically endangered. The shark of every shipwreck account |
-
-### The rest
-
-**Remora** *(hitchhikes on sharks with a dorsal fin modified into a suction
-plate)* · **Pilot fish** · **Common dolphin** · **Striped dolphin** ·
-**Porbeagle**
-
-### Quests this biome brings
-
-- **Bluefin quota** — the fish, the price, and the international management fight.
-- **Dolphin-safe tuna** — what the label actually means and what it does not.
-- **Sargasso Sea** — the only sea with no coastline, and the plastic that
-  gathers in it.
-
+| **Atlantic Bluefin Tuna** | Warm-blooded, crosses the Atlantic in weeks, and its fishery is the textbook case of a quota argued over for forty years |
+| **Chub Mackerel** | The schooling fish nearly everything else in this biome is already eating |
+| **Atlantic Herring** | The biomass the North Atlantic runs on; shoals have been measured in cubic kilometres |
+| **Mahi-mahi** | Grows faster than almost any fish alive, and the colour drains out of it within minutes of death |
+| **Opah** | The only fish known to be **fully warm-blooded** — it heats itself by flapping its pectoral fins |
+| **Oceanic Whitetip Shark** | Was among the most abundant large animals on earth, and is down by more than 98% in some seas |
+| **Blue Shark** | The widest-ranging shark there is, and the one that follows ships |
+| **Remora** | Rides the sharks already in this biome; its dorsal fin evolved into a suction plate |
+| **Sargassum Frogfish** | Lives only in floating weed and is invisible inside it — the Sargasso is habitat, not scenery |
+| **Humboldt Squid** | Hunts in coordinated groups and signals to the others by flashing colour |
+| **Portuguese Man o' War** | Not one animal but **a colony of four kinds of specialised individual** that cannot live apart |
+| **Northern Gannet** | Dives from forty metres and has air sacs in its face to absorb the impact |
+| **Sooty Shearwater** | Flies a figure-of-eight around an entire ocean every year — about 65,000 km |
+| **Wilson's Storm Petrel** | One of the most numerous birds alive, and it appears to walk on the surface of the sea to feed |
+| **Red-billed Tropicbird** | Comes to land only to nest on a cliff, and can barely walk when it gets there |
+| **Loggerhead Turtle** | Spends its first decade adrift in open ocean — **the lost years**, unobserved until recently |
+| **Olive Ridley Turtle** | The *arribada*: tens of thousands come ashore to nest on one beach in a single night |
 
 ---
 
-## CORAL REEF — CONFIRMED, ~20 species
+## CORAL REEF — CONFIRMED, 5 species
 
-*Ayr, 2026-08-25: "especially the coral. like, of course lol."*
+*Ayr, 2026-08-25: "especially the coral. like, of course lol."* — batch finalised
+at **5** on 2026-08-29 by **The Last Forty-Four**.
 
-**This one genuinely needs it, and for a specific reason: the reef has no reef.**
-There is not a single coral in the roster. Corals are animals, and they are the
-thing the entire biome is named after and built from. That is the largest single
-gap anywhere in the dex.
-
-The list is also fish-heavy — around 24 fish to 10 invertebrates — where a real
-reef is overwhelmingly invertebrate.
-
-### The reef itself
+**41 → 46. Forty-one species and not one coral.** The reef had its fish, its
+cleaner, its sharks and the starfish that eats coral — but not the animal that
+builds the place. A player could complete the biome without ever meeting the reef
+itself.
 
 | Species | Why |
 |---|---|
-| **Staghorn coral** | The reef-builder. Fast-growing, branching, and one of the two Caribbean species that collapsed by over 95% |
-| **Elkhorn coral** | The other one. Together these two *built* the Caribbean reefs |
-| **Brain coral** | Centuries old, and the individual polyps fight each other along the seams |
-| **Sea fan** *(gorgonian)* | Grows across the current to filter it, like a net |
-| **Tube sponge** | Filters its own volume of water every few seconds |
-
-### Partnerships — the reef runs on them
-
-| Species | Why |
-|---|---|
-| **Sea anemone** | **The clownfish's partner, and it is missing.** The fish is already in the game twice and the thing it lives inside is not |
-| **Pistol shrimp** | Snaps a claw so fast it **boils the water into a cavitation bubble** — briefly hotter than the surface of the sun. It also shares a burrow with a goby: the shrimp digs, the goby watches for danger, and the shrimp keeps one antenna on its tail |
-| **Cleaner shrimp** | Runs a cleaning station that predators queue at and do not eat from |
-| **Harlequin shrimp** | Eats **only starfish**. Flips them over and eats them alive, slowly, over days |
-
-### Invertebrates worth having
-
-| Species | Why |
-|---|---|
-| **Giant clam** | A metre across, over a century old, and it **farms algae inside its own tissue** for food |
-| **Blue-ringed octopus** | The size of a golf ball, and carries enough tetrodotoxin to kill twenty-six people |
-| **Coconut octopus** | **Carries coconut shell halves around and assembles them into armour.** Tool use, in an invertebrate |
-| **Flamboyant cuttlefish** | Too toxic to eat and walks on the seabed rather than swimming |
-| **Elysia** *(solar-powered sea slug)* | **Steals chloroplasts from the algae it eats and photosynthesises with them** for months |
-| **Spanish dancer** *(nudibranch)* | Swims by unrolling its body and undulating, bright red |
-| **Feather star** | Ancient, and it swims — most people do not know they can |
-| **Long-spined sea urchin** | The 1983 Caribbean die-off removed the reef's main grazer and the algae took over. A quest by itself |
-
-### Fish that earn their place
-
-**Bumphead parrotfish** *(eats coral and excretes sand — one fish makes tonnes
-of beach a year)* · **Humphead wrasse** *(a metre and a half, and changes sex)*
-· **Frogfish** *(fishes with a lure, and has the fastest strike of any
-vertebrate)* · **Garden eel** *(colonies standing out of the sand like grass,
-vanishing all at once)* · **Titan triggerfish**
+| **Staghorn Coral** | The fast-growing reef-builder, and the first thing bleaching takes |
+| **Brain Coral** | Grows about a centimetre a year and lives for centuries — one colony can outlast a village |
+| **Giant Clam** | Farms algae in its own mantle and can live past a hundred. Joins **No Bones About It** |
+| **Pistol Shrimp** | Snaps a claw hard enough to boil the water, and shares a burrow with a goby that stands watch. Joins **The Colony** and **Strange Allies** |
+| **Humphead Wrasse** | Born female, and some become male later — joins **The Switch**. One fish can be worth more than the boat that took it |
 
 ---
 
-## COAST & KELP — CONFIRMED, ~12 species
+## COAST & KELP — CONFIRMED, 6 species
 
-**Coast needs less.** At 49 it is reasonably healthy and the list is varied. But
-a few are too good to leave out.
+**Batch finalised at 6** on 2026-08-29 by **The Last Forty-Four** — the Little
+Blue Penguin already in the pipeline, plus five. The earlier ~12 list
+(mudskipper, archerfish, limpet, abalone, sea hare, the two temperate seals) is
+superseded; it is kept in `NEW_DIRECTION.md` as the record.
+
+**40 → 45. No gull, and nothing fixed to a rock.** Zonation is the coast's
+defining pattern and the roster had none of it — the Ochre Sea Star was here
+without the mussel bed that makes it the textbook keystone predator.
 
 | Species | Why |
 |---|---|
-| **Mudskipper** | **A fish that lives out of water.** Walks on its fins, breathes through its skin, climbs trees, and defends a territory on land |
-| **Archerfish** | **Shoots a jet of water** to knock insects off overhanging branches, correcting for refraction, and learns by watching others |
-| **Northern gannet** | **Plunge-dives from thirty metres at a hundred kilometres an hour**, with air sacs under the skin to absorb the impact |
-| **Cormorant** | Its wings are **not waterproof** — that is why it stands with them spread. It trades buoyancy for the ability to chase fish |
-| **Black skimmer** | The **lower half of its bill is longer than the upper**. It flies with it slicing the water and snaps shut on contact |
-| **Sanderling** | The small wave-chasing shorebird that runs in and out with every wave |
-| **Limpet** | Its teeth are **the strongest biological material ever measured**, stronger than spider silk |
-| **Goose barnacle** | Glued head-down for life, and medieval Europe believed barnacle geese hatched from them |
-| **Abalone** | Fished to collapse, and now the subject of one of the largest marine restoration efforts anywhere |
-| **Sea hare** | Releases a purple ink that jams a predator's sense of smell |
-| **Grey seal** · **Harbour seal** | The two temperate seals, and the coast currently has neither |
-
+| **Little Blue Penguin** | Already in the pipeline. The smallest penguin, and it comes ashore after dark |
+| **Herring Gull** | Reads human behaviour well enough to time its raids, and is declining despite how it looks |
+| **Blue Mussel** | Anchors itself with threads stronger than tendon and builds the bed everything else lives in |
+| **Acorn Barnacle** | Glues its head to a rock for life and kicks food into its mouth with its legs |
+| **Giant Green Anemone** | Green from the algae inside its own tissue. Completes the tide pool, and joins **The Slowest** and **Strange Allies** |
+| **Aldabra Giant Tortoise** | Island gigantism, a century and a half of life, and a walking pace — joins **The Island Rule**, **The Old Ones** and **The Slowest** |
 
 ---
 
-## MOUNTAINS — proposed, ~15 species
+## FARMLAND — CONFIRMED, 10 species
+
+**37 → 46. Nothing the Barn Owl eats.** Birds, insects and mid-sized mammals, but
+no rodents, no amphibian and no reptile — the predators already placed here had
+no prey base under them. It is also **the first biome the player ever walks
+into**, which makes it the worst one to leave thin.
+
+| Species | Why |
+|---|---|
+| **Plains Pocket Gopher** | Already in the pipeline, from Ayr's 2026-08-25 note |
+| **House Mouse** | Followed people out of Asia and into every building on earth |
+| **Brown Rat** | The same story told louder, and the wild counterpart to the Fancy Rat in The Kept |
+| **Field Vole** | What the Barn Owl actually lives on; its numbers crash on a four-year cycle and everything above it follows |
+| **Common Toad** | Walks back to the pond it was born in every spring, across roads, in numbers |
+| **Grass Snake** | Plays dead convincingly — mouth open, tongue out, and a smell to finish it |
+| **Eurasian Magpie** | One of the very few animals to pass the mirror test. Joins **Who's That** |
+| **Eurasian Skylark** | Sings only in flight, and its decline is the clearest single measure of what changed in farming |
+| **European Mole** | A hand evolved into a shovel, and saliva that paralyses earthworms |
+| **European Badger** | A pasture and hedgerow animal, which is why it belongs here rather than in the wood. Embryonic diapause — joins **On Pause** |
+
+**House Mouse and Brown Rat are the wild forms of Fancy Mouse and Fancy Rat**,
+which sit in The Kept. That is allowed and the roster already does it: **Pig** is
+in The Kept while **Wild Boar** is in the forest, and they are one species. The
+rule this must not break is the budgerigar rule — the same *form* is never
+stocked twice. Write the pairing into both entries the way Rock Dove and Fancy
+Pigeon already do.
+
+**European Mole arrives on merit.** Its stated reason in *The Last Forty-Four*
+was the *Rare Poison* badge, which Ayr cut on 2026-08-28. The shovel hands and
+the paralysing saliva are reason enough without it.
+
+---
+
+## WETLAND — CONFIRMED, 2 species
+
+**45 → 47. Already at the floor**, and the best-composed biome on the roster.
+What it lacked was a freshwater predatory fish.
+
+| Species | Why |
+|---|---|
+| **Northern Pike** | The ambush predator the rest of the pond is arranged around |
+| **Electric Eel** | Not an eel — a knifefish, and it delivers 860 volts. Joins **Not What It Looks Like** |
+
+---
+
+## SAVANNA — CONFIRMED, 2 species
+
+**74 → 75.** The Gemsbok was already in the pipeline as a quest requirement. The
+other arrival is the best story in the badge set.
+
+| Species | Why |
+|---|---|
+| **Gemsbok** | Already in the pipeline. Required by the conservancy quest — the roster held only the Arabian Oryx, which is a desert animal and already the subject of the desert elder quest |
+| **Greater Honeyguide** | Leads people to bees' nests, on purpose, answering a call its human partners have used for generations — and takes the wax when they leave. **The only mutualism in the game where the other partner is us.** Joins **Strange Allies** |
+
+---
+
+## FOREST — CONFIRMED, 4 species
+
+Forest **finishes at 55 and gains nothing net.** Four species entered the
+pipeline over time and one entry leaves to make room for the last of them.
+
+| Species | Why |
+|---|---|
+| **Iberian Lynx** | Already in the pipeline. Quest animal, and joins **Back From the Brink** |
+| **Bumblebee Bat** | Two grams, and it contests "smallest mammal" with the Etruscan shrew — which is the fact. Joins **The Smallest** |
+| **Wood Frog** | Freezes solid every winter — heart stopped, up to 65% of its body water ice — and thaws. Joins **Sub-Zero** |
+| **Indian Giant Squirrel** | Nearly a metre nose to tail, maroon and orange, and the largest squirrel there is |
+
+**Black Cockatoo leaves** to make room for the squirrel (Ayr, 2026-08-29).
+"Black cockatoo" is five different birds — red-tailed, yellow-tailed, glossy,
+Carnaby's and Baudin's — and the entry names none of them, while Sulphur-crested
+Cockatoo already holds the cockatoo slot in the same biome. It failed the naming
+rule *and* it was redundant, and it carried no badge and no quest. Recorded in
+`design/cut_species.md`.
+
+---
+
+## MOUNTAINS — CONFIRMED, 16 species
 
 Currently 34, and heavy on hoofed herbivores and raptors. What is missing is
 **everything that makes altitude itself interesting** — the animals that live
@@ -243,7 +257,7 @@ horns that can weigh 25 kg)* · **Himalayan tahr** · **Mountain goat**
 
 ---
 
-## DESERT — proposed, ~8 species, plus 4 moves
+## DESERT — CONFIRMED, 4 species, plus 4 moves
 
 ### Four reptiles moved in, not created
 
@@ -259,20 +273,25 @@ Saudi Arabia", which is arid)*
 
 ### New
 
+**Batch finalised at 4** on 2026-08-29 by **The Last Forty-Four**. The earlier
+~8 proposal (golden mole, shovel-snouted lizard, elf owl, chuckwalla) is
+superseded and kept in `NEW_DIRECTION.md` as the record. **Sidewinder** is not
+created — the roster's Rattlesnake was renamed to it by the generics audit, and
+**Addax** already exists and is flagged for the Vigil.
+
+**43 → 46. Nothing that solves water, and no scavenger.** The desert's real
+subject is water, and of 43 entries not one was there because of how it gets it.
+
 | Species | Why |
 |---|---|
-| **Namib desert beetle** | Stands on a dune facing the fog and **collects water on its own back**, then tips it into its mouth. The shell texture has been copied for real water-harvesting technology |
-| **Kangaroo rat** | **Never drinks water in its entire life.** It metabolises what it needs from dry seeds |
-| **Golden mole** | Blind, **iridescent** — genuinely shimmering — and it *swims* through loose sand rather than digging tunnels |
-| **Sidewinder** | Moves sideways specifically to keep **as little of itself as possible touching burning sand** at any moment |
-| **Shovel-snouted lizard** | Does a **thermal dance**, lifting its feet off the sand in alternating pairs, and dives into the dune to escape the heat |
-| **Elf owl** | **The smallest owl in the world**, at about 40 grams, nesting in woodpecker holes in giant cactus |
-| ~~**Addax**~~ | **Already exists** — and is already flagged for the Vigil. See the Vigil note in NEW_DIRECTION.md; do not create |
-| **Chuckwalla** | Wedges itself into a rock crack and **inflates its body** so it cannot be pulled out |
+| **Mexican Redknee** | Already in the pipeline, renamed from the bare "Tarantula" by the generics audit |
+| **Kangaroo Rat** | **Never drinks.** It manufactures all the water it needs from dry seed |
+| **Namib Desert Beetle** | Stands facing the fog at dawn and **drinks what condenses on its own back**. The shell texture has been copied for real water-harvesting technology |
+| **Egyptian Vulture** | Throws stones at ostrich eggs to break them — one of very few birds that uses a tool. Joins **The Toolkit** |
 
 ---
 
-## POLAR — LIKELY, 25 species
+## POLAR — CONFIRMED, 25 species
 
 *Ayr, 2026-08-25: "those are all great. we will most likely do that."*
 Takes polar from 28 to **53**.
@@ -303,30 +322,45 @@ nobody knows why)* · Ross's gull
 
 ## STILL TO DO
 
-- **Mole and gopher** for Farmland & Town (Ayr, 2026-08-25).
-- Resolve the **Alpaca / Farm Alpaca** duplicate.
-- Additions for **reef, desert, mountains, coast, open ocean** — not yet
-  proposed.
+**Nothing, for the roster.** The thousand closed on 2026-08-29. Every slot in the
+700 and the 300 has a name, and Uncle Albert reports a shortfall of zero.
+
+What remains is **making** them — art and field-guide entries for the species
+that are named but not yet drawn — and that is tracked as production, not as
+design. Two old items from this list are resolved: the mole and gopher for
+Farmland are both in (European Mole and Plains Pocket Gopher), and the
+Alpaca / Farm Alpaca duplicate was settled by the cosmetic-and-merged pass.
 
 ## Running total
 
-| | |
-|---|---|
-| Deep sea | 32 confirmed |
-| Open ocean | ~25 confirmed |
-| Coral reef | ~20 confirmed |
-| Coast | ~12 confirmed |
-| Mountains | ~15 proposed |
-| Desert | ~8 proposed + 4 moves |
-| Polar | 25 likely |
-| **Committed so far** | **114** |
-| Budget | 121 |
-| Cuts from forest & rainforest | **+15** |
-| **Remaining** | **22** |
+**The pipeline, by destination.** These are the `new>` lines in
+`design/PENDING_MOVES.txt`, which is the only place a promise counts.
 
-**Mountains and desert are still unproposed.** The 15 cuts recorded in
-`design/cut_species.md` bring the remaining budget to 22, which covers a real
-pass at both without moving the 700.
+| Biome | In the pipeline | Biome finishes at |
+|---|---|---|
+| Deep sea | 43 | 55 |
+| Polar | 25 | 49 |
+| Open ocean | 17 | 45 |
+| Mountains | 16 | 48 |
+| Farmland | 10 | 46 |
+| Coast | 6 | 45 |
+| Coral reef | 5 | 46 |
+| Desert | 4 | 46 |
+| Forest | 4 | 55 *(one entry leaves)* |
+| Wetland | 2 | 47 |
+| Savanna | 2 | 75 |
+| Rainforest | 0 | 93 |
+| | | **650** |
+
+**650 biomes + 50 The Kept = 700.** With the 300 already complete — Vigil 50,
+On the Brink 50, The Telling 100, The Record 50, The Breeding Centre 50 — that is
+**1000, and it is closed.**
+
+The floor is **45**, not the ~57 this document opened with. Every biome clears it
+and the four big ones sit well above, which is true to the world: rainforest at
+93 and savanna at 75 are not overweight, they are correct.
+
+**Do not reopen the counts.** If a species is added, one comes out.
 
 ## Added 2026-08-25 — quest requirement
 

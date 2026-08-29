@@ -589,3 +589,199 @@ RENAME=Peccary::Chacoan Peccary|Dormouse::Edible Dormouse|Sawfish::Smalltooth Sa
 ! --- Wood Frog: freezes solid every winter - heart stopped, no breathing, up to 65%
 ! ---   of its body water ice - and thaws in spring. Ranges above the Arctic Circle.
 new>forest=Bumblebee Bat|Wood Frog
+
+! ============================================================================
+! THE LAST FORTY-FOUR - Ayr, 2026-08-29. THE THOUSAND CLOSES HERE.
+!
+! Published as the design record "The Last Forty-Four" and transcribed into the
+! pipeline on the day Ayr asked for the number to stop moving.
+!
+! The document planned 44. Two of them were already in the pipeline above
+! (Bumblebee Bat and the forest's second slot), so 42 arrive here. Every biome
+! lands on its target, the twelve sum to 650, The Kept holds 50 - that is 700 -
+! and the 300 is already complete. One thousand.
+!
+! TARGETS   opensea 45   farmland 46   coast 45   reef 46   desert 46
+!           wetland 47   forest  55   savanna 75  alpine 48  polar 49
+!           deepsea 55   rainforest 93                        = 650
+!
+! The seven species the document proposed cutting to hold the number - Harbour
+! Seal, European Green Crab, Day Octopus, Cactus Wren, Ring-necked Pheasant,
+! Mallard and Water Vole - were never in the roster at all. That trade was
+! against an earlier candidate list. Nothing is cut for them.
+! ============================================================================
+
+! --- OPEN OCEAN, 28 -> 45. The middle of the food web was missing. Of 28 entries
+! ---   ten were whales and dolphins and seven were sharks; not one schooling
+! ---   fish, not one invertebrate, and a single seabird. A highlight reel rather
+! ---   than an ocean. These are the shoals, the drifters, and the birds that
+! ---   come to land only to nest.
+! --- Opah: the only fish known to be fully warm-blooded, heating itself by
+! ---   flapping its pectoral fins.
+! --- Portuguese Man o' War: not one animal but a colony of four kinds of
+! ---   specialised individual that cannot live apart.
+! --- Sargassum Frogfish: lives only in floating weed and is invisible inside it.
+! ---   The Sargasso is habitat, not scenery.
+! --- Loggerhead Turtle: spends its first decade adrift out here - the lost years.
+new>opensea=Atlantic Bluefin Tuna|Chub Mackerel|Atlantic Herring|Mahi-mahi|Opah|Oceanic Whitetip Shark|Blue Shark|Remora|Sargassum Frogfish|Humboldt Squid|Portuguese Man o' War|Northern Gannet|Sooty Shearwater|Wilson's Storm Petrel|Red-billed Tropicbird|Loggerhead Turtle|Olive Ridley Turtle
+
+! --- FARMLAND, 37 -> 46. Nothing the Barn Owl eats. Birds, insects and mid-sized
+! ---   mammals, but no rodents, no amphibian and no reptile - the predators
+! ---   already placed here had no prey base under them. It is also the first
+! ---   biome the player ever walks into.
+! --- House Mouse and Brown Rat are the WILD FORMS of Fancy Mouse and Fancy Rat in
+! ---   The Kept. That is allowed and the roster already does it: Pig sits in The
+! ---   Kept while Wild Boar sits in the forest, and they are one species. The rule
+! ---   this must not break is the budgerigar rule - the same FORM is never stocked
+! ---   twice. Write the pairing into both entries the way Rock Dove and Fancy
+! ---   Pigeon already do.
+! --- Field Vole is what the Barn Owl actually lives on. Its numbers crash on a
+! ---   four-year cycle and everything above it follows.
+! --- European Mole arrives on its own merit. Its stated reason in the document was
+! ---   the Rare Poison badge, which Ayr cut on 2026-08-28. A hand evolved into a
+! ---   shovel, and saliva that paralyses earthworms, is reason enough without it.
+new>farmland=House Mouse|Brown Rat|Field Vole|Common Toad|Grass Snake|Eurasian Magpie|Eurasian Skylark|European Mole|European Badger
+
+! --- COAST, 40 -> 45. No gull, and nothing fixed to a rock. Zonation is the
+! ---   coast's defining pattern and the roster had none of it - the Ochre Sea Star
+! ---   was here without the mussel bed that makes it the textbook keystone
+! ---   predator.
+! --- Acorn Barnacle: glues its head to a rock for life and kicks food into its
+! ---   mouth with its legs.
+new>coast=Herring Gull|Blue Mussel|Acorn Barnacle|Giant Green Anemone|Aldabra Giant Tortoise
+
+! --- REEF, 41 -> 46. Forty-one species and not one coral. The reef had its fish,
+! ---   its cleaner, its sharks and the starfish that eats coral - but not the
+! ---   animal that builds the place. A player could complete the biome without
+! ---   ever meeting the reef itself.
+! --- Brain Coral grows about a centimetre a year and lives for centuries; one
+! ---   colony can outlast a village.
+new>reef=Staghorn Coral|Brain Coral|Giant Clam|Pistol Shrimp|Humphead Wrasse
+
+! --- DESERT, 43 -> 46. Nothing that solves water, and no scavenger. The desert's
+! ---   real subject is water, and of 43 entries not one was there because of how
+! ---   it gets it.
+! --- Kangaroo Rat never drinks - it manufactures all the water it needs from dry
+! ---   seed. Namib Desert Beetle stands facing the fog at dawn and drinks what
+! ---   condenses on its own back.
+new>desert=Kangaroo Rat|Namib Desert Beetle|Egyptian Vulture
+
+! --- WETLAND, 45 -> 47. Already at the floor and the best-composed biome on the
+! ---   roster. What it lacked was a freshwater predatory fish.
+new>wetland=Northern Pike|Electric Eel
+
+! --- SAVANNA, 74 -> 75. One arrival, and it is the best story in the badge set.
+! ---   The Greater Honeyguide leads people to bees' nests, on purpose, answering a
+! ---   call its human partners have used for generations - and takes the wax when
+! ---   they leave. The only mutualism in the game where the other partner is us.
+new>savanna=Greater Honeyguide
+
+! --- FOREST stays at 55. Ayr, 2026-08-29: the Indian Giant Squirrel is worth a
+! ---   slot - nearly a metre nose to tail, maroon and orange, the largest squirrel
+! ---   there is - so one entry leaves to make room.
+! --- Black Cockatoo goes. "Black cockatoo" is five different birds - red-tailed,
+! ---   yellow-tailed, glossy, Carnaby's and Baudin's - and the entry names none of
+! ---   them, while Sulphur-crested Cockatoo already holds the cockatoo slot in the
+! ---   same biome with Crimson Rosella and Nicobar Pigeon beside it. It failed the
+! ---   naming rule AND it was redundant; it was the only forest entry that was
+! ---   both, and it carried no badge and no quest.
+forest>cut=Black Cockatoo
+new>forest=Indian Giant Squirrel
+
+! ============================================================================
+! THE DEEP-SEA NAMING PASS - Ayr, 2026-08-29, from "The Last Forty-Four".
+!
+! Twenty-six entries whose name was a genus, a family, an order, a class or a
+! phylum rather than a species - nearly all of them in the deep sea, which the
+! Species Audit had already flagged as "all mine, all generic, all need naming."
+!
+! Twenty-one are renamed below. Five keep the name everyone knows and simply
+! credit the species in the entry text; those are listed at the end and are NOT
+! renames.
+!
+! Where a real common name exists for the right species it is used. Where only
+! the binomial identifies the animal, the binomial is the name - which is what
+! the roster already does with Deepstaria and Bathydevius.
+!
+! SEVEN OF THESE OVERRIDE AN EARLIER RENAME on the same source name. The rename
+! table is read in file order and the last pair wins, so the line below is the
+! one that takes effect. The earlier lines are left where they are: they are the
+! record of how the name got here.
+! ============================================================================
+! Anglerfish        -> Humpback Anglerfish: the black seadevil. Carries the
+!                      bacterial lure in "Lights On" and the magnified-photograph
+!                      point in "Bad Reputation".
+! Atolla            -> Alarm Jellyfish: A. wyvillei lights up to draw a BIGGER
+!                      predator onto whatever just grabbed it.
+! Barreleye         -> Macropinna Barreleye: the transparent-headed one, which is
+!                      what popular use already means.
+! Glass Squid       -> Googly-eyed Glass Squid: Teuthowenia pellucida, a real name
+!                      for a described species. OVERRIDES Glass Squid::Cockatoo
+!                      Squid above.
+! Coffinfish        -> Australian Coffinfish: the one that holds a lungful of
+!                      water in its gills for four minutes.
+! Fangtooth         -> Common Fangtooth: sixteen centimetres, which is the whole
+!                      "Bad Reputation" point.
+! Hatchetfish       -> Silver Hatchetfish: counter-illumination, and the standard
+!                      name.
+! Lanternfish       -> Glacier Lanternfish: the abundant North Atlantic one. GDD
+!                      s13 gives lanternfish the bioluminescence slot.
+! Black Coral       -> Leiopathes Black Coral: the four-thousand-year individual.
+!                      The longevity claim in "The Old Ones" is this one's.
+! Bamboo Coral      -> Isidella Bamboo Coral: a described, photographed species.
+!                      OVERRIDES Bamboo Coral::Deep-sea Bamboo Coral above.
+! Sea Lily          -> Japanese Sea Lily: the stalked crinoid actually studied and
+!                      filmed. OVERRIDES Sea Lily::Stalked Sea Lily above.
+! Xenophyophore     -> Giant Xenophyophore: Syringammina fragilissima, a single
+!                      cell twenty centimetres across.
+! Yeti Crab         -> Hoff Crab: Kiwa tyleri, named for the hairy chest, and it
+!                      farms bacteria on itself.
+! Deep-sea Barnacle -> Neolepas Vent Barnacle: described from Indian Ocean vents.
+!                      OVERRIDES Deep-sea Barnacle::Vent Barnacle above.
+! Squat Lobster     -> Munidopsis Squat Lobster: the Galapagos-vent species.
+!                      OVERRIDES Squat Lobster::Vent Squat Lobster above.
+! Vent Mussel       -> Vent Mussel: SHORTENED back from Deep-sea Vent Mussel. The
+!                      species is Bathymodiolus thermophilus, from the 1977
+!                      discovery, and it is credited in the entry rather than in
+!                      the name. This pair is deliberately an identity, and it
+!                      OVERRIDES Vent Mussel::Deep-sea Vent Mussel above.
+! Alicella          -> Giant Amphipod: A. gigantea, the largest amphipod known,
+!                      and a plainer name.
+! Tardigrade        -> Water Bear: Milnesium tardigradum, the species that went to
+!                      orbit and came back. FLAGGED FOR AYR - this is the one
+!                      rename in the pass that does not obviously gain
+!                      specificity, since "water bear" is also used for the whole
+!                      phylum. Reversing it is a one-line change.
+! Velvet Worm       -> Southern Velvet Worm: Euperipatoides rowelli, the
+!                      glue-squirting Australian one.
+! Coelacanth        -> West Indian Ocean Coelacanth: Latimeria chalumnae, the 1938
+!                      trawler off South Africa. The audit already ruled on this
+!                      shape when it renamed Hippo to Common Hippopotamus - a
+!                      two-species group gets named, it does not get an exemption.
+!                      The Indonesian coelacanth becomes the twist INSIDE the
+!                      entry rather than a second slot. Both badges survive:
+!                      "Unchanged" and "Back From the Dead" are about the lineage,
+!                      and the lineage belongs to the named species too.
+! Trilobite         -> Elrathia: E. kingii, Middle Cambrian, the most abundant
+!                      trilobite fossil on earth.
+RENAME=Anglerfish::Humpback Anglerfish|Atolla::Alarm Jellyfish|Barreleye::Macropinna Barreleye|Glass Squid::Googly-eyed Glass Squid|Coffinfish::Australian Coffinfish|Fangtooth::Common Fangtooth|Hatchetfish::Silver Hatchetfish|Lanternfish::Glacier Lanternfish|Black Coral::Leiopathes Black Coral|Bamboo Coral::Isidella Bamboo Coral|Sea Lily::Japanese Sea Lily|Xenophyophore::Giant Xenophyophore|Yeti Crab::Hoff Crab|Deep-sea Barnacle::Neolepas Vent Barnacle|Squat Lobster::Munidopsis Squat Lobster|Vent Mussel::Vent Mussel|Alicella::Giant Amphipod|Tardigrade::Water Bear|Velvet Worm::Southern Velvet Worm|Coelacanth::West Indian Ocean Coelacanth|Trilobite::Elrathia
+
+! --- THE FIVE THAT KEEP THEIR NAME. Not renames. The species is credited in the
+! --- entry text and the name on the card does not change, because the name on the
+! --- card is already the one people know:
+! ---   Giant Siphonophore  (Praya dubia)
+! ---   Zombie Worm         (Osedax mucofloris)  - "bone-eating snot flower" is a
+! ---     real published name, but "Bad Reputation" lists this animal under FEARED
+! ---     FOR THE NAME. Renaming it would take it out of the badge.
+! ---   Dumbo Octopus       (Grimpoteuthis bathynectes)
+! ---   Sea Pig             (Scotoplanes globosa)
+! ---   Giant Isopod        (Bathynomus giganteus)
+! ---
+! --- And two the pass deliberately leaves alone:
+! ---   Bigfin Squid - the Magnapinna animals on film have never been formally
+! ---     described, so there is no species to name. Say that in the entry rather
+! ---     than attach a binomial that is not real. "The longest arms of any squid,
+! ---     and nobody has ever caught one" is a better card anyway.
+! ---   Chambered Nautilus - flagged in error. It is the standard common name of
+! ---     Nautilus pompilius, one species. It only looked generic beside the family
+! ---     Nautilidae. Record the binomial in the entry and leave the name alone.

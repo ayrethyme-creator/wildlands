@@ -265,7 +265,11 @@ bnames = sorted((n for n, _ in badges), key=len, reverse=True)
 # is exactly the case this check exists to catch
 snames = sorted(alln, key=len, reverse=True)
 for doc in STRICT:
-    for sent in re.split(r'(?<=[.!?])\s+|\n\n', read(doc)):
+    # A markdown table row has no full stop, so consecutive rows merged into one
+    # "sentence" and every species got paired with the PREVIOUS row's badge. Six
+    # false hits appeared the moment new_species.md grew tables, 2026-08-29.
+    # A report you learn to ignore is worse than no report, so rows split too.
+    for sent in re.split(r'(?<=[.!?])\s+|\n\n|\n(?=\s*\|)', read(doc)):
         flat = ' '.join(sent.split())
         b = next((x for x in bnames if x in flat), None)
         if not b:
@@ -295,6 +299,11 @@ SECTION_BIOME = {
     'DEEP SEA': 'deepsea', 'OPEN OCEAN': 'opensea', 'CORAL REEF': 'reef',
     'COAST & KELP': 'coast', 'MOUNTAINS': 'alpine', 'DESERT': 'desert',
     'POLAR': 'polar', 'FARMLAND': 'farmland',
+    # Added 2026-08-29 when the roster closed: every biome now has a batch
+    # heading, so every batch is checkable rather than only the seven that
+    # happened to have been written up.
+    'WETLAND': 'wetland', 'SAVANNA': 'savanna', 'FOREST': 'forest',
+    'RAINFOREST': 'rainforest',
 }
 pipeline = {}
 for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):

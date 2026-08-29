@@ -96,3 +96,35 @@ Also not used: 4 of the 12 Ice Age species from the Vigil - Cave Lion,
 Short-faced Bear, Giant Beaver, Steppe Bison.
 
 New game only. The Safari Saga roster on `main` is untouched.
+
+---
+
+## Approved cut — Ayr, 2026-08-29. The one that closed the thousand
+
+### Forest (1) — 56 → 55
+
+| Cut | Reason |
+|---|---|
+| **Black Cockatoo** | **A bare group name.** Red-tailed, yellow-tailed, glossy, Carnaby's and Baudin's are five different birds and the entry names none of them. **Sulphur-crested Cockatoo already holds the cockatoo slot in the same biome**, with Crimson Rosella and Nicobar Pigeon beside it. It failed the naming rule *and* it was redundant — the only forest entry that was both — and it carried no badge and no quest |
+
+It leaves so that the **Indian Giant Squirrel** can have the slot: nearly a metre
+nose to tail, maroon and orange, and the largest squirrel there is. Forest
+finishes at 55 either way, which is what the thousand needs.
+
+Twenty-six other forest entries were checked first and could not go: every one
+of them carries a badge, a quest, or both. Twenty-nine were free, and of those
+the two runners-up were **Elk** (in British English an elk *is* a moose, and
+Moose sits in the same biome — but cutting it throws away a species to solve a
+naming problem) and **Quokka** (one of eight Australian marsupials here, but the
+best-known face of the eight).
+
+### The seven that were never cut
+
+*The Last Forty-Four* proposed cutting **Harbour Seal, European Green Crab, Day
+Octopus, Cactus Wren, Ring-necked Pheasant, Mallard** and **Water Vole** to hold
+the number. **None of them was ever in the roster** — that trade was against an
+earlier candidate list, not against the data. Nothing was cut for them, and
+Ayr's Water Vole veto was moot. Recorded here so the proposal is not acted on a
+second time.
+
+New game only. The Safari Saga roster on `main` is untouched.

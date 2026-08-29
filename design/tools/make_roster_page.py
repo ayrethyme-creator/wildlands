@@ -162,7 +162,8 @@ q.addEventListener('input',run);run();
 p = ['<title>Terrane Roster</title>', '<style>%s</style>' % CSS, '<div class="wrap">',
      '<header class="top"><h1>Terrane Roster</h1>'
      '<p class="lede">Every creature in the game data &mdash; <b>%d</b> entries today, '
-     'of which <b>%d</b> sit in the twelve biomes against a target of <b>700</b>.</p>'
+     'of which <b>%d</b> sit in the twelve biomes. The twelve biomes target <b>650</b>, '
+     'and with The Kept at 50 that is the <b>700</b>.</p>'
      '<p class="prov">Read from the running game, not parsed from source. Three separate '
      'attempts to extract these numbers with regular expressions returned 461, 516 and 465, '
      'all wrong, because DEX entries come in two different shapes.</p></header>' % (real, bt),
@@ -177,10 +178,13 @@ p = ['<title>Terrane Roster</title>', '<style>%s</style>' % CSS, '<div class="wr
      'game data; <span style="color:var(--accent);border-bottom:1px dashed">underlined</span> ones '
      'do not exist yet and need creating. See design/PENDING_MOVES.txt. '
      'The gap to 700 living species is <b>%d</b>.</p></footer>'
-     % (bt, len(d['vigil']) + len(d['mythic']) + len(d['kept']) + len(d['fossil']),
-        len(d['lifestage']), len(d['unplaced']), real, len(TOCREATE), 700 - bt),
+     % (bt, sum(len(d.get(k, [])) for k in
+            ('vigil', 'brink', 'mythic', 'fossil', 'breeding')),
+        len(d['lifestage']), len(d['unplaced']), real, len(TOCREATE),
+        700 - (bt + len(d['kept']))),
      '</div>', '<script>%s</script>' % JS]
 
 out = sys.argv[1] if len(sys.argv) > 1 else 'roster.html'
 io.open(out, 'w', encoding='utf-8').write('\n'.join(p))
-print('wrote', out, '| biomes', bt, '| total', tot, '| gap to 700 =', 700 - bt)
+print('wrote', out, '| biomes', bt, '| The Kept', len(d['kept']),
+      '| total', tot, '| gap to 700 =', 700 - (bt + len(d['kept'])))
