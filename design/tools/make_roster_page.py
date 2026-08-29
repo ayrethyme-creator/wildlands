@@ -184,7 +184,7 @@ p = ['<title>Terrane Roster</title>', '<style>%s</style>' % CSS, '<div class="wr
         700 - (bt + len(d['kept']))),
      '</div>', '<script>%s</script>' % JS]
 
-out = sys.argv[1] if len(sys.argv) > 1 else 'roster.html'
+out = sys.argv[1] if len(sys.argv) > 1 else 'design/roster.html'
 io.open(out, 'w', encoding='utf-8').write('\n'.join(p))
 print('wrote', out, '| biomes', bt, '| The Kept', len(d['kept']),
       '| total', tot, '| gap to 700 =', 700 - (bt + len(d['kept'])))
