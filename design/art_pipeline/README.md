@@ -68,12 +68,19 @@ The craft rules, learned across roughly 140 corrective renders:
 3. **Do negate a literal object the animal is not.** "absolutely NOT a wooden barrel
    with staves" works, because the noun is not one of its features. The deep sea is
    almost entirely this problem — sea pig, coffinfish, hatchetfish, brain coral.
-4. **Say nothing about the background, even to deny it.** "clear sky all around"
+4. **A SIMILE IS AS DANGEROUS AS A NEGATION — the model draws the comparison object.**
+   Proved on the first Terrane batch: "like a wadded paper flower" produced a rose, and
+   "like a small bare tree" produced a leafless tree with no coral in it. Same mechanism
+   as "bat-like ears" becoming bat wings. A comparison to a **body part or a plain
+   shape** is safe — *like a beard, like a collar, like a cone*. A comparison to a
+   **whole object or organism that could stand in for the animal** is not — *like a
+   flower, like a tree, like an ice-cream cone, like a bat's*.
+5. **Say nothing about the background, even to deny it.** "clear sky all around"
    painted a real sky on 6 of 10 bats. The COMPOSITION clause already asks for an
    empty backdrop.
-5. **If a pose keeps producing a mangled animal, change the pose.** The fruit bat's
+6. **If a pose keeps producing a mangled animal, change the pose.** The fruit bat's
    head was unfixable upside down and perfect the moment it was drawn upright.
-6. **Name the distinguishing feature in capitals**, and where two species will be
+7. **Name the distinguishing feature in capitals**, and where two species will be
    confused, say what it must NOT be — four penguins in one batch need four different
    diagnostics or they all come out as the same bird.
 
