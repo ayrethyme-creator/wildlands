@@ -2116,7 +2116,7 @@ Controlled / Baited / Lured). One idea serving two systems.
 
 ---
 
-# 12. Badges — **DECIDED, count OPEN**
+# 12. Badges — **DECIDED**
 
 **An achievement system that is actually a curriculum.** Each badge is a concept in biology,
 and **the set you must assemble to earn it is the lesson.**
@@ -2270,8 +2270,9 @@ governs which species get made, not headcount.**
 invented world. **A biome with five species does matter, because it is not an ecosystem — it
 is a corridor with some bats in it.**
 
-That reasoning is also what cut caves as a biome, and it is why the thinnest biomes are the
-ones the remaining species work should go to.
+That reasoning is also what cut caves as a biome, and it is what set the floor at **45**.
+**Every biome now clears it**, and the biomes that were thinnest — open ocean, farmland,
+coast and reef — are exactly where the last 42 species went.
 
 ---
 
@@ -2682,7 +2683,7 @@ stays open**, which is why the rest of this document is not resting on air.
 | 4 | **Origin-language naming** for individual animals — needs proper sourcing | No |
 | 5 | ~~**The badge count** breaks the round-number rule~~ **SETTLED at 50**, 2026-08-28 | No |
 | 6 | **Fluorescence** — restore *Blacklight*, or drop it | No |
-| 7 | **The 44 remaining species** — some already claimed by badges | The roster |
+| 7 | ~~**The 44 remaining species**~~ **CLOSED**, 2026-08-29. All 42 outstanding slots transcribed into the pipeline from *The Last Forty-Four*; the roster stands at 1000 | No |
 | 8 | **`Only In Captivity`** needs an `EW` tag that does not exist in the data | The badge |
 | 9 | ~~**Sprite terrain**~~ — **answered in v7.** Two assets: the current 1001 become codex plates, game sprites are a later pass without props. **Ayr's call to accept** | The HD-2D look |
 | 10 | **Sandbox holding extinct species** — proposed, not ruled | No |

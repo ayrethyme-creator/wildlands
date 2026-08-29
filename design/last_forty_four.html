@@ -1,0 +1,581 @@
+<title>The Last Forty-Four</title>
+<style>
+:root{
+  --bg:#f6f8f6; --surface:#fff; --ink:#141814; --muted:#5f6b62; --rule:#dde3de;
+  --accent:#2f6b4f; --accentsoft:#e7f0ea; --add:#8a4a1e; --addsoft:#f4ece3;
+  --shadow:0 1px 2px rgba(20,24,20,.06);
+  --serif:ui-serif,"Iowan Old Style",Palatino,Georgia,serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e110f; --surface:#161a17; --ink:#e7ece8; --muted:#95a29a; --rule:#242b26;
+  --accent:#74c49a; --accentsoft:#1a2a21; --add:#d9a273; --addsoft:#2a2119; --shadow:none;
+}}
+:root[data-theme="dark"]{
+  --bg:#0e110f; --surface:#161a17; --ink:#e7ece8; --muted:#95a29a; --rule:#242b26;
+  --accent:#74c49a; --accentsoft:#1a2a21; --add:#d9a273; --addsoft:#2a2119; --shadow:none;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);margin:0;font:15px/1.55 var(--sans);
+ -webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px 96px}
+header.top{padding:56px 0 8px;display:flex;flex-direction:column;gap:16px}
+h1{font:600 clamp(30px,4.4vw,46px)/1.08 var(--serif);margin:0;letter-spacing:-.015em;
+ text-wrap:balance}
+.lede{color:var(--muted);max-width:64ch;margin:0;font-size:16px}
+.lede b{color:var(--ink);font-variant-numeric:tabular-nums}
+.prov{font-size:13px;color:var(--muted);border-left:2px solid var(--accent);
+ padding:3px 0 3px 12px;margin:0;max-width:64ch}
+
+.sum{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
+ box-shadow:var(--shadow);padding:18px 20px;margin:28px 0 0;display:flex;
+ flex-direction:column;gap:12px}
+.sum h2{font:600 13px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;
+ color:var(--muted);margin:0}
+.sum p{margin:0;color:var(--muted);font-size:14px;max-width:64ch}
+pre.calc{margin:0;font:13px/1.9 var(--mono);color:var(--ink);overflow-x:auto;
+ font-variant-numeric:tabular-nums;background:transparent;padding:0}
+pre.calc i{font-style:normal;color:var(--muted)}
+pre.calc b{color:var(--accent)}
+
+section{border-top:1px solid var(--rule);padding:34px 0 6px}
+h2.sec{font:600 24px/1.2 var(--serif);margin:0 0 6px;letter-spacing:-.01em}
+.blurb{color:var(--muted);font-size:14.5px;margin:0 0 22px;max-width:64ch}
+
+.chart{display:flex;flex-direction:column;gap:9px;margin:0 0 8px}
+.crow{display:grid;grid-template-columns:96px 1fr 62px;gap:12px;align-items:center}
+.cname{font-size:13.5px;color:var(--muted);text-align:right;white-space:nowrap;
+ overflow:hidden;text-overflow:ellipsis}
+.crow.hi .cname{color:var(--ink)}
+.track{position:relative;height:19px}
+.bars{position:absolute;inset:0;display:flex;gap:2px}
+.b1{background:var(--accent);border-radius:3px 0 0 3px}
+.b2{background:var(--add);border-radius:0 3px 3px 0}
+.bars .only{border-radius:3px}
+.floor{position:absolute;top:-4px;bottom:-4px;width:1px;background:var(--muted);opacity:.5}
+.cval{font-variant-numeric:tabular-nums;font-size:13.5px;color:var(--muted);white-space:nowrap}
+.cval b{color:var(--ink);font-weight:600}
+.cval i{font-style:normal;color:var(--add);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:14px 0 0;
+ padding-left:108px;font-size:13px;color:var(--muted)}
+.key{display:inline-flex;align-items:center;gap:7px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw.a{background:var(--accent)} .sw.b{background:var(--add)}
+.sw.f{width:1px;height:14px;border-radius:0;background:var(--muted);opacity:.6}
+
+.biome{border-top:1px solid var(--rule);padding:26px 0 4px}
+.bhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 10px}
+.bhead h3{font:600 20px/1.25 var(--serif);margin:0;letter-spacing:-.01em}
+.bhead .count{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);
+ background:var(--accentsoft);border-radius:99px;padding:3px 10px;white-space:nowrap}
+.bhead .count b{color:var(--accent)}
+.gap{color:var(--muted);font-size:14.5px;margin:0 0 14px;max-width:64ch}
+.gap b{color:var(--ink);font-weight:600}
+ul.sp{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+ul.sp li{display:grid;grid-template-columns:minmax(150px,205px) 1fr;gap:2px 20px;
+ padding:9px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+ul.sp li:last-child{border-bottom:0}
+.sp .nm{font-weight:600;font-size:14.5px}
+.sp .nm em{font-style:normal;font-weight:400;font-size:11px;color:var(--add);
+ text-transform:uppercase;letter-spacing:.06em;display:block}
+.sp .why{color:var(--muted);font-size:14px}
+
+table{width:100%;border-collapse:collapse;font-size:14px;margin:0}
+.scroll{overflow-x:auto}
+th{text-align:left;font:600 11px/1.4 var(--sans);letter-spacing:.07em;
+ text-transform:uppercase;color:var(--muted);padding:0 14px 8px 0;
+ border-bottom:1px solid var(--rule);white-space:nowrap}
+td{padding:8px 14px 8px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.a{font-weight:600;white-space:nowrap}
+td.b{color:var(--accent);font-weight:600;white-space:nowrap}
+td.c{color:var(--muted);font-size:13.5px}
+tr:last-child td{border-bottom:0}
+h3.grp{font:600 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;
+ color:var(--add);margin:26px 0 10px}
+h3.grp:first-of-type{margin-top:0}
+
+.note{background:var(--surface);border:1px solid var(--rule);border-left:2px solid var(--add);
+ border-radius:8px;padding:14px 16px;box-shadow:var(--shadow);margin:0 0 12px}
+.note h4{font:600 14.5px/1.3 var(--sans);margin:0 0 4px}
+.note p{margin:0;color:var(--muted);font-size:14px;max-width:64ch}
+.next{background:var(--accentsoft);border:1px solid var(--rule);border-radius:10px;
+ padding:18px 20px;margin:20px 0 0}
+.next h4{font:600 13px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;
+ color:var(--accent);margin:0 0 10px}
+.next ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:7px;font-size:14.5px}
+.next li::marker{color:var(--accent)}
+footer{border-top:1px solid var(--rule);margin-top:34px;padding:20px 0 0;
+ color:var(--muted);font-size:13px}
+@media(max-width:560px){
+  ul.sp li{grid-template-columns:1fr}
+  .crow{grid-template-columns:78px 1fr 58px;gap:9px}
+  .legend{padding-left:0}
+  .cname{font-size:12.5px}
+}
+
+.exec{margin:26px 0 0;background:var(--surface);border:1px solid var(--rule);
+ border-left:3px solid var(--accent);border-radius:10px;padding:22px 24px;
+ box-shadow:var(--shadow)}
+.exec .tag{font:600 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+ color:var(--accent);margin:0 0 10px}
+.exec h2{font:600 22px/1.2 var(--serif);margin:0 0 10px;letter-spacing:-.01em}
+.exec p{margin:0 0 10px;color:var(--muted);max-width:66ch;font-size:14.5px}
+.exec p:last-child{margin-bottom:0}
+.exec b{color:var(--ink)}
+.exec ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;
+ gap:8px;font-size:14px;color:var(--muted)}
+.exec li::marker{color:var(--add)}
+.exec li b{color:var(--ink)}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <h1>The Last Forty-Four</h1>
+  <p class="lede">The forty-four species that complete the twelve biomes of Terrane, the
+  badge system reconciled against them, and the rule that finally makes the thousand add
+  up: <b>no cub, pup, caste, morph or sex difference occupies a slot.</b></p>
+  <p class="prov">Counts read from the Terrane Roster, which reads them from the running
+  game. Every candidate checked against all 1,138 roster entries and all 52 badges. Nothing
+  here is Critically Endangered or Extinct in the Wild, which by the admission rule belongs
+  to On the Brink instead.</p>
+</header>
+
+<div class="exec">
+  <p class="tag">Executed &middot; 29 August 2026</p>
+  <h2>This was carried out, and the thousand is closed</h2>
+  <p><b>The plan below is done.</b> Forty-two of the forty-four were transcribed into
+  <code>design/PENDING_MOVES.txt</code> &mdash; the other two were already in the pipeline.
+  Every biome landed on the target named here, the twelve sum to <b>650</b>, and with The
+  Kept at 50 that is <b>700</b>. With the 300 already complete: <b>1000</b>. Uncle Albert
+  reports a shortfall of zero and Cousin Bob passes.</p>
+  <p><b>The badge side closed too.</b> All six remaining stars are gone, so the badges
+  reference <b>324 species, of which 324 exist</b> &mdash; nothing on either list is waiting
+  to be invented.</p>
+  <p><b>Six things below are superseded. The text is left as written, because this is the
+  record of a proposal rather than a description of the data:</b></p>
+  <ul>
+    <li><b>It says 52 badges. There are 50.</b> Ayr cut <i>Armour</i> and <i>Rare Poison</i>
+    on 2026-08-28, after this was published. So the <b>Three-banded Armadillo &rarr;
+    European Pill Millipede</b> ruling is void, and <b>European Mole</b> keeps its farmland
+    slot on its own merit rather than for <i>Rare Poison</i>.</li>
+    <li><b>The seven species cut &ldquo;to hold the number&rdquo; were never in the roster.</b>
+    Harbour Seal, European Green Crab, Day Octopus, Cactus Wren, Ring-necked Pheasant,
+    Mallard and Water Vole return zero hits against the data &mdash; that trade was against
+    an earlier candidate list. Nothing was cut for them, and the Water Vole veto was moot.</li>
+    <li><b>Forest went differently.</b> The second forest slot went to <b>Wood Frog</b>, not
+    the Indian Giant Squirrel &mdash; <i>Sub-Zero</i> needed it, so the proposed
+    <b>Wood Frog &rarr; Antarctic Toothfish</b> swap was never taken. The squirrel is in
+    anyway: <b>Black Cockatoo</b> was cut to make room, being five different birds under one
+    name while Sulphur-crested Cockatoo already held that slot.</li>
+    <li><b>&ldquo;Nine are marked badge&rdquo; &mdash; it is twelve</b>, and eleven were
+    outstanding once Bumblebee Bat is set aside. All eleven are now in
+    <code>design/BADGES.txt</code>.</li>
+    <li><b>The two generic renames went the other way.</b> This proposed Chacoan Peccary
+    &rarr; Peccary and Edible Dormouse &rarr; Dormouse. The repo did the reverse &mdash;
+    generic to specific &mdash; which is what the naming rule actually requires.</li>
+    <li><b>Two badges now stand at three members.</b> Ayr ruled that <i>Dad's Turn</i> holds
+    at three rather than invent a fourth male-pregnancy species; <i>Heat Vision</i> fell to
+    three the same way when Green Tree Python was dropped beside the Ball Python already in
+    it.</li>
+  </ul>
+  <p>The deep-sea naming pass was applied in full: <b>21 renames</b> and five entries keeping
+  the name everyone knows with the binomial credited in the entry. One is flagged for review
+  &mdash; <b>Tardigrade &rarr; Water Bear</b> is the only rename in the pass that does not
+  clearly gain specificity.</p>
+</div>
+
+<div class="sum">
+  <h2>The thousand, and how it closes</h2>
+  <pre class="calc">650  <i>twelve biomes</i>          650 + 50            = <b>700</b>  <i>main game</i>
+ 50  <i>The Kept</i>              50+50+100+50+50     = <b>300</b>  <i>postgame</i>
+                                                  <b>1000</b>
+
+in the data today, countable species                <b>818</b>
+  <i>1000 entries − 120 life stages − 13 wardens − 44 cut − 3 coats − 2 merged</i>
+still to add                                        <b>182</b>
+  <i>138 already designed  +  44 biome slots, chosen below</i></pre>
+  <p>The GDD had the target right at 44. The roster footer's "the gap to 700 is 94" is the
+  one wrong number — it counted The Kept as postgame.</p>
+</div>
+
+<section>
+  <h2 class="sec">Where the forty-four go</h2>
+  <p class="blurb">The floor matters and the ceiling does not: a biome with too few species
+  is not an ecosystem, but a big biome holding more than its neighbours is true to the
+  world. Nothing goes to Rainforest, Deep Sea, Polar or Mountains. Every biome finishes at
+  45 or above, and the twelve land on exactly 650.</p>
+
+  <div class="chart">
+    <div class="crow hi"><div class="cname">Open Ocean</div><div class="track"><div class="bars"><div class="b1" style="flex:28"></div><div class="b2" style="flex:17"></div><div style="flex:48"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>45</b> <i>+17</i></div></div>
+    <div class="crow hi"><div class="cname">Farmland</div><div class="track"><div class="bars"><div class="b1" style="flex:37"></div><div class="b2" style="flex:9"></div><div style="flex:47"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>46</b> <i>+9</i></div></div>
+    <div class="crow hi"><div class="cname">Coast</div><div class="track"><div class="bars"><div class="b1" style="flex:40"></div><div class="b2" style="flex:5"></div><div style="flex:48"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>45</b> <i>+5</i></div></div>
+    <div class="crow hi"><div class="cname">Reef</div><div class="track"><div class="bars"><div class="b1" style="flex:41"></div><div class="b2" style="flex:5"></div><div style="flex:47"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>46</b> <i>+5</i></div></div>
+    <div class="crow hi"><div class="cname">Desert</div><div class="track"><div class="bars"><div class="b1" style="flex:43"></div><div class="b2" style="flex:3"></div><div style="flex:47"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>46</b> <i>+3</i></div></div>
+    <div class="crow hi"><div class="cname">Wetlands</div><div class="track"><div class="bars"><div class="b1" style="flex:45"></div><div class="b2" style="flex:2"></div><div style="flex:46"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>47</b> <i>+2</i></div></div>
+    <div class="crow hi"><div class="cname">Forest</div><div class="track"><div class="bars"><div class="b1" style="flex:53"></div><div class="b2" style="flex:2"></div><div style="flex:38"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>55</b> <i>+2</i></div></div>
+    <div class="crow hi"><div class="cname">Savanna</div><div class="track"><div class="bars"><div class="b1" style="flex:74"></div><div class="b2" style="flex:1"></div><div style="flex:18"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>75</b> <i>+1</i></div></div>
+    <div class="crow"><div class="cname">Mountains</div><div class="track"><div class="bars"><div class="b1 only" style="flex:48"></div><div style="flex:45"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>48</b></div></div>
+    <div class="crow"><div class="cname">Polar</div><div class="track"><div class="bars"><div class="b1 only" style="flex:49"></div><div style="flex:44"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>49</b></div></div>
+    <div class="crow"><div class="cname">Deep Sea</div><div class="track"><div class="bars"><div class="b1 only" style="flex:55"></div><div style="flex:38"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>55</b></div></div>
+    <div class="crow"><div class="cname">Rainforest</div><div class="track"><div class="bars"><div class="b1 only" style="flex:93"></div></div><div class="floor" style="left:48.4%"></div></div><div class="cval"><b>93</b></div></div>
+  </div>
+
+  <div class="legend">
+    <span class="key"><span class="sw a"></span> designed already</span>
+    <span class="key"><span class="sw b"></span> the forty-four</span>
+    <span class="key"><span class="sw f"></span> the floor, 45</span>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">The forty-four</h2>
+  <p class="blurb">Each entry names the job it does in the composition rule — apex predator,
+  mesopredator, herbivore large and small, scavenger, invertebrate, bird — and the fact that
+  makes it worth a card. Nine are marked <em style="color:var(--add);font-style:normal">badge</em>:
+  they were approved off the Badge Book and earn their slot twice.</p>
+
+  <div class="biome">
+    <div class="bhead"><h3>Open Ocean — The Blue</h3><div class="count">28 → <b>45</b></div></div>
+    <p class="gap"><b>The middle of the food web is missing.</b> Of 28 entries, ten are whales
+    and dolphins and seven are sharks. Not one schooling fish, one invertebrate, or more than
+    a single seabird — a highlight reel rather than an ocean.</p>
+    <ul class="sp">
+      <li><span class="nm">Atlantic Bluefin Tuna</span><span class="why">Warm-blooded, crosses the Atlantic in weeks, and its fishery is the textbook case of a quota argued over for forty years</span></li>
+      <li><span class="nm">Chub Mackerel</span><span class="why">The schooling fish nearly everything else in this biome is already eating</span></li>
+      <li><span class="nm">Atlantic Herring</span><span class="why">The biomass the North Atlantic runs on; shoals have been measured in cubic kilometres</span></li>
+      <li><span class="nm">Mahi-mahi</span><span class="why">Grows faster than almost any fish alive, and the colour drains out of it within minutes of death</span></li>
+      <li><span class="nm">Opah</span><span class="why">The only fish known to be fully warm-blooded — it heats itself by flapping its pectoral fins</span></li>
+      <li><span class="nm">Oceanic Whitetip Shark</span><span class="why">Was among the most abundant large animals on earth, and is down by more than 98% in some seas</span></li>
+      <li><span class="nm">Blue Shark</span><span class="why">The widest-ranging shark there is, and the one that follows ships</span></li>
+      <li><span class="nm">Remora</span><span class="why">Rides the sharks already in this biome; its dorsal fin evolved into a suction plate</span></li>
+      <li><span class="nm">Sargassum Frogfish</span><span class="why">Lives only in floating weed and is invisible inside it — the Sargasso is habitat, not scenery</span></li>
+      <li><span class="nm">Humboldt Squid</span><span class="why">Hunts in coordinated groups and signals to the others by flashing colour</span></li>
+      <li><span class="nm">Portuguese Man o' War</span><span class="why">Not one animal but a colony of four kinds of specialised individual that cannot live apart</span></li>
+      <li><span class="nm">Northern Gannet</span><span class="why">Dives from forty metres and has air sacs in its face to absorb the impact</span></li>
+      <li><span class="nm">Sooty Shearwater</span><span class="why">Flies a figure-of-eight around an entire ocean every year — about 65,000 km</span></li>
+      <li><span class="nm">Wilson's Storm Petrel</span><span class="why">One of the most numerous birds alive, and it appears to walk on the surface of the sea to feed</span></li>
+      <li><span class="nm">Red-billed Tropicbird</span><span class="why">Comes to land only to nest on a cliff, and can barely walk when it gets there</span></li>
+      <li><span class="nm">Loggerhead Turtle</span><span class="why">Spends its first decade adrift in open ocean — the lost years, unobserved until recently</span></li>
+      <li><span class="nm">Olive Ridley Turtle</span><span class="why">The arribada: tens of thousands come ashore to nest on one beach in a single night</span></li>
+    </ul>
+  </div>
+
+  <div class="biome">
+    <div class="bhead"><h3>Farmland — The Furrows</h3><div class="count">37 → <b>46</b></div></div>
+    <p class="gap"><b>Nothing the Barn Owl eats.</b> Birds, insects and mid-sized mammals, but
+    no rodents, no amphibian, no reptile — the predators already placed here have no prey base
+    under them. It is also the first biome the player ever walks into.</p>
+    <ul class="sp">
+      <li><span class="nm">House Mouse</span><span class="why">Followed people out of Asia and into every building on earth</span></li>
+      <li><span class="nm">Brown Rat</span><span class="why">The same story told louder, and the wild counterpart to the Fancy Rat in The Kept</span></li>
+      <li><span class="nm">Field Vole</span><span class="why">What the Barn Owl actually lives on; its numbers crash on a four-year cycle and everything above it follows</span></li>
+      <li><span class="nm">Common Toad</span><span class="why">Walks back to the pond it was born in every spring, across roads, in numbers</span></li>
+      <li><span class="nm">Grass Snake</span><span class="why">Plays dead convincingly — mouth open, tongue out, and a smell to finish it</span></li>
+      <li><span class="nm">Eurasian Magpie<em>badge</em></span><span class="why">One of the very few animals to pass the mirror test — <i>Who's That</i></span></li>
+      <li><span class="nm">Eurasian Skylark</span><span class="why">Sings only in flight, and its decline is the clearest single measure of what changed in farming</span></li>
+      <li><span class="nm">European Mole<em>badge</em></span><span class="why">A hand evolved into a shovel — and saliva that paralyses earthworms, which makes it a venomous mammal for <i>Rare Poison</i></span></li>
+      <li><span class="nm">European Badger<em>badge</em></span><span class="why">A pasture and hedgerow animal, which is why it belongs here rather than in the wood. Embryonic diapause — it can mate in spring and give birth the following winter. <i>On Pause</i></span></li>
+    </ul>
+    <div class="note" style="margin-top:16px">
+      <h4>House Mouse and Brown Rat are the same species as Fancy Mouse and Fancy Rat</h4>
+      <p>The Kept holds the domesticated forms of both. That is allowed, and the roster
+      already does it deliberately — <b>Pig</b> sits in The Kept while <b>Wild Boar</b> sits in
+      the forest, and they are one species. The rule it must not break is the budgerigar rule:
+      the same <i>form</i> is stocked, never duplicated. Write the pairing into both entries the
+      way Rock Dove and Fancy Pigeon already do it. Worth noting the same trap caught
+      <b>Mallard</b>, which is the wild form of the Domestic Duck already in The Kept — one more
+      reason it was the right cut.</p>
+    </div>
+  </div>
+
+  <div class="biome">
+    <div class="bhead"><h3>Coast — The Strand</h3><div class="count">40 → <b>45</b></div></div>
+    <p class="gap"><b>No gull, and nothing fixed to a rock.</b> Zonation is the coast's
+    defining pattern and the roster had none of it. The Ochre Sea Star was here without the
+    mussel bed that makes it the textbook keystone predator.</p>
+    <ul class="sp">
+      <li><span class="nm">Herring Gull</span><span class="why">Reads human behaviour well enough to time its raids, and is declining despite how it looks</span></li>
+      <li><span class="nm">Blue Mussel</span><span class="why">Anchors itself with threads stronger than tendon and builds the bed everything else lives in</span></li>
+      <li><span class="nm">Acorn Barnacle</span><span class="why">Glues its head to a rock for life and kicks food into its mouth with its legs</span></li>
+      <li><span class="nm">Giant Green Anemone<em>badge</em></span><span class="why">Green from the algae inside its own tissue. Completes the tide pool, and carries <i>The Slowest</i> and the clownfish mutualism in <i>Strange Allies</i></span></li>
+      <li><span class="nm">Aldabra Giant Tortoise<em>badge</em></span><span class="why">Island gigantism, a century and a half of life, and a walking pace — <i>The Island Rule</i>, <i>The Old Ones</i>, <i>The Slowest</i></span></li>
+    </ul>
+  </div>
+
+  <div class="biome">
+    <div class="bhead"><h3>Reef — The Garden</h3><div class="count">41 → <b>46</b></div></div>
+    <p class="gap"><b>Forty-one species and not one coral.</b> The reef had its fish, its
+    cleaner, its sharks and the starfish that eats coral — but not the animal that builds the
+    place. A player could complete the biome without meeting the reef itself.</p>
+    <ul class="sp">
+      <li><span class="nm">Staghorn Coral</span><span class="why">The fast-growing reef-builder, and the first thing bleaching takes</span></li>
+      <li><span class="nm">Brain Coral</span><span class="why">Grows about a centimetre a year and lives for centuries — one colony can outlast a village</span></li>
+      <li><span class="nm">Giant Clam<em>badge</em></span><span class="why">Farms algae in its own mantle and can live past a hundred — <i>No Bones About It</i></span></li>
+      <li><span class="nm">Pistol Shrimp<em>badge</em></span><span class="why">Snaps a claw hard enough to boil the water, and shares a burrow with a goby that stands watch — <i>The Colony</i> and <i>Strange Allies</i></span></li>
+      <li><span class="nm">Humphead Wrasse<em>badge</em></span><span class="why">Born female, and some become male later — <i>The Switch</i>. One fish can be worth more than the boat that took it</span></li>
+    </ul>
+  </div>
+
+  <div class="biome">
+    <div class="bhead"><h3>Desert — The Dry</h3><div class="count">43 → <b>46</b></div></div>
+    <p class="gap"><b>Nothing that solves water, and no scavenger.</b> The desert's real
+    subject is water, and of 43 entries not one was there because of how it gets it.</p>
+    <ul class="sp">
+      <li><span class="nm">Kangaroo Rat</span><span class="why">Never drinks. It manufactures all the water it needs from dry seed</span></li>
+      <li><span class="nm">Namib Desert Beetle</span><span class="why">Stands facing the fog at dawn and drinks what condenses on its own back</span></li>
+      <li><span class="nm">Egyptian Vulture<em>badge</em></span><span class="why">Throws stones at ostrich eggs to break them — one of very few birds that uses a tool, for <i>The Toolkit</i></span></li>
+    </ul>
+  </div>
+
+  <div class="biome">
+    <div class="bhead"><h3>Wetlands — The Fens</h3><div class="count">45 → <b>47</b></div></div>
+    <p class="gap"><b>Already at the floor.</b> The best-composed biome on the roster. What it
+    lacked was a freshwater predatory fish.</p>
+    <ul class="sp">
+      <li><span class="nm">Northern Pike</span><span class="why">The ambush predator the rest of the pond is arranged around</span></li>
+      <li><span class="nm">Electric Eel<em>badge</em></span><span class="why">Not an eel — a knifefish, and it delivers 860 volts. <i>Not What It Looks Like</i></span></li>
+    </ul>
+  </div>
+
+  <div class="biome">
+    <div class="bhead"><h3>Forest — The Weald</h3><div class="count">53 → <b>55</b></div></div>
+    <p class="gap"><b>Two arrivals from the badge work</b>, both forest animals, and both of
+    which the forest had room for.</p>
+    <ul class="sp">
+      <li><span class="nm">Bumblebee Bat<em>badge</em></span><span class="why">Two grams, and it contests "smallest mammal" with the Etruscan shrew — which is the fact. <i>The Smallest</i></span></li>
+      <li><span class="nm">Indian Giant Squirrel</span><span class="why">Nearly a metre nose to tail, maroon and orange, and the largest squirrel there is — <i>The Largest</i>, beside the capybara</span></li>
+    </ul>
+  </div>
+
+  <div class="biome">
+    <div class="bhead"><h3>Savanna — The Long Grass</h3><div class="count">74 → <b>75</b></div></div>
+    <p class="gap"><b>One arrival, and it is the best story in the badge set.</b></p>
+    <ul class="sp">
+      <li><span class="nm">Greater Honeyguide<em>badge</em></span><span class="why">Leads people to bees' nests, on purpose, answering a call its human partners have used for generations — and takes the wax when they leave. The only mutualism in the game where the other partner is us. <i>Strange Allies</i></span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">Seven cut to hold the number</h2>
+  <p class="blurb">The badge work added seven animals the original list did not have, so seven
+  come out. Each was cut from a biome that stays at or above 45 without it.</p>
+  <div class="scroll"><table>
+    <tr><th>Cut</th><th>From</th><th>Why it was the weakest there</th></tr>
+    <tr><td class="a">Harbour Seal</td><td class="c">Coast</td><td class="c">Eleven seals on the roster, two of them already on this coast</td></tr>
+    <tr><td class="a">European Green Crab</td><td class="c">Coast</td><td class="c">Good invasion story, but the coast has hermit, coconut, fiddler and horseshoe crabs</td></tr>
+    <tr><td class="a">Day Octopus</td><td class="c">Reef</td><td class="c">Giant Pacific and Mimic Octopus are one biome away</td></tr>
+    <tr><td class="a">Cactus Wren</td><td class="c">Desert</td><td class="c">Seven desert birds already; water-solvers were the gap</td></tr>
+    <tr><td class="a">Ring-necked Pheasant</td><td class="c">Farmland</td><td class="c">A released gamebird among thirteen farmland birds</td></tr>
+    <tr><td class="a">Mallard</td><td class="c">Wetlands</td><td class="c">Mandarin Duck is already there</td></tr>
+    <tr><td class="a">Water Vole</td><td class="c">Wetlands</td><td class="c">The one worth vetoing — it filled a real small-mammal gap. Swap Brain Coral in if you'd rather keep it</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2 class="sec">The badge system, reconciled</h2>
+  <p class="blurb">The Badge Book marked 82 species "to create". Ten are being made, and the
+  other 72 resolve without new art — eight are already on the roster under another name, two
+  are naming decisions, forty-six can be filled by an animal you already have, and sixteen
+  slots stay empty because nothing else carries the concept.</p>
+
+  <h3 class="grp">Already yours, under another name</h3>
+  <div class="scroll"><table>
+    <tr><th>Badge says</th><th>You have</th><th></th></tr>
+    <tr><td class="a">Brazilian Free-tailed Bat</td><td class="b">Mexican Free-tailed Bat</td><td class="c"><i>Tadarida brasiliensis</i> — the same species, its other common name</td></tr>
+    <tr><td class="a">Harbour Porpoise</td><td class="b">Harbor Porpoise</td><td class="c">US spelling</td></tr>
+    <tr><td class="a">Periodical Cicada</td><td class="b">Seventeen-year Cicada</td><td class="c">forest</td></tr>
+    <tr><td class="a">Leaf Insect</td><td class="b">Giant Leaf Insect</td><td class="c">rainforest</td></tr>
+    <tr><td class="a">Comb Jelly</td><td class="b">Bloody-belly Comb Jelly</td><td class="c">deep sea</td></tr>
+    <tr><td class="a">Smalltooth Sawfish</td><td class="b">Sawfish</td><td class="c">Name it smalltooth and the audit's naming rule is served too</td></tr>
+    <tr><td class="a">Black Cat</td><td class="b">House Cat coat</td><td class="c">By the Badge Book's own opening section — it needs no catching</td></tr>
+    <tr><td class="a">Antarctic Krill</td><td class="b">—</td><td class="c">Already removed by GDD §13 under the no-plankton rule; the badge page never got the fix</td></tr>
+  </table></div>
+
+  <h3 class="grp">Fixed by naming a generic</h3>
+  <div class="scroll"><table>
+    <tr><th>Badge says</th><th>Rename</th><th></th></tr>
+    <tr><td class="a">Chacoan Peccary</td><td class="b">Peccary</td><td class="c">It is the fossil-then-found-alive animal, so <i>Back From the Dead</i> and the audit resolve in one edit</td></tr>
+    <tr><td class="a">Edible Dormouse</td><td class="b">Dormouse</td><td class="c">Hibernates up to eleven months, which is the record <i>The Long Sleep</i> wants</td></tr>
+  </table></div>
+
+  <h3 class="grp">Filled by an animal you already have</h3>
+  <div class="scroll"><table>
+    <tr><th>Badge slot</th><th>Filled by</th><th>Badge</th></tr>
+    <tr><td class="a">Rhesus Macaque</td><td class="b">Gelada</td><td class="c">Blood Queen</td></tr>
+    <tr><td class="a">Orangutan</td><td class="b">Sumatran Orangutan</td><td class="c">Blood Queen · Who's That</td></tr>
+    <tr><td class="a">Burmese Python</td><td class="b">Green Anaconda</td><td class="c">No Father Required</td></tr>
+    <tr><td class="a">Bluehead Wrasse</td><td class="b">Six-Line Wrasse</td><td class="c">The Switch</td></tr>
+    <tr><td class="a">Asian Sheepshead Wrasse</td><td class="b">Emperor Angelfish</td><td class="c">The Switch</td></tr>
+    <tr><td class="a">Common Seahorse</td><td class="b">— drop</td><td class="c">Dad's Turn stands on four syngnathids</td></tr>
+    <tr><td class="a">Roe Deer</td><td class="b">Pine Marten</td><td class="c">On Pause</td></tr>
+    <tr><td class="a">Mayfly</td><td class="b">Luna Moth</td><td class="c">One Shot — no mouthparts as an adult</td></tr>
+    <tr><td class="a">Termite</td><td class="b">Honeypot Ant</td><td class="c">The Colony</td></tr>
+    <tr><td class="a">Laysan Albatross</td><td class="b">Red-crowned Crane</td><td class="c">Til Death</td></tr>
+    <tr><td class="a">Paddlefish</td><td class="b">Goblin Shark</td><td class="c">The Sixth Sense</td></tr>
+    <tr><td class="a">Oilbird</td><td class="b">Greater Bulldog Bat</td><td class="c">Seeing With Sound</td></tr>
+    <tr><td class="a">Green Tree Python</td><td class="b">Ball Python</td><td class="c">Heat Vision</td></tr>
+    <tr><td class="a">Western Diamondback</td><td class="b">— drop</td><td class="c">The Sidewinder already in the badge <i>is</i> a rattlesnake</td></tr>
+    <tr><td class="a">Blue Tit</td><td class="b">Great Tit</td><td class="c">Beyond Violet</td></tr>
+    <tr><td class="a">Common Octopus</td><td class="b">Mimic Octopus</td><td class="c">Through the Glare</td></tr>
+    <tr><td class="a">Hawaiian Bobtail Squid</td><td class="b">Lanternfish</td><td class="c">Lights On — the slot GDD §13 already named</td></tr>
+    <tr><td class="a">Planarian</td><td class="b">Great Crested Newt</td><td class="c">Grow It Back</td></tr>
+    <tr><td class="a">Solenodon</td><td class="b">— drop</td><td class="c">Rare Poison stands on Platypus, Slow Loris, European Mole</td></tr>
+    <tr><td class="a">N. Short-tailed Shrew</td><td class="b">— drop</td><td class="c">as above</td></tr>
+    <tr><td class="a">Eurasian Water Shrew</td><td class="b">European Mole</td><td class="c">Rare Poison</td></tr>
+    <tr><td class="a">Salp</td><td class="b">Venus's Girdle</td><td class="c">See-Through</td></tr>
+    <tr><td class="a">Wood Frog</td><td class="b">Antarctic Toothfish</td><td class="c">Sub-Zero — mechanism shifts to antifreeze</td></tr>
+    <tr><td class="a">Three-banded Armadillo</td><td class="b">European Pill Millipede</td><td class="c">Armour — the convergence is the lesson</td></tr>
+    <tr><td class="a">Galápagos Giant Tortoise</td><td class="b">— drop</td><td class="c">Aldabra covers island gigantism</td></tr>
+    <tr><td class="a">Takahē · Flightless Cormorant</td><td class="b">— drop</td><td class="c">Grounded has eight flightless birds</td></tr>
+    <tr><td class="a">Takahē</td><td class="b">Black-footed Ferret</td><td class="c">Back From the Dead — extinct 1979, found 1981</td></tr>
+    <tr><td class="a">Australian Lungfish</td><td class="b">Pacific Hagfish</td><td class="c">Unchanged</td></tr>
+    <tr><td class="a">Domestic Pigeon</td><td class="b">Fancy Pigeon</td><td class="c">Made By Us</td></tr>
+    <tr><td class="a">New Caledonian Crow</td><td class="b">Kea</td><td class="c">The Toolkit</td></tr>
+    <tr><td class="a">Yellow-billed Oxpecker</td><td class="b">Giant Green Anemone</td><td class="c">Strange Allies — with the clownfish already in the badge</td></tr>
+    <tr><td class="a">Viceroy Butterfly</td><td class="b">Great Potoo</td><td class="c">The Impostor — masquerade</td></tr>
+    <tr><td class="a">Bluestriped Fangblenny</td><td class="b">Death's-head Hawkmoth</td><td class="c">The Impostor — chemical mimicry to raid hives</td></tr>
+    <tr><td class="a">Common Marmoset</td><td class="b">Pygmy Marmoset</td><td class="c">The Village</td></tr>
+    <tr><td class="a">Florida Scrub-Jay</td><td class="b">Kookaburra</td><td class="c">The Village — helpers at the nest</td></tr>
+    <tr><td class="a">Arctic Ground Squirrel</td><td class="b">Groundhog</td><td class="c">The Long Sleep</td></tr>
+    <tr><td class="a">Helmeted Hornbill</td><td class="b">Slow Loris</td><td class="c">The Trade</td></tr>
+    <tr><td class="a">Ploughshare Tortoise</td><td class="b">Tibetan Antelope</td><td class="c">The Trade — shahtoosh, and it ties to the mountains quest</td></tr>
+    <tr><td class="a">European Eel</td><td class="b">Hyacinth Macaw</td><td class="c">The Trade</td></tr>
+    <tr><td class="a">Titan Beetle</td><td class="b">Goliath Beetle</td><td class="c">The Largest — heaviest insect</td></tr>
+    <tr><td class="a">Etruscan Shrew</td><td class="b">— drop</td><td class="c">Bumblebee Bat holds smallest mammal</td></tr>
+    <tr><td class="a">Barbados Threadsnake</td><td class="b">Pudú</td><td class="c">The Smallest</td></tr>
+    <tr><td class="a">Himalayan Tahr</td><td class="b">Argali</td><td class="c">The Highest</td></tr>
+    <tr><td class="a">Ocean Quahog</td><td class="b">Black Coral</td><td class="c">The Old Ones — four thousand years</td></tr>
+    <tr><td class="a">Rougheye Rockfish</td><td class="b">Orange Roughy</td><td class="c">The Old Ones</td></tr>
+    <tr><td class="a">Garden Snail</td><td class="b">Ochre Sea Star</td><td class="c">The Slowest</td></tr>
+    <tr><td class="a">Dwarf Seahorse</td><td class="b">Pygmy Seahorse</td><td class="c">The Slowest</td></tr>
+  </table></div>
+
+  <h3 class="grp">Sixteen slots left empty</h3>
+  <p class="blurb" style="margin-bottom:0">Elephant Shrew · Spiny Mouse · Antechinus ·
+  Damaraland Mole-Rat · Guiana Dolphin · Arctic Woolly Bear Moth · Painted Turtle · Glass
+  Catfish · Lord Howe Island Stick Insect · Bermuda Petrel · Common Cuckoo · Common Poorwill ·
+  Fat-tailed Dwarf Lemur · Bee Hummingbird · Common Swift · Pygmy Three-toed Sloth.<br><br>
+  Each is the only animal that carries its point — the only semelparous mammal, the only
+  hibernating bird, the only hibernating primate, the only electroreceptive placental mammal,
+  the only rodent that menstruates. Those badges run one or two members lighter.</p>
+</section>
+
+<section>
+  <h2 class="sec">The life-stage rule</h2>
+  <p class="blurb">No cub, pup, juvenile, caste, morph or sex difference occupies a slot in
+  the thousand. The data stays exactly where it is — the entries are not deleted and the
+  sprites are not lost. They simply stop being counted, and a young form becomes a growth
+  state on its adult rather than an entry of its own.</p>
+  <div class="note">
+    <h4>Not counted, from now on</h4>
+    <p>All 120 life stages, the three coat options, the two merged entries, the 44 cut, and
+    the 13 invented wardens. That is what takes today's 1,000 data entries down to 818
+    countable species — and it is why the thousand now closes exactly.</p>
+  </div>
+  <div class="note">
+    <h4>Three that pointed at nothing</h4>
+    <p><b>Glass Eel · Elver · Leptocephalus</b> are stages of a freshwater eel, and there is
+    no <i>Anguilla</i> anywhere on the roster. They come out of the count with the rest, and
+    no European Eel is being made. Leptocephalus could legitimately be reattached to the Giant
+    Moray, which has one.</p>
+  </div>
+  <div class="note">
+    <h4>No new young forms as entries</h4>
+    <p>No Badger Cub for the European Badger, no Fur Seal Pup for the Cape Fur Seal. Sprites
+    where the young genuinely looks different — a walrus calf has no tusks — but the entry is
+    the adult.</p>
+  </div>
+  <div class="note">
+    <h4>The orangutan, resolved without a new species</h4>
+    <p>Flanged Male Orangutan is a maturity state, not an entry, the same call already made on
+    Lioness and the Mole-Rat Queen. The two badges that cite "Orangutan" now cite
+    <b>Sumatran Orangutan</b> — On the Brink is available to badges, and <i>Built Wrong on
+    Purpose</i> already draws its whole membership from the Breeding Centre, so postgame
+    members were never actually barred.</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">The deep-sea naming pass</h2>
+  <p class="blurb">Every slot in the thousand now has a name, but twenty-six of those names
+  were a genus, a family, an order or a phylum rather than a species — nearly all of them in
+  the deep sea, which the Species Audit had already flagged as <i>"all mine, all generic, all
+  need naming."</i> Where a real common name exists for the right species it is used; where
+  only the binomial identifies the animal, the binomial is the name, which is what the roster
+  already does with Deepstaria and Bathydevius.</p>
+  <div class="scroll"><table>
+    <tr><th>Was</th><th>Rank</th><th>Becomes</th><th>Why this species</th></tr>
+    <tr><td class="a">Anglerfish</td><td class="c">order</td><td class="b">Humpback Anglerfish</td><td class="c">The black seadevil — carries the bacterial lure in <i>Lights On</i> and the magnified-photograph point in <i>Bad Reputation</i></td></tr>
+    <tr><td class="a">Atolla</td><td class="c">genus</td><td class="b">Alarm Jellyfish</td><td class="c"><i>A. wyvillei</i> — lights up to draw a bigger predator onto whatever grabbed it</td></tr>
+    <tr><td class="a">Barreleye</td><td class="c">family</td><td class="b">Macropinna Barreleye</td><td class="c">The transparent-headed one; popular use already means this species</td></tr>
+    <tr><td class="a">Cockatoo Squid</td><td class="c">genus</td><td class="b">Googly-eyed Glass Squid</td><td class="c"><i>Teuthowenia pellucida</i> — a real name for a described species</td></tr>
+    <tr><td class="a">Coffinfish</td><td class="c">genus</td><td class="b">Australian Coffinfish</td><td class="c">The one that holds a lungful of water in its gills for four minutes</td></tr>
+    <tr><td class="a">Fangtooth</td><td class="c">genus</td><td class="b">Common Fangtooth</td><td class="c">Sixteen centimetres, which is the <i>Bad Reputation</i> point</td></tr>
+    <tr><td class="a">Hatchetfish</td><td class="c">family</td><td class="b">Silver Hatchetfish</td><td class="c">Counter-illumination, and the standard name</td></tr>
+    <tr><td class="a">Lanternfish</td><td class="c">family</td><td class="b">Glacier Lanternfish</td><td class="c">The abundant North Atlantic one; GDD §13 gives lanternfish the bioluminescence slot</td></tr>
+    <tr><td class="a">Giant Siphonophore</td><td class="c">—</td><td class="b">Giant Siphonophore <i>(Praya dubia)</i></td><td class="c">Keeps the name, credits the species</td></tr>
+    <tr><td class="a">Black Coral</td><td class="c">order</td><td class="b">Leiopathes Black Coral</td><td class="c">The four-thousand-year individual — the longevity claim in <i>The Old Ones</i> is this one's</td></tr>
+    <tr><td class="a">Deep-sea Bamboo Coral</td><td class="c">family</td><td class="b">Isidella Bamboo Coral</td><td class="c">A described, photographed species</td></tr>
+    <tr><td class="a">Stalked Sea Lily</td><td class="c">class</td><td class="b">Japanese Sea Lily</td><td class="c">The stalked crinoid actually studied and filmed</td></tr>
+    <tr><td class="a">Xenophyophore</td><td class="c">class</td><td class="b">Giant Xenophyophore</td><td class="c"><i>Syringammina fragilissima</i> — a single cell twenty centimetres across</td></tr>
+    <tr><td class="a">Yeti Crab</td><td class="c">genus</td><td class="b">Hoff Crab</td><td class="c"><i>Kiwa tyleri</i> — named for the hairy chest, and it farms bacteria on itself</td></tr>
+    <tr><td class="a">Zombie Worm</td><td class="c">genus</td><td class="b">Zombie Worm <i>(Osedax mucofloris)</i></td><td class="c">Keeps its name. "Bone-eating snot flower" is a real published name, but <i>Bad Reputation</i> lists this animal under <b>feared for the name</b> — renaming it removes it from the badge</td></tr>
+    <tr><td class="a">Vent Barnacle</td><td class="c">genus</td><td class="b">Neolepas Vent Barnacle</td><td class="c">Described from Indian Ocean vents</td></tr>
+    <tr><td class="a">Vent Squat Lobster</td><td class="c">genus</td><td class="b">Munidopsis Squat Lobster</td><td class="c">The Galápagos-vent species</td></tr>
+    <tr><td class="a">Deep-sea Vent Mussel</td><td class="c">genus</td><td class="b">Vent Mussel <i>(Bathymodiolus thermophilus)</i></td><td class="c">The original, from the 1977 discovery</td></tr>
+    <tr><td class="a">Dumbo Octopus</td><td class="c">genus</td><td class="b">Dumbo Octopus <i>(Grimpoteuthis bathynectes)</i></td><td class="c">Keeps the name everyone knows, credits a described species</td></tr>
+    <tr><td class="a">Alicella</td><td class="c">genus</td><td class="b">Giant Amphipod</td><td class="c"><i>A. gigantea</i>, the largest amphipod known — and a plainer name</td></tr>
+    <tr><td class="a">Sea Pig</td><td class="c">genus</td><td class="b">Sea Pig <i>(Scotoplanes globosa)</i></td><td class="c">Already effectively species-level; just credit it</td></tr>
+    <tr><td class="a">Giant Isopod</td><td class="c">genus</td><td class="b">Giant Isopod <i>(Bathynomus giganteus)</i></td><td class="c">As above</td></tr>
+    <tr><td class="a">Tardigrade <i>forest</i></td><td class="c">phylum</td><td class="b">Water Bear <i>(Milnesium tardigradum)</i></td><td class="c">The species that went to orbit and came back</td></tr>
+    <tr><td class="a">Velvet Worm <i>rainforest</i></td><td class="c">phylum</td><td class="b">Southern Velvet Worm</td><td class="c"><i>Euperipatoides rowelli</i> — the glue-squirting Australian one</td></tr>
+    <tr><td class="a">Coelacanth <i>deep sea</i></td><td class="c">genus</td><td class="b">West Indian Ocean Coelacanth</td><td class="c"><i>Latimeria chalumnae</i> — the 1938 trawler; the Indonesian species becomes the twist in the entry</td></tr>
+    <tr><td class="a">Trilobite <i>The Record</i></td><td class="c">class</td><td class="b">Elrathia</td><td class="c"><i>E. kingii</i>, Middle Cambrian — the most abundant trilobite fossil on earth</td></tr>
+  </table></div>
+  <div class="note" style="margin-top:18px">
+    <h4>One left alone on purpose: Bigfin Squid</h4>
+    <p>The <i>Magnapinna</i> animals on film have never been formally described, so there is no
+    species to name. Say that in the entry rather than attach a binomial that isn't real — "the
+    longest arms of any squid, and nobody has ever caught one" is a better card anyway.</p>
+  </div>
+  <div class="note">
+    <h4>Coelacanth becomes the West Indian Ocean Coelacanth</h4>
+    <p><i>Latimeria chalumnae</i> — the 1938 trawler off South Africa. The audit already ruled
+    on this shape when it renamed Hippo to Common Hippopotamus: a two-species group gets named,
+    it does not get an exemption. The Indonesian coelacanth is better as the twist inside the
+    entry than as a second slot — sixty-six million years written off, then one on a trawler in
+    1938, then another in a fish market ten thousand kilometres away sixty years later. Both
+    badges survive: <i>Unchanged</i> and <i>Back From the Dead</i> are about the lineage, and
+    the lineage belongs to the named species too.</p>
+  </div>
+  <div class="note">
+    <h4>Chambered Nautilus needs no change</h4>
+    <p>Flagged in error. "Chambered nautilus" is the standard common name of
+    <i>Nautilus pompilius</i>, one species — it only looked generic beside the family
+    Nautilidae. Record the binomial in the entry and leave the name alone.</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec">What is left to build</h2>
+  <div class="next">
+    <h4>182 species, of which 138 are already named</h4>
+    <ul>
+      <li><b>The forty-four above</b> — new to the roster, none of them drawn yet.</li>
+      <li><b>89 already designed for the biomes</b> — 43 in Deep Sea, 25 in Polar, 16 in Mountains, and five singles elsewhere.</li>
+      <li><b>49 across the postgame sets</b> — 21 fossils, 16 breeds, six for The Kept, six for The Vigil.</li>
+      <li><b>Twenty-one renames from the deep-sea pass</b>, five entries keeping their name with the species credited,, two from the badge work, and eight corrections, plus the krill fix in the Badge Book — none of which needs new art.</li>
+      <li>The roster footer's <b>"the gap to 700 is 94"</b> becomes 44, and the Bad Reputation copy's <b>"the only badge in the fifty"</b> becomes fifty-two.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Counts from the Terrane Roster, 27 August 2026 · rules from GDD v18.0 §3 and §13 ·
+  candidates cross-checked against all 1,138 roster entries and all 52 badges
+</footer>
+
+</div>
