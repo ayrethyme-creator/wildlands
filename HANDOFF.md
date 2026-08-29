@@ -230,6 +230,14 @@ of the design is safe to keep building. Do not confuse the two.
   *"people only know them by those names."* The phylum fact goes in the **description**,
   not the name. Worth remembering as a general principle: the naming rule exists to help a
   reader, so **a name nobody recognises is not more specific, it is just quieter.**
+- **The badge member card, decided 2026-08-29.** Every *membership* gets a card explaining
+  how that species meets that concept, linking back to the animal's own card — **430 cards
+  across 324 species**, because a species in four badges is claimed for four reasons. Ayr:
+  *"it's not just a title with names."* **This is what the generics audit was for** — a
+  generic name cannot carry a claim, which is why individual species had to be assigned.
+  Two small things still open: **where the text lives** (BADGES.txt has no room for it and
+  needs a companion keyed by badge + species) and **whether the link runs both ways**. Full
+  reasoning and the three worked examples are in GDD §12.
 - **Items in the world** — committed as a principle. **No item ideas until Ayr asks.**
 
 ### Parked — do not restart unprompted

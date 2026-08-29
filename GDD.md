@@ -2261,6 +2261,78 @@ Two worked examples from the record:
 **Fluorescence and bioluminescence are the same class of distinction**, which is why the
 Deathstalker had to come out of *Lights On*.
 
+## The badge member card — **DECIDED, Ayr's call** — **[v19]**
+
+> **Ayr, 2026-08-29:** *"Not every species in a genus qualifies for the badge, and that's
+> why an individual species had to be assigned. These concepts actually do need to be
+> spelled out and explained somewhere, which is really what the badge system is for — it's
+> not just a title with names. Each species on a badge should have a new card explaining how
+> that specific species meets that criteria, and a link that takes you to the card of the
+> general animal. The goal is to provide the whole story for those who care, but display it
+> in a way that those who don't won't get overwhelmed."*
+
+**Every membership gets a card, not every species.** A species in four badges has four
+cards, because it is being claimed for four different reasons.
+
+```
+430 memberships  ·  324 species  ·  50 badges  ·  8.6 members per badge
+246 species carry one badge · 56 carry two · 17 carry three · 4 carry four · 1 carries five
+```
+
+### This is what the generics audit was actually for
+
+**"Tapir" cannot be in a badge, because tapirs as a group do not all do the thing.** The
+audit renamed the bare generics for data hygiene, and that was the right call for a reason
+nobody had written down: **a badge is a claim about a species, and a generic name cannot
+carry a claim.** The member card is where that claim finally gets stated instead of implied.
+
+It is also the other half of the two-name rule (§10). The species card says *one of 4
+tapirs*; the member card says *and this is the one that —*. **Same idea at two scales.**
+
+### The badge title cannot carry the concept, and the live data proves it three times
+
+| Badge | What the flat list hides |
+|---|---|
+| **The Switch** | Sequential hermaphroditism — **and the members go in opposite directions.** The Percula Clownfish is protandrous: born male, and the dominant one becomes female. The Stoplight Parrotfish and the wrasses are protogynous: born female, and some become male. **The badge holds both and the title says neither** |
+| **Heat Vision** | *Infrared pit organs* — but the Sidewinder and Bushmaster are pit vipers with **loreal pits**, a pair between eye and nostril, while the Ball Python has **labial pits**, a row along the lip. Different organs, evolved separately, doing the same job. **The title flattens the most interesting thing in the badge** |
+| **Same Answer Twice** | Convergent evolution, **and it is made entirely of pairs** — sugar glider with flying squirrel, thylacine with grey wolf, *Shonisaurus* with the bottlenose dolphin. The membership is a flat list of eleven names, so **the pairing, which is the entire lesson, is invisible** |
+
+### Why layering it is the point, not a compromise
+
+**The whole story for those who care, out of the way of those who don't.** The member card
+sits *behind a link* rather than on the species card, so the animal's own page stays a
+page about the animal. A player who never opens one loses nothing; a player who opens one
+gets the real explanation rather than a title.
+
+**That is the same shape as the codex, the sources layer and the practice quizzes** —
+optional depth that is genuinely deep, rather than a summary pretending to be enough.
+
+### What it costs, honestly
+
+**430 short texts.** Smaller than the 700 intake stories already committed, and much
+smaller than 48 quests. **But the review bar is higher than either**, because these are not
+flavour — **each one is a checkable claim about biology, and a wrong one is an error in the
+educational core.** Uncle Albert can verify that a member exists; **no tool can verify that
+the reason given is true.** That is the cost, and it is review time rather than writing time.
+
+### **OPEN** — two small things this needs
+
+- **Where the text lives.** `design/BADGES.txt` is the only source and has no room for a
+  per-membership paragraph. It needs a companion file keyed by *badge + species*, so
+  Albert can check that every membership has exactly one card and no card is orphaned.
+- **Whether the link runs both ways.** Ayr specified member card → species card. The
+  reverse — the species card listing its badges, each opening that member card — is what
+  lets a player who met a Malayan Tapir in the field ever discover the badge material at
+  all. Worth deciding, and cheap either way.
+
+### An idea, not a decision: pair badges may need the partner named
+
+**Same Answer Twice** is tiered at 4 / 8 / 11, so a player can hold four members and have
+demonstrated nothing — sugar glider and thylacine are two marsupials, not a convergence.
+**If a member card on a pair badge named its partner, the badge would teach at every step
+instead of only at gold.** It is the one badge whose structure the flat list actively
+fights. **Ayr's call, and it costs nothing to decline.**
+
 ### Governance
 
 `design/BADGES.txt` is the only source. The page is generated from it and **Uncle Albert
