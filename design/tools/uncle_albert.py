@@ -17,6 +17,8 @@ Verifies:
   6. nothing in cut / cosmetic / merged is still referenced as living
   7. every badge member is a real species, and nothing marked * already exists
   8. no badge member and no quest animal is merely a LIFE STAGE
+  9. every species tagged EW is real, sits in On the Brink, and matches the
+     "Only In Captivity" badge exactly
 
 Check 8 was added 2026-08-28 and fired immediately. Three badges and one quest
 cited "Orangutan", which is not a species in this data - it sits in the lifestage
@@ -316,6 +318,61 @@ print('BADGE MEMBERS MARKED * THAT ALREADY EXIST: %d' % len(bad_star))
 for x in sorted(bad_star):
     print('   ' + x)
     FAIL.append('badge member starred but exists: ' + x)
+
+# 10. THE CONSERVATION TAGS
+# design/TAGS.txt, added 2026-08-29. "Only In Captivity" was written as a RULE -
+# "any five from On the Brink tagged EW" - against a tag nobody had created, and
+# was patched by typing the ten species into BADGES.txt by hand. The tag now
+# exists, so the badge is a rule again and these three things are checked rather
+# than trusted:
+#   every EW species is real; every EW species is in "brink", because On the Brink
+#   admits on status alone and EW is half of that test; and the badge membership is
+#   EXACTLY the tagged set, so the two cannot drift apart in silence.
+TAGS = {}
+if os.path.exists('design/TAGS.txt'):
+    for line in io.open('design/TAGS.txt', encoding='utf-8'):
+        line = line.rstrip('\n')
+        if not line or line.startswith('!') or '=' not in line:
+            continue
+        k, v = line.split('=', 1)
+        TAGS[k.strip()] = [x.strip() for x in v.split('|') if x.strip()]
+
+print()
+print('=' * 52)
+print('THE CONSERVATION TAGS')
+print('=' * 52)
+ew = TAGS.get('EW', [])
+print('   %-24s %4d' % ('tagged EW', len(ew)))
+
+ew_missing = [n for n in ew if n not in alln_sp]
+print()
+print('EW SPECIES NOT IN THE ROSTER: %d' % len(ew_missing))
+for x in sorted(ew_missing):
+    print('   ' + x)
+    FAIL.append('tagged EW but not in the roster: ' + x)
+
+# On the Brink admits Critically Endangered OR Extinct in the Wild, so an EW
+# species filed anywhere else is a placement error, not a tagging one.
+ew_astray = [(n, seen.get(n, '?')) for n in ew
+             if n in alln_sp and seen.get(n) != 'brink']
+print()
+print('EW SPECIES NOT IN ON THE BRINK: %d' % len(ew_astray))
+for n, g in sorted(ew_astray):
+    print('   %-26s is in "%s"' % (n, g))
+    FAIL.append('tagged EW but filed in "%s", not brink: %s' % (g, n))
+
+oic = dict((n, r) for c, n, dd, t, r in badges).get('Only In Captivity')
+print()
+if oic is None:
+    print('ONLY IN CAPTIVITY: badge not found')
+    FAIL.append('the "Only In Captivity" badge is missing from BADGES.txt')
+else:
+    drift = sorted(set(oic) ^ set(ew))
+    print('ONLY IN CAPTIVITY vs THE EW TAG: %d difference(s)' % len(drift))
+    for x in drift:
+        side = 'in the badge, not tagged EW' if x in oic else 'tagged EW, not in the badge'
+        print('   %-26s %s' % (x, side))
+        FAIL.append('Only In Captivity and the EW tag disagree: %s (%s)' % (x, side))
 
 # how much of the roster the badges actually reach
 have = len(allbadge) - len(tocreate)

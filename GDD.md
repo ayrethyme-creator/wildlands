@@ -2589,6 +2589,7 @@ tool can check whether a claim is true of the world.**
 | `design/GROUND_TRUTH.txt` | The species that exist. **Read from the running game, never parsed from `.jsx`** |
 | `design/PENDING_MOVES.txt` | Decisions made but not yet in game data |
 | `design/BADGES.txt` | Badge membership, the only source |
+| `design/TAGS.txt` | Conservation tags. `EW`, checked against On the Brink and the badge |
 | `NEW_DIRECTION.md` | The design record — every *why* |
 | `HANDOFF.md` | Orientation for a new session |
 
@@ -2653,8 +2654,19 @@ them.** So:
                                   what On the Brink and the Vigil do
 ```
 
-**Euthanasia is not being ignored — it is deferred deliberately**, because it is a layer-4
-question and layers 0, 1 and 3 are missing underneath it.
+**Layer 1 is deferred until coding starts — Ayr's call, 2026-08-29.** *"I don't think I'll
+be ready to design the 3 career encounter systems until we start coding. I need to see
+visually how the game will look in order to plan it."*
+
+**This changes the order above rather than the analysis behind it.** Layer 1 is still the
+load-bearing layer and everything above it still attaches to the *contract* rather than to
+the mechanic. What changed is the recognition that **the encounter cannot be judged on
+paper** — three careers have to be told apart by feel, and feel is not reviewable in a
+document. So the vertical slice (§2) comes first and Layer 0 arrives with it; Layer 1 is
+designed against something that moves.
+
+**Euthanasia is not being ignored either — it is deferred deliberately**, because it is a
+layer-4 question and layers 0, 1 and 3 are missing underneath it.
 
 ### And the contract is why the gap is survivable
 
@@ -2684,12 +2696,12 @@ stays open**, which is why the rest of this document is not resting on air.
 | 5 | ~~**The badge count** breaks the round-number rule~~ **SETTLED at 50**, 2026-08-28 | No |
 | 6 | **Fluorescence** — restore *Blacklight*, or drop it | No |
 | 7 | ~~**The 44 remaining species**~~ **CLOSED**, 2026-08-29. All 42 outstanding slots transcribed into the pipeline from *The Last Forty-Four*; the roster stands at 1000 | No |
-| 8 | **`Only In Captivity`** needs an `EW` tag that does not exist in the data | The badge |
+| 8 | ~~**`Only In Captivity`** needs an `EW` tag~~ **CLOSED**, 2026-08-29. The tag is `design/TAGS.txt`; Uncle Albert checks the badge against it | No |
 | 9 | ~~**Sprite terrain**~~ — **answered in v7.** Two assets: the current 1001 become codex plates, game sprites are a later pass without props. **Ayr's call to accept** | The HD-2D look |
 | 10 | **Sandbox holding extinct species** — proposed, not ruled | No |
 | 11 ~~**Euthanasia**~~ — **effectively resolved by option C.** It becomes an authored beat used once or twice at full weight, not a background system. What remains is only *whether to write those beats at all* | No |
 | 12 | **What the items are** | No |
-| 13 | **Layers 0, 1 and 3 are empty** — moment-to-moment, the encounter, and what an hour contains. **The foundation of the whole thing** | Everything eventually |
+| 13 | **Layers 0, 1 and 3 are empty** — moment-to-moment, the encounter, and what an hour contains. **The foundation of the whole thing.** **Deferred by Ayr on 2026-08-29 until coding starts**, because the encounter cannot be judged on paper — the vertical slice comes first | Not until there is something on screen |
 | 14 | **Does the child name the rescued animal**, before learning why that is a problem? | The childhood |
 | 15 | **Is the childhood pet still alive later?** A cat dies somewhere in the adult stages | Mortality |
 | 16 | **Free building layout, or prepared plots?** Free makes the two-routes puzzle real; plots make it approachable | The facility |

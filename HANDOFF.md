@@ -37,6 +37,7 @@ record eighteen times, and each pass is listed in its own version note.
 | **`design/GROUND_TRUTH.txt`** | The species that exist, by group. **Read from the running game, never parsed from `.jsx`** |
 | **`design/PENDING_MOVES.txt`** | Decisions made but not yet in game data. Every fix lives here until applied |
 | **`design/BADGES.txt`** | Badge membership, the only source. The page is generated from it |
+| **`design/TAGS.txt`** | Conservation tags. `EW` today; Albert checks every tagged species is real, is in On the Brink, and matches the *Only In Captivity* badge exactly |
 | **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
 | **`GDD.md`** | **The design.** By system, current-only, everything marked decided / open / proposed. **Start here** |
 | **`NEW_DIRECTION.md`** | The design *record*, ~11,000 lines, append-only with dated headers. Every *why*, including the reversals |
@@ -157,9 +158,22 @@ Layer 3  one session         MISSING
 Layers 2, 4, 5               built
 ```
 
-**Layer 1 first** — what happens when you meet an animal, and what each of the three careers
-does about it. **Everything else depends on it**, and it was flagged on day one as idea 10
-and never done. Then layer 0, then layer 3, then the open questions.
+**Layer 1 is deferred until coding starts — Ayr's call, 2026-08-29.**
+
+> *"Layer will happen when I'm ready. I don't think I'll be ready to design the 3 career
+> encounter systems until we start coding. I need to see visually how the game will look in
+> order to plan it."*
+
+**Do not open Layer 1 as a design exercise on paper.** It is not blocked by missing
+research or a missing decision — it is blocked by **Ayr needing to see the game move.**
+The encounter is the one system whose feel cannot be judged from a document, and three of
+them have to be told apart by feel.
+
+**What that makes the next work:** the thing that puts something on screen. The GDD already
+names it — *build a one-biome vertical slice early*, and the hook scene, which is
+animal-led and therefore **needs no character art at all.** Layer 0 (movement, camera,
+what is on screen) comes with that slice rather than before it, and Layer 1 follows once
+there is something to look at. Then Layer 3, then the open questions.
 
 **The encounter *contract* is fixed even though the mechanic is not**, which is why the rest
 of the design is safe to keep building. Do not confuse the two.
@@ -186,13 +200,20 @@ of the design is safe to keep building. Do not confuse the two.
   *Blacklight* was never restored. **Ayr's ruling is still owed:** restore *Blacklight*
   with the puffin bill, chameleon bones and platypus fur, or let fluorescence go
   unmentioned.
-- **`Only In Captivity`** depends on an `EW` tag that does not exist in the data. This is
-  the last thing on the badge side that is not merely production work.
-- **One rename is flagged for review: `Tardigrade` → `Water Bear`.** It came from the
-  deep-sea naming pass, which everywhere else replaced a genus or a phylum with a species.
-  This one does not obviously gain specificity — "water bear" is also used for the whole
-  phylum — even though the species meant is *Milnesium tardigradum*, the one that went to
-  orbit. Reversing it is a one-line change in `design/PENDING_MOVES.txt`.
+- **`Only In Captivity` is closed.** The `EW` tag now exists —
+  **`design/TAGS.txt`**, added 2026-08-29 on Ayr's instruction. Ten species are tagged,
+  seven formally listed Extinct in the Wild and three that are EW as a population rather
+  than as an IUCN listing (Barbary Lion, Northern White Rhino, South China Tiger), each
+  with the caveat recorded in the file. **Uncle Albert now checks three things** rather
+  than trusting a hand-typed list: every EW species is real, every one sits in On the
+  Brink (which admits on status alone, CR **or** EW), and the badge membership is exactly
+  the tagged set — so the two cannot drift apart in silence. The file also records the
+  five species deliberately **not** tagged and why, Przewalski's Horse and the Arabian
+  Oryx among them.
+- **`Tardigrade` / `Water Bear` — ruled, 2026-08-29. Either name is fine.** Ayr:
+  *"people only know them by those names."* The phylum fact goes in the **description**,
+  not the name. Worth remembering as a general principle: the naming rule exists to help a
+  reader, so **a name nobody recognises is not more specific, it is just quieter.**
 - **Items in the world** — committed as a principle. **No item ideas until Ayr asks.**
 
 ### Parked — do not restart unprompted

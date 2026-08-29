@@ -1,0 +1,80 @@
+! Conservation tags for the roster. Same shape as GROUND_TRUTH.txt.
+!
+! Format: TAG=Name|Name|Name
+!
+! Added 2026-08-29 on Ayr's instruction: "add the EW tag where appropriate."
+!
+! ============================================================================
+! EW - EXTINCT IN THE WILD
+! ============================================================================
+! Why the tag exists at all. The "Only In Captivity" badge was written as a RULE -
+! "any five from On the Brink tagged EW" - against a tag that had never been
+! created. It was patched by typing the ten species into BADGES.txt by hand, which
+! worked but left the badge as a list that nobody could check against anything.
+!
+! With this file the badge becomes a rule again, and Uncle Albert enforces three
+! things that a hand-typed list could not:
+!
+!   1. every EW species is real and in the roster
+!   2. every EW species sits in the "brink" group - because On the Brink admits on
+!      status alone, Critically Endangered OR Extinct in the Wild, and EW is half
+!      of that admission test
+!   3. the "Only In Captivity" membership is EXACTLY this set - so adding a species
+!      here without updating the badge, or the reverse, is a failure rather than a
+!      quiet drift
+!
+! ----------------------------------------------------------------------------
+! FORMALLY LISTED EXTINCT IN THE WILD - seven
+! ----------------------------------------------------------------------------
+! Spix's Macaw          Cyanopsitta spixii. The one everybody knows from the film.
+! Guam Kingfisher       Todiramphus cinnamominus. Wiped out by the brown tree snake;
+!                         every living bird descends from 29 taken into captivity.
+! Socorro Dove          Zenaida graysoni. Gone from Socorro by 1972; survives in
+!                         European and American collections.
+! 'Alala               Corvus hawaiiensis, the Hawaiian crow. Tool-using, and the
+!                         releases keep failing to the 'io, the Hawaiian hawk.
+! Kihansi Spray Toad    Nectophrynoides asperginis. Its entire world was the spray
+!                         zone of one waterfall, and a dam took the spray away.
+! Wyoming Toad          Anaxyrus baxteri.
+! Pere David's Deer     Elaphurus davidianus. Extinct in China, survived because a
+!                         herd sat in an English park at Woburn. Reintroduced herds
+!                         exist and the listing has not moved.
+!
+! ----------------------------------------------------------------------------
+! EXTINCT IN THE WILD AS A POPULATION, NOT AS AN IUCN SPECIES LISTING - three
+! ----------------------------------------------------------------------------
+! These three carry a caveat and the field-guide entry should say so plainly. They
+! are tagged because the badge's CONCEPT - nowhere left to go home to - is exactly
+! true of them, and dropping them would teach that the line is cleaner than it is.
+!
+! Barbary Lion          A population of Panther leo, not a species. Gone from the
+!                         wild; survives only as captive descendants. The lion as a
+!                         species is Vulnerable.
+! Northern White Rhino  The subspecies Ceratotherium simum cottoni. TWO FEMALES,
+!                         both unable to carry a calf. Functionally rather than
+!                         formally EW, and the starkest entry in the game.
+! South China Tiger     Panthera tigris amoyensis. Listed Critically Endangered with
+!                         no confirmed wild animal for over thirty years.
+!
+! ----------------------------------------------------------------------------
+! DELIBERATELY NOT TAGGED - read this before adding one
+! ----------------------------------------------------------------------------
+! Przewalski's Horse    WAS EW and has been reintroduced. It belongs in "Back From
+!                         the Brink", where it already is, and the contrast with
+!                         this list is worth using rather than blurring.
+! Scimitar-horned Oryx  Same story, same reason.
+! Guam Rail             Declared EW, rebred, released on Cocos Island, and downlisted
+!                         to Critically Endangered in 2019 - the second bird ever to
+!                         recover from EW. It is in "Grounded" and "Back From the
+!                         Brink" instead.
+! Arabian Oryx          The first species ever downlisted from EW, in 2011. Now
+!                         Vulnerable, which is why it is not in On the Brink at all.
+! Axolotl               Often called extinct in the wild in ordinary speech, and it
+!                         is not - it is Critically Endangered, with a small wild
+!                         population left in Xochimilco. The GDD's phrase is
+!                         "functionally extinct in the wild", which is the honest one.
+!
+! IUCN listings move. When one does, change it here and Albert will tell you which
+! badge stopped being true.
+! ============================================================================
+EW=Spix's Macaw|Guam Kingfisher|Socorro Dove|ʻAlalā|Kihansi Spray Toad|Wyoming Toad|Père David's Deer|Barbary Lion|Northern White Rhino|South China Tiger

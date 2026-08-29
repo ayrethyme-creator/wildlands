@@ -748,10 +748,16 @@ new>forest=Indian Giant Squirrel
 ! Alicella          -> Giant Amphipod: A. gigantea, the largest amphipod known,
 !                      and a plainer name.
 ! Tardigrade        -> Water Bear: Milnesium tardigradum, the species that went to
-!                      orbit and came back. FLAGGED FOR AYR - this is the one
-!                      rename in the pass that does not obviously gain
-!                      specificity, since "water bear" is also used for the whole
-!                      phylum. Reversing it is a one-line change.
+!                      orbit and came back.
+!                      RULED, Ayr 2026-08-29: EITHER NAME IS FINE and the flag is
+!                      withdrawn. "People only know them by those names" - tardigrade
+!                      and water bear are both the names that reach a reader, and
+!                      neither is more use than the other. THE FACT THAT IT IS A WHOLE
+!                      PHYLUM GOES IN THE DESCRIPTION, not into the name. This is the
+!                      one place in the naming pass where the rule bends, and it bends
+!                      because the rule exists to help the reader rather than to be
+!                      obeyed - a name nobody recognises is not more specific, it is
+!                      just quieter.
 ! Velvet Worm       -> Southern Velvet Worm: Euperipatoides rowelli, the
 !                      glue-squirting Australian one.
 ! Coelacanth        -> West Indian Ocean Coelacanth: Latimeria chalumnae, the 1938
