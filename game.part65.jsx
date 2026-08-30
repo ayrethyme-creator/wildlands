@@ -63,7 +63,7 @@ const ARC_CAST = {
     build: "One strand? That is the whole of it? Show me and it is done by the weekend.",
   },
   highpasture: {
-    who: "Ilse Brunner", em: "👩🏼‍🌾", find: "🐾",
+    who: "Ilse Brunner", em: "👩🏼‍🌾", find: "🐑",
     line: "They call me the wolf woman up here, and it is not meant kindly.\n\nMy grandfather cleared "
         + "them off this mountain. Now they are back and the shepherds are losing lambs. Both of those "
         + "are true at the same time, and I am tired of being asked to pick one.",

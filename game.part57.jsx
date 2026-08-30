@@ -202,6 +202,19 @@ const PROP_SHAPES = {
   // rather than sitting on it, so they take a dark fill and no outline - the
   // opposite of every other prop here, which is what makes them read as a mark
   // rather than an object.
+  // The wolf case is the shepherd's, so its findings are what she is losing.
+  // Solid cream wool against the outline colour, because the tracks below draw
+  // at a fifth of full opacity in dark brown and disappeared into grass - Ayr
+  // walked the whole road and reported the clues missing.
+  sheep: (bg) => propWrap(bg,
+    `<ellipse cx="17" cy="19.6" rx="8.4" ry="6.2" fill="#f4efe2" stroke="${PROP_OUT}" stroke-width="1"/>` +
+    `<g fill="#efe8d8"><circle cx="11.4" cy="16.6" r="3"/><circle cx="16.4" cy="14.4" r="3.3"/>` +
+    `<circle cx="21.6" cy="16.4" r="2.9"/><circle cx="23.4" cy="20.4" r="2.6"/></g>` +
+    `<g fill="${PROP_DARK}"><rect x="12.4" y="24.4" width="2.1" height="4.4" rx="1"/>` +
+    `<rect x="19.4" y="24.4" width="2.1" height="4.4" rx="1"/></g>` +
+    `<ellipse cx="9.2" cy="20.4" rx="3.5" ry="4.1" fill="${PROP_DARK}"/>` +
+    `<ellipse cx="6.6" cy="18.6" rx="1.9" ry="1.2" fill="${PROP_DARK}" transform="rotate(-24 6.6 18.6)"/>` +
+    `<circle cx="8.2" cy="19.2" r=".8" fill="#f4efe2"/>`),
   tracks: (bg) => propWrap(bg,
     [[10, 25, 1, .5], [14, 20, -1, .4], [19, 15, 1, .3], [23, 10, -1, .2]].map(([x, y, d, o]) =>
       `<g opacity="${o + .28}">` +
@@ -272,7 +285,7 @@ const PROP_BY_EM = {
   // Six trainers are marked by an object rather than a face - a beekeeper by
   // her bees, a surveyor by his clipboard. Those are drawn as the objects they
   // are rather than turned into people.
-  "🐾": ["tracks", null],
+  "🐾": ["tracks", null], "🐑": ["sheep", null],
   "🐝": ["bee", null], "🍯": ["honey", null], "🔔": ["bell", null],
   "📋": ["clipboard", null], "🌅": ["sunrise", null], "🌳": ["sapling", null],
 };
