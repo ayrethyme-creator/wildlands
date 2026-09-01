@@ -3,12 +3,8 @@
 // The Kept to bring the main game to 700. Seventeen open ocean, nine farmland,
 // five coast, five reef, three desert, two forest, two wetland, one savanna.
 //
-// THIS FILE IS NOT LOADED YET. It is deliberately absent from GAME_PARTS in
-// index.html, because it declares PHOTO_ART for all forty-four and none of the
-// PNGs exist. A species flagged for photographic art with no file on disk
-// renders broken, so the flag and the art go in together — add the line to
-// GAME_PARTS once tools/artgen/batch_terrane_01.json has been run and the
-// sprites are in art/.
+// Loaded after part67. The forty-four matching sprites are present in art/;
+// their filenames use the stable DEX keys declared below.
 //
 // Learnsets are not written by hand. buildLearnset is the same builder part17,
 // part31 and part54 use, so these forty-four progress exactly like everything
@@ -48,7 +44,7 @@ Object.assign(DEX, (() => {
     add("grasssnake", "Grass Snake", ["Wild", "Swift"], { h: 36, a: 44, d: 34, s: 54 }, 0.44),
     add("magpie", "Eurasian Magpie", ["Aerial", "Night"], { h: 42, a: 48, d: 38, s: 64 }, 0.36),
     add("skylark", "Eurasian Skylark", ["Aerial", "Swift"], { h: 28, a: 30, d: 26, s: 68 }, 0.5),
-    add("europeanmole", "European Mole", ["Burrow", "Venom"], { h: 38, a: 44, d: 40, s: 30 }, 0.44),
+    add("europeanmole", "European Mole", ["Burrow"], { h: 38, a: 44, d: 40, s: 30 }, 0.44),
     add("europeanbadger", "European Badger", ["Burrow", "Armor"], { h: 62, a: 54, d: 60, s: 34 }, 0.28),
 
     // ---- The Strand: coast ----
@@ -85,112 +81,111 @@ Object.assign(DEX, (() => {
 
 Object.assign(INFO, {
   // ---- The Blue ----
-  bluefintuna: { d: "Carnivore — herring, mackerel, squid, run down at speed", h: "Open Atlantic and Mediterranean; crosses the ocean and returns to spawn", s: "LC",
-    f: "Warm-blooded in a way almost no other fish manages: a heat-exchanger in the blood keeps its muscles well above the water around it, which is what lets it hunt in cold water at speed. It was assessed as Endangered in 2011 and back to Least Concern in 2021 — one of the clearest cases anywhere that a quota, enforced and unpopular, works." },
-  chubmackerel: { d: "Planktivore and small fish, taken while swimming through the shoal", h: "Warm and temperate shelf seas worldwide", s: "LC",
-    f: "The thing almost everything larger in this ocean is eating. A mackerel shoal turns as one because each fish is watching the movement of the fish beside it and nothing more — no leader, no decision, and a wall of silver that behaves like a single animal." },
-  atlanticherring: { d: "Planktivore — copepods and larvae, strained from the water", h: "Cold North Atlantic, in shoals from the surface to 200 m", s: "LC",
-    f: "The biomass the North Atlantic is built on. Shoals have been measured at four cubic kilometres and several billion fish. They also communicate at night by releasing bursts of gas from the gut, a sound named — by the scientists who described it — Fast Repetitive Tick." },
-  mahimahi: { d: "Carnivore — flying fish, squid, anything under floating weed", h: "Warm surface waters worldwide, often under drifting objects", s: "LC",
-    f: "It grows faster than almost any fish in the sea, reaching a metre inside a year and rarely living past four. The colour is the famous part and it does not survive the animal: the electric green and gold drain to dull grey within minutes of death, which is why almost nobody has seen one properly." },
-  opah: { d: "Carnivore — squid and krill, hunted in cold deep water", h: "Open ocean worldwide, usually 50–400 m down", s: "DD",
-    f: "The only fish known to be fully warm-blooded throughout its body. It generates the heat by constantly flapping its pectoral fins and keeps it in with a lattice of blood vessels in the gills, so it can hunt cold deep water at full speed while everything around it has gone sluggish. Nobody worked this out until 2015." },
-  oceanicwhitetip: { d: "Carnivore — tuna, squid, seabirds, carrion", h: "Warm open ocean worldwide, usually the top 150 m", s: "CR",
-    f: "Once described as the most abundant large animal on earth over about 45 kg, and now down by more than 98% in parts of its range — taken almost entirely as bycatch on longlines set for tuna. It is the shark sailors met after a sinking, and the reputation that came from that did nothing to slow the collapse." },
-  blueshark: { d: "Carnivore — squid above all, and schooling fish", h: "Every ocean but the poles; the widest-ranging shark there is", s: "NT",
-    f: "One tagged blue shark crossed the Atlantic and was recovered 9,200 km away. They travel in loose groups sorted by size and sex, and females carry mating scars so deep that their skin is three times thicker than a male's — an adaptation to their own courtship." },
-  remora: { d: "Scavenger — scraps, parasites, and skin off its host", h: "Warm oceans, attached to sharks, rays, turtles and boat hulls", s: "LC",
-    f: "The disc on its head is a dorsal fin that stopped being a fin: rows of movable slats that grip harder the more the host pulls forward. It is not a parasite — it eats the host's parasites and leftovers, and lets go to feed. Fishermen in several cultures tied lines to remoras and used them to catch turtles." },
-  sargassumfrogfish: { d: "Ambush carnivore — anything up to its own size, including other frogfish", h: "Floating sargassum weed rafts in the open Atlantic", s: "LC",
-    f: "It lives its whole life in drifting weed and is shaped like the weed down to the ragged flaps of skin. Its pectoral fins have jointed elbows and grasping tips, so it climbs the sargassum rather than swimming, and its strike is one of the fastest movements measured in any vertebrate — the mouth opens in six milliseconds." },
-  humboldtsquid: { d: "Carnivore — lanternfish, crustaceans, and each other", h: "Eastern Pacific, rising from deep water to hunt at night", s: "DD",
-    f: "It hunts in coordinated groups of hundreds and signals by flashing its skin red and white, which appears to be communication rather than camouflage — nobody has yet read it. They grow to two metres in about a year and a half and then die, and when food runs short the group turns on itself." },
-  manowar: { d: "Carnivore — small fish and crustaceans, paralysed by the tentacles", h: "Warm surface waters worldwide, drifting where the wind takes it", s: "DD",
-    f: "Not one animal. It is a colony of four kinds of specialised individual — one becomes the float, others the tentacles, the digestion, the reproduction — and none of them can live alone. It cannot swim at all: the crest on the float is a sail, and it is left- or right-handed, so a population blows into two groups going different ways." },
-  northerngannet: { d: "Piscivore — mackerel and herring, taken in a plunge dive", h: "North Atlantic cliffs and stacks; at sea outside the breeding season", s: "LC",
-    f: "It dives from forty metres and enters the water at around 100 km/h. To survive that it has no external nostrils, air sacs under the skin of the face and chest to absorb the impact, and a reinforced skull. It hits, then swims down after the fish it was aiming at." },
-  sootyshearwater: { d: "Piscivore and squid, seized at the surface or in shallow dives", h: "Breeds in burrows on southern islands; the whole Pacific and Atlantic outside that", s: "NT",
-    f: "It flies a figure-of-eight around an entire ocean every year — about 65,000 km, one of the longest migrations ever recorded by tracking. It follows the endless summer, and a bird born on a New Zealand island will feed off Alaska and Japan before it comes home." },
-  stormpetrel: { d: "Planktivore — crustaceans and oil droplets picked off the surface", h: "Breeds on Antarctic and subantarctic rock; at sea across the world's oceans", s: "LC",
-    f: "One of the most numerous birds on earth and one of the smallest seabirds, no bigger than a swallow. It appears to walk on the water: it holds itself up on the wind with its wings and patters the surface with its feet, which is where the name petrel comes from — a diminutive of Peter, who did the same thing." },
-  tropicbird: { d: "Piscivore — flying fish and squid, taken in a dive", h: "Tropical Atlantic, Pacific and Indian oceans; nests on sea cliffs", s: "LC",
-    f: "Two tail streamers longer than the rest of the bird put together, and it has no real use for legs — they are set so far back that it cannot stand or walk, only shuffle to a cliff ledge. It spends months at a time entirely at sea and comes to land for nothing but the nest." },
-  loggerhead: { d: "Carnivore — crabs, whelks and conch, crushed with the jaws", h: "Warm seas worldwide; nests on beaches in the Atlantic, Pacific and Indian oceans", s: "VU",
-    f: "The head is the reason for the name and for the diet: jaws heavy enough to crush a queen conch. Hatchlings ride ocean gyres for the first decade of life, drifting the whole North Atlantic before anyone sees them again — biologists call it the lost years, and satellite tags only started filling it in this century." },
-  oliveridley: { d: "Omnivore — jellyfish, crabs, algae", h: "Tropical Pacific, Atlantic and Indian oceans; nests on a handful of beaches", s: "VU",
-    f: "The arribada: tens of thousands of females come ashore on one beach in a single night, so many that later arrivals dig up the eggs of the earlier ones. It is the most abundant sea turtle there is, and that abundance rests on a very small number of beaches — which is a different kind of fragile." },
+  bluefintuna: { taxon: "Thunnus thynnus · one of 8 living Thunnus species", d: "Carnivore — herring, mackerel, squid, run down at speed", h: "Open Atlantic and Mediterranean; crosses the ocean and returns to spawn", s: "LC",
+    f: "One of eight living Thunnus tuna, it keeps its swimming muscles warmer than the water with counter-current heat exchangers and can hunt at speed in the cold North Atlantic. Its 2021 assessment moved from Endangered to Least Concern after enforced catch limits — unusually clear evidence that an unpopular quota can give a heavily fished ocean animal room to recover." },
+  chubmackerel: { taxon: "Scomber japonicus · Pacific Chub Mackerel, one of 4 living Scomber species", d: "Planktivore and small fish, taken while swimming through the shoal", h: "Southeast Atlantic and Indo-Pacific shelf seas, usually 50–200 m deep", s: "LC",
+    f: "One of four living Scomber mackerels, this is the moving middle of an ocean food web — it eats plankton and small animals, then feeds tuna, sharks, seabirds and people. A school has no leader. Each fish responds mostly to the few beside it, yet thousands turn together so quickly that the shoal behaves like one silver animal." },
+  atlanticherring: { taxon: "Clupea harengus · one of 3 living Clupea species", d: "Planktivore — copepods and larvae, strained from the water", h: "Cold North Atlantic, in shoals from the surface to 200 m", s: "LC",
+    f: "One of three living Clupea herrings, it forms shoals so large that they have been measured in cubic kilometres. The North Atlantic's larger hunters are built on that moving biomass — herring also release rapid trains of bubbles from the swim bladder after dark, producing the Fast Repetitive Tick that researchers recorded as a possible way for a school to keep in contact." },
+  mahimahi: { taxon: "Coryphaena hippurus · one of 2 living Coryphaena species", d: "Carnivore — flying fish, squid, anything under floating weed", h: "Warm surface waters worldwide, often under drifting objects", s: "LC",
+    f: "One of two living Coryphaena species, it can reach about a metre in its first year and rarely lives beyond five. The electric green, blue and gold are made by pigment cells changing shape while the fish is alive. After death those signals stop and the colour drains to grey within minutes — the famous animal is one that a market stall cannot quite show." },
+  opah: { taxon: "Lampris incognitus · Smalleye Pacific Opah, one of 6 recognised opah species", d: "Carnivore — squid and krill, hunted in cold deep water", h: "Temperate and subtropical North Pacific open ocean, below the surface",
+    f: "One of six recognised Lampris opahs, this Pacific species broke a rule — researchers reported whole-body endothermy in 2015. Constantly beating pectoral fins make heat, and blood-vessel lattices inside the gills keep much of it from escaping. Warm blood reaches the heart as well as the swimming muscles, letting the fish forage in cold deep water without repeatedly returning to the surface." },
+  oceanicwhitetip: { taxon: "Carcharhinus longimanus · one of 36 living Carcharhinus species", d: "Carnivore — tuna, squid, seabirds, carrion", h: "Warm open ocean worldwide, usually the top 150 m", s: "CR",
+    f: "One of thirty-six living Carcharhinus sharks, it once ranged through warm open ocean in extraordinary numbers. Longlines set for tuna catch the same wide-ranging predator, and some monitored populations fell by more than 90 percent — the species is now Critically Endangered. Its old reputation came from meeting shipwreck survivors. That story outlived the abundance of the shark itself." },
+  blueshark: { taxon: "Prionace glauca · the only living species in Prionace", d: "Carnivore — squid above all, and schooling fish", h: "Every ocean but the poles; the widest-ranging shark there is", s: "NT",
+    f: "The only living species in Prionace, the blue shark crosses entire ocean basins; tagged animals have travelled more than 9,000 kilometres. Females bear deep mating scars, and their skin is roughly twice as thick as a male's. That is not armour against another predator but an adaptation to courtship within their own species — a private danger carried across the open sea." },
+  remora: { taxon: "Remora remora · one of 5 living Remora species", d: "Scavenger — scraps, parasites, and skin off its host", h: "Warm oceans, attached to sharks, rays, turtles and boat hulls", s: "LC",
+    f: "One of five living Remora species, it rides sharks, rays and turtles on a suction disc made from a transformed dorsal fin — rows of movable plates increase their grip as the host pulls forward, yet the fish can release them to feed. Some fishing cultures tied a line to a live remora and let its remarkable fin catch a turtle for them." },
+  sargassumfrogfish: { taxon: "Histrio histrio · the only living species in Histrio", d: "Ambush carnivore — anything up to its own size, including other frogfish", h: "Floating sargassum weed rafts in the open Atlantic", s: "LC",
+    f: "The only living species in Histrio spends its life inside floating Sargassum — its colour and ragged skin match the weed. Jointed, grasping pectoral fins let it climb through the raft instead of swimming around it. There it ambushes animals up to its own size, including other frogfish, in a habitat that is both island and camouflage." },
+  humboldtsquid: { taxon: "Dosidicus gigas · the only living species in Dosidicus", d: "Carnivore — lanternfish, crustaceans, and each other", h: "Eastern Pacific, rising from deep water to hunt at night", s: "DD",
+    f: "The only living species in Dosidicus grows to more than a metre in a life of roughly one to two years. Groups rise from deep eastern Pacific water to hunt at night while their skin flashes between pale and dark red. The changing patterns appear to carry signals between squid — researchers can describe the display more confidently than they can translate it." },
+  manowar: { taxon: "Physalia physalis · one of 5 currently recognised Physalia species", d: "Carnivore — small fish and crustaceans, paralysed by the tentacles", h: "Warm surface waters worldwide, drifting where the wind takes it", s: "DD",
+    f: "One of five Physalia species currently recognised, it is not one animal but a colony — its specialised members become float, tentacles, digestion and reproduction. None can live alone. The colony cannot swim: its gas-filled crest works as a sail, and left- and right-sailing forms are pushed in different directions by the same wind." },
+  northerngannet: { taxon: "Morus bassanus · one of 3 living Morus species", d: "Piscivore — mackerel and herring, taken in a plunge dive", h: "North Atlantic cliffs and stacks; at sea outside the breeding season", s: "LC",
+    f: "One of three living Morus gannets, it folds into an arrow and enters the sea at around 100 kilometres an hour. Air sacs beneath the skin cushion the impact, its nostrils open inside the bill rather than on the surface, and the skull is reinforced. The plunge is only the beginning — underwater, it uses wings and feet to chase the fish it saw from above." },
+  sootyshearwater: { taxon: "Ardenna grisea · one of 7 living Ardenna species", d: "Piscivore and squid, seized at the surface or in shallow dives", h: "Breeds in burrows on southern islands; the whole Pacific and Atlantic outside that", s: "NT",
+    f: "One of seven living Ardenna shearwaters, it traces a vast figure of eight through the Pacific each year. Tracking has recorded journeys of roughly 65,000 kilometres between breeding islands near New Zealand and feeding waters off Japan, Alaska and California. It follows productive seasons so far that a bird can cross the equator twice before coming home." },
+  stormpetrel: { taxon: "Oceanites oceanicus · one of 3 IOC-recognised Oceanites species; a revision proposes 7", d: "Planktivore — crustaceans and oil droplets picked off the surface", h: "Breeds on Antarctic and subantarctic rock; at sea across the world's oceans", s: "LC",
+    f: "One of three Oceanites species in the IOC world list, it is among the most numerous seabirds and scarcely larger than a swallow. It seems to walk on the sea — holding itself against the wind and pattering its feet over the surface while it feeds. That performance is traditionally linked to the name petrel, after Saint Peter walking on water." },
+  tropicbird: { taxon: "Phaethon aethereus · one of 3 living Phaethon species", d: "Piscivore — flying fish and squid, taken in a dive", h: "Tropical Atlantic, Pacific and Indian oceans; nests on sea cliffs", s: "LC",
+    f: "One of three living Phaethon tropicbirds, it carries two tail streamers longer than the rest of its body. Its legs are set so far back that it cannot stand and walk normally, only shuffle on its belly near the nest. The apparent handicap hardly matters to a bird that spends months over tropical ocean and comes ashore only to breed." },
+  loggerhead: { taxon: "Caretta caretta · the only living Caretta, one of 7 sea-turtle species", d: "Carnivore — crabs, whelks and conch, crushed with the jaws", h: "Warm seas worldwide; nests on beaches in the Atlantic, Pacific and Indian oceans", s: "VU",
+    f: "The only living species in Caretta, and one of seven sea turtles, it is named for a head and jaws powerful enough to crush hard-shelled prey. Young turtles vanish into ocean currents for years before returning to coastal water — those “lost years” once left an entire life stage almost invisible; tiny satellite tags are now beginning to map it." },
+  oliveridley: { taxon: "Lepidochelys olivacea · one of 2 ridleys and 7 living sea-turtle species", d: "Omnivore — jellyfish, crabs, algae", h: "Tropical Pacific, Atlantic and Indian oceans; nests on a handful of beaches", s: "VU",
+    f: "One of two Lepidochelys ridleys, and one of seven living sea turtles, it nests in an arribada: thousands of females landing on the same beach over a few nights. Later arrivals may uncover nests laid earlier. It is the most abundant sea turtle, but much of that abundance funnels through a small number of beaches — a crowd can still depend on very little ground." },
 
   // ---- The Furrows ----
-  housemouse: { d: "Omnivore — grain, scraps, almost anything stored", h: "Wherever people build, on every continent including Antarctic bases", s: "LC",
-    f: "It followed grain out of northern India and into every building on earth, and it is now the most studied mammal after ourselves. It sings: males produce ultrasonic songs with structure and repeated phrases, pitched an octave and more above anything we can hear without equipment." },
-  brownrat: { d: "Omnivore — genuinely anything", h: "Cities, farms, sewers and ports worldwide; almost never far from people", s: "LC",
-    f: "It reached Europe from northern China in the 1700s and the world by ship. It is neophobic — deeply suspicious of anything new in a familiar place — which is why poisoning campaigns fail, and it will refuse a food that made it ill once and never touch it again. The tame version of this animal is in every laboratory and a good many living rooms." },
-  fieldvole: { d: "Herbivore — grass, almost exclusively", h: "Rough grassland, verges and young forestry across Europe and Asia", s: "LC",
-    f: "The animal the barn owl, the kestrel and the weasel are all living on. Its numbers rise and crash on a roughly four-year cycle, and everything that eats it rises and crashes behind — a vole year is a good year for owls and a lean one is not. Its urine reflects ultraviolet, so a kestrel can read a vole run from the air." },
-  commontoad: { d: "Carnivore — slugs, worms, beetles, taken with the tongue", h: "Gardens, woodland and farmland across Europe; breeds in ponds", s: "LC",
-    f: "It walks back to the pond it was born in every spring, in numbers, across whatever is in the way — which is why volunteers stand on roads at dusk in March with buckets. The warty skin behind the eyes carries a toxin strong enough to make a dog very ill, which is why almost nothing eats an adult toad." },
-  grasssnake: { d: "Carnivore — frogs and toads above all, hunted in and around water", h: "Damp grassland, ponds and ditches across Europe", s: "LC",
-    f: "Harmless, and it has two answers to being caught. First it produces a smell described by everyone who has met it as unforgettable. If that fails it plays dead — completely limp, mouth open, tongue hanging out — and it will keep doing it until you put it down." },
-  magpie: { d: "Omnivore — invertebrates, carrion, eggs, scraps", h: "Farmland, hedgerows and towns across Europe and Asia", s: "LC",
-    f: "One of very few animals to pass the mirror test: shown a mark on its own throat in a mirror, a magpie scratches at its throat and not at the glass. The reputation for stealing shiny things has been tested and mostly fails — in trials magpies avoided shiny objects more often than they took them." },
-  skylark: { d: "Omnivore — seeds and insects, taken on the ground", h: "Open farmland and grassland across Europe and Asia", s: "LC",
-    f: "It sings only in flight, hanging in the air for minutes at a time, and a single song can run unbroken past half an hour. It nests on bare ground between crops, which is why the switch from spring to autumn sowing emptied so much of the countryside of it — by the time the birds arrive, the crop is already too tall to nest in." },
-  europeanmole: { d: "Carnivore — earthworms, stored alive in a larder", h: "Any soil deep enough to tunnel, across Europe", s: "LC",
-    f: "The front paws are hands turned into shovels, permanently facing outward, with an extra thumb bone that is not a thumb. Its saliva carries a toxin that paralyses earthworms without killing them, so it can stockpile hundreds of live worms in a chamber and eat through them — which makes it, quietly, one of the very few venomous mammals." },
-  europeanbadger: { d: "Omnivore — earthworms mostly, plus fruit, insects and carrion", h: "Woodland edge, pasture and hedgerow across Europe", s: "LC",
-    f: "It lives in a sett that may be centuries old and dug by animals long dead, with chambers, bedding it changes, and latrines dug well away from the entrances. A single night's feeding can be two hundred earthworms. It also has embryonic diapause: it can mate in spring and not begin the pregnancy until winter." },
+  housemouse: { taxon: "Mus musculus · one of 39 living Mus species", d: "Omnivore — grain, scraps, almost anything stored", h: "Wherever people build, on every continent including Antarctic bases", s: "LC",
+    f: "One of thirty-nine living Mus mice, it has followed stored food into homes, farms and laboratories across the world — much of its social life happens above human hearing: males produce patterned ultrasonic songs during courtship, with syllables repeated in recognisable sequences. The animal beside the skirting board is using a voice that the people in the room cannot hear." },
+  brownrat: { taxon: "Rattus norvegicus · one of 63 living Rattus species", d: "Omnivore — genuinely anything", h: "Cities, farms, sewers and ports worldwide; almost never far from people", s: "LC",
+    f: "One of sixty-three living Rattus rats, it spread with people through ports, farms and cities — it is strongly wary of changes in a familiar place, which is why a new trap may be avoided for days. A meal followed by illness can produce a lasting taste aversion after one experience — a small animal solving human control measures by remembering." },
+  fieldvole: { taxon: "Microtus agrestis · one of 62 living Microtus species", d: "Herbivore — grass, almost exclusively", h: "Rough grassland, verges and young forestry across Europe and Asia", s: "LC",
+    f: "One of sixty-two living Microtus voles, it turns grass into the food that kestrels, owls, foxes and weasels depend on. In places where its population rises and crashes on a multi-year cycle, predator breeding success follows it — A “vole year” is therefore not just a change in one small mammal but a pulse moving through the whole field." },
+  commontoad: { taxon: "Bufo bufo · one of 26 living Bufo species", d: "Carnivore — slugs, worms, beetles, taken with the tongue", h: "Gardens, woodland and farmland across Europe; breeds in ponds", s: "LC",
+    f: "One of twenty-six living Bufo toads, it returns towards its breeding pond each spring even when a road has appeared across the route — volunteers carry them over in buckets because the homing instinct does not account for traffic. Large glands behind the eyes release defensive toxins, so an animal that looks slow and exposed is a dangerous mouthful." },
+  grasssnake: { taxon: "Natrix natrix · one of 5 living Natrix species", d: "Carnivore — frogs and toads above all, hunted in and around water", h: "Damp grassland, ponds and ditches across Europe", s: "LC",
+    f: "One of five living Natrix water snakes, it is harmless to people and hunts frogs around ponds and damp grassland. When caught it first releases a foul-smelling secretion. If that fails, it may go completely limp, open its mouth and let its tongue hang out — maintaining the performance until the threat puts the apparently dead snake down." },
+  magpie: { taxon: "Pica pica · one of 7 living Pica species", d: "Omnivore — invertebrates, carrion, eggs, scraps", h: "Farmland, hedgerows and towns across Europe and Asia", s: "LC",
+    f: "One of seven living Pica magpies, it became famous after a mirror study in which marked birds scratched at their own throats rather than the glass. Later tests have made the interpretation less certain, which is what a good experiment is allowed to do — the old claim that magpies compulsively steal shiny things fares worse: trials found curiosity and caution, not a preference for treasure." },
+  skylark: { taxon: "Alauda arvensis · one of 4 living Alauda species", d: "Omnivore — seeds and insects, taken on the ground", h: "Open farmland and grassland across Europe and Asia", s: "LC",
+    f: "One of four living Alauda larks, it can sing for minutes while climbing and hanging high above a field. The nest is less conspicuous: a shallow cup on the ground between crop stems. When sowing moved from spring to autumn, many fields were already too tall and dense by breeding time — a quiet change in farming that removed places for a famously audible bird." },
+  europeanmole: { taxon: "Talpa europaea · one of 16 living Talpa species", d: "Carnivore — earthworms, stored alive in a larder", h: "Any soil deep enough to tunnel, across Europe", s: "LC",
+    f: "One of sixteen living Talpa moles, it digs with hands turned permanently outward and widened by an extra “false thumb” bone. It stores live earthworms, sometimes disabling them with bites near the head. The often-repeated claim that its saliva contains a paralysing venom remains untested — a memorable story is not the same thing as an established mechanism." },
+  europeanbadger: { taxon: "Meles meles · one of 4 living Meles species", d: "Omnivore — earthworms mostly, plus fruit, insects and carrion", h: "Woodland edge, pasture and hedgerow across Europe", s: "LC",
+    f: "One of four living Meles badgers, it may inherit a sett dug and enlarged by generations before it was born. The tunnels have sleeping chambers — bedding that is carried out and replaced, and latrines away from the entrances. Mating and pregnancy can also be separated: delayed implantation lets embryos wait until the season is right to develop." },
 
   // ---- The Strand ----
-  herringgull: { d: "Omnivore — fish, crabs, eggs, refuse, whatever is going", h: "Coasts and increasingly the roofs of coastal towns, North Atlantic", s: "LC",
-    f: "The red spot on the bill is a target: a chick pecks it and the parent brings up food, and Tinbergen won a Nobel Prize partly for working that out with cardboard models. It reads human behaviour well enough to time a raid, and it is declining across its range despite being the bird most people would name as too common." },
-  bluemussel: { d: "Filter feeder — plankton strained from the tide", h: "Cold and temperate rocky shores, North Atlantic and Pacific", s: "LC",
-    f: "It anchors itself with byssus threads it spins from a gland in the foot, each one stronger than tendon and glued down with an adhesive that sets underwater — a problem the adhesives industry has been trying to copy for forty years. A mussel bed is habitat: hundreds of other species live in the spaces between." },
-  acornbarnacle: { d: "Filter feeder — plankton, kicked into the mouth by the legs", h: "Rocky intertidal shores worldwide, in the splash zone", s: "LC",
-    f: "It glues its head to a rock as a larva and stays there for life, feeding by kicking its legs out through the top of its own shell. Darwin spent eight years on barnacles before he published on anything else. It also has, proportionally, the longest reproductive organ of any animal — which is what you do when you cannot move and neither can your neighbours." },
-  greenanemone: { d: "Carnivore — mussels, crabs and small fish, stung and swallowed", h: "Cold Pacific rocky shores and tide pools, Alaska to California", s: "LC",
-    f: "The green is not its own. Algae live inside its tissue and pay rent in sugar, which is why an anemone in a shaded pool is pale and one in the sun is brilliant. It can live for decades, possibly much longer — nobody has found the upper limit, because they do not appear to age in the ordinary way." },
-  aldabratortoise: { d: "Herbivore — grasses, leaves and fallen fruit", h: "The Aldabra atoll, Seychelles — one wild population, and nowhere else", s: "VU",
-    f: "Island gigantism, and one of only two giant tortoises left on earth. It grazes the atoll so hard it has created its own habitat — a turf of dwarf plants that flower at ankle height, called tortoise turf, which exists because they eat everything taller. Individuals live past 150 years, and the oldest credibly recorded reached 255." },
+  herringgull: { taxon: "Larus argentatus · European Herring Gull, one of 24 living Larus species", d: "Omnivore — fish, crabs, eggs, refuse, whatever is going", h: "Coasts and increasingly the roofs of coastal towns, North Atlantic", s: "LC",
+    f: "One of twenty-four living Larus gulls, it carries a red spot on the bill that chicks peck to prompt a parent to bring up food — Tinbergen's model-bill experiments helped make that signal a classic of animal behaviour. The bird reads people well enough to raid a meal, yet its familiar presence hides a long-term decline across parts of its natural range." },
+  bluemussel: { taxon: "Mytilus edulis · one of 8 living Mytilus species", d: "Filter feeder — plankton strained from the tide", h: "Cold and temperate rocky shores, North Atlantic and Pacific", s: "LC",
+    f: "One of eight living Mytilus mussels, it anchors itself with byssus threads spun by its foot and fixed by proteins that cure underwater — engineers still study that wet adhesive. A mussel bed is more than a crowd of filter-feeders: the gaps between shells slow water, trap material and create shelter for hundreds of other coastal animals." },
+  acornbarnacle: { taxon: "Semibalanus balanoides · Northern Acorn Barnacle, one of 4 Semibalanus species", d: "Filter feeder — plankton, kicked into the mouth by the legs", h: "Cold North Atlantic and northeastern Pacific rocky shores, in the intertidal zone", s: "LC",
+    f: "One of four living Semibalanus barnacles, it glues its head to rock as a young animal and then spends adult life kicking feathery legs through the shell to catch food. It cannot walk to a mate, so fertilisation happens across the gap between fixed neighbours. An organ that can extend several body lengths is the practical answer to never being able to move." },
+  greenanemone: { taxon: "Anthopleura xanthogrammica · one of about 50 living Anthopleura species", d: "Carnivore — mussels, crabs and small fish, stung and swallowed", h: "Cold Pacific rocky shores and tide pools, Alaska to California", s: "LC",
+    f: "One of about fifty living Anthopleura anemones, it gets much of its green from green fluorescent proteins made by the anemone itself. Photosynthetic algae inside its tissues can add pigment and pass sugars to their host, but a 2024 study found they are not the main source of the colour — the partnership is real, while the neat old explanation was too simple." },
+  aldabratortoise: { taxon: "Aldabrachelys gigantea · the only living species in Aldabrachelys", d: "Herbivore — grasses, leaves and fallen fruit", h: "The Aldabra atoll, Seychelles — one wild population, and nowhere else", s: "VU",
+    f: "The only living species in Aldabrachelys is also one of just two surviving giant-tortoise lineages. On its home atoll, grazing maintains a low community of plants called tortoise turf — the animal does not merely occupy the habitat but helps make it. Individuals can live for well over a century, so one grazer may reshape the same patch of island across several human generations." },
 
   // ---- The Garden ----
-  staghorncoral: { d: "Symbiotic — sugars from algae in its tissue, plus plankton at night", h: "Shallow Indo-Pacific reefs, in clear water with strong light", s: "NT",
-    f: "It is a colony of thousands of tiny animals, each in a stone cup it built itself, and it grows faster than any other reef coral — up to twenty centimetres a year, which is what lets a damaged reef come back at all. It is also the first thing to bleach: warm the water a degree and a half and it expels the algae feeding it." },
-  braincoral: { d: "Symbiotic — sugars from algae, plus plankton caught at night", h: "Reefs and lagoons in the Caribbean and Atlantic", s: "LC",
-    f: "The maze on the surface is not decoration: each valley is a row of polyps sharing one continuous mouth. It grows about a centimetre a year and a boulder-sized colony has been alive for several centuries, which means the coral was here before the town on the shore, and its growth bands can be read like tree rings for the climate of each year." },
-  giantclam: { d: "Symbiotic — sugars from algae farmed in its own mantle, plus filtered plankton", h: "Shallow Indo-Pacific reef flats, embedded in the reef itself", s: "VU",
-    f: "The largest bivalve there has ever been, over a metre across and a quarter of a tonne. The colours in the mantle are algae it farms in its own flesh, arranged in a layer with iridescent cells above them that spread the light so the deeper algae are not scorched. It cannot close fast enough to trap a diver, and never has." },
-  pistolshrimp: { d: "Carnivore — small fish and worms, stunned by the snap", h: "Warm shallow seas worldwide, in a burrow it shares with a goby", s: "LC",
-    f: "It does not close the claw on anything. It snaps it shut fast enough to throw a jet of water that leaves a collapsing bubble behind it, and the collapse produces a bang, a flash of light, and a moment hotter than the surface of the sun. Colonies of them make enough noise to hide a submarine. Most share their burrow with a goby that watches for danger while the near-blind shrimp digs." },
-  humpheadwrasse: { d: "Carnivore — molluscs, crustaceans, and crown-of-thorns starfish", h: "Indo-Pacific coral reefs, on steep outer slopes", s: "EN",
-    f: "Two metres long, sixty years old, and one of the very few things that eats crown-of-thorns starfish, which is why a reef with them on it holds together better. Every one starts female and some become male later. A single live fish can sell for more than the boat that took it, which is the whole of its conservation problem." },
+  staghorncoral: { taxon: "Acropora cervicornis · one of about 156 living Acropora species", d: "Symbiotic — sugars from algae in its tissue, plus plankton at night", h: "Shallow Caribbean reefs, in clear water with strong light", s: "CR",
+    f: "One of about 156 living Acropora corals, this Caribbean species builds thickets with fast-growing antler branches that turn flat reef into shelter for fish and invertebrates — the same rapid metabolism and branching form make it especially sensitive to heat, disease and storm breakage. A reef-builder able to add more than ten centimetres a year is now Critically Endangered." },
+  braincoral: { taxon: "Diploria labyrinthiformis · Grooved Brain Coral, the only living Diploria", d: "Symbiotic — sugars from algae, plus plankton caught at night", h: "Reefs and lagoons in the Caribbean and Atlantic", s: "LC",
+    f: "The only living species in Diploria is one of several unrelated corals given the plain name “brain coral” for their winding ridges. Its grooves are shared walls between rows of small polyps, not decoration — a colony grows slowly for centuries, laying down annual density bands that preserve past sea conditions as a tree's rings preserve seasons on land." },
+  giantclam: { taxon: "Tridacna gigas · one of 10 living Tridacna species", d: "Symbiotic — sugars from algae farmed in its own mantle, plus filtered plankton", h: "Shallow Indo-Pacific reef flats, embedded in the reef itself", s: "VU",
+    f: "One of ten living Tridacna clams, it can exceed a metre across and two hundred kilograms. Much of its energy comes from algae farmed inside the exposed mantle; iridescent cells scatter sunlight down to them without letting the surface layer take it all. The old tale of a “killer clam” trapping divers survives better than any verified case of it happening." },
+  pistolshrimp: { taxon: "Alpheus randalli · one of about 322 living Alpheus species", d: "Carnivore — small fish and worms, stunned by the snap", h: "Warm Indo-Pacific reef sand and rubble, in a burrow it shares with a goby", s: "LC",
+    f: "One of about 322 living Alpheus snapping shrimps, Randall's pistol shrimp shares a burrow with a goby. The nearly blind shrimp excavates while keeping an antenna on the fish; the goby watches for danger and signals when both should retreat. Its enlarged claw fires a water jet whose collapsing bubble makes the snap — remarkable, but the partnership is what keeps it alive." },
+  humpheadwrasse: { taxon: "Cheilinus undulatus · one of 8 living Cheilinus species", d: "Carnivore — molluscs, crustaceans, and crown-of-thorns starfish", h: "Indo-Pacific coral reefs, on steep outer slopes", s: "EN",
+    f: "One of eight living Cheilinus wrasses, it can grow beyond two metres and live for decades on an Indo-Pacific reef. Some change sex from female to male as they mature, so removing the largest fish can remove breeding males faster than a headcount suggests — a single live animal may command an enormous restaurant price; slow growth turns that demand into an endangered species." },
 
   // ---- The Dry ----
-  kangaroorat: { d: "Granivore — dry seed, carried in cheek pouches", h: "Deserts and arid scrub of western North America", s: "LC",
-    f: "It never drinks. It makes all the water it needs by metabolising dry seed, and then refuses to waste any: kidneys that concentrate urine to a paste, no sweat glands, and a nasal passage that condenses the moisture back out of its own breath before it leaves. It plugs its burrow by day to keep the humidity it exhaled." },
-  namibbeetle: { d: "Detritivore — windblown plant fragments and grass seed", h: "The Namib desert dune fields, one of the driest places on earth", s: "LC",
-    f: "It solves water by standing still. On fog mornings it climbs a dune, faces into the wind and tips its rear end up, and fog condenses on the bumps of its back and runs down channels straight to its mouth. The pattern of water-attracting bumps and waxy water-repelling troughs has been copied into fog-harvesting nets for human use." },
-  egyptianvulture: { d: "Scavenger — carrion, and eggs broken open with a stone", h: "Dry open country from southern Europe to India and across Africa", s: "EN",
-    f: "One of very few birds that uses a tool: it picks up a stone and throws it at an ostrich egg until the shell gives, and young birds learn it by watching. The bare face is bright yellow because of carotenoids from its diet, so the colour advertises how well a bird is feeding — including, as it happens, how much dung it has eaten." },
+  kangaroorat: { taxon: "Dipodomys merriami · one of 20 living Dipodomys species", d: "Granivore — dry seed, carried in cheek pouches", h: "Deserts and arid scrub of western North America", s: "LC",
+    f: "One of twenty living Dipodomys kangaroo rats, Merriam's kangaroo rat can live without drinking liquid water. Moisture already in seeds, plus water released while metabolising them, covers the need; efficient kidneys and nasal passages limit what escapes. It seals the burrow by day, keeping heat out and humidity in — a desert water budget balanced with food, physiology and architecture." },
+  namibbeetle: { taxon: "Onymacris unguicularis · one of 14 living Onymacris species", d: "Detritivore — windblown plant fragments and grass seed", h: "The Namib desert dune fields, one of the driest places on earth", s: "LC",
+    f: "One of fourteen living Onymacris beetles, it climbs a Namib dune when fog arrives, faces the wind and stands head-down. Droplets collect on its smooth, grooved back and run towards the mouth. The crucial adaptation is the behaviour, not the often-repeated story of special water-attracting bumps — experiments found that bumpy beetles did not perform this fog-basking routine." },
+  egyptianvulture: { taxon: "Neophron percnopterus · the only living species in Neophron", d: "Scavenger — carrion, and eggs broken open with a stone", h: "Dry open country from southern Europe to India and across Africa", s: "EN",
+    f: "The only living species in Neophron is one of the few birds repeatedly seen using a tool in the wild. It carries stones to ostrich eggs and throws them until the shell breaks. Naive birds can perform the action without being taught, so the basic behaviour appears innate rather than culturally copied — its yellow face, meanwhile, is coloured partly by carotenoids acquired through diet." },
 
   // ---- The Weald ----
-  bumblebeebat: { d: "Insectivore — tiny insects taken in flight at dusk", h: "Limestone caves in a small area of Thailand and Myanmar", s: "NT",
-    f: "Two grams, and a contender for the smallest mammal alive — it and the Etruscan shrew have argued the title for decades, one lighter and the other shorter. It was not described until 1974, it lives in a handful of caves in one river valley, and it hunts in the twenty minutes of dusk and then stops." },
-  giantsquirrel: { d: "Frugivore — fruit, nuts, bark and the occasional egg", h: "Moist deciduous and evergreen forest of peninsular India", s: "LC",
-    f: "Nearly a metre from nose to tail-tip and coloured maroon, purple and cream, which is startling for a squirrel and works as camouflage in dappled canopy. It rarely comes to the ground at all, jumping gaps of six metres, and builds several globe-shaped nests across its range — some for sleeping, some as decoys." },
+  bumblebeebat: { taxon: "Craseonycteris thonglongyai · the only living species in its genus and family", d: "Insectivore — tiny insects taken in flight at dusk", h: "Limestone caves in a small area of Thailand and Myanmar", s: "NT",
+    f: "The only living species in both Craseonycteris and Craseonycteridae weighs about two grams. It competes with the Etruscan shrew for “smallest mammal”, one being lighter and the other shorter — science did not describe it until 1974, and its entire ancient branch survives in limestone caves across a small part of Thailand and Myanmar." },
+  giantsquirrel: { taxon: "Ratufa indica · one of 4 living Ratufa species", d: "Frugivore — fruit, nuts, bark and the occasional egg", h: "Moist deciduous and evergreen forest of peninsular India", s: "LC",
+    f: "One of four living Ratufa giant squirrels, it can approach a metre from nose to tail-tip and wears patches of cream, maroon and dark brown. Those colours break up its outline in dappled canopy — it rarely needs the ground, crossing gaps of several metres and building more than one large spherical nest within its home range." },
 
   // ---- The Fens ----
-  northernpike: { d: "Ambush carnivore — fish, ducklings, frogs, other pike", h: "Weedy lakes and slow rivers across the northern hemisphere", s: "LC",
-    f: "Built as one long muscle with the fins bunched at the back, so it accelerates from a standstill without a wind-up. The teeth angle backwards and the roof of the mouth is covered in them, so nothing taken comes out again. Everything else in the pond is arranged around it, including the smaller pike." },
-  electriceel: { d: "Carnivore — fish, stunned before they are taken", h: "Slow, murky waters of the Amazon and Orinoco basins", s: "LC",
-    f: "Not an eel at all — a knifefish, more closely related to catfish. Four-fifths of its body is battery: stacked cells that discharge up to 860 volts, the strongest of any animal. It hunts by firing a low pulse to make hidden fish twitch and give themselves away, then a high one to lock their muscles solid. It has to surface to breathe air." },
+  northernpike: { taxon: "Esox lucius · one of 7 living Esox species", d: "Ambush carnivore — fish, ducklings, frogs, other pike", h: "Weedy lakes and slow rivers across the northern hemisphere", s: "LC",
+    f: "One of seven living Esox pikes, it is built for a single explosive start: a long body with the dorsal and anal fins crowded near the tail. Backward-pointing teeth line the jaws and roof of the mouth, so prey seized in the rush is guided in rather than out — the still fish in the weeds is an acceleration waiting to happen." },
+  electriceel: { taxon: "Electrophorus voltai · Volta's electric eel, one of 3 living electric-eel species", d: "Carnivore — fish, stunned before they are taken", h: "Clear, low-conductivity rivers of the Brazilian and southern Guyana shields", s: "LC",
+    f: "One of three living Electrophorus species, Volta's electric eel is the one measured at 860 volts — the strongest known discharge from an animal. Most of its long body is electric organs built from stacked cells. Low pulses reveal nearby movement; a high-voltage volley activates prey muscles before the fish closes in. It is a knifefish, not a true eel." },
 
   // ---- The Long Grass ----
-  honeyguide: { d: "Beeswax, bee larvae, and insects — one of very few birds that digests wax", h: "Woodland and savanna across sub-Saharan Africa", s: "LC",
-    f: "It leads people to bees' nests. Honey-hunters in Mozambique and Tanzania call with a particular trill, the bird answers and flies ahead, waiting to be followed, and takes the wax once the nest is opened. It is one of the only mutualisms between a wild animal and humans, it is generations old on both sides, and the birds distinguish the hunters' call from other human sounds. It is also a brood parasite whose chicks kill their nestmates with a hooked bill, which is the same bird." },
+  honeyguide: { taxon: "Indicator indicator · one of 11 living Indicator species", d: "Beeswax, bee larvae, and insects — one of very few birds that digests wax", h: "Woodland and savanna across sub-Saharan Africa", s: "LC",
+    f: "One of eleven living Indicator honeyguides, some populations answer specialised calls used by African honey-hunting cultures and lead people towards a bees' nest. People open what the bird cannot, then leave wax it can digest — a learned partnership between two wild species. The same bird is a brood parasite whose newly hatched chick kills nest-mates with a hooked bill." },
 });
 
-// Photographic sprites for all forty-four. See the note at the head of this
-// file: this is why part68 stays out of GAME_PARTS until art/ has the PNGs.
+// Photographic sprites for all forty-four. Each matching PNG is present in art/.
 Object.assign(PHOTO_ART, Object.fromEntries(P68.map((k) => [k, true])));
 
 /* Learnsets and placement — the part54 pattern, unchanged.
@@ -218,47 +213,79 @@ Object.assign(PHOTO_ART, Object.fromEntries(P68.map((k) => [k, true])));
      The savanna routes are this game's hedgerow country: route1 and the
      seg_m maps already hold groundhog, red squirrel, hedgehog, rabbit and
      mandarin duck, which is where the farmland animals belong. */
-  const BY_ZONE = {
-    oceanz: ["bluefintuna", "chubmackerel", "atlanticherring", "mahimahi", "opah",
-             "oceanicwhitetip", "blueshark", "remora", "sargassumfrogfish", "humboldtsquid",
-             "manowar", "northerngannet", "sootyshearwater", "stormpetrel", "tropicbird",
-             "loggerhead", "oliveridley"],
-    kelpz:    ["bluemussel", "acornbarnacle", "greenanemone"],
-    reefz:    ["staghorncoral", "braincoral", "giantclam", "pistolshrimp", "humpheadwrasse"],
-    savanna:  ["housemouse", "brownrat", "fieldvole", "magpie", "skylark",
-               "europeanmole", "europeanbadger", "honeyguide"],
-    savannaz: ["honeyguide"],
-    wetland:  ["commontoad", "grasssnake", "northernpike", "electriceel"],
-    desert:   ["kangaroorat", "namibbeetle", "egyptianvulture"],
-    jungle:   ["giantsquirrel"],
-    cavezone: ["bumblebeebat"],
-  };
+  // Each destination names its encounter layer as well as its zone. Fish and
+  // marine invertebrates belong in poolWater; seabirds and land animals use
+  // pool. Keeping that distinction here prevents a shark appearing on a dry
+  // tile merely because the map itself is an ocean map.
+  const BY_ZONE = [
+    { zone: "oceanz", pool: "poolWater", list: [
+      "bluefintuna", "chubmackerel", "atlanticherring", "mahimahi", "opah",
+      "oceanicwhitetip", "blueshark", "remora", "sargassumfrogfish", "humboldtsquid",
+      "manowar", "loggerhead", "oliveridley",
+    ] },
+    { zone: "oceanz", pool: "pool", list: [
+      "northerngannet", "sootyshearwater", "stormpetrel", "tropicbird",
+    ] },
+    { zone: "kelpz", pool: "poolWater", list: [
+      "bluemussel", "acornbarnacle", "greenanemone",
+    ] },
+    { zone: "reefz", pool: "poolWater", list: [
+      "staghorncoral", "braincoral", "giantclam", "pistolshrimp", "humpheadwrasse",
+    ] },
+    { zone: "savanna", pool: "pool", list: [
+      "housemouse", "brownrat", "fieldvole", "magpie", "skylark",
+      "europeanmole", "europeanbadger", "honeyguide",
+    ] },
+    { zone: "savannaz", pool: "pool", list: ["honeyguide"] },
+    { zone: "wetland", pool: "pool", list: ["commontoad", "grasssnake"] },
+    { zone: "wetland", pool: "poolWater", list: ["northernpike", "electriceel"] },
+    { zone: "desert", pool: "pool", list: [
+      "kangaroorat", "namibbeetle", "egyptianvulture",
+    ] },
+    { zone: "jungle", pool: "pool", list: ["giantsquirrel"] },
+    { zone: "cavezone", pool: "pool", list: ["bumblebeebat"] },
+  ];
   // Two that want one specific map rather than a whole zone. The shore is the
   // beach — flamingo, pelican, penguin, booby — and volcanic covers the slopes
   // above it as well, which is no place for a gull or a giant tortoise.
-  const BY_MAP = { shore: ["herringgull", "aldabratortoise"] };
+  const BY_MAP = [
+    { map: "shore", pool: "pool", list: ["herringgull", "aldabratortoise"] },
+  ];
 
-  const usable = (m) => MAPS[m] && MAPS[m].pool && MAPS[m].pool.length
-    && !m.startsWith("vig") && !m.startsWith("arc");
+  const usable = (m, pool) => MAPS[m] && Array.isArray(MAPS[m][pool]) && MAPS[m][pool].length
+    && !m.startsWith("vig") && !m.startsWith("arc") && !m.startsWith("town")
+    && m !== "aquarium" && !m.startsWith("aqua_");
   const placed = new Set();
   let added = 0;
-  const drop = (m, k) => { MAPS[m].pool = [...MAPS[m].pool, [k, 2]]; added++; placed.add(k); };
+  const drop = (m, pool, k) => {
+    MAPS[m][pool] = [...MAPS[m][pool], [k, 2]];
+    const places = WHERE[k] || (WHERE[k] = []);
+    if (!places.some((place) => place.k === m)) {
+      places.push({ k: m, n: MAPS[m].name, z: MAPS[m].zone,
+        lvl: pool === "poolWater" ? (MAPS[m].lvlWater || MAPS[m].lvl) : MAPS[m].lvl });
+    }
+    added++;
+    placed.add(k);
+  };
 
-  Object.entries(BY_ZONE).forEach(([zone, list]) => {
-    const maps = Object.keys(MAPS).filter((m) => usable(m) && MAPS[m].zone === zone);
-    list.forEach((k) => maps.forEach((m) => drop(m, k)));
+  BY_ZONE.forEach(({ zone, pool, list }) => {
+    const maps = Object.keys(MAPS).filter((m) => usable(m, pool) && MAPS[m].zone === zone);
+    list.forEach((k) => maps.forEach((m) => drop(m, pool, k)));
   });
-  Object.entries(BY_MAP).forEach(([m, list]) => {
-    if (usable(m)) list.forEach((k) => drop(m, k));
+  BY_MAP.forEach(({ map, pool, list }) => {
+    if (usable(map, pool)) list.forEach((k) => drop(map, pool, k));
   });
 
   // No silent fallback. A species with nowhere to go is a mistake in the lists
   // above, and burying it in whichever map happens to score well on type is
   // how the mole ended up in the desert. Say so instead.
   const homeless = P68.filter((k) => !placed.has(k));
+  const hiddenFromGuide = P68.filter((k) => !(WHERE[k] || []).length);
 
   console.log(`[part68] the forty-four: ${P68.length} species | learnsets: ${built}`
     + ` | pool entries added: ${added} | reachable: ${placed.size}/${P68.length}`
+    + ` | guide locations: ${P68.length - hiddenFromGuide.length}/${P68.length}`
     + (thin.length ? ` | NO MOVES: ${thin.join(", ")}` : "")
-    + (homeless.length ? ` | NOWHERE TO LIVE: ${homeless.join(", ")}` : ""));
+    + (homeless.length ? ` | NOWHERE TO LIVE: ${homeless.join(", ")}` : "")
+    + (hiddenFromGuide.length ? ` | HIDDEN FROM GUIDE: ${hiddenFromGuide.join(", ")}` : ""));
 }

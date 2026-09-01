@@ -1979,6 +1979,7 @@
                           <div style={{ background: "#2e2921", borderRadius: 15, padding: 4 }}><Sprite sp={sp} size={72} /></div>
                           <div style={{ flex: 1 }}>
                             <div style={{ fontSize: 17, fontWeight: 700, color: "#f2ede0" }}>{d.n}</div>
+                            {nfo?.taxon && <div style={{ marginTop: 2, fontSize: 10.5, lineHeight: 1.35, fontStyle: "italic", color: "#b9ad98" }}>{nfo.taxon}</div>}
                             <div style={{ margin: "4px 0" }}>{d.t.map((t) => <Chip key={t} t={t} small />)}</div>
                             {iu && <div style={{ display: "inline-block", fontSize: 10, fontWeight: 700, color: "#1a1713", background: iu[1], borderRadius: 4, padding: "1px 6px" }}>{st} · {iu[0]}</div>}
                           </div>
