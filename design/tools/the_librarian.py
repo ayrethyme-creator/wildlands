@@ -51,13 +51,15 @@ the distinctions that have already gone wrong once.
 """
 import io, os, re, sys, hashlib
 
-os.chdir("C:/Claude/wildlands")
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+os.chdir(ROOT)
 FAIL, WARN = [], []
 
 # Files whose prose makes claims about the world. Deliberately NOT the whole doc
 # set: HANDOFF, LINKS and the species lists are about the project, and Cousin Bob
 # already owns their numbers.
-SOURCES = ['GDD.md', 'design/BADGE_CARDS.txt', 'design/FIELD_GUIDE.txt']
+SOURCES = ['GDD.md', 'design/BADGE_CARDS.txt', 'design/FIELD_GUIDE.txt',
+           'design/TERRANE_FIELD_GUIDE_44.md']
 
 REGISTER = 'design/CLAIMS.txt'
 
@@ -71,6 +73,7 @@ SUPERLATIVE = (r'\b(only|first|last|largest|biggest|smallest|fastest|slowest|dee
 # "over a hundred million years ago" contains no digit at all.
 NUMBER = (r'\b\d[\d,]*\s*(?:%|kg|g\b|cm|mm|m\b|km|metres|meters|years|species|'
           r'million|billion)|\b\d+%'
+          r'|\b\d+\s+(?:living\s+)?(?:[a-z][a-z-]*\s+){0,3}species\b'
           r'|\b(?:hundred|thousand|million|billion)\b')
 YEAR = r'\b(?:1[6-9]\d\d|20\d\d)\b'
 CLAIM = re.compile('|'.join([SUPERLATIVE, NUMBER, YEAR]), re.I)
@@ -183,6 +186,37 @@ def sentences(path):
             if len(parts) < 3:
                 continue
             yield ('%s — %s' % (parts[1], '::'.join(parts[2:])), parts[1])
+        return
+
+    # Terrane does not have runnable game data yet, so its first new entries live
+    # in a reviewable Markdown source. Each level-three heading is the familiar
+    # card name, the italic line identifies the exact species and relative count,
+    # and the following paragraph is the player-facing entry. Keep the heading as
+    # the species hint so a sentence such as "The only living species..." does not
+    # vanish from the queue merely because it uses a pronoun instead of repeating
+    # the animal's name.
+    if path.endswith('TERRANE_FIELD_GUIDE_44.md'):
+        raw = io.open(path, encoding='utf-8').read()
+        entry = re.compile(
+            r'^### ([^\n]+)\n\n(\*[^\n]+\* · [^\n]+)\n\n(.+?)'
+            r'(?=\n\n(?:### |## ))', re.M | re.S)
+        matches = list(entry.finditer(raw))
+        names = [match.group(1) for match in matches]
+        if len(matches) != 44:
+            FAIL.append('TERRANE_FIELD_GUIDE_44.md has %d entries, expected 44'
+                        % len(matches))
+        duplicates = sorted({name for name in names if names.count(name) > 1})
+        if duplicates:
+            FAIL.append('TERRANE_FIELD_GUIDE_44.md repeats: ' + ', '.join(duplicates))
+        for match in matches:
+            name, relative_line, body = match.groups()
+            if not re.search(r'\d|\bonly\b', relative_line, re.I):
+                FAIL.append('%s has no relative count in TERRANE_FIELD_GUIDE_44.md'
+                            % name)
+            yield ('%s — %s' % (name, strip_markup(relative_line)), name)
+            for sent in re.split(r'(?<=[.!?])\s+', ' '.join(body.split())):
+                if 25 < len(sent) < 400:
+                    yield ('%s — %s' % (name, sent), name)
         return
 
     raw = io.open(path, encoding='utf-8').read()

@@ -33,7 +33,8 @@ disagreeing about what counts as a species is what hid it.
 """
 import io, os, sys, re
 
-os.chdir("C:/Claude/wildlands")
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+os.chdir(ROOT)
 FAIL = []
 
 

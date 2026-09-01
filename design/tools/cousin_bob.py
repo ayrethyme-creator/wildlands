@@ -56,7 +56,8 @@ checks that documents agree with the repo, not that the repo agrees with reality
 """
 import io, os, re, sys
 
-os.chdir("C:/Claude/wildlands")
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+os.chdir(ROOT)
 FAIL, WARN = [], []
 
 # Documents that claim to describe the CURRENT state. Held to the numbers.
@@ -75,8 +76,7 @@ def read(p):
 
 
 # ---------------------------------------------------------------- the real data
-exec(read('design/tools/uncle_albert.py').split('d, pend, made = load()')[0]
-     .replace('os.chdir("C:/Claude/wildlands")', ''))
+exec(read('design/tools/uncle_albert.py').split('d, pend, made = load()')[0])
 d, pend, made = load()
 GONE = ['cut', 'cosmetic', 'merged', 'unplaced', 'lifestage']
 BIOMES = ['rainforest', 'savanna', 'forest', 'wetland', 'desert', 'coast',
