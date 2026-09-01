@@ -21,6 +21,7 @@ var BIOME_BY_HAND = {
   springbok:"savanna", impala:"savanna", kudu:"savanna", eland:"savanna",
   nyala:"savanna", wildebeest:"savanna", blackbuck:"savanna",
   nakedmolerat:"savanna", molequeen:"savanna", firehawk:"savanna",
+  honeyguide:"savanna",
 
   // --- forest ---
   puma:"forest", bobcat:"forest", grayfox:"forest", stoat:"forest", macaque:"forest",
@@ -34,6 +35,7 @@ var BIOME_BY_HAND = {
   jewelbeetle:"forest", cicada:"forest", komododragon:"forest",
   frilledlizard:"forest", skink:"forest", tuatara:"forest",
   tawnyfrogmouth:"forest", tardigrade:"forest",
+  bumblebeebat:"forest", giantsquirrel:"forest",
 
   // --- rainforest ---
   babirusa:"rainforest", peccary:"rainforest", duiker:"rainforest",
@@ -52,6 +54,7 @@ var BIOME_BY_HAND = {
   dingo:"desert", degu:"desert", cockatiel:"desert", emu:"desert",
   peacockspider:"desert", gecko:"desert", rattlesnake:"desert", taipan:"desert",
   vermilionflycatcher:"desert",
+  kangaroorat:"desert", namibbeetle:"desert", egyptianvulture:"desert",
 
   // --- wetland ---
   mink:"wetland", amazonriverdolphin:"wetland", gangesdolphin:"wetland",
@@ -62,24 +65,34 @@ var BIOME_BY_HAND = {
   newt:"wetland", firebellytoad:"wetland", piedavocet:"wetland",
   neontetra:"wetland", blackskirttetra:"wetland", betta:"wetland",
   guppy:"wetland", platyfish:"wetland", discusfish:"wetland",
-  oscarcichlid:"wetland",
+  oscarcichlid:"wetland", northernpike:"wetland", electriceel:"wetland",
 
   // --- coast ---
   monkseal:"coast", bottlenose:"coast", vaquita:"coast", stellerseagle:"coast",
   puffin:"coast", frigatebird:"coast", bluefootedbooby:"coast",
   marineiguana:"coast", lavalizard:"coast", nicobarpigeon:"coast",
   mimicoctopus:"coast", coconutcrab:"coast", lobster:"coast",
+  herringgull:"coast", bluemussel:"coast", acornbarnacle:"coast",
+  greenanemone:"coast", aldabratortoise:"coast",
 
   // --- reef ---
   mantaray:"reef", clownfish:"reef", lionfish:"reef", barracuda:"reef",
   seasnake:"reef", greenseaturtle:"reef", brittlestar:"reef", bobbitworm:"reef",
   royalgramma:"reef", banggaicardinalfish:"reef",
+  staghorncoral:"reef", braincoral:"reef", giantclam:"reef",
+  pistolshrimp:"reef", humpheadwrasse:"reef",
 
   // --- open ocean ---
   finwhale:"opensea", minke:"opensea", seiwhale:"opensea", spermwhale:"opensea",
   orca:"opensea", melonhead:"opensea", spinnerdolphin:"opensea",
   cuvierbeaked:"opensea", marlin:"opensea", sailfish:"opensea",
   giantsquid:"opensea", leatherback:"opensea",
+  bluefintuna:"opensea", chubmackerel:"opensea", atlanticherring:"opensea",
+  mahimahi:"opensea", opah:"opensea", oceanicwhitetip:"opensea",
+  blueshark:"opensea", remora:"opensea", sargassumfrogfish:"opensea",
+  humboldtsquid:"opensea", manowar:"opensea", northerngannet:"opensea",
+  sootyshearwater:"opensea", stormpetrel:"opensea", tropicbird:"opensea",
+  loggerhead:"opensea", oliveridley:"opensea",
 
   // --- polar ---
   lionsmane:"polar",
@@ -91,6 +104,9 @@ var BIOME_BY_HAND = {
   ladybug:"farmland", firefly:"farmland", jumpingspider:"farmland",
   earthworm:"farmland", housesparrow:"farmland", barnswallow:"farmland",
   commonstarling:"farmland", ibericanworm:"farmland",
+  housemouse:"farmland", brownrat:"farmland", fieldvole:"farmland",
+  commontoad:"farmland", grasssnake:"farmland", magpie:"farmland",
+  skylark:"farmland", europeanmole:"farmland", europeanbadger:"farmland",
   // pets and livestock
   housecat:"farmland", tabbycat:"farmland", calicocat:"farmland", blackcat:"farmland",
   dog:"farmland", puppy:"farmland", hamster:"farmland", gerbil:"farmland",
