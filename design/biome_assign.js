@@ -500,3 +500,12 @@ BIOME_BY_HAND.electriceel       = "wetland";
 
 // The Long Grass - savanna, 1
 BIOME_BY_HAND.honeyguide        = "savanna";
+
+// --- THE SIX STILL OWED, 2026-09-02. Promises that predate "The Last Forty-Four"
+// --- and did not travel with it. Added to the game data by game.part69.jsx.
+BIOME_BY_HAND.littlebluepenguin  = "coast";
+BIOME_BY_HAND.plainspocketgopher = "farmland";
+BIOME_BY_HAND.gemsbok            = "savanna";
+BIOME_BY_HAND.mexicanredknee     = "desert";
+BIOME_BY_HAND.iberianlynx        = "forest";
+BIOME_BY_HAND.woodfrog           = "forest";

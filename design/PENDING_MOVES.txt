@@ -44,8 +44,8 @@ kept>lifestage=Puppy
 
 ! --- Ayr, 2026-08-26. Two species to create and the camelid duplicate resolved.
 ! --- Gopher -> The Furrows. Tarantula -> The Dry.
-new>farmland=Gopher
-new>desert=Tarantula
+! APPLIED 2026-09-02 - new>farmland=Gopher
+! APPLIED 2026-09-02 - new>desert=Tarantula
 
 ! --- The llama and alpaca are DOMESTICATED - their wild relatives are the guanaco and
 ! --- vicuna, both already in The Divide. So both belong in The Kept, not in a biome.
@@ -125,8 +125,8 @@ new>vigil=Bachman's Warbler|Christmas Island Forest Skink|Alaotra Grebe|Tecopa P
 ! ---   Arabian oryx, which is a desert animal and has its own elder quest.
 ! --- Little blue penguin: Ayr, 2026-08-26. New Zealand and southern Australia,
 ! ---   nests in burrows on temperate coast - it is not a polar animal.
-new>savanna=Gemsbok
-new>coast=Little Blue Penguin
+! APPLIED 2026-09-02 - new>savanna=Gemsbok
+! APPLIED 2026-09-02 - new>coast=Little Blue Penguin
 
 ! --- Ayr, 2026-08-26. The Kept was 51 because the llama joined it. Potbelly Pig goes:
 ! --- "Pig" already covers pigs, and the potbelly is a bred pet variety rather than a
@@ -144,7 +144,7 @@ forest>merged=King Cobra
 ! ---   recovered past 2,000 by 2023 - captive breeding, rabbit restoration, underpasses.
 ! --- Tibetan Antelope: The Divide, elder. The shahtoosh ban, CITES Appendix I,
 ! ---   and a recovery from ~75,000 to ~300,000.
-new>forest=Iberian Lynx
+! APPLIED 2026-09-02 - new>forest=Iberian Lynx
 new>alpine=Tibetan Antelope
 
 ! ============================================================================
@@ -591,7 +591,7 @@ RENAME=Peccary::Chacoan Peccary|Dormouse::Edible Dormouse|Sawfish::Smalltooth Sa
 ! --- APPLIED 2026-09-02: Bumblebee Bat now exists in the game data, in the forty-four.
 ! --- The Wood Frog does not yet, so the promise is split rather than deleted.
 ! APPLIED 2026-09-02 - new>forest=Bumblebee Bat
-new>forest=Wood Frog
+! APPLIED 2026-09-02 - new>forest=Wood Frog
 
 ! ============================================================================
 ! THE LAST FORTY-FOUR - Ayr, 2026-08-29. THE THOUSAND CLOSES HERE.

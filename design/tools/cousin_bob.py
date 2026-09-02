@@ -357,13 +357,32 @@ for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
 # GROUND_TRUTH.txt - what the RUNNING GAME says - and deliberately not against the
 # roster Albert builds, because that one already has the pipeline applied on top
 # and would happily confirm a promise using the promise itself.
+#
+# Renames are applied to both sides first. A promise is retired under the name it
+# was MADE under - "new>desert=Tarantula" - while the game holds the name the
+# generics audit gave it, Mexican Redknee. Comparing the raw strings would report
+# a species that plainly exists as missing.
+RENAME = {}
+for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
+    line = line.rstrip('\n')
+    if not line or line.startswith('!') or '=' not in line:
+        continue
+    route, names = line.split('=', 1)
+    if route == 'RENAME':
+        for pair in names.split('|'):
+            a, b = pair.split('::')
+            RENAME[a] = b
+
 in_game = set()
 for line in io.open('design/GROUND_TRUTH.txt', encoding='utf-8'):
     line = line.strip()
     if not line or line.startswith('!') or '=' not in line:
         continue
-    in_game.update(x for x in line.split('=', 1)[1].split('|') if x)
-ghosts = sorted({n for names in applied.values() for n in names if n not in in_game})
+    for x in line.split('=', 1)[1].split('|'):
+        if x:
+            in_game.add(RENAME.get(x, x))
+ghosts = sorted({RENAME.get(n, n) for names in applied.values() for n in names
+                 if RENAME.get(n, n) not in in_game})
 print()
 print('SPECIES MARKED APPLIED IN THE PIPELINE: %d'
       % sum(len(v) for v in applied.values()))
