@@ -59,7 +59,81 @@ FAIL, WARN = [], []
 # set: HANDOFF, LINKS and the species lists are about the project, and Cousin Bob
 # already owns their numbers.
 SOURCES = ['GDD.md', 'design/BADGE_CARDS.txt', 'design/FIELD_GUIDE.txt',
-           'design/TERRANE_FIELD_GUIDE_44.md']
+           'design/TERRANE_FIELD_GUIDE_44.md',
+           'design/TERRANE_FIELD_GUIDE_66.md']
+
+# These are the approved pictures behind the second writing batch. Keeping the
+# exact manifest here prevents a rejected render from quietly receiving finished
+# prose, or an approved animal from disappearing behind a correct total of 66.
+TERRANE_66_NAMES = set('''
+Adélie Penguin
+Antarctic Icefish
+Antarctic Sea Spider
+Antarctic Toothfish
+Arctic Char
+Arctic Cod
+Arctic Tern
+Arctic Wolf
+Capelin
+Collared Lemming
+Gentoo Penguin
+Greenland Halibut
+Ivory Gull
+King Penguin
+Little Auk
+Long-tailed Duck
+Ringed Seal
+Rock Ptarmigan
+Ross's Gull
+Snow Petrel
+South Polar Skua
+Alpine Chamois
+Alpine Chough
+Alpine Salamander
+Apollo Butterfly
+Argali
+Bar-headed Goose
+Himalayan Jumping Spider
+Kiang
+Lammergeier
+Mountain Goat
+Rock Hyrax
+Tibetan Antelope
+Wallcreeper
+White-rumped Vulture
+Woolly Flying Squirrel
+Anatolian Shepherd
+Angora Rabbit
+Ball Python Morph
+Bred Axolotl
+Bull Terrier
+Burmese
+Cornish Rex
+Domestic Fox
+Egyptian Mau
+Fancy Pigeon
+French Bulldog
+Manx
+Munchkin
+Silkworm
+Bearded Dragon
+Corn Snake
+Leopard Gecko
+Mutt
+Pit Bull
+Russian Tortoise
+Alaotra Grebe
+Bachman's Warbler
+Christmas Island Forest Skink
+Round Island Burrowing Boa
+Tecopa Pupfish
+Gemsbok
+Iberian Lynx
+Little Blue Penguin
+Mexican Redknee
+Wood Frog
+'''.strip().split('\n'))
+assert len(TERRANE_66_NAMES) == 66
 
 REGISTER = 'design/CLAIMS.txt'
 
@@ -188,31 +262,44 @@ def sentences(path):
             yield ('%s — %s' % (parts[1], '::'.join(parts[2:])), parts[1])
         return
 
-    # Terrane does not have runnable game data yet, so its first new entries live
-    # in a reviewable Markdown source. Each level-three heading is the familiar
+    # Terrane does not have runnable game data yet, so its new entries live in
+    # reviewable Markdown sources. Each level-three heading is the familiar
     # card name, the italic line identifies the exact species and relative count,
     # and the following paragraph is the player-facing entry. Keep the heading as
     # the species hint so a sentence such as "The only living species..." does not
     # vanish from the queue merely because it uses a pronoun instead of repeating
     # the animal's name.
-    if path.endswith('TERRANE_FIELD_GUIDE_44.md'):
+    terrane_source = re.search(r'TERRANE_FIELD_GUIDE_(\d+)\.md$', path)
+    if terrane_source:
+        expected = int(terrane_source.group(1))
+        label = os.path.basename(path)
         raw = io.open(path, encoding='utf-8').read()
         entry = re.compile(
             r'^### ([^\n]+)\n\n(\*[^\n]+\* · [^\n]+)\n\n(.+?)'
-            r'(?=\n\n(?:### |## ))', re.M | re.S)
+            r'(?=\n\n(?:### |## )|\Z)', re.M | re.S)
         matches = list(entry.finditer(raw))
         names = [match.group(1) for match in matches]
-        if len(matches) != 44:
-            FAIL.append('TERRANE_FIELD_GUIDE_44.md has %d entries, expected 44'
-                        % len(matches))
+        if len(matches) != expected:
+            FAIL.append('%s has %d entries, expected %d'
+                        % (label, len(matches), expected))
         duplicates = sorted({name for name in names if names.count(name) > 1})
         if duplicates:
-            FAIL.append('TERRANE_FIELD_GUIDE_44.md repeats: ' + ', '.join(duplicates))
+            FAIL.append('%s repeats: %s' % (label, ', '.join(duplicates)))
+        if expected == 66:
+            missing = sorted(TERRANE_66_NAMES - set(names))
+            unexpected = sorted(set(names) - TERRANE_66_NAMES)
+            if missing:
+                FAIL.append('%s is missing approved entries: %s'
+                            % (label, ', '.join(missing)))
+            if unexpected:
+                FAIL.append('%s includes entries outside the approved batch: %s'
+                            % (label, ', '.join(unexpected)))
         for match in matches:
             name, relative_line, body = match.groups()
             if not re.search(r'\d|\bonly\b', relative_line, re.I):
-                FAIL.append('%s has no relative count in TERRANE_FIELD_GUIDE_44.md'
-                            % name)
+                FAIL.append('%s has no relative count in %s' % (name, label))
+            if len(strip_markup(body)) < 220:
+                FAIL.append('%s has an unfinished entry in %s' % (name, label))
             yield ('%s — %s' % (name, strip_markup(relative_line)), name)
             for sent in re.split(r'(?<=[.!?])\s+', ' '.join(body.split())):
                 if 25 < len(sent) < 400:
@@ -248,6 +335,9 @@ def load_register():
 reg = load_register()
 found = {}
 for path in SOURCES:
+    if not os.path.exists(path):
+        FAIL.append('claim source does not exist: ' + path)
+        continue
     for t, hint in sentences(path):
         if not CLAIM.search(t):
             continue
