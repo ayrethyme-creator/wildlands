@@ -93,7 +93,8 @@ var DATA_PARTS = [
   "game.part53.jsx","game.part54.jsx","game.part55.jsx","game.part56.jsx","game.part57.jsx",
   "game.part58.jsx","game.part59.jsx","game.part60.jsx","game.part61.jsx","game.part62.jsx",
   "game.part63.jsx","game.part64.jsx","game.part65.jsx","game.part66.jsx","game.part67.jsx",
-  "game.part68.jsx"
+  "game.part68.jsx","game.part69.jsx","game.part70.jsx","game.part71.jsx",
+  "game.part72.jsx","game.part73.jsx","game.part74.jsx","game.part75.jsx"
 ];
 
 /* The gallery uses the SAME classifier the design work uses - design/biomes.js
@@ -107,7 +108,12 @@ var ALL_FILES = DATA_PARTS.concat(CLASSIFIER);
 var texts = new Array(ALL_FILES.length), done = 0;
 
 ALL_FILES.forEach(function (name, i) {
-  fetch(name + "?g=1").then(function (r) { return r.text(); }).then(function (t) {
+/* Never read these from cache. A fixed "?g=1" means the same URL and the same
+   cached answer, with no way to tell it is stale - and on 2026-09-02 that served
+   a biome_assign.js from before six species were added, so the gallery filed a
+   gemsbok in the desert and a Mexican redknee in a forest without erroring. */
+var BUST = "?g=" + Date.now();
+  fetch(name + BUST, { cache: "no-cache" }).then(function (r) { return r.text(); }).then(function (t) {
     texts[i] = t; done++;
     statusEl.textContent = "Loading the game data… " + done + "/" + ALL_FILES.length;
     if (done === ALL_FILES.length) start();

@@ -161,3 +161,105 @@ Object.keys(BIOME_FIX).forEach(function (k) { BIOME_BY_HAND[k] = BIOME_FIX[k]; }
 
 // More life stages that slipped through - "eyas" is a nestling falcon.
 ["eyas","goldeneyas"].forEach(function (k) { NOT_A_SPECIES.push(k); });
+
+// --- THE SIX STILL OWED, 2026-09-02. Promises that predate "The Last Forty-Four"
+// --- and did not travel with it. Added to the game data by game.part69.jsx.
+BIOME_BY_HAND.littlebluepenguin  = "coast";
+BIOME_BY_HAND.plainspocketgopher = "farmland";
+BIOME_BY_HAND.gemsbok            = "savanna";
+BIOME_BY_HAND.mexicanredknee     = "desert";
+BIOME_BY_HAND.iberianlynx        = "forest";
+BIOME_BY_HAND.woodfrog           = "forest";
+
+// --- THE DARK, 2026-09-02. The 43 deep-sea species, added by game.part70.jsx.
+// --- Their habitat text says "deep", which the rules would mostly get right on
+// --- their own - but "hydrothermal vents of the Indian Ocean ridges" and "the
+// --- continental slope off Japan" would not, so all 43 are placed by hand.
+BIOME_BY_HAND.gulpereel                = "deepsea";
+BIOME_BY_HAND.commonfangtooth          = "deepsea";
+BIOME_BY_HAND.viperfish                = "deepsea";
+BIOME_BY_HAND.macropinnabarreleye      = "deepsea";
+BIOME_BY_HAND.silverhatchetfish        = "deepsea";
+BIOME_BY_HAND.blackdragonfish          = "deepsea";
+BIOME_BY_HAND.glacierlanternfish       = "deepsea";
+BIOME_BY_HAND.marianasnailfish         = "deepsea";
+BIOME_BY_HAND.tripodfish               = "deepsea";
+BIOME_BY_HAND.cookiecuttershark        = "deepsea";
+BIOME_BY_HAND.blobfish                 = "deepsea";
+BIOME_BY_HAND.australiancoffinfish     = "deepsea";
+BIOME_BY_HAND.stoplightloosejaw        = "deepsea";
+BIOME_BY_HAND.deepsealizardfish        = "deepsea";
+BIOME_BY_HAND.bluntnosesixgillshark    = "deepsea";
+BIOME_BY_HAND.orangeroughy             = "deepsea";
+BIOME_BY_HAND.vampiresquid             = "deepsea";
+BIOME_BY_HAND.googlyeyedglasssquid     = "deepsea";
+BIOME_BY_HAND.bigfinsquid              = "deepsea";
+BIOME_BY_HAND.dumbooctopus             = "deepsea";
+BIOME_BY_HAND.giantisopod              = "deepsea";
+BIOME_BY_HAND.hoffcrab                 = "deepsea";
+BIOME_BY_HAND.giantamphipod            = "deepsea";
+BIOME_BY_HAND.eyelessventshrimp        = "deepsea";
+BIOME_BY_HAND.gianttubeworm            = "deepsea";
+BIOME_BY_HAND.zombieworm               = "deepsea";
+BIOME_BY_HAND.munidopsissquatlobster   = "deepsea";
+BIOME_BY_HAND.neolepasventbarnacle     = "deepsea";
+BIOME_BY_HAND.ventmussel               = "deepsea";
+BIOME_BY_HAND.giantsiphonophore        = "deepsea";
+BIOME_BY_HAND.alarmjellyfish           = "deepsea";
+BIOME_BY_HAND.bloodybellycombjelly     = "deepsea";
+BIOME_BY_HAND.deepstaria               = "deepsea";
+BIOME_BY_HAND.venussgirdle             = "deepsea";
+BIOME_BY_HAND.helmetjellyfish          = "deepsea";
+BIOME_BY_HAND.seapig                   = "deepsea";
+BIOME_BY_HAND.venusflowerbasket        = "deepsea";
+BIOME_BY_HAND.japanesesealily          = "deepsea";
+BIOME_BY_HAND.leiopathesblackcoral     = "deepsea";
+BIOME_BY_HAND.isidellabamboocoral      = "deepsea";
+BIOME_BY_HAND.giantxenophyophore       = "deepsea";
+BIOME_BY_HAND.predatorytunicate        = "deepsea";
+BIOME_BY_HAND.bathydevius              = "deepsea";
+
+// --- THE FLOE, 2026-09-02. The 25 polar species, added by game.part71.jsx.
+BIOME_BY_HAND.adeliepenguin          = "polar";
+BIOME_BY_HAND.kingpenguin            = "polar";
+BIOME_BY_HAND.gentoopenguin          = "polar";
+BIOME_BY_HAND.chinstrappenguin       = "polar";
+BIOME_BY_HAND.beardedseal            = "polar";
+BIOME_BY_HAND.hoodedseal             = "polar";
+BIOME_BY_HAND.ringedseal             = "polar";
+BIOME_BY_HAND.arctictern             = "polar";
+BIOME_BY_HAND.snowpetrel             = "polar";
+BIOME_BY_HAND.southpolarskua         = "polar";
+BIOME_BY_HAND.littleauk              = "polar";
+BIOME_BY_HAND.longtailedduck         = "polar";
+BIOME_BY_HAND.ivorygull              = "polar";
+BIOME_BY_HAND.rossgull               = "polar";
+BIOME_BY_HAND.rockptarmigan          = "polar";
+BIOME_BY_HAND.arcticwolf             = "polar";
+BIOME_BY_HAND.collaredlemming        = "polar";
+BIOME_BY_HAND.colossalsquid          = "polar";
+BIOME_BY_HAND.antarcticicefish       = "polar";
+BIOME_BY_HAND.antarctictoothfish     = "polar";
+BIOME_BY_HAND.antarcticseaspider     = "polar";
+BIOME_BY_HAND.arcticcod              = "polar";
+BIOME_BY_HAND.capelin                = "polar";
+BIOME_BY_HAND.arcticchar             = "polar";
+BIOME_BY_HAND.greenlandhalibut       = "polar";
+
+// --- THE DIVIDE, 2026-09-02. The 16 mountain species, added by game.part72.jsx.
+BIOME_BY_HAND.himalayanjumpingspider   = "alpine";
+BIOME_BY_HAND.barheadedgoose           = "alpine";
+BIOME_BY_HAND.alpinechough             = "alpine";
+BIOME_BY_HAND.lammergeier              = "alpine";
+BIOME_BY_HAND.wallcreeper              = "alpine";
+BIOME_BY_HAND.himalayanmonal           = "alpine";
+BIOME_BY_HAND.alpinesalamander         = "alpine";
+BIOME_BY_HAND.apollobutterfly          = "alpine";
+BIOME_BY_HAND.whiterumpedvulture       = "alpine";
+BIOME_BY_HAND.woollyflyingsquirrel     = "alpine";
+BIOME_BY_HAND.rockhyrax                = "alpine";
+BIOME_BY_HAND.argali                   = "alpine";
+BIOME_BY_HAND.alpinechamois            = "alpine";
+BIOME_BY_HAND.mountaingoat             = "alpine";
+BIOME_BY_HAND.kiang                    = "alpine";
+BIOME_BY_HAND.tibetanantelope          = "alpine";
