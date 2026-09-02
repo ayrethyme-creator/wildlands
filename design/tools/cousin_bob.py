@@ -29,9 +29,11 @@ Verifies:
   4. no current-truth doc ends mid-sentence (the LINKS.md failure)
   5. artifact links are well formed, and none is duplicated under two names
   6. reports every sentence that claims a species is in a badge, with a verdict
-  7. every CONFIRMED batch in new_species.md has reached PENDING_MOVES.txt
+  7. every CONFIRMED batch in new_species.md is fully accounted for in
+     PENDING_MOVES.txt - either still owed, or marked APPLIED because it was built
   8. no badge star is an animal the roster already holds under another name
   9. every species named in the badge page's hand-written prose is real
+ 10. every species marked APPLIED in the pipeline really is in GROUND_TRUTH.txt
 
 Checks 7 and 8 were added 2026-08-28, and both fired immediately.
 
@@ -41,6 +43,14 @@ were written into new_species.md and never transcribed into PENDING_MOVES.txt -
 61 species, sitting in prose, invisible to Uncle Albert because he only reads
 the pipeline. The biomes then showed up in HANDOFF.md as "thinnest", which read
 as a design gap rather than a filing one.
+
+Seven learned to tell two things apart on 2026-09-02, when the forty-four were
+built into the game data. A promise can leave the pipeline because it was
+FORGOTTEN, which is the fault this check was written for - or because it was
+KEPT. Counting only the pipeline read the good outcome as the bad one and failed
+three biomes that had just been finished. So a batch now has to add up out of
+what is still owed PLUS what is marked APPLIED, and check 10 makes the second
+half honest by asking the running game whether those species are really there.
 
 Eight is what happens when a rename lands and the badge file does not follow.
 Albert checks that a starred member is ABSENT from the roster, and it always is,
@@ -124,8 +134,15 @@ print('checking %d documents against the data' % len(ALL_DOCS))
 print()
 
 # ------------------------------------------------------- 1. paths that are lies
+# The extensions are longest-first, and the lookahead stops the match halfway
+# through one. Both matter: "js" used to be tried before "jsx", so every mention
+# of game.part68.jsx was read as a file called game.part68.js and reported as a
+# path that does not exist. It only ever fired in the historical docs, which do
+# not fail, so it sat here unnoticed until 2026-09-02 - three of the "ghosts" Bob
+# printed every run (game.part3.js, game.part9.js, game.part49.js) were this bug
+# and not stale history at all.
 PATH = re.compile(r'(?<![\w/:.])([A-Za-z0-9_][A-Za-z0-9_./-]*\.'
-                  r'(?:md|txt|py|js|jsx|html|bat|json|gdshader))')
+                  r'(?:gdshader|html|json|jsx|bat|txt|md|py|js))(?![A-Za-z0-9])')
 
 
 def paths_in(doc):
@@ -306,14 +323,57 @@ SECTION_BIOME = {
     'WETLAND': 'wetland', 'SAVANNA': 'savanna', 'FOREST': 'forest',
     'RAINFOREST': 'rainforest',
 }
+#
+# A promise can leave the pipeline two ways, and only one of them is a fault.
+# It can be FORGOTTEN, which is what this check was written for. Or it can be
+# KEPT - the species gets built, so its "new>" line is retired and the animal
+# turns up in GROUND_TRUTH instead. That happened for the first time on
+# 2026-09-02, when the forty-four were added to the game data, and a check that
+# only counted the pipeline read the good outcome as the bad one.
+#
+# So a retired line still counts towards its batch. It is retired by prefixing
+# "! APPLIED <date> - " to the original line, which keeps the promise and its
+# reason readable. Bob then asserts something STRONGER than before: the batch
+# adds up, AND every species claimed as made is really in the running game's
+# ground truth. A relabelled promise that was never built now fails here.
 pipeline = {}
+applied = {}
+APPLIED = re.compile(r'^!\s*APPLIED\b.*?(new>[a-z]+)=(.*)$')
 for line in io.open('design/PENDING_MOVES.txt', encoding='utf-8'):
     line = line.rstrip('\n')
-    if not line or line.startswith('!') or '=' not in line:
+    if not line:
+        continue
+    m = APPLIED.match(line)
+    if m:
+        applied.setdefault(m.group(1)[4:], []).extend(m.group(2).split('|'))
+        continue
+    if line.startswith('!') or '=' not in line:
         continue
     route, names = line.split('=', 1)
     if route.startswith('new>'):
         pipeline.setdefault(route[4:], []).extend(names.split('|'))
+
+# Every species marked APPLIED must really be in the game data. Checked against
+# GROUND_TRUTH.txt - what the RUNNING GAME says - and deliberately not against the
+# roster Albert builds, because that one already has the pipeline applied on top
+# and would happily confirm a promise using the promise itself.
+in_game = set()
+for line in io.open('design/GROUND_TRUTH.txt', encoding='utf-8'):
+    line = line.strip()
+    if not line or line.startswith('!') or '=' not in line:
+        continue
+    in_game.update(x for x in line.split('=', 1)[1].split('|') if x)
+ghosts = sorted({n for names in applied.values() for n in names if n not in in_game})
+print()
+print('SPECIES MARKED APPLIED IN THE PIPELINE: %d'
+      % sum(len(v) for v in applied.values()))
+if ghosts:
+    FAIL.append('PENDING_MOVES.txt marks %d species APPLIED that the running game '
+                'does not have: %s' % (len(ghosts), ', '.join(ghosts[:8])))
+    for n in ghosts:
+        print('   NOT IN THE GAME DATA  ' + n)
+else:
+    print('   all of them are in GROUND_TRUTH.txt')
 
 print()
 print('APPROVED BATCHES vs THE PIPELINE')
@@ -328,24 +388,30 @@ for name, status, want in batches:
     if key is None:
         WARN.append('new_species.md batch "%s" has no biome mapping in Bob' % name.strip())
         continue
-    got = len(pipeline.get(key, []))
+    waiting = len(pipeline.get(key, []))
+    built = len(applied.get(key, []))
+    got = waiting + built
     want = int(want)
     firm = status.upper() == 'CONFIRMED'
     if got == 0:
         verdict = 'NOTHING IN THE PIPELINE'
         if firm:
             FAIL.append('new_species.md marks %s CONFIRMED (~%d species) but '
-                        'PENDING_MOVES.txt has no "new>%s" line at all'
-                        % (name.strip(), want, key))
+                        'PENDING_MOVES.txt has no "new>%s" line at all, and none '
+                        'marked APPLIED either' % (name.strip(), want, key))
     elif got < want:
         verdict = 'short by %d' % (want - got)
         if firm:
-            WARN.append('%s is CONFIRMED at ~%d but the pipeline holds %d'
+            WARN.append('%s is CONFIRMED at ~%d but the pipeline accounts for %d'
                         % (name.strip(), want, got))
+    elif built == want:
+        verdict = 'all made'
+    elif built:
+        verdict = 'ok - %d made, %d still owed' % (built, waiting)
     else:
         verdict = 'ok'
-    print('   %-13s %-9s doc ~%-4d pipeline %-4d %s'
-          % (name.strip(), status.upper(), want, got, verdict))
+    print('   %-13s %-9s doc ~%-4d waiting %-4d made %-4d %s'
+          % (name.strip(), status.upper(), want, waiting, built, verdict))
 
 # --------------------------- 8. badge stars for species that already exist
 # Uncle Albert checks that a starred badge member is absent from the roster, and

@@ -433,3 +433,70 @@ BIOME_BY_HAND.beaver          = "farmland";   // the beaver pond is the childhoo
 // --- Domesticated animals wrongly sitting in a biome. Both belong in The Kept,
 // --- which already holds a Farm Alpaca (the duplicate Ayr flagged).
 // alpaca, llama -> The Kept  (needs a dom:true flag in the DEX, not a biome)
+
+// --- THE FORTY-FOUR, 2026-09-02. Added to the game data by game.part68.jsx and
+// --- placed here into Terrane's biomes. These are the species PENDING_MOVES.txt
+// --- carried as "new>" promises; they now exist in the DEX, so they are placed
+// --- like every other real species rather than being applied by the pipeline.
+// --- Placement is the same as design/biome_assign.js on main, which is the
+// --- assignment the forty-four shipped with.
+
+// The Blue - open ocean, 17
+BIOME_BY_HAND.bluefintuna       = "opensea";
+BIOME_BY_HAND.chubmackerel      = "opensea";
+BIOME_BY_HAND.atlanticherring   = "opensea";
+BIOME_BY_HAND.mahimahi          = "opensea";
+BIOME_BY_HAND.opah              = "opensea";
+BIOME_BY_HAND.oceanicwhitetip   = "opensea";
+BIOME_BY_HAND.blueshark         = "opensea";
+BIOME_BY_HAND.remora            = "opensea";
+BIOME_BY_HAND.sargassumfrogfish = "opensea";
+BIOME_BY_HAND.humboldtsquid     = "opensea";
+BIOME_BY_HAND.manowar           = "opensea";
+BIOME_BY_HAND.northerngannet    = "opensea";
+BIOME_BY_HAND.sootyshearwater   = "opensea";
+BIOME_BY_HAND.stormpetrel       = "opensea";
+BIOME_BY_HAND.tropicbird        = "opensea";
+BIOME_BY_HAND.loggerhead        = "opensea";
+BIOME_BY_HAND.oliveridley       = "opensea";
+
+// The Furrows - farmland, 9
+BIOME_BY_HAND.housemouse        = "farmland";
+BIOME_BY_HAND.brownrat          = "farmland";
+BIOME_BY_HAND.fieldvole         = "farmland";
+BIOME_BY_HAND.commontoad        = "farmland";
+BIOME_BY_HAND.grasssnake        = "farmland";
+BIOME_BY_HAND.magpie            = "farmland";
+BIOME_BY_HAND.skylark           = "farmland";
+BIOME_BY_HAND.europeanmole      = "farmland";
+BIOME_BY_HAND.europeanbadger    = "farmland";
+
+// The Strand - coast, 5
+BIOME_BY_HAND.herringgull       = "coast";
+BIOME_BY_HAND.bluemussel        = "coast";
+BIOME_BY_HAND.acornbarnacle     = "coast";
+BIOME_BY_HAND.greenanemone      = "coast";
+BIOME_BY_HAND.aldabratortoise   = "coast";
+
+// The Garden - reef, 5
+BIOME_BY_HAND.staghorncoral     = "reef";
+BIOME_BY_HAND.braincoral        = "reef";
+BIOME_BY_HAND.giantclam         = "reef";
+BIOME_BY_HAND.pistolshrimp      = "reef";
+BIOME_BY_HAND.humpheadwrasse    = "reef";
+
+// The Dry - desert, 3
+BIOME_BY_HAND.kangaroorat       = "desert";
+BIOME_BY_HAND.namibbeetle       = "desert";
+BIOME_BY_HAND.egyptianvulture   = "desert";
+
+// The Weald - forest, 2
+BIOME_BY_HAND.bumblebeebat      = "forest";
+BIOME_BY_HAND.giantsquirrel     = "forest";
+
+// The Fens - wetland, 2
+BIOME_BY_HAND.northernpike      = "wetland";
+BIOME_BY_HAND.electriceel       = "wetland";
+
+// The Long Grass - savanna, 1
+BIOME_BY_HAND.honeyguide        = "savanna";

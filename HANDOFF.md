@@ -149,6 +149,41 @@ it. Ayr decides.
 
 ---
 
+## The forty-four are real, 2026-09-02 — **and the old game may now exceed 1000**
+
+`game.part68.jsx` puts forty-four species into the game data: DEX entry, sprite,
+types, base stats, catch rate, and a full field-guide entry with diet, habitat and
+IUCN status. The sprites were made here; the entries were written by Eric's codex.
+They are placed by biome at the foot of `design/biome_assign.js`.
+
+**Ayr's ruling: the thousand may be exceeded, and only in the old game.** Safari
+Saga now holds **1044** species. **Terrane still holds 1000 and nothing about it
+moved** — these forty-four were always counted inside the thousand, as `new>`
+promises in `design/PENDING_MOVES.txt`. What changed is that the promises became
+animals. Run Uncle Albert: he still says 700 + 300.
+
+**This is the first time production has moved a design record**, and it needed a
+new idea in the pipeline. A `new>` line can leave `PENDING_MOVES.txt` two ways: it
+can be **forgotten**, which is the failure Cousin Bob was built to catch, or it can
+be **kept**. A kept promise is now retired in place with the prefix
+`! APPLIED <date> - `, so the promise and its reasoning stay readable, and Bob
+accounts for every batch as **still owed plus made** rather than pipeline alone.
+He also asks the running game whether each species marked APPLIED is really there,
+so a relabelled promise that was never built fails rather than passes.
+
+**Six of the earlier promises are still owed** and did not travel with the batch,
+because they entered the pipeline before it: Little Blue Penguin, Plains Pocket
+Gopher, Gemsbok, Mexican Redknee, Iberian Lynx and Wood Frog.
+
+**One open item, and it is small: the Opah has no IUCN status.** Every other one of
+the forty-four carries one. `Lampris incognitus` was described in 2018 and may
+simply not be assessed — but the status field is empty rather than saying so, and
+`design/CLAIMS.txt` already lists "extinct in the wild is a listing, not a figure
+of speech" as a trap. **Do not guess it.** It is the one thing in this batch
+waiting on a decision.
+
+---
+
 ## Where things stand, 2026-08-29 — **the roster is closed**
 
 Run Uncle Albert for the live version. **Cousin Bob checks these exact numbers**, so if they drift he fails rather than letting them rot:
@@ -255,19 +290,25 @@ of the design is safe to keep building. Do not confuse the two.
   is the most damaging error available.
 - **`EW` existed in the game data the whole time, and this file said it did not.** The
   status lives on every entry as `.s`, and the game holds **13** EW species against the
-  design's **10**. The five disagreements are now listed by **Uncle Albert check 11**, which
-  fails unless each one is explained in `TAGS.txt`. Three are deliberate (Przewalski's
-  Horse, the scimitar-horned oryx and the Guam rail were EW and have been downlisted since;
-  the game data is stale). **One is unresolved and is Ayr's: `Partula Snail`** — a genus
-  name covering species that are simultaneously extinct, extinct-in-the-wild and
-  reintroduced, sitting in The Vigil. The fix is to name the species.
+  design's **11**. The four disagreements are now listed by **Uncle Albert check 11**, which
+  fails unless each one is explained in `TAGS.txt`, and all four are explained. Three are
+  deliberate (Przewalski's Horse, the scimitar-horned oryx and the Guam rail were EW and
+  have been downlisted since; the game data is stale); the fourth is the Northern White
+  Rhino, tagged EW as a population where the game says CR. **The snail is resolved** — Ayr
+  named it `Partula nodosa` on 2026-08-29, which is formally Extinct in the Wild, sits in On
+  the Brink where EW belongs, and joins *Only In Captivity*. No roster count moved.
 - **The art is being made now, and the deep sea is parked.** All 183 outstanding species
   have descriptions in `design/art_prompts/`, and `design/art_pipeline/run_all.py` is
   rendering the rest of the roster unattended. **The deep sea batch is finished and Ayr
   has ruled the whole set wrong** — *"I think the deep sea ones will take careful one by
   one building."* **Do not bulk-regenerate it**; `design/art_prompts/REVIEW_deepsea.md`
   records the ruling and why the review that preceded it was too lenient. Every other
-  biome continues as a normal batch.
+  biome continues as a normal batch. **`design/art_prompts/ONE_BY_ONE.txt` is the live
+  queue: 79 species that bulk fixing could not get right, to be rebuilt individually with
+  reference pictures open.**
+- **The forty-four arrived with their own art and their own writing.** Sprites for all of
+  them are in `art/` under the game's short DEX keys, and Terrane already held most of the
+  same images under its longer names — so this batch cost the one-by-one queue nothing.
 - **Items in the world** — committed as a principle. **No item ideas until Ayr asks.**
 
 ### Parked — do not restart unprompted

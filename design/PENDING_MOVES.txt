@@ -588,7 +588,10 @@ RENAME=Peccary::Chacoan Peccary|Dormouse::Edible Dormouse|Sawfish::Smalltooth Sa
 ! ---   Limestone caves in dry deciduous forest, western Thailand and Myanmar.
 ! --- Wood Frog: freezes solid every winter - heart stopped, no breathing, up to 65%
 ! ---   of its body water ice - and thaws in spring. Ranges above the Arctic Circle.
-new>forest=Bumblebee Bat|Wood Frog
+! --- APPLIED 2026-09-02: Bumblebee Bat now exists in the game data, in the forty-four.
+! --- The Wood Frog does not yet, so the promise is split rather than deleted.
+! APPLIED 2026-09-02 - new>forest=Bumblebee Bat
+new>forest=Wood Frog
 
 ! ============================================================================
 ! THE LAST FORTY-FOUR - Ayr, 2026-08-29. THE THOUSAND CLOSES HERE.
@@ -609,6 +612,27 @@ new>forest=Bumblebee Bat|Wood Frog
 ! Seal, European Green Crab, Day Octopus, Cactus Wren, Ring-necked Pheasant,
 ! Mallard and Water Vole - were never in the roster at all. That trade was
 ! against an earlier candidate list. Nothing is cut for them.
+!
+! ----------------------------------------------------------------------------
+! ALL FORTY-FOUR ARE NOW REAL. APPLIED 2026-09-02.
+!
+! game.part68.jsx puts every one of them into the game data - DEX entry, art key,
+! types, base stats, catch rate, and a full field-guide entry with diet, habitat
+! and IUCN status. The sprites are in art/ and design/biome_assign.js places them
+! by biome at the foot of the file. Uncle Albert now reads them out of the running
+! game like any other species.
+!
+! So the "new>" lines below are RETIRED, not deleted. A retired line keeps its
+! prefix "! APPLIED 2026-09-02 - " so the promise and the reason for it stay
+! readable, and Albert stops counting the species twice - once as ground truth and
+! once as a promise, which is exactly what he reported the moment the data landed.
+!
+! Bumblebee Bat is retired further up, where its own line lives; the Wood Frog on
+! that line is NOT in the forty-four and is still owed.
+!
+! WHAT DID NOT CHANGE: Terrane still holds 1000. These 44 were always counted in
+! it. What moved is the OLD GAME, which now holds 1044 - Ayr, 2026-09-02: the
+! thousand may be exceeded in Safari Saga, and only there.
 ! ============================================================================
 
 ! --- OPEN OCEAN, 28 -> 45. The middle of the food web was missing. Of 28 entries
@@ -623,7 +647,7 @@ new>forest=Bumblebee Bat|Wood Frog
 ! --- Sargassum Frogfish: lives only in floating weed and is invisible inside it.
 ! ---   The Sargasso is habitat, not scenery.
 ! --- Loggerhead Turtle: spends its first decade adrift out here - the lost years.
-new>opensea=Atlantic Bluefin Tuna|Chub Mackerel|Atlantic Herring|Mahi-mahi|Opah|Oceanic Whitetip Shark|Blue Shark|Remora|Sargassum Frogfish|Humboldt Squid|Portuguese Man o' War|Northern Gannet|Sooty Shearwater|Wilson's Storm Petrel|Red-billed Tropicbird|Loggerhead Turtle|Olive Ridley Turtle
+! APPLIED 2026-09-02 - new>opensea=Atlantic Bluefin Tuna|Chub Mackerel|Atlantic Herring|Mahi-mahi|Opah|Oceanic Whitetip Shark|Blue Shark|Remora|Sargassum Frogfish|Humboldt Squid|Portuguese Man o' War|Northern Gannet|Sooty Shearwater|Wilson's Storm Petrel|Red-billed Tropicbird|Loggerhead Turtle|Olive Ridley Turtle
 
 ! --- FARMLAND, 37 -> 46. Nothing the Barn Owl eats. Birds, insects and mid-sized
 ! ---   mammals, but no rodents, no amphibian and no reptile - the predators
@@ -640,7 +664,7 @@ new>opensea=Atlantic Bluefin Tuna|Chub Mackerel|Atlantic Herring|Mahi-mahi|Opah|
 ! --- European Mole arrives on its own merit. Its stated reason in the document was
 ! ---   the Rare Poison badge, which Ayr cut on 2026-08-28. A hand evolved into a
 ! ---   shovel, and saliva that paralyses earthworms, is reason enough without it.
-new>farmland=House Mouse|Brown Rat|Field Vole|Common Toad|Grass Snake|Eurasian Magpie|Eurasian Skylark|European Mole|European Badger
+! APPLIED 2026-09-02 - new>farmland=House Mouse|Brown Rat|Field Vole|Common Toad|Grass Snake|Eurasian Magpie|Eurasian Skylark|European Mole|European Badger
 
 ! --- COAST, 40 -> 45. No gull, and nothing fixed to a rock. Zonation is the
 ! ---   coast's defining pattern and the roster had none of it - the Ochre Sea Star
@@ -648,7 +672,7 @@ new>farmland=House Mouse|Brown Rat|Field Vole|Common Toad|Grass Snake|Eurasian M
 ! ---   predator.
 ! --- Acorn Barnacle: glues its head to a rock for life and kicks food into its
 ! ---   mouth with its legs.
-new>coast=Herring Gull|Blue Mussel|Acorn Barnacle|Giant Green Anemone|Aldabra Giant Tortoise
+! APPLIED 2026-09-02 - new>coast=Herring Gull|Blue Mussel|Acorn Barnacle|Giant Green Anemone|Aldabra Giant Tortoise
 
 ! --- REEF, 41 -> 46. Forty-one species and not one coral. The reef had its fish,
 ! ---   its cleaner, its sharks and the starfish that eats coral - but not the
@@ -656,7 +680,7 @@ new>coast=Herring Gull|Blue Mussel|Acorn Barnacle|Giant Green Anemone|Aldabra Gi
 ! ---   ever meeting the reef itself.
 ! --- Brain Coral grows about a centimetre a year and lives for centuries; one
 ! ---   colony can outlast a village.
-new>reef=Staghorn Coral|Brain Coral|Giant Clam|Pistol Shrimp|Humphead Wrasse
+! APPLIED 2026-09-02 - new>reef=Staghorn Coral|Brain Coral|Giant Clam|Pistol Shrimp|Humphead Wrasse
 
 ! --- DESERT, 43 -> 46. Nothing that solves water, and no scavenger. The desert's
 ! ---   real subject is water, and of 43 entries not one was there because of how
@@ -664,17 +688,17 @@ new>reef=Staghorn Coral|Brain Coral|Giant Clam|Pistol Shrimp|Humphead Wrasse
 ! --- Kangaroo Rat never drinks - it manufactures all the water it needs from dry
 ! ---   seed. Namib Desert Beetle stands facing the fog at dawn and drinks what
 ! ---   condenses on its own back.
-new>desert=Kangaroo Rat|Namib Desert Beetle|Egyptian Vulture
+! APPLIED 2026-09-02 - new>desert=Kangaroo Rat|Namib Desert Beetle|Egyptian Vulture
 
 ! --- WETLAND, 45 -> 47. Already at the floor and the best-composed biome on the
 ! ---   roster. What it lacked was a freshwater predatory fish.
-new>wetland=Northern Pike|Electric Eel
+! APPLIED 2026-09-02 - new>wetland=Northern Pike|Electric Eel
 
 ! --- SAVANNA, 74 -> 75. One arrival, and it is the best story in the badge set.
 ! ---   The Greater Honeyguide leads people to bees' nests, on purpose, answering a
 ! ---   call its human partners have used for generations - and takes the wax when
 ! ---   they leave. The only mutualism in the game where the other partner is us.
-new>savanna=Greater Honeyguide
+! APPLIED 2026-09-02 - new>savanna=Greater Honeyguide
 
 ! --- FOREST stays at 55. Ayr, 2026-08-29: the Indian Giant Squirrel is worth a
 ! ---   slot - nearly a metre nose to tail, maroon and orange, the largest squirrel
@@ -686,7 +710,7 @@ new>savanna=Greater Honeyguide
 ! ---   naming rule AND it was redundant; it was the only forest entry that was
 ! ---   both, and it carried no badge and no quest.
 forest>cut=Black Cockatoo
-new>forest=Indian Giant Squirrel
+! APPLIED 2026-09-02 - new>forest=Indian Giant Squirrel
 
 ! ============================================================================
 ! THE DEEP-SEA NAMING PASS - Ayr, 2026-08-29, from "The Last Forty-Four".

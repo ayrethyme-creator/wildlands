@@ -10914,3 +10914,153 @@ animals.** Worth deciding later whether that ratio is right.
 **One badge is still thin: *Only In Captivity*** has no fixed list, because it is a rule —
 any five from On the Brink tagged EW. **Albert flags it every run.** That is acceptable,
 but the tag it depends on does not exist in the data yet.
+
+---
+
+# 2026-09-02 — THE FORTY-FOUR ARE REAL, AND THE OLD GAME PASSES 1000
+
+Ayr: *"I added 44 animals with pictures you made and descriptions Eric's codex made.
+It exceeds 1000, but I'm ok with that now for the old game only."*
+
+**This is the first time production moved a design record.** Everything before this
+point was the roster deciding what should exist. This is forty-four of those decisions
+becoming animals a player can meet.
+
+## What arrived
+
+`game.part68.jsx`, merged to `main` as *"Activate the forty-four animals in Safari
+Saga"*. For each of the forty-four it carries a DEX entry — name, art key, types, base
+stats, catch rate — an INFO entry with diet, habitat, IUCN status and the field-guide
+fact, and a `PHOTO_ART` flag. The sprites were made here; the entries were written by
+Eric's codex. Learnsets are not hand-written: `buildLearnset` is the same builder
+parts 17, 31 and 54 use, so the forty-four progress like everything else in the dex.
+
+They are exactly the species *The Last Forty-Four* named, by biome:
+
+```
+opensea 17   farmland 9   coast 5   reef 5   desert 3
+forest 2     wetland 2    savanna 1                    = 44
+```
+
+Read from the running game: the DEX is now **1044** entries and the field guide
+**1043**. Deltas against the 2026-08-26 ground truth are exactly those eight numbers.
+
+## The ruling, and what it does not mean
+
+**The thousand may be exceeded in the OLD GAME, and only there.** *Safari Saga* on
+`main` holds 1044. **Terrane still holds 1000 and no count in the design moved** —
+these forty-four were always inside the thousand, sitting in `PENDING_MOVES.txt` as
+`new>` promises. Uncle Albert still reports 700 + 300 after the change, because the
+species did not appear, they *relocated*: from the promise column into the data column.
+
+That is the whole story, and it is worth being precise about, because "we added 44
+animals and the total did not change" reads like an error until you know where they
+were already counted.
+
+## What it broke, and the idea that fixed it
+
+The moment the data landed, Uncle Albert reported **44 duplicates** — each of the
+forty-four counted once from ground truth and once from its own pipeline promise. He
+was right. A kept promise that is left in the pipeline is a double count.
+
+But the fix could not be *delete the lines*. This project keeps its reasoning: the
+deep-sea renames were left in place as "the record of how the name got here", and the
+same argument applies to every promise. So a fulfilled `new>` line is now **retired in
+place**, prefixed:
+
+```
+! APPLIED 2026-09-02 - new>opensea=Atlantic Bluefin Tuna|Chub Mackerel|...
+```
+
+**Then Cousin Bob failed**, and this is the interesting part. His check 7 exists
+because on 2026-08-25 Ayr approved three batches by name, with a quote, and nobody
+transcribed them into the pipeline — 61 species sitting in prose where no tool could
+see them. So Bob counts a batch's species in the pipeline and fails if they are not
+there.
+
+**Retiring the lines emptied the pipeline for open ocean, coral reef and wetland — and
+Bob read finishing them as forgetting them.** Identical evidence, opposite meanings.
+
+> **A promise can leave the pipeline two ways, and only one is a fault. It can be
+> forgotten. Or it can be kept.**
+
+Bob now accounts for a batch as **still owed + made**, and — because a checker that
+trusts a label is not a checker — **check 10 asks the running game whether every
+species marked APPLIED is really in `GROUND_TRUTH.txt`**. A promise relabelled as done
+but never built now fails where before it would have passed silently. The check came
+out of this stronger than it went in.
+
+All eleven batches reconcile exactly:
+
+```
+DEEP SEA   43 owed   0 made      OPEN OCEAN   0 owed  17 made   all made
+POLAR      25 owed   0 made      CORAL REEF   0 owed   5 made   all made
+MOUNTAINS  16 owed   0 made      WETLAND      0 owed   2 made   all made
+FARMLAND    1 owed   9 made      COAST        1 owed   5 made
+DESERT      1 owed   3 made      FOREST       2 owed   2 made
+SAVANNA     1 owed   1 made      RAINFOREST   0 owed   0 made
+```
+
+## Six promises did not travel with the batch
+
+Little Blue Penguin (coast), Plains Pocket Gopher (farmland), Gemsbok (savanna),
+Mexican Redknee (desert), Iberian Lynx and Wood Frog (forest). Every one entered the
+pipeline **before** *The Last Forty-Four*, which is why it did not carry them. They are
+still owed and are now marked *still owed* in `design/new_species.md`.
+
+## A latent bug in Cousin Bob, found by accident
+
+Writing `game.part68.jsx` into HANDOFF.md made Bob fail with *"path does not exist:
+game.part68.js"*. His extension pattern listed `js` before `jsx`, so the alternation
+matched the shorter one and every `.jsx` mention in the documents was read as a `.js`
+file that does not exist.
+
+It had never failed before **only because it had only ever fired in the historical
+docs, which do not fail.** Three of the "ghost paths" Bob printed on every run —
+`game.part3.js`, `game.part9.js`, `game.part49.js` — were not stale history at all.
+They were this bug, printed daily, read past every time. Extensions are now
+longest-first with a boundary lookahead, and the ghost list dropped from 11 to 8.
+
+**Worth remembering: a warning nobody acts on stops being read.** Those three lines
+were visible in every single run and nobody had ever asked why a project that has
+never had a `.js` file was being told about three of them.
+
+## One thing is open, and it is Ayr's
+
+**The Opah has no IUCN status.** Forty-three of the forty-four carry one; the Opah's
+`s` field is simply absent, so it exports as `-` in `design/FIELD_GUIDE.txt`.
+
+*Lampris incognitus*, the smalleye Pacific opah, was described in 2018, and a species
+that recently described may genuinely not be assessed yet. **That is a reason to say so
+in the entry, not a reason to guess a letter.** `design/CLAIMS.txt` already carries the
+trap this would fall into: *"extinct in the wild is a listing, not a figure of speech"*
+— a conservation status is a thing the IUCN has published, or it is nothing.
+
+## What was done to the branch, and what was not
+
+Ayr's call: **copy the forty-four across to `Terrane_try1`, and nothing else.**
+`game.part68.jsx`, its biome placements at the foot of `design/biome_assign.js`, the
+loader lines in `gallery.html` and `index.html`, and the sprites. The design tools read
+their numbers by *running the game*, so a branch that could not load the forty-four
+could not reproduce its own records.
+
+`main`'s six unrelated gameplay fixes — the wolf clues that rendered as ground texture,
+the findings that vanished where an old save remembered a trainer — stayed on `main`.
+The two branches still differ on game code. **Nothing the design records depend on is
+in that difference.**
+
+## Where this leaves production
+
+```
+ROSTER      1000, closed          unchanged by any of this
+OLD GAME    1044                  Ayr's ruling, 2026-09-02
+FIELD GUIDE 1043 entries          was 999
+LIBRARIAN   998 untriaged claims  was 974; 368 superlative, was 358
+ART         79 species queued in ONE_BY_ONE.txt, unchanged - the
+            forty-four arrived with their own sprites
+BADGE CARDS 3 of 431 written
+```
+
+**The forty-four cost the art queue nothing.** Terrane already held most of the same
+images under its longer file names; `main` simply keeps them under the game's short
+DEX keys. The one-by-one queue is exactly where it was.

@@ -9,8 +9,16 @@ having in it.
 > checks each heading against the pipeline, so a batch cannot quietly drift
 > again. If a species is added now, one comes out.
 
+> **2026-09-02 — the first forty-four of these are no longer promises.** They are
+> in the game data, with sprites and full field-guide entries. A batch heading's
+> count is now the total ever promised, and Bob accounts for it in two parts:
+> **still owed** plus **made**. Each section below says which of its species have
+> arrived. Nothing about the roster's size changed — these forty-four were always
+> counted inside the thousand.
+
 Status: **CONFIRMED** = Ayr has approved it. **LIKELY** = approved in principle,
-not finally.
+not finally. **MADE** on a species means it exists in the game now, and can be
+read out of `design/GROUND_TRUTH.txt`.
 
 ---
 
@@ -80,25 +88,29 @@ that lands the biome on 45.
 whales and dolphins and seven were sharks. Not one schooling fish, not one
 invertebrate, and a single seabird — a highlight reel rather than an ocean.
 
+> **ALL SEVENTEEN ARE MADE — 2026-09-02.** Every one is in the game data with a
+> sprite and a field-guide entry. Open ocean now reads 46 in `GROUND_TRUTH.txt`
+> (45 after the Coelacanth leaves for the deep sea, which the pipeline still owes).
+
 | Species | Why |
 |---|---|
-| **Atlantic Bluefin Tuna** | Warm-blooded, crosses the Atlantic in weeks, and its fishery is the textbook case of a quota argued over for forty years |
-| **Chub Mackerel** | The schooling fish nearly everything else in this biome is already eating |
-| **Atlantic Herring** | The biomass the North Atlantic runs on; shoals have been measured in cubic kilometres |
-| **Mahi-mahi** | Grows faster than almost any fish alive, and the colour drains out of it within minutes of death |
-| **Opah** | The only fish known to be **fully warm-blooded** — it heats itself by flapping its pectoral fins |
-| **Oceanic Whitetip Shark** | Was among the most abundant large animals on earth, and is down by more than 98% in some seas |
-| **Blue Shark** | The widest-ranging shark there is, and the one that follows ships |
-| **Remora** | Rides the sharks already in this biome; its dorsal fin evolved into a suction plate |
-| **Sargassum Frogfish** | Lives only in floating weed and is invisible inside it — the Sargasso is habitat, not scenery |
-| **Humboldt Squid** | Hunts in coordinated groups and signals to the others by flashing colour |
-| **Portuguese Man o' War** | Not one animal but **a colony of four kinds of specialised individual** that cannot live apart |
-| **Northern Gannet** | Dives from forty metres and has air sacs in its face to absorb the impact |
-| **Sooty Shearwater** | Flies a figure-of-eight around an entire ocean every year — about 65,000 km |
-| **Wilson's Storm Petrel** | One of the most numerous birds alive, and it appears to walk on the surface of the sea to feed |
-| **Red-billed Tropicbird** | Comes to land only to nest on a cliff, and can barely walk when it gets there |
-| **Loggerhead Turtle** | Spends its first decade adrift in open ocean — **the lost years**, unobserved until recently |
-| **Olive Ridley Turtle** | The *arribada*: tens of thousands come ashore to nest on one beach in a single night |
+| **Atlantic Bluefin Tuna** | **MADE.** Warm-blooded, crosses the Atlantic in weeks, and its fishery is the textbook case of a quota argued over for forty years |
+| **Chub Mackerel** | **MADE.** The schooling fish nearly everything else in this biome is already eating |
+| **Atlantic Herring** | **MADE.** The biomass the North Atlantic runs on; shoals have been measured in cubic kilometres |
+| **Mahi-mahi** | **MADE.** Grows faster than almost any fish alive, and the colour drains out of it within minutes of death |
+| **Opah** | **MADE.** The only fish known to be **fully warm-blooded** — it heats itself by flapping its pectoral fins |
+| **Oceanic Whitetip Shark** | **MADE.** Was among the most abundant large animals on earth, and is down by more than 98% in some seas |
+| **Blue Shark** | **MADE.** The widest-ranging shark there is, and the one that follows ships |
+| **Remora** | **MADE.** Rides the sharks already in this biome; its dorsal fin evolved into a suction plate |
+| **Sargassum Frogfish** | **MADE.** Lives only in floating weed and is invisible inside it — the Sargasso is habitat, not scenery |
+| **Humboldt Squid** | **MADE.** Hunts in coordinated groups and signals to the others by flashing colour |
+| **Portuguese Man o' War** | **MADE.** Not one animal but **a colony of four kinds of specialised individual** that cannot live apart |
+| **Northern Gannet** | **MADE.** Dives from forty metres and has air sacs in its face to absorb the impact |
+| **Sooty Shearwater** | **MADE.** Flies a figure-of-eight around an entire ocean every year — about 65,000 km |
+| **Wilson's Storm Petrel** | **MADE.** One of the most numerous birds alive, and it appears to walk on the surface of the sea to feed |
+| **Red-billed Tropicbird** | **MADE.** Comes to land only to nest on a cliff, and can barely walk when it gets there |
+| **Loggerhead Turtle** | **MADE.** Spends its first decade adrift in open ocean — **the lost years**, unobserved until recently |
+| **Olive Ridley Turtle** | **MADE.** The *arribada*: tens of thousands come ashore to nest on one beach in a single night |
 
 ---
 
@@ -112,13 +124,16 @@ cleaner, its sharks and the starfish that eats coral — but not the animal that
 builds the place. A player could complete the biome without ever meeting the reef
 itself.
 
+> **ALL FIVE ARE MADE — 2026-09-02.** The reef now builds itself: Staghorn and
+> Brain Coral are in the game data with the other three.
+
 | Species | Why |
 |---|---|
-| **Staghorn Coral** | The fast-growing reef-builder, and the first thing bleaching takes |
-| **Brain Coral** | Grows about a centimetre a year and lives for centuries — one colony can outlast a village |
-| **Giant Clam** | Farms algae in its own mantle and can live past a hundred. Joins **No Bones About It** |
-| **Pistol Shrimp** | Snaps a claw hard enough to boil the water, and shares a burrow with a goby that stands watch. Joins **The Colony** and **Strange Allies** |
-| **Humphead Wrasse** | Born female, and some become male later — joins **The Switch**. One fish can be worth more than the boat that took it |
+| **Staghorn Coral** | **MADE.** The fast-growing reef-builder, and the first thing bleaching takes |
+| **Brain Coral** | **MADE.** Grows about a centimetre a year and lives for centuries — one colony can outlast a village |
+| **Giant Clam** | **MADE.** Farms algae in its own mantle and can live past a hundred. Joins **No Bones About It** |
+| **Pistol Shrimp** | **MADE.** Snaps a claw hard enough to boil the water, and shares a burrow with a goby that stands watch. Joins **The Colony** and **Strange Allies** |
+| **Humphead Wrasse** | **MADE.** Born female, and some become male later — joins **The Switch**. One fish can be worth more than the boat that took it |
 
 ---
 
@@ -135,12 +150,12 @@ without the mussel bed that makes it the textbook keystone predator.
 
 | Species | Why |
 |---|---|
-| **Little Blue Penguin** | Already in the pipeline. The smallest penguin, and it comes ashore after dark |
-| **Herring Gull** | Reads human behaviour well enough to time its raids, and is declining despite how it looks |
-| **Blue Mussel** | Anchors itself with threads stronger than tendon and builds the bed everything else lives in |
-| **Acorn Barnacle** | Glues its head to a rock for life and kicks food into its mouth with its legs |
-| **Giant Green Anemone** | Green from the algae inside its own tissue. Completes the tide pool, and joins **The Slowest** and **Strange Allies** |
-| **Aldabra Giant Tortoise** | Island gigantism, a century and a half of life, and a walking pace — joins **The Island Rule**, **The Old Ones** and **The Slowest** |
+| **Little Blue Penguin** | *Still owed.* Already in the pipeline. The smallest penguin, and it comes ashore after dark |
+| **Herring Gull** | **MADE.** Reads human behaviour well enough to time its raids, and is declining despite how it looks |
+| **Blue Mussel** | **MADE.** Anchors itself with threads stronger than tendon and builds the bed everything else lives in |
+| **Acorn Barnacle** | **MADE.** Glues its head to a rock for life and kicks food into its mouth with its legs |
+| **Giant Green Anemone** | **MADE.** Green from the algae inside its own tissue. Completes the tide pool, and joins **The Slowest** and **Strange Allies** |
+| **Aldabra Giant Tortoise** | **MADE.** Island gigantism, a century and a half of life, and a walking pace — joins **The Island Rule**, **The Old Ones** and **The Slowest** |
 
 ---
 
@@ -153,16 +168,16 @@ into**, which makes it the worst one to leave thin.
 
 | Species | Why |
 |---|---|
-| **Plains Pocket Gopher** | Already in the pipeline, from Ayr's 2026-08-25 note |
-| **House Mouse** | Followed people out of Asia and into every building on earth |
-| **Brown Rat** | The same story told louder, and the wild counterpart to the Fancy Rat in The Kept |
-| **Field Vole** | What the Barn Owl actually lives on; its numbers crash on a four-year cycle and everything above it follows |
-| **Common Toad** | Walks back to the pond it was born in every spring, across roads, in numbers |
-| **Grass Snake** | Plays dead convincingly — mouth open, tongue out, and a smell to finish it |
-| **Eurasian Magpie** | One of the very few animals to pass the mirror test. Joins **Who's That** |
-| **Eurasian Skylark** | Sings only in flight, and its decline is the clearest single measure of what changed in farming |
-| **European Mole** | A hand evolved into a shovel, and saliva that paralyses earthworms |
-| **European Badger** | A pasture and hedgerow animal, which is why it belongs here rather than in the wood. Embryonic diapause — joins **On Pause** |
+| **Plains Pocket Gopher** | *Still owed.* Already in the pipeline, from Ayr's 2026-08-25 note |
+| **House Mouse** | **MADE.** Followed people out of Asia and into every building on earth |
+| **Brown Rat** | **MADE.** The same story told louder, and the wild counterpart to the Fancy Rat in The Kept |
+| **Field Vole** | **MADE.** What the Barn Owl actually lives on; its numbers crash on a four-year cycle and everything above it follows |
+| **Common Toad** | **MADE.** Walks back to the pond it was born in every spring, across roads, in numbers |
+| **Grass Snake** | **MADE.** Plays dead convincingly — mouth open, tongue out, and a smell to finish it |
+| **Eurasian Magpie** | **MADE.** One of the very few animals to pass the mirror test. Joins **Who's That** |
+| **Eurasian Skylark** | **MADE.** Sings only in flight, and its decline is the clearest single measure of what changed in farming |
+| **European Mole** | **MADE.** A hand evolved into a shovel, and saliva that paralyses earthworms |
+| **European Badger** | **MADE.** A pasture and hedgerow animal, which is why it belongs here rather than in the wood. Embryonic diapause — joins **On Pause** |
 
 **House Mouse and Brown Rat are the wild forms of Fancy Mouse and Fancy Rat**,
 which sit in The Kept. That is allowed and the roster already does it: **Pig** is
@@ -184,8 +199,10 @@ What it lacked was a freshwater predatory fish.
 
 | Species | Why |
 |---|---|
-| **Northern Pike** | The ambush predator the rest of the pond is arranged around |
-| **Electric Eel** | Not an eel — a knifefish, and it delivers 860 volts. Joins **Not What It Looks Like** |
+| **Northern Pike** | **MADE.** The ambush predator the rest of the pond is arranged around |
+| **Electric Eel** | **MADE.** Not an eel — a knifefish, and it delivers 860 volts. Joins **Not What It Looks Like** |
+
+> **BOTH ARE MADE — 2026-09-02.** The Fens has its freshwater predatory fish.
 
 ---
 
@@ -196,8 +213,8 @@ other arrival is the best story in the badge set.
 
 | Species | Why |
 |---|---|
-| **Gemsbok** | Already in the pipeline. Required by the conservancy quest — the roster held only the Arabian Oryx, which is a desert animal and already the subject of the desert elder quest |
-| **Greater Honeyguide** | Leads people to bees' nests, on purpose, answering a call its human partners have used for generations — and takes the wax when they leave. **The only mutualism in the game where the other partner is us.** Joins **Strange Allies** |
+| **Gemsbok** | *Still owed.* Already in the pipeline. Required by the conservancy quest — the roster held only the Arabian Oryx, which is a desert animal and already the subject of the desert elder quest |
+| **Greater Honeyguide** | **MADE.** Leads people to bees' nests, on purpose, answering a call its human partners have used for generations — and takes the wax when they leave. **The only mutualism in the game where the other partner is us.** Joins **Strange Allies** |
 
 ---
 
@@ -208,10 +225,10 @@ pipeline over time and one entry leaves to make room for the last of them.
 
 | Species | Why |
 |---|---|
-| **Iberian Lynx** | Already in the pipeline. Quest animal, and joins **Back From the Brink** |
-| **Bumblebee Bat** | Two grams, and it contests "smallest mammal" with the Etruscan shrew — which is the fact. Joins **The Smallest** |
-| **Wood Frog** | Freezes solid every winter — heart stopped, up to 65% of its body water ice — and thaws. Joins **Sub-Zero** |
-| **Indian Giant Squirrel** | Nearly a metre nose to tail, maroon and orange, and the largest squirrel there is |
+| **Iberian Lynx** | *Still owed.* Already in the pipeline. Quest animal, and joins **Back From the Brink** |
+| **Bumblebee Bat** | **MADE.** Two grams, and it contests "smallest mammal" with the Etruscan shrew — which is the fact. Joins **The Smallest** |
+| **Wood Frog** | *Still owed.* Freezes solid every winter — heart stopped, up to 65% of its body water ice — and thaws. Joins **Sub-Zero** |
+| **Indian Giant Squirrel** | **MADE.** Nearly a metre nose to tail, maroon and orange, and the largest squirrel there is |
 
 **Black Cockatoo leaves** to make room for the squirrel (Ayr, 2026-08-29).
 "Black cockatoo" is five different birds — red-tailed, yellow-tailed, glossy,
@@ -284,10 +301,10 @@ subject is water, and of 43 entries not one was there because of how it gets it.
 
 | Species | Why |
 |---|---|
-| **Mexican Redknee** | Already in the pipeline, renamed from the bare "Tarantula" by the generics audit |
-| **Kangaroo Rat** | **Never drinks.** It manufactures all the water it needs from dry seed |
-| **Namib Desert Beetle** | Stands facing the fog at dawn and **drinks what condenses on its own back**. The shell texture has been copied for real water-harvesting technology |
-| **Egyptian Vulture** | Throws stones at ostrich eggs to break them — one of very few birds that uses a tool. Joins **The Toolkit** |
+| **Mexican Redknee** | *Still owed.* Already in the pipeline, renamed from the bare "Tarantula" by the generics audit |
+| **Kangaroo Rat** | **MADE.** **Never drinks.** It manufactures all the water it needs from dry seed |
+| **Namib Desert Beetle** | **MADE.** Stands facing the fog at dawn and **drinks what condenses on its own back**. The shell texture has been copied for real water-harvesting technology |
+| **Egyptian Vulture** | **MADE.** Throws stones at ostrich eggs to break them — one of very few birds that uses a tool. Joins **The Toolkit** |
 
 ---
 
@@ -331,26 +348,39 @@ design. Two old items from this list are resolved: the mole and gopher for
 Farmland are both in (European Mole and Plains Pocket Gopher), and the
 Alpaca / Farm Alpaca duplicate was settled by the cosmetic-and-merged pass.
 
+**And on 2026-09-02 the making started to land.** Forty-four of the promises
+below are now real animals in the game data — sprite, stats, diet, habitat, IUCN
+status and a written entry each. That is production moving, not design moving:
+**no count in this document changed.**
+
 ## Running total
 
 **The pipeline, by destination.** These are the `new>` lines in
-`design/PENDING_MOVES.txt`, which is the only place a promise counts.
+`design/PENDING_MOVES.txt`, which is the only place a promise counts — plus, from
+2026-09-02, the lines marked `! APPLIED`, which are promises that have been kept.
+A batch has to add up out of both halves, and Cousin Bob checks that it does.
 
-| Biome | In the pipeline | Biome finishes at |
-|---|---|---|
-| Deep sea | 43 | 55 |
-| Polar | 25 | 49 |
-| Open ocean | 17 | 45 |
-| Mountains | 16 | 48 |
-| Farmland | 10 | 46 |
-| Coast | 6 | 45 |
-| Coral reef | 5 | 46 |
-| Desert | 4 | 46 |
-| Forest | 4 | 55 *(one entry leaves)* |
-| Wetland | 2 | 47 |
-| Savanna | 2 | 75 |
-| Rainforest | 0 | 93 |
-| | | **650** |
+| Biome | Still owed | Made | Promised in all | Biome finishes at |
+|---|---|---|---|---|
+| Deep sea | 43 | 0 | 43 | 55 |
+| Polar | 25 | 0 | 25 | 49 |
+| Open ocean | 0 | **17** | 17 | 45 |
+| Mountains | 16 | 0 | 16 | 48 |
+| Farmland | 1 | **9** | 10 | 46 |
+| Coast | 1 | **5** | 6 | 45 |
+| Coral reef | 0 | **5** | 5 | 46 |
+| Desert | 1 | **3** | 4 | 46 |
+| Forest | 2 | **2** | 4 | 55 *(one entry leaves)* |
+| Wetland | 0 | **2** | 2 | 47 |
+| Savanna | 1 | **1** | 2 | 75 |
+| Rainforest | 0 | 0 | 0 | 93 |
+| | **90** | **44** | **134** | **650** |
+
+**The five still owed from the finished batches** are the Little Blue Penguin
+(coast), the Plains Pocket Gopher (farmland), the Gemsbok (savanna), the Mexican
+Redknee (desert), and the Iberian Lynx and Wood Frog (forest). Every one predates
+*The Last Forty-Four* — they entered the pipeline earlier and were not part of
+that batch, which is why they did not travel with it.
 
 **650 biomes + 50 The Kept = 700.** With the 300 already complete — Vigil 50,
 On the Brink 50, The Telling 100, The Record 50, The Breeding Centre 50 — that is

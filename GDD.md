@@ -2,7 +2,7 @@
 
 ## Game Design Document
 
-**Version 18.0 — eighteenth pass over the full record, 2026-08-27**
+**Version 18.1 — the forty-four built into the game data, 2026-09-02**
 Design owner: Ayr · Working title: *Wildlands* · World: **Terrane**
 
 ---
@@ -2387,6 +2387,13 @@ one cut (Black Cockatoo, a bare group name, to make room for the Indian Giant Sq
 and the deep-sea naming pass — 21 renames that turned a genus, a family or a phylum into
 a species. **If a species is added now, one comes out.**
 
+> **2026-09-02 — forty-four of them are now real, and the old game may exceed 1000.**
+> `game.part68.jsx` builds the forty-four into the game data with sprites and full
+> field-guide entries. **Terrane is unchanged at 1000** — they were always counted inside
+> it, as promises in the pipeline — but *Safari Saga*, the finished game on `main`, now
+> holds **1044**. Ayr's ruling: **the thousand may be exceeded there, and only there.**
+> Terrane's round numbers are still firm and still shut.
+
 ### Everything in the roster is real — **[v10]**
 
 **The thirteen invented wardens are cut** and stay in Safari Saga. **Every entry in the new
@@ -2853,7 +2860,8 @@ stays open**, which is why the rest of this document is not resting on air.
 | 4 | **Origin-language naming** for individual animals — needs proper sourcing | No |
 | 5 | ~~**The badge count** breaks the round-number rule~~ **SETTLED at 50**, 2026-08-28 | No |
 | 6 | ~~**Fluorescence** — restore *Blacklight*, or drop it~~ **RULED, 2026-08-29: leave it.** Fluorescence goes unmentioned in the badges and the Deathstalker carries none. The *Lights On* correction stands — it is bioluminescence only | No |
-| 7 | ~~**The 44 remaining species**~~ **CLOSED**, 2026-08-29. All 42 outstanding slots transcribed into the pipeline from *The Last Forty-Four*; the roster stands at 1000 | No |
+| 7 | ~~**The 44 remaining species**~~ **CLOSED**, 2026-08-29, and **BUILT**, 2026-09-02. All 42 outstanding slots were transcribed into the pipeline from *The Last Forty-Four*; the roster stands at 1000. The forty-four now exist in the game data with sprites and written entries, and their pipeline lines are retired as `! APPLIED`. **Six earlier promises are still owed** — Little Blue Penguin, Plains Pocket Gopher, Gemsbok, Mexican Redknee, Iberian Lynx, Wood Frog | No |
+| 7b | **The Opah has no IUCN status.** Every other one of the forty-four carries one. *Lampris incognitus* was described in 2018 and may simply not be assessed — but the field is empty rather than saying so, and a status is a listing, not a guess | The field guide |
 | 8 | ~~**`Only In Captivity`** needs an `EW` tag~~ **CLOSED**, 2026-08-29. The tag is `design/TAGS.txt`; Uncle Albert checks the badge against it | No |
 | 9 | ~~**Sprite terrain**~~ — **answered in v7.** Two assets: the current 1001 become codex plates, game sprites are a later pass without props. **Ayr's call to accept** | The HD-2D look |
 | 10 | **Sandbox holding extinct species** — proposed, not ruled | No |

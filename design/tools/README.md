@@ -55,7 +55,7 @@ onto `window`. Asking the running game is the only reliable source.
 | `make_roster_page.py` | Builds the browsable roster page **from `GROUND_TRUTH.txt`**. Reads no `.jsx` |
 | **`uncle_albert.py`** | **The check &mdash; "run it by Uncle Albert."** Covers **the roster and the badges**: group targets, the 1000 total, duplicate species, species marked new that already exist, quest animals that do not exist, and every badge member being a real species with tiers that match the set. Exits non-zero on failure. Run after any change to `PENDING_MOVES.txt` or `BADGES.txt` |
 | `make_badge_page.py` | Builds `design/badges.html` **from `BADGES.txt`**. Never hand-edit the data in the page &mdash; it is overwritten |
-| **`cousin_bob.py`** | **The document check &mdash; "run it by Cousin Bob."** Asserts that the docs still agree with the data: file paths that exist, the numbers in `HANDOFF.md`, stale badge counts, documents cut off mid-sentence, artifact links, and sentences claiming a species is in a badge. Exits non-zero on failure |
+| **`cousin_bob.py`** | **The document check &mdash; "run it by Cousin Bob."** Asserts that the docs still agree with the data: file paths that exist, the numbers in `HANDOFF.md`, stale badge counts, documents cut off mid-sentence, artifact links, sentences claiming a species is in a badge, every approved batch fully accounted for, and every species marked `APPLIED` really being in the running game. Exits non-zero on failure |
 | `sprite_audit.py` | Measures sprite bounding boxes and bottom gaps |
 | `hd2d_billboard.gdshader` | Y-locked billboard shader for Godot. **Untested** — there is no Godot in this environment |
 
@@ -94,6 +94,33 @@ It answers a question readers always have and field guides rarely do: is this a 
 or one of a crowd? It also surfaces the animals that are **the last of a whole branch** —
 the aardvark is the only living species in its *order*, and the tuatara is the only
 survivor of Rhynchocephalia.
+
+## A promise that has been kept (2026-09-02)
+
+`PENDING_MOVES.txt` holds decisions **not yet in the game data**. When one finally lands,
+the line is **retired in place**, not deleted:
+
+```
+! APPLIED 2026-09-02 - new>opensea=Atlantic Bluefin Tuna|Chub Mackerel|...
+```
+
+Deleting it would lose the reasoning, which this project keeps on purpose. Leaving it
+alone would make Uncle Albert count the species twice — once from ground truth, once
+from its own promise — which is exactly what he reported the moment the forty-four
+landed.
+
+**Cousin Bob then had to learn the difference between the two ways a promise leaves the
+pipeline.** It can be *forgotten*, which is the failure his check 7 was written for. Or
+it can be *kept*. Counting only the pipeline read the good outcome as the bad one and
+failed three biomes that had just been finished.
+
+So a batch now has to add up out of **still owed + made**, and **check 10 asks the
+running game whether each species marked `APPLIED` is really in `GROUND_TRUTH.txt`** —
+because a checker that trusts a label is not a checker. Relabelling a promise as done
+without building it now fails.
+
+**Regenerate `GROUND_TRUTH.txt` whenever species land in the game data**, before
+touching anything else. Every other number is downstream of it.
 
 ## The badges
 
