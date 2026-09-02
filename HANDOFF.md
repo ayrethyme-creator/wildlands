@@ -159,7 +159,21 @@ taxon, diet, habitat, IUCN status and a written fact. **1000 of 1000.**
 That took three sittings on one day: the forty-four Ayr added (below), the six
 promises that predated them, and then the last 133 — the deep sea's 43, the
 polar 25, the fossils' 21, the mountains' 16, the Breeding Centre's 16, the last
-6 of The Kept and 6 more for The Vigil. The old game now holds **1183** species.
+6 of The Kept and 6 more for The Vigil.
+
+**And all 139 of them are in `main` as well, as of 2026-09-02.** Ayr: *"the 1000
+cap no longer applies to main, only to terrane."* Safari Saga now holds **1183**
+species — every animal that had both a picture and a description is in the live
+game. The two branches hold the same species data again; they still differ on
+six gameplay fixes that live only on `main`, and on `design/biome_assign.js`,
+which Terrane has corrected far more heavily.
+
+**One label was deliberately NOT changed on `main`.** Its `design/biomes.js`
+still merges `deepsea` into `opensea`, so the gallery calls a hydrothermal vent
+barnacle "open ocean". That merge dates from when the deep sea held 11 species
+and its own comment says it folded because the group was too thin; it is now 54.
+**Ayr ruled on 2026-09-02 to leave it merged** — Terrane treats the deep sea as
+its own twelfth biome and the old game does not, and that is allowed to differ.
 
 **The art is the remaining production job, and Ayr owns it.** Every one of the
 133 already had a sprite from the biome art batches, so nothing was drawn for
