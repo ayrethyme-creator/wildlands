@@ -38,10 +38,10 @@ expensive one, and it has caught misreads.
 ### Cutting content
 
 The old rule here read "no species may be cut". That is no longer true — they
-has since asked for seven mythological creatures to be removed to hold a round
+have since asked for seven mythological creatures to be removed to hold a round
 number. The real rule is:
 
-- They are a completionist and has caught nearly everything. Cutting a species
+- They are a completionist and have caught nearly everything. Cutting a species
   they have caught silently deletes that record from their save.
 - Say so before cutting, once, and then do as they ask. They have accepted that
   trade knowingly.
@@ -83,6 +83,8 @@ Where the drawing lives:
 | Quest-giver and clue placement | `game.part65.jsx` |
 | Per-run ecology | `game.part66.jsx` |
 | Ambient, tracks, set dressing, puddles, birds, fruit | `game.part67.jsx` |
+| First 44 approved Terrane animals in this playable preview | `game.part68.jsx` |
+| Next 66 approved Terrane animals, generated from reviewed writing | `game.part69.jsx` |
 
 `ROWS_TOWN` in part3 is a **dead template** — part22 overwrites every town.
 Editing part3's towns does nothing.
@@ -95,15 +97,25 @@ art together.
 Pushing: plain `git push` hangs. Use
 `GIT_TERMINAL_PROMPT=0 timeout 30 git push origin main`.
 
-## Two numbers they care about
+## Two roster counts that must not be confused
 
-- **The dex is exactly 1000 species.**
+- **Terrane's finished roster is exactly 1000 counted animals.** Its 120 life
+  stages remain attached to their adults and do not count toward that thousand.
 - **The mythological roster is exactly 100.**
 
-Both are hers, both are deliberate, and both are checked. If you add a
-creature, something comes out. Nothing in the code enforces either number —
-"Bestiary Complete" counts the roster dynamically — so they are conventions you
-have to hold yourself.
+Both are Ayr's decisions. Safari Saga is currently being used as a playable,
+additive preview for approved Terrane animals: Part 68 added 44 records and Part
+69 adds another 66. Its raw `DEX` key count therefore includes the original
+life stages and is deliberately transitional; it is not the Terrane roster
+count. Do not remove an old Safari Saga animal merely to offset one of these
+already-approved additions. The cuts, cosmetics and merges in the Terrane
+design are for the new game and need an explicit save-preserving migration if
+they are ever brought back to Safari Saga.
+
+Part 69 is generated from `design/TERRANE_FIELD_GUIDE_66.md` by
+`design/tools/build_part69.js`; do not hand-edit the generated file. Run
+`node design/tools/validate_part69.js` after changing its source, metadata,
+artwork or loader placement.
 
 ## The art pipeline
 

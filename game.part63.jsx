@@ -56,7 +56,7 @@ ACHIEVEMENTS.push(
     check: (st) => allCaught(st, MYTHIC_KEYS) },
   { id: "pets_10", icon: "🐕", tier: "bronze", name: "Good Company", desc: "Befriend 10 domestic or pet species.",
     check: (st) => Object.keys(st.dex || {}).filter((k) => caught(st, k) && DEX[k] && DEX[k].dom).length >= 10 },
-  { id: "breeds_all", icon: "🏡", tier: "gold", name: "Full House", desc: "Befriend every breed at the Kennels and the Cattery.",
+  { id: "breeds_all", icon: "🏡", tier: "gold", name: "Full House", desc: "Befriend every breed and domestic form at Hearthside.",
     check: (st) => allCaught(st, BREED_KEYS) },
   { id: "aquarium_all", icon: "🐠", tier: "silver", name: "Full Tank", desc: "Befriend every fish in the Aquarium.",
     check: (st) => allCaught(st, AQUARIUM_KEYS) },
