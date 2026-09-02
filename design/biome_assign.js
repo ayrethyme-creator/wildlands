@@ -21,7 +21,7 @@ var BIOME_BY_HAND = {
   springbok:"savanna", impala:"savanna", kudu:"savanna", eland:"savanna",
   nyala:"savanna", wildebeest:"savanna", blackbuck:"savanna",
   nakedmolerat:"savanna", molequeen:"savanna", firehawk:"savanna",
-  honeyguide:"savanna",
+  honeyguide:"savanna", gemsbok:"savanna",
 
   // --- forest ---
   puma:"forest", bobcat:"forest", grayfox:"forest", stoat:"forest", macaque:"forest",
@@ -35,7 +35,7 @@ var BIOME_BY_HAND = {
   jewelbeetle:"forest", cicada:"forest", komododragon:"forest",
   frilledlizard:"forest", skink:"forest", tuatara:"forest",
   tawnyfrogmouth:"forest", tardigrade:"forest",
-  bumblebeebat:"forest", giantsquirrel:"forest",
+  bumblebeebat:"forest", giantsquirrel:"forest", iberianlynx:"forest", woodfrog:"forest",
 
   // --- rainforest ---
   babirusa:"rainforest", peccary:"rainforest", duiker:"rainforest",
@@ -49,12 +49,18 @@ var BIOME_BY_HAND = {
 
   // --- alpine ---
   klipspringer:"alpine", goldeneagle:"alpine", volcanorabbit:"alpine",
+  alpinechamois:"alpine", alpinechough:"alpine", alpinesalamander:"alpine",
+  apollobutterfly:"alpine", argali:"alpine", barheadedgoose:"alpine",
+  himalayanjumpingspider:"alpine", kiang:"alpine", lammergeier:"alpine",
+  mountaingoat:"alpine", rockhyrax:"alpine", tibetanantelope:"alpine",
+  wallcreeper:"alpine", whiterumpedvulture:"alpine", woollyflyingsquirrel:"alpine",
 
   // --- desert ---
   dingo:"desert", degu:"desert", cockatiel:"desert", emu:"desert",
   peacockspider:"desert", gecko:"desert", rattlesnake:"desert", taipan:"desert",
   vermilionflycatcher:"desert",
   kangaroorat:"desert", namibbeetle:"desert", egyptianvulture:"desert",
+  mexicanredknee:"desert",
 
   // --- wetland ---
   mink:"wetland", amazonriverdolphin:"wetland", gangesdolphin:"wetland",
@@ -73,7 +79,7 @@ var BIOME_BY_HAND = {
   marineiguana:"coast", lavalizard:"coast", nicobarpigeon:"coast",
   mimicoctopus:"coast", coconutcrab:"coast", lobster:"coast",
   herringgull:"coast", bluemussel:"coast", acornbarnacle:"coast",
-  greenanemone:"coast", aldabratortoise:"coast",
+  greenanemone:"coast", aldabratortoise:"coast", littlebluepenguin:"coast",
 
   // --- reef ---
   mantaray:"reef", clownfish:"reef", lionfish:"reef", barracuda:"reef",
@@ -95,7 +101,13 @@ var BIOME_BY_HAND = {
   loggerhead:"opensea", oliveridley:"opensea",
 
   // --- polar ---
-  lionsmane:"polar",
+  lionsmane:"polar", adeliepenguin:"polar", antarcticicefish:"polar",
+  antarcticseaspider:"polar", antarctictoothfish:"polar", arcticchar:"polar",
+  arcticcod:"polar", arctictern:"polar", arcticwolf:"polar", capelin:"polar",
+  collaredlemming:"polar", gentoopenguin:"polar", greenlandhalibut:"polar",
+  ivorygull:"polar", kingpenguin:"polar", littleauk:"polar", longtailedduck:"polar",
+  ringedseal:"polar", rockptarmigan:"polar", rossgull:"polar", snowpetrel:"polar",
+  southpolarskua:"polar",
 
   // --- farmland & town ---
   hedgehog:"farmland", raccoon:"farmland", groundhog:"farmland", hare:"farmland",
@@ -128,7 +140,14 @@ var BIOME_BY_HAND = {
   greyhound:"farmland", saintbernard:"farmland", dalmatian:"farmland",
   rottweiler:"farmland", bulldog:"farmland", bordeauxmastiff:"farmland",
   akita:"farmland", samoyed:"farmland", bernesemountain:"farmland",
-  australianshepherd:"farmland", jackrussell:"farmland", wolfdog:"farmland"
+  australianshepherd:"farmland", jackrussell:"farmland", wolfdog:"farmland",
+  anatolianshepherd:"farmland", angorarabbit:"farmland", ballpythonmorph:"farmland",
+  bredaxolotl:"farmland", bullterrier:"farmland", burmese:"farmland",
+  cornishrex:"farmland", domesticfox:"farmland", egyptianmau:"farmland",
+  fancypigeon:"farmland", frenchbulldog:"farmland", manx:"farmland",
+  munchkin:"farmland", silkworm:"farmland", beardeddragon:"farmland",
+  cornsnake:"farmland", leopardgecko:"farmland", mutt:"farmland",
+  pitbull:"farmland", russiantortoise:"farmland"
 };
 
 // --- Second pass. These were placed by the habitat RULES, not the zone
