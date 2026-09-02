@@ -842,14 +842,24 @@ RENAME=Partula Snail::Partula nodosa
 ! ============================================================================
 ! ART-KEY BUG, found 2026-08-29 by the art audit. Not a roster change.
 ! ============================================================================
-! SOCKEYE SALMON points at art key "salmonadult". THERE IS NO salmonadult.png.
-! The sprite that exists is art/salmon.png, and parr.png and smolt.png are its two
-! life stages. So the art is finished and the entry points at a filename that is
-! not there - which renders as a missing image rather than as an error.
+! NOT A BUG. WITHDRAWN 2026-09-02, and left here because a false entry in a
+! defect list costs more than no entry at all.
 !
-! It was the ONLY species in the whole roster sitting in the "described but not
-! drawn" bucket, and it turned out not to be. Fix the key when the new game data
-! is built: salmonadult -> salmon.
+! The claim was: SOCKEYE SALMON points at art key "salmonadult", there is no
+! salmonadult.png, so it renders as a missing image. Both halves are true and the
+! conclusion is wrong.
+!
+! The photo path in game.part2.jsx does not use the art field. It is
+!     <img src={`art/${sp}.png`} />
+! keyed on the DEX KEY, which is "salmon" - and art/salmon.png exists. The art
+! field is only read on the SVG fallback path, `ART[d.art]`, and ART.salmonadult
+! is defined in game.part16.jsx as a drawn shape. Both paths resolve. Nothing is
+! broken and there is nothing to fix.
+!
+! Checked properly on 2026-09-02 by running the game and asking it for every art
+! key: 1183 of 1183 resolve, none 404s. The original note was written by reading
+! the entry and the directory listing and reasoning between them, which is the
+! same shape of mistake as counting species with a regex.
 ! ============================================================================
 
 ! ============================================================================
