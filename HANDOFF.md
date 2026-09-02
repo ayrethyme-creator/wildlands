@@ -35,19 +35,19 @@ record eighteen times, and each pass is listed in its own version note.
 | File | What it is |
 |---|---|
 | **`design/GROUND_TRUTH.txt`** | The species that exist, by group. **Read from the running game, never parsed from `.jsx`** |
-| **`design/PENDING_MOVES.txt`** | Decisions made but not yet in game data. Every fix lives here until applied |
+| **`design/PENDING_MOVES.txt`** | Decisions made but not yet in game data. Every fix lives here until applied, then is retired in place as `! APPLIED` rather than deleted. **No `new>` line is left** |
 | **`design/BADGES.txt`** | Badge membership, the only source. The page is generated from it |
 | **`design/TAGS.txt`** | Conservation tags. `EW` today; Albert checks every tagged species is real, is in On the Brink, and matches the *Only In Captivity* badge exactly |
 | **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
 | **`design/tools/the_librarian.py`** | **The fact check.** *"Run it by The Librarian."* It cannot tell whether a claim is true — it tracks **who checked what, against what source**, and fails when a checked sentence is edited underneath its check |
 | **`design/CLAIMS.txt`** | The claims register, and the **TRAP** list: the distinctions this project has already got wrong once |
 | **`design/BADGE_CARDS.txt`** | One card per badge membership. 430 to write, 3 written |
-| **`design/FIELD_GUIDE.txt`** | **All 999 field-guide entries with their IUCN status, read from the running game.** Do not hand-edit and do not regex-parse the `.jsx` to rebuild it — `design/tools/read_field_guide.js` |
+| **`design/FIELD_GUIDE.txt`** | **All 1183 field-guide entries with their IUCN status, read from the running game.** Do not hand-edit and do not regex-parse the `.jsx` to rebuild it — `design/tools/read_field_guide.js` |
 | **`GDD.md`** | **The design.** By system, current-only, everything marked decided / open / proposed. **Start here** |
 | **`NEW_DIRECTION.md`** | The design *record*, ~11,000 lines, append-only with dated headers. Every *why*, including the reversals |
 | **`design/tools/cousin_bob.py`** | **The document check.** *"Run it by Cousin Bob."* Verifies the docs still agree with the data |
 | **`design/tools/README.md`** | **Read this before quoting any number.** Documents both traps and the correct method |
-| **`design/new_species.md`** | The running list of species still to create |
+| **`design/new_species.md`** | What was promised and how it was made. **Nothing is owed** — kept as the record |
 | **`design/cut_species.md`** | What was cut, and why. Check before proposing a removal |
 
 **Numbers come from Uncle Albert, never from either document.** `NEW_DIRECTION.md`'s prose
@@ -87,7 +87,7 @@ statements in these documents had quietly stopped being true and no amount of re
 was going to reliably find the next one.
 
 **2. Never regex-parse `game.part*.jsx`.** Serve the repo and read `window.__DEX` from
-`gallery.html`. `design/tools/read_ground_truth.js` is the sanctioned snippet.
+`gallery.html`. `design/tools/read_ground_truth.js` is the sanctioned snippet, and `design/tools/gt_export_server.py` writes the file from it so nobody retypes 13KB of species names.
 
 ---
 
@@ -149,6 +149,48 @@ it. Ayr decides.
 
 ---
 
+## 2026-09-02 — **all 1000 species exist, and all 1000 have a description**
+
+**The pipeline is empty.** `design/PENDING_MOVES.txt` has no `new>` line left in
+it, and Cousin Bob reads every one of the eleven approved batches as *all made*.
+Every species in the Terrane roster is in the game data with a field-guide entry:
+taxon, diet, habitat, IUCN status and a written fact. **1000 of 1000.**
+
+That took three sittings on one day: the forty-four Ayr added (below), the six
+promises that predated them, and then the last 133 — the deep sea's 43, the
+polar 25, the fossils' 21, the mountains' 16, the Breeding Centre's 16, the last
+6 of The Kept and 6 more for The Vigil. The old game now holds **1183** species.
+
+**The art is the remaining production job, and Ayr owns it.** Every one of the
+133 already had a sprite from the biome art batches, so nothing was drawn for
+this; `design/art_prompts/ONE_BY_ONE.txt` still lists 79 species needing
+individual rebuilds. That queue did not move.
+
+**Two things this batch introduced that a later session needs to know:**
+
+- **`NE` — Not Evaluated — is now a status.** Added in `game.part70.jsx` the way
+  part29 adds `MYTH`. Most deep-sea animals have never been assessed by the IUCN
+  at all, and saying so is more honest than reaching for `DD`, which is a real
+  category meaning something else: assessed, and not enough known. **Do not use
+  `NE` to mean "I could not find it."**
+- **Four species in The Kept are wild animals, not breeds**, and carry their real
+  status rather than `DOM`: Bearded Dragon and Corn Snake and Leopard Gecko are
+  LC, and the **Russian Tortoise is Vulnerable** — worth a reader noticing on a
+  pet-shop shelf. The `dom` flag files them in The Kept; the status tells the
+  truth about the animal.
+
+**Two small things are flagged for Ayr and are not decided:**
+
+- **The Ordovician has one species in it.** Naming the generic "Trilobite" to
+  *Elrathia kingii* moved it to the **Cambrian**, where that species actually
+  lives, leaving Cameroceras alone in the Ordovician. The fossil rebalance was
+  built to fill empty periods, so this is a real gap rather than a rounding error.
+- **Jaekelopterus was filed under the Silurian and is Early Devonian.** The data
+  follows the animal. Pneumodesmus keeps the Silurian and says in its own entry
+  why that is argued about.
+
+---
+
 ## The forty-four are real, 2026-09-02 — **and the old game may now exceed 1000**
 
 `game.part68.jsx` puts forty-four species into the game data: DEX entry, sprite,
@@ -175,12 +217,9 @@ so a relabelled promise that was never built fails rather than passes.
 because they entered the pipeline before it: Little Blue Penguin, Plains Pocket
 Gopher, Gemsbok, Mexican Redknee, Iberian Lynx and Wood Frog.
 
-**One open item, and it is small: the Opah has no IUCN status.** Every other one of
-the forty-four carries one. `Lampris incognitus` was described in 2018 and may
-simply not be assessed — but the status field is empty rather than saying so, and
-`design/CLAIMS.txt` already lists "extinct in the wild is a listing, not a figure
-of speech" as a trap. **Do not guess it.** It is the one thing in this batch
-waiting on a decision.
+**The Opah's missing status is resolved.** Ayr, 2026-09-02: it is Least Concern,
+and `game.part68.jsx` now says so. It was the only one of the forty-four whose
+status field was absent.
 
 ---
 

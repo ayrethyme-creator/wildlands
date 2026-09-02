@@ -39,7 +39,7 @@ kept>cut=Farm Dog
 
 ! --- Species that do NOT exist yet and need creating. "new>group" means the entry has
 ! --- no row in the DEX at all; everything else in this file is a move between groups.
-new>kept=Mutt|Pit Bull|Corn Snake|Bearded Dragon|Russian Tortoise|Leopard Gecko
+! APPLIED 2026-09-02 - new>kept=Mutt|Pit Bull|Corn Snake|Bearded Dragon|Russian Tortoise|Leopard Gecko
 kept>lifestage=Puppy
 
 ! --- Ayr, 2026-08-26. Two species to create and the camelid duplicate resolved.
@@ -55,10 +55,10 @@ farmland>kept=Llama
 farmland>merged=Alpaca
 
 ! --- Ayr, 2026-08-26. The Breeding Centre goes to 50. Two named directly.
-new>breeding=Domestic Fox|Bred Axolotl
+! APPLIED 2026-09-02 - new>breeding=Domestic Fox|Bred Axolotl
 
 ! --- Ayr's picks, 2026-08-26. Fourteen, taking the Breeding Centre to exactly 50.
-new>breeding=Fancy Pigeon|Silkworm|English Budgie|Angora Rabbit|Ball Python Morph|Anatolian Shepherd|Manx|Munchkin|Cornish Rex|Burmese|Egyptian Mau|American Curl|French Bulldog|Bull Terrier
+! APPLIED 2026-09-02 - new>breeding=Fancy Pigeon|Silkworm|English Budgie|Angora Rabbit|Ball Python Morph|Anatolian Shepherd|Manx|Munchkin|Cornish Rex|Burmese|Egyptian Mau|American Curl|French Bulldog|Bull Terrier
 
 ! --- Ayr, 2026-08-26. Three out of The Telling to make room for Qilin, Thunderbird
 ! --- and Phoenix, which are genuine folklore and were sitting unplaced.
@@ -94,7 +94,7 @@ vigil>fossil=Woolly Rhinoceros|Smilodon|Mastodon|Dire Wolf|Megatherium|Glyptodon
 vigil>cut=Columbian Mammoth|Cave Lion|Short-faced Bear|Giant Beaver|Steppe Bison
 
 ! 21 new species for the eight empty periods.
-new>fossil=Charnia|Dickinsonia|Anomalocaris|Opabinia|Hallucigenia|Trilobite|Cameroceras|Jaekelopterus|Pneumodesmus|Tiktaalik|Dunkleosteus|Ichthyostega|Meganeura|Arthropleura|Dimetrodon|Gorgonops|Sinosauropteryx|Basilosaurus|Ambulocetus|Megalodon|Gigantopithecus
+! APPLIED 2026-09-02 - new>fossil=Charnia|Dickinsonia|Anomalocaris|Opabinia|Hallucigenia|Trilobite|Cameroceras|Jaekelopterus|Pneumodesmus|Tiktaalik|Dunkleosteus|Ichthyostega|Meganeura|Arthropleura|Dimetrodon|Gorgonops|Sinosauropteryx|Basilosaurus|Ambulocetus|Megalodon|Gigantopithecus
 
 ! ============================================================================
 ! THE VIGIL / ON THE BRINK SPLIT - decided 2026-08-25, applied 2026-08-26.
@@ -118,7 +118,7 @@ lifestage>brink=Axolotl
 
 ! That leaves the Vigil at 44 genuinely extinct species. Six more real ones, none
 ! currently in the roster, take it to 50.
-new>vigil=Bachman's Warbler|Christmas Island Forest Skink|Alaotra Grebe|Tecopa Pupfish|Round Island Burrowing Boa|Little Mariana Fruit Bat
+! APPLIED 2026-09-02 - new>vigil=Bachman's Warbler|Christmas Island Forest Skink|Alaotra Grebe|Tecopa Pupfish|Round Island Burrowing Boa|Little Mariana Fruit Bat
 
 ! --- Two species decided earlier and never created.
 ! --- Gemsbok: the savanna conservancy quest needs it; the roster only had the
@@ -145,7 +145,7 @@ forest>merged=King Cobra
 ! --- Tibetan Antelope: The Divide, elder. The shahtoosh ban, CITES Appendix I,
 ! ---   and a recovery from ~75,000 to ~300,000.
 ! APPLIED 2026-09-02 - new>forest=Iberian Lynx
-new>alpine=Tibetan Antelope
+! APPLIED 2026-09-02 - new>alpine=Tibetan Antelope
 
 ! ============================================================================
 ! THE THREE APPROVED SPECIES BATCHES - proposed 2026-08-25/26, approved by Ayr,
@@ -156,14 +156,14 @@ new>alpine=Tibetan Antelope
 ! ============================================================================
 
 ! THE DARK - 43. Brittle Star was dropped from the original 44; it is already in reef.
-new>deepsea=Gulper Eel|Fangtooth|Viperfish|Barreleye|Hatchetfish|Black Dragonfish|Lanternfish|Mariana Snailfish|Tripod Fish|Cookiecutter Shark|Blobfish|Coffinfish|Stoplight Loosejaw|Deep-sea Lizardfish|Vampire Squid|Glass Squid|Bigfin Squid|Dumbo Octopus|Giant Isopod|Yeti Crab|Alicella|Vent Shrimp|Giant Tube Worm|Zombie Worm|Squat Lobster|Deep-sea Barnacle|Siphonophore|Atolla|Bloody-belly Comb Jelly|Deepstaria|Comb Jelly|Helmet Jellyfish|Sea Pig|Venus Flower Basket|Sea Lily|Black Coral|Xenophyophore|Bathydevius|Predatory Tunicate|Bamboo Coral|Vent Mussel|Bluntnose Sixgill Shark|Orange Roughy
+! APPLIED 2026-09-02 - new>deepsea=Gulper Eel|Fangtooth|Viperfish|Barreleye|Hatchetfish|Black Dragonfish|Lanternfish|Mariana Snailfish|Tripod Fish|Cookiecutter Shark|Blobfish|Coffinfish|Stoplight Loosejaw|Deep-sea Lizardfish|Vampire Squid|Glass Squid|Bigfin Squid|Dumbo Octopus|Giant Isopod|Yeti Crab|Alicella|Vent Shrimp|Giant Tube Worm|Zombie Worm|Squat Lobster|Deep-sea Barnacle|Siphonophore|Atolla|Bloody-belly Comb Jelly|Deepstaria|Comb Jelly|Helmet Jellyfish|Sea Pig|Venus Flower Basket|Sea Lily|Black Coral|Xenophyophore|Bathydevius|Predatory Tunicate|Bamboo Coral|Vent Mussel|Bluntnose Sixgill Shark|Orange Roughy
 
 ! THE FLOE - 25.
-new>polar=Antarctic Icefish|Colossal Squid|Collared Lemming|Antarctic Sea Spider|Bearded Seal|Hooded Seal|Arctic Tern|Snow Petrel|South Polar Skua|Long-tailed Duck|Little Auk|Adélie Penguin|King Penguin|Gentoo Penguin|Chinstrap Penguin|Antarctic Toothfish|Arctic Cod|Capelin|Arctic Char|Greenland Halibut|Ringed Seal|Arctic Wolf|Rock Ptarmigan|Ivory Gull|Ross's Gull
+! APPLIED 2026-09-02 - new>polar=Antarctic Icefish|Colossal Squid|Collared Lemming|Antarctic Sea Spider|Bearded Seal|Hooded Seal|Arctic Tern|Snow Petrel|South Polar Skua|Long-tailed Duck|Little Auk|Adélie Penguin|King Penguin|Gentoo Penguin|Chinstrap Penguin|Antarctic Toothfish|Arctic Cod|Capelin|Arctic Char|Greenland Halibut|Ringed Seal|Arctic Wolf|Rock Ptarmigan|Ivory Gull|Ross's Gull
 
 ! THE DIVIDE - 15. Snow Leopard and Ibex already exist; the mountain gorilla moved to
 ! rainforest and was replaced by the Tibetan antelope, already added.
-new>alpine=White-rumped Vulture|Bar-headed Goose|Lammergeier|Alpine Chough|Wallcreeper|Himalayan Monal|Argali|Chamois|Mountain Goat|Kiang|Rock Hyrax|Alpine Salamander|Apollo Butterfly|Woolly Flying Squirrel|Himalayan Jumping Spider
+! APPLIED 2026-09-02 - new>alpine=White-rumped Vulture|Bar-headed Goose|Lammergeier|Alpine Chough|Wallcreeper|Himalayan Monal|Argali|Chamois|Mountain Goat|Kiang|Rock Hyrax|Alpine Salamander|Apollo Butterfly|Woolly Flying Squirrel|Himalayan Jumping Spider
 
 ! ============================================================================
 ! SPECIES AUDIT - section 1, "not an animal at all". All four, Ayr 2026-08-26.
@@ -851,3 +851,18 @@ RENAME=Partula Snail::Partula nodosa
 ! drawn" bucket, and it turned out not to be. Fix the key when the new game data
 ! is built: salmonadult -> salmon.
 ! ============================================================================
+
+! ============================================================================
+! THE SIXTEEN NEW BREEDS ARE IN THE GAME NOW - so they need the same move the
+! original thirty-four needed. Ayr, 2026-09-02.
+!
+! game.part74.jsx creates them with breed:true, and the GAME has no Breeding
+! Centre - groupOf() files anything with dom or breed under The Kept, which is
+! correct for the old game and wrong for Terrane. Uncle Albert caught it the
+! moment they landed: The Kept read 66 against a target of 50, and the Breeding
+! Centre read 34 against 50. The two errors were the same sixteen animals.
+!
+! This is the ordinary shape of a Terrane group that the old game does not have,
+! and it is what the pipeline is for.
+! ============================================================================
+kept>breeding=American Curl|Manx|Munchkin|Cornish Rex|Burmese|Egyptian Mau|Anatolian Shepherd|Bull Terrier|French Bulldog|Domestic Fox|Fancy Pigeon|English Budgie|Angora Rabbit|Ball Python Morph|Bred Axolotl|Silkworm

@@ -9,12 +9,16 @@ having in it.
 > checks each heading against the pipeline, so a batch cannot quietly drift
 > again. If a species is added now, one comes out.
 
-> **2026-09-02 — the first forty-four of these are no longer promises.** They are
-> in the game data, with sprites and full field-guide entries. A batch heading's
-> count is now the total ever promised, and Bob accounts for it in two parts:
-> **still owed** plus **made**. Each section below says which of its species have
-> arrived. Nothing about the roster's size changed — these forty-four were always
-> counted inside the thousand.
+> **2026-09-02 — EVERY SPECIES ON THIS LIST HAS BEEN MADE.** The pipeline is
+> empty: `design/PENDING_MOVES.txt` has no `new>` line left in it. All 1000
+> species in the Terrane roster now exist in the game data with a field-guide
+> entry, and Cousin Bob reads all eleven batches below as **all made**.
+>
+> This document is therefore a record rather than a work list. A batch heading's
+> count is the total ever promised, and Bob accounts for it as **still owed**
+> plus **made** — every one of them now reads 0 owed. Nothing about the roster's
+> size changed at any point: these species were always counted inside the
+> thousand, as promises. What changed is that they became animals.
 
 Status: **CONFIRMED** = Ayr has approved it. **LIKELY** = approved in principle,
 not finally. **MADE** on a species means it exists in the game now, and can be
@@ -362,25 +366,26 @@ A batch has to add up out of both halves, and Cousin Bob checks that it does.
 
 | Biome | Still owed | Made | Promised in all | Biome finishes at |
 |---|---|---|---|---|
-| Deep sea | 43 | 0 | 43 | 55 |
-| Polar | 25 | 0 | 25 | 49 |
+| Deep sea | 0 | **43** | 43 | 55 |
+| Polar | 0 | **25** | 25 | 49 |
 | Open ocean | 0 | **17** | 17 | 45 |
-| Mountains | 16 | 0 | 16 | 48 |
-| Farmland | 1 | **9** | 10 | 46 |
-| Coast | 1 | **5** | 6 | 45 |
+| Mountains | 0 | **16** | 16 | 48 |
+| Farmland | 0 | **10** | 10 | 46 |
+| Coast | 0 | **6** | 6 | 45 |
 | Coral reef | 0 | **5** | 5 | 46 |
-| Desert | 1 | **3** | 4 | 46 |
-| Forest | 2 | **2** | 4 | 55 *(one entry leaves)* |
+| Desert | 0 | **4** | 4 | 46 |
+| Forest | 0 | **4** | 4 | 55 *(one entry leaves)* |
 | Wetland | 0 | **2** | 2 | 47 |
-| Savanna | 1 | **1** | 2 | 75 |
+| Savanna | 0 | **2** | 2 | 75 |
 | Rainforest | 0 | 0 | 0 | 93 |
-| | **90** | **44** | **134** | **650** |
+| | **0** | **134** | **134** | **650** |
 
-**The five still owed from the finished batches** are the Little Blue Penguin
-(coast), the Plains Pocket Gopher (farmland), the Gemsbok (savanna), the Mexican
-Redknee (desert), and the Iberian Lynx and Wood Frog (forest). Every one predates
-*The Last Forty-Four* — they entered the pipeline earlier and were not part of
-that batch, which is why they did not travel with it.
+**Nothing is owed.** The last six — Little Blue Penguin (coast), Plains Pocket
+Gopher (farmland), Gemsbok (savanna), Mexican Redknee (desert), Iberian Lynx and
+Wood Frog (forest) — all predated *The Last Forty-Four* and did not travel with
+it, so they were made separately on 2026-09-02 in `game.part69.jsx`. The three
+groups outside the biomes went the same day: The Record's 21 fossils, the
+Breeding Centre's 16, The Kept's last 6, and six more for The Vigil.
 
 **650 biomes + 50 The Kept = 700.** With the 300 already complete — Vigil 50,
 On the Brink 50, The Telling 100, The Record 50, The Breeding Centre 50 — that is

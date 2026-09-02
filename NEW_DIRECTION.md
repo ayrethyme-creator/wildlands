@@ -11064,3 +11064,141 @@ BADGE CARDS 3 of 431 written
 **The forty-four cost the art queue nothing.** Terrane already held most of the same
 images under its longer file names; `main` simply keeps them under the game's short
 DEX keys. The one-by-one queue is exactly where it was.
+
+---
+
+# 2026-09-02, later — ONE THOUSAND DESCRIPTIONS
+
+Ayr: *"opah is least concern. yes do the still owed animals you listed. do we have
+1000 descriptions for the animals? if we don't, make it so. i know we don't have
+that many art, but that's ok I'll work on that later."*
+
+**We did not. We do now. 1000 of 1000.**
+
+## What the number actually was
+
+The first count said 260 missing, which was wrong, and wrong in an instructive
+way: it compared roster names against field-guide names without applying the
+rename map. A species renamed by the generics audit — Chameleon to Panther
+Chameleon — still has its entry filed under the old name, so 120 animals that
+had descriptions were counted as having none.
+
+With renames applied it was **140**: 139 species that did not exist in the game
+data at all, plus the **Tawny Frogmouth**, which had a DEX row from the early
+roster and no INFO entry — the one species in the game that could be caught and
+not read about.
+
+**Ask what a number is being compared against.** Both counts came from the same
+files and only one meant anything.
+
+## What was written
+
+```
+part69   6    the promises that predated The Last Forty-Four, plus the frogmouth
+part70   43   THE DARK          the deep sea
+part71   25   THE FLOE          polar
+part72   16   THE DIVIDE        the mountains
+part73   21   THE RECORD        the fossils, filling eight empty periods
+part74   22   the Breeding Centre's 16 and the last 6 of The Kept
+part75   6    six more for THE VIGIL
+```
+
+Every one has taxon, diet, habitat, IUCN status and a written fact, in the house
+shape: the relatives count leads, because *End of the Line* only means anything
+to a reader who has met "one of four tapirs" a dozen times first.
+
+**The art queue did not move.** All 133 already had sprites from the biome art
+batches. Nothing was drawn for this, and `ONE_BY_ONE.txt` still lists its 79.
+
+## NE — Not Evaluated
+
+Most deep-sea animals have never been assessed by the IUCN at all. A vent
+barnacle, a glass sponge and a single cell twenty centimetres across are on
+nobody's Red List while the sharks beside them are, and that is worth a player
+noticing rather than papering over.
+
+The vocabulary had ten values and none of them said it. **Data Deficient is not
+the same thing** — DD means assessed, and not enough known. So `game.part70.jsx`
+adds `NE` to `IUCN` and `STATUS_NAME`, the way part29 adds `MYTH`.
+
+**The rule that comes with it: NE means the IUCN has not assessed this animal.
+It does not mean "I could not find the status."** The temptation to use it as a
+shrug is exactly the trap `CLAIMS.txt` already records about extinct-in-the-wild
+being a listing rather than a figure of speech.
+
+## Four animals in The Kept are not domesticated
+
+A bearded dragon, a corn snake, a leopard gecko and a Russian tortoise are
+captive-bred and sold in shops, and none of them is a domesticated animal. They
+have wild populations and real listings. So they carry `dom: true`, which files
+them in The Kept where the design wants them, and their **real status**, not DOM
+— and the **Russian tortoise is Vulnerable**, which is worth meeting on a
+pet-shop shelf.
+
+The Breeding Centre is the other thing entirely: a Munchkin, a silkworm and a
+show budgie have no wild population to assess, and DOM is the honest answer for
+them.
+
+## Uncle Albert caught the sixteen immediately
+
+The sixteen new Breeding Centre animals are created with `breed: true`, and the
+GAME has no Breeding Centre — `groupOf()` files anything with dom or breed under
+The Kept. So the moment they landed, Albert read The Kept at 66 against a target
+of 50 and the Breeding Centre at 34 against 50. **The two errors were the same
+sixteen animals**, and the fix is the ordinary one: a `kept>breeding` line, the
+same move the original thirty-four already needed. That is what the pipeline is
+for — a Terrane group the old game does not have.
+
+## A cached file nearly wrote a wrong roster
+
+Worth recording on its own, because it is the dangerous shape.
+
+The first export after part69 put the **gemsbok in the desert** and the **Mexican
+redknee in a forest**. Neither placement was in `biome_assign.js`. Both were the
+habitat-guessing fallback, because `gallery.html` fetched the classifier as
+`"?g=1"` — a fixed URL — so the browser served the copy from before the six were
+added, and the six had no hand placement in it to find.
+
+Nothing errored. The gallery looked completely normal. **GROUND_TRUTH.txt is
+exported from that page**, so a stale read does not show up as a stale gallery;
+it shows up as a wrong roster written to disk and believed. It was caught by
+reading the exported group counts instead of trusting the write.
+
+The gallery now busts its cache per load. And `GROUND_TRUTH.txt` finally has the
+receiver the field guide has had all along — `design/tools/gt_export_server.py`,
+which writes the file from a POST instead of a person retyping thirteen kilobytes
+of Pudú, Kākāpō, ʻAlalā and Níðhöggr, and refuses a body that does not look like
+a whole roster.
+
+## Two fossil periods disagree with the design doc, and the data follows the animal
+
+**Elrathia was listed under the Ordovician.** Naming the generic "Trilobite" to
+*E. kingii* moved it, because that species is Middle **Cambrian**. The Ordovician
+is therefore left with Cameroceras alone — and the whole point of the fossil
+rebalance was filling empty periods, so this is a real gap. **Flagged for Ayr.**
+
+**Jaekelopterus was listed under the Silurian and is Early Devonian.**
+Pterygotid eurypterids span both; *J. rhenaniae* does not.
+
+**Pneumodesmus keeps the Silurian and says why that is argued about in its own
+entry** — its claim to be the oldest air-breathing animal rests on the age of
+the rock, and a 2017 redating disputes it. The dispute is the better fact.
+
+## Where this leaves everything
+
+```
+ROSTER          1000, closed
+DESCRIPTIONS    1000 of 1000          was 860 this morning
+OLD GAME        1183 species          Ayr's ruling: it may exceed 1000
+PIPELINE        empty. No new> line left in PENDING_MOVES.txt
+FIELD GUIDE     1183 entries
+LIBRARIAN       1168 untriaged claims, 453 of them superlative
+ART             79 species queued in ONE_BY_ONE.txt - unchanged
+BADGE CARDS     3 of 431 written
+```
+
+**The Librarian's queue grew by 170 claims today**, and that is the honest cost of
+this: every entry written is a claim somebody has to check, and the entries were
+written to reach for the distinctive fact rather than the safe one. A wrong
+superlative in a game about facts is the most damaging error available, and there
+are now four hundred and fifty-three of them waiting.
