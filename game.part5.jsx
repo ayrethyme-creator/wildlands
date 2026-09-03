@@ -1288,6 +1288,7 @@
           <button style={btnS("#b7950b")} onClick={() => saveGame(false)}>💾 Save</button>
           <button style={btnS("#8e44ad")} onClick={() => setS((p) => ({ ...p, menu: "types" }))}>⚖️ Types</button>
           <button style={btnS("#c9a227")} onClick={() => setS((p) => ({ ...p, menu: "achievements" }))}>🏆 Achievements</button>
+          <button style={btnS("#b5651d")} onClick={() => setS((p) => ({ ...p, menu: "badgebook", badgeSel: null }))}>🎖️ Badge Book</button>
           {S.items.compass > 0 && (
             <button style={btnS(S.compassOn ? "#2d8a6b" : "#7d735f")} onClick={() => setS((p) => ({ ...p, compassOn: !p.compassOn }))}>
               {S.compassOn ? "🧭 Compass: On" : "🧭 Compass: Off"}
@@ -2173,6 +2174,112 @@
                 })}
               </div>
             )}
+            {S.menu === "badgebook" && (() => {
+              /* The Badge Book. NOT the gym ladder - those are 🏅 and are earned
+                 by beating a leader. These are 🎖️ and are earned by noticing.
+
+                 GDD s12 decides the order this screen works in: "the concept
+                 arrives AFTER they have already noticed the pattern themselves,
+                 which is the only order that teaches." So a badge you hold
+                 nothing from gives you its name and nothing else - no concept
+                 line, no member list. Members appear as you befriend them, so
+                 the shape of the set shows up before anything explains it, and
+                 the explanation unlocks when the badge is earned. */
+              const TIER_COLOUR = { gold: "#e8c547", silver: "#c9d4de", bronze: "#c98a5c" };
+              const TIER_ICON = { gold: "🥇", silver: "🥈", bronze: "🥉" };
+              const dex = S.dex || {};
+              const sel = S.badgeSel != null ? BADGES_BOOK[S.badgeSel] : null;
+
+              if (sel) {
+                const tier = badgeTierOf(S, sel);
+                const held = badgeHeld(S, sel);
+                const goal = badgeGoal(sel);
+                const colour = tier ? TIER_COLOUR[tier] : "#8a7f68";
+                return (
+                  <div>
+                    <button style={{ ...btn("#7d735f"), marginBottom: 8 }}
+                      onClick={() => setS((p) => ({ ...p, badgeSel: null }))}>← Badge Book</button>
+                    <b style={{ color: colour }}>{tier ? TIER_ICON[tier] : "🔒"} {sel.n}</b>
+                    <div style={{ fontSize: 11, color: "#c9b88a", margin: "2px 0 6px" }}>
+                      {sel.c} · {held} of {sel.keys.length} befriended
+                      {sel.t ? ` · tiers at ${sel.t.join(" / ")}` : ""}
+                    </div>
+                    <div style={{ fontSize: 12, lineHeight: 1.5, background: "#241f19",
+                      border: "1px solid #3a342b", borderRadius: 8, padding: 8, marginBottom: 8 }}>
+                      {tier
+                        ? sel.concept
+                        : `What do these animals have in common? Befriend ${goal} of them and the answer unlocks.`}
+                    </div>
+                    {sel.keys.map(([k, name]) => {
+                      const got = dex[k] === 2;
+                      const seen = dex[k] >= 1;
+                      const card = tier && got ? badgeCardFor(sel.n, name) : null;
+                      return (
+                        <div key={k} style={{ padding: "6px 4px", borderBottom: "1px solid #3a342b", opacity: got ? 1 : 0.45 }}>
+                          <div style={{ fontWeight: 700, fontSize: 12, color: got ? "#f2e8d5" : "#8a7f68" }}>
+                            {got ? "🐾" : seen ? "👁️" : "❔"} {got || seen ? (DEX[k]?.n || name) : "???"}
+                          </div>
+                          {card ? (
+                            <div style={{ fontSize: 11, lineHeight: 1.5, color: "#c9b88a", marginTop: 3 }}>{card}</div>
+                          ) : null}
+                        </div>
+                      );
+                    })}
+                    {!tier ? (
+                      <div style={{ fontSize: 10, color: "#8a7f68", marginTop: 8 }}>
+                        Each animal here has its own reason for being in this set. They unlock with the badge.
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              }
+
+              const earned = BADGES_BOOK.filter((b) => badgeEarned(S, b)).length;
+              return (
+                <div>
+                  <b>🎖️ The Badge Book</b>
+                  <div style={{ fontSize: 11, color: "#c9b88a", marginBottom: 2 }}>
+                    {earned} of {BADGES_BOOK.length} earned
+                  </div>
+                  <div style={{ fontSize: 10, color: "#8a7f68", marginBottom: 8 }}>
+                    Not the gym badges. Each of these is a set of animals that share one idea —
+                    befriend the set and the game tells you what it is.
+                  </div>
+                  {BADGE_CATS.map((cat) => {
+                    const list = BADGES_BOOK.map((b, i) => [b, i]).filter(([b]) => b.c === cat);
+                    if (!list.length) return null;
+                    return (
+                      <div key={cat} style={{ marginBottom: 10 }}>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: "#c9a227", margin: "6px 0 4px", textTransform: "uppercase" }}>{cat}</div>
+                        {list.map(([b, i]) => {
+                          const tier = badgeTierOf(S, b);
+                          const held = badgeHeld(S, b);
+                          const colour = tier ? TIER_COLOUR[tier] : "#c9b88a";
+                          const pct = Math.min(100, Math.round((held / Math.max(1, b.keys.length)) * 100));
+                          return (
+                            <button key={b.n} onClick={() => setS((p) => ({ ...p, badgeSel: i }))}
+                              style={{ display: "block", width: "100%", textAlign: "left", background: "none",
+                                border: "none", borderBottom: "1px solid #3a342b", padding: "6px 4px",
+                                color: "inherit", font: "inherit", cursor: "pointer" }}>
+                              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                <div style={{ fontSize: 18, width: 24, textAlign: "center" }}>{tier ? TIER_ICON[tier] : "🔒"}</div>
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                  <div style={{ fontWeight: 700, fontSize: 12, color: colour }}>{b.n}</div>
+                                  <div style={{ height: 3, background: "#3a342b", borderRadius: 2, marginTop: 3 }}>
+                                    <div style={{ width: pct + "%", height: "100%", background: colour, borderRadius: 2 }} />
+                                  </div>
+                                </div>
+                                <div style={{ fontSize: 10, color: "#8a7f68", width: 40, textAlign: "right" }}>{held}/{b.keys.length}</div>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
             {S.menu === "quizhouse" && (
               <div>
                 <b>🔎 The Naturalist's Archive</b>
