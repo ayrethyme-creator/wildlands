@@ -2319,7 +2319,7 @@ the reason given is true.** That is the cost, and it is review time rather than 
 
 **Where the text lives: `design/BADGE_CARDS.txt`**, keyed `Badge :: Species :: text`. One
 line per membership. **Uncle Albert check 11** verifies every card points at a real
-membership, that none is written twice, and reports coverage — 3 of 430 today. The file
+membership, that none is written twice, and reports coverage — **431 of 431 as of 2026-09-03**. The file
 carries the writing brief at the top, because the card answers exactly one question:
 **why this species and not its cousin?** It is not a second field-guide entry.
 

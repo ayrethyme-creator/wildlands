@@ -41,7 +41,7 @@ record eighteen times, and each pass is listed in its own version note.
 | **`design/tools/uncle_albert.py`** | The validator, and the last word on every number. Ayr calls it *"run it by Uncle Albert"*. It checks **the roster and the badges** |
 | **`design/tools/the_librarian.py`** | **The fact check.** *"Run it by The Librarian."* It cannot tell whether a claim is true — it tracks **who checked what, against what source**, and fails when a checked sentence is edited underneath its check |
 | **`design/CLAIMS.txt`** | The claims register, and the **TRAP** list: the distinctions this project has already got wrong once |
-| **`design/BADGE_CARDS.txt`** | One card per badge membership. 430 to write, 3 written |
+| **`design/BADGE_CARDS.txt`** | One card per badge membership. **All 431 written, 2026-09-03.** Albert checks each names a real membership and that none is written twice |
 | **`design/FIELD_GUIDE.txt`** | **All 1183 field-guide entries with their IUCN status, read from the running game.** Do not hand-edit and do not regex-parse the `.jsx` to rebuild it — `design/tools/read_field_guide.js` |
 | **`GDD.md`** | **The design.** By system, current-only, everything marked decided / open / proposed. **Start here** |
 | **`NEW_DIRECTION.md`** | The design *record*, ~11,000 lines, append-only with dated headers. Every *why*, including the reversals |
@@ -329,7 +329,7 @@ of the design is safe to keep building. Do not confuse the two.
   generic name cannot carry a claim, which is why individual species had to be assigned.
   **All three follow-ups are settled:** the text lives in `design/BADGE_CARDS.txt`, the link
   runs **both ways**, and **pair badges name their partner** (*Same Answer Twice*, *The
-  Switch*, *The Island Rule*). Albert reports coverage — **3 of 430**. Full reasoning and
+  Switch*, *The Island Rule*). **Albert reports coverage of 431 of 431, done 2026-09-03.** Full reasoning and
   the worked examples are in GDD §12.
 - **The Librarian now reads the field guide, and the queue is the real one.** Exporting
   all 999 entries took it from 27 claims to **980**, of which **974 are untriaged and 358
