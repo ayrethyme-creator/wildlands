@@ -63,9 +63,20 @@ const personArtKey = (p) => {
   return "npc_" + bits.join("_");
 };
 
+// Anyone the game asks for and cannot find is reported once, by key. That is
+// the list of who still has to be drawn, and it comes from the running game
+// rather than from a scan of the source - which is the only way to be sure the
+// cast list matches the people actually standing on the maps.
+const PEOPLE_MISSING = {};
 const personArtUrl = (p) => {
   const k = personArtKey(p);
-  return k && PEOPLE_ART[k] ? 'url("art/' + k + '.png")' : null;
+  if (!k) return null;
+  if (PEOPLE_ART[k]) return 'url("art/' + k + '.png")';
+  if (!PEOPLE_MISSING[k]) {
+    PEOPLE_MISSING[k] = 1;
+    console.warn("[part78] no drawing for " + k);
+  }
+  return null;
 };
 
 console.log("[part78] people drawn: " + Object.keys(PEOPLE_ART).filter((k) => k.indexOf("npc_") === 0).length

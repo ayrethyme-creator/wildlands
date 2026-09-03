@@ -18,32 +18,80 @@
 
 const PEOPLE_ART = {
 "npc_climber_dark": 1,
+"npc_climber_dark_t3": 1,
+"npc_farmer_dark": 1,
+"npc_farmer_dark_t1": 1,
+"npc_farmer_dark_t1_long": 1,
+"npc_farmer_dark_t2": 1,
 "npc_farmer_dark_t2_long": 1,
+"npc_farmer_dark_t3": 1,
 "npc_farmer_dark_t4_long": 1,
 "npc_farmer_dark_t5": 1,
+"npc_farmer_dark_t5_long": 1,
 "npc_guard_dark": 1,
+"npc_night_dark": 1,
+"npc_night_dark_t1": 1,
+"npc_pilot_dark_t1": 1,
+"npc_pilot_dark_t2": 1,
+"npc_pilot_dark_t3": 1,
+"npc_plain_curly_t1": 1,
+"npc_plain_curly_t3": 1,
+"npc_plain_curly_t3_long": 1,
+"npc_plain_curly_t4_long": 1,
 "npc_plain_dark": 1,
+"npc_plain_dark_beard": 1,
+"npc_plain_dark_child": 1,
 "npc_plain_dark_long": 1,
+"npc_plain_dark_scarf": 1,
 "npc_plain_dark_t1": 1,
 "npc_plain_dark_t1_beard": 1,
+"npc_plain_dark_t1_long": 1,
+"npc_plain_dark_t2": 1,
 "npc_plain_dark_t2_beard": 1,
 "npc_plain_dark_t2_long": 1,
+"npc_plain_dark_t3": 1,
 "npc_plain_dark_t3_beard": 1,
+"npc_plain_dark_t3_child": 1,
 "npc_plain_dark_t3_long": 1,
 "npc_plain_dark_t3_scarf": 1,
+"npc_plain_dark_t4": 1,
+"npc_plain_dark_t4_beard": 1,
+"npc_plain_dark_t4_scarf": 1,
+"npc_plain_dark_t4_turban": 1,
 "npc_plain_dark_t5": 1,
 "npc_plain_dark_t5_long": 1,
+"npc_plain_dark_turban": 1,
 "npc_plain_grey_elder": 1,
 "npc_plain_grey_elder_beard": 1,
 "npc_plain_grey_elder_long": 1,
 "npc_plain_grey_t1_elder": 1,
+"npc_plain_grey_t1_elder_long": 1,
+"npc_plain_grey_t2_elder": 1,
+"npc_plain_grey_t2_elder_long": 1,
 "npc_plain_grey_t3_elder": 1,
 "npc_plain_grey_t5_elder": 1,
+"npc_plain_red_t1_beard": 1,
+"npc_plain_red_t1_long": 1,
+"npc_plain_red_t2": 1,
+"npc_plain_white_t1": 1,
+"npc_plain_white_t1_long": 1,
+"npc_plain_white_t2": 1,
+"npc_plain_white_t2_long": 1,
+"npc_plain_white_t3": 1,
+"npc_scientist_dark_t1": 1,
 "npc_scientist_dark_t1_long": 1,
+"npc_scientist_dark_t2": 1,
 "npc_scientist_dark_t2_long": 1,
+"npc_scientist_dark_t3": 1,
 "npc_scientist_dark_t3_long": 1,
+"npc_scientist_dark_t4": 1,
+"npc_teacher_dark_t1_long": 1,
+"npc_teacher_dark_t2": 1,
+"npc_teacher_dark_t2_long": 1,
+"npc_teacher_dark_t4": 1,
 "npc_teacher_dark_t5_long": 1,
 "npc_walker_dark": 1,
+"npc_walker_dark_t1": 1,
 "ranger_down": 1,
 "ranger_left": 1,
 "ranger_right": 1,
@@ -65,9 +113,20 @@ const personArtKey = (p) => {
   return "npc_" + bits.join("_");
 };
 
+// Anyone the game asks for and cannot find is reported once, by key. That is
+// the list of who still has to be drawn, and it comes from the running game
+// rather than from a scan of the source - which is the only way to be sure the
+// cast list matches the people actually standing on the maps.
+const PEOPLE_MISSING = {};
 const personArtUrl = (p) => {
   const k = personArtKey(p);
-  return k && PEOPLE_ART[k] ? 'url("art/' + k + '.png")' : null;
+  if (!k) return null;
+  if (PEOPLE_ART[k]) return 'url("art/' + k + '.png")';
+  if (!PEOPLE_MISSING[k]) {
+    PEOPLE_MISSING[k] = 1;
+    console.warn("[part78] no drawing for " + k);
+  }
+  return null;
 };
 
 console.log("[part78] people drawn: " + Object.keys(PEOPLE_ART).filter((k) => k.indexOf("npc_") === 0).length
