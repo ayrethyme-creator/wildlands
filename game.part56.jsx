@@ -176,8 +176,12 @@ const PERSON_TILE = (em, bg) => {
   const key = `${em}|${bg}`;
   if (key in NPC_CACHE) return NPC_CACHE[key];
   const p = readPerson(em);
-  NPC_CACHE[key] = p
-    ? `url("data:image/svg+xml,${encodeURIComponent(npcSvg(p, bg, em))}")`
+  // A drawn person is preferred where one exists. part78 is the manifest of who
+  // has been rendered so far; anyone not in it keeps the SVG below, so the cast
+  // can be finished in any order without the map ever being half-drawn.
+  const art = (typeof personArtUrl === "function") ? personArtUrl(p) : null;
+  NPC_CACHE[key] = art ? art
+    : p ? `url("data:image/svg+xml,${encodeURIComponent(npcSvg(p, bg, em))}")`
     : null;
   return NPC_CACHE[key];
 };
