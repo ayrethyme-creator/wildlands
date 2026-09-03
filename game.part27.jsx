@@ -15,7 +15,7 @@ note2("makoshark", "Carnivore — tuna, swordfish", "Open ocean, worldwide", "EN
 note2("baskingshark", "Filter feeder — zooplankton", "Cool coastal water, worldwide", "EN",
   "The second-largest fish on earth, and it eats animals the size of a grain of rice — it filters up to 2,000 tonnes of water an hour with its mouth held open. It has almost no teeth. Rotting carcasses of them washed ashore are the source of a long list of 'sea serpent' reports.");
 note2("bullshark", "Carnivore — fish, turtles, other sharks", "Coasts, and far up rivers", "VU",
-  "The only shark that lives comfortably in fresh water — it regulates its own salt balance and has been found 4,000km up the Amazon and in the Mississippi at Illinois. There are bull sharks in a golf course lake in Australia. That river tolerance is why it accounts for a disproportionate share of attacks on people.");
+  "The shark that goes furthest into fresh water and stays — the river sharks tolerate it too, but this one can live in it indefinitely, regulating its own salt balance, and has been found 4,000km up the Amazon and in the Mississippi at Illinois. There are bull sharks in a golf course lake in Australia. That river tolerance is why it accounts for a disproportionate share of attacks on people.");
 note2("wobbegong", "Carnivore — ambush predator on fish and octopus", "Reefs of Australia and Indonesia", "LC",
   "A carpet shark: it lies flat on the bottom, fringed with skin flaps that look exactly like weed, and waits — the camouflage is so complete that fish swim into its mouth. It can swallow prey nearly its own size. People step on them, which is the only way anyone gets bitten.");
 note2("epaulette", "Carnivore — worms, crabs", "Shallow reef flats of Australia and New Guinea", "LC",

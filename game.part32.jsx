@@ -213,7 +213,7 @@ n32("ribbonseal", "Carnivore — fish and squid", "The Arctic Pacific pack ice",
 n32("seiwhale", "Filter feeder — copepods", "Every ocean", "EN",
   "The third-largest whale and the fastest — over 50km/h. Unlike other rorquals it skims rather than lunges, cruising along with its mouth open. When the blue and fin whales had been hunted out, the whalers turned to this one: over 300,000 were killed in a few decades, mostly in the 1960s and 70s.");
 n32("brydeswhale", "Filter feeder — fish and krill", "Warm oceans worldwide", "LC",
-  "The only baleen whale that lives in warm water year-round and does not migrate. It has three ridges on top of its head instead of one, which is how you tell it from a sei. A population in the Gulf of Mexico numbers about 50 animals and is one of the most endangered whales on earth.");
+  "One of only two baleen whales that stay in warm water all year - the other is Omura's whale - and some Bryde's populations do make short seasonal moves, so even that is not absolute. It has three ridges on top of its head instead of one, which is how you tell it from a sei. A population in the Gulf of Mexico numbers about 50 animals and is one of the most endangered whales on earth.");
 n32("melonhead", "Carnivore — squid and fish", "Deep tropical waters", "LC",
   "It is a dolphin, and it moves in tight pods of several hundred to over a thousand — one of the most social cetaceans. Mass strandings are common and poorly understood. It is one of very few whales that regularly associates with Fraser's dolphins, and the two species travel together.");
 n32("duskydolphin", "Carnivore — anchovies and squid", "Cool coastal waters of the southern hemisphere", "LC",

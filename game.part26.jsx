@@ -171,7 +171,7 @@ note("turtle", "Omnivore — plants, insects, carrion", "Ponds, rivers and marsh
 
 // ===== everything else =====
 note("beaver", "Herbivore — bark, cambium, aquatic plants", "Rivers and wetlands of North America and Eurasia", "LC",
-  "It is the only animal besides us that reshapes a landscape at scale: its dams create wetlands that store water, filter pollutants, and slow floods. Its teeth are orange because they are laced with iron, and they never stop growing. Beaver ponds are now deliberately built by people trying to undo what removing beavers did.");
+  "It is the only animal besides us that dams running water, and the dams do the rest: they create wetlands that store water, filter pollutants and slow floods. Its teeth are orange because they are laced with iron, and they never stop growing. Beaver ponds are now deliberately built by people trying to undo what removing beavers did.");
 note("aardvark", "Insectivore — ants and termites", "Africa south of the Sahara", "LC",
   "Its name is Afrikaans for 'earth pig' and it is related to neither pigs nor anteaters — its closest living relatives are elephants and manatees. It can dig itself out of sight in about five minutes, faster than most people can dig with a shovel. Its abandoned burrows house a long list of other animals.");
 note("hedgehog", "Insectivore — beetles, worms, slugs", "Europe, Asia and Africa", "LC",
@@ -231,7 +231,7 @@ note("wombat", "Herbivore — grasses and roots", "Forest and scrub of southern 
 note("opossum", "Omnivore — insects, carrion, fruit, ticks", "North and Central America", "LC",
   "North America's only marsupial. 'Playing possum' is not an act — it is an involuntary shock response it cannot control or come out of at will, sometimes for hours. It has a body temperature too low for rabies to establish, and partial immunity to snake venom.");
 note("bandicoot", "Omnivore — insects, tubers, fungi", "Australia and New Guinea", "LC",
-  "It has the shortest pregnancy of any mammal on earth — about 12 days — and the only placenta of any marsupial worth the name. It digs constant small conical pits foraging, and a single bandicoot turns over several tonnes of soil a year, which is why the plants do better where they are.");
+  "It has one of the shortest pregnancies of any mammal — about 12 days, a record it shares with the opossums — and it grows a proper chorioallantoic placenta, which almost no other marsupial does. It digs constant small conical pits foraging, and a single bandicoot turns over several tonnes of soil a year, which is why the plants do better where they are.");
 note("hyena", "Carnivore — hunts most of what it eats", "Savanna and scrub of Africa", "LC",
   "It is not primarily a scavenger — spotted hyenas kill the large majority of their food, and lions steal from them more often than the reverse. Clans of up to 80 are matriarchal, and the lowest-ranking female outranks the highest male. Their social intelligence tests out on par with some primates.");
 note("badger", "Omnivore — snakes, honey, larvae, roots", "Africa, the Middle East and India", "LC",
