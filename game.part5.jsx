@@ -2253,10 +2253,15 @@
                           const colour = tier ? TIER_COLOUR[tier] : "#c9b88a";
                           const pct = Math.min(100, Math.round((held / Math.max(1, b.keys.length)) * 100));
                           return (
-                            <button key={b.n} onClick={() => setS((p) => ({ ...p, badgeSel: i }))}
-                              style={{ display: "block", width: "100%", textAlign: "left", background: "none",
-                                border: "none", borderBottom: "1px solid #3a342b", padding: "6px 4px",
-                                color: "inherit", font: "inherit", cursor: "pointer" }}>
+                            /* A DIV, not a button, and that is not a style choice.
+                               index.html sets `button { touch-action: none }`, so a
+                               finger drag that starts on a button is not treated as a
+                               scroll - and a list made entirely of buttons cannot be
+                               scrolled at all on a touch screen. Ayr hit exactly that:
+                               only the first two categories were reachable. The Guide
+                               uses div+onClick for its long list for the same reason. */
+                            <div key={b.n} onClick={() => setS((p) => ({ ...p, badgeSel: i }))}
+                              style={{ borderBottom: "1px solid #3a342b", padding: "6px 4px", cursor: "pointer" }}>
                               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                                 <div style={{ fontSize: 18, width: 24, textAlign: "center" }}>{tier ? TIER_ICON[tier] : "🔒"}</div>
                                 <div style={{ flex: 1, minWidth: 0 }}>
@@ -2267,7 +2272,7 @@
                                 </div>
                                 <div style={{ fontSize: 10, color: "#8a7f68", width: 40, textAlign: "right" }}>{held}/{b.keys.length}</div>
                               </div>
-                            </button>
+                            </div>
                           );
                         })}
                       </div>
