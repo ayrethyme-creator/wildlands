@@ -82,12 +82,28 @@
       }
       .wl-sway { animation: wlSway 4.5s ease-in-out infinite; }
 
-      /* People: standing still is not standing frozen. */
-      @keyframes wlIdle {
+      /* People: standing still is not standing frozen.
+         The 1.2px breathe was tuned for the old vector figures and disappeared
+         completely under the drawn ones - a 256px painting nudged by one pixel
+         reads as nothing at all. So the movement is bigger, and there are THREE
+         of them at different speeds, picked per tile, because a street where
+         everybody breathes in time is worse than a street standing still. */
+      @keyframes wlIdleA {
         0%, 100% { background-position: 0 0; }
-        50%      { background-position: 0 -1.2px; }
+        50%      { background-position: 0 -3px; }
       }
-      .wl-idle { animation: wlIdle 2.6s ease-in-out infinite; }
+      @keyframes wlIdleB {
+        0%, 100% { background-position: 0 -1px; }
+        45%      { background-position: .6px -3.5px; }
+      }
+      @keyframes wlIdleC {
+        0%, 100% { background-position: 0 0; }
+        30%      { background-position: -.6px -2px; }
+        70%      { background-position: .4px -3.2px; }
+      }
+      .wl-idle   { animation: wlIdleA 2.6s ease-in-out infinite; }
+      .wl-idle-b { animation: wlIdleB 3.4s ease-in-out infinite; }
+      .wl-idle-c { animation: wlIdleC 4.1s ease-in-out infinite; }
 
       /* Anything with a flame in it. */
       @keyframes wlFlicker {
@@ -984,7 +1000,10 @@
               const jitter = ((x * 7 + y * 13) % 20) / 10;
               if (ch2 === "W") { motion = "wl-water"; delay = ((x * 3 + y * 5) % 40) / 10; }
               else if (grassBgImg) { motion = "wl-sway"; delay = jitter; }
-              else if (personBgImg) { motion = "wl-idle"; delay = jitter * 0.6; }
+              else if (personBgImg) {
+                motion = ["wl-idle", "wl-idle-b", "wl-idle-c"][(x * 5 + y * 11) % 3];
+                delay = jitter * 0.6;
+              }
               else if (propBgImg && FLICKER_TILES.has(ch2)) { motion = "wl-flicker"; delay = jitter; }
             }
             // Water is two layers: the shimmer band that slides, over a drawn

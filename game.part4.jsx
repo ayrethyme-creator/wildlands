@@ -683,10 +683,20 @@ function Wildlands() {
     return () => window.removeEventListener("pointerdown", h);
   }, []);
   useEffect(() => {
-    if (!S.soundReady || !S.sound) { stopBGM(); return; }
+    if (!S.soundReady || !S.sound) { stopBGM(); if (typeof stopAmbience === "function") stopAmbience(); return; }
     if (S.battle) playBGM(S.battle.kind === "legend" ? "legend" : S.battle.elite ? "elite" : "battle");
     else if (S.screen === "world") playBGM(MAPS[S.map].music || "route");
     else stopBGM();
+    // The bed under the music. It follows the MAP rather than the battle, so
+    // walking into an encounter does not drop the wind out from under it - the
+    // place you are standing in has not changed. Indoors and in the dark it
+    // stops, because a cave is not a windy hillside.
+    if (typeof playAmbience === "function") {
+      const m = MAPS[S.map];
+      const ph = (typeof dayPhase === "function") ? dayPhase() : "day";
+      if (S.screen === "world" && m && !m.dark) playAmbience(m.zone, ph);
+      else stopAmbience();
+    }
   }, [!!S.battle, S.battle?.kind, S.battle?.elite, S.screen, S.map, S.sound, S.soundReady]);
 
   // ----- pending move-learn prompts -----
@@ -1165,6 +1175,16 @@ function Wildlands() {
     else if (cfg.kind === "legend") { intro = `⚡ The ${DEX[enemy.sp].n} descends! The air itself trembles!`; }
     else intro = `A ${DEX[enemy.sp].n} breaks cover — Lv ${enemy.lvl}. Hold still.`;
     if (cfg.kind === "legend") SFX.legend(); else SFX.encounter();
+    // ...and then the animal itself, a beat later so the two do not stack into
+    // one noise. One generic beep for a bumblebee bat and a blue whale alike is
+    // what this replaces.
+    // `enemy`, not cfg.enemy - a trainer battle passes enemy:null and takes the
+    // first of their team, so keying off cfg would silence every trainer's
+    // animal and only the wild ones would have a voice.
+    if (typeof animalVoice === "function" && enemy && enemy.sp) {
+      const vsp = enemy.sp;
+      setTimeout(() => animalVoice(vsp), 260);
+    }
     setS((p) => ({
       ...p, dialog: null, menu: null,
       dex: { ...p.dex, [enemy.sp]: Math.max(p.dex[enemy.sp] || 0, 1) },

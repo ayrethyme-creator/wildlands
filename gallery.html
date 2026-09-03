@@ -103,8 +103,14 @@ var DATA_PARTS = [
    disagree with the design doc. */
 var CLASSIFIER = ["design/biomes.js", "design/biome_assign.js"];
 
+/* part79 is not data, but its voice table decides which animal makes which
+   sound, and that has to be checkable against the real roster rather than
+   against the source. It only touches tone() and SOUND_ON inside function
+   bodies, so it is safe to evaluate here with no audio running. */
+var VOICES = ["game.part79.jsx"];
+
 var statusEl = document.getElementById("status");
-var ALL_FILES = DATA_PARTS.concat(CLASSIFIER);
+var ALL_FILES = DATA_PARTS.concat(VOICES).concat(CLASSIFIER);
 var texts = new Array(ALL_FILES.length), done = 0;
 
 ALL_FILES.forEach(function (name, i) {
@@ -131,7 +137,13 @@ function start() {
     var EXPORTS = ";window.__DEX = (typeof DEX !== 'undefined') ? DEX : null;"
                 + ";window.__INFO = (typeof INFO !== 'undefined') ? INFO : {};"
                 + ";window.__RULES = BIOME_RULES;window.__HAND = BIOME_BY_HAND;"
-                + ";window.__MERGE = BIOME_MERGE;window.__NA = NOT_A_SPECIES;";
+                + ";window.__MERGE = BIOME_MERGE;window.__NA = NOT_A_SPECIES;"
+                /* part79's voice table, so which animal makes which sound can be
+                   checked against the real roster the same way everything else
+                   is - from the running game, not from the source. Guarded, so
+                   this page still works on a branch without part79. */
+                + ";window.__VOICE = (typeof VOICE !== 'undefined') ? VOICE : null;"
+                + ";window.__VOICE_FOR = (typeof voiceFor !== 'undefined') ? voiceFor : null;";
     var code = texts.join(String.fromCharCode(10)) + String.fromCharCode(10) + EXPORTS;
     var out = Babel.transform(code, { presets: [["react", { runtime: "classic" }]] }).code;
     (0, eval)(out);
