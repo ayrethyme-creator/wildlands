@@ -16,7 +16,7 @@ dnote("blackcat", "Carnivore — obligate", "Domestic worldwide",
 
 // ===== dogs =====
 dnote("puppy", "Omnivore — dogs digest starch, unlike wolves", "Domestic worldwide, from the grey wolf",
-  "A puppy is born deaf and blind and does almost nothing for two weeks, then goes through a socialisation window between about 3 and 12 weeks where it learns what is safe for the rest of its life — miss it and the fear never fully lifts. Dogs are the only animal that reads human pointing and eye direction from birth, which not even wolves raised by people do reliably. That is the thing we actually bred: an animal that watches our face.");
+  "A puppy is born deaf and blind and does almost nothing for two weeks, then goes through a socialisation window between about 3 and 12 weeks where it learns what is safe for the rest of its life — miss it and the fear never fully lifts. Puppies read human pointing and eye direction without being taught, which not even wolves raised by people do reliably — horses, goats, cats and pigs can follow a point too, but they are not born doing it. That is the thing we actually bred: an animal that watches our face.");
 
 // ===== small pets =====
 dnote("hamster", "Omnivore — seeds, grains, insects", "Domestic worldwide, from the Syrian wild hamster",
