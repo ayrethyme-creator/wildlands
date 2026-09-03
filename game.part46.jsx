@@ -105,6 +105,28 @@ const Avatar = ({ dir, swimming, size }) => {
     : dir === "up" ? avUp(er)
     : (dir === "left" || dir === "right") ? avSide(er)
     : avDown(er);
+  // The drawn ranger, once all five facings exist. All-or-nothing on purpose:
+  // a rendered front view next to a vector side view would change who she is as
+  // she turns. part78 carries the flag and the files.
+  //
+  // No scaleX(-1) here - left and right are two separate drawings, so mirroring
+  // one of them would flip the second and put her binoculars on the wrong side.
+  // Swimming is the front drawing clipped at the chest by the wrapper, which is
+  // what puts her IN the water rather than standing on it.
+  if (typeof RANGER_ART_READY !== "undefined" && RANGER_ART_READY) {
+    const file = swimming ? "ranger_swim"
+      : dir === "up" ? "ranger_up"
+      : dir === "left" ? "ranger_left"
+      : dir === "right" ? "ranger_right"
+      : "ranger_down";
+    return (
+      <div style={{ width: size, height: swimming ? size * 0.62 : size,
+        overflow: "hidden", display: "block" }}>
+        <img src={`art/${file}.png`} width={size} height={size} alt=""
+          style={{ display: "block", objectFit: "contain" }} />
+      </div>
+    );
+  }
   return (
     // width only, with the height following the viewBox, so the sprite scales
     // with the tile instead of being squashed into a square.
