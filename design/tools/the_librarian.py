@@ -69,9 +69,28 @@ SUPERLATIVE = (r'\b(only|first|last|largest|biggest|smallest|fastest|slowest|dee
                r'every|nothing else|no other)\b')
 # Spelled-out magnitudes are claims too, and some of the strongest ones are:
 # "over a hundred million years ago" contains no digit at all.
+#
+# AND SO ARE THE SMALL ONES. Added 2026-09-03, and it found 294 claims the tool
+# had never been able to see. The gap was specific and bad: the big words were
+# here and two through twenty were not, so "one of three Phyllobates frogs, out
+# of about 170 poison dart frogs" was invisible up to the 170.
+#
+# That is the worst possible thing for this project to miss, because THE HOUSE
+# STYLE MANUFACTURES COUNTED CLAIMS. Ayr's rule of 2026-08-27 is that every
+# field-guide entry states how many relatives the animal has, so the roster is
+# full of sentences whose whole content is a small number - "one of two living
+# Cystophora", "one of four lynx", "the only two living species in
+# Monodontidae". A count is exactly the kind of assertion that goes stale when a
+# genus is revised, and it was the kind the fact check could not read.
+#
+# Found by writing a badge card that said "one of five toothed whales with
+# menopause" and noticing it had vanished out of the queue rather than into it.
 NUMBER = (r'\b\d[\d,]*\s*(?:%|kg|g\b|cm|mm|m\b|km|metres|meters|years|species|'
           r'million|billion)|\b\d+%'
-          r'|\b(?:hundred|thousand|million|billion)\b')
+          r'|\b(?:hundred|thousand|million|billion)\b'
+          r'|\b(?:two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|'
+          r'thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|'
+          r'twenty|dozen)\b')
 YEAR = r'\b(?:1[6-9]\d\d|20\d\d)\b'
 CLAIM = re.compile('|'.join([SUPERLATIVE, NUMBER, YEAR]), re.I)
 
