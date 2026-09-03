@@ -115,7 +115,7 @@ note("sugarglider", "Omnivore — sap, nectar, insects", "Forests of Australia a
 note("okapi", "Folivore — leaves, buds, clay for minerals", "Ituri rainforest of the Congo", "EN",
   "The giraffe's only living relative, and Europeans did not know it existed until 1901 — the Congolese always had. Its tongue is long enough to wash its own eyes and ears. The stripes break its outline in dappled forest light, and a calf can go weeks without defecating, which hides it from predators.");
 note("reindeer", "Herbivore — lichen in winter, almost entirely", "Tundra and boreal forest of the far north", "VU",
-  "The only deer where both sexes grow antlers, and the only mammal known to see ultraviolet — which turns lichen and wolf fur dark against snow that blazes white. Some herds migrate over 5,000km a year, further than any other land mammal. Their eyes physically change colour between summer and winter.");
+  "The only deer where both sexes grow antlers, and one of the few mammals whose eyes let ultraviolet through — which turns lichen and wolf fur dark against snow that blazes white. Some herds migrate over 5,000km a year, further than any other land mammal. Their eyes physically change colour between summer and winter.");
 note("muskox", "Herbivore — grasses, willow, lichen", "Arctic tundra", "LC",
   "It survived the ice age that took the mammoth. Its underwool, qiviut, is eight times warmer than sheep's wool and finer than cashmere. When wolves come, the herd forms a ring facing outward with the calves inside — which worked perfectly until people arrived with rifles.");
 note("moose", "Herbivore — willow, aquatic plants", "Boreal forest of the north", "LC",
