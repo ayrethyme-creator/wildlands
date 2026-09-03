@@ -18,7 +18,7 @@ function Wildlands() {
     dialog: null, menu: null, battle: null, pick: null,
     sound: true, soundReady: false, run: true,
     slot: null, quiz: {}, dir: "down", arcs: {},
-    compassOn: false, achv: {}, achvQueue: [], quizWins: { notes: 0, trials: 0, masters: 0 }, quizPerfect: {}, critQuiz: null,
+    compassOn: false, achv: {}, achvQueue: [], book: {}, bookQueue: [], quizWins: { notes: 0, trials: 0, masters: 0 }, quizPerfect: {}, critQuiz: null,
     // This save's own ecology. Dealt once, kept forever, so a world is
     // consistent with itself across sessions and two saves are not the same
     // game. `pressure` is how hard each patch has been worked lately.
@@ -96,7 +96,7 @@ function Wildlands() {
         legends: st.legends, dex: st.dex, objects: st.objects, visited: st.visited,
         trainersBeaten: st.trainersBeaten, rival: st.rival, sound: st.sound, run: st.run,
         quiz: st.quiz, arcs: st.arcs,
-        compassOn: st.compassOn, achv: st.achv, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
+        compassOn: st.compassOn, achv: st.achv, book: st.book, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
       setSaves((prev) => ({ ...prev, [n]: payload }));
@@ -247,7 +247,7 @@ function Wildlands() {
       slot: n,
       quiz: p.quiz || {},
       arcs: p.arcs || {},
-      compassOn: !!p.compassOn, achv: p.achv || {}, achvQueue: [],
+      compassOn: !!p.compassOn, achv: p.achv || {}, achvQueue: [], book: p.book || {}, bookQueue: [],
       quizWins: { notes: 0, trials: 0, masters: 0, ...(p.quizWins || {}) },
       quizPerfect: p.quizPerfect || {}, critQuiz: null,
     }));
@@ -505,6 +505,52 @@ function Wildlands() {
     setS((p) => ({ ...p, achvQueue: p.achvQueue.slice(1),
       dialog: { text: `🏆 Achievement unlocked: ${a ? a.name : id}!${a ? "\n" + a.desc : ""}` } }));
   }, [S.achvQueue, S.dialog, S.menu, S.battle, S.exam, S.critQuiz, S.screen]);
+
+
+  // ----- the Badge Book -----
+  // Awarded the same way achievements are, and deliberately NOT quietly: GDD s12
+  // says the concept is the payload and that it has to arrive after the player
+  // has already noticed the pattern. Earning the badge IS that moment, so the
+  // announcement carries the concept line with it. A badge that only appeared in
+  // a menu would be a menu, which is the thing the design says not to build.
+  //
+  // Keyed by badge AND tier, so a tiered badge announces itself three times as
+  // it climbs rather than once and then going silent.
+  useEffect(() => {
+    if (SR.current.screen !== "world") return;
+    const st = SR.current;
+    const had = st.book || {};
+    const queued = new Set(st.bookQueue || []);
+    const newly = [];
+    BADGES_BOOK.forEach((b) => {
+      const tier = badgeTierOf(st, b);
+      if (!tier) return;
+      const id = b.n + "|" + tier;
+      if (!had[id] && !queued.has(id)) newly.push(id);
+    });
+    if (!newly.length) return;
+    setS((p) => {
+      const book = { ...(p.book || {}) };
+      newly.forEach((id) => { book[id] = true; });
+      return { ...p, book, bookQueue: [...(p.bookQueue || []), ...newly] };
+    });
+  }, [S.dex, S.screen]);
+
+  useEffect(() => {
+    const st = SR.current;
+    if (st.screen !== "world" || st.dialog || st.menu || st.battle || st.exam || st.critQuiz) return;
+    if (!st.bookQueue || !st.bookQueue.length) return;
+    const id = st.bookQueue[0];
+    const [name, tier] = id.split("|");
+    const b = BADGES_BOOK.find((x) => x.n === name);
+    const icon = tier === "gold" ? "🥇" : tier === "silver" ? "🥈" : "🥉";
+    const rung = b && b.t ? ` (${tier})` : "";
+    SFX.badge?.();
+    setS((p) => ({ ...p, bookQueue: p.bookQueue.slice(1),
+      dialog: { text: `🎖️ Badge earned: ${name}${rung} ${icon}`
+        + (b ? `\n\n${b.concept}` : "")
+        + `\n\nOpen the Badge Book to read why each animal is in it.` } }));
+  }, [S.bookQueue, S.dialog, S.menu, S.battle, S.exam, S.critQuiz, S.screen]);
 
   // ----- retroactive Champion's Compass -----
   // Saves that beat the Champion before the Compass existed had that grant
