@@ -59,11 +59,27 @@ if (typeof WALK_EXTRA === "undefined") { globalThis.WALK_EXTRA = "¦¡"; }
 // diseased rather than dark. Night does not rotate hue: it drops brightness,
 // drains saturation, and leans what is left slightly toward blue. Doing that
 // honestly keeps greens green while still reading as moonlight.
-const NIGHT_FILTER = "brightness(.58) saturate(.42) hue-rotate(-8deg) contrast(1.06)";
-const DUSK_FILTER = "brightness(.78) saturate(.72) hue-rotate(-5deg)";
+// 2026-09-03, Ayr: "the game needs more color and light."
+//
+// Night was doing the honest thing and overdoing it. saturate(.42) is more
+// drain than moonlight actually causes, and the result was a world that went
+// grey after seven o'clock - all the colour work in the tiles simply switched
+// off for half of every real day. Brightness is up a little and saturation a
+// lot; it still reads as night because the brightness drop and the blue lean
+// are what say night, not the absence of colour.
+//
+// Dusk and dawn get to be gold. They were treated as weak daylight and they
+// are the best-looking twenty minutes in the game, so they now warm rather
+// than merely dim.
+const NIGHT_FILTER = "brightness(.66) saturate(.78) hue-rotate(-10deg) contrast(1.08)";
+const DUSK_FILTER = "brightness(.9) saturate(1.15) sepia(.12) hue-rotate(-12deg)";
+// And daylight was raw. A touch more saturation and contrast is the difference
+// between a palette and a screenshot of one.
+const DAY_FILTER = "saturate(1.12) contrast(1.04)";
 // expose for the renderer
 globalThis.NIGHT_FILTER = NIGHT_FILTER;
 globalThis.DUSK_FILTER = DUSK_FILTER;
+globalThis.DAY_FILTER = DAY_FILTER;
 
 // finer clock: real dawn/dusk bands, not just a hard 6/19 flip
 globalThis.dayPhase = () => {

@@ -27,102 +27,112 @@
 // every zone now has something after dark - the test being that no screen in
 // the game is dead air at night.
 const AMBIENT = {
-  // "meadow" was never a zone. No map has ever used that name, so these nine
-  // fireflies - the example this whole part opens with - have never once been
-  // drawn. The picture was right and the key was wrong: long grass after dark
-  // is Long Grass Savanna, which until now had nothing in its air at all.
-  savannaz: [{ kind: "fly",   when: "night", n: 12, c: "#ffe9a3" },
-             { kind: "dust",  when: "day",   n: 5,  c: "#e4d8b4" }],
-  savanna:  [{ kind: "fly",   when: "night", n: 10, c: "#ffe1a0" },
-             { kind: "dust",  when: "day",   n: 6,  c: "#e8d9b8" }],
-  wetland:  [{ kind: "fly",   when: "night", n: 14, c: "#d8f0a8" },
-             { kind: "glint", when: "day",   n: 6,  c: "#eaf8ff" }],
-  jungle:   [{ kind: "fly",   when: "night", n: 11, c: "#bff0c0" },
-             { kind: "leaf",  when: "day",   n: 5,  c: "#5e8a58" }],
-  // The four zones Ayr means by "the later towns" - Gloam, Frost, Cinder and
-  // the Citadel. These are the places whose weather is the reason to stand
-  // still and look at them, so they carry the most.
-  grove:    [{ kind: "fly",   when: "night", n: 16, c: "#c8f0a0" },
-             { kind: "leaf",  when: "day",   n: 10, c: "#b8794a" }],
-  alpine:   [{ kind: "snow",  when: "any",   n: 18, c: "#ffffff" }],
-  summit:   [{ kind: "snow",  when: "any",   n: 15, c: "#eef4fa" }],
-  volcanic: [{ kind: "ember", when: "any",   n: 14, c: "#ffb055" }],
+  // 2026-09-03, Ayr: "add more floating sparkles and leaves and shiny things
+  // that float in every biome. the game needs more color and light."
+  //
+  // So the counts go up again and two new kinds arrive. `spark` is the shiny
+  // floating thing - it rises slowly and twinkles, and unlike a glint it
+  // TRAVELS, so it reads as something in the air rather than sun on a surface.
+  // `petal` is a leaf that is not brown: slower, smaller, and in whatever
+  // colour that place should be.
+  //
+  // The old ceiling was eighteen and the note above says twenty reads as a
+  // screensaver. That was written when a zone had ONE kind in the air; the
+  // answer now is more layers rather than more of any one thing, so no single
+  // spec goes far past twenty while a busy screen carries three of them.
+  //
+  // THE VIGIL IS STILL EXEMPT AND MUST STAY THAT WAY. It is a memorial to
+  // animals that are gone. It does not sparkle.
+  savannaz: [{ kind: "fly",   when: "night", n: 16, c: "#ffe9a3" },
+             { kind: "dust",  when: "day",   n: 7,  c: "#e4d8b4" },
+             { kind: "spark", when: "day",   n: 9,  c: "#ffd98a" },
+             { kind: "petal", when: "day",   n: 6,  c: "#e8c06a" }],
+  savanna:  [{ kind: "fly",   when: "night", n: 14, c: "#ffe1a0" },
+             { kind: "dust",  when: "day",   n: 7,  c: "#e8d9b8" },
+             { kind: "spark", when: "any",   n: 8,  c: "#ffd27a" },
+             { kind: "petal", when: "day",   n: 6,  c: "#f0c878" }],
+  wetland:  [{ kind: "fly",   when: "night", n: 18, c: "#d8f0a8" },
+             { kind: "glint", when: "day",   n: 8,  c: "#eaf8ff" },
+             { kind: "spark", when: "any",   n: 9,  c: "#9fe8ff" },
+             { kind: "petal", when: "day",   n: 6,  c: "#a8dc7a" }],
+  jungle:   [{ kind: "fly",   when: "night", n: 15, c: "#bff0c0" },
+             { kind: "leaf",  when: "day",   n: 8,  c: "#5e8a58" },
+             { kind: "spark", when: "any",   n: 9,  c: "#8affc8" },
+             { kind: "petal", when: "day",   n: 8,  c: "#ff7fb0" }],
+  grove:    [{ kind: "fly",   when: "night", n: 20, c: "#c8f0a0" },
+             { kind: "leaf",  when: "day",   n: 14, c: "#b8794a" },
+             { kind: "spark", when: "any",   n: 10, c: "#ffcf7a" },
+             { kind: "petal", when: "day",   n: 8,  c: "#e8a05c" }],
+  alpine:   [{ kind: "snow",  when: "any",   n: 20, c: "#ffffff" },
+             { kind: "spark", when: "any",   n: 10, c: "#cfe8ff" }],
+  summit:   [{ kind: "snow",  when: "any",   n: 18, c: "#eef4fa" },
+             { kind: "spark", when: "any",   n: 9,  c: "#dcefff" }],
+  volcanic: [{ kind: "ember", when: "any",   n: 18, c: "#ffb055" },
+             { kind: "spark", when: "any",   n: 9,  c: "#ffd08a" }],
 
-  // Dry country was blowing dust all day and then going completely dead at
-  // dark - Dune Town and Crag Town had nothing in the air at night at all.
-  // Desert nights are not empty; they are when almost everything out there
-  // actually moves.
-  desert:   [{ kind: "dust",  when: "day",   n: 8,  c: "#e8d0a3" },
-             { kind: "fly",   when: "night", n: 9,  c: "#ffdca0" }],
-  highveld: [{ kind: "dust",  when: "day",   n: 6,  c: "#d9cbb0" },
-             { kind: "fly",   when: "night", n: 10, c: "#ffe6b0" }],
-  // Water catches the light. The shimmer band already travelling across a lake
-  // says the surface is moving; a glint says the sun is on it. Daylight only -
-  // a sparkle at midnight is a torch, not a reflection - and slow, because a
-  // fast twinkle reads as a broken pixel.
-  // Sun on the water by day, and the water lighting itself at night. Phosphor-
-  // escence is real, it is the same wandering breathing behaviour as a firefly,
-  // and it means the reef and the ice stop going dead the moment the sun does.
-  kelpz:    [{ kind: "glint", when: "day",   n: 7,  c: "#eaffff" },
-             { kind: "fly",   when: "night", n: 8,  c: "#8ce8d8" }],
-  reefz:    [{ kind: "glint", when: "day",   n: 8,  c: "#f2ffff" },
-             { kind: "fly",   when: "night", n: 9,  c: "#8ce0f0" }],
-  oceanz:   [{ kind: "glint", when: "day",   n: 6,  c: "#e8f8ff" },
-             { kind: "fly",   when: "night", n: 7,  c: "#88d4f4" }],
-  polarz:   [{ kind: "glint", when: "day",   n: 5,  c: "#f4ffff" },
-             { kind: "fly",   when: "night", n: 6,  c: "#a8e4ff" }],
+  desert:   [{ kind: "dust",  when: "day",   n: 10, c: "#e8d0a3" },
+             { kind: "fly",   when: "night", n: 12, c: "#ffdca0" },
+             { kind: "spark", when: "any",   n: 8,  c: "#ffe0a8" }],
+  highveld: [{ kind: "dust",  when: "day",   n: 8,  c: "#d9cbb0" },
+             { kind: "fly",   when: "night", n: 13, c: "#ffe6b0" },
+             { kind: "spark", when: "any",   n: 8,  c: "#ffdca0" },
+             { kind: "petal", when: "day",   n: 5,  c: "#d9a0c8" }],
+  kelpz:    [{ kind: "glint", when: "day",   n: 9,  c: "#eaffff" },
+             { kind: "fly",   when: "night", n: 11, c: "#8ce8d8" },
+             { kind: "spark", when: "any",   n: 9,  c: "#7fffe0" }],
+  reefz:    [{ kind: "glint", when: "day",   n: 10, c: "#f2ffff" },
+             { kind: "fly",   when: "night", n: 12, c: "#8ce0f0" },
+             { kind: "spark", when: "any",   n: 12, c: "#ff9ad4" },
+             { kind: "petal", when: "day",   n: 7,  c: "#ffc46a" }],
+  oceanz:   [{ kind: "glint", when: "day",   n: 8,  c: "#e8f8ff" },
+             { kind: "fly",   when: "night", n: 10, c: "#88d4f4" },
+             { kind: "spark", when: "any",   n: 9,  c: "#9fe0ff" }],
+  polarz:   [{ kind: "glint", when: "day",   n: 7,  c: "#f4ffff" },
+             { kind: "fly",   when: "night", n: 9,  c: "#a8e4ff" },
+             { kind: "snow",  when: "any",   n: 12, c: "#ffffff" },
+             { kind: "spark", when: "any",   n: 9,  c: "#c8f0ff" }],
 
-  // The wider regions had nothing in their air at all - every map added after
-  // the original eight biomes was silent. Same rules as above: one kind per
-  // zone unless the place genuinely changes character after dark, and counts
-  // low enough that you notice the air rather than the specks.
-  canopyz:  [{ kind: "leaf",  when: "day",   n: 6,  c: "#4c7a3c" },
-             { kind: "fly",   when: "night", n: 11, c: "#c0f0b8" }],
-  outbackz: [{ kind: "dust",  when: "day",   n: 8,  c: "#d9a06c" },
-             { kind: "fly",   when: "night", n: 9,  c: "#ffd9a0" }],
-  tundraz:  [{ kind: "snow",  when: "any",   n: 10, c: "#f4fafe" }],
-  taigaz:   [{ kind: "snow",  when: "any",   n: 8,  c: "#e8f0f6" }],
-  fossil:   [{ kind: "dust",  when: "day",   n: 6,  c: "#ded0b0" },
-             { kind: "fly",   when: "night", n: 8,  c: "#ffe0ac" }],
+  canopyz:  [{ kind: "leaf",  when: "day",   n: 9,  c: "#4c7a3c" },
+             { kind: "fly",   when: "night", n: 15, c: "#c0f0b8" },
+             { kind: "spark", when: "any",   n: 9,  c: "#a8ffd0" },
+             { kind: "petal", when: "day",   n: 9,  c: "#ff8fc0" }],
+  outbackz: [{ kind: "dust",  when: "day",   n: 10, c: "#d9a06c" },
+             { kind: "fly",   when: "night", n: 12, c: "#ffd9a0" },
+             { kind: "spark", when: "any",   n: 8,  c: "#ffc98a" }],
+  tundraz:  [{ kind: "snow",  when: "any",   n: 14, c: "#f4fafe" },
+             { kind: "spark", when: "any",   n: 8,  c: "#cfe8ff" }],
+  taigaz:   [{ kind: "snow",  when: "any",   n: 11, c: "#e8f0f6" },
+             { kind: "spark", when: "any",   n: 8,  c: "#d8ecff" },
+             { kind: "leaf",  when: "day",   n: 6,  c: "#6f8a5c" }],
+  fossil:   [{ kind: "dust",  when: "day",   n: 8,  c: "#ded0b0" },
+             { kind: "fly",   when: "night", n: 11, c: "#ffe0ac" },
+             { kind: "spark", when: "any",   n: 7,  c: "#e8d08a" }],
 
-  // Ember Hollow is the only cave that is lit. The other two are `dark`, and
-  // the render skips ambient there entirely, so this reaches exactly the one
-  // map it should.
-  cavezone: [{ kind: "ember", when: "any",   n: 8,  c: "#ff9a4a" }],
+  cavezone: [{ kind: "ember", when: "any",   n: 11, c: "#ff9a4a" },
+             { kind: "spark", when: "any",   n: 9,  c: "#ffc07a" }],
 
-  // No sun reaches the Midnight Zone, so a glint would be a lie down there.
-  // What is actually in that water is animals making their own light, which is
-  // the firefly behaviour exactly - wandering, breathing, lit from within.
-  abyssz:   [{ kind: "fly",   when: "any",   n: 10, c: "#7fd8ff" }],
+  abyssz:   [{ kind: "fly",   when: "any",   n: 14, c: "#7fd8ff" },
+             { kind: "spark", when: "any",   n: 11, c: "#a08cff" }],
 
-  // The rifts are not weather. Slow motes, always, in a colour nothing else
-  // in the game uses, because these places should not feel like anywhere.
-  rift:     [{ kind: "fly",   when: "any",   n: 12, c: "#cbb0ff" }],
+  rift:     [{ kind: "fly",   when: "any",   n: 16, c: "#cbb0ff" },
+             { kind: "spark", when: "any",   n: 12, c: "#ff9ae8" }],
 
-  // The Vigil is a memorial to animals that are gone, and it should not
-  // sparkle. Grey dust, very few, drifting in still air - the look of a room
-  // nobody has come into for a long time.
+  // Unchanged, on purpose. See the note above.
   vigilz:   [{ kind: "dust",  when: "any",   n: 5,  c: "#9aa0ac" }],
 
-  // "What We Kept" is the far end of that walk, and the only one of those maps
-  // where something was saved. It is the one place in the region with living
-  // light in it, and it is the whole point of the region that it looks
-  // different from the nine rooms before it.
-  hopez:    [{ kind: "fly",   when: "night", n: 13, c: "#b8f0a0" },
-             { kind: "leaf",  when: "day",   n: 4,  c: "#6f9a5c" }],
+  hopez:    [{ kind: "fly",   when: "night", n: 16, c: "#b8f0a0" },
+             { kind: "leaf",  when: "day",   n: 6,  c: "#6f9a5c" },
+             { kind: "spark", when: "any",   n: 10, c: "#c8ff9a" },
+             { kind: "petal", when: "day",   n: 7,  c: "#ffd08a" }],
 
-  // Hearthside is somebody's back garden after dark, full of animals that live
-  // with people. Fireflies over a lawn, warmer than the wild ones.
-  hearth:   [{ kind: "fly",   when: "night", n: 10, c: "#ffddaa" },
-             { kind: "dust",  when: "day",   n: 5,  c: "#e8dcc0" }],
+  hearth:   [{ kind: "fly",   when: "night", n: 13, c: "#ffddaa" },
+             { kind: "dust",  when: "day",   n: 5,  c: "#e8dcc0" },
+             { kind: "spark", when: "any",   n: 9,  c: "#ffd9a0" },
+             { kind: "petal", when: "day",   n: 7,  c: "#ff9ec0" }],
 
-  // The battle outposts were left out on the grounds that rooms do not have
-  // weather. Wrong: they are not rooms. Thornwood Apiary and Windward Eyrie are
-  // walled yards with lawn in them, open to the sky, and leaving them out was
-  // the reason four screens still had dead air after everything else had been
-  // filled. Small enclosures, so small counts.
-  arena:    [{ kind: "fly",   when: "night", n: 8,  c: "#ffe6b0" },
-             { kind: "dust",  when: "day",   n: 4,  c: "#e4dcc4" }],
+  arena:    [{ kind: "fly",   when: "night", n: 10, c: "#ffe6b0" },
+             { kind: "dust",  when: "day",   n: 4,  c: "#e4dcc4" },
+             { kind: "spark", when: "any",   n: 7,  c: "#ffe0a0" }],
 };
 
 // Deterministic scatter. A firefly that jumps to a new place on every redraw is
@@ -145,6 +155,8 @@ const ambientSpecks = (spec, salt) => {
     const size = spec.kind === "glint" ? 1.4 + ambSeed(i, salt + 7) * 1.6
       : spec.kind === "snow" ? 2 + ambSeed(i, salt + 7) * 2.4
       : spec.kind === "leaf" ? 3 + ambSeed(i, salt + 7) * 2
+      : spec.kind === "petal" ? 2.4 + ambSeed(i, salt + 7) * 1.8
+      : spec.kind === "spark" ? 1.6 + ambSeed(i, salt + 7) * 2.2
       : 1.8 + ambSeed(i, salt + 7) * 1.8;
     out.push({
       key: spec.kind + i,
@@ -158,9 +170,15 @@ const ambientSpecks = (spec, salt) => {
         animationDuration: dur.toFixed(2) + "s",
         animationDelay: delay.toFixed(2) + "s",
         // Fireflies and embers glow; leaves, snow and dust are lit by the sky.
-        boxShadow: (spec.kind === "fly" || spec.kind === "ember" || spec.kind === "glint")
-          ? `0 0 ${(size * 2.4).toFixed(1)}px ${spec.c}` : undefined,
-        borderRadius: spec.kind === "leaf" ? "60% 10% 60% 10%" : "50%",
+        // A spark is the brightest thing in the air and has to look lit from
+        // inside, so it gets a second, wider halo. That double shadow is most
+        // of why it reads as shiny rather than as one more dot.
+        boxShadow: spec.kind === "spark"
+          ? `0 0 ${(size * 2.2).toFixed(1)}px ${spec.c}, 0 0 ${(size * 5).toFixed(1)}px ${spec.c}`
+          : (spec.kind === "fly" || spec.kind === "ember" || spec.kind === "glint")
+            ? `0 0 ${(size * 2.4).toFixed(1)}px ${spec.c}` : undefined,
+        borderRadius: spec.kind === "leaf" ? "60% 10% 60% 10%"
+          : spec.kind === "petal" ? "70% 0% 70% 0%" : "50%",
       },
     });
   }

@@ -552,6 +552,23 @@ function Wildlands() {
         + `\n\nOpen the Badge Book to read why each animal is in it.` } }));
   }, [S.bookQueue, S.dialog, S.menu, S.battle, S.exam, S.critQuiz, S.screen]);
 
+  // ----- the first time you meet a species, open its page -----
+  // Ayr, 2026-09-03. The catch already ended with "open it to read what you now
+  // know about them", which is an instruction where it could have been the
+  // thing itself.
+  //
+  // It waits for the world to be quiet - no dialog, no battle, no other menu -
+  // because the befriending plays out over three messages and the last of them
+  // is the one about the animal going back to what it was doing. Opening on top
+  // of that would bury the sentence the game is actually about.
+  useEffect(() => {
+    const st = SR.current;
+    if (!st.guidePop) return;
+    if (st.screen !== "world" || st.dialog || st.menu || st.battle || st.exam || st.critQuiz) return;
+    if (!DEX[st.guidePop]) { setS((p) => ({ ...p, guidePop: null })); return; }
+    setS((p) => ({ ...p, guidePop: null, menu: "guide", guideSel: p.guidePop }));
+  }, [S.guidePop, S.screen, S.dialog, S.menu, S.battle, S.exam, S.critQuiz]);
+
   // ----- retroactive Champion's Compass -----
   // Saves that beat the Champion before the Compass existed had that grant
   // fire and find nothing to hand over. This catches them the next time
@@ -1246,6 +1263,11 @@ function Wildlands() {
     const legends = { ...st.legends };
     const tb = { ...st.trainersBeaten };
     const dex = { ...st.dex };
+    // Set when a species is befriended for the very first time. Carried out
+    // on snapEnd and picked up by an effect once the world is back and quiet,
+    // rather than opened here - the battle is still showing three messages
+    // and a menu thrown on top of them would bury the last two.
+    let guidePop = null;
     const steps = [];
     const foeName = () => (b.kind === "wild" ? "Wild " : b.kind === "legend" ? "Guardian " : "") + DEX[en.sp].n;
     const clean = (a) => { const { stg, psn, slp, fear, chill, ...r } = a; return { ...r }; };
@@ -1271,6 +1293,7 @@ function Wildlands() {
         ...prev, party: P, items: { ...items }, box: [...box], badges,
         legends: { ...legends }, trainersBeaten: { ...tb }, dex: { ...dex },
         battle: null, screen: "world",
+        guidePop: guidePop || prev.guidePop || null,
         map: opts.blackout ? "town1" : prev.map,
         x: opts.blackout ? 7 : prev.x, y: opts.blackout ? 8 : prev.y,
         swimming: opts.blackout ? false : prev.swimming,
@@ -1611,7 +1634,12 @@ function Wildlands() {
           eased * (1.7 - en.hp / en.maxHp) * (1 - 0.22 * wary));
         if (Math.random() < chance) {
           const friend = clean({ ...en, hp: Math.max(1, en.hp) });
+          // Ayr, 2026-09-03: "when you catch an animal for the first time,
+          // bring up the guide entry so I can read it right away."
+          // Captured BEFORE the write, because a moment later it is always 2.
+          const firstEver = dex[en.sp] !== 2;
           dex[en.sp] = 2;
+          if (firstEver) guidePop = en.sp;
           if (b.kind === "legend") legends[en.sp] = "befriended";
           // The wild animal goes back to what it was doing. What joins you is
           // the station's own non-releasable animal of that species, who has a

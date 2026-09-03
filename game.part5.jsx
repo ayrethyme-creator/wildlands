@@ -243,6 +243,31 @@
       }
       .amb-glint { animation-name: ambGlint; animation-timing-function: ease-out; }
 
+      /* A spark is the shiny thing that floats. It is NOT a glint: a glint is
+         sun on a surface and never moves, so it stays put and flares. This
+         drifts upward and sideways while it twinkles, which is what makes it
+         read as something IN the air. Two peaks per cycle rather than one, so
+         it catches the eye twice on the way past. */
+      @keyframes ambSpark {
+        0%   { transform: translate(0,0) scale(.4);          opacity: 0; }
+        18%  { transform: translate(4px,-10px) scale(1);     opacity: .95; }
+        38%  { transform: translate(8px,-20px) scale(.55);   opacity: .3; }
+        62%  { transform: translate(14px,-34px) scale(1.05); opacity: .9; }
+        100% { transform: translate(22px,-58px) scale(.35);  opacity: 0; }
+      }
+      .amb-spark { animation-name: ambSpark; animation-timing-function: ease-in-out; }
+
+      /* Petals fall like leaves and take their time about it - slower, flatter
+         and they turn the other way, so a screen with both does not look like
+         one thing in two colours. */
+      @keyframes ambPetal {
+        0%   { transform: translate(0,-12%) rotate(0deg);       opacity: 0; }
+        12%  {                                                  opacity: .9; }
+        50%  { transform: translate(-14px,55%) rotate(-140deg); opacity: .8; }
+        100% { transform: translate(20px,120%) rotate(-260deg); opacity: 0; }
+      }
+      .amb-petal { animation-name: ambPetal; animation-timing-function: ease-in-out; }
+
       /* Embers rise, because heat does. */
       @keyframes ambEmber {
         0%   { transform: translate(0,0) scale(1);        opacity: 0; }
@@ -854,7 +879,7 @@
       </div>
 
       <div style={{ padding: "0 10px" }}>
-        <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "2px solid rgba(122,110,90,.6)", borderRadius: "18px 13px 20px 14px", boxShadow: "0 10px 26px -12px rgba(14,9,5,.65), inset 0 0 0 1px rgba(255,246,224,.05)", overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : undefined), transition: "filter 1.2s ease" }}>
+        <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "2px solid rgba(122,110,90,.6)", borderRadius: "18px 13px 20px 14px", boxShadow: "0 10px 26px -12px rgba(14,9,5,.65), inset 0 0 0 1px rgba(255,246,224,.05)", overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : (typeof DAY_FILTER !== "undefined" ? DAY_FILTER : undefined)), transition: "filter 1.2s ease" }}>
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
             const idKey = `${S.map}:${x},${y}`;
