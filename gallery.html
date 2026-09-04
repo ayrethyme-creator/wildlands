@@ -143,7 +143,13 @@ function start() {
                    is - from the running game, not from the source. Guarded, so
                    this page still works on a branch without part79. */
                 + ";window.__VOICE = (typeof VOICE !== 'undefined') ? VOICE : null;"
-                + ";window.__VOICE_FOR = (typeof voiceFor !== 'undefined') ? voiceFor : null;";
+                + ";window.__VOICE_FOR = (typeof voiceFor !== 'undefined') ? voiceFor : null;"
+                /* The maps and the people standing on them, so questions like
+                   "how many townspeople are there, and which of them fight?"
+                   are answered by counting rather than by reading .jsx. */
+                + ";window.__MAPS = (typeof MAPS !== 'undefined') ? MAPS : null;"
+                + ";window.__TRAINERS = (typeof TRAINERS !== 'undefined') ? TRAINERS : null;"
+                + ";window.__GYMS = (typeof GYMS !== 'undefined') ? GYMS : null;";
     var code = texts.join(String.fromCharCode(10)) + String.fromCharCode(10) + EXPORTS;
     var out = Babel.transform(code, { presets: [["react", { runtime: "classic" }]] }).code;
     (0, eval)(out);

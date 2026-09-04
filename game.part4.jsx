@@ -699,6 +699,22 @@ function Wildlands() {
     }
   }, [!!S.battle, S.battle?.kind, S.battle?.elite, S.screen, S.map, S.sound, S.soundReady]);
 
+  // ----- the townspeople get on with their day -----
+  // One heartbeat for the whole cast, started once and never restarted, reading
+  // the live state out of SR rather than closing over it - otherwise this would
+  // tear down and rebuild on every step she takes.
+  //
+  // part80 does the deciding and refuses anything unsafe; all this has to do is
+  // ask, and tell React when the answer was yes. npcTick exists only to say "the
+  // map changed underneath you" - nothing reads its value.
+  useEffect(() => {
+    if (typeof wanderStep !== "function") return;
+    const id = setInterval(() => {
+      if (wanderStep(SR.current)) setS((p) => ({ ...p, npcTick: ((p.npcTick || 0) + 1) % 1000 }));
+    }, 900);
+    return () => clearInterval(id);
+  }, []);
+
   // ----- pending move-learn prompts -----
   useEffect(() => {
     if (S.screen !== "world" || S.battle || S.dialog || S.menu) return;
@@ -814,7 +830,13 @@ function Wildlands() {
       }));
       return;
     }
-    const idKey = `${st.map}:${nx},${ny}`;
+    // A townsperson who has wandered off their home tile is still the person
+    // who lives on that tile: part80 translates where they are STANDING back to
+    // where they came FROM, and everything below - the walkability rule, the
+    // trainer lookup, the arc tables, the solved-text - goes on using the home
+    // coordinate it has always used. See the note at the top of part80.
+    const idKey = (typeof wanderKey === "function" && wanderKey(st.map, nx, ny))
+      || `${st.map}:${nx},${ny}`;
     const walk =
       ch === "." || ch === "g" || ch === "G" || ch === "p" || ch === "*" ||
       // Tracks, hives, webs and nests are walked ONTO, not into.

@@ -105,6 +105,25 @@
       .wl-idle-b { animation: wlIdleB 3.4s ease-in-out infinite; }
       .wl-idle-c { animation: wlIdleC 4.1s ease-in-out infinite; }
 
+      /* A townsperson taking a step. The tile they arrive in is a different
+         element from the one they left - the map is a grid of cells, not a set
+         of movable sprites - so the arrival slides in from the neighbour it came
+         from. Without this they teleport one square, which reads as a glitch
+         rather than as somebody walking. */
+      @keyframes wlStepL { from { transform: translateX(100%); } to { transform: none; } }
+      @keyframes wlStepR { from { transform: translateX(-100%); } to { transform: none; } }
+      @keyframes wlStepU { from { transform: translateY(100%); } to { transform: none; } }
+      @keyframes wlStepD { from { transform: translateY(-100%); } to { transform: none; } }
+      /* The breathe is carried along in the same declaration rather than left to
+         a second class, because two rules setting the animation property on one
+         element do not add up - the last one wins and the other silently stops.
+         Somebody who steps must not hold their breath for the rest of the scene.
+         (This whole block is a template literal: no backticks in here.) */
+      .wl-from-l { animation: wlStepL .42s ease-out, wlIdleA 2.6s ease-in-out infinite; }
+      .wl-from-r { animation: wlStepR .42s ease-out, wlIdleA 2.6s ease-in-out infinite; }
+      .wl-from-u { animation: wlStepU .42s ease-out, wlIdleA 2.6s ease-in-out infinite; }
+      .wl-from-d { animation: wlStepD .42s ease-out, wlIdleA 2.6s ease-in-out infinite; }
+
       /* Anything with a flame in it. */
       @keyframes wlFlicker {
         0%, 100% { filter: brightness(1); }
@@ -898,7 +917,11 @@
         <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "2px solid rgba(122,110,90,.6)", borderRadius: "18px 13px 20px 14px", boxShadow: "0 10px 26px -12px rgba(14,9,5,.65), inset 0 0 0 1px rgba(255,246,224,.05)", overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : (typeof DAY_FILTER !== "undefined" ? DAY_FILTER : undefined)), transition: "filter 1.2s ease" }}>
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
-            const idKey = `${S.map}:${x},${y}`;
+            // Same translation part4 does: a wanderer carries their own emoji,
+            // their own name and their own solved-arc redress to wherever they
+            // are standing, because the key follows the person and not the tile.
+            const idKey = (typeof wanderKey === "function" && wanderKey(S.map, x, y))
+              || `${S.map}:${x},${y}`;
             if (ch === "X" && S.badges >= (GYMS[S.map]?.id ?? GYM_COUNT)) ch2 = ".";
             // Must match the walkability rule in part4 - see the note there on
             // why a chat NPC is exempt from the beaten-flag.
@@ -1001,8 +1024,12 @@
               if (ch2 === "W") { motion = "wl-water"; delay = ((x * 3 + y * 5) % 40) / 10; }
               else if (grassBgImg) { motion = "wl-sway"; delay = jitter; }
               else if (personBgImg) {
-                motion = ["wl-idle", "wl-idle-b", "wl-idle-c"][(x * 5 + y * 11) % 3];
-                delay = jitter * 0.6;
+                // Somebody who has just taken a step slides in from the tile they
+                // came from; everybody else breathes on one of three rhythms.
+                const from = (typeof wanderArrival === "function") ? wanderArrival(S.map, x, y) : null;
+                motion = from ? "wl-from-" + from
+                  : ["wl-idle", "wl-idle-b", "wl-idle-c"][(x * 5 + y * 11) % 3];
+                delay = from ? 0 : jitter * 0.6;
               }
               else if (propBgImg && FLICKER_TILES.has(ch2)) { motion = "wl-flicker"; delay = jitter; }
             }
