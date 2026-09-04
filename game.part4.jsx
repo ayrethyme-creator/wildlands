@@ -1280,7 +1280,11 @@ function Wildlands() {
     const burn = att.brn ? 0.5 : 1;
     const critM = crit ? (typeof CRIT_MULT === "number" ? CRIT_MULT : 1.5) : 1;
     const roll = 0.85 + Math.random() * 0.15;
-    return { dmg: Math.max(1, Math.floor(base * mult * stab * burn * critM * roll)), mult, crit };
+    // One dial for how long a fight lasts. part85 holds it and explains the
+    // number; simulating 300 battles through this very function is how it was
+    // chosen rather than guessed.
+    const scale = (typeof DMG_SCALE === "number") ? DMG_SCALE : 1;
+    return { dmg: Math.max(1, Math.floor(base * mult * stab * burn * critM * roll * scale)), mult, crit };
   };
 
   const runSteps = (steps) => {
@@ -1419,7 +1423,12 @@ function Wildlands() {
     };
 
     const enemyMove = () => {
-      const all = en.moves.map((k) => MOVES[k]);
+      // Only what it still has the PP for. Empty-handed, it flails, exactly as
+      // the player does.
+      const all = en.moves
+        .map((k, i) => ((en.pp && (en.pp[i] ?? 0) <= 0) ? null : MOVES[k]))
+        .filter(Boolean);
+      if (!all.length) return { n: "Flail", t: "Wild", p: 30, acc: 100 };
       const dmgOpts = all.filter((m2) => m2.p > 0).sort((a2, b2) => eff(b2.t, DEX[my.sp].t) - eff(a2.t, DEX[my.sp].t));
       const status = all.filter((m2) => m2.p <= 0 && !((m2.fx === "sleep" && my.slp) || (m2.fx === "fear" && my.fear) || (m2.fx === "chill" && my.chill) || (m2.fx === "poison" && my.psn)));
       // A gym leader, an Elite and a guardian always take the best move they
@@ -1686,7 +1695,20 @@ function Wildlands() {
     };
 
     const enemyActs = (eMv) => {
-      const fainted = doAttack(false, eMv || enemyMove());
+      const chosen2 = eMv || enemyMove();
+      /* THE OTHER ANIMAL RUNS OUT TOO. Only `my.pp` was ever spent - the enemy
+         has had a pp array since mk() built it and nothing has ever decremented
+         it, so a trainer's animal could repeat any move for ever.
+
+         That was invisible while fights were two turns long. Found by simulating
+         300 battles at level 50 through this very function: three of them NEVER
+         ENDED, because an animal at low health healed 45% of itself every turn
+         and, with damage scaled for longer fights, could not be out-damaged. You
+         cannot flee a trainer battle, so that is a soft-lock, and it would have
+         shipped. */
+      const i = en.moves ? en.moves.findIndex((k) => MOVES[k] === chosen2) : -1;
+      if (i >= 0 && en.pp) en.pp[i] = Math.max(0, (en.pp[i] ?? 0) - 1);
+      const fainted = doAttack(false, chosen2);
       if (fainted) { onMyFaint(); return true; }
       return false;
     };

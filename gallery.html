@@ -164,6 +164,7 @@ function start() {
                 + ";window.__MOVES = (typeof MOVES !== 'undefined') ? MOVES : null;"
                 + ";window.__MK = (typeof mk !== 'undefined') ? mk : null;"
                 + ";window.__CHART = (typeof CHART !== 'undefined') ? CHART : null;"
+                + ";window.__DMG_SCALE = (typeof DMG_SCALE === 'number') ? DMG_SCALE : 1;"
                 + ";window.__REMATCH = (typeof rematchTeam !== 'undefined') ? rematchTeam : null;"
                 + ";window.__HOLDS = (typeof trainerHoldsGround !== 'undefined') ? trainerHoldsGround : null;";
     var code = texts.join(String.fromCharCode(10)) + String.fromCharCode(10) + EXPORTS;

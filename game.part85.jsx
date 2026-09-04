@@ -40,6 +40,29 @@ const stageMul = (s) => {
   return v >= 0 ? (2 + v) / 2 : 2 / (2 - v);
 };
 
+/* HOW LONG A FIGHT LASTS. One dial, multiplied into every damage roll.
+
+   Set by simulating battles through the game's own doAttack rather than by
+   feel - design/tools/battle_sim.js runs real animals built by mk() with real
+   moves, and reports turns-to-knockout.
+
+   What it found:
+     before this overhaul   median 3 turns, and a tenth of fights over in ONE
+     with STAB and crits    median 2
+     at 0.45                median 5
+
+   Three turns was already too short for anything but hitting, which is the
+   whole of what Ayr reported: "there is no strategy beyond use the strongest
+   move until it dies." A setup move costs a turn and pays from the third turn
+   on, so in a two-turn fight it can never be right - the maths of the stage
+   rework was correct and there was simply no room to spend it. Lengthening the
+   fight is what makes every other part of this file mean anything.
+
+   It cuts both ways, so it is not a difficulty change: the player's animals hit
+   for the same fraction less. It buys TURNS, and turns are where decisions
+   live. */
+const DMG_SCALE = 0.45;
+
 // Same-type attack bonus, and the critical hit.
 const STAB = 1.5;
 const CRIT_MULT = 1.5;
