@@ -162,28 +162,51 @@ Object.assign(INFO, {
   // the grass-tile trigger for an indoor room because there's nothing else
   // to stand in for "close enough to the animals to meet one," but a fish
   // tank has an obvious, better fit already built into the engine.
-  const AQUA_LEAF_ROWS = [
+  /* ONE TANK PER HALL. Ayr, 2026-09-04: "the aquarium fish area should be one
+     body of water for fresh water fish and one body of water for salt water
+     fish. not multiple small puddles that are hard to swim in."
+
+     The old layout was six disconnected pools of four to ten tiles each, so
+     swimming meant getting into a puddle, crossing it in two strokes, climbing
+     out and walking to the next one. This is a single tank twelve wide and four
+     deep - forty-eight connected tiles - with a walkway all the way round it.
+
+     The ring matters as much as the tank. You arrive at (7,8) on the bottom
+     walkway and the exit is the tile below you, so a player with no Aquatic
+     teammate can still come in, read the sign and leave; and the two side
+     columns connect the bottom walkway to the top one, so the sign is reachable
+     without crossing the water. Nothing here can strand anybody.
+
+     The sign stays at (7,3), which is why the walkway is three rows deep at the
+     top: its text is keyed by coordinate in SIGNS below, and moving the glyph
+     without moving the key would blank it. */
+  const aquaRows = () => [
     "^^^^^^^^^^^^^^^^",
-    "^..WWW....WWW..^",
-    "^.WWWWW..WWWWW.^",
-    "^......!.......^",
-    "^WWWW......WWWW^",
-    "^WWWW......WWWW^",
     "^..............^",
-    "^..WWW....WWW..^",
-    "^..WWW....WWW..^",
+    "^..............^",
+    "^......!.......^",
+    "^.WWWWWWWWWWWW.^",
+    "^.WWWWWWWWWWWW.^",
+    "^.WWWWWWWWWWWW.^",
+    "^.WWWWWWWWWWWW.^",
+    "^..............^",
     "^^^^^^^s^^^^^^^^",
   ];
+  // A FRESH ARRAY EACH. The two halls used to share one rows object, so anything
+  // that edited one hall's map silently edited the other - and this game has
+  // several passes that rewrite rows at load (dressing, lamps, sign placement,
+  // and now wandering people). Nothing has bitten yet because neither hall
+  // qualifies for any of them, which is luck rather than design.
   MAPS.aqua_fresh = {
     name: "The Aquarium: Freshwater Hall", zone: "reefz", music: "route",
-    rows: AQUA_LEAF_ROWS,
+    rows: aquaRows(),
     exits: { "7,9": { map: "aquarium", x: 1, y: 3 } },
     poolWater: AQUA_FRESH.map((sp, i) => [sp, Math.max(4, 12 - i)]).filter(([sp]) => DEX[sp]),
     lvlWater: [37, 41],
   };
   MAPS.aqua_salt = {
     name: "The Aquarium: Saltwater Hall", zone: "reefz", music: "route",
-    rows: AQUA_LEAF_ROWS,
+    rows: aquaRows(),
     exits: { "7,9": { map: "aquarium", x: 14, y: 3 } },
     poolWater: AQUA_SALT.map((sp, i) => [sp, Math.max(4, 12 - i)]).filter(([sp]) => DEX[sp]),
     lvlWater: [37, 41],

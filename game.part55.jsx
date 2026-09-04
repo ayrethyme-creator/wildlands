@@ -115,18 +115,44 @@ const TILE_SHAPES = {
       `<circle cx="${cx}" cy="${cy}" r="2.6" fill="${dark}"/>`);
   },
   cactus: (c, v, base) => {
-    // Filled silhouette in one dark shape with a lighter body on top. Drawing
-    // it as a dark stroke under a light stroke turned it into a horseshoe.
+    /* Redrawn 2026-09-04 on Ayr's note that the cacti needed it.
+
+       The old one was a rounded rectangle with a single arm built from two arcs,
+       and the arcs were the problem: at 32px the elbow curled back on itself and
+       the arm read as a handle rather than as part of the plant. It also only
+       ever had ONE arm, on alternating sides, so a stand of them looked like the
+       same plant flipped.
+
+       A saguaro is a column with arms that go OUT and then turn UP, and that is
+       far easier to draw as a stroked path with round caps and joins than as a
+       filled outline - the corner rounds itself, and the limb keeps an even
+       thickness the whole way along. Each limb is stroked twice: once fat and
+       dark for the silhouette, once thinner in the body colour on top, which is
+       the same read-at-tile-size trick the trees use.
+
+       Arms are drawn BEFORE the trunk so they emerge from behind it rather than
+       being pasted across it. */
     const dark = tsh(c, -0.42), light = tsh(c, 0.3);
-    const arm = v % 2
-      ? `M6.5 24 v-7 a5 5 0 0 1 7.5 -4.3 v5 a1.6 1.6 0 0 0 -2.5 1.4 v4.9 Z`
-      : `M25.5 25 v-8 a5 5 0 0 0 -7.5 -4.3 v5 a1.6 1.6 0 0 1 2.5 1.4 v5.9 Z`;
+    // A saguaro is not symmetrical, and a field of identical plants is wallpaper,
+    // so the variant picks a different pair of arms at different heights.
+    const [armL, armR] = [
+      ["M12 21 L8 21 L8 13", "M20 17 L24 17 L24 9"],
+      ["M12 18 L7.5 18 L7.5 11", ""],
+      ["", "M20 20 L24.5 20 L24.5 12"],
+      ["M12 23 L8.5 23 L8.5 16", "M20 14 L23.5 14 L23.5 8"],
+    ][v % 4];
+    const limb = (d, w, col) => d
+      ? `<path d="${d}" fill="none" stroke="${col}" stroke-width="${w}"` +
+        ` stroke-linecap="round" stroke-linejoin="round"/>`
+      : "";
+    const trunk = "M16 30 V6";
     return svgWrap(
       `<rect width="32" height="32" fill="${base}"/>` +
-      `<path d="${arm}" fill="${dark}"/>` +
-      `<rect x="11" y="3" width="10" height="28" rx="5" fill="${dark}"/>` +
-      `<rect x="12.6" y="4.6" width="6.8" height="25" rx="3.4" fill="${c}"/>` +
-      `<rect x="13.8" y="6.5" width="2" height="21" rx="1" fill="${light}" opacity=".65"/>`);
+      limb(armL, 7.6, dark) + limb(armR, 7.6, dark) + limb(trunk, 11.4, dark) +
+      limb(armL, 4.6, c) + limb(armR, 4.6, c) + limb(trunk, 8.4, c) +
+      // One rib down the lit side. More than one turns to mush at this size.
+      `<path d="M13.7 25 V10" fill="none" stroke="${light}" stroke-width="1.4"` +
+      ` stroke-linecap="round" opacity=".5"/>`);
   },
   grain: (c, v, base) => {
     // A standing tuft rather than a field printed on the tile: fewer stalks,
