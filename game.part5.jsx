@@ -38,6 +38,28 @@
       }
       .shake { animation: hitShake .26s ease-in-out; }
 
+      /* The swing. Ayr, 2026-09-04: "the animal should make a brief movement
+         every time it attacks."
+         It goes on a WRAPPER around the sprite rather than on the sprite itself,
+         because part2 sets the float and the bob as an inline animation property
+         and an inline style beats a class every time. Two elements, two
+         animations, and the animal keeps breathing while it lunges.
+         (No backticks in this block - it is inside a template literal.) */
+      @keyframes wlSwingR {
+        0%   { transform: translate(0, 0) scale(1); }
+        30%  { transform: translate(16%, -8%) scale(1.06); }
+        55%  { transform: translate(10%, -4%) scale(1.03); }
+        100% { transform: translate(0, 0) scale(1); }
+      }
+      @keyframes wlSwingL {
+        0%   { transform: translate(0, 0) scale(1); }
+        30%  { transform: translate(-16%, 8%) scale(1.06); }
+        55%  { transform: translate(-10%, 4%) scale(1.03); }
+        100% { transform: translate(0, 0) scale(1); }
+      }
+      .wl-swing-r { animation: wlSwingR .38s cubic-bezier(.2,.8,.3,1); }
+      .wl-swing-l { animation: wlSwingL .38s cubic-bezier(.2,.8,.3,1); }
+
       /* Damage numbers rise and fade rather than simply appearing. */
       @keyframes popUp {
         0% { transform: translateY(6px) scale(.8); opacity: 0; }
@@ -750,7 +772,17 @@
     const en = b.enemy;
     const busy = b.phase === "busy";
     const foeLabel = b.kind === "legend" ? "Guardian " : "";
-    const arenaBg = b.kind === "legend" ? "linear-gradient(#4a3f6b,#8a7a5c)" : (ARENA[MAPS[S.map].zone] || ARENA.savanna);
+    // part83 fills ARENA in for every zone in the world, so the fallback is now
+    // a genuine last resort rather than the answer for sixteen of them.
+    const scene = b.kind === "legend" ? "linear-gradient(#4a3f6b,#8a7a5c)" : (ARENA[MAPS[S.map].zone] || ARENA.savanna);
+    // The same clock the world uses. A daylit savanna behind a battle at
+    // midnight was part of why these looked wrong, and one veil over the top
+    // fixes all twenty-six at once rather than doubling the table.
+    const phase = (typeof dayPhase === "function") ? dayPhase() : "day";
+    const veil = phase === "night" ? "linear-gradient(rgba(14,20,46,.58), rgba(14,20,46,.58)), "
+      : phase === "dusk" ? "linear-gradient(rgba(122,60,30,.26), rgba(122,60,30,.26)), " : "";
+    const arenaBg = veil + scene;
+    const strike = S.strike || { side: null, n: 0 };
     // Keying on the hit counter remounts the wrapper, which is what makes the
     // shake replay on every blow rather than only the first.
     const shakeKey = S.hitFlash || 0;
@@ -764,10 +796,20 @@
               <div style={{ margin: "3px 0" }}>{DEX[en.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
               <HPBar hp={en.hp} max={en.maxHp} />
             </div>
-            <Sprite sp={en.sp} size={b.kind === "legend" ? 96 : 86} anim="floatY" />
+            {/* The foe stands top-right and swings down-left, toward you. Keyed
+                on the strike counter so a second attack restarts the lunge
+                instead of being swallowed by the one still running - the same
+                trick the hit shake uses. */}
+            <div key={"foe" + (strike.side === "foe" ? strike.n : 0)}
+              className={strike.side === "foe" ? "wl-swing-l" : undefined}>
+              <Sprite sp={en.sp} size={b.kind === "legend" ? 96 : 86} anim="floatY" />
+            </div>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: 14 }}>
-            <Sprite sp={my.sp} size={86} flip anim="bobY" />
+            <div key={"me" + (strike.side === "me" ? strike.n : 0)}
+              className={strike.side === "me" ? "wl-swing-r" : undefined}>
+              <Sprite sp={my.sp} size={86} flip anim="bobY" />
+            </div>
             <div style={{ ...panel, padding: 8, width: "58%" }}>
               <div style={{ fontSize: 13, fontWeight: 700 }}>{my.indiv || DEX[my.sp].n}{my.indiv ? <span style={{ fontWeight: 400, fontSize: 10, color: "#8a9a6a" }}> · {DEX[my.sp].n}</span> : null} <span style={{ color: "#c9b88a" }}>Lv {my.lvl}</span>{my.psn ? " ☠️" : ""}{my.slp ? " 💤" : ""}{my.fear ? " 😨" : ""}{my.chill ? " 🧊" : ""}</div>
               <div style={{ margin: "3px 0" }}>{DEX[my.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>

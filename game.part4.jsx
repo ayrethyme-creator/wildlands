@@ -1347,13 +1347,23 @@ function Wildlands() {
     // being swallowed by the animation already running.
     const HITSOUNDS = new Set(["hit", "crit", "super", "weak"]);
 
-    const snapBusy = (text, extras = {}, snd) => {
+    const snapBusy = (text, extras = {}, snd, side) => {
       const P = party.map((a) => ({ ...a })); P[0] = { ...my };
       const E = { ...en };
       steps.push((prev) => { if (snd) SFX[snd]?.(); return prev.battle ? {
-        hitFlash: HITSOUNDS.has(snd) ? (prev.hitFlash || 0) + 1 : (prev.hitFlash || 0),
         ...prev, party: P, items: { ...items }, box: [...box], badges,
         legends: { ...legends }, trainersBeaten: { ...tb }, dex: { ...dex },
+        // AFTER the spread, not before it. Written before, `...prev` put the old
+        // value straight back on top and the counter never moved - so the hit
+        // shake this was added for has never once played. It is a React key as
+        // well as a flag, which is what makes a second blow restart the shake
+        // instead of being swallowed by the one already running.
+        hitFlash: HITSOUNDS.has(snd) ? (prev.hitFlash || 0) + 1 : (prev.hitFlash || 0),
+        // Ayr, 2026-09-04: "the animal should make a brief movement every time
+        // it attacks." `side` says who swung, and only doAttack passes it - the
+        // XP lines and the level-up messages go through here too and nobody
+        // lunges at those.
+        strike: side ? { side, n: ((prev.strike && prev.strike.n) || 0) + 1 } : prev.strike,
         battle: { ...prev.battle, enemy: E, phase: "busy", log: [...prev.battle.log, text].slice(-4), mode: "main", ...extras },
       } : prev; });
     };
@@ -1390,36 +1400,40 @@ function Wildlands() {
 
     const doAttack = (attIsMe, mv) => {
       const att = attIsMe ? my : en, dfn = attIsMe ? en : my;
+      // Every snapshot taken while this animal is acting carries which side
+      // swung, so the screen can move the right sprite. A miss lunges too - you
+      // still threw the punch.
+      const swing = (t, e, snd) => snapBusy(t, e, snd, attIsMe ? "me" : "foe");
       const who = attIsMe ? DEX[my.sp].n : foeName();
       const tgt = attIsMe ? foeName() : DEX[my.sp].n;
       if (att.slp > 0) {
         att.slp -= 1;
-        if (att.slp > 0) { snapBusy(`${who} is fast asleep!`, {}, "sleep"); return false; }
-        snapBusy(`${who} woke up!`);
+        if (att.slp > 0) { swing(`${who} is fast asleep!`, {}, "sleep"); return false; }
+        swing(`${who} woke up!`);
       }
       if (att.fear > 0) {
         att.fear -= 1;
-        if (Math.random() < 0.4) { snapBusy(`${who} is too shaken to move!`, {}, "fear"); return false; }
+        if (Math.random() < 0.4) { swing(`${who} is too shaken to move!`, {}, "fear"); return false; }
       }
-      if (Math.random() * 100 > mv.acc) { snapBusy(`${who} used ${mv.n}... but it missed!`, {}, "miss"); return false; }
+      if (Math.random() * 100 > mv.acc) { swing(`${who} used ${mv.n}... but it missed!`, {}, "miss"); return false; }
       if (mv.p <= 0) {
         let txt = `${who} used ${mv.n}!`;
-        if (mv.fx === "heal") { const h = Math.floor(att.maxHp * 0.45); att.hp = Math.min(att.maxHp, att.hp + h); txt += ` It recovered ${h} HP!`; snapBusy(txt, {}, "heal"); }
-        else if (mv.fx === "raiseDef") { att.stg.d = Math.min(2, att.stg.d + 1); txt += " Its defense rose!"; snapBusy(txt, {}, "learn"); }
-        else if (mv.fx === "lowerAtk") { dfn.stg.a = Math.max(-2, dfn.stg.a - 1); txt += ` ${tgt}'s attack fell!`; snapBusy(txt, {}, "weak"); }
-        else if (mv.fx === "lowerDef") { dfn.stg.d = Math.max(-2, dfn.stg.d - 1); txt += ` ${tgt}'s defense fell!`; snapBusy(txt, {}, "weak"); }
-        else if (mv.fx === "raiseAtk") { att.stg.a = Math.min(2, att.stg.a + 1); txt += " Its attack rose!"; snapBusy(txt, {}, "learn"); }
-        else if (mv.fx === "raiseSpd") { att.stg.s = Math.min(2, (att.stg.s || 0) + 1); txt += " Its speed rose!"; snapBusy(txt, {}, "learn"); }
-        else if (mv.fx === "lowerSpd") { dfn.stg.s = Math.max(-2, (dfn.stg.s || 0) - 1); txt += ` ${tgt}'s speed fell!`; snapBusy(txt, {}, "weak"); }
-        else if (mv.fx === "chill") { if (dfn.chill) txt += ` But ${tgt} is already chilled!`; else { dfn.chill = 3; txt += ` ${tgt} was chilled — its speed halves!`; } snapBusy(txt, {}, "weak"); }
-        else if (mv.fx === "sleep") { if (dfn.slp) txt += ` But ${tgt} is already asleep!`; else { dfn.slp = rnd(2, 3); txt += ` ${tgt} drifted off to sleep!`; } snapBusy(txt, {}, "sleep"); }
-        else if (mv.fx === "fear") { if (dfn.fear) txt += ` But ${tgt} is already shaken!`; else { dfn.fear = 2; txt += ` ${tgt} shudders with dread!`; } snapBusy(txt, {}, "fear"); }
-        else if (mv.fx === "burn") { if (dfn.brn) txt += ` But ${tgt} is already burned!`; else { dfn.brn = 1; txt += ` ${tgt} was burned!`; } snapBusy(txt, {}, "weak"); }
+        if (mv.fx === "heal") { const h = Math.floor(att.maxHp * 0.45); att.hp = Math.min(att.maxHp, att.hp + h); txt += ` It recovered ${h} HP!`; swing(txt, {}, "heal"); }
+        else if (mv.fx === "raiseDef") { att.stg.d = Math.min(2, att.stg.d + 1); txt += " Its defense rose!"; swing(txt, {}, "learn"); }
+        else if (mv.fx === "lowerAtk") { dfn.stg.a = Math.max(-2, dfn.stg.a - 1); txt += ` ${tgt}'s attack fell!`; swing(txt, {}, "weak"); }
+        else if (mv.fx === "lowerDef") { dfn.stg.d = Math.max(-2, dfn.stg.d - 1); txt += ` ${tgt}'s defense fell!`; swing(txt, {}, "weak"); }
+        else if (mv.fx === "raiseAtk") { att.stg.a = Math.min(2, att.stg.a + 1); txt += " Its attack rose!"; swing(txt, {}, "learn"); }
+        else if (mv.fx === "raiseSpd") { att.stg.s = Math.min(2, (att.stg.s || 0) + 1); txt += " Its speed rose!"; swing(txt, {}, "learn"); }
+        else if (mv.fx === "lowerSpd") { dfn.stg.s = Math.max(-2, (dfn.stg.s || 0) - 1); txt += ` ${tgt}'s speed fell!`; swing(txt, {}, "weak"); }
+        else if (mv.fx === "chill") { if (dfn.chill) txt += ` But ${tgt} is already chilled!`; else { dfn.chill = 3; txt += ` ${tgt} was chilled — its speed halves!`; } swing(txt, {}, "weak"); }
+        else if (mv.fx === "sleep") { if (dfn.slp) txt += ` But ${tgt} is already asleep!`; else { dfn.slp = rnd(2, 3); txt += ` ${tgt} drifted off to sleep!`; } swing(txt, {}, "sleep"); }
+        else if (mv.fx === "fear") { if (dfn.fear) txt += ` But ${tgt} is already shaken!`; else { dfn.fear = 2; txt += ` ${tgt} shudders with dread!`; } swing(txt, {}, "fear"); }
+        else if (mv.fx === "burn") { if (dfn.brn) txt += ` But ${tgt} is already burned!`; else { dfn.brn = 1; txt += ` ${tgt} was burned!`; } swing(txt, {}, "weak"); }
         else if (mv.fx === "poison") {
           if (dfn.psn) txt += ` But ${tgt} is already poisoned!`;
           else { dfn.psn = true; txt += ` ${tgt} was poisoned!`; }
-          snapBusy(txt, {}, "poison");
-        } else snapBusy(txt);
+          swing(txt, {}, "poison");
+        } else swing(txt);
         return false;
       }
       const { dmg, mult } = dmgCalc(att, dfn, mv);
@@ -1437,7 +1451,7 @@ function Wildlands() {
       if (mv.fx === "lowerDef" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.d = Math.max(-2, dfn.stg.d - 1); txt += ` ${tgt}'s defense fell!`; }
       if (mv.fx === "lowerSpd" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.s = Math.max(-2, (dfn.stg.s || 0) - 1); txt += ` ${tgt}'s speed fell!`; }
       if (mv.fx === "raiseAtk" && Math.random() < (mv.fxc || 0)) { att.stg.a = Math.min(2, att.stg.a + 1); txt += ` ${who}'s attack rose!`; }
-      snapBusy(txt, {}, mult > 1 ? "super" : mult < 1 ? "weak" : "hit");
+      swing(txt, {}, mult > 1 ? "super" : mult < 1 ? "weak" : "hit");
       return dfn.hp <= 0;
     };
 
