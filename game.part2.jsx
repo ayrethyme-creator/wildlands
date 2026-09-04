@@ -1445,7 +1445,20 @@ const natureFor = (uid) => {
 
 const mk = (sp, lvl) => {
   const d = DEX[sp];
-  const moves = [...d.m, ...(d.l || []).filter(([L]) => L <= lvl).map(([, k]) => k)].slice(-4);
+  /* KEEP A STATUS MOVE. Ayr, 2026-09-04: "the status ones are useless."
+     Part of that was the maths, which part85 fixes. This was the other part, and
+     it is why they seemed not to exist at all: learnsets are ordered by POWER,
+     and this line takes the last four an animal has learned - so the four
+     strongest. A status move has power 0, sits at the front of that list for
+     ever, and was thrown away the instant the animal was built. Every wild
+     animal and every trainer's team came out with four attacks and nothing else.
+     The newest three attacks, plus the most recent status move it knows. */
+  const learned = [...new Set([...d.m, ...(d.l || []).filter(([L]) => L <= lvl).map(([, k]) => k)])];
+  let moves = learned.slice(-4);
+  if (!moves.some((k) => MOVES[k] && MOVES[k].p <= 0)) {
+    const util = [...learned].reverse().find((k) => MOVES[k] && MOVES[k].p <= 0);
+    if (util) moves = [util, ...moves.slice(-3)];
+  }
   const maxHp = statAt(d.b.h, lvl, true);
   const uid = UID++;
   const nat = NATURE_KEYS[Math.floor(Math.random() * NATURE_KEYS.length)];

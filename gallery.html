@@ -80,7 +80,10 @@
    never drift out of sync. It loads the data parts only - part4 and part5 are
    the React application and are not needed to read DEX and INFO. */
 var DATA_PARTS = [
-  "game.part1.jsx","game.part2.jsx","game.part3.jsx","game.part3b.jsx","game.part6.jsx",
+  "game.part1.jsx","game.part2.jsx","game.part3.jsx","game.part3b.jsx",
+  /* part85 adds 96 moves and MUST load before part17, which snapshots the
+     move table into the pools every generated learnset is built from. */
+  "game.part85.jsx","game.part6.jsx",
   "game.part7.jsx","game.part8.jsx","game.part9.jsx","game.part10.jsx","game.part11.jsx",
   "game.part12.jsx","game.part13.jsx","game.part14.jsx","game.part15.jsx","game.part16.jsx",
   "game.part17.jsx","game.part18.jsx","game.part19.jsx","game.part20.jsx","game.part21.jsx",
@@ -158,6 +161,9 @@ function start() {
                 + ";window.__MAPS = (typeof MAPS !== 'undefined') ? MAPS : null;"
                 + ";window.__TRAINERS = (typeof TRAINERS !== 'undefined') ? TRAINERS : null;"
                 + ";window.__GYMS = (typeof GYMS !== 'undefined') ? GYMS : null;"
+                + ";window.__MOVES = (typeof MOVES !== 'undefined') ? MOVES : null;"
+                + ";window.__MK = (typeof mk !== 'undefined') ? mk : null;"
+                + ";window.__CHART = (typeof CHART !== 'undefined') ? CHART : null;"
                 + ";window.__REMATCH = (typeof rematchTeam !== 'undefined') ? rematchTeam : null;"
                 + ";window.__HOLDS = (typeof trainerHoldsGround !== 'undefined') ? trainerHoldsGround : null;";
     var code = texts.join(String.fromCharCode(10)) + String.fromCharCode(10) + EXPORTS;

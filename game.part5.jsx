@@ -871,10 +871,27 @@
               {my.moves.map((mk2, i) => {
                 const mv = MOVES[mk2];
                 const out = (my.pp?.[i] ?? 0) <= 0;
+                /* HOW WELL IT WILL LAND, on the button. Ayr, 2026-09-04: "can
+                   you add the effectiveness of a move to the attack button too?"
+                   Only for damaging moves - a status move has no type matchup to
+                   report, and putting "no effect" on one would be a lie. The
+                   same-type bonus is shown too, because part85 makes it worth
+                   50% and it is otherwise invisible. */
+                const m = mv.p > 0 ? eff(mv.t, DEX[en.sp].t) : null;
+                const tag = m === null ? null
+                  : m === 0 ? { s: "NO EFFECT", c: "#8a7f68" }
+                  : m >= 4 ? { s: "×4 !!", c: "#8ff08a" }
+                  : m >= 2 ? { s: "×2 SUPER", c: "#8ff08a" }
+                  : m <= 0.25 ? { s: "×¼", c: "#f0a8a8" }
+                  : m < 1 ? { s: "×½ weak", c: "#f0a8a8" }
+                  : null;
+                const stab = mv.p > 0 && (DEX[my.sp].t || []).indexOf(mv.t) >= 0;
                 return (
                   <button key={mk2} disabled={busy || out} style={{ ...btn(TYPE_COLORS[mv.t]), opacity: busy || out ? 0.45 : 1 }}
                     onClick={() => takeTurn({ kind: "move", i })}>
-                    {mv.n}<div style={{ fontSize: 10, fontWeight: 400 }}>{mv.t} · {mv.p > 0 ? `PWR ${mv.p}` : "STATUS"}{mv.pri ? " · FIRST" : ""} · PP {my.pp?.[i] ?? 0}/{maxPP(mv)}</div>
+                    {mv.n}
+                    {tag ? <span style={{ fontSize: 10, fontWeight: 800, color: tag.c }}> {tag.s}</span> : null}
+                    <div style={{ fontSize: 10, fontWeight: 400 }}>{mv.t} · {mv.p > 0 ? `PWR ${mv.p}` : "STATUS"}{stab ? " · STAB" : ""}{mv.pri ? " · FIRST" : ""}{mv.hits ? ` · ${mv.hits[0]}-${mv.hits[1]}×` : ""}{mv.drain ? " · DRAINS" : ""}{mv.recoil ? " · RECOIL" : ""}{mv.crit ? " · HIGH CRIT" : ""} · PP {my.pp?.[i] ?? 0}/{maxPP(mv)}</div>
                   </button>
                 );
               })}

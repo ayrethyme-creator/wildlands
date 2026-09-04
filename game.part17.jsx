@@ -20,8 +20,14 @@ Object.keys(BY_TYPE).forEach((t) => BY_TYPE[t].sort((a, b) => MOVES[a].p - MOVES
 const UTIL_BY_TYPE = {};
 UTILITY.forEach((k) => { (UTIL_BY_TYPE[MOVES[k].t] = UTIL_BY_TYPE[MOVES[k].t] || []).push(k); });
 
-// levels at which a growing animal picks something up
-const LEARN_AT = [7, 11, 15, 19, 24, 29, 34, 39, 45, 51];
+/* Levels at which a growing animal picks something up.
+   Ayr, 2026-09-04, asked for something closer to FireRed "including levels at
+   which animals get the moves". Ten milestones for a game that runs to level 55+
+   left long dead stretches - nothing new between 39 and 45, nothing at all after
+   51 - and with part85's 221 moves there is plenty to hand out. Fourteen now,
+   closer together early where levelling is fast and spaced out later, ending at
+   60 so a fully grown animal is still learning. */
+const LEARN_AT = [5, 8, 11, 14, 18, 22, 26, 30, 34, 38, 43, 48, 54, 60];
 
 // Mythic and Fossil are flavour types with no moves of their own. Anything
 // built on them draws from a thematic spread instead, which is why a Kitsune
@@ -58,18 +64,33 @@ const buildLearnset = (key) => {
   // but keep the alternation as the tiebreak
   woven.sort((x, y) => MOVES[x].p - MOVES[y].p);
   // support: one from each of its types if available, else a generic
+  /* Support. Both of an animal's types contribute, and up to two each rather
+     than one, because part85 gave every type four to eight status moves and
+     taking only the first of each left a Predator/Swift knowing exactly two
+     tricks for its whole life. Deterministic per species so the same animal
+     always grows the same way, but offset by its name so two Predator/Swift
+     animals do not have identical kits. */
   const util = [];
-  [t1, t2].forEach((t) => { const u = UTIL_BY_TYPE[t]; if (u && u.length) util.push(u[0]); });
+  let hh = 0; for (let i = 0; i < key.length; i++) hh = (hh * 31 + key.charCodeAt(i)) >>> 0;
+  [t1, t2].forEach((t, ti) => {
+    const u = UTIL_BY_TYPE[t];
+    if (!u || !u.length) return;
+    util.push(u[(hh + ti) % u.length]);
+    if (u.length > 1) util.push(u[(hh + ti + 1 + (u.length >> 1)) % u.length]);
+  });
   if (!util.length) util.push("harden");
+  const utilq = [...new Set(util)];
   // starting moves: the two weakest, so there's room to grow
   const start = woven.slice(0, 2);
   // everything after, plus utility slotted in at sensible points
   const rest = woven.slice(2);
   const seq = [];
+  let ui = 0;
   rest.forEach((mv, i) => {
     seq.push(mv);
-    if (i === 1 && util[0]) seq.push(util[0]);
-    if (i === 4 && util[1]) seq.push(util[1]);
+    // Spread across the whole climb instead of both landing in the first third,
+    // so an animal is still picking up new tools in its forties.
+    if ((i === 1 || i === 4 || i === 7 || i === 10) && utilq[ui]) seq.push(utilq[ui++]);
   });
   const learn = [...new Set(seq)].slice(0, LEARN_AT.length).map((mv, i) => [LEARN_AT[i], mv]);
   return { start, learn };

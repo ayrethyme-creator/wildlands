@@ -1256,14 +1256,31 @@ function Wildlands() {
     timers.current.push(t);
   };
 
-  const effSpd = (x) => x.spd * (1 + 0.25 * (x.stg?.s || 0)) * (x.chill ? 0.5 : 1);
+  // part85 owns the stage curve, the same-type bonus and the crit rate. The
+  // fallbacks keep this file working on its own if that part ever fails to load.
+  const SM = (s) => (typeof stageMul === "function" ? stageMul(s) : 1 + 0.25 * (s || 0));
+  const effSpd = (x) => x.spd * SM(x.stg?.s || 0)
+    * (x.chill ? 0.5 : 1)
+    * (x.para ? (typeof PARA_SPD === "number" ? PARA_SPD : 0.5) : 1);
 
   const dmgCalc = (att, dfn, mv) => {
-    const aS = 1 + 0.25 * (att.stg?.a || 0);
-    const dS = 1 + 0.25 * (dfn.stg?.d || 0);
+    const aS = SM(att.stg?.a || 0);
+    // A critical hit ignores the defender having buffed its guard - that is what
+    // makes a crit an ANSWER to somebody who has set up, rather than just a
+    // bigger number.
+    const crit = Math.random() < (typeof critChance === "function" ? critChance(mv) : 1 / 16);
+    const dStage = dfn.stg?.d || 0;
+    const dS = SM(crit && dStage > 0 ? 0 : dStage);
     const base = ((2 * att.lvl / 5 + 2) * mv.p * ((att.atk * aS) / Math.max(1, dfn.def * dS))) / 20 + 2;
     const mult = eff(mv.t, DEX[dfn.sp].t);
-    return { dmg: Math.max(1, Math.floor(base * mult * (0.85 + Math.random() * 0.15))), mult };
+    // Same-type attack bonus: an animal hits harder with its own kind of move.
+    const stab = (DEX[att.sp].t || []).indexOf(mv.t) >= 0
+      ? (typeof STAB === "number" ? STAB : 1.5) : 1;
+    // A burn halves what you hit for, which is most of why it is worth applying.
+    const burn = att.brn ? 0.5 : 1;
+    const critM = crit ? (typeof CRIT_MULT === "number" ? CRIT_MULT : 1.5) : 1;
+    const roll = 0.85 + Math.random() * 0.15;
+    return { dmg: Math.max(1, Math.floor(base * mult * stab * burn * critM * roll)), mult, crit };
   };
 
   const runSteps = (steps) => {
@@ -1336,8 +1353,8 @@ function Wildlands() {
     const st = SR.current;
     if (!st.battle || st.battle.phase !== "choose") return;
     const b = st.battle;
-    const my = { ...st.party[0], stg: { ...(st.party[0].stg || { a: 0, d: 0, s: 0 }) } };
-    const en = { ...b.enemy, stg: { ...(b.enemy.stg || { a: 0, d: 0, s: 0 }) } };
+    const my = { ...st.party[0], stg: { a: 0, d: 0, s: 0, acc: 0, ...(st.party[0].stg || {}) } };
+    const en = { ...b.enemy, stg: { a: 0, d: 0, s: 0, acc: 0, ...(b.enemy.stg || {}) } };
     const party = st.party.map((a) => ({ ...a }));
     const items = { ...st.items };
     const box = [...st.box];
@@ -1352,7 +1369,7 @@ function Wildlands() {
     let guidePop = null;
     const steps = [];
     const foeName = () => (b.kind === "wild" ? "Wild " : b.kind === "legend" ? "Guardian " : "") + DEX[en.sp].n;
-    const clean = (a) => { const { stg, psn, slp, fear, chill, ...r } = a; return { ...r }; };
+    const clean = (a) => { const { stg, psn, slp, fear, chill, para, guard, ...r } = a; return { ...r }; };
 
     // A landed blow bumps a counter the battle screen watches, and the counter
     // doubles as a React key so a second hit restarts the shake instead of
@@ -1410,7 +1427,22 @@ function Wildlands() {
       // still picks wrong a quarter of the time, which is most of the
       // difference between a route scrap and an assessment.
       const sharp = !!(b.gym || b.elite || b.kind === "legend");
-      if (status.length && Math.random() < (sharp ? 0.12 : 0.18)) return status[rnd(0, status.length - 1)];
+
+      /* A leader who is holding a setup move now opens with it, once, while it
+         still has the health to spend a turn. With stages worth what part85
+         makes them worth, +2 attack on turn one is the difference between a
+         gym that is a wall of numbers and a gym that is a plan you have to
+         answer - which is what Ayr asked for. */
+      const stages = (en.stg?.a || 0) + (en.stg?.d || 0) + (en.stg?.s || 0);
+      const setup = all.filter((m2) => m2.p <= 0 && /^raise/.test(m2.fx || ""));
+      if (sharp && setup.length && stages <= 0 && en.hp > en.maxHp * 0.6 && Math.random() < 0.55) {
+        return setup.sort((x, y) => (y.amt || 1) - (x.amt || 1))[0];
+      }
+      // Healing when it is actually hurt, rather than at random.
+      const heal = all.filter((m2) => m2.fx === "heal");
+      if (heal.length && en.hp < en.maxHp * 0.35 && Math.random() < (sharp ? 0.6 : 0.25)) return heal[0];
+
+      if (status.length && Math.random() < (sharp ? 0.2 : 0.18)) return status[rnd(0, status.length - 1)];
       if (dmgOpts.length === 0) return all[0];
       if (sharp) return dmgOpts[0];
       return Math.random() < 0.75 ? dmgOpts[0] : dmgOpts[rnd(0, dmgOpts.length - 1)];
@@ -1433,16 +1465,62 @@ function Wildlands() {
         att.fear -= 1;
         if (Math.random() < 0.4) { swing(`${who} is too shaken to move!`, {}, "fear"); return false; }
       }
-      if (Math.random() * 100 > mv.acc) { swing(`${who} used ${mv.n}... but it missed!`, {}, "miss"); return false; }
+      // A brace lasts exactly one round: the user set it last turn, it either
+      // blocked something or it did not, and now they are acting again.
+      att.guard = false;
+      // Paralysis: slower always, and every so often it simply cannot go.
+      if (att.para && Math.random() < (typeof PARA_SKIP === "number" ? PARA_SKIP : 0.25)) {
+        swing(`${who} seizes up and cannot move!`, {}, "weak"); return false;
+      }
+      // Accuracy carries a stage of its own now, so Smokescreen and Ink Cloud
+      // are worth a turn instead of being flavour.
+      const aim = mv.acc * SM(att.stg?.acc || 0);
+      if (Math.random() * 100 > aim) { swing(`${who} used ${mv.n}... but it missed!`, {}, "miss"); return false; }
       if (mv.p <= 0) {
         let txt = `${who} used ${mv.n}!`;
+        /* Stages move by mv.amt, default one, and clamp at ±6 rather than ±2.
+           part85 has the reasoning: at ±2 on a flat quarter-step the very best a
+           setup move could ever do was +50%, so attacking twice always beat
+           spending a turn, and every status move in the game was a trap. The
+           word says how far it went, because "rose" and "SHARPLY rose" is the
+           difference between a turn well spent and a wasted one. */
+        const CAP = (typeof STAGE_CAP === "number") ? STAGE_CAP : 2;
+        const amt = mv.amt || 1;
+        const hard = amt >= 2 ? " sharply" : "";
+        const up = (o, st, label) => {
+          const before = o.stg[st] || 0;
+          o.stg[st] = Math.min(CAP, before + amt);
+          txt += o.stg[st] === before ? ` Its ${label} won't go higher!` : ` Its ${label}${hard} rose!`;
+        };
+        const down = (o, st, label, name) => {
+          const before = o.stg[st] || 0;
+          o.stg[st] = Math.max(-CAP, before - amt);
+          txt += o.stg[st] === before ? ` ${name}'s ${label} won't go lower!` : ` ${name}'s ${label}${hard} fell!`;
+        };
         if (mv.fx === "heal") { const h = Math.floor(att.maxHp * 0.45); att.hp = Math.min(att.maxHp, att.hp + h); txt += ` It recovered ${h} HP!`; swing(txt, {}, "heal"); }
-        else if (mv.fx === "raiseDef") { att.stg.d = Math.min(2, att.stg.d + 1); txt += " Its defense rose!"; swing(txt, {}, "learn"); }
-        else if (mv.fx === "lowerAtk") { dfn.stg.a = Math.max(-2, dfn.stg.a - 1); txt += ` ${tgt}'s attack fell!`; swing(txt, {}, "weak"); }
-        else if (mv.fx === "lowerDef") { dfn.stg.d = Math.max(-2, dfn.stg.d - 1); txt += ` ${tgt}'s defense fell!`; swing(txt, {}, "weak"); }
-        else if (mv.fx === "raiseAtk") { att.stg.a = Math.min(2, att.stg.a + 1); txt += " Its attack rose!"; swing(txt, {}, "learn"); }
-        else if (mv.fx === "raiseSpd") { att.stg.s = Math.min(2, (att.stg.s || 0) + 1); txt += " Its speed rose!"; swing(txt, {}, "learn"); }
-        else if (mv.fx === "lowerSpd") { dfn.stg.s = Math.max(-2, (dfn.stg.s || 0) - 1); txt += ` ${tgt}'s speed fell!`; swing(txt, {}, "weak"); }
+        // Shakes off poison, burn, sleep, chill and paralysis in one turn. The
+        // counter-play to a team built on status.
+        else if (mv.fx === "cure") {
+          const had = att.psn || att.brn || att.slp || att.chill || att.para;
+          att.psn = false; att.brn = 0; att.slp = 0; att.chill = 0; att.para = false;
+          txt += had ? " It shook itself clean!" : " But there was nothing to shake off.";
+          swing(txt, {}, "heal");
+        }
+        // One turn of refusing to be hit at all. Priority 3, so it resolves
+        // before anything it is meant to stop.
+        else if (mv.fx === "guard") { att.guard = true; txt += " It braced itself!"; swing(txt, {}, "learn"); }
+        else if (mv.fx === "raiseDef") { up(att, "d", "defense"); swing(txt, {}, "learn"); }
+        else if (mv.fx === "lowerAtk") { down(dfn, "a", "attack", tgt); swing(txt, {}, "weak"); }
+        else if (mv.fx === "lowerDef") { down(dfn, "d", "defense", tgt); swing(txt, {}, "weak"); }
+        else if (mv.fx === "raiseAtk") { up(att, "a", "attack"); swing(txt, {}, "learn"); }
+        else if (mv.fx === "raiseSpd") { up(att, "s", "speed"); swing(txt, {}, "learn"); }
+        else if (mv.fx === "lowerSpd") { down(dfn, "s", "speed", tgt); swing(txt, {}, "weak"); }
+        else if (mv.fx === "lowerAcc") { down(dfn, "acc", "aim", tgt); swing(txt, {}, "weak"); }
+        else if (mv.fx === "para") {
+          if (dfn.para) txt += ` But ${tgt} is already staggering!`;
+          else { dfn.para = true; txt += ` ${tgt} is paralysed — it is slower, and it will seize up!`; }
+          swing(txt, {}, "weak");
+        }
         else if (mv.fx === "chill") { if (dfn.chill) txt += ` But ${tgt} is already chilled!`; else { dfn.chill = 3; txt += ` ${tgt} was chilled — its speed halves!`; } swing(txt, {}, "weak"); }
         else if (mv.fx === "sleep") { if (dfn.slp) txt += ` But ${tgt} is already asleep!`; else { dfn.slp = rnd(2, 3); txt += ` ${tgt} drifted off to sleep!`; } swing(txt, {}, "sleep"); }
         else if (mv.fx === "fear") { if (dfn.fear) txt += ` But ${tgt} is already shaken!`; else { dfn.fear = 2; txt += ` ${tgt} shudders with dread!`; } swing(txt, {}, "fear"); }
@@ -1454,11 +1532,46 @@ function Wildlands() {
         } else swing(txt);
         return false;
       }
-      const { dmg, mult } = dmgCalc(att, dfn, mv);
+      // Braced against exactly one attack, then it drops.
+      if (dfn.guard) {
+        dfn.guard = false;
+        swing(`${who} used ${mv.n} — but ${tgt} was braced and took nothing!`, {}, "miss");
+        return false;
+      }
+      /* A move that lands two to five times. Each hit is rolled separately, so
+         effectiveness and crits apply per hit and a five-hit Rake genuinely can
+         be the best turn in the fight - that is the trade for its low power. */
+      let dmg = 0, mult = 1, crit = false, landed = 1;
+      if (mv.hits) {
+        const times = rnd(mv.hits[0], mv.hits[1]);
+        landed = 0;
+        for (let i = 0; i < times && dfn.hp - dmg > 0; i++) {
+          const r = dmgCalc(att, dfn, mv);
+          dmg += r.dmg; mult = r.mult; crit = crit || r.crit; landed++;
+        }
+      } else {
+        const r = dmgCalc(att, dfn, mv);
+        dmg = r.dmg; mult = r.mult; crit = r.crit;
+      }
       dfn.hp = Math.max(0, dfn.hp - dmg);
       let txt = `${who} used ${mv.n}! (-${dmg})`;
+      if (mv.hits) txt += ` Hit ${landed} time${landed === 1 ? "" : "s"}!`;
+      if (crit) txt += " A critical hit!";
       if (mult > 1) txt += " It's super effective!";
       else if (mult < 1) txt += " Not very effective...";
+      // Drinks back half of what it dealt.
+      if (mv.drain) {
+        const back = Math.max(1, Math.floor(dmg * mv.drain));
+        const before = att.hp;
+        att.hp = Math.min(att.maxHp, att.hp + back);
+        if (att.hp > before) txt += ` ${who} drank back ${att.hp - before} HP!`;
+      }
+      // And pays for the big ones.
+      if (mv.recoil) {
+        const hurt = Math.max(1, Math.floor(dmg * mv.recoil));
+        att.hp = Math.max(0, att.hp - hurt);
+        txt += ` ${who} is hurt by the effort! (-${hurt})`;
+      }
       if (mv.fx === "poison" && dfn.hp > 0 && !dfn.psn && Math.random() < (mv.fxc || 0)) {
         dfn.psn = true; txt += ` ${tgt} was poisoned!`;
       }
@@ -1466,10 +1579,16 @@ function Wildlands() {
       if (mv.fx === "sleep" && dfn.hp > 0 && !dfn.slp && Math.random() < (mv.fxc || 0)) { dfn.slp = rnd(2, 3); txt += ` ${tgt} fell asleep!`; }
       if (mv.fx === "burn" && dfn.hp > 0 && !dfn.brn && Math.random() < (mv.fxc || 0)) { dfn.brn = 1; txt += ` ${tgt} was burned!`; }
       if (mv.fx === "fear" && dfn.hp > 0 && !dfn.fear && Math.random() < (mv.fxc || 0)) { dfn.fear = 2; txt += ` ${tgt} flinched!`; }
-      if (mv.fx === "lowerDef" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.d = Math.max(-2, dfn.stg.d - 1); txt += ` ${tgt}'s defense fell!`; }
-      if (mv.fx === "lowerSpd" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.s = Math.max(-2, (dfn.stg.s || 0) - 1); txt += ` ${tgt}'s speed fell!`; }
-      if (mv.fx === "raiseAtk" && Math.random() < (mv.fxc || 0)) { att.stg.a = Math.min(2, att.stg.a + 1); txt += ` ${who}'s attack rose!`; }
-      swing(txt, {}, mult > 1 ? "super" : mult < 1 ? "weak" : "hit");
+      if (mv.fx === "para" && dfn.hp > 0 && !dfn.para && Math.random() < (mv.fxc || 0)) { dfn.para = true; txt += ` ${tgt} is paralysed!`; }
+      {
+        const CAP2 = (typeof STAGE_CAP === "number") ? STAGE_CAP : 2;
+        const step = mv.amt || 1;
+        if (mv.fx === "lowerDef" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.d = Math.max(-CAP2, (dfn.stg.d || 0) - step); txt += ` ${tgt}'s defense fell!`; }
+        if (mv.fx === "lowerSpd" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.s = Math.max(-CAP2, (dfn.stg.s || 0) - step); txt += ` ${tgt}'s speed fell!`; }
+        if (mv.fx === "lowerAcc" && dfn.hp > 0 && Math.random() < (mv.fxc || 0)) { dfn.stg.acc = Math.max(-CAP2, (dfn.stg.acc || 0) - step); txt += ` ${tgt}'s aim fell!`; }
+        if (mv.fx === "raiseAtk" && Math.random() < (mv.fxc || 0)) { att.stg.a = Math.min(CAP2, (att.stg.a || 0) + step); txt += ` ${who}'s attack rose!`; }
+      }
+      swing(txt, {}, crit ? "crit" : mult > 1 ? "super" : mult < 1 ? "weak" : "hit");
       return dfn.hp <= 0;
     };
 
@@ -1556,10 +1675,10 @@ function Wildlands() {
           battle: { ...prev.battle, enemy: { ...en }, phase: "switch", mode: "main" },
         } : prev);
       } else {
-        party.forEach((a) => { a.hp = a.maxHp; a.pp = a.moves.map((k) => maxPP(MOVES[k])); a.psn = false; a.slp = 0; a.fear = 0; a.chill = 0; a.brn = 0; });
+        party.forEach((a) => { a.hp = a.maxHp; a.pp = a.moves.map((k) => maxPP(MOVES[k])); a.psn = false; a.slp = 0; a.fear = 0; a.chill = 0; a.brn = 0; a.para = false; a.guard = false; });
         my.hp = my.maxHp;
         my.pp = my.moves.map((k) => maxPP(MOVES[k]));
-        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0; my.brn = 0;
+        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0; my.brn = 0; my.para = false; my.guard = false;
         const lost = blackoutLoss(items.coins, badges);
         items.coins = (items.coins ?? 0) - lost;
         snapEnd(`You blacked out and woke at Baobab Base. Your team was healed, but you dropped ₡${lost} on the trail.`, { blackout: true });
@@ -1675,7 +1794,7 @@ function Wildlands() {
       if (!my.psn && !my.slp && !my.fear && !my.chill) { snapBusy(`${DEX[my.sp].n} is already feeling fine.`); backToChoose(); }
       else {
         items.balms -= 1;
-        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0; my.brn = 0;
+        my.psn = false; my.slp = 0; my.fear = 0; my.chill = 0; my.brn = 0; my.para = false; my.guard = false;
         snapBusy(`You rubbed Soothe Balm on ${DEX[my.sp].n}. It shook everything off!`, {}, "heal");
         if (!enemyActs()) finishRound();
       }
@@ -1886,7 +2005,7 @@ function Wildlands() {
       let msg;
       if (F.revive) {
         a.hp = Math.max(1, Math.floor(a.maxHp / 2));
-        a.psn = false; a.slp = 0; a.fear = 0; a.chill = 0; a.brn = 0;
+        a.psn = false; a.slp = 0; a.fear = 0; a.chill = 0; a.brn = 0; a.para = false;
         msg = `✨ ${DEX[a.sp].n} is back on its feet. (half HP)`;
       } else if (F.heal) {
         const before = a.hp;
