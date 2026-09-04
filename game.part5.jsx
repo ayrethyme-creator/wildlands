@@ -865,7 +865,7 @@
               {my.moves.every((k, i) => (my.pp?.[i] ?? 0) <= 0) && (
                 <button disabled={busy} style={{ ...btn("#27ae60"), opacity: busy ? 0.5 : 1, gridColumn: "1 / -1" }}
                   onClick={() => takeTurn({ kind: "flail" })}>
-                  Flail<div style={{ fontSize: 10, fontWeight: 400 }}>Out of PP! Wild · PWR 30</div>
+                  Flail<div style={{ fontSize: 10, fontWeight: 400 }}>Out of PP! Wild · PWR 30 · 100% hit</div>
                 </button>
               )}
               {my.moves.map((mk2, i) => {
@@ -886,12 +886,27 @@
                   : m < 1 ? { s: "×½ weak", c: "#f0a8a8" }
                   : null;
                 const stab = mv.p > 0 && (DEX[my.sp].t || []).indexOf(mv.t) >= 0;
+                /* THE CHANCE TO HIT. Ayr, 2026-09-04: "the percentage chance to
+                   hit does not show up during battle still."
+                   It is the LIVE number, not the move's printed accuracy: part85
+                   made aim a stat stage, so a Smokescreen in your face genuinely
+                   changes what this move will do and the button should say so.
+                   Marked when it is not the base figure, because a silently
+                   different number is worse than no number. */
+                const aimStage = (my.stg && my.stg.acc) || 0;
+                const aimMul = (typeof stageMul === "function") ? stageMul(aimStage) : 1;
+                const hit = Math.max(1, Math.min(100, Math.round(mv.acc * aimMul)));
                 return (
                   <button key={mk2} disabled={busy || out} style={{ ...btn(TYPE_COLORS[mv.t]), opacity: busy || out ? 0.45 : 1 }}
                     onClick={() => takeTurn({ kind: "move", i })}>
                     {mv.n}
                     {tag ? <span style={{ fontSize: 10, fontWeight: 800, color: tag.c }}> {tag.s}</span> : null}
-                    <div style={{ fontSize: 10, fontWeight: 400 }}>{mv.t} · {mv.p > 0 ? `PWR ${mv.p}` : "STATUS"}{stab ? " · STAB" : ""}{mv.pri ? " · FIRST" : ""}{mv.hits ? ` · ${mv.hits[0]}-${mv.hits[1]}×` : ""}{mv.drain ? " · DRAINS" : ""}{mv.recoil ? " · RECOIL" : ""}{mv.crit ? " · HIGH CRIT" : ""} · PP {my.pp?.[i] ?? 0}/{maxPP(mv)}</div>
+                    <div style={{ fontSize: 10, fontWeight: 400 }}>
+                      {mv.t} · {mv.p > 0 ? `PWR ${mv.p}` : "STATUS"} ·{" "}
+                      <span style={{ color: aimStage < 0 ? "#f0a8a8" : aimStage > 0 ? "#8ff08a" : undefined }}>
+                        {hit}% hit{aimStage ? (aimStage < 0 ? " ↓" : " ↑") : ""}
+                      </span>
+                      {stab ? " · STAB" : ""}{mv.pri ? " · FIRST" : ""}{mv.hits ? ` · ${mv.hits[0]}-${mv.hits[1]}×` : ""}{mv.drain ? " · DRAINS" : ""}{mv.recoil ? " · RECOIL" : ""}{mv.crit ? " · HIGH CRIT" : ""} · PP {my.pp?.[i] ?? 0}/{maxPP(mv)}</div>
                   </button>
                 );
               })}
