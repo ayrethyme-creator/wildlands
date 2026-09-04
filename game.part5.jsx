@@ -485,6 +485,41 @@
   };
   const btnS = (bg) => ({ ...btn(bg), padding: "8px 10px", fontSize: 12 });
 
+  /* A way out that is always where you left it.
+
+     Ayr, 2026-09-04: "when you open a menu and have to scroll all of the way
+     down to close it, that gets annoying."
+
+     STICKY, not merely first. A Close at the top of a long list is only an
+     improvement while you are still at the top of it — open the Badge Book, read
+     down to the fortieth badge, and a button at the top is exactly as far away
+     as the one at the bottom. Sticking it to the top of the scrolling area means
+     the distance to the exit is zero wherever you have got to.
+
+     The bottom Close stays. Both is what was asked for, and the one at the
+     bottom is the natural place to finish when you have read to the end.
+
+     `pad` has to match the panel's own padding, because the bar is pulled out to
+     the panel edges with negative margins so it covers the full width — a strip
+     of scrolling content sliding past either side of it would be worse than no
+     bar at all. */
+  const closeBar = (onClose, { bg, pad = 12, style } = {}) => (
+    <div style={{
+      position: "sticky", top: -pad, zIndex: 8,
+      margin: `-${pad}px -${pad}px 10px`, padding: `${pad}px ${pad}px 8px`,
+      // Fully opaque. A translucent bar let the list ghost through it as it
+      // scrolled underneath, which read as a smudge rather than as a header.
+      background: bg || "linear-gradient(#443c31, #3e382e)",
+      borderBottom: "1px solid rgba(122,110,90,.45)",
+      display: "flex", justifyContent: "flex-end",
+    }}>
+      <button onClick={onClose} aria-label="Close"
+        style={{ ...(style || btnS("#7d735f")), width: "auto", padding: "5px 13px", fontSize: 12 }}>
+        ✕ Close
+      </button>
+    </div>
+  );
+
   // ---------- TITLE ----------
   if (S.screen === "title") {
     return (
@@ -1395,6 +1430,11 @@
           <div style={{ position: "fixed", inset: 0, background: "rgba(20,17,13,.93)", zIndex: 63,
             display: "flex", alignItems: "center", justifyContent: "center", padding: 14, overflowY: "auto" }}>
             <div style={{ ...panel, maxWidth: 430, width: "100%", padding: 14 }}>
+              {/* An animal's own story runs long. The scroll here is on the
+                  backdrop rather than inside this card, so the bar sticks to the
+                  top of the screen instead of the top of the panel — which comes
+                  to the same thing for anyone trying to get out. */}
+              {closeBar(() => setS((p) => ({ ...p, storyOf: null })), { pad: 14 })}
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
                 <Sprite sp={a.sp} size={64} />
                 <div>
@@ -1657,6 +1697,11 @@
       {S.menu && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.65)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>
           <div style={{ ...panel, margin: 14, maxWidth: 400, width: "100%", maxHeight: "80vh", overflowY: "auto" }}>
+            {/* Same condition as the Close at the bottom: the learn prompt is a
+                question, not a menu. There is no closing it without answering,
+                and offering a way out that does nothing would be worse than
+                offering none. */}
+            {S.menu !== "learn" && closeBar(() => setS((p) => ({ ...p, menu: null, pick: null, bagSel: null })))}
             {S.menu === "bag" && (() => {
               // Two steps: pick the item, then pick who it is for. Doing it the
               // other way round means opening an animal and finding out you own
@@ -2063,6 +2108,10 @@
                     <div onClick={() => setS((p) => ({ ...p, guideSel: null }))}
                       style={{ position: "fixed", inset: 0, background: "rgba(12,10,8,.88)", zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
                       <div onClick={(e) => e.stopPropagation()} style={{ background: "#241f19", border: "2px solid #5c5344", borderRadius: 14, padding: 14, maxWidth: 430, width: "100%", maxHeight: "88vh", overflowY: "auto" }}>
+                        {/* This card is the longest scroll in the game — a full
+                            field guide entry, its taxon line, its locations and
+                            its moves. Its own background, not the panel's. */}
+                        {closeBar(() => setS((p) => ({ ...p, guideSel: null })), { bg: "#241f19", pad: 14 })}
                         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                           <div style={{ background: "#2e2921", borderRadius: 15, padding: 4 }}><Sprite sp={sp} size={72} /></div>
                           <div style={{ flex: 1 }}>
