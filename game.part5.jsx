@@ -871,20 +871,20 @@
               {my.moves.map((mk2, i) => {
                 const mv = MOVES[mk2];
                 const out = (my.pp?.[i] ?? 0) <= 0;
-                /* HOW WELL IT WILL LAND, on the button. Ayr, 2026-09-04: "can
-                   you add the effectiveness of a move to the attack button too?"
-                   Only for damaging moves - a status move has no type matchup to
-                   report, and putting "no effect" on one would be a lie. The
-                   same-type bonus is shown too, because part85 makes it worth
-                   50% and it is otherwise invisible. */
-                const m = mv.p > 0 ? eff(mv.t, DEX[en.sp].t) : null;
-                const tag = m === null ? null
-                  : m === 0 ? { s: "NO EFFECT", c: "#8a7f68" }
-                  : m >= 4 ? { s: "×4 !!", c: "#8ff08a" }
-                  : m >= 2 ? { s: "×2 SUPER", c: "#8ff08a" }
-                  : m <= 0.25 ? { s: "×¼", c: "#f0a8a8" }
-                  : m < 1 ? { s: "×½ weak", c: "#f0a8a8" }
-                  : null;
+                /* NO MATCHUP ON THE BUTTON, deliberately. Ayr, 2026-09-04:
+                   "remove the effectiveness, and keep the accuracy. not having
+                   the effectiveness displayed increases the challenge."
+
+                   A x2 SUPER label answers the question the fight is asking. The
+                   battle log still tells you afterwards - "It's super
+                   effective!" - which is the right moment for it: you find out
+                   by trying, and then you know it for next time.
+
+                   The same-type bonus stays. It is a fact about YOUR animal
+                   holding YOUR move, true before the fight starts and against
+                   any opponent, so it gives nothing away about the one in front
+                   of you - and part85 makes it worth 50%, which is too much to
+                   leave invisible. */
                 const stab = mv.p > 0 && (DEX[my.sp].t || []).indexOf(mv.t) >= 0;
                 /* THE CHANCE TO HIT. Ayr, 2026-09-04: "the percentage chance to
                    hit does not show up during battle still."
@@ -900,7 +900,6 @@
                   <button key={mk2} disabled={busy || out} style={{ ...btn(TYPE_COLORS[mv.t]), opacity: busy || out ? 0.45 : 1 }}
                     onClick={() => takeTurn({ kind: "move", i })}>
                     {mv.n}
-                    {tag ? <span style={{ fontSize: 10, fontWeight: 800, color: tag.c }}> {tag.s}</span> : null}
                     <div style={{ fontSize: 10, fontWeight: 400 }}>
                       {mv.t} · {mv.p > 0 ? `PWR ${mv.p}` : "STATUS"} ·{" "}
                       <span style={{ color: aimStage < 0 ? "#f0a8a8" : aimStage > 0 ? "#8ff08a" : undefined }}>
