@@ -860,8 +860,14 @@ function Wildlands() {
       // build can hold a finding now - and an old save still lists it as beaten.
       // The finding then became bare walkable floor: invisible and uninteractable.
       // Late regions carry the most beaten coordinates, so they lost the most.
+      // ...and a beaten trainer only steps aside if they HAVE to. Ayr wants
+      // rematches, and a trainer who has vanished cannot be asked for one, so
+      // part84 works out per trainer whether standing their ground would seal a
+      // route and lets everybody else stay put. The rival is never held: her
+      // blocking the road until she is beaten is the point of her.
       ((ch === "R" || ch === "V") && st.trainersBeaten[idKey]
-        && !(TRAINERS[idKey] || {}).chat) ||
+        && !(TRAINERS[idKey] || {}).chat
+        && !(typeof trainerHoldsGround === "function" && trainerHoldsGround(idKey))) ||
       (ch === "W" && st.swimming);
     if (walk) {
       // step counts every completed footfall. The avatar and the grass both
@@ -1004,7 +1010,10 @@ function Wildlands() {
           { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
         ]);
       }
-      else say(`📋 ${g.leader}: "Written's done. Practical now — ${g.type} work, four animals, and I want to see how you handle a bad matchup as much as a good one.\n\nReady when you are."`, [
+      // The count comes from the team rather than from a hard-coded word. It
+      // read "four animals" for as long as the teams happened to be four, and
+      // part84 gives the later leaders a fifth.
+      else say(`📋 ${g.leader}: "Written's done. Practical now — ${g.type} work, ${typeof gymTeamWord === "function" ? gymTeamWord(st.map) : "four"} animals, and I want to see how you handle a bad matchup as much as a good one.\n\nReady when you are."`, [
         { label: "Begin the practical", act: () => startBattle({ kind: "trainer", trainerName: g.leader, gym: g, team: g.team(), ti: 0, enemy: null }) },
         { label: "Not yet", act: () => setS((p) => ({ ...p, dialog: null })) },
       ]);
@@ -1181,6 +1190,23 @@ function Wildlands() {
       // The battle line is theirs; a field note, if they carry one, is a
       // separate beat underneath rather than a second clause of the same
       // sentence.
+      // A REMATCH, for a trainer already beaten who is still standing there.
+      // Ayr: "make the trainers that you battle repeatable. shuffle the animals
+      // for each battle, but keep the level balance the same."
+      //
+      // The prize is cut to a third. A trainer you can fight as many times as
+      // you like is a practice partner and an XP source, which is what was
+      // asked for; at full price they would also be a money tap, and that is a
+      // different game. The XP is untouched.
+      if (st.trainersBeaten[idKey] && tr.team) {
+        const purse = Math.round((tr.prize || 0) / 3);
+        say(`${tr.name}: "Again? Go on then — I've been working on something."`, [
+          { label: "Rematch", act: () => startBattle({ kind: "trainer", trainerName: tr.name,
+            elite: !!tr.elite, team: rematchTeam(idKey, tr), ti: 0, enemy: null, tid: idKey, prize: purse }) },
+          { label: "Later", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+        return;
+      }
       say(`${tr.elite ? "⚜️ " : ""}${tr.specialist ? "🌿 " : ""}${tr.name}${tr.homage ? ` (${tr.homage})` : ""}: "${tr.line}"`
         , [
         { label: "Battle!", act: () => startBattle({ kind: "trainer", trainerName: tr.name, elite: !!tr.elite, team: tr.team(), ti: 0, enemy: null, tid: idKey, prize: tr.prize }) },
@@ -1379,8 +1405,14 @@ function Wildlands() {
       const all = en.moves.map((k) => MOVES[k]);
       const dmgOpts = all.filter((m2) => m2.p > 0).sort((a2, b2) => eff(b2.t, DEX[my.sp].t) - eff(a2.t, DEX[my.sp].t));
       const status = all.filter((m2) => m2.p <= 0 && !((m2.fx === "sleep" && my.slp) || (m2.fx === "fear" && my.fear) || (m2.fx === "chill" && my.chill) || (m2.fx === "poison" && my.psn)));
-      if (status.length && Math.random() < 0.18) return status[rnd(0, status.length - 1)];
+      // A gym leader, an Elite and a guardian always take the best move they
+      // have against what is standing in front of them. An ordinary trainer
+      // still picks wrong a quarter of the time, which is most of the
+      // difference between a route scrap and an assessment.
+      const sharp = !!(b.gym || b.elite || b.kind === "legend");
+      if (status.length && Math.random() < (sharp ? 0.12 : 0.18)) return status[rnd(0, status.length - 1)];
       if (dmgOpts.length === 0) return all[0];
+      if (sharp) return dmgOpts[0];
       return Math.random() < 0.75 ? dmgOpts[0] : dmgOpts[rnd(0, dmgOpts.length - 1)];
     };
 

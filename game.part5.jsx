@@ -1002,8 +1002,12 @@
             if (ch === "X" && S.badges >= (GYMS[S.map]?.id ?? GYM_COUNT)) ch2 = ".";
             // Must match the walkability rule in part4 - see the note there on
             // why a chat NPC is exempt from the beaten-flag.
+            // Must match part4's walkability rule exactly, including part84's
+            // rematch hold: a trainer who stays solid has to stay VISIBLE, or
+            // you would be bumping an invisible person.
             if ((ch === "R" || ch === "V") && S.trainersBeaten[idKey]
-                && !(TRAINERS[idKey] || {}).chat) ch2 = ".";
+                && !(TRAINERS[idKey] || {}).chat
+                && !(typeof trainerHoldsGround === "function" && trainerHoldsGround(idKey))) ch2 = ".";
             if (ch === "D" && o.solved) ch2 = ".";
             const t = TILE_STYLE(ch2, pal);
             let em = t.em, bg = t.bg;
