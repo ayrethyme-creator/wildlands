@@ -893,8 +893,13 @@ function Wildlands() {
           || (tracks && typeof readTracks === "function" ? readTracks(st.map, st) : null);
         const spot = `${nx},${ny}`;
         const alreadyRead = !tracks && (o.read || []).indexOf(spot) >= 0;
-        if (line && !alreadyRead) { const t = setTimeout(() => say(line), 120); timers.current.push(t); }
-        if (!tracks && !alreadyRead) markRead = spot;
+        if (line && !alreadyRead) {
+          const t = setTimeout(() => say(line), 120); timers.current.push(t);
+          // Only remember the ones that actually SAID something. The web and the
+          // nest are silent now (part67), so recording them would fill the save
+          // with a list of places nothing happened.
+          if (!tracks) markRead = spot;
+        }
       }
       setS((p) => {
         // A worked patch recovers while you are away from it. Only entries

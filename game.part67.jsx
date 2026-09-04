@@ -317,10 +317,24 @@ const DRESSING = [
     // hive has only ever appeared in savanna. Long Grass Savanna is the map
     // that name was reaching for.
     line: "🍯 A hive on a rough stand, and the air busy around it. Somebody keeps these — the grass is trodden in a ring." },
-  { ch: "\u2044", kind: "web", zones: ["jungle", "grove"],
-    line: "🕸️ A web strung between two trunks, wet with morning. The spider sits dead centre and does not move as you pass." },
-  { ch: "\u2045", kind: "nest", zones: ["grove", "wetland", "jungle"],
-    line: "🪹 A cup of twigs, low in the fork of a branch. Three eggs, still warm. Whatever laid them is watching you from somewhere close, so you step back." },
+  /* THE WEB AND THE NEST SAY NOTHING AT ALL. Ayr, 2026-09-04: "the webs and
+     nests still make you stop and display a message. please just get rid of
+     that function."
+
+     They are scenery now, and only scenery. The pass before this tried to keep
+     the writing by showing each one ONCE and remembering it in the save, and
+     that was the wrong fix: there is one web and one nest PER MAP, so every new
+     map is a first crossing and it kept happening about as often as it always
+     had. A paragraph you did not ask for, in a box you have to dismiss, in the
+     middle of walking somewhere, is an interruption however good it is.
+
+     Tracks keep their line, because readTracks reports who is living on THIS
+     map right now - it answers a question rather than reciting a fixed
+     paragraph, which is the distinction Ayr drew both times. The hive keeps its
+     line too, never having been part of the complaint. */
+  { ch: "\u2044", kind: "web",  zones: ["jungle", "grove"], line: null },
+  { ch: "\u2045", kind: "nest", zones: ["grove", "wetland", "jungle"], line: null },
+
 ];
 
 const placeDressing = () => {
