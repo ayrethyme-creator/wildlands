@@ -307,34 +307,33 @@ console.log("[part67] tracks laid on", placeTracks(), "maps");
 // The rest of Ayr's list that is an object rather than an effect: a beehive in
 // the meadow, a web strung in the jungle, a nest in the grove.
 //
-// Placed the same careful way the tracks are. These are things you walk into
-// and read, so the tile stops being walkable, so each one needs open ground
-// with a way round it - and at most one of each kind per map, because a hive
-// every eight paces stops being a discovery and becomes wallpaper.
+// SET DRESSING DOES NOT TALK. Ayr, over 2026-09-04: first "the bird nests and
+// spider web should not stop you", then "please just get rid of that function",
+// then "the hive should also not do that". All three are scenery, and scenery is
+// something you look at while walking past it.
+//
+// Each of them used to open a written paragraph when you stepped on the tile. An
+// intermediate version tried to keep the writing by showing each one ONCE and
+// remembering it in the save, and that missed the point twice over: there is one
+// of each PER MAP, so every new map was a first crossing, and a box you have to
+// dismiss in the middle of walking somewhere is an interruption however good the
+// paragraph is and however rarely it fires.
+//
+// TRACKS ARE NOT SET DRESSING and are not in this table. readTracks names who is
+// living on THIS map right now - it answers a question rather than reciting a
+// fixed line - which is the distinction Ayr drew every time: "the animal tracks
+// makes sense."
+//
+// Placed the same careful way the tracks are, and walked ONTO rather than into:
+// nothing this file adds to a map is solid. At most one of each kind per map,
+// because a hive every eight paces stops being a discovery and becomes wallpaper.
 const DRESSING = [
-  { ch: "\u2043", kind: "hive", zones: ["savanna", "savannaz"],
-    // "meadow" again - the same zone that never existed, so in practice the
-    // hive has only ever appeared in savanna. Long Grass Savanna is the map
-    // that name was reaching for.
-    line: "🍯 A hive on a rough stand, and the air busy around it. Somebody keeps these — the grass is trodden in a ring." },
-  /* THE WEB AND THE NEST SAY NOTHING AT ALL. Ayr, 2026-09-04: "the webs and
-     nests still make you stop and display a message. please just get rid of
-     that function."
-
-     They are scenery now, and only scenery. The pass before this tried to keep
-     the writing by showing each one ONCE and remembering it in the save, and
-     that was the wrong fix: there is one web and one nest PER MAP, so every new
-     map is a first crossing and it kept happening about as often as it always
-     had. A paragraph you did not ask for, in a box you have to dismiss, in the
-     middle of walking somewhere, is an interruption however good it is.
-
-     Tracks keep their line, because readTracks reports who is living on THIS
-     map right now - it answers a question rather than reciting a fixed
-     paragraph, which is the distinction Ayr drew both times. The hive keeps its
-     line too, never having been part of the complaint. */
-  { ch: "\u2044", kind: "web",  zones: ["jungle", "grove"], line: null },
-  { ch: "\u2045", kind: "nest", zones: ["grove", "wetland", "jungle"], line: null },
-
+  // "meadow" was a zone that never existed, so in practice the hive has only
+  // ever appeared in savanna. Long Grass Savanna is the map that name was
+  // reaching for.
+  { ch: "\u2043", kind: "hive", zones: ["savanna", "savannaz"] },
+  { ch: "\u2044", kind: "web",  zones: ["jungle", "grove"] },
+  { ch: "\u2045", kind: "nest", zones: ["grove", "wetland", "jungle"] },
 ];
 
 const placeDressing = () => {
@@ -370,8 +369,6 @@ const placeDressing = () => {
 };
 
 // What each says when you walk into it.
-const DRESSING_LINE = {};
-DRESSING.forEach((d) => { DRESSING_LINE[d.ch] = d.line; });
 
 console.log("[part67] set dressing placed:", placeDressing());
 
