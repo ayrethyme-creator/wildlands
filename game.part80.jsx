@@ -49,18 +49,46 @@ const wanderPassable = (ch) =>
   WANDER_PASSABLE.indexOf(ch) >= 0 ||
   (typeof MAP_MARKS !== "undefined" && MAP_MARKS.indexOf(ch) >= 0);
 
+/* IS THIS THING ALIVE?
+
+   Ayr, 2026-09-04: "the quest clues also walk. the bees and the sheep can walk,
+   but not the tree, trashcan or scrolls."
+
+   Correct, and the fault was mine. An arc finding is placed on an R tile exactly
+   like a person, because a finding is something you walk up to and read - so the
+   first version of this file saw the tile, saw no battler, and sent it for a
+   stroll. There are 76 of them and most are objects: a tree, a bin, a scroll, a
+   bell, a bone, a tap, a lightbulb, a hook. Two are a beehive and a flock of
+   sheep, which is what Ayr noticed still worked.
+
+   So the test is no longer "is this tile a person tile" but "is the thing
+   standing here alive". People come from part56's decoder, which already reads
+   an emoji into a human being and returns nothing for a wheelbarrow. Animals are
+   matched by the emoji blocks they live in.
+
+   AN ALLOWLIST, deliberately, rather than a list of objects to exclude. A new
+   emoji nobody thought about defaults to standing still, which is the harmless
+   direction: a scroll that walks is a bug, a sheep that does not is a sheep. */
+const WANDER_ALIVE = /[\u{1F400}-\u{1F43C}\u{1F43F}\u{1F54A}\u{1F577}\u{1F980}-\u{1F9AE}\u{1FAB0}-\u{1FAB3}]/u;
+
+const wanderIsAlive = (em) => {
+  if (!em) return true;                       // the default 🧍 / 🏃 tile: a person
+  if (typeof readPerson === "function" && readPerson(em)) return true;
+  return WANDER_ALIVE.test(em);
+};
+
 /* Who is allowed to wander. Not a whitelist of names - a rule, so people added
    later are covered without anybody remembering to come back here.
 
    Out: anyone with a team (they are standing there to challenge you), the gym
    guards on X, the one quiz house and the one station keeper. A station keeper
    is posted at a specific counter, and a shopkeeper drifting three tiles from
-   the shop is worse than one standing still. */
+   the shop is worse than one standing still. And anything that is not alive. */
 const wanderAllowed = (tr) => {
   if (!tr) return true;                       // an R with no entry: scenery, let it walk
   if (tr.team) return false;                  // battler
   if (tr.station || tr.quizHouse) return false;
-  return true;
+  return wanderIsAlive(tr.em);
 };
 
 const wanderBuild = (map) => {

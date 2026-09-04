@@ -871,10 +871,30 @@ function Wildlands() {
       // the grass arrived in, which is what makes walking a field leave a wake
       // through it rather than a single clump twitching under your feet.
       // Stepping onto one reads it. Same words, no wall.
+      //
+      // ONCE, for the ones that never change. Ayr, 2026-09-04: "the bird nests
+      // and spider web should not stop you. the animal tracks makes sense."
+      //
+      // They never did stop you - MAP_MARKS has been walkable floor since the
+      // trapped-save fix - but a box you have to dismiss every single time you
+      // cross a tile stops you just as effectively as a wall does. The
+      // difference Ayr is pointing at is that TRACKS REPORT SOMETHING THAT
+      // CHANGES: readTracks names who is living on this map right now, so it is
+      // worth reading again. The hive, the web and the nest are a fixed
+      // paragraph. Read it once and it is a discovery; read it on every crossing
+      // and it is a toll gate.
+      //
+      // The mark is remembered per tile in this map's own object record, which
+      // is already part of the save, so a nest stays read across sessions.
+      let markRead = null;
       if (typeof MAP_MARKS !== "undefined" && MAP_MARKS.indexOf(ch) >= 0) {
+        const tracks = ch === "⁂";
         const line = (typeof DRESSING_LINE !== "undefined" && DRESSING_LINE[ch])
-          || (ch === "⁂" && typeof readTracks === "function" ? readTracks(st.map, st) : null);
-        if (line) { const t = setTimeout(() => say(line), 120); timers.current.push(t); }
+          || (tracks && typeof readTracks === "function" ? readTracks(st.map, st) : null);
+        const spot = `${nx},${ny}`;
+        const alreadyRead = !tracks && (o.read || []).indexOf(spot) >= 0;
+        if (line && !alreadyRead) { const t = setTimeout(() => say(line), 120); timers.current.push(t); }
+        if (!tracks && !alreadyRead) markRead = spot;
       }
       setS((p) => {
         // A worked patch recovers while you are away from it. Only entries
@@ -892,7 +912,15 @@ function Wildlands() {
           }
           if (changed) pressure = next;
         }
-        return { ...p, pressure, px: p.x, py: p.y, x: nx, y: ny,
+        // Spreading the existing record keeps boulders, lit torches and solved
+        // exactly as they were - `read` is one more key on the same object, so
+        // it rides along in the save with no change to the payload.
+        let objects = p.objects;
+        if (markRead) {
+          const cur = objsFor(p, p.map);
+          objects = { ...p.objects, [p.map]: { ...cur, read: [...(cur.read || []), markRead] } };
+        }
+        return { ...p, pressure, objects, px: p.x, py: p.y, x: nx, y: ny,
           swimming: ch === "W", step: ((p.step || 0) + 1) % 1000 };
       });
       if (ch === "G") rollEncounter(st.map, "grass");
