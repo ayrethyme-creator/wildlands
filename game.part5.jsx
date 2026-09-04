@@ -542,6 +542,31 @@
     </div>
   );
 
+  /* What an animal is called IN A FIGHT.
+
+     Ayr, 2026-09-04: "use the propper animal name during the whole battle
+     sequence, the nick names get confusing."
+
+     Everything the battle WRITES has always used the species name - "Come back,
+     Fennec Kit!", "Wild Marbled Cat used Pounce!" - it was only the panels and
+     the switch lists that led with the individual's name, so the log and the
+     screen were calling the same animal two different things at the same moment.
+     That is the confusing part, and it is now the species name in both.
+
+     The one place the individual's name survives is a list holding TWO OF THE
+     SAME SPECIES, where dropping it would leave you choosing between two
+     identical rows. It goes in brackets, after, and only then.
+
+     Outside battle nothing changes: the Team screen, the Sanctuary and an
+     animal's own story card still lead with who they are, which is the whole
+     point of them having a name. */
+  const battleName = (a, party) => {
+    const species = DEX[a.sp].n;
+    if (!a.indiv) return species;
+    const twin = (party || []).some((o) => o && o.uid !== a.uid && o.sp === a.sp);
+    return twin ? `${species} (${a.indiv})` : species;
+  };
+
   // ---------- TITLE ----------
   if (S.screen === "title") {
     return (
@@ -811,7 +836,7 @@
               <Sprite sp={my.sp} size={86} flip anim="bobY" />
             </div>
             <div style={{ ...panel, padding: 8, width: "58%" }}>
-              <div style={{ fontSize: 13, fontWeight: 700 }}>{my.indiv || DEX[my.sp].n}{my.indiv ? <span style={{ fontWeight: 400, fontSize: 10, color: "#8a9a6a" }}> · {DEX[my.sp].n}</span> : null} <span style={{ color: "#c9b88a" }}>Lv {my.lvl}</span>{my.psn ? " ☠️" : ""}{my.slp ? " 💤" : ""}{my.fear ? " 😨" : ""}{my.chill ? " 🧊" : ""}</div>
+              <div style={{ fontSize: 13, fontWeight: 700 }}>{battleName(my, S.party)} <span style={{ color: "#c9b88a" }}>Lv {my.lvl}</span>{my.psn ? " ☠️" : ""}{my.slp ? " 💤" : ""}{my.fear ? " 😨" : ""}{my.chill ? " 🧊" : ""}</div>
               <div style={{ margin: "3px 0" }}>{DEX[my.sp].t.map((t) => <Chip key={t} t={t} small />)}</div>
               <HPBar hp={my.hp} max={my.maxHp} />
               <div style={{ fontSize: 10, color: "#c9b88a", marginTop: 2 }}>{my.hp}/{my.maxHp} HP · XP {my.xp}/{xpNeed(my.lvl)}</div>
@@ -830,7 +855,7 @@
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                 {S.party.map((a, i) => i !== 0 && a.hp > 0 ? (
                   <button key={a.uid} style={btn("#2471a3")} onClick={() => forcedSwitch(i)}>
-                    {a.indiv || DEX[a.sp].n} Lv {a.lvl}
+                    {battleName(a, S.party)} Lv {a.lvl}
                   </button>
                 ) : null)}
               </div>
@@ -892,7 +917,7 @@
                 {S.party.map((a, i) => (a.hp > 0 || i === 0) ? null : (
                   <button key={a.uid} disabled={busy} style={{ ...btn("#c9457a"), opacity: busy ? 0.5 : 1 }}
                     onClick={() => takeTurn({ kind: "revive", idx: i })}>
-                    {a.indiv || DEX[a.sp].n} Lv {a.lvl}<div style={{ fontSize: 10, fontWeight: 400 }}>→ {Math.floor(a.maxHp / 2)} HP</div>
+                    {battleName(a, S.party)} Lv {a.lvl}<div style={{ fontSize: 10, fontWeight: 400 }}>→ {Math.floor(a.maxHp / 2)} HP</div>
                   </button>
                 ))}
                 <button disabled={busy} style={{ ...btn("#7d735f"), gridColumn: "1 / -1" }}
@@ -909,7 +934,7 @@
                   <button key={a.uid} disabled={busy || i === 0 || a.hp <= 0}
                     style={{ ...btn("#2471a3"), opacity: busy || i === 0 || a.hp <= 0 ? 0.45 : 1 }}
                     onClick={() => takeTurn({ kind: "freeSwitch", idx: i })}>
-                    {a.indiv || DEX[a.sp].n} Lv {a.lvl} · {a.hp}/{a.maxHp}
+                    {battleName(a, S.party)} Lv {a.lvl} · {a.hp}/{a.maxHp}
                   </button>
                 ))}
                 <button disabled={busy} style={{ ...btn("#7d735f"), gridColumn: "1 / -1" }}
@@ -926,7 +951,7 @@
                   <button key={a.uid} disabled={busy || i === 0 || a.hp <= 0}
                     style={{ ...btn("#2471a3"), opacity: busy || i === 0 || a.hp <= 0 ? 0.45 : 1 }}
                     onClick={() => takeTurn({ kind: "switch", idx: i })}>
-                    {a.indiv || DEX[a.sp].n} Lv {a.lvl} · {a.hp}/{a.maxHp}
+                    {battleName(a, S.party)} Lv {a.lvl} · {a.hp}/{a.maxHp}
                   </button>
                 ))}
                 <button disabled={busy} style={btn("#7d735f")} onClick={() => setS((p) => ({ ...p, battle: { ...p.battle, mode: "main" } }))}>← Back</button>
