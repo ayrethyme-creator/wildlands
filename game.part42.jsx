@@ -213,12 +213,38 @@ const buildExam = (gymId, seed) => {
   // backbone - it reads like a quiz question instead of a form field, and it
   // is easier as well as better, because four animal names are far easier to
   // tell apart than four almost-identical range strings.
+  /* THE BADGES AND THE NATURALISTS, added 2026-09-04 on Ayr's ask for the badge
+     concepts, more variety, and questions about what the specialists say.
+
+     Both are gated the same way everything else here is - by the ground you have
+     walked. A badge only comes up if THREE of its members live in this region,
+     and a naturalist only comes up if they are standing in it. So the badge
+     question is not "have you unlocked the Badge Book entry", which you may not
+     have; it is "you have met these three animals and read their entries - what
+     do they have in common?" That is answerable from the Field Guide, which is
+     the rule this file was built on, and it is the badge's own payload: the
+     concept arrives as the explanation of why those animals belong together. */
+  const speciesHere = new Set(species);
+  const badgesHere = (typeof BADGES_BOOK !== "undefined" ? BADGES_BOOK : [])
+    .map((bg) => ({ bg, mine: (bg.keys || []).filter(([k]) => speciesHere.has(k)) }))
+    .filter((x) => x.mine.length >= 3 && x.bg.concept);
+  const localMaps = new Set(QUIZ_MAPS[gymId] || []);
+  const specHere = (typeof SPECIALISTS !== "undefined" ? SPECIALISTS : [])
+    .filter((s) => localMaps.has(s.at) && s.line && s.name);
+  const allSpec = (typeof SPECIALISTS !== "undefined" ? SPECIALISTS : []);
+
+  // whoAmI was weighted 4 when it and factTrue were most of the file. With four
+  // more kinds in the bag it was still taking two questions in five, which is
+  // the opposite of the variety Ayr asked for, so it comes down to 3.
   const kinds = [];
-  for (let i = 0; i < 4; i++) kinds.push("whoAmI");
+  for (let i = 0; i < 3; i++) kinds.push("whoAmI");
   for (let i = 0; i < 2; i++) kinds.push("factTrue");
   if (mySigns.length >= 1 && elseSigns.length >= 3) kinds.push("sign");
   if (tier >= 2) kinds.push("status");
   if (tier === 1) kinds.push("home");          // one gentle lookup early on
+  kinds.push("diet");
+  if (badgesHere.length >= 4) { kinds.push("badgeConcept"); kinds.push("badgeConcept"); kinds.push("badgeMember"); }
+  if (specHere.length && allSpec.length >= 4) { kinds.push("saidIt"); kinds.push("saidIt"); }
 
   const picked = qShuffle(species, rnd);
   const used = new Set();
@@ -229,7 +255,50 @@ const buildExam = (gymId, seed) => {
     const kind = kinds[Math.floor(rnd() * kinds.length)];
     let q = null;
 
-    if (kind === "sign") {
+    if (kind === "badgeConcept") {
+      // Name three animals you have met and ask what a naturalist would file
+      // them under. The badge's own concept line is the answer; the wrong three
+      // are other badges' concepts, so every option is a real idea.
+      const pickB = badgesHere[Math.floor(rnd() * badgesHere.length)];
+      const names = qShuffle(pickB.mine, rnd).slice(0, 3).map(([, n2]) => n2);
+      const right = pickB.bg.concept;
+      const wrong = [];
+      for (const o of qShuffle(badgesHere, rnd)) {
+        if (o.bg.n === pickB.bg.n || wrong.includes(o.bg.concept)) continue;
+        wrong.push(o.bg.concept);
+        if (wrong.length === 3) break;
+      }
+      if (wrong.length === 3)
+        q = { q: `You have met all three of these. What puts them together?\n\n${names.join(" · ")}`,
+              a: right, w: wrong, long: true };
+    } else if (kind === "badgeMember") {
+      // The other way round: given the idea, which animal belongs to it.
+      const pickB = badgesHere[Math.floor(rnd() * badgesHere.length)];
+      const mine = new Set(pickB.mine.map(([k]) => k));
+      const right = pickB.mine[Math.floor(rnd() * pickB.mine.length)][1];
+      const wrong = [];
+      for (const o of qShuffle(species, rnd)) {
+        if (mine.has(o) || !DEX[o] || wrong.includes(DEX[o].n) || DEX[o].n === right) continue;
+        wrong.push(DEX[o].n);
+        if (wrong.length === 3) break;
+      }
+      if (wrong.length === 3)
+        q = { q: `${pickB.bg.n} — ${pickB.bg.concept}.\n\nWhich of these belongs to it?`,
+              a: right, w: wrong, long: true };
+    } else if (kind === "saidIt") {
+      // The naturalists on this stretch of road say something true and specific.
+      // Ayr: "add questions about what the animal specialists say."
+      const who = specHere[Math.floor(rnd() * specHere.length)];
+      const right = who.name;
+      const wrong = [];
+      for (const o of qShuffle(allSpec, rnd)) {
+        if (o.name === right || wrong.includes(o.name)) continue;
+        wrong.push(o.name);
+        if (wrong.length === 3) break;
+      }
+      if (wrong.length === 3)
+        q = { q: `Who says this?\n\n“${firstSentence(who.line)}”`, a: right, w: wrong, long: true };
+    } else if (kind === "sign") {
       const right = qShuffle(mySigns, rnd)[0];
       const wrong = [];
       for (const t2 of qShuffle(elseSigns, rnd)) {
@@ -275,6 +344,20 @@ const buildExam = (gymId, seed) => {
         }
         if (wrong.length === 3)
           q = { q: `Which of these is true of the ${name}?`, a: right, w: wrong, sp, long: true };
+      } else if (kind === "diet") {
+        // What it eats. Reads off the same guide entry as the range question and
+        // is usually more distinctive - "sponges and bryozoans" is nobody else's.
+        const right = info.d;
+        const wrong = [];
+        for (const o of qShuffle(species, rnd)) {
+          if (o === sp) continue;
+          const v = INFO[o].d;
+          if (!v || v === right || wrong.includes(v)) continue;
+          wrong.push(v);
+          if (wrong.length === 3) break;
+        }
+        if (right && wrong.length === 3)
+          q = { q: `What does the ${name} eat?`, a: right, w: wrong, sp, long: true };
       } else if (kind === "status") {
         const right = STATUS_NAME[info.s];
         const pool = ["Least Concern", "Near Threatened", "Vulnerable", "Endangered", "Critically Endangered"];

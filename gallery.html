@@ -101,6 +101,12 @@ var DATA_PARTS = [
   /* part81 adds species too, so it belongs in the DATA list rather than after
      it - otherwise the gallery reports a roster that is two animals short and
      every count taken from it is quietly wrong. */
+  /* part77 holds the badges. It must come BEFORE part81, which pushes the
+     Garibaldi into one of them at load time - the game already loads them in
+     that order, and a gallery that did not died with "Cannot access
+     BADGES_BOOK before initialization". part42 now draws exam questions from
+     the badges too. */
+  "game.part77.jsx",
   "game.part81.jsx",
   /* part84 rewrites the gym teams, so a gallery that leaves it out would report
      the old ones and any check of the difficulty change would be measuring
@@ -165,6 +171,9 @@ function start() {
                 + ";window.__MK = (typeof mk !== 'undefined') ? mk : null;"
                 + ";window.__CHART = (typeof CHART !== 'undefined') ? CHART : null;"
                 + ";window.__DMG_SCALE = (typeof DMG_SCALE === 'number') ? DMG_SCALE : 1;"
+                + ";window.__EXAM = (typeof buildExam !== 'undefined') ? buildExam : null;"
+                + ";window.__SPECIALISTS = (typeof SPECIALISTS !== 'undefined') ? SPECIALISTS : null;"
+                + ";window.__BADGES = (typeof BADGES_BOOK !== 'undefined') ? BADGES_BOOK : null;"
                 + ";window.__REMATCH = (typeof rematchTeam !== 'undefined') ? rematchTeam : null;"
                 + ";window.__HOLDS = (typeof trainerHoldsGround !== 'undefined') ? trainerHoldsGround : null;";
     var code = texts.join(String.fromCharCode(10)) + String.fromCharCode(10) + EXPORTS;
