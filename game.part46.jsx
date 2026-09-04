@@ -119,11 +119,37 @@ const Avatar = ({ dir, swimming, size }) => {
       : dir === "left" ? "ranger_left"
       : dir === "right" ? "ranger_right"
       : "ranger_down";
+    if (!swimming) {
+      return (
+        <div style={{ width: size, height: size, overflow: "hidden", display: "block" }}>
+          <img src={`art/${file}.png`} width={size} height={size} alt=""
+            style={{ display: "block", objectFit: "contain" }} />
+        </div>
+      );
+    }
+    /* SWIMMING. Ayr, 2026-09-04: "it's funny, but not accurate."
+       Half of that was the drawing - the old ranger_swim.png was her STANDING,
+       the same front view as ranger_down with the bottom 38% hidden, arms
+       hanging at her sides. The other half is here: a hard horizontal cut across
+       a person does not read as water, it reads as a person who has been cut in
+       half. Clipping alone was always going to look like clipping.
+       So the cut now has a surface on it - a soft ellipse of brightness across
+       her waterline, sitting slightly proud of the crop on both sides, which is
+       what the eye needs to read "she is IN this" rather than "she stops here". */
+    const h = size * 0.62;
     return (
-      <div style={{ width: size, height: swimming ? size * 0.62 : size,
-        overflow: "hidden", display: "block" }}>
-        <img src={`art/${file}.png`} width={size} height={size} alt=""
-          style={{ display: "block", objectFit: "contain" }} />
+      <div style={{ position: "relative", width: size, height: h, display: "block" }}>
+        <div style={{ width: size, height: h, overflow: "hidden" }}>
+          <img src={`art/${file}.png`} width={size} height={size} alt=""
+            style={{ display: "block", objectFit: "contain" }} />
+        </div>
+        <div style={{
+          position: "absolute", left: -size * 0.08, right: -size * 0.08,
+          bottom: -size * 0.05, height: size * 0.17, borderRadius: "50%",
+          background: "radial-gradient(ellipse at 50% 34%,"
+            + " rgba(255,255,255,.42) 0%, rgba(255,255,255,.16) 45%, rgba(255,255,255,0) 72%)",
+          pointerEvents: "none",
+        }} />
       </div>
     );
   }
