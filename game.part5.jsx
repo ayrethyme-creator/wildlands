@@ -1024,12 +1024,8 @@
               if (ch2 === "W") { motion = "wl-water"; delay = ((x * 3 + y * 5) % 40) / 10; }
               else if (grassBgImg) { motion = "wl-sway"; delay = jitter; }
               else if (personBgImg) {
-                // Somebody who has just taken a step slides in from the tile they
-                // came from; everybody else breathes on one of three rhythms.
-                const from = (typeof wanderArrival === "function") ? wanderArrival(S.map, x, y) : null;
-                motion = from ? "wl-from-" + from
-                  : ["wl-idle", "wl-idle-b", "wl-idle-c"][(x * 5 + y * 11) % 3];
-                delay = from ? 0 : jitter * 0.6;
+                motion = ["wl-idle", "wl-idle-b", "wl-idle-c"][(x * 5 + y * 11) % 3];
+                delay = jitter * 0.6;
               }
               else if (propBgImg && FLICKER_TILES.has(ch2)) { motion = "wl-flicker"; delay = jitter; }
             }
@@ -1043,6 +1039,21 @@
               ? `linear-gradient(100deg, rgba(255,255,255,0) 38%, ${sh(bg, 0.16)}80 50%, rgba(255,255,255,0) 62%)`
               : null;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
+            /* A townsperson mid-step is drawn on a LAYER OF THEIR OWN rather than
+               as this tile's background, and that is not tidiness either.
+
+               A tile carries the ground colour and the person in the same
+               element. Sliding that element slides the ground with it and leaves
+               the cell it came from unpainted, so the map showed through - Ayr:
+               "when they move, a black square moves with them". The square was
+               the hole where the tile used to be, travelling along beside them.
+
+               So the tile keeps the ground and stops still, and only the drawing
+               moves. z-index 2 puts the person over the tile they are crossing
+               and still under the player at 3. */
+            const stepFrom = (personBgImg && typeof wanderArrival === "function")
+              ? wanderArrival(S.map, x, y) : null;
+            const personBg = stepFrom ? null : personBgImg;
             return (
               <div key={x + "," + y + ((disturbed || wake) && grassBgImg ? ":" + (S.step || 0) : "")}
                 className={grassBgImg && !hidden
@@ -1062,26 +1073,31 @@
                 // the road. The warm centre is also actually warm now.
                 backgroundImage: [
                   waterImg,
-                  grassBgImg || artBgImg || personBgImg || propBgImg || waterSurface,
+                  grassBgImg || artBgImg || personBg || propBgImg || waterSurface,
                   glow ? `radial-gradient(circle, rgba(255,203,120,.55) 0%, rgba(255,190,96,.22) 42%, ${bg} 76%)` : null,
                 ].filter(Boolean).join(", ") || undefined,
                 // Water names both layers: the sliding band is oversized so it
                 // has somewhere to travel, the surface under it is exactly one
                 // tile and never moves.
                 backgroundSize: waterImg ? "200% 100%, 100% 100%"
-                  : (grassBgImg || artBgImg || personBgImg || propBgImg)
+                  : (grassBgImg || artBgImg || personBg || propBgImg)
                     ? (glow ? "100% 100%, 100% 100%" : "100% 100%")
                     : undefined,
                 // Without this a shifted background wraps and a second copy of
                 // the tile slides in from the far edge.
-                backgroundRepeat: (grassBgImg || artBgImg || personBgImg || propBgImg) ? "no-repeat" : undefined,
+                backgroundRepeat: (grassBgImg || artBgImg || personBg || propBgImg) ? "no-repeat" : undefined,
                 animationDelay: motion ? `${delay}s` : undefined,
                 aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
                 boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined,
-                position: (glow || isPlayer) ? "relative" : undefined,
-                zIndex: glow ? 2 : isPlayer ? 3 : undefined }}>
+                position: (glow || isPlayer || stepFrom) ? "relative" : undefined,
+                zIndex: glow ? 2 : isPlayer ? 3 : stepFrom ? 2 : undefined }}>
+                {stepFrom ? (
+                  <div className={"wl-from-" + stepFrom} style={{
+                    position: "absolute", inset: 0, backgroundImage: personBgImg,
+                    backgroundSize: "100% 100%", backgroundRepeat: "no-repeat" }} />
+                ) : null}
                 {grassBgImg ? "" : em}
               </div>
             );
