@@ -15,8 +15,47 @@ CHART.Aquatic.Ice = 0.5;
 CHART.Burrow.Canopy = 0.5;
 CHART.Venom.Canopy = 2; CHART.Venom.Night = 0.5;
 CHART.Armor.Ice = 2;
-CHART.Swift.Bug = 2; CHART.Swift.Night = 0.5;
+CHART.Swift.Bug = 2;
 CHART.Ember.Ice = 2; CHART.Ember.Bug = 2; CHART.Ember.Canopy = 2;
+
+/* NIGHT, brought back into the pack. Ayr, 2026-09-05: "the night type is too
+   powerful and doesn't have enough weaknesses."
+
+   Measured against the other twelve before changing anything, and it was not
+   close. Night was weak to ONE type and resisted THREE - the best defensive
+   profile in the game apart from Wild, which is meant to be neutral. For scale,
+   Canopy is weak to six and resists one.
+
+   Worse than the counts is WHICH types. Night resisted Swift and Predator, the
+   two commonest attacking types in the game at 311 and 193 species, while its
+   single weakness was Bug, one of the rarest at 67. So the answer to a Night
+   animal existed on paper and almost never in your party.
+
+   Two changes, and only two, because the type is supposed to be good:
+
+   1. EMBER NOW BEATS NIGHT. Light against the dark - the one matchup a player
+      will guess before being told, and the game had it at neutral. */
+CHART.Ember.Night = 2;
+
+/* 1b. AND SO DOES AERIAL, which is MOBBING. Find a roosting owl in daylight and
+      the crows, jays and songbirds will come from everywhere to scream at it and
+      drive it off - one of the most watchable things a bird does, and the reason
+      birders play owl calls to bring the woods out. It is the honest answer to
+      "what actually beats a night animal", and it is the one that makes the
+      weakness reachable: Ember and Bug together are only 92 species, the
+      thinnest answer of any type in the game, while Aerial is 189. */
+CHART.Aerial.Night = 2;
+
+/* 2. SWIFT NO LONGER BOUNCES OFF IT. This was the real engine of the problem:
+      Night hit Swift for double AND took half from it, so against the single
+      commonest type in the game it won both halves of the exchange. Night still
+      hits Swift hard - that is its identity, you cannot dodge what you cannot
+      see - but Swift now hits back for full.
+
+   Night keeps its resistances to Predator and Venom, which are the flavourful
+   ones: a nocturnal animal slipping a hunter, and shrugging off what it has
+   spent its life eating. That leaves it weak to two and resisting two, which is
+   where Aquatic, Ice and Ember already sit - strong, no longer unanswerable. */
 
 Object.assign(MOVES, {
   frostfang: { n: "Frost Fang", t: "Ice", p: 62, acc: 95, fx: "chill", fxc: 0.2 },
