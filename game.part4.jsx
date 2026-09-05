@@ -557,10 +557,11 @@ function Wildlands() {
   // know about them", which is an instruction where it could have been the
   // thing itself.
   //
-  // It waits for the world to be quiet - no dialog, no battle, no other menu -
-  // because the befriending plays out over three messages and the last of them
-  // is the one about the animal going back to what it was doing. Opening on top
-  // of that would bury the sentence the game is actually about.
+  // It still waits for the world to be quiet - no dialog, no battle, no other
+  // menu - so the befriending's auto-advancing log lines get their moment first.
+  // As of 2026-09-05 a first-ever catch no longer ends on a blocking dialog box
+  // (see the treat handler), so "quiet" now arrives on its own a beat after the
+  // battle is down, and the guide opens with nothing to dismiss.
   useEffect(() => {
     const st = SR.current;
     if (!st.guidePop) return;
@@ -1910,12 +1911,25 @@ function Wildlands() {
           snapBusy(b.kind === "legend" ? `🌟 ${BEFRIEND_LEGEND[en.sp]}` : `📖 The ${DEX[en.sp].n} lets you close enough. Notes, measurements, photographs.`, {}, "befriend");
           if (b.kind !== "legend") {
             snapBusy(`🌿 It goes back to what it was doing. Nothing wild leaves this place with you.`);
-            snapBusy(`📔 ${DEX[en.sp].n} logged in your Field Guide — open it to read what you now know about them.`);
-            if (ind) snapBusy(`🏠 At the station there is a ${DEX[en.sp].n} who cannot go back.\n\n${ind.name} — ${ind.since}`);
+            if (firstEver) {
+              // On a first-ever catch the Field Guide entry opens by itself the
+              // moment the battle is down (guidePop, handled in an effect). So
+              // the "open it to read" line and the dialog box that used to stand
+              // between the catch and the guide are both dropped, and where the
+              // animal went gets one passing line instead of a box you have to
+              // dismiss. Ayr, 2026-09-05: "get rid of that so it jumps straight
+              // to the guide info."
+              snapBusy(`📔 ${dest}`);
+            } else {
+              // A repeat catch has no guide to jump to, so it keeps the full
+              // sequence and the closing box.
+              snapBusy(`📔 ${DEX[en.sp].n} logged in your Field Guide — open it to read what you now know about them.`);
+              if (ind) snapBusy(`🏠 At the station there is a ${DEX[en.sp].n} who cannot go back.\n\n${ind.name} — ${ind.since}`);
+            }
           }
           snapEnd(b.kind === "legend"
             ? `Field study complete — ${DEX[en.sp].n} logged. The land settles; the guardian chose you.`
-            : dest);
+            : firstEver ? null : dest);
         } else {
           const nw = wary + 1;
           // Three refusals and it is gone. Deterministic rather than a roll,
