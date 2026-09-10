@@ -1201,7 +1201,28 @@ function Wildlands() {
     } else if (ch === "L") {
       const key = m.legend;
       if (!key) return;
-      if (st.legends[key]) { say("🗿 The altar is quiet now. The air here is deeply calm."); return; }
+      /* Befriended is finished: it walks with you and there is nothing here.
+         CALMED IS NOT. The land is settled either way - which is what part92
+         reads and what Acacia reports - but a guardian you only knocked down
+         never chose you, and it used to be gone from the save regardless. It
+         will answer again.
+
+         Yes, that means a player could fight one repeatedly for the experience.
+         Beating a level-forty-something guardian over and over is a poor way to
+         earn anything, and it is a far smaller problem than the one it fixes:
+         losing an animal for good by playing the obvious way and being shown a
+         victory message for it. */
+      if (st.legends[key] === "befriended") {
+        say("🗿 The altar is quiet now. The air here is deeply calm, and what used to wait here is walking with you.");
+        return;
+      }
+      if (st.legends[key]) {
+        say("🗿 The altar is warm and settled. Whatever was unquiet here is not, any more.\n\nBut it did not choose you, and it is still willing to be asked.", [
+          { label: "Ask again", act: () => startBattle({ kind: "legend", enemy: mk(key, LEGEND_LVL[key]) }) },
+          { label: "Leave it in peace", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+        return;
+      }
       if (st.badges < LEGEND_REQ[key]) {
         say(`🗿 The altar is cold and silent. Faint script surfaces: 'Return bearing ${LEGEND_REQ[key]} proofs of mastery.' (You carry ${st.badges} badge${st.badges === 1 ? "" : "s"}.)`);
         return;
@@ -1859,8 +1880,23 @@ function Wildlands() {
           }
         }
       } else if (b.kind === "legend") {
+        /* CALMING IT IS NOT LOSING IT. Ayr, 2026-09-10: "I feel like the
+           legendaries are not catchable."
+
+           This line was half of why. Knocking a guardian out set legends[sp],
+           and the altar refused everyone with a legends[sp] set - so the
+           ordinary way to play, wearing it down so a treat might land, took the
+           guardian out of that save FOR EVER the moment you swung once too
+           hard. And it told you the calm text, which reads like winning. You
+           could lose the animal permanently and be congratulated for it.
+
+           The land still settles - part92 hangs the whole healing thread off
+           this flag and should - but the altar will answer again while it is
+           only calmed. The state now says which of the two happened, so the
+           altar can tell the difference. */
         legends[en.sp] = "calmed";
-        snapEnd(CALM[en.sp]);
+        snapEnd(CALM[en.sp]
+          + "\n\nIt is settled, but it did not choose you. The altar will answer once more if you want to try for that.");
       } else {
         // A wild animal has no purse. What you pick up is whatever the scuffle
         // shook loose, which keeps grinding grass from being an income.
@@ -2070,8 +2106,28 @@ function Wildlands() {
         // now, never for the run. Walk back into the grass and it is there
         // again, which is the rule Ayr set and the reason wariness resets.
         const wary = b.wary || 0;
+        /* THE WARINESS FLOOR. Ayr, 2026-09-10: "I feel like the legendaries are
+           not catchable."
+
+           They were not. `1 - 0.22 * wary` goes NEGATIVE at five refusals, and
+           a guardian never bolts - the three-strikes exit is behind !isLeg - so
+           the encounter cannot end and the chance cannot come back. Five
+           refused treats and the catch was mathematically impossible for the
+           rest of that meeting, while the message stayed "Not yet, its eyes
+           say", which is indistinguishable from bad luck. Players sat there
+           feeding treats into a guaranteed zero.
+
+           Worked through for the three guardians: best case, at almost no
+           health and no wariness, was 13.1% for the Qilin and Thunderbird and
+           10.9% for the Phoenix - and about a 32% and 27% chance of ever
+           landing it before the wall. So a majority of players met an
+           impossible animal and no message ever said so.
+
+           Floored at 0.3. Wariness still bites hard - a much-refused guardian
+           is a third as likely as a fresh one - but it can never be zero, and
+           a berry still walks it back. */
         const chance = Math.min(isLeg ? 0.6 : 0.95,
-          eased * (1.7 - en.hp / en.maxHp) * (1 - 0.22 * wary));
+          eased * (1.7 - en.hp / en.maxHp) * Math.max(0.3, 1 - 0.22 * wary));
         if (Math.random() < chance) {
           const friend = clean({ ...en, hp: Math.max(1, en.hp) });
           // Ayr, 2026-09-03: "when you catch an animal for the first time,
@@ -2137,7 +2193,16 @@ function Wildlands() {
             snapEnd(`The ${DEX[en.sp].n} has had enough of being followed. It slips into the grass and is gone.\n\n` +
               `You will find another — but it will not be this one, today.`);
           } else if (isLeg) {
-            snapBusy("The Guardian regards the treat... and you. Not yet, its eyes say.", { wary: nw }, "miss");
+            /* AND IT SAYS SO. The old line was the same every time however
+               wary the guardian had become, so a player had no way to tell a
+               refusal from a wall - and the berry, which is the actual answer,
+               is never mentioned anywhere a guardian is involved. A hidden
+               mechanic that decides whether an animal is catchable is a
+               mechanic the game has to admit to. */
+            snapBusy(nw >= 2
+              ? "The Guardian's gaze has cooled. It will keep refusing while it is this wary — a berry would settle it."
+              : "The Guardian regards the treat... and you. Not yet, its eyes say.",
+              { wary: nw }, "miss");
             if (!enemyActs()) finishRound();
           } else {
             snapBusy(nw >= 2
