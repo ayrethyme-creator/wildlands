@@ -117,6 +117,7 @@ function Wildlands() {
         runSeed: st.runSeed, pressure: st.pressure,
         steps: st.steps,
         trail: st.trail,
+        metRival: st.metRival,
         compassOn: st.compassOn, achv: st.achv, book: st.book, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
@@ -261,6 +262,7 @@ function Wildlands() {
       // How far this save has walked. part89 runs the world's events off it.
       steps: p.steps || 0,
       trail: p.trail || null,
+      metRival: p.metRival || {},
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
       visited: { town1: true, ...(typeof p.badges === "number" ? p.visited || {} : {}) },
@@ -1010,6 +1012,11 @@ function Wildlands() {
       });
       if (ch === "G") rollEncounter(st.map, "grass");
       else if (ch === "W") rollEncounter(st.map, "water");
+      // ...and Zuri might be coming the other way. After the encounter roll, so
+      // the grass gets first refusal on the step and the two can never fire on
+      // the same footfall. part90 holds every condition, including the one that
+      // stops her challenging somebody who has nothing left to fight with.
+      if (typeof rivalRoamDue === "function" && rivalRoamDue(SR.current)) meetRival();
       return;
     }
     if (ch === "W" && !st.swimming) {
@@ -1022,6 +1029,24 @@ function Wildlands() {
       return;
     }
     interact(ch, nx, ny, idKey);
+  };
+
+  /* Zuri, out in the country. Marked as met for this chapter the moment she
+     appears rather than when the fight ends, so declining her still uses up the
+     meeting - otherwise saying "not now" would leave her hovering over every
+     step until you gave in, which is a worse kind of pestering than the one
+     this replaces. */
+  const meetRival = () => {
+    const st = SR.current;
+    const stage = rivalRoamStage(st.badges);
+    setS((p) => ({ ...p, metRival: { ...(p.metRival || {}), [p.badges]: true, at: p.steps || 0 } }));
+    say(rivalRoamLine(st), [
+      { label: "Battle!", act: () => startBattle({
+          kind: "trainer", trainerName: "Rival Zuri", team: rivalTeam(stage, st.rival),
+          ti: 0, enemy: null, prize: 60 * stage * stage }) },
+      { label: "Not now", act: () => setS((p) => ({ ...p, dialog: {
+          text: "🏃 Zuri: \"Fine! FINE. Go and do your important ranger business. I'll be here. Getting better.\"" } })) },
+    ]);
   };
 
   const tryPush = (st, m, o, nx, ny, dx, dy) => {
