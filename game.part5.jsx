@@ -1053,14 +1053,36 @@
               <button disabled={busy} style={{ ...btn("#b7950b"), opacity: busy ? 0.5 : 1 }} onClick={() => takeTurn({ kind: "treat" })}>🍖 Befriend ({S.items.treats})</button>
               {/* Only offered once the animal is actually unsettled, so it is a
                   response to something the player can see happening rather than
-                  one more button to learn up front. */}
-              {b.kind === "wild" && (b.wary || 0) > 0 && (
+                  one more button to learn up front.
+
+                  AND IT HAS TO INCLUDE GUARDIANS. Ayr, 2026-09-10: "there is no
+                  way for me to give it a berry even though it says I should."
+
+                  This was gated on kind === "wild", and a guardian fight is
+                  kind === "legend" - so the one control that answers wariness
+                  has never once appeared in a guardian battle. That is not only
+                  a missing button. It is why the wariness bug fixed earlier
+                  today was inescapable: a guardian accumulates wariness with
+                  every refused treat, never bolts, and had no way to be settled,
+                  so the encounter could only ever get worse. The berry was the
+                  designed answer and it was unreachable in exactly the fight
+                  that needed it.
+
+                  Written as "not a trainer" rather than as a list of the two
+                  kinds that should have it, so a kind added later is included
+                  by default. The failure above was a list that fell behind. */}
+              {b.kind !== "trainer" && (b.wary || 0) > 0 && (
                 <button disabled={busy || (S.items.berries ?? 0) <= 0}
                   style={{ ...btn("#5d8a5f"), opacity: busy || (S.items.berries ?? 0) <= 0 ? 0.45 : 1 }}
                   onClick={() => takeTurn({ kind: "calm" })}>
                   🫐 Settle it ({S.items.berries ?? 0})
                   <div style={{ fontSize: 10, fontWeight: 400 }}>
-                    {(b.wary || 0) >= 2 ? "About to bolt" : "Wary of you"}
+                    {/* A guardian never bolts, so promising it might would be a
+                        lie. What it does is keep refusing, which is worth
+                        saying plainly. */}
+                    {b.kind === "legend"
+                      ? ((b.wary || 0) >= 2 ? "Refusing you" : "Cooling toward you")
+                      : ((b.wary || 0) >= 2 ? "About to bolt" : "Wary of you")}
                   </div>
                 </button>
               )}
