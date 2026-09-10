@@ -118,6 +118,7 @@ function Wildlands() {
         steps: st.steps,
         trail: st.trail,
         metRival: st.metRival,
+        buddy: st.buddy,
         compassOn: st.compassOn, achv: st.achv, book: st.book, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
@@ -263,6 +264,7 @@ function Wildlands() {
       steps: p.steps || 0,
       trail: p.trail || null,
       metRival: p.metRival || {},
+      buddy: p.buddy !== false,
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
       visited: { town1: true, ...(typeof p.badges === "number" ? p.visited || {} : {}) },
@@ -908,6 +910,11 @@ function Wildlands() {
         // warp increments on every transition so the avatar element is rebuilt
         // rather than animated into place. See the note beside it in part5.
         ...p, map: exit.map, x: exit.x, y: exit.y, swimming: false, warp: (p.warp || 0) + 1,
+        // The tile you have just left is on the map you have just left, so it
+        // means nothing here. The footprint layer already guarded against this;
+        // the follower in part91 stands on it, and would have spent one frame
+        // on whatever tile shares those coordinates in the new place.
+        px: null, py: null,
         visited: (exit.map.startsWith("town") || TOWN_LIST.some(([k]) => k === exit.map)) ? { ...p.visited, [exit.map]: true } : p.visited,
       }));
       return;

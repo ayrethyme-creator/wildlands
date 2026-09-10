@@ -296,6 +296,28 @@
         transform-origin: top center;
       }
 
+      /* The follower's trot (part91). Not the ranger's stride, which is a
+         person's weight shifting - this is four legs and it is a small hop with
+         a bit of tilt in it. Deliberately springier than anything else on the
+         map, because the whole job of this animation is to look pleased. */
+      @keyframes wlTrot {
+        0%   { transform: translateY(0)     rotate(0deg); }
+        35%  { transform: translateY(-11%)  rotate(-3deg); }
+        70%  { transform: translateY(0)     rotate(1.5deg); }
+        100% { transform: translateY(0)     rotate(0deg); }
+      }
+      .wl-trot { animation: wlTrot 240ms ease-out; }
+
+      /* And its feelings, which arrive, hang about, and go. */
+      @keyframes wlEmote {
+        0%   { transform: translateY(4px) scale(.4); opacity: 0; }
+        22%  { transform: translateY(-2px) scale(1.1); opacity: 1; }
+        35%  { transform: translateY(0) scale(1); opacity: 1; }
+        80%  { transform: translateY(-1px) scale(1); opacity: 1; }
+        100% { transform: translateY(-5px) scale(.9); opacity: 0; }
+      }
+      .wl-emote { animation: wlEmote 2.6s ease-out; pointer-events: none; }
+
       /* Dust does not fall, it blows past. */
       @keyframes ambDust {
         0%   { transform: translate(-8px,0);  opacity: 0; }
@@ -1443,6 +1465,42 @@
             );
           })()}
 
+          {/* ---- somebody is following you (part91) ----
+
+              Positioned exactly like the ranger and moved by the same kind of
+              transform, so it slides between tiles instead of hopping. It sits
+              one z-index below her, which is what makes it read as BEHIND: when
+              the two overlap for a frame on a corner, she passes in front.
+
+              The transition is a touch slower than her stride, so it is always
+              arriving just after she does. That lag is most of what makes it
+              look like following rather than like a second cursor. */}
+          {typeof followerOf === "function" && !dark && (() => {
+            const f = followerOf(S);
+            if (!f) return null;
+            return (
+              <div aria-hidden="true" style={{
+                position: "absolute", left: 0, top: 0, zIndex: 3, pointerEvents: "none",
+                width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
+                transform: `translate(${f.x * 100}%, ${f.y * 100}%)`,
+                transition: `transform ${Math.round((typeof stepDelay === "function" ? stepDelay() : 165) * 1.25)}ms linear`,
+                display: "flex", alignItems: "flex-end", justifyContent: "center",
+              }}>
+                {/* Keyed on the step so the little hop restarts on every
+                    footfall, the same way the ranger's stride does. */}
+                <div key={S.step || 0} className="wl-trot" style={{ width: "104%", marginBottom: "-4%" }}>
+                  <FollowSprite sp={f.sp} flip={f.flip} />
+                </div>
+                {f.em ? (
+                  <div className="wl-emote" style={{
+                    position: "absolute", left: "62%", top: "-14%",
+                    fontSize: `min(${(46 / W).toFixed(2)}vw, 13px)`, lineHeight: 1,
+                  }}>{f.em}</div>
+                ) : null}
+              </div>
+            );
+          })()}
+
           {/* Mist and heat are not specks - they are what the whole scene looks
               like through. One flat layer each, weak enough to read the map
               through, sitting under the ranger like every other atmosphere in
@@ -1583,6 +1641,15 @@
           )}
           <button style={btnS("#7d735f")} onClick={() => setS((p) => ({ ...p, sound: !p.sound }))}>{S.sound ? "🔊 On" : "🔇 Off"}</button>
           <button style={btnS(S.run ? "#c0651a" : "#7d735f")} onClick={() => setS((p) => ({ ...p, run: !p.run }))}>{S.run ? "🏃 Withdraw" : "🚶 Walk"}</button>
+          {/* Whether your lead animal walks with you. On by default, and off is
+              a real preference rather than a fault - some people want the map
+              clear, and on a small screen a big animal behind a small ranger is
+              a lot of tile. */}
+          <button style={btnS(S.buddy === false ? "#7d735f" : "#2d7d5a")}
+            title="Your lead animal walks with you"
+            onClick={() => setS((p) => ({ ...p, buddy: p.buddy === false }))}>
+            {S.buddy === false ? "🐾 Alone" : "🐾 Together"}
+          </button>
         </div>
       </div>
 
