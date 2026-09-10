@@ -235,7 +235,7 @@ const TRACK_CHAR = "\u2042";           // ⁂ - a character no map uses for terr
 //
 // Floor removes the whole class of fault instead of narrowing it. Nothing this
 // file adds to a map can trap anybody, because nothing it adds is solid.
-const MAP_MARKS = "⁂⁃⁄⁅";
+const MAP_MARKS = "⁂⁃⁄⁅⁌";   // ⁌ is part93's note: floor, so it can never block
 
 // Where a set of tracks makes sense: beside grass, on open ground, on a wild
 // map. Not in towns - a paw print outside the market is a joke, not a hint.

@@ -448,6 +448,7 @@ const TILE_STYLE = (ch, pal) => {
     case "⁃": return { bg: pal.ground, em: "🍯" };
     case "⁄": return { bg: pal.ground, em: "🕸️" };
     case "⁅": return { bg: pal.ground, em: "🪹" };
+    case "⁌": return { bg: pal.ground, em: "📜" };   // part93: a page somebody left
     case "¦": return { bg: pal.ground, em: "🔦" };
     case "¡": return { bg: pal.ground, em: "🪵" };
     default: return { bg: pal.ground, em: "" };

@@ -119,6 +119,9 @@ function Wildlands() {
         trail: st.trail,
         metRival: st.metRival,
         buddy: st.buddy,
+        // The story threads. All three are small: a set of flags, a set of
+        // flags, and one boolean.
+        notes: st.notes, zuriTalk: st.zuriTalk,
         compassOn: st.compassOn, achv: st.achv, book: st.book, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
@@ -265,6 +268,8 @@ function Wildlands() {
       trail: p.trail || null,
       metRival: p.metRival || {},
       buddy: p.buddy !== false,
+      notes: p.notes || {},
+      zuriTalk: !!p.zuriTalk,
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
       visited: { town1: true, ...(typeof p.badges === "number" ? p.visited || {} : {}) },
@@ -992,6 +997,38 @@ function Wildlands() {
           if (trail) setS((p) => ({ ...p, trail }));
         }
       }
+      /* A PAGE SOMEBODY LEFT (part93). Walked onto rather than bumped, exactly
+         like the tracks and for the same reason: part67 learned that anything
+         solid placed on a map is a tile that can be pinched off, and a note you
+         had to bump would be a wall in the middle of a field.
+
+         The last note plays the meeting instead of a page, because it is the
+         one that says where they are - and they are there. */
+      // typeof first, always: if part93 ever fails to load, NOTE_CH is not a
+      // thing and comparing against it would throw on the step rather than do
+      // nothing. Every other cross-part hook in this file is written this way.
+      if (typeof readNote === "function" && ch === NOTE_CH) {
+        const id = noteHere(st.map);
+        if (id) {
+          const already = !!(st.notes || {})[id];
+          const r = readNote(id, st);
+          // A page you have already picked up can be read again - it is a page,
+          // and it is still lying there. Only the first time records it, and
+          // only the first time plays the scene.
+          if (r && r.keep && !already) setS((p) => ({ ...p, notes: { ...(p.notes || {}), [id]: true } }));
+          const show = (id === 12 && r && r.keep && !already)
+            ? () => say(AMADI_MEETING, [
+                { label: "Sit down", act: () => say(AMADI_TELLS, [
+                  { label: "…", act: () => say(AMADI_GUIDE) },
+                ]) },
+              ])
+            : (id === 12 && already)
+              ? () => say("🥾 Amadi is bent over a page with a kettle going. \"Still here. Still writing. Go on.\"")
+              : () => say(r.text);
+          const t = setTimeout(show, 140);
+          timers.current.push(t);
+        }
+      }
       setS((p) => {
         // A worked patch recovers while you are away from it. Only entries
         // belonging to other maps fade, so standing in the grass you just
@@ -1047,7 +1084,18 @@ function Wildlands() {
     const st = SR.current;
     const stage = rivalRoamStage(st.badges);
     setS((p) => ({ ...p, metRival: { ...(p.metRival || {}), [p.badges]: true, at: p.steps || 0 } }));
-    say(rivalRoamLine(st), [
+    /* THE ONE SHE DOES NOT WANT TO FIGHT (part94). Once in the whole game, at
+       the point where you have settled a guardian and she has not. It takes the
+       place of a challenge rather than being added to one, because the entire
+       weight of the scene is that this time she does not ask. */
+    if (typeof zuriQuietDue === "function" && zuriQuietDue(st)) {
+      setS((p) => ({ ...p, zuriTalk: true }));
+      say(ZURI_QUIET);
+      return;
+    }
+    // What she has to say tracks the guardian thread now, not just the walking.
+    const line = (typeof zuriLine === "function") ? zuriLine(st) : rivalRoamLine(st);
+    say(line, [
       { label: "Battle!", act: () => startBattle({
           kind: "trainer", trainerName: "Rival Zuri", team: rivalTeam(stage, st.rival),
           ti: 0, enemy: null, prize: 60 * stage * stage }) },
@@ -1104,8 +1152,16 @@ function Wildlands() {
       } else if (st.badges >= 8) {
         say("⛺ Prof. Acacia: \"Twelve badges. The Summit Citadel is open to you — the Elite Four, and whoever waits above them. Rest, stock up, and climb, ranger.\"");
       } else {
+        /* SHE TRACKS IT NOW. A professor who sends you out about three symptoms
+           and then never mentions them again is the flatness in one person, so
+           her briefing moves with the state of the land - and when all three
+           are settled she says so, which is the only ending most of this thread
+           gets. The badge directions still follow, because they are what she is
+           for. */
+        const brief = (typeof blightBriefing === "function") ? blightBriefing(st) : null;
         const nextTown = Object.keys(GYMS).find((k) => GYMS[k].id === st.badges + 1);
-        say(`⛺ Prof. Acacia: "Badge ${st.badges + 1} waits with ${GYMS[nextTown].leader} in ${MAPS[nextTown].name}. ${done > 0 ? `${done} of 3 guardians settled — the land breathes easier. ` : "The guardians' shrines will only answer a proven ranger — badges first. "}Keep walking the trail."`);
+        const dir = `Badge ${st.badges + 1} waits with ${GYMS[nextTown].leader} in ${MAPS[nextTown].name}. ${done > 0 ? `${done} of 3 guardians settled — the land breathes easier. ` : "The guardians' shrines will only answer a proven ranger — badges first. "}Keep walking the trail.`;
+        say(brief ? brief + "\n\n⛺ \"" + dir + "\"" : `⛺ Prof. Acacia: "${dir}"`);
       }
     } else if (ch === "H") {
       setS((p) => ({ ...p, houseIdx: p.houseIdx + 1, dialog: { text: "🛖 " + HOUSE_LINES[st.houseIdx % HOUSE_LINES.length] } }));
@@ -1196,7 +1252,19 @@ function Wildlands() {
       // opening speech forever and nothing can be learned, pitched or built.
       const isStory = tr.learns || tr.builds || tr.pitchArc || tr.station
         || (typeof beeloudSolvedText !== "undefined" && beeloudSolvedText[idKey]);
-      if (!isStory && (tr.chat || !tr.team)) { say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`); return; }
+      if (!isStory && (tr.chat || !tr.team)) {
+        /* SOMETIMES THEY TALK ABOUT THE THING THAT IS HAPPENING.
+           The world already has hundreds of people reciting one fixed line
+           each, and the cheapest way to make a place feel like it is living
+           through something is for the people in it to bring it up. About one
+           in three, so it is a rumour going round rather than a village of
+           broken records - and the choice is made from the tile, so the same
+           person always says the same thing and you can go back and check. */
+        const talk = (typeof blightTalk === "function") ? blightTalk(st, m && m.zone) : null;
+        const speaks = talk && ((nx * 7 + ny * 13) % 3 === 0);
+        say(`${tr.em || "🧍"} ${tr.name}: "${speaks ? talk : tr.line}"`);
+        return;
+      }
       // Once an arc is solved its people and places change what they say, and
       // the emoji on the tile changes with them. The payoff has to be visible
       // from the map rather than buried in a menu.

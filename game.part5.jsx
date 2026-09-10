@@ -296,6 +296,25 @@
         transform-origin: top center;
       }
 
+      /* Lightning with no cloud in it (part92). Almost all of this animation is
+         nothing happening, because a sky that flashes constantly is a disco and
+         a sky that flashes twice a minute is wrong. Two strikes close together
+         - real lightning rarely goes once - and then a long wait. */
+      @keyframes wlDryStorm {
+        0%, 84%, 100% { opacity: 0; }
+        85%  { opacity: .55; }
+        87%  { opacity: .05; }
+        89%  { opacity: .42; }
+        93%  { opacity: 0; }
+      }
+      .wl-dry-storm {
+        animation-name: wlDryStorm;
+        animation-timing-function: ease-out;
+        animation-iteration-count: infinite;
+        background: linear-gradient(180deg, rgba(226,238,255,.85), rgba(198,216,255,.28) 42%, rgba(198,216,255,0) 72%);
+        mix-blend-mode: screen;
+      }
+
       /* The follower's trot (part91). Not the ranger's stride, which is a
          person's weight shifting - this is four legs and it is a small hop with
          a bit of tilt in it. Deliberately springier than anything else on the
@@ -1465,6 +1484,66 @@
             );
           })()}
 
+          {/* ---- THE RINGS (part92) ----
+              Grass dying in perfect circles, which is the first of the three
+              things Acacia says is wrong and the first one you can see. Drawn,
+              never in the rows, so you can walk straight through one - and you
+              should be able to, because standing in the middle of it is how the
+              size of it lands.
+
+              Under the follower and the ranger: this is something on the
+              ground, and everything alive passes over it. */}
+          {typeof blightRings === "function" && !dark && (() => {
+            const rings = blightRings(S.map, m.rows, S);
+            if (!rings.length) return null;
+            return (
+              <div aria-hidden="true"
+                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
+                {rings.map((g) => (
+                  <div key={g.key} style={{
+                    position: "absolute", left: 0, top: 0,
+                    width: `${(100 / W) * (g.r * 2)}%`, height: `${(100 / m.rows.length) * (g.r * 2)}%`,
+                    transform: `translate(${(g.x - g.r + 0.5) * (100 / (g.r * 2))}%, ${(g.y - g.r + 0.5) * (100 / (g.r * 2))}%)`,
+                    borderRadius: "50%",
+                    // Dead in the middle, and the edge is where it is still
+                    // dying - which is the detail that makes it read as
+                    // spreading rather than as a stain somebody painted on.
+                    background: "radial-gradient(circle, rgba(122,104,66,.62) 0%, rgba(134,116,74,.5) 58%, rgba(150,132,86,.28) 82%, rgba(150,132,86,0) 100%)",
+                    boxShadow: "inset 0 0 6px rgba(60,48,28,.4)",
+                  }} />
+                ))}
+              </div>
+            );
+          })()}
+
+          {/* ---- THE COLD EMBERS (part92) ----
+              They rise off the water, they are the wrong colour for fire, and
+              there are more of them the worse it gets. */}
+          {typeof blightSpecks === "function" && !m.dark && (() => {
+            const em = blightSpecks(m.zone, S);
+            if (!em.length) return null;
+            return (
+              <div key={`blight:${S.map}:${S.badges}`} aria-hidden="true"
+                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
+                {em.map((s) => <div key={s.key} className={s.cls} style={s.style} />)}
+              </div>
+            );
+          })()}
+
+          {/* ---- THE DRY STORM (part92) ----
+              Lightning out of a clear sky. One layer that flashes, keyed on the
+              step so it fires as you walk rather than on a timer nothing else
+              in this game uses. It never darkens the map: the whole horror of
+              this one is that there is no cloud. */}
+          {typeof blightStorm === "function" && !dark && blightStorm(S, m.zone) > 0 && (
+            <div key={`sky:${S.map}:${Math.floor((S.step || 0) / 9)}`} aria-hidden="true"
+              className="wl-dry-storm"
+              style={{
+                position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2,
+                animationDuration: `${Math.max(2.2, 7 - blightStorm(S, m.zone) * 1.1)}s`,
+              }} />
+          )}
+
           {/* ---- somebody is following you (part91) ----
 
               Positioned exactly like the ranger and moved by the same kind of
@@ -2330,6 +2409,42 @@
                     })()}
                   </div>
                 )}
+                {/* AMADI'S NOTES (part93). Twelve pages found across the whole
+                    trail, and a thread told in pieces is no good if you cannot
+                    put the pieces back in order - by the time you find the
+                    ninth you will not remember the third. Collapsed, because
+                    it is a lot of prose and it is not why you opened the
+                    guide. */}
+                {typeof notesFound === "function" && (() => {
+                  const got = notesFound(S);
+                  if (!got.length) return null;
+                  return (
+                    <div style={{ marginBottom: 10 }}>
+                      <button style={{ ...btnS("#6b5a3a"), width: "100%" }}
+                        onClick={() => setS((p) => ({ ...p, notePanel: !p.notePanel }))}>
+                        📜 Amadi's notes — {got.length} of {NOTES.length}
+                      </button>
+                      {S.notePanel && (
+                        <div style={{ ...panel, marginTop: 6, padding: 8 }}>
+                          <div style={{ fontSize: 10, color: "#c9b88a", marginBottom: 8, lineHeight: 1.45 }}>
+                            Pages left along the trail by the ranger who walked it before you,
+                            in the order they were written.
+                          </div>
+                          {got.map((n) => (
+                            <div key={n.id} style={{ padding: "7px 0", borderBottom: "1px solid #3a342b" }}>
+                              <div style={{ fontSize: 11.5, fontWeight: 700, color: "#e8c547" }}>
+                                {n.id}. {n.t}
+                              </div>
+                              <div style={{ fontSize: 10.5, lineHeight: 1.5, color: "#c9b88a",
+                                marginTop: 3, whiteSpace: "pre-wrap" }}>{n.s}</div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
+
                 {/* WHAT IS ON, RIGHT NOW (part89). The announcement tells you
                     once; this is where you come back to check what it said, how
                     much of it is left, and where it is - because "somewhere in
