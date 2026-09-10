@@ -116,6 +116,7 @@ function Wildlands() {
            Both are small: an integer and a short map of numbers. */
         runSeed: st.runSeed, pressure: st.pressure,
         steps: st.steps,
+        trail: st.trail,
         compassOn: st.compassOn, achv: st.achv, book: st.book, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
@@ -259,6 +260,7 @@ function Wildlands() {
       pressure: p.pressure || {},
       // How far this save has walked. part89 runs the world's events off it.
       steps: p.steps || 0,
+      trail: p.trail || null,
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
       visited: { town1: true, ...(typeof p.badges === "number" ? p.visited || {} : {}) },
@@ -845,7 +847,18 @@ function Wildlands() {
     // loudest fact about a place while it lasts - a river in a salmon run is
     // not a river having an ordinary autumn.
     if (typeof eventPool === "function") usePool = eventPool(usePool, st, mapKey);
-    const picked = pickPool(usePool);
+    /* UNLESS YOU ARE ON A TRAIL, in which case none of the above applies and
+       you meet what you have been following. Tracking is the one thing in this
+       game you can do about wanting a particular animal, and a trail that only
+       improved your odds would be indistinguishable from luck - which is the
+       thing tracking is supposed to be an alternative to.
+
+       Spent on use, so it buys one meeting and then the ground is ordinary
+       again. Grass only: prints on a bank say nothing about what is in the
+       water. */
+    const trail = (kind !== "water" && typeof trailLive === "function") ? trailLive(st) : null;
+    const picked = trail ? trail.sp : pickPool(usePool);
+    if (trail) setS((p) => ({ ...p, trail: null }));
     // Taking one from a patch makes that species harder to find there for a
     // while. Recorded on the roll rather than on the catch, because a fight
     // you fled from still disturbed them.
@@ -962,6 +975,13 @@ function Wildlands() {
       if (ch === "⁂" && typeof readTracks === "function") {
         const line = readTracks(st.map, st);
         if (line) { const t = setTimeout(() => say(line), 120); timers.current.push(t); }
+        // ...and you are now following them. part67 decides whose they are and
+        // refuses when the weather has taken the prints; all this does is put
+        // the answer where rollEncounter can find it.
+        if (typeof trailFrom === "function") {
+          const trail = trailFrom(st.map, st);
+          if (trail) setS((p) => ({ ...p, trail }));
+        }
       }
       setS((p) => {
         // A worked patch recovers while you are away from it. Only entries

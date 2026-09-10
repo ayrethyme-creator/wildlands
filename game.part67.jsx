@@ -270,6 +270,51 @@ const placeTracks = () => {
   return placed;
 };
 
+/* Who left them. One rule, read by both the prints and the trail below, so what
+   the ground SAYS and what following it GIVES you can never disagree - which
+   they would within a fortnight if this ranking existed twice. */
+const trackPicks = (mapKey, st) => {
+  const m = MAPS[mapKey];
+  const pool = (m && m.pool) || [];
+  const dex = (st && st.dex) || {};
+  // Prefer what the player has never befriended: a hint about an animal already
+  // in the party is a hint nobody needed.
+  const ranked = pool.slice().sort((a, b) => ((dex[a[0]] || 0) - (dex[b[0]] || 0)) || (b[1] - a[1]));
+  return ranked.slice(0, 2).filter(([sp]) => DEX[sp]);
+};
+
+/* THE TRAIL. Ayr: tracks that lead somewhere.
+
+   Until now a set of prints was a paragraph. You read who lives here and then
+   went back to standing in grass hoping, which is the same blind waiting the
+   prints were added to remove - a fact with nothing to do about it.
+
+   So following them works. Read a fresh set and you are on that animal's trail:
+   the next thing the grass gives you on this map is what made the prints. Not a
+   better chance - the actual animal. That turns tracking into the one thing in
+   this game you can DO about wanting a particular species, and it is honest
+   about what tracking is, which is following one animal rather than improving
+   your odds against all of them.
+
+   It is deliberately not a guarantee you can bank. It lapses if you leave the
+   map, and it lapses after forty steps, because a trail goes cold. And it can
+   only ever hand you an animal this map already had. */
+const TRAIL_STEPS = 40;
+const trailFrom = (mapKey, st) => {
+  if (typeof weatherTracks === "function" && !weatherTracks(st)) return null;
+  const picks = trackPicks(mapKey, st);
+  if (!picks.length) return null;
+  return { map: mapKey, sp: picks[0][0], until: ((st && st.steps) || 0) + TRAIL_STEPS };
+};
+
+// Is the trail still good? Same map, still within the forty steps.
+const trailLive = (st) => {
+  const t = st && st.trail;
+  if (!t || t.map !== st.map) return null;
+  if (((st.steps) || 0) > t.until) return null;
+  return (typeof DEX !== "undefined" && DEX[t.sp]) ? t : null;
+};
+
 // What the ground says. Two animals, the unmet ones first, with their standing
 // this season spelled out - so "come back after dark" is something the world
 // tells you rather than something you have to infer.
@@ -296,8 +341,7 @@ const readTracks = (mapKey, st) => {
   const dex = (st && st.dex) || {};
   // Prefer what the player has never befriended: a hint about an animal already
   // in the party is a hint nobody needed.
-  const ranked = pool.slice().sort((a, b) => ((dex[a[0]] || 0) - (dex[b[0]] || 0)) || (b[1] - a[1]));
-  const picks = ranked.slice(0, 2).filter(([sp]) => DEX[sp]);
+  const picks = trackPicks(mapKey, st);
   if (!picks.length) return "🐾 Old prints, all of them yours.";
 
   const lines = picks.map(([sp]) => {
@@ -312,7 +356,8 @@ const readTracks = (mapKey, st) => {
     return `${name} — thin on the ground, and ${when}.`;
   });
 
-  return "🐾 Tracks, and what they say:\n\n" + lines.map((l) => "· " + l).join("\n");
+  return "🐾 Tracks, and what they say:\n\n" + lines.map((l) => "· " + l).join("\n")
+    + `\n\nThe ${DEX[picks[0][0]].n} prints are the freshest. Follow them.`;
 };
 
 console.log("[part67] tracks laid on", placeTracks(), "maps");
