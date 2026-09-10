@@ -2200,6 +2200,62 @@
                     })()}
                   </div>
                 )}
+                {/* THE WATCH LIST. Ayr, 2026-09-05: "a list in the guide of the
+                    CR endangered animals with how many there are left (and how
+                    many is a healthy population for context) once they are
+                    caught."
+
+                    It fills in as you befriend them, which is the same rule the
+                    rest of the guide runs on and the reason it lands: the line
+                    about ten vaquita means something once you have met one.
+
+                    Collapsed by default. Forty-eight entries at two lines each
+                    would bury the rest of this screen, and the count on the
+                    header is the part you want at a glance anyway. */}
+                {typeof WATCH !== "undefined" && typeof WATCH_ORDER !== "undefined" && (() => {
+                  const inGame = WATCH_ORDER.filter((k) => DEX[k] && WATCH[k]);
+                  const met = inGame.filter((k) => S.dex[k] === 2);
+                  return (
+                    <div style={{ marginBottom: 10 }}>
+                      <button style={{ ...btnS("#8a3a32"), width: "100%" }}
+                        onClick={() => setS((p) => ({ ...p, watchPanel: !p.watchPanel }))}>
+                        🔴 The Watch List — {met.length} of {inGame.length} met
+                      </button>
+                      {S.watchPanel && (
+                        <div style={{ ...panel, marginTop: 6, padding: 8 }}>
+                          <div style={{ fontSize: 10, color: "#c9b88a", marginBottom: 8, lineHeight: 1.45 }}>
+                            Every animal on this list is Critically Endangered — the last
+                            category before Extinct in the Wild. They appear here once you
+                            have befriended one.
+                          </div>
+                          {met.length === 0 ? (
+                            <div style={{ fontSize: 11, color: "#8a7f68", lineHeight: 1.45 }}>
+                              You have not befriended one of these yet. When you do, this is
+                              where the count goes.
+                            </div>
+                          ) : met.map((k) => (
+                            <div key={k} onClick={() => setS((p) => ({ ...p, guideSel: k }))}
+                              style={{ display: "flex", gap: 8, alignItems: "flex-start", cursor: "pointer",
+                                padding: "7px 0", borderBottom: "1px solid #3a342b" }}>
+                              <div style={{ background: "#2e2921", borderRadius: 10, padding: 2, flexShrink: 0 }}>
+                                <Sprite sp={k} size={34} />
+                              </div>
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ fontSize: 12, fontWeight: 700, color: "#f2ede0" }}>{DEX[k].n}</div>
+                                <div style={{ fontSize: 10.5, lineHeight: 1.4, color: "#e8a89a", marginTop: 2 }}>
+                                  <b style={{ color: "#d94a3a" }}>Left </b>{WATCH[k].now}
+                                </div>
+                                <div style={{ fontSize: 10.5, lineHeight: 1.4, color: "#c9b88a", marginTop: 2 }}>
+                                  <b style={{ color: "#8a7f68" }}>For scale </b>{WATCH[k].was}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
                 {S.guideSel && (() => {
                   const sp = S.guideSel, d = DEX[sp], nfo = INFO[sp], seen = S.dex[sp] || 0;
                   const spots = (WHERE[sp] || []).filter((w) => !w.k.startsWith("shrine_"));

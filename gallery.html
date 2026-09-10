@@ -111,7 +111,12 @@ var DATA_PARTS = [
   /* part84 rewrites the gym teams, so a gallery that leaves it out would report
      the old ones and any check of the difficulty change would be measuring
      nothing. */
-  "game.part84.jsx"
+  "game.part84.jsx",
+  /* part86 is the Watch List. It reads INFO to check its own coverage, so it
+     has to come after every part that adds a species, and it exposes WATCH so
+     the gallery can be asked whether any Critically Endangered animal is
+     missing a line. */
+  "game.part86.jsx"
 ];
 
 /* The gallery uses the SAME classifier the design work uses - design/biomes.js
@@ -175,7 +180,9 @@ function start() {
                 + ";window.__SPECIALISTS = (typeof SPECIALISTS !== 'undefined') ? SPECIALISTS : null;"
                 + ";window.__BADGES = (typeof BADGES_BOOK !== 'undefined') ? BADGES_BOOK : null;"
                 + ";window.__REMATCH = (typeof rematchTeam !== 'undefined') ? rematchTeam : null;"
-                + ";window.__HOLDS = (typeof trainerHoldsGround !== 'undefined') ? trainerHoldsGround : null;";
+                + ";window.__HOLDS = (typeof trainerHoldsGround !== 'undefined') ? trainerHoldsGround : null;"
+                + ";window.__WATCH = (typeof WATCH !== 'undefined') ? WATCH : null;"
+                + ";window.__WATCH_ORDER = (typeof WATCH_ORDER !== 'undefined') ? WATCH_ORDER : null;";
     var code = texts.join(String.fromCharCode(10)) + String.fromCharCode(10) + EXPORTS;
     var out = Babel.transform(code, { presets: [["react", { runtime: "classic" }]] }).code;
     (0, eval)(out);
