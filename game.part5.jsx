@@ -1057,6 +1057,8 @@
   // What the sky is doing here, asked once per render. Null underground, in the
   // arena, and at the Vigil - see part88 on why those are exempt by choice.
   const wxNow = (typeof weatherHere === "function") ? weatherHere(S) : null;
+  // Whether the thing currently happening in the world is happening here.
+  const evHere = (typeof eventHere === "function") ? eventHere(S) : null;
   const learner = S.party.find((a) => a.pending?.length);
 
   return (
@@ -1070,7 +1072,11 @@
             and part88's own text says it in a sentence. */}
         <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {phase === "night" ? "🌙" : phase === "dusk" ? "🌆" : phase === "dawn" ? "🌅" : "☀️"}
           {wxNow && wxNow.key !== "clear"
-            ? <span title={wxNow.line} style={{ marginLeft: 4 }}>{wxNow.em}</span> : null}</div>
+            ? <span title={wxNow.line} style={{ marginLeft: 4 }}>{wxNow.em}</span> : null}
+          {/* And if the thing happening in the world is happening HERE, say so
+              on the map rather than only in the guide. This is the tile you are
+              standing on being the right place to be. */}
+          {evHere ? <span title={evHere.n} style={{ marginLeft: 4 }}>{evHere.em}</span> : null}</div>
         <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have studied">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}{S.items.compass && S.compassOn ? " 🧭" : ""}</div>
       </div>
 
@@ -2257,6 +2263,33 @@
                     })()}
                   </div>
                 )}
+                {/* WHAT IS ON, RIGHT NOW (part89). The announcement tells you
+                    once; this is where you come back to check what it said, how
+                    much of it is left, and where it is - because "somewhere in
+                    the taiga" is only a reason to travel if you can still find
+                    out where the taiga was. */}
+                {typeof eventNow === "function" && (() => {
+                  const e = eventNow(S);
+                  if (!e) return null;
+                  const left = typeof eventLeft === "function" ? eventLeft(S) : 0;
+                  const places = typeof eventPlaces === "function" ? eventPlaces(e) : [];
+                  const here = typeof eventHere === "function" && !!eventHere(S);
+                  return (
+                    <div style={{ ...panel, marginBottom: 10, padding: 9, borderColor: "#7a6a3a" }}>
+                      <div style={{ fontSize: 12.5, fontWeight: 700, color: "#e8c547" }}>
+                        {e.em} {e.n}{here ? " — here, now" : ""}
+                      </div>
+                      <div style={{ fontSize: 10.5, lineHeight: 1.5, color: "#c9b88a", marginTop: 4 }}>
+                        {e.text}
+                      </div>
+                      <div style={{ fontSize: 10, color: "#8a7f68", marginTop: 5 }}>
+                        {places.length ? "Around " + places.slice(0, 4).join(", ")
+                          + (places.length > 4 ? " and " + (places.length - 4) + " more" : "") + ". " : ""}
+                        {left > 0 ? "Another " + left + " steps of it." : ""}
+                      </div>
+                    </div>
+                  );
+                })()}
                 {/* THE WATCH LIST. Ayr, 2026-09-05: "a list in the guide of the
                     CR endangered animals with how many there are left (and how
                     many is a healthy population for context) once they are

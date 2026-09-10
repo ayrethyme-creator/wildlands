@@ -115,6 +115,7 @@ function Wildlands() {
 
            Both are small: an integer and a short map of numbers. */
         runSeed: st.runSeed, pressure: st.pressure,
+        steps: st.steps,
         compassOn: st.compassOn, achv: st.achv, book: st.book, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
@@ -256,6 +257,8 @@ function Wildlands() {
       // stays the same world it was the session before.
       runSeed: p.runSeed || ((Math.random() * 0x7fffffff) | 0),
       pressure: p.pressure || {},
+      // How far this save has walked. part89 runs the world's events off it.
+      steps: p.steps || 0,
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
       visited: { town1: true, ...(typeof p.badges === "number" ? p.visited || {} : {}) },
@@ -735,6 +738,25 @@ function Wildlands() {
     return () => clearInterval(id);
   }, []);
 
+  /* ----- word reaches you -----
+     An event announces itself once, when you first walk into the stretch it
+     belongs to. Held in a ref rather than the save, so it also tells you what
+     is on when you sit back down - which is the moment you most want to know,
+     and the only interruption this feature ever makes.
+
+     It waits for a clear screen. A migration announcing itself over the top of
+     a gym leader's speech would be the game talking to itself. */
+  const NEWS = useRef(null);
+  useEffect(() => {
+    if (typeof eventNow !== "function") return;
+    if (S.screen !== "world" || S.dialog || S.menu || S.battle) return;
+    const e = eventNow(S);
+    if (!e) { NEWS.current = null; return; }
+    if (NEWS.current === e.k) return;
+    NEWS.current = e.k;
+    say(eventAnnounce(e));
+  }, [S.screen, S.steps, S.dialog, S.menu, S.battle]);
+
   // ----- pending move-learn prompts -----
   useEffect(() => {
     if (S.screen !== "world" || S.battle || S.dialog || S.menu) return;
@@ -819,6 +841,10 @@ function Wildlands() {
     // remains the fact about the world. part88 floors it, so this cannot take a
     // species off the map either.
     if (typeof weatherPool === "function") usePool = weatherPool(usePool, st);
+    // ...and last, whatever is happening here. Last because an event is the
+    // loudest fact about a place while it lasts - a river in a salmon run is
+    // not a river having an ordinary autumn.
+    if (typeof eventPool === "function") usePool = eventPool(usePool, st, mapKey);
     const picked = pickPool(usePool);
     // Taking one from a patch makes that species harder to find there for a
     // while. Recorded on the roll rather than on the catch, because a fight
@@ -954,7 +980,13 @@ function Wildlands() {
           if (changed) pressure = next;
         }
         return { ...p, pressure, px: p.x, py: p.y, x: nx, y: ny,
-          swimming: ch === "W", step: ((p.step || 0) + 1) % 1000 };
+          swimming: ch === "W", step: ((p.step || 0) + 1) % 1000,
+          // Every footfall this save has ever taken. `step` above wraps at a
+          // thousand because it exists to key an animation; this one does not
+          // wrap, because part89 measures the world's events in it. Walking is
+          // what makes time pass here - put the game down for a month and the
+          // world is where you left it.
+          steps: (p.steps || 0) + 1 };
       });
       if (ch === "G") rollEncounter(st.map, "grass");
       else if (ch === "W") rollEncounter(st.map, "water");

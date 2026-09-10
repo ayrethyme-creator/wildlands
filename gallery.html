@@ -119,7 +119,10 @@ var DATA_PARTS = [
   "game.part86.jsx",
   /* part88 is the weather. It reads MAPS to check that every zone the world
      uses has a climate, so it has to load after every part that adds one. */
-  "game.part88.jsx"
+  "game.part88.jsx",
+  /* part89 is the world's events. It checks every event against the real
+     zones and the real pools at load, so it needs the whole map set. */
+  "game.part89.jsx"
 ];
 
 /* The gallery uses the SAME classifier the design work uses - design/biomes.js
