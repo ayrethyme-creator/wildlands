@@ -96,6 +96,25 @@ function Wildlands() {
         legends: st.legends, dex: st.dex, objects: st.objects, visited: st.visited,
         trainersBeaten: st.trainersBeaten, rival: st.rival, sound: st.sound, run: st.run,
         quiz: st.quiz, arcs: st.arcs,
+        /* THE WORLD THIS SAVE WAS DEALT. These two were missing, and their
+           absence quietly cancelled part66.
+
+           part66's premise is that a save is a particular world - this fennec
+           is scarce this season and abroad after dark, that patch has been
+           worked thin - and that it is the SAME world next time you sit down.
+           loadGame is written for exactly that: it restores p.runSeed and
+           p.pressure and only deals a fresh seed when the save has none. But
+           the save never wrote either of them, so every load looked like an
+           older save and dealt a brand new world.
+
+           What that cost: the Field Guide would tell you an animal was scarce
+           this season and abroad at night, and next session it was neither -
+           the one place the ecology is ever stated, contradicting itself
+           between sittings. And every patch you had worked thin came back full,
+           so the system that rewards moving on was reset every time you loaded.
+
+           Both are small: an integer and a short map of numbers. */
+        runSeed: st.runSeed, pressure: st.pressure,
         compassOn: st.compassOn, achv: st.achv, book: st.book, quizWins: st.quizWins, quizPerfect: st.quizPerfect,
       };
       const r = await storage.set(slotKey(n), JSON.stringify(payload));
