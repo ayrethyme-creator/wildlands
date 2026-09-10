@@ -57,7 +57,16 @@ FAIL, WARN = [], []
 # Files whose prose makes claims about the world. Deliberately NOT the whole doc
 # set: HANDOFF, LINKS and the species lists are about the project, and Cousin Bob
 # already owns their numbers.
-SOURCES = ['GDD.md', 'design/BADGE_CARDS.txt', 'design/FIELD_GUIDE.txt']
+#
+# WATCH_LIST.md was added on 2026-09-09. It is player-facing writing in the
+# strictest sense - it ships as game.part86.jsx in the first game, sentence for
+# sentence - and every line of it is a population claim about a real animal,
+# which is the single most perishable kind this project makes. Numbers move: the
+# vaquita count falls, the condor count climbs, and a figure that was right when
+# it was written goes quietly wrong without anybody editing it. That is precisely
+# what the register is for.
+SOURCES = ['GDD.md', 'design/BADGE_CARDS.txt', 'design/FIELD_GUIDE.txt',
+           'design/WATCH_LIST.md']
 
 REGISTER = 'design/CLAIMS.txt'
 
@@ -202,6 +211,33 @@ def sentences(path):
             if len(parts) < 3:
                 continue
             yield ('%s — %s' % (parts[1], '::'.join(parts[2:])), parts[1])
+        return
+
+    # WATCH_LIST.md has the same shape as the two files above and needs the same
+    # treatment for the same reason. Each entry is "**Species** - Left: ... For
+    # scale: ...", so the animal is named once and every claim after it is a
+    # bare sentence. Read generically, only the first sentence of each entry
+    # carries a species name and the rest slip past the filter: 38 claims out of
+    # roughly a hundred, and the half that goes missing is the "For scale" half,
+    # which is exactly the half that says something the game does not say
+    # anywhere else.
+    #
+    # So the bolded name at the head of a paragraph becomes the hint for every
+    # sentence in that paragraph, and each sentence is still tracked separately -
+    # verifying how many vaquita are left should not quietly vouch for the claim
+    # about what a porpoise population needs.
+    if path.endswith('WATCH_LIST.md'):
+        raw = io.open(path, encoding='utf-8').read()
+        for block in re.split(r'\n\s*\n', raw):
+            m = re.match(r'\s*\*\*([^*]+)\*\*\s*[-—]', block)
+            if not m:
+                continue
+            name = m.group(1).strip()
+            body = block[m.end():]
+            for sent in re.split(r'(?<=[.!?])\s+', body):
+                t = strip_markup(sent)
+                if 25 < len(t) < 400:
+                    yield ('%s — %s' % (name, t), name)
         return
 
     raw = io.open(path, encoding='utf-8').read()

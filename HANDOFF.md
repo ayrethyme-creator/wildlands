@@ -43,6 +43,7 @@ record eighteen times, and each pass is listed in its own version note.
 | **`design/CLAIMS.txt`** | The claims register, and the **TRAP** list: the distinctions this project has already got wrong once |
 | **`design/BADGE_CARDS.txt`** | One card per badge membership. **All 431 written, 2026-09-03.** Albert checks each names a real membership and that none is written twice |
 | **`design/FIELD_GUIDE.txt`** | **All 1183 field-guide entries with their IUCN status, read from the running game.** Do not hand-edit and do not regex-parse the `.jsx` to rebuild it — `design/tools/read_field_guide.js` |
+| **`design/WATCH_LIST.md`** | **All 52 Critically Endangered species: how many are left, and what that number sits next to.** Ships in the first game as `game.part86.jsx`. The Librarian reads it, so every population figure is in the register — they are the claims most likely to go quietly out of date |
 | **`GDD.md`** | **The design.** By system, current-only, everything marked decided / open / proposed. **Start here** |
 | **`NEW_DIRECTION.md`** | The design *record*, ~11,000 lines, append-only with dated headers. Every *why*, including the reversals |
 | **`design/tools/cousin_bob.py`** | **The document check.** *"Run it by Cousin Bob."* Verifies the docs still agree with the data |
