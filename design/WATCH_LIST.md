@@ -102,7 +102,7 @@ shot in 1948. Genetically distinct from every African cheetah.
 big-cat recoveries. *For scale:* a few thousand once ranged the Russian Far East,
 Korea and northeast China.
 
-**Vancouver Island Marmot** — *Left:* a few hundred, recovered from a low of
+**Vancouver I. Marmot** — *Left:* a few hundred, recovered from a low of
 about 30 in 2003, almost all of it captive-bred releases. *For scale:* it lives
 only in the alpine meadows of one island; a secure population would fill them.
 
