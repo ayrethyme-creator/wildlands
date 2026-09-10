@@ -278,6 +278,24 @@
       }
       .amb-snow { animation-name: ambSnow; }
 
+      /* Rain (part88). Snow drifts and rain does not - it falls fast, on a
+         slant, and it is a streak rather than a dot, which is the whole of what
+         makes falling water read as rain. The height is stretched here rather
+         than in the speck builder so part67's sizing stays one rule; a drop is
+         sized like any other speck and then pulled into a line. */
+      @keyframes ambRain {
+        0%   { transform: translate(0,-18%);     opacity: 0; }
+        12%  {                                   opacity: .85; }
+        100% { transform: translate(-16px,124%); opacity: .35; }
+      }
+      .amb-rain {
+        animation-name: ambRain;
+        animation-timing-function: linear;
+        height: 9px !important;
+        border-radius: 40% !important;
+        transform-origin: top center;
+      }
+
       /* Dust does not fall, it blows past. */
       @keyframes ambDust {
         0%   { transform: translate(-8px,0);  opacity: 0; }
@@ -1036,13 +1054,23 @@
   const phase = (typeof dayPhase === "function") ? dayPhase() : (night ? "night" : "day");
   const lit = phase === "night" || phase === "dusk" || phase === "dawn";
   const dark = m.dark && !(S.items.lantern > 0);
+  // What the sky is doing here, asked once per render. Null underground, in the
+  // arena, and at the Vigil - see part88 on why those are exempt by choice.
+  const wxNow = (typeof weatherHere === "function") ? weatherHere(S) : null;
   const learner = S.party.find((a) => a.pending?.length);
 
   return (
     <div className="wl-paper" style={frame}>
       {KEYFRAMES}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px" }}>
-        <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {phase === "night" ? "🌙" : phase === "dusk" ? "🌆" : phase === "dawn" ? "🌅" : "☀️"}</div>
+        {/* The sky, next to the place. It only ever shows when the weather is
+            doing something - a clear day says nothing, because a badge that is
+            always lit is furniture. Long-pressing is not a thing here, so the
+            title carries the line explaining what it means for what is about,
+            and part88's own text says it in a sentence. */}
+        <div style={{ fontWeight: 700, fontSize: 14, color: "#e8c547" }}>📍 {m.name} {phase === "night" ? "🌙" : phase === "dusk" ? "🌆" : phase === "dawn" ? "🌅" : "☀️"}
+          {wxNow && wxNow.key !== "clear"
+            ? <span title={wxNow.line} style={{ marginLeft: 4 }}>{wxNow.em}</span> : null}</div>
         <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have studied">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}{S.items.compass && S.compassOn ? " 🧭" : ""}</div>
       </div>
 
@@ -1393,6 +1421,35 @@
               </div>
             );
           })()}
+
+          {/* The weather itself, over the ordinary ambience rather than instead
+              of it - fireflies do not stop for rain. Keyed on which weather it
+              is, so a front arriving rebuilds the layer and the drops do not
+              inherit the positions the snow had. */}
+          {typeof weatherSpecks === "function" && !m.dark && (() => {
+            const drops = weatherSpecks(m.zone, S.runSeed);
+            if (!drops.length) return null;
+            return (
+              <div key={`wx:${S.map}:${wxNow ? wxNow.key : "none"}`} aria-hidden="true"
+                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
+                {drops.map((s) => <div key={s.key} className={s.cls} style={s.style} />)}
+              </div>
+            );
+          })()}
+
+          {/* Mist and heat are not specks - they are what the whole scene looks
+              like through. One flat layer each, weak enough to read the map
+              through, sitting under the ranger like every other atmosphere in
+              this stack. */}
+          {wxNow && (wxNow.key === "mist" || wxNow.key === "haze") && !m.dark && (
+            <div aria-hidden="true" style={{
+              position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2,
+              background: wxNow.key === "mist"
+                ? "linear-gradient(180deg, rgba(206,216,224,.30), rgba(188,200,210,.16) 60%, rgba(188,200,210,.26))"
+                : "linear-gradient(180deg, rgba(255,214,140,.13), rgba(255,186,96,.05) 55%, rgba(255,170,80,.15))",
+              mixBlendMode: wxNow.key === "mist" ? "screen" : "overlay",
+            }} />
+          )}
 
           {/* ---- light on the scene ----
               The tiles themselves are drawn well - blades, mottle, four

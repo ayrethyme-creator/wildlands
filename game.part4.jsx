@@ -775,7 +775,24 @@ function Wildlands() {
   const rollEncounter = (mapKey, kind) => {
     const m = MAPS[mapKey];
     const water = kind === "water";
-    const chance = water ? 0.08 : 0.1;
+    const st = SR.current;
+    /* WEATHER, AND HOW LOUD YOU ARE. Two multipliers on the base rate.
+
+       part88 decides what the sky is doing: heat and blizzards keep animals
+       lying up, rain brings them out. Nothing here is big enough to make a
+       patch feel empty - the widest spread is a blizzard at .65 against rain at
+       1.15.
+
+       And walking is quieter than running. Ayr's version of this was that
+       running should raise the rate, which is the same dial anchored the other
+       way round - but running is the DEFAULT in this game, so anchoring on it
+       would have raised the rate for everybody who never touches the toggle and
+       called it a feature. Anchored here, the default is exactly the game as it
+       was, and choosing to walk buys you a quieter crossing at half the speed.
+       That gives the Walk button something to be for besides slowness. */
+    const wx = (typeof weatherRate === "function") ? weatherRate(st) : 1;
+    const quiet = (SHIFT.current || st.run) ? 1 : 0.6;
+    const chance = (water ? 0.08 : 0.1) * wx * quiet;
     const pool = water ? m.poolWater : (isNight() && m.poolN ? m.poolN : m.pool);
     const lv = water ? m.lvlWater : m.lvl;
     if (ENC_COOL.current > 0) { ENC_COOL.current -= 1; return; }
@@ -785,7 +802,6 @@ function Wildlands() {
     // in the Field Guide, but never toward an empty pool — if everything
     // living here is already befriended, it quietly falls back to normal.
     let usePool = pool;
-    const st = SR.current;
     if (st.items.compass > 0 && st.compassOn) {
       const undiscovered = pool.filter(([sp]) => (st.dex[sp] || 0) < 2);
       if (undiscovered.length) usePool = undiscovered;
@@ -798,6 +814,11 @@ function Wildlands() {
         seed: st.runSeed, pressure: st.pressure, mapKey, badges: st.badges,
       });
     }
+    // ...and then what the sky is doing today. After the ecology rather than
+    // before it, so weather is the last word on an afternoon while the season
+    // remains the fact about the world. part88 floors it, so this cannot take a
+    // species off the map either.
+    if (typeof weatherPool === "function") usePool = weatherPool(usePool, st);
     const picked = pickPool(usePool);
     // Taking one from a patch makes that species harder to find there for a
     // while. Recorded on the roll rather than on the catch, because a fight
@@ -1299,12 +1320,16 @@ function Wildlands() {
     // A burn halves what you hit for, which is most of why it is worth applying.
     const burn = att.brn ? 0.5 : 1;
     const critM = crit ? (typeof CRIT_MULT === "number" ? CRIT_MULT : 1.5) : 1;
+    // What the sky is doing. One multiplier, never more than 15% either way,
+    // and only ever on a move whose type the weather has an opinion about -
+    // rain behind a wave, rain against a flame. See the table in part88.
+    const wx = (typeof weatherPower === "function") ? weatherPower(mv, SR.current) : 1;
     const roll = 0.85 + Math.random() * 0.15;
     // One dial for how long a fight lasts. part85 holds it and explains the
     // number; simulating 300 battles through this very function is how it was
     // chosen rather than guessed.
     const scale = (typeof DMG_SCALE === "number") ? DMG_SCALE : 1;
-    return { dmg: Math.max(1, Math.floor(base * mult * stab * burn * critM * roll * scale)), mult, crit };
+    return { dmg: Math.max(1, Math.floor(base * mult * stab * burn * critM * wx * roll * scale)), mult, crit };
   };
 
   const runSteps = (steps) => {

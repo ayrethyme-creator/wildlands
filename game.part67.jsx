@@ -278,6 +278,20 @@ const readTracks = (mapKey, st) => {
   const pool = (m && m.pool) || [];
   if (!pool.length) return "🐾 The ground is scuffed, but nothing here is legible.";
 
+  /* Rain, blown dust, ash and a blizzard all take a print away, and part88
+     knows which is which. This is the whole reason weather is worth having in a
+     game about reading a landscape: the ground is a source of information, and
+     weather is the thing that takes information away. Come back when it has
+     passed and the same ground will talk to you again. */
+  if (typeof weatherTracks === "function" && !weatherTracks(st)) {
+    const w = (typeof weatherHere === "function") ? weatherHere(st) : null;
+    return w && w.key === "blizzard"
+      ? "🐾 There were prints here. The blizzard has taken them."
+      : w && (w.key === "dust" || w.key === "ash")
+        ? "🐾 Whatever walked here is already filling in with " + (w.key === "ash" ? "ash" : "dust") + "."
+        : "🐾 Rain has run the prints together. Nothing here can be read until it passes.";
+  }
+
   const seed = st && st.runSeed;
   const dex = (st && st.dex) || {};
   // Prefer what the player has never befriended: a hint about an animal already

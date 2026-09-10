@@ -116,7 +116,10 @@ var DATA_PARTS = [
      has to come after every part that adds a species, and it exposes WATCH so
      the gallery can be asked whether any Critically Endangered animal is
      missing a line. */
-  "game.part86.jsx"
+  "game.part86.jsx",
+  /* part88 is the weather. It reads MAPS to check that every zone the world
+     uses has a climate, so it has to load after every part that adds one. */
+  "game.part88.jsx"
 ];
 
 /* The gallery uses the SAME classifier the design work uses - design/biomes.js
