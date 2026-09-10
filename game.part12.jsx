@@ -29,7 +29,26 @@ Object.assign(ART, {
 });
 
 // ---- warden dex ----
-const WD = (n, art, t, b, m) => ({ n, art, t, b, m, l: [], c: 0.05, legend: true, warden: true });
+/* THE WARDEN CATCH RATE. Ayr, 2026-09-10: "I'm still having way harder time
+   catching rimehorn than I should."
+
+   Nothing was wrong with Rimehorn specifically. Every warden was dealt c 0.05,
+   which is LOWER than two of the three named guardians - while sitting ten to
+   twenty-two levels above them with half again as much health. Rimehorn is
+   level 62 with 447 HP against the Qilin's 42 and 287, and it was harder to
+   befriend on the dice as well as in the fight. Strictly worse in every
+   dimension, for the same class of animal.
+
+   Measured through the real expression: about 12.4 treats for a warden against
+   10.4 for the Qilin, and that is with perfect play - holding it low and
+   spending a berry whenever it turns wary.
+
+   THE DIFFICULTY OF A GUARDIAN SHOULD LIVE IN THE FIGHT, not in a dice roll
+   nobody can influence. A level-62 warden with 447 HP and Ice/Armor is already
+   a hard afternoon; making the roll worse on top of that is not difficulty, it
+   is the same afternoon repeated. So every legend now shares one number and
+   the fight is what separates them: 0.08, which is about 7.8 treats. */
+const WD = (n, art, t, b, m) => ({ n, art, t, b, m, l: [], c: LEGEND_CATCH, legend: true, warden: true });
 Object.assign(DEX, {
   sarkoth: WD("Sarkoth", "sarkoth", ["Predator", "Night"], B(82, 88, 66, 58), ["apexfang", "maul", "intimidate", "dreadhowl"]),
   nycterion: WD("Nycterion", "nycterion", ["Aerial", "Night"], B(72, 80, 60, 86), ["stormdive", "hurricane", "moonstrike", "duskfeint"]),

@@ -1,4 +1,24 @@
 // ---------- SPECIES ----------
+/* ONE CATCH RATE FOR EVERY LEGEND IN THE GAME - the three named guardians here
+   and the thirteen wardens in part12. Ayr, 2026-09-10: "I'm still having way
+   harder time catching rimehorn than I should."
+
+   They were right, and it was not Rimehorn. The wardens had been dealt 0.05,
+   LOWER than two of the three named guardians, while sitting ten to twenty-two
+   levels above them with half again the health - Rimehorn is level 62 with 447
+   HP against the Qilin's 42 and 287, and was harder on the dice as well as in
+   the fight.
+
+   The difficulty of a guardian belongs in the FIGHT, where the player can do
+   something about it, not in a roll nobody can influence. So all sixteen share
+   this number and their levels, stats and moves are what separate them.
+
+   Measured through the real expression, with perfect play - held low, and a
+   berry spent whenever it turns wary: 0.05 was about 12.4 treats and 0.06 about
+   10.4. This is about 7.8, or roughly 230 coins. Move this one number to retune
+   every guardian in the game at once. */
+const LEGEND_CATCH = 0.08;
+
 const DEX = {
   // starters
   fennec_j: { n: "Fennec Kit", art: "fennec", juv: true, t: ["Burrow", "Swift"], b: { h: 38, a: 40, d: 33, s: 50 }, m: ["scratch", "quickdash"], l: [[8, "dig"], [12, "tunnel"]], grows: { to: "fennec", at: 14 }, c: 0.6 },
@@ -88,9 +108,12 @@ const DEX = {
   cheetah_j:{ n: "Cheetah Cub", art: "cheetah", juv: true, t: ["Predator", "Swift"], b: { h: 40, a: 46, d: 32, s: 64 }, m: ["scratch", "pounce"], l: [[14, "quickdash"], [18, "blitz"]], grows: { to: "cheetah", at: 20 }, c: 0.45 },
   cheetah:  { n: "Cheetah", art: "cheetah", t: ["Predator", "Swift"], b: { h: 50, a: 60, d: 40, s: 82 }, m: ["pounce", "quickdash", "blitz"], l: [[24, "takedown"], [30, "firststrike"], [36, "lightstep"], [42, "apexfang"]], c: 0.25 },
   // guardians
-  qilin:       { n: "Qilin", art: "qilin", t: ["Burrow", "Armor"], b: { h: 80, a: 70, d: 78, s: 64 }, m: ["harmonystomp", "ironhide", "dig", "harden"], l: [], c: 0.06, legend: true },
-  thunderbird: { n: "Thunderbird", art: "thunderbird", t: ["Aerial", "Swift"], b: { h: 72, a: 80, d: 62, s: 84 }, m: ["stormdive", "blitz", "gust", "intimidate"], l: [], c: 0.06, legend: true },
-  phoenix:     { n: "Phoenix", art: "phoenix", t: ["Ember", "Aerial"], b: { h: 76, a: 78, d: 64, s: 76 }, m: ["emberwing", "magmaburst", "divebomb", "preen"], l: [], c: 0.05, legend: true },
+  // One catch rate for every legend in the game, wardens included - see the
+  // note on WD in part12 for why the difficulty belongs in the fight rather
+  // than in the roll. Moving this one number moves all sixteen.
+  qilin:       { n: "Qilin", art: "qilin", t: ["Burrow", "Armor"], b: { h: 80, a: 70, d: 78, s: 64 }, m: ["harmonystomp", "ironhide", "dig", "harden"], l: [], c: LEGEND_CATCH, legend: true },
+  thunderbird: { n: "Thunderbird", art: "thunderbird", t: ["Aerial", "Swift"], b: { h: 72, a: 80, d: 62, s: 84 }, m: ["stormdive", "blitz", "gust", "intimidate"], l: [], c: LEGEND_CATCH, legend: true },
+  phoenix:     { n: "Phoenix", art: "phoenix", t: ["Ember", "Aerial"], b: { h: 76, a: 78, d: 64, s: 76 }, m: ["emberwing", "magmaburst", "divebomb", "preen"], l: [], c: LEGEND_CATCH, legend: true },
 };
 
 // ---------- ZONE PALETTES ----------
