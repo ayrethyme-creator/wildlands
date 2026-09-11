@@ -42,7 +42,7 @@ const DEEP2 = [
 
   { k: "rift13", n: "What the Ice Takes", lvl: [60, 65], prev: { map: "rift12", x: 7, y: 1 }, next: "rift14",
     sign: "🪧 'WHAT THE ICE TAKES — the far north has the most practical monsters on earth. Nearly every one of them is standing exactly where the ground is thin, the light is flat, or a person alone is about to make a mistake.'",
-    who: ["qalupalik", "amarok", "ijiraq", "amikuk", "tupilaq", "stallo", "yukionna", "huldra", "draugr", "fossegrim", "mara", "kamuyhuci", "tokoloshe", "zduhac"] },
+    who: ["qalupalik", "amarok", "ijiraq", "amikuk", "tupilaq", "stallo", "yukionna", "huldra", "draugr", "fossegrim", "nightmara", "kamuyhuci", "tokoloshe", "zduhac"] },
 
   { k: "rift14", n: "The Unburied", lvl: [61, 65], prev: { map: "rift13", x: 7, y: 1 }, next: "rift15",
     sign: "🪧 'THE UNBURIED — a body without rites becomes a problem, and four continents came to the same answer independently. What is feared is never the death. It is the part that was left undone afterwards.'",

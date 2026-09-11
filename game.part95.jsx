@@ -381,7 +381,7 @@ const M2 = [
     "Omnivore — porridge, with butter on it",
     "Scandinavian farms, in the barn",
     "He guards the farm and the animals, and he requires porridge on Christmas Eve with the butter ON TOP. A farmhand who ate the butter first was killed for it in more than one telling. Of all the small gods in this guide, the one with the strictest position on dairy."],
-  ["mara", "Mara", "fairy", "Night", [50, 62, 46, 72], MV.night, 0.2, "Norse",
+  ["nightmara", "Mara", "fairy", "Night", [50, 62, 46, 72], MV.night, 0.2, "Norse",
     "Carnivore — breath, and rest",
     "Northern Europe, on the sleeper's chest",
     "She sits on you in the night so you cannot move or breathe, and rides horses to exhaustion. This is sleep paralysis again - the third time it appears in this guide under three unconnected names - and it is where the word nightmare comes from. Not a bad dream: a specific creature, sitting on you."],
@@ -502,6 +502,24 @@ const M2 = [
    spelled differently in the two places - a whole class of creature that exists
    with no field note and never complains. One row cannot disagree with
    itself. */
+/* WHAT WAS IN THE ROSTER BEFORE THIS FILE TOUCHED IT.
+
+   Captured here rather than checked afterwards, because Object.assign is
+   silent: a key that already exists is overwritten with no error and no
+   warning, and the species that was there is simply gone.
+
+   THIS IS NOT HYPOTHETICAL. The first version of this file gave the Norse
+   nightmare-spirit the key `mara`, and `mara` is the Patagonian Mara - a real
+   rodent with its own artwork, its own field note and a place in two encounter
+   pools. It was overwritten, and the art pipeline then overwrote its sprite
+   too. Nothing complained. It was found only because the sprite key turned up
+   in PHOTO_ART already.
+
+   Ayr's standing rule is that a species they may already have caught must never
+   be cut. Silently replacing one is worse than cutting it, so this now fails
+   loudly. */
+const M2_BEFORE = new Set(Object.keys(DEX));
+
 Object.assign(DEX, M2.reduce((out, r) => {
   const [k, n, art, t2, b, m, c, org] = r;
   out[k] = { n, art, t: ["Mythic", t2], b: { h: b[0], a: b[1], d: b[2], s: b[3] }, m, l: [], c, org };
@@ -523,6 +541,8 @@ M2.forEach(([k, , , , , , , , diet, where, note]) => {
 {
   const keys = M2.map((r) => r[0]);
   const dupes = keys.filter((k, i) => keys.indexOf(k) !== i);
+  // The one that actually bit: a key the roster was already using.
+  const stole = keys.filter((k) => M2_BEFORE.has(k));
   const noArt = [...new Set(M2.map((r) => r[2]).filter((a) => !ART[a]))];
   const noMove = [...new Set(M2.flatMap((r) => r[5]).filter((mv) => !MOVES[mv]))];
   const noNote = keys.filter((k) => !INFO[k] || !INFO[k].f);
@@ -534,6 +554,7 @@ M2.forEach(([k, , , , , , , , diet, where, note]) => {
   console.log("[part95] the second hundred: " + M2.length + " added across "
     + Object.keys(orgs).length + " cultures | myths in the guide now: " + mythTotal
     + " | sprites still to render: " + M2.filter((r) => !(typeof PHOTO_ART !== "undefined" && PHOTO_ART[r[0]])).length
+    + (stole.length ? " | OVERWROTE AN EXISTING SPECIES: " + stole.join(", ") : "")
     + (dupes.length ? " | DUPLICATE KEY: " + dupes.join(", ") : "")
     + (noArt.length ? " | NO SUCH ART: " + noArt.join(", ") : "")
     + (noMove.length ? " | NO SUCH MOVE: " + noMove.join(", ") : "")
