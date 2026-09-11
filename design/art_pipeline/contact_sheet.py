@@ -18,6 +18,37 @@ from PIL import Image, ImageDraw, ImageFont
 
 REPO = "C:/Claude/wildlands"
 ART = os.path.join(REPO, "art")
+
+# Ayr, 2026-09-11, of the bigger sheets: "I still can't see detail."
+#
+# They were right and the sheet was not the problem. A SHIPPED SPRITE IS
+# 256x256 - postprocess crops and resizes every render down to that - so a 340px
+# cell was upscaling, and no sheet built from art/ can ever show more detail
+# than a 256px source has. Making the cells larger only made the blur larger.
+#
+# The raw renders are 1024x1024 and they are kept. For REVIEW, read those: it is
+# sixteen times the pixels, and a fault visible at 1024 is a fault that was
+# rendered rather than one introduced by the resize.
+#
+#     SHEET_SRC=design/art_pipeline/raw SHEET_CELL=460 SHEET_COLS=5 \n#         python contact_sheet.py <batch.json>
+#
+# raw/ names files <key>_0.png, so the lookup below tries the plain name first
+# and then that suffix. Default is still art/, because a sheet of what actually
+# ships is the right thing to look at when the question is how the game looks.
+SRC = os.environ.get("SHEET_SRC") or ART
+if not os.path.isabs(SRC):
+    SRC = os.path.join(REPO, SRC)
+
+
+def sprite_path(k):
+    """The file for this key, tolerating raw/'s <key>_0.png naming."""
+    for name in (k + ".png", k + "_0.png"):
+        p = os.path.join(SRC, name)
+        if os.path.exists(p):
+            return p
+    return None
+
+
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sheets")
 
 # Ayr, 2026-09-11, of the first 100-sprite sheet: "the resolution is hard to
@@ -68,7 +99,7 @@ def build(batch_path):
     d = ImageDraw.Draw(sheet)
 
     name = os.path.basename(batch_path)[6:-5]
-    missing = [k for k in keys if not os.path.exists(os.path.join(ART, k + ".png"))]
+    missing = [k for k in keys if not sprite_path(k)]
     d.text((PAD, 12), "%s  -  %d species, %d rendered, %d missing"
            % (name, len(keys), len(keys) - len(missing), len(missing)),
            fill=TEXT, font=font(22))
@@ -76,10 +107,10 @@ def build(batch_path):
     fs = font(13)
     for i, k in enumerate(keys):
         cx, cy = (i % cols) * cw, title_h + (i // cols) * ch
-        p = os.path.join(ART, k + ".png")
+        p = sprite_path(k)
         box = (cx + PAD, cy + PAD, cx + PAD + CELL, cy + PAD + CELL)
-        d.rectangle(box, fill=CELL_BG if os.path.exists(p) else MISSING_BG)
-        if os.path.exists(p):
+        d.rectangle(box, fill=CELL_BG if p else MISSING_BG)
+        if p:
             im = Image.open(p).convert("RGBA")
             im.thumbnail((CELL - 8, CELL - 8), Image.LANCZOS)
             sheet.paste(im, (box[0] + (CELL - im.width) // 2,
