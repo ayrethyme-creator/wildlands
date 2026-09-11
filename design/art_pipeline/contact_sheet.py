@@ -20,7 +20,25 @@ REPO = "C:/Claude/wildlands"
 ART = os.path.join(REPO, "art")
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sheets")
 
-CELL = 200          # sprite box
+# Ayr, 2026-09-11, of the first 100-sprite sheet: "the resolution is hard to
+# see. make 2 sheets."
+#
+# Splitting the batch alone does not fix that, and it is worth writing down why:
+# the column count below is derived from how many sprites there are, but it is
+# CAPPED AT SEVEN. A hundred sprites and fifty sprites both come out at seven
+# across, so half the batch on its own sheet is the same 200px cell, just less
+# scrolling. The size of a sprite on the sheet is set by CELL and by nothing
+# else.
+#
+# So both are overridable now. SHEET_CELL makes the box bigger; SHEET_COLS makes
+# the grid narrower, which is what actually helps on a phone - fewer, larger
+# columns beat more, smaller ones every time for spotting a wrong limb.
+#
+#     SHEET_CELL=340 SHEET_COLS=5 python contact_sheet.py <batch.json>
+#
+# Defaults unchanged, so every sheet built before today still rebuilds
+# identically.
+CELL = int(os.environ.get("SHEET_CELL", 200))          # sprite box
 LABEL = 26          # text strip under each sprite
 PAD = 8
 BG = (108, 112, 118)
@@ -41,7 +59,7 @@ def font(size):
 def build(batch_path):
     batch = json.load(io.open(batch_path, encoding="utf-8"))
     keys = sorted(batch)
-    cols = min(7, max(1, int(len(keys) ** 0.5 + 0.999)))
+    cols = int(os.environ.get("SHEET_COLS", 0)) or min(7, max(1, int(len(keys) ** 0.5 + 0.999)))
     rows = (len(keys) + cols - 1) // cols
 
     cw, ch = CELL + PAD * 2, CELL + LABEL + PAD * 2
