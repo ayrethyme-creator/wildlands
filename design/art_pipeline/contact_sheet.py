@@ -70,7 +70,7 @@ OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sheets")
 # Defaults unchanged, so every sheet built before today still rebuilds
 # identically.
 CELL = int(os.environ.get("SHEET_CELL", 200))          # sprite box
-LABEL = 26          # text strip under each sprite
+LABEL = 26          # text strip under each sprite; grown with the font below
 PAD = 8
 BG = (108, 112, 118)
 CELL_BG = (128, 132, 138)
@@ -93,7 +93,8 @@ def build(batch_path):
     cols = int(os.environ.get("SHEET_COLS", 0)) or min(7, max(1, int(len(keys) ** 0.5 + 0.999)))
     rows = (len(keys) + cols - 1) // cols
 
-    cw, ch = CELL + PAD * 2, CELL + LABEL + PAD * 2
+    lab = max(LABEL, CELL // 16 + 14)
+    cw, ch = CELL + PAD * 2, CELL + lab + PAD * 2
     title_h = 46
     sheet = Image.new("RGB", (cols * cw, rows * ch + title_h), BG)
     d = ImageDraw.Draw(sheet)
@@ -104,7 +105,14 @@ def build(batch_path):
            % (name, len(keys), len(keys) - len(missing), len(missing)),
            fill=TEXT, font=font(22))
 
-    fs = font(13)
+    # Ayr, 2026-09-11: "I can't read their titles."
+    #
+    # This was hardcoded at 13px, which was legible at the 200px default and
+    # became a rounding error the moment the cell grew - the label shrank
+    # relative to everything around it exactly as the sprites got bigger. It
+    # scales with the cell now, with 13 as the floor so the old sheets are
+    # unchanged.
+    fs = font(max(13, CELL // 16))
     for i, k in enumerate(keys):
         cx, cy = (i % cols) * cw, title_h + (i // cols) * ch
         p = sprite_path(k)
