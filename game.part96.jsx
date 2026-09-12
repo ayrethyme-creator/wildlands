@@ -1,100 +1,170 @@
 // ---------- Part 96: WHERE THE SECOND HUNDRED LIVE ----------
 // A species nobody can meet is not in the game, it is in a file. part95 wrote a
-// hundred creatures; this puts them somewhere.
+// hundred creatures; this puts them somewhere, and the somewhere has to be the
+// RIGHT somewhere.
 //
-// FOLLOWING A DECISION SOMEBODY ELSE ALREADY MADE WELL.
-// The first six rifts are geographic - Olympus, Aurora, and so on - but part12
-// then added four more that are THEMATIC: the Weaving for tricksters, the
-// Deluge for flood stories, the Underworld Gate for the animal that guards the
-// door of the dead. That was the better idea, because it puts creatures next to
-// the thing they have in common rather than next to their neighbours, and the
-// sign in each rift gets to say what that thing is.
+// THE FIRST VERSION OF THIS FILE PUT THEM ALL BEHIND THE AMERICAS.
+// Ayr, 2026-09-11: "you put the new rooms all behind the Americas entrance. the
+// correct cultures should go in the right area."
 //
-// So the second hundred extends the thematic chain rather than crowding the six
-// regional pools, which would have diluted every one of them and made the
-// original hundred harder to find as a side effect of adding to it.
+// Correct, and it was a plain misreading of the map. The myth hub opens into six
+// rifts that are GEOGRAPHIC - Olympus for Greece, Aurora for the north, Hearth
+// for Africa and the Near East, Celestial for East Asia, Monsoon for southern
+// Asia and Oceania, Twilight for the Americas. part12 then hung four THEMATIC
+// rooms off the back of Twilight - the Weaving, the Deluge - and I followed that
+// chain and added eight more to the end of it.
 //
-// Eight new rifts, each one a shape that turns up across unconnected cultures:
-// small people who make things, a foot pointing the wrong way, what the ice
-// takes, the dead nobody buried. That last one is the reason gashadokuro,
-// abiku, the jiangshi and the soucouyant end up in the same room despite coming
-// from four continents - they are all about the same fear, and the game can now
-// say so out loud.
+// Which put the entire second hundred behind the Americas. To reach a Slavic
+// bathhouse spirit you walked through the Americas, through four thematic rooms,
+// and out the far side. A Hawaiian shark god was in the same corridor. The hub's
+// whole organising idea - that the world is laid out by where things come from -
+// was quietly cancelled by a chain of doors.
 //
-// The chain is built with part12's own DEEP pattern and its own row templates,
-// so a rift added here behaves exactly like a rift added there.
+// So the thematic framing is dropped and these are REGIONS, each opening off the
+// rift it belongs to. Four of the six rifts get a door in each side wall, two get
+// one, and Greece needs no room at all: the centaur and the gorgon go straight
+// into Olympus, where they always belonged.
+//
+// The region is read from the `org` field part95 already carries on every
+// species, so the placement is derived from the roster rather than typed out a
+// second time, and cannot drift away from it.
 
-// rift10 was the end of the road - RIFT_END has no door in its north wall - so
-// it gets one, the same way part12 opened rift6 to reach rift7.
-if (MAPS.rift10 && typeof RIFT_MID !== "undefined") {
-  MAPS.rift10.rows = RIFT_MID;
-  MAPS.rift10.exits = { ...MAPS.rift10.exits, "7,0": { map: "rift11", x: 7, y: 8 } };
+// rift10 is the end of part12's thematic chain again. The first version of this
+// file cut a north door in it to reach the rooms beyond. Nothing is beyond it.
+if (MAPS.rift10 && typeof RIFT_END !== "undefined") {
+  MAPS.rift10.rows = RIFT_END;
+  const ex = { ...MAPS.rift10.exits };
+  delete ex["7,0"];
+  MAPS.rift10.exits = ex;
 }
 
-const DEEP2 = [
-  { k: "rift11", n: "The Small Makers", lvl: [59, 63], prev: { map: "rift10", x: 7, y: 1 }, next: "rift12",
-    sign: "🪧 'THE SMALL MAKERS — every people who ever built anything difficult has a story about small folk who built it overnight. It is how a community says: we do not quite know how our grandparents did this.'",
-    who: ["menehune", "lamiak", "knocker", "nisse", "domovoi", "korpokkur", "yumboe", "veli", "para", "dokkaebi", "basajaun", "bannik"] },
+/* Which culture belongs to which part of the world. Every `org` part95 uses is
+   listed here; anything missing is REPORTED at the bottom rather than quietly
+   dropped into a default, because a creature filed under the wrong continent
+   without complaint is the exact fault this file exists to fix. */
+const REGION_OF = {
+  Greek: "olympus",
 
-  { k: "rift12", n: "The Backwards Foot", lvl: [60, 64], prev: { map: "rift11", x: 7, y: 1 }, next: "rift13",
-    sign: "🪧 'THE BACKWARDS FOOT — Brazil, Trinidad and the Philippines all put the same detail on their forest guardians: the feet point the wrong way, so the tracks lead out when the thing is going in. Nobody copied it from anybody.'",
-    who: ["curupira", "douen", "chullachaqui", "teakettler", "hidebehind", "agropelter", "squonk", "boggart", "tiyanak", "kapre"] },
+  Slavic: "north", Serbian: "north", Norse: "north", Norwegian: "north",
+  Finnish: "north", "Sámi": "north",
 
-  { k: "rift13", n: "What the Ice Takes", lvl: [60, 65], prev: { map: "rift12", x: 7, y: 1 }, next: "rift14",
-    sign: "🪧 'WHAT THE ICE TAKES — the far north has the most practical monsters on earth. Nearly every one of them is standing exactly where the ground is thin, the light is flat, or a person alone is about to make a mistake.'",
-    who: ["qalupalik", "amarok", "ijiraq", "amikuk", "tupilaq", "stallo", "yukionna", "huldra", "draugr", "fossegrim", "nightmara", "kamuyhuci", "tokoloshe", "zduhac"] },
+  English: "isles", Welsh: "isles", Cornish: "isles", Irish: "isles",
+  Scottish: "isles", Basque: "isles",
 
-  { k: "rift14", n: "The Unburied", lvl: [61, 65], prev: { map: "rift13", x: 7, y: 1 }, next: "rift15",
-    sign: "🪧 'THE UNBURIED — a body without rites becomes a problem, and four continents came to the same answer independently. What is feared is never the death. It is the part that was left undone afterwards.'",
-    who: ["gashadokuro", "abiku", "huakaipo", "jiangshi", "lilith", "ghul", "soucouyant", "manananggal", "obayifo", "ilomba", "adze", "ifrit", "nasnas"] },
+  Ewe: "africa", Zulu: "africa", Ashanti: "africa", Mongo: "africa",
+  Yoruba: "africa", Kanuri: "africa", Sawa: "africa", Tonga: "africa",
+  Bemba: "africa", Wolof: "africa", Swahili: "africa",
 
-  { k: "rift15", n: "The Watchers of the Wood", lvl: [62, 66], prev: { map: "rift14", x: 7, y: 1 }, next: "rift16",
-    sign: "🪧 'THE WATCHERS OF THE WOOD — a forest with something in it does not get cut. These stories have protected more old trees than any law, and several of them were doing conservation centuries before there was a word for it.'",
-    who: ["patupaiarehe", "ponaturi", "tipua", "eloko", "asanbosam", "jorogumo", "penghou", "bungisngis", "blackshuck", "redcap", "dullahan", "cwnannwn", "bultungin", "gumiho"] },
+  Arabian: "neareast", Persian: "neareast", Anatolian: "neareast",
+  Jewish: "neareast", Egyptian: "neareast",
 
-  { k: "rift16", n: "What the Water Holds", lvl: [62, 67], prev: { map: "rift15", x: 7, y: 1 }, next: "rift17",
-    sign: "🪧 'WHAT THE WATER HOLDS — notice how many of these come with a rule about WHEN. Do not swim at noon. Do not swim in that week. The monster is a calendar, and the calendar is usually right about the current.'",
-    who: ["marakihau", "dakuwaqa", "nanaue", "berberoka", "vodyanoy", "rusalka", "pincoya", "lusca", "jengu", "nyaminyami", "shahmaran", "medjed"] },
+  Japanese: "eastasia", Chinese: "eastasia", Korean: "eastasia",
+  Ainu: "eastasia", Mongolian: "eastasia",
 
-  { k: "rift17", n: "The Made Things", lvl: [63, 67], prev: { map: "rift16", x: 7, y: 1 }, next: "rift18",
-    sign: "🪧 'THE MADE THINGS — a kettle, a broom, a hut, a word written on clay. Half the world decided that a thing used long enough and then discarded would eventually have something to say about it.'",
-    who: ["golem", "babayagahut", "nurikabe", "ashiaraiyashiki", "kasaobake", "betobetosan", "bulgasari", "baize", "xiezhi", "serpopard", "likho", "namazu"] },
+  Hawaiian: "oceania", "Māori": "oceania", Fijian: "oceania", Filipino: "oceania",
 
-  { k: "rift18", n: "What Walked Before", lvl: [64, 69], prev: { map: "rift17", x: 7, y: 1 }, next: null,
-    sign: "🪧 'WHAT WALKED BEFORE — some of these are not inventions at all. Haast's eagle was real and hunted people. The giant ground sloth was real. A myth is sometimes just a very long memory, kept by people who had no other way to write it down.'",
-    who: ["pouakai", "mapinguari", "camahueto", "centaur", "gorgon", "tartalo", "olgoikhorkhoi", "kamapuaa", "akualele", "boitata", "snallygaster", "jerseydevil", "huma"] },
-];
+  Inuit: "arctic", Greenlandic: "arctic",
 
-/* Weights. The rarest thing in each rift is the one with the best story, which
-   is the wrong way round for a collector and the right way round for a game:
-   the pouākai and the mapinguari should take some finding. Everything else
-   sits in a band narrow enough that no species is a wall. */
-const riftWeight = (sp, i, n) => {
-  const rare = ["pouakai", "mapinguari", "gashadokuro", "golem", "draugr", "centaur",
-    "gorgon", "olgoikhorkhoi", "nyaminyami", "lusca", "dakuwaqa", "huakaipo"];
-  if (rare.indexOf(sp) >= 0) return 4;
-  return 9 - Math.floor((i / Math.max(1, n - 1)) * 3);      // 9 down to 6
+  "American folklore": "americas", Tupi: "americas", Amazonian: "americas",
+  Chilote: "americas", Trinidadian: "americas", Bahamian: "americas",
 };
 
-DEEP2.forEach((d) => {
-  // Filtered against DEX exactly as part12 filters its own, so a key that never
-  // made it into the roster leaves a thinner pool instead of a broken one.
-  const pool = d.who.filter((sp) => DEX[sp]).map((sp, i, a) => [sp, riftWeight(sp, i, a.length)]);
+/* The rooms. `off` is the rift each one opens from and `side` is which wall, so
+   you walk into a region from the part of the world it belongs to.
+
+   Levels sit a little above the parent rift, which is what part12's chain
+   already did: going further in should mean going up. */
+const REGIONS = [
+  { k: "rift_north", n: "The Long Winter", region: "north", off: "rift2", side: "w", lvl: [53, 57],
+    sign: "🪧 'THE LONG WINTER — notice how many of these live in the house. The stove, the bathhouse, the barn. Where winter is long enough, the thing you must stay on good terms with is indoors with you.'" },
+
+  { k: "rift_isles", n: "The Old Stones", region: "isles", off: "rift2", side: "e", lvl: [53, 57],
+    sign: "🪧 'THE OLD STONES — a black dog on a lonely road, hounds heard passing overhead, knocking in the rock ahead of you. These are the sounds of being out after dark in a small country, given shapes.'" },
+
+  { k: "rift_africa", n: "The Long Grass", region: "africa", off: "rift3", side: "w", lvl: [54, 58],
+    sign: "🪧 'THE LONG GRASS — the adze is a firefly that brings fever, and it is a mosquito. Some of the oldest correct medicine anywhere is written down as a monster, because a monster was the only way to write anything down.'" },
+
+  { k: "rift_neareast", n: "The Smokeless Fire", region: "neareast", off: "rift3", side: "e", lvl: [54, 58],
+    sign: "🪧 'THE SMOKELESS FIRE — the jinn are not ghosts and not angels. They are a third kind of person, with their own laws and their own religions, who were here first. Nearly everything the word genie does to that idea is a loss.'" },
+
+  { k: "rift_eastasia", n: "The Hundred Demons", region: "eastasia", off: "rift4", side: "w", lvl: [55, 59],
+    sign: "🪧 'THE HUNDRED DEMONS — a wall that will not let you past. Footsteps that stop when you stop. An umbrella that has reached a hundred years old and woken up. Half of these are not monsters at all; they are explanations with faces put on them.'" },
+
+  { k: "rift_oceania", n: "The Long Voyage", region: "oceania", off: "rift5", side: "w", lvl: [55, 59],
+    sign: "🪧 'THE LONG VOYAGE — the pouākai was real. Haast's eagle had a three-metre span, hunted moa, and was easily capable of killing a person. It was gone by about 1400. Some of what is filed under myth is only a very long memory.'" },
+
+  { k: "rift_arctic", n: "The Thin Ice", region: "arctic", off: "rift6", side: "w", lvl: [56, 60],
+    sign: "🪧 'THE THIN ICE — the qalupalik hums under the floe and takes children who go too near the edge. Every creature in this room is standing exactly where the ground is dangerous. These are the most practical stories on earth.'" },
+
+  { k: "rift_americas", n: "The Deep Woods", region: "americas", off: "rift6", side: "e", lvl: [56, 60],
+    sign: "🪧 'THE DEEP WOODS — the curupira wears his feet backwards so his tracks lead hunters out of the forest, and he punishes anyone who takes more than they need. That is a conservation ethic, written down several centuries before there was a word for it.'" },
+];
+
+/* Cutting a door. Row 6 is the open corridor across the middle of every rift
+   room - "T..............T" - so a side door there always opens onto walkable
+   floor, and part4 already treats `e` as an exit tile.
+
+   THE ROWS ARE REPLACED, NEVER EDITED IN PLACE. All six rifts are declared with
+   `rows: ROWS_RIFT`, which is ONE shared array - mutating it would put the same
+   door in all six at once. withRow returns a new array, which is why part12 used
+   it for the same job. */
+const DOOR_Y = 6;
+const riftDoor = (parentKey, side, target) => {
+  const m = MAPS[parentKey];
+  if (!m || !m.rows) return false;
+  const row = m.rows[DOOR_Y];
+  const x = side === "w" ? 0 : row.length - 1;
+  m.rows = withRow(m.rows, DOOR_Y, x === 0 ? "e" + row.slice(1) : row.slice(0, x) + "e");
+  m.exits = { ...m.exits, [x + "," + DOOR_Y]: { map: target, x: 7, y: 8 } };
+  return true;
+};
+
+// Every species sorted into its region by the culture part95 gave it.
+const REGION_MEMBERS = {};
+if (typeof M2 !== "undefined") {
+  M2.forEach((r) => {
+    const reg = REGION_OF[r[7]];
+    if (!reg) return;
+    (REGION_MEMBERS[reg] = REGION_MEMBERS[reg] || []).push(r[0]);
+  });
+}
+
+/* Weights. The rarest thing in each room is the one with the best story, which
+   is the wrong way round for a collector and the right way round for a game. */
+const RIFT_RARE = ["pouakai", "mapinguari", "gashadokuro", "golem", "draugr",
+  "centaur", "gorgon", "olgoikhorkhoi", "nyaminyami", "lusca", "dakuwaqa", "huakaipo"];
+const riftWeight = (sp, i, n) =>
+  RIFT_RARE.indexOf(sp) >= 0 ? 4 : 9 - Math.floor((i / Math.max(1, n - 1)) * 3);
+
+REGIONS.forEach((d) => {
+  const who = (REGION_MEMBERS[d.region] || []).filter((sp) => DEX[sp]);
+  if (!who.length) return;
   MAPS[d.k] = {
     name: d.n, zone: "rift", music: "legend",
-    rows: d.next ? RIFT_MID : RIFT_END,
-    exits: { "7,9": d.prev, ...(d.next ? { "7,0": { map: d.next, x: 7, y: 8 } } : {}) },
-    pool, lvl: d.lvl,
+    rows: RIFT_END,
+    exits: { "7,9": { map: d.off, x: d.side === "w" ? 1 : 14, y: DOOR_Y } },
+    pool: who.map((sp, i, a) => [sp, riftWeight(sp, i, a.length)]),
+    lvl: d.lvl,
   };
+  riftDoor(d.off, d.side, d.k);
   SIGNS[d.k + ":7,3"] = d.sign;
 });
 
-/* THE CHECK, and it is the one that matters most in this file.
+/* Greece already has a rift, and the centaur and the gorgon are the two most
+   Greek things in the whole second hundred. They go into Olympus rather than
+   into a room of their own - the first version of this file had them eight
+   doors away, behind the Americas. */
+if (MAPS.rift1 && (REGION_MEMBERS.olympus || []).length) {
+  const add = REGION_MEMBERS.olympus.filter((sp) => DEX[sp]);
+  MAPS.rift1.pool = [...MAPS.rift1.pool, ...add.map((sp) => [sp, 5])];
+}
 
-   A creature written, given a sprite, and placed in no pool is invisible - it
-   exists in the guide as a locked entry that can never be unlocked, which is
-   worse than not adding it at all. So every one of part95's hundred is counted
-   back out of the maps, and anything that did not land is named. */
+/* THE CHECK. Three things could be wrong here and not one would announce itself.
+
+   A creature in no pool is invisible - a guide entry that can never be unlocked.
+   A culture missing from REGION_OF silently loses every creature in it. And a
+   room whose door was never cut is a room nobody can walk into, which is the
+   same as not existing. */
 {
   const placed = new Set();
   Object.keys(MAPS).forEach((mk) => {
@@ -102,10 +172,21 @@ DEEP2.forEach((d) => {
   });
   const mine = (typeof M2 !== "undefined") ? M2.map((r) => r[0]) : [];
   const lost = mine.filter((sp) => !placed.has(sp));
-  const reachable = DEEP2.every((d) => MAPS[d.k] && MAPS[d.k].pool.length);
+  const noRegion = [...new Set((typeof M2 !== "undefined" ? M2 : [])
+    .map((r) => r[7]).filter((o) => !REGION_OF[o]))];
+  const shut = REGIONS.filter((d) => {
+    const m = MAPS[d.off];
+    if (!MAPS[d.k] || !m) return true;
+    const x = d.side === "w" ? 0 : m.rows[DOOR_Y].length - 1;
+    return !(m.exits || {})[x + "," + DOOR_Y];
+  }).map((d) => d.k);
 
-  console.log("[part96] where the second hundred live: " + DEEP2.length + " new rifts"
+  const spread = REGIONS.map((d) => d.n + " " + ((MAPS[d.k] || {}).pool || []).length).join(", ");
+  console.log("[part96] the second hundred, by where they come from: "
+    + REGIONS.length + " regions | " + spread
+    + " | Olympus +" + (REGION_MEMBERS.olympus || []).length
     + " | placed " + mine.filter((sp) => placed.has(sp)).length + " of " + mine.length
-    + " | the chain runs rift10 -> rift18 and every rift has a pool: " + reachable
+    + (noRegion.length ? " | CULTURE WITH NO REGION: " + noRegion.join(", ") : "")
+    + (shut.length ? " | ROOM WITH NO DOOR: " + shut.join(", ") : "")
     + (lost.length ? " | NOWHERE TO BE FOUND: " + lost.join(", ") : ""));
 }
