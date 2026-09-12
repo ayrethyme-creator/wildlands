@@ -83,7 +83,7 @@ var DATA_PARTS = [
   "game.part1.jsx","game.part2.jsx","game.part3.jsx","game.part3b.jsx",
   /* part85 adds 96 moves and MUST load before part17, which snapshots the
      move table into the pools every generated learnset is built from. */
-  "game.part85.jsx","game.part6.jsx",
+  "game.part85.jsx","game.part97.jsx","game.part6.jsx",
   "game.part7.jsx","game.part8.jsx","game.part9.jsx","game.part10.jsx","game.part11.jsx",
   "game.part12.jsx","game.part13.jsx","game.part14.jsx","game.part15.jsx","game.part16.jsx",
   "game.part17.jsx","game.part18.jsx","game.part19.jsx","game.part20.jsx","game.part21.jsx",
@@ -127,9 +127,9 @@ var DATA_PARTS = [
      without both reports a roster a hundred short. */
   "game.part95.jsx",
   "game.part96.jsx",
-  /* part97 adds the Fossil and Mythic moves and extends 271 learnsets, so a
-     gallery without it reports move counts that are two types short. */
-  "game.part97.jsx"
+  /* part98 hands out the Fossil and Mythic learnsets; part97 defines the moves
+     themselves and sits up with part85, because part17 must see them. */
+  "game.part98.jsx"
 ];
 
 /* The gallery uses the SAME classifier the design work uses - design/biomes.js

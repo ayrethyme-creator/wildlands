@@ -29,9 +29,21 @@ UTILITY.forEach((k) => { (UTIL_BY_TYPE[MOVES[k].t] = UTIL_BY_TYPE[MOVES[k].t] ||
    60 so a fully grown animal is still learning. */
 const LEARN_AT = [5, 8, 11, 14, 18, 22, 26, 30, 34, 38, 43, 48, 54, 60];
 
-// Mythic and Fossil are flavour types with no moves of their own. Anything
-// built on them draws from a thematic spread instead, which is why a Kitsune
-// fights nothing like a Cerberus.
+// A fallback for a type with no moves of its own. Anything built on such a type
+// draws from a thematic spread instead, which is why a Kitsune fights nothing
+// like a Cerberus.
+//
+// MYTHIC AND FOSSIL NO LONGER REACH THIS, and the reason is worth keeping. They
+// had no moves, so every myth in the game drew its learnset from the spread
+// below - which includes Ember, and Ember is where all six burning moves live.
+// Ayr, playing, 2026-09-12: "every time I fight a mythic, my animal gets a burn,
+// regardless of the move used." Nearly every myth in the game had been taught
+// fire by this table.
+//
+// part97 now defines twenty Fossil and Mythic moves and loads BEFORE this file,
+// so poolFor finds a real pool for both and returns above. The entries stay as a
+// safety net for any type that ends up with no moves in future - and as the
+// record of what happens when one does.
 const FALLBACK = {
   Mythic: ["Wild", "Predator", "Aerial", "Ember", "Night", "Venom"],
   Fossil: ["Wild", "Predator", "Armor", "Burrow"],

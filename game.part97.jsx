@@ -2,39 +2,38 @@
 // Ayr, 2026-09-12: "I want some fossil and mythic moves since they are already
 // their own types."
 //
-// They are, and looking into it turned up something worse than a missing move
-// list. THE GAME HAS 139 MOVES ACROSS 13 TYPES AND NEITHER FOSSIL NOR MYTHIC
-// HAS A SINGLE ONE. Every fossil and every myth in the game fights with
-// borrowed weapons.
+// They are, and the gap turned out to be worse than a missing move list. The
+// game had 139 moves across 13 types and NEITHER FOSSIL NOR MYTHIC HAD ONE.
 //
-// That matters more than it sounds, because of one line in part4:
+// That is not cosmetic, because of one line in part4:
 //
 //     const stab = (DEX[att.sp].t || []).indexOf(mv.t) >= 0 ? STAB : 1;
 //
-// Same-type attack bonus is 1.5x, and it is the single largest multiplier an
-// ordinary attack gets. A creature can only earn it by using a move of its own
-// type. So 71 fossils and around 200 myths - 271 species, a quarter of the
-// roster - have never once been able to earn it. They have been fighting at a
-// permanent disadvantage that no player could see and nothing in the game
-// explained.
+// Same-type attack bonus is 1.5x and it is the largest multiplier an ordinary
+// attack gets. A creature earns it only with a move of its own type, so 71
+// fossils and about 200 myths - a quarter of the roster - had never once been
+// able to earn it.
 //
-// Twenty moves here, ten each, built to the shape the other thirteen types
-// already use: a cheap fast one, a couple in the middle, one heavy one with the
-// accuracy to match, and three or four that do something other than damage.
-// Powers sit inside the established range - the game's own median attack is 60
-// and its ceiling is 100 - so nothing here is stronger than what already exists.
+// WHY THIS FILE LOADS HERE, DIRECTLY AFTER part85 AND LONG BEFORE part4.
+// It was written at the end of the load order, which broke something. part17
+// builds every generated learnset out of a table it makes from MOVES AT THE
+// MOMENT IT RUNS, and it carries a fallback for exactly this situation:
 //
-// WHAT THIS FILE DELIBERATELY DOES NOT DO
-// ---------------------------------------
-// It does not give Fossil or Mythic a row in the type chart. Neither type has
-// one, which means a Fossil attack is neutral against all fifteen types and
-// nothing in the game is strong or weak against either of them. Fixing that is
-// a real balance change touching every battle and 271 species on defence as
-// well as offence, and it is a decision rather than an oversight, so it is
-// Ayr's to make. See the note at the bottom for what I would propose.
+//     Mythic: ["Wild", "Predator", "Aerial", "Ember", "Night", "Venom"]
 //
-// These moves are worth having either way: STAB does not need a chart row. A
-// fossil using a Fossil move goes from 1x to 1.5x today.
+// Because Mythic had no moves of its own, every myth in the game drew its
+// learnset from that spread - and Ember is where all six burning moves live.
+// Ayr, playing: "there seems to be an error that every time I fight a mythic,
+// my animal gets a burn, regardless of the move used." That is the cause. Not
+// the move the player chose: nearly every myth in the game had quietly been
+// taught fire.
+//
+// Defining these moves BEFORE part17 runs makes poolFor find a real Mythic pool
+// and never reach the fallback. A Phoenix still burns you, because a Phoenix is
+// Mythic/Ember and Ember is its second type. A kappa no longer does.
+//
+// The learnset ladders that go with these moves are in part98, which has to run
+// after part95 so that the second hundred exists to be given them.
 
 Object.assign(MOVES, {
   // ---- FOSSIL ----
@@ -69,72 +68,41 @@ Object.assign(MOVES, {
   retold:      { n: "Retold",         t: "Mythic", p: 0,  acc: 100, fx: "raiseAtk" },
 });
 
-/* GIVING THEM OUT.
+/* THE TYPE CHART. Ayr, 2026-09-12: "Yeah all that sounds good, fossil beats
+   mythic."
 
-   Every Fossil species gets Fossil moves and every Mythic species gets Mythic
-   ones, chosen by how far into the game the species is rather than handed out
-   flat - a level-12 ammonite should not know Deep Time.
+   Until now neither type had a row, so a Fossil attack was neutral against all
+   fifteen types and nothing anywhere was strong or weak against a myth - which
+   mattered more once part95 took Mythic to about two hundred species.
 
-   The learnset is APPENDED to what the species already has and sorted, exactly
-   the way part3b adds Ice and Night moves to the animals that grew into them.
-   Nothing is removed, so no save loses a move it had.
+   FOSSIL BEATS MYTHIC, and it is the one entry here that the game has already
+   spent a hundred field-guide entries arguing for. part29's rule is that a myth
+   is best explained by what people were actually looking at, and half that book
+   is fossils: the griffin is a Protoceratops lying in gold-bearing ground, the
+   cyclops is a dwarf elephant skull with a nasal cavity where the eye should
+   be. When you find the bone, the monster stops being a monster.
 
-   part17 snapshots MOVES into the pools that generated learnsets are built
-   from, and it has already run by the time this file loads - which is why this
-   adds levels directly to DEX[k].l rather than hoping a generator picks them
-   up. part85 learned that the hard way and its note says so. */
-const FOSSIL_LADDER = [[1, "boneclub"], [14, "siltfall"], [20, "shalesplit"],
-  [26, "tarpit"], [32, "bonebed"], [38, "petrify"], [44, "oldbloodroar"],
-  [50, "stratacrush"], [56, "amberlock"], [62, "deeptime"]];
-const MYTHIC_LADDER = [[1, "hearsay"], [16, "talltale"], [22, "rumour"],
-  [28, "omen"], [34, "glamour"], [40, "storysong"], [46, "wondertouch"],
-  [52, "retold"], [58, "legendweight"], [64, "olderthanus"]];
+   The rest is kept deliberately small, because 271 species are affected on
+   defence as well as offence:
+     a story cannot dent a fact          Mythic hits Fossil for half
+     you dig a fossil up                 Burrow hits Fossil hard
+     bone breaks against bone            Armor hits Fossil hard
+     ice preserves, it does not destroy  Ice hits Fossil for half, and Fossil
+                                         gets little out of hitting ice
+
+   Fossil is now the designated answer to Mythic, which is a job the chart
+   needed filling the moment Mythic became a fifth of the roster. */
+CHART.Fossil = { Mythic: 2, Ice: 0.5 };
+CHART.Mythic = { Fossil: 0.5 };
+CHART.Burrow.Fossil = 2;
+CHART.Armor.Fossil = 2;
+CHART.Ice.Fossil = 0.5;
 
 {
-  let fossil = 0, mythic = 0, added = 0;
-  Object.keys(DEX).forEach((k) => {
-    const types = (DEX[k] && DEX[k].t) || [];
-    const ladder = types.indexOf("Fossil") >= 0 ? FOSSIL_LADDER
-      : types.indexOf("Mythic") >= 0 ? MYTHIC_LADDER : null;
-    if (!ladder) return;
-    if (ladder === FOSSIL_LADDER) fossil++; else mythic++;
-    const have = new Set((DEX[k].l || []).map(([, mv]) => mv));
-    const give = ladder.filter(([, mv]) => !have.has(mv));
-    added += give.length;
-    DEX[k].l = [...(DEX[k].l || []), ...give].sort((a, b) => a[0] - b[0]);
-  });
-
-  // Every move named in a ladder must exist, or a species learns nothing at
-  // that level and the gap is silent.
-  const bad = [...FOSSIL_LADDER, ...MYTHIC_LADDER].map(([, mv]) => mv).filter((mv) => !MOVES[mv]);
-  const newMoves = Object.keys(MOVES).filter((k) => MOVES[k].t === "Fossil" || MOVES[k].t === "Mythic");
-
-  console.log("[part97] fossil and mythic can hit back: " + newMoves.length + " new moves"
-    + " | learnsets extended for " + fossil + " fossils and " + mythic + " myths"
-    + " (" + added + " entries added)"
-    + " | they earn STAB for the first time"
-    + (bad.length ? " | LADDER NAMES A MOVE THAT DOES NOT EXIST: " + bad.join(", ") : ""));
+  const fossilMoves = Object.keys(MOVES).filter((k) => MOVES[k].t === "Fossil").length;
+  const mythicMoves = Object.keys(MOVES).filter((k) => MOVES[k].t === "Mythic").length;
+  console.log("[part97] fossil and mythic can hit back: " + fossilMoves + " fossil moves, "
+    + mythicMoves + " mythic | defined before part17, so no myth draws its"
+    + " learnset from the Ember fallback any more"
+    + " | chart: Fossil beats Mythic, Fossil weak to Burrow and Armor");
 }
-
-/* WHAT I WOULD PROPOSE FOR THE TYPE CHART, when Ayr wants to decide it.
-
-   Neither type has a row, so a Fossil attack is neutral against everything and
-   nothing on earth is strong against a myth. The shape that fits this game's
-   own writing is:
-
-     FOSSIL beats MYTHIC. part29's rule is that a myth is best explained by
-     what people were actually looking at, and half that book is fossils - the
-     griffin is a Protoceratops in gold-bearing ground, the cyclops is a dwarf
-     elephant skull with a nasal cavity where the eye should be. When you find
-     the bone, the monster stops being a monster. The game already believes
-     this; the chart could say it.
-
-     MYTHIC resists almost everything and beats little. A story is hard to kill
-     and does not hit back - that is closer to what a myth IS than making it a
-     damage type.
-
-     FOSSIL is weak to ICE and ARMOR. Ice because the best-preserved things we
-     have came out of permafrost, and Armor because bone breaks against bone.
-
-   It is a real change - 271 species on defence as well as offence, every
-   battle - so it is not being made on my own initiative. */
