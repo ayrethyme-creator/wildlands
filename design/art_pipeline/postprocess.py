@@ -2,7 +2,16 @@ from PIL import Image
 from collections import deque
 import sys
 
-def remove_bg_and_crop(in_path, out_path, size=256, tol=20, pocket_tol=10, min_pocket_px=150):
+DARK = 120      # luminance below this is the style's drawn linework, not fill
+
+
+def _lum(p):
+    return (p[0] * 299 + p[1] * 587 + p[2] * 114) // 1000
+
+
+def remove_bg_and_crop(in_path, out_path, size=256, tol=20, step=6,
+                       pocket_tol=34, min_pocket_px=150, max_pocket_frac=0.10,
+                       fence=90, probe=3, line_max=6):
     img = Image.open(in_path).convert("RGBA")
     w, h = img.size
     px = img.load()
@@ -12,49 +21,116 @@ def remove_bg_and_crop(in_path, out_path, size=256, tol=20, pocket_tol=10, min_p
     def close(c1, c2, t):
         return all(abs(a - b) <= t for a, b in zip(c1, c2))
 
+    # PASS 1: flood in from the border, FOLLOWING A GRADIENT.
+    #
+    # This used to compare every pixel against the one colour sampled at (0,0),
+    # which assumes the backdrop is flat. It isn't. The model vignettes it -
+    # darker in the corners, lighter in the middle - so the flood would clear
+    # the dark corner ring, reach the point where the grey brightens past `tol`,
+    # and stop dead, leaving the middle of the backdrop opaque behind the
+    # animal. The anomalocaris came out 87.7% opaque, the worst leak of all 1377
+    # sprites, and Ayr caught it by eye: "anomalocaris-- background error".
+    #
+    # So a pixel is background if it is near the sampled corner colour (loose,
+    # `tol`) OR near the pixel the flood arrived from (tight, `step`). The
+    # second test walks up the vignette one small increment at a time. It cannot
+    # walk into the animal, because the style draws a hard outline and a hard
+    # outline is a jump far bigger than `step`. Verified by sweeping step from 4
+    # to 12 on the anomalocaris: coverage lands on 21.8% and stays there, which
+    # is what a clean cut-out looks like. A flood that were leaking into the
+    # subject would keep eating as the tolerance rose.
     visited = bytearray(w * h)
     q = deque()
+
+    def push(x, y, ref):
+        i = y * w + x
+        if not visited[i]:
+            visited[i] = 1
+            q.append((x, y, ref))
+
     for x in range(w):
         for y in (0, h - 1):
-            q.append((x, y))
+            push(x, y, bg)
     for y in range(h):
         for x in (0, w - 1):
-            q.append((x, y))
-
+            push(x, y, bg)
     while q:
-        x, y = q.popleft()
-        if x < 0 or y < 0 or x >= w or y >= h:
+        x, y, ref = q.popleft()
+        c = px[x, y][:3]
+        if not (close(c, bg, tol) or close(c, ref, step)):
             continue
-        idx = y * w + x
-        if visited[idx]:
-            continue
-        visited[idx] = 1
-        r, g, b, a = px[x, y]
-        if close((r, g, b), bg, tol):
-            px[x, y] = (r, g, b, 0)
-            q.append((x + 1, y)); q.append((x - 1, y))
-            q.append((x, y + 1)); q.append((x, y - 1))
+        px[x, y] = c + (0,)
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < w and 0 <= ny < h:
+                push(nx, ny, c)
 
-    # Second pass: catch background-colored pockets that got fully enclosed
-    # by the subject (e.g. the gap between an animal's legs, or between a
-    # scorpion's claws) and so were never reached by the edge-flood above
-    # because they aren't 4-connected to the border through a near-bg path.
+    # PASS 2: clear background trapped INSIDE the animal - the hole in a coiled
+    # snake, the gap inside a curled tail, the spaces between a sea spider's
+    # legs. Pass 1 cannot reach these; they are not connected to the border.
     #
-    # We can't just clear every remaining near-bg-colored pixel regardless
-    # of connectivity with a loose tolerance (tried that first) -- light fur
-    # (e.g. a colobus's white mantle) and eye catchlights are frequently
-    # close-ish to a light-gray background color too, and indiscriminately
-    # clearing those punches visible holes in the subject. Two things tame
-    # that: (1) pocket_tol is much tighter than the pass-1 tol -- genuine
-    # unpainted background pixels match the sampled bg color almost exactly
-    # (within ~5), while painted fur/highlights that are merely "close" to
-    # bg in a loose sense usually deviate by more than that on inspection;
-    # (2) a minimum component size still filters out single-pixel
-    # coincidental matches. Verified against sample raw generations: real
-    # enclosed pockets (leg gaps, claw gaps, chin/branch gaps) survive this
-    # filter at 150-8800px, while a colobus's white fur mantle -- the worst
-    # false-positive case found -- drops to isolated <20px specks and is
-    # correctly left alone.
+    # WHY THIS IS GATED NOW. The old version decided by colour alone: near the
+    # sampled background, big enough, enclosed - clear it. That is unsound, and
+    # not marginally. Measured on the amarok, the wolf's own grey fur is
+    # (211,210,209) and the backdrop behind it is (211,208,210). A DIFFERENCE OF
+    # TWO. The animal is painted the same colour as the air. On white animals
+    # the cel-shaded tone on the lit side lands on the backdrop value just as
+    # exactly. So the pass found the wolf's ruff, the angora rabbit's flank, the
+    # oryx's shoulder and the ivory gull's wing, called them background, and
+    # erased them. Ayr, 2026-09-13: "the rear is transparent in this sprite and
+    # it shouldn't be", and the same complaint against four more - every one of
+    # them a white or grey animal, which is the whole tell.
+    #
+    # It ran on 164 of 313 sprites and a hole audit found 226 across the full
+    # 1377. Tightening the colour tolerance does not help: at a threshold tight
+    # enough to spare the wolf the pass does nothing at all, because there is no
+    # colour difference to find. Neither does flatness - these regions really
+    # are flat. Colour cannot answer this question.
+    #
+    # But the pass cannot simply be deleted either. Switched off, the sea
+    # spider gets grey slabs between its legs, the namazu a grey disc inside its
+    # coil, the capuchin a disc inside its curled tail. It is doing real work on
+    # 5 of every 12 sprites it touches.
+    #
+    # WHAT ACTUALLY SEPARATES THEM IS WHAT FENCES THE REGION IN. A true trapped
+    # pocket is ringed by the style's dark linework the whole way round, because
+    # the animal drew a closed loop around it. A cel-shading highlight is ringed
+    # mostly by more fur, with linework only where it happens to abut an edge.
+    # So walk the pocket's rim and measure the fraction that has drawn line
+    # within `probe` pixels. Measured: coil and leg gaps score 93-100%, eaten
+    # fur scores 2-63%, and the amarok - the worst case there is - tops out at
+    # 72.8%.
+    #
+    # `max_pocket_frac` is the backstop. The angora rabbit's entire body reads
+    # as one enclosed near-background region and fences at 81.8%, which would
+    # pass. Nothing legitimately trapped inside an animal is a tenth of the
+    # canvas; at that size it is the animal.
+    #
+    # `line_max` IS THE SECOND HALF OF THE TEST, AND IT IS NOT OPTIONAL. Fencing
+    # alone scored 12/12 on the twelve sprites it was designed against and then
+    # broke twelve others when run over all 316 kept originals: border collie,
+    # colobus, northern gannet, European badger, magpie, gentoo penguin. Every
+    # one black-and-white. A white patch on a pied animal is ringed by black
+    # FUR, and "ringed by something dark" is exactly what fencing measures. The
+    # colobus lost 4855px, the border collie 3180.
+    #
+    # What separates a stroke from a mass is thickness. Linework goes dark and
+    # comes back out within a few pixels; black fur goes dark and stays dark. So
+    # a rim pixel only counts as fenced if the dark run ENDS within `line_max`.
+    #
+    # WHY THE THRESHOLD IS DELIBERATELY TIMID. With both tests there is still no
+    # clean separation - the settings that clear every coil also eat some fur.
+    # The two errors are not equally bad. Eaten anatomy is what Ayr reported and
+    # it is disfiguring; leftover background inside a coil is a grey patch on a
+    # handful of sprites. So this is tuned to the end of the range that eats
+    # nothing: zero false positives across all sixteen known-bad cases, at the
+    # cost of leaving some genuine pockets behind. When it is wrong it is wrong
+    # in the direction that keeps the animal whole.
+    #
+    # THE REAL FIX IS UPSTREAM AND IS NOT IN THIS FILE. None of this ambiguity
+    # would exist if the backdrop were a colour no animal is. It is light grey,
+    # and so are a great many of these animals - hence a wolf painted (211,210,209)
+    # against a backdrop of (211,208,210). See the note in gen_runner.py.
     visited2 = bytearray(w * h)
     for y0 in range(h):
         for x0 in range(w):
@@ -83,12 +159,36 @@ def remove_bg_and_crop(in_path, out_path, size=256, tol=20, pocket_tol=10, min_p
                             if aa != 0 and close((rr, gg, bb), bg, pocket_tol):
                                 visited2[nidx] = 1
                                 cq.append((nx, ny))
-            # touches_edge shouldn't happen post-pass-1, but guard anyway;
-            # only clear sizable enclosed pockets.
-            if not touches_edge and len(comp) >= min_pocket_px:
+            if touches_edge or not (min_pocket_px <= len(comp) <= max_pocket_frac * w * h):
+                continue
+            cells = set(comp)
+            fenced = total = 0
+            for (x, y) in comp:
+                for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                    if (x + dx, y + dy) in cells:
+                        continue
+                    total += 1
+                    # Walk outward. A stroke goes dark and comes back out within
+                    # a few pixels; a mass of black fur goes dark and stays dark.
+                    start, run = None, 0
+                    for s in range(1, probe + line_max + 3):
+                        nx, ny = x + dx * s, y + dy * s
+                        if not (0 <= nx < w and 0 <= ny < h):
+                            break
+                        if _lum(px[nx, ny][:3]) < DARK:
+                            if start is None:
+                                if s > probe:
+                                    break
+                                start = s
+                            run += 1
+                        elif start is not None:
+                            break
+                    if start is not None and run <= line_max:
+                        fenced += 1
+                    break
+            if total and 100.0 * fenced / total >= fence:
                 for (x, y) in comp:
-                    r, g, b, a = px[x, y]
-                    px[x, y] = (r, g, b, 0)
+                    px[x, y] = px[x, y][:3] + (0,)
 
     img = strip_shadow(img)
 

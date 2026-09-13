@@ -6,6 +6,25 @@ import postprocess as pp
 STYLE = ("anime-influenced creature-collector game concept art, clean sharp linework, flat "
     "cel-shaded colour with only thin rim-light highlights on the edges, confident heroic "
     "energy, no chubby rounding, lean and powerful silhouette, not photorealistic, illustration")
+# THE BACKDROP COLOUR IS THE ROOT CAUSE OF THE WORST BUG IN THIS PIPELINE, and
+# it is still here because changing it changes every future sprite and that is
+# Ayr's call, not mine. Recording it so the next person does not have to
+# rediscover it.
+#
+# "light gray" is also what a great many of these animals are. Measured on the
+# amarok: the wolf's fur is (211,210,209) and the backdrop behind it is
+# (211,208,210) - a difference of two. On white animals the cel-shaded tone on
+# the lit side lands on the backdrop value just as exactly. The cut-out then has
+# to decide which grey is animal and which is air, and there is genuinely no
+# information with which to decide. It got it wrong on 226 of 1377 sprites,
+# erasing the amarok's ruff, the angora rabbit's flank, the oryx's shoulder.
+# postprocess.py now guards against it by geometry instead of colour, but the
+# guard is necessarily timid because the underlying question is unanswerable.
+#
+# A backdrop no animal is - saturated green, or magenta - makes the question
+# trivial and the guard unnecessary. The risk to weigh is colour bleed: a
+# strongly coloured surround can pull the model's palette and leave a fringe on
+# the sprite edges. That is worth a test batch before committing to it.
 COMPOSITION = ("plain light gray seamless background, no ground, no shadow, no rocks, no props, "
     "centered composition, full body visible, no text, no watermark, no logo")
 
