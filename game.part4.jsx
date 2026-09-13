@@ -1132,7 +1132,13 @@ function Wildlands() {
       SFX.heal();
       setS((p) => ({
         ...p,
-        party: p.party.map((a) => ({ ...a, hp: a.maxHp, pp: a.moves.map((k) => maxPP(MOVES[k])) })),
+        // Clears conditions as well as HP and PP. The line below promises the
+        // team was "rested, fed, and checked over", and until now it left every
+        // status on them - which mattered most for burn, the one that used to
+        // survive the battle at all. Belt and braces now that clean() strips
+        // burn too: a player who reads that sentence should be right.
+        party: p.party.map((a) => ({ ...a, hp: a.maxHp, pp: a.moves.map((k) => maxPP(MOVES[k])),
+          psn: false, slp: 0, fear: 0, chill: 0, brn: 0, para: false, guard: false })),
         dialog: { text: "🏥 Care Center: Your team was rested, fed, and checked over. HP and PP fully restored! (Progress saved)" },
       }));
       const t = setTimeout(() => saveGame(true), 250);
@@ -1591,7 +1597,25 @@ function Wildlands() {
     let guidePop = null;
     const steps = [];
     const foeName = () => (b.kind === "wild" ? "Wild " : b.kind === "legend" ? "Guardian " : "") + DEX[en.sp].n;
-    const clean = (a) => { const { stg, psn, slp, fear, chill, para, guard, ...r } = a; return { ...r }; };
+    /* Everything a battle did to an animal, taken off it when the battle ends.
+       Status in this game is per-encounter: you do not walk out of a fight
+       still poisoned.
+
+       `brn` WAS MISSING FROM THIS LIST. Ayr, 2026-09-12, then 2026-09-13: "every
+       time I fight a mythic, my animal gets a burn" and then "the burn problem
+       is showing up everywhere now."
+
+       The second report is this line. Burn was the only status in the game that
+       was permanent - it survived the battle, survived the next one, and was
+       still there for every fight after that. An animal that had ever been
+       burned dealt HALF DAMAGE for the rest of the run, because dmgCalc halves
+       output while brn is set, and took chip damage every turn on top. The Care
+       Center did not clear it either.
+
+       So the mythic fix stopped new burns and could not touch the old ones,
+       which is why it looked like the problem had spread rather than shrunk.
+       One word in a destructuring list. */
+    const clean = (a) => { const { stg, psn, slp, fear, chill, para, brn, guard, ...r } = a; return { ...r }; };
 
     // A landed blow bumps a counter the battle screen watches, and the counter
     // doubles as a React key so a second hit restarts the shake instead of
