@@ -21,3 +21,25 @@ in its own tradition.
 
 Kept because the same creatures will be re-rendered again and the reference is
 the only record of what "right" means for them.
+
+## Second sheet, 2026-09-13 - THESE WERE MISFILED FOR A FULL DAY
+
+Five more photos came in with the A-fixes list, saved under the five species
+names in order. They were saved one position off - each file held the PREVIOUS
+species' photo, in a clean rotation - and it went unnoticed until the anglerfish
+img2img request was about to go out conditioned on a picture of an aye-aye.
+Corrected 2026-09-14:
+
+| file now | actually shows | used for |
+|---|---|---|
+| `alkonost_ref.jpg` | the amikuk (A Book of Creatures) - smooth-headed, four tentacle-limbs. It DOES draw a mouth and an eye; Ayr's 2026-09-14 note asks for the head "smooth and faceless" - that instruction overrides what this picture shows | amikuk prompt, text only, no img2img (denoise would have risked pulling the face back in) |
+| `anglerfish_ref.jpg` | the anglerfish (NYT, "a rare black seadevil") | anglerfish img2img, cropped free of browser chrome to `anglerfish_ref_crop.jpg` |
+| `ayeaye_ref.jpg` | the aye-aye (Britannica illustration) | aye-aye prompt, text only |
+| `acornbarnacle_ref.jpg` | the alkonost (a harpy-style illustration, human torso AND arms AND wings) - superseded: Ayr, 2026-09-14, "she should not have arms, just wings" | already resolved and shipped before this photo was even correctly identified |
+
+**The acorn barnacle's own reference photo is MISSING.** The rotation was
+clean - each name held the photo that belonged one slot over - which means
+nothing recovered from it is a photo of an acorn barnacle. The screenshot that
+would have been the fifth photo turned out to be a screenshot of Ayr's own "A
+fixes" notes list instead; kept as `_notes_screenshot.jpg`. If Ayr still has
+the real photo, it needs resending.
