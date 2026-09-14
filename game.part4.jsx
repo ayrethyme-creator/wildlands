@@ -625,6 +625,18 @@ function Wildlands() {
   const HELD = useRef(null);        // {dx,dy} while a direction is held
   const SHIFT = useRef(false);      // shift = run for as long as it is held
   const TIMER = useRef(null);
+  // When the player last tried to go anywhere. part101 turns time since this
+  // into encounters; move() restarts it.
+  const STILL_SINCE = useRef(Date.now());
+  const SAT_ONCE = useRef(false);   // the sitting hint is said once a session
+  // rollEncounter is rebuilt every render, and the interval below is mounted
+  // once - so it reads the current one through a ref rather than closing over
+  // whichever one existed at mount. Everything rollEncounter touches is a ref
+  // or setS already, but this costs nothing and removes the question. Only
+  // DECLARED here: rollEncounter is defined further down this file, and
+  // assigning it at this point would read a const in its temporal dead zone
+  // and take the whole component down on the first render.
+  const ROLL = useRef(null);
 
   const stepDelay = () => {
     const running = SHIFT.current || SR.current.run;
@@ -805,7 +817,14 @@ function Wildlands() {
   // patch of grass sometimes cost three fights in a row.
   const ENC_COOL = useRef(0);
 
-  const rollEncounter = (mapKey, kind) => {
+  // `stillRate` is set - to a multiplier, not a flag - when this roll came from
+  // sitting in place rather than from a footfall (part101). It changes two
+  // things and nothing else: the walk/run multiplier stops applying, because
+  // standing still is neither of those, and the rate is multiplied by what
+  // part101 asks for. Everything below - the pools, the ecology, the pressure,
+  // the trail - is identical either way, which is the point: waiting is a
+  // different way to meet the same country, not a different country.
+  const rollEncounter = (mapKey, kind, stillRate) => {
     const m = MAPS[mapKey];
     const water = kind === "water";
     const st = SR.current;
@@ -824,8 +843,9 @@ function Wildlands() {
        was, and choosing to walk buys you a quieter crossing at half the speed.
        That gives the Walk button something to be for besides slowness. */
     const wx = (typeof weatherRate === "function") ? weatherRate(st) : 1;
-    const quiet = (SHIFT.current || st.run) ? 1 : 0.6;
-    const chance = (water ? 0.08 : 0.1) * wx * quiet;
+    const sitting = stillRate > 0;
+    const quiet = sitting ? 1 : ((SHIFT.current || st.run) ? 1 : 0.6);
+    const chance = (water ? 0.08 : 0.1) * wx * quiet * (sitting ? stillRate : 1);
     const pool = water ? m.poolWater : (isNight() && m.poolN ? m.poolN : m.pool);
     const lv = water ? m.lvlWater : m.lvl;
     if (ENC_COOL.current > 0) { ENC_COOL.current -= 1; return; }
@@ -877,6 +897,44 @@ function Wildlands() {
     } }));
     startBattle({ kind: "wild", enemy: mk(picked, rnd(lv[0], lv[1])) });
   };
+  ROLL.current = rollEncounter;
+
+  /* ----- sitting still (part101) -----
+     Ayr, on the endgame grind: "When you are not in a town and just sitting in
+     grass or water, the animals will come to you."
+
+     THIS IS THE ONE THING IN THE FILE THAT HAS TO BE A TIMER. Everything else
+     the game does hangs off an event React already knows about, and part87's
+     visible animals is the standing lesson in why - it spawned nothing for
+     weeks because its only heartbeat was throttled whenever the pane was
+     hidden and refused to act while a dialog was up, which is the state you
+     are in the moment you arrive. But stillness is measured in seconds of
+     nothing happening, and "nothing happening" fires no events. So: a timer,
+     with that lesson applied rather than ignored - it holds no state of its
+     own, it asks part101 fresh every tick instead of latching a "waiting"
+     mode, and refusing to act during a dialog or a battle is correct here
+     rather than fatal, because being ambushed mid-menu is not the feature.
+
+     One second is slower than a running footfall (85ms) and slower than a
+     walking one (165ms), so sitting can never out-roll walking per unit of
+     real time by accident - the whole difference in what it yields is the
+     multiplier part101 hands back, and that is the only number to touch. */
+  useEffect(() => {
+    const t = setInterval(() => {
+      if (typeof waitingSpot !== "function") return;
+      const st = SR.current;
+      const spot = waitingSpot(st, Date.now() - STILL_SINCE.current);
+      if (!spot) return;
+      // Said once a session, before anything arrives, because nothing on
+      // screen would otherwise tell a player this is a thing they can do.
+      if (!SAT_ONCE.current) {
+        SAT_ONCE.current = true;
+        if (typeof WAIT_HINT === "function") { say(WAIT_HINT(spot.kind)); return; }
+      }
+      if (ROLL.current) ROLL.current(st.map, spot.kind, spot.rate);
+    }, 1000);
+    return () => clearInterval(t);
+  }, []);
 
   // ----- world movement -----
   // A direction pressed while a box is still up. Closing a dialog and stepping
@@ -888,6 +946,10 @@ function Wildlands() {
   const BUFFER = useRef(null);
 
   const move = (dx, dy) => {
+    // Any attempt to go anywhere is the opposite of sitting still, so the clock
+    // part101 waits on restarts here - including on a step that turns out to be
+    // blocked. Walking into a tree is not sitting quietly in the grass.
+    STILL_SINCE.current = Date.now();
     const st = SR.current;
     if (st.screen === "world" && (st.dialog || st.menu || st.battle)) {
       BUFFER.current = { dx, dy, at: Date.now() };
