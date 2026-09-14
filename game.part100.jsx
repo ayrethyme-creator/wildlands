@@ -1,9 +1,13 @@
-// ---------- Part 100: SIGNS, PEOPLE AND CLUES OUT OF THE DOORWAY ----------
+// ---------- Part 100: SIGNS, PEOPLE, CLUES AND TRAINERS OUT OF THE DOORWAY --
 // Ayr, on seeing part99's fix: "There are still things in the way. Water and
 // buildings are ok, but not clues, people, or signs, all of which are still
-// present."
-//
-// Right, and for two different reasons.
+// present." Then, on the first version of this file, which left battle
+// trainers standing on the theory that fighting them is the game working as
+// designed: "No. I wanted the trainers to be moved specifically as well." So
+// they move too now - the theory was mine, not Ayr's, and Ayr's word on their
+// own game wins. A relocated trainer is still exactly as strong, still gives
+// the same prize, still has to be fought if you walk up and bump it - it is
+// only no longer sitting on the one line between a door and its exit.
 //
 // SIGNS ALREADY HAD A FIX - part82, 2026-09-04, this exact ask - but it runs
 // ONCE, early in load order, over whatever MAPS holds at that moment. part96
@@ -15,21 +19,19 @@
 // "PEOPLE" AND "CLUES" NEVER HAD A FIX AT ALL, because they are not signs.
 // part65 places both an investigation's person and its findings the same
 // way - literally the same function, `placeOn` - and both come out as an 'R'
-// tile registered in TRAINERS with `chat: true`. That flag is not
-// incidental: part4's walk rule explicitly excludes a chat NPC from ever
-// turning walkable on a beaten flag ("a chat NPC is never beaten"), on
-// purpose, because talking to someone is not winning against them. A route
-// trainer with the same 'R' character clears itself the day it loses. A
-// person with a clue to give never does. That is the whole difference
-// between "leave trainers alone, they are the game working" and "these are
-// permanently in the way, move them" - both are literally the same tile
-// character, and only the registration tells them apart.
+// tile registered in TRAINERS with `chat: true`. Ordinary route trainers use
+// the same character with no such flag. Once Ayr said trainers should move
+// too, the distinction stopped mattering for THIS file's purpose - every 'R'
+// and every 'V' is now a candidate, chat or not.
 //
-// So: 'R' is left standing exactly where it is when TRAINERS[key] has no
-// `chat` flag (an actual battle) or team lookup (route1:4,4 and the rest,
-// none of which set `chat`), and is a candidate to relocate when it does.
+// FIVE POSITIONS ARE KEPT FIXED ON PURPOSE: the story rival's five encounters
+// (RIVAL_TILES - route1/3/5/7 and the summit, all at "7,1"). Those are staged
+// narrative beats, not scenery a player happens to walk into, and moving one
+// would only relocate the drama, not remove an obstacle. Flagging this rather
+// than silently deciding it: if Ayr wants those moved too, say so and they
+// come out of the exclusion the same way ordinary trainers came out of it.
 //
-// THE ALGORITHM IS PART82'S, RUN AGAIN AND WIDENED TO A SECOND CHARACTER. Not
+// THE ALGORITHM IS PART82'S, RUN AGAIN AND WIDENED TO MORE CHARACTERS. Not
 // rewritten - the reachability bookkeeping there is exactly what this needs,
 // and there is no reason to risk a second, differently-buggy version of it.
 // obstructs() asks whether removing this one tile shortens some door-to-door
@@ -171,8 +173,10 @@ const relocate = (id, m, ch, movable, onMoved) => {
   return { checked, moved, stuck };
 };
 
+const RIVAL_FIXED = (typeof RIVAL_TILES !== "undefined") ? RIVAL_TILES : {};
+
 let sChecked = 0, sMoved = 0, sStuck = 0, sTextCarried = 0;
-let rChecked = 0, rMoved = 0, rStuck = 0;
+let tChecked = 0, tMoved = 0, tStuck = 0;
 
 Object.keys(MAPS).forEach((id) => {
   const m = MAPS[id];
@@ -191,20 +195,23 @@ Object.keys(MAPS).forEach((id) => {
   });
   sChecked += signRes.checked; sMoved += signRes.moved; sStuck += signRes.stuck;
 
-  const chatHere = (x, y) => {
-    const t = TRAINERS[id + ":" + x + "," + y];
-    return !!t && t.chat === true;
-  };
-  const rRes = relocate(id, m, "R", chatHere, (sx, sy, nx, ny) => {
+  // Every 'R' and every 'V' is a candidate now - a battle trainer, a rival,
+  // a chat-only investigation person, a finding, all of it - except the five
+  // staged rival encounters, which keep their fixed stage.
+  const onMovedTrainer = (sx, sy, nx, ny) => {
     const oldKey = id + ":" + sx + "," + sy, newKey = id + ":" + nx + "," + ny;
     if (TRAINERS[oldKey] !== undefined) { TRAINERS[newKey] = TRAINERS[oldKey]; delete TRAINERS[oldKey]; }
+  };
+  ["R", "V"].forEach((glyph) => {
+    const movable = (x, y) => !RIVAL_FIXED[id + ":" + x + "," + y];
+    const res = relocate(id, m, glyph, movable, onMovedTrainer);
+    tChecked += res.checked; tMoved += res.moved; tStuck += res.stuck;
   });
-  rChecked += rRes.checked; rMoved += rRes.moved; rStuck += rRes.stuck;
 });
 
 console.log("[part100] signs: " + sMoved + " moved of " + sChecked + " checked ("
-  + sTextCarried + " text carried, " + sStuck + " no room) | people/clues: "
-  + rMoved + " moved of " + rChecked + " checked (" + rStuck + " no room) | "
-  + "battle trainers and rivals untouched - they clear themselves");
+  + sTextCarried + " text carried, " + sStuck + " no room) | trainers/rivals/"
+  + "people/clues: " + tMoved + " moved of " + tChecked + " checked (" + tStuck
+  + " no room) | the five staged rival encounters kept their fixed spot");
 
 }
