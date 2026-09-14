@@ -63,15 +63,35 @@ def _names(outs) -> set:
     return out
 
 
-def submit(prompt, seed, w=1024, h=1024, steps=20, guidance=3.5):
-    """Queue one image. Returns {'prompt_id': ...} like the old client did."""
+def submit(prompt, seed, w=1024, h=1024, steps=20, guidance=3.5,
+           input_image=None, denoise=1.0):
+    """Queue one image. Returns {'prompt_id': ...} like the old client did.
+
+    `input_image`, if given, is a local file path: a real reference photo Ayr
+    supplied (e.g. design/art_prompts/refs/anglerfish_ref.jpg). Text alone had
+    already gone two rounds on the anglerfish's jaw and Ayr asked to reference
+    the photo directly rather than keep describing it. Uploaded once here and
+    fed to the same img2img mode halo_scrying_client's CLI uses for
+    --input-image, so the render is conditioned on the real animal's
+    proportions instead of guessing them from adjectives.
+
+    `denoise` controls how much of the photo survives: 1.0 is pure text-to-
+    image (the default, unchanged behaviour). Something in the 0.55-0.7 range
+    keeps the reference's silhouette and proportions while still letting the
+    prompt repaint it into the game's cel-shaded style - too low and the
+    output stays a photo, too high and the reference stops mattering.
+    """
+    input_ref = ""
+    if input_image:
+        input_ref = sg._upload_image(_base(), Path(input_image))
     payload = {
         "prompt": prompt, "negative_prompt": "", "model": MODEL,
         "sampler": "euler", "steps": steps, "cfg": 1.0,
         "width": w, "height": h, "seed": int(seed) % 2**31, "batch": 1,
         "client_id": "ponyta-claude-" + uuid.uuid4().hex,
-        "media_type": "image", "mode": "text", "input_image": "",
-        "denoise": 1.0, "frames": 49, "fps": 24.0, "loras": [],
+        "media_type": "image", "mode": "image" if input_ref else "text",
+        "input_image": input_ref,
+        "denoise": denoise if input_ref else 1.0, "frames": 49, "fps": 24.0, "loras": [],
     }
     # Remember what already existed so the new file can be told apart. Requests
     # are made one at a time, so the newest unseen output is ours.

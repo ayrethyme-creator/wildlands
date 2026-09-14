@@ -1,5 +1,6 @@
 from PIL import Image
 from collections import deque
+import statistics
 import sys
 
 DARK = 120      # luminance below this is the style's drawn linework, not fill
@@ -17,7 +18,20 @@ def remove_bg_and_crop(in_path, out_path, size=256, tol=20, step=6,
     w, h = img.size
     px = img.load()
 
-    bg = px[0, 0][:3]
+    # THE BACKGROUND SAMPLE MUST NOT BE A SINGLE PIXEL. It used to be px[0,0]
+    # alone, and the asanbosam render put a small dark smudge - a stray render
+    # artifact, maybe 70 pixels out of a 4096-pixel border ring - exactly on
+    # that corner: (16,16,3) against a backdrop that is (213,213,213)
+    # everywhere else. Every later test in this function compared against that
+    # one poisoned sample, so nothing on the entire canvas ever counted as
+    # "close to background" and the cut-out failed almost completely - the
+    # shipped sprite came out on a solid grey square instead of transparent.
+    # The median of the whole border ring shrugs off a corner-sized outlier;
+    # it would take background pixels on more than half the border being wrong
+    # to move it, and a stray smudge is nowhere near that large.
+    border = ([px[x, 0][:3] for x in range(w)] + [px[x, h - 1][:3] for x in range(w)]
+              + [px[0, y][:3] for y in range(h)] + [px[w - 1, y][:3] for y in range(h)])
+    bg = tuple(int(statistics.median(c[i] for c in border)) for i in range(3))
 
     def close(c1, c2, t):
         return all(abs(a - b) <= t for a, b in zip(c1, c2))

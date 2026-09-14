@@ -86,14 +86,15 @@ os.makedirs(ARTDIR, exist_ok=True)
 # Scrying Glass already saves the request, waits for the steward to admit
 # it, and retries. A second watchdog just competes with the first.
 
-def gen_one(dexKey, desc, attempt=0):
+def gen_one(dexKey, desc, attempt=0, ref_image=None, denoise=0.6):
     prompt = desc + ", " + STYLE + ", " + pick_composition(desc)
     seed = random.randint(1, 2**31 - 1)
     # Every network call here can raise rather than return - a socket timeout
     # inside submit() is what killed the mythic run outright. Nothing below is
     # allowed to escape: a failed species is logged and retried, never fatal.
     try:
-        res = g.submit(prompt, seed, w=1024, h=1024, steps=20)
+        res = g.submit(prompt, seed, w=1024, h=1024, steps=20,
+                        input_image=ref_image, denoise=denoise)
     except Exception as e:
         return "SUBMIT_ERR:" + str(e)[:150]
     if "prompt_id" not in res:
@@ -115,19 +116,27 @@ def gen_one(dexKey, desc, attempt=0):
     return True
 
 def run_batch(batch_path, log_path):
+    # A batch entry is normally just a text prompt (string). It can also be
+    # {"desc": ..., "ref": "path/to/photo.jpg", "denoise": 0.6} to condition
+    # the render on a real reference photo Ayr supplied - added when text
+    # alone had already gone two rounds on the anglerfish's jaw shape.
     batch = json.load(open(batch_path, encoding="utf-8"))
     log = {}
     if os.path.exists(log_path):
         log = json.load(open(log_path, encoding="utf-8"))
-    for dexKey, desc in batch.items():
+    for dexKey, entry in batch.items():
         if log.get(dexKey) is True:
             continue
+        if isinstance(entry, dict):
+            desc, ref_image, denoise = entry["desc"], entry.get("ref"), entry.get("denoise", 0.6)
+        else:
+            desc, ref_image, denoise = entry, None, 0.6
         t0 = time.time()
-        result = gen_one(dexKey, desc, attempt=0)
+        result = gen_one(dexKey, desc, attempt=0, ref_image=ref_image, denoise=denoise)
         tries = 1
         while result is not True and tries <= 2:
             print(f"  {dexKey}: attempt{tries} failed ({str(result)[:100]}), retrying...")
-            result = gen_one(dexKey, desc, attempt=tries)
+            result = gen_one(dexKey, desc, attempt=tries, ref_image=ref_image, denoise=denoise)
             tries += 1
         elapsed = time.time() - t0
         log[dexKey] = result if result is True else str(result)

@@ -1,0 +1,7 @@
+{
+  "anglerfish": {
+    "desc": "A deep-sea black seadevil anglerfish, matching the reference photo: a dark blackish-brown fish with a LARGE ANGULAR HEAD THAT IS NOT ROUNDED OR BALL-SHAPED. Its mouth has a CLEARLY DEFINED UPPER JAW AND LOWER JAW, and the LOWER JAW JUTS FORWARD BEYOND THE UPPER ONE, thrust out and prominent, giving it a heavy undershot underbite exactly like the reference - this jaw shape is the single most important detail to copy from the reference. Both jaws are lined with long thin needle fangs that interlock. Small dull eye, spiny pectoral fins, and a single long thin stalk rising from the forehead with a small glowing bulb at the tip, curving slightly forward over the head. On a COMPLETELY PLAIN FLAT LIGHT GREY STUDIO BACKGROUND - NO WATER, NO OCEAN, NO BLUE, NO UNDERWATER SCENE OF ANY KIND, nothing behind the fish but flat empty grey, exactly like a product photo background. Redrawn in the game's clean flat cel-shaded illustration style with sharp black linework, not photorealistic, not painterly.",
+    "ref": "design/art_prompts/refs/anglerfish_ref_tight.jpg",
+    "denoise": 0.68
+  }
+}
