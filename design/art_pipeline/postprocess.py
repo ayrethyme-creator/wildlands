@@ -10,6 +10,7 @@ def _lum(p):
 
 
 def remove_bg_and_crop(in_path, out_path, size=256, tol=20, step=6,
+                       leak_frac=0.70, keep_frac=0.90,
                        pocket_tol=34, min_pocket_px=150, max_pocket_frac=0.10,
                        fence=90, probe=3, line_max=6):
     img = Image.open(in_path).convert("RGBA")
@@ -33,37 +34,81 @@ def remove_bg_and_crop(in_path, out_path, size=256, tol=20, step=6,
     #
     # So a pixel is background if it is near the sampled corner colour (loose,
     # `tol`) OR near the pixel the flood arrived from (tight, `step`). The
-    # second test walks up the vignette one small increment at a time. It cannot
-    # walk into the animal, because the style draws a hard outline and a hard
-    # outline is a jump far bigger than `step`. Verified by sweeping step from 4
-    # to 12 on the anomalocaris: coverage lands on 21.8% and stays there, which
-    # is what a clean cut-out looks like. A flood that were leaking into the
-    # subject would keep eating as the tolerance rose.
-    visited = bytearray(w * h)
-    q = deque()
+    # second test walks up the vignette one small increment at a time.
+    #
+    # I FIRST WROTE THAT IT CANNOT WALK INTO THE ANIMAL, because the style draws
+    # a hard outline and an outline is a jump far bigger than `step`. That is
+    # true of most of this roster and false where it matters. The ijiraq is a
+    # pale grey figure with soft luminous edges and no closed dark outline; the
+    # gradient flood walked straight in and took 56% of it. The obayifo lost the
+    # glow around its hands the same way.
+    #
+    # NOTHING IN THE HOLE AUDIT CAN SEE THAT. An eroded edge stays connected to
+    # the background, so it is not an enclosed hole; it is simply a smaller
+    # animal. It was caught by comparing opaque pixel counts before and after,
+    # which is the only test that sees this failure.
+    #
+    # So run the flood BOTH ways and choose, the way strip_shadow already
+    # abandons its own work when it has eaten too much. The gradient is a rescue
+    # for a specific fault - a leaked backdrop - so it is only allowed to win
+    # when there is something to rescue, or when it barely changes anything:
+    #
+    #   the plain flood left a slab      -> take the gradient, that is the fix
+    #   the two agree within `keep_frac` -> take the gradient, it is trimming
+    #   the gradient lost much more      -> take the plain flood, it is eating
+    #
+    # anomalocaris takes the first branch (87.7% opaque is not an animal shape)
+    # and lands at 21.8%. ijiraq takes the third and is left alone.
+    #
+    # `leak_frac` IS DELIBERATELY FAR ABOVE ANY REAL ANIMAL. It started at 0.45,
+    # which was wrong: measured across 320 originals the largest legitimate
+    # subjects run 43-62% of the uncropped canvas - the nurikabe is a WALL and
+    # covers 61.8% correctly - so 0.45 fired on big animals and handed them to
+    # the gradient with no guard, quietly shaving the xiezhi and the kapre. A
+    # genuine leak is not marginal: the anomalocaris was 99.7%. Nothing in the
+    # current set reaches 0.70, which is the point - this branch is a safety net
+    # for a rare fault, not a routine path.
+    #
+    # Branch counts over 320 originals at these settings: 283 agree, 25 saved
+    # from the gradient (pitbull, mastiff, Cornish rex, French bulldog, manx,
+    # civet - short-haired animals with soft edges, the vulnerable class).
+    def flood(gradient):
+        im = img.copy()
+        p = im.load()
+        seen = bytearray(w * h)
+        q = deque()
 
-    def push(x, y, ref):
-        i = y * w + x
-        if not visited[i]:
-            visited[i] = 1
-            q.append((x, y, ref))
+        def push(x, y, ref):
+            i = y * w + x
+            if not seen[i]:
+                seen[i] = 1
+                q.append((x, y, ref))
 
-    for x in range(w):
-        for y in (0, h - 1):
-            push(x, y, bg)
-    for y in range(h):
-        for x in (0, w - 1):
-            push(x, y, bg)
-    while q:
-        x, y, ref = q.popleft()
-        c = px[x, y][:3]
-        if not (close(c, bg, tol) or close(c, ref, step)):
-            continue
-        px[x, y] = c + (0,)
-        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < w and 0 <= ny < h:
-                push(nx, ny, c)
+        for x in range(w):
+            for y in (0, h - 1):
+                push(x, y, bg)
+        for y in range(h):
+            for x in (0, w - 1):
+                push(x, y, bg)
+        while q:
+            x, y, ref = q.popleft()
+            c = p[x, y][:3]
+            if not (close(c, bg, tol) or (gradient and close(c, ref, step))):
+                continue
+            p[x, y] = c + (0,)
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < w and 0 <= ny < h:
+                    push(nx, ny, c)
+        return im, sum(1 for q2 in im.getdata() if q2[3] > 40)
+
+    plain, n_plain = flood(False)
+    grad, n_grad = flood(True)
+    if n_plain > leak_frac * w * h or n_grad >= keep_frac * max(n_plain, 1):
+        img = grad
+    else:
+        img = plain
+    px = img.load()
 
     # PASS 2: clear background trapped INSIDE the animal - the hole in a coiled
     # snake, the gap inside a curled tail, the spaces between a sea spider's

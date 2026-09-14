@@ -24,8 +24,19 @@ STYLE = ("anime-influenced creature-collector game concept art, clean sharp line
 # A backdrop no animal is - saturated green, or magenta - makes the question
 # trivial and the guard unnecessary. The risk to weigh is colour bleed: a
 # strongly coloured surround can pull the model's palette and leave a fringe on
-# the sprite edges. That is worth a test batch before committing to it.
-COMPOSITION = ("plain light gray seamless background, no ground, no shadow, no rocks, no props, "
+# the sprite edges.
+#
+# So it is settable, and the default is unchanged until a test batch says the
+# bleed is acceptable:
+#
+#     ART_BACKDROP="vivid chroma-key green" python gen_runner.py <batch> <log>
+#
+# Whatever is chosen here has to stay out of the animals. Chroma-key green is
+# the film industry's answer to exactly this problem and no mammal, bird or fish
+# is that colour - but a tree frog is, and so is a green iguana, so the species
+# a green backdrop is wrong for are the ones a magenta backdrop is right for.
+BACKDROP = os.environ.get("ART_BACKDROP", "plain light gray")
+COMPOSITION = (BACKDROP + " seamless background, no ground, no shadow, no rocks, no props, "
     "centered composition, full body visible, no text, no watermark, no logo")
 
 # Some poses genuinely need a prop to read correctly (an animal "gripping a
@@ -33,7 +44,7 @@ COMPOSITION = ("plain light gray seamless background, no ground, no shadow, no r
 # no props" clause but keep the "no shadow" / no-extra-ground-clutter intent.
 # Detected by keyword against the per-species description text so we don't
 # have to hand-curate every one of ~900 entries.
-PROP_COMPOSITION = ("plain light gray seamless background, no ground plane, no shadow, "
+PROP_COMPOSITION = (BACKDROP + " seamless background, no ground plane, no shadow, "
     "only the minimal prop needed for the pose, centered composition, full body visible, "
     "no text, no watermark, no logo")
 PROP_KEYWORDS = (
