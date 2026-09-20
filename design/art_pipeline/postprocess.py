@@ -10,10 +10,50 @@ def _lum(p):
     return (p[0] * 299 + p[1] * 587 + p[2] * 114) // 1000
 
 
+def _bbox(comp):
+    xs = [c[0] for c in comp]
+    ys = [c[1] for c in comp]
+    return (min(xs), min(ys), max(xs), max(ys))
+
+
 def remove_bg_and_crop(in_path, out_path, size=256, tol=20, step=6,
                        leak_frac=0.70, keep_frac=0.90,
                        pocket_tol=34, min_pocket_px=150, max_pocket_frac=0.10,
-                       fence=90, probe=3, line_max=6):
+                       fence=90, probe=3, line_max=6, on_pocket=None,
+                       clear_enclosed_min=None):
+    # `clear_enclosed_min` CLEARS EVERY ENCLOSED NEAR-BACKGROUND REGION AT OR
+    # ABOVE THAT PIXEL COUNT AND SKIPS THE FENCE TEST ENTIRELY. It is not a
+    # better classifier and must never become the default. It is the manual
+    # override for the case where Ayr has looked at one sprite and said the
+    # trapped grey in it is background - at which point the question the fence
+    # test exists to answer has already been answered by someone who can
+    # actually see, and the only thing left to decide is a size floor that
+    # separates the marked region from the sprite's own shading.
+    #
+    # It is needed because the fence test does not merely miss these by a
+    # little. Measured on the seven Ayr marked: the caecilian's inner disc
+    # fences at 59.8, the woodpecker's at 64.1, the cyclops' club gap at 43.9,
+    # and JORMUNGANDR'S AT 0.0 - its coil is dark scales far thicker than
+    # `line_max`, so every rim pixel reads as a mass rather than a stroke and
+    # the region scores as if nothing enclosed it at all. Relaxing the gates far
+    # enough to catch those would reopen exactly the faults they were added for.
+    #
+    # THE SIZE FLOOR IS NOT A SAFE SUBSTITUTE FOR THE FENCE TEST AND THE ROBIN
+    # PROVES IT. At a 3000px floor this cleared five of those seven perfectly
+    # and then bit a hole straight through the European robin's white breast:
+    # the bird's own belly is one enclosed near-background region of 5652px,
+    # indistinguishable by size or colour from the wedge of real backdrop
+    # beside it. Same failure as the amarok, reached by a different route. So a
+    # floor has to be read off the measurements of the sprite in front of you,
+    # every result has to be looked at, and a sprite this cannot fix is one for
+    # the renderer, not for a wider floor.
+    # `on_pocket`, if given, is called for every enclosed region pass 2
+    # considers, as on_pocket(px_count, fenced_pct, bbox, cleared). It changes
+    # nothing. It exists because pass 2 is tuned timid on purpose and therefore
+    # leaves real pockets behind, and when Ayr marks one of those by eye the
+    # only useful question is HOW NEAR the miss was - a region that fenced at 88
+    # against a threshold of 90 is a different thing from one that fenced at 40,
+    # and without this you cannot tell them apart from the outside.
     img = Image.open(in_path).convert("RGBA")
     w, h = img.size
     px = img.load()
@@ -218,8 +258,22 @@ def remove_bg_and_crop(in_path, out_path, size=256, tol=20, step=6,
                             if aa != 0 and close((rr, gg, bb), bg, pocket_tol):
                                 visited2[nidx] = 1
                                 cq.append((nx, ny))
-            if touches_edge or not (min_pocket_px <= len(comp) <= max_pocket_frac * w * h):
+            if touches_edge:
                 continue
+            if not (min_pocket_px <= len(comp) <= max_pocket_frac * w * h):
+                if on_pocket and len(comp) >= min_pocket_px:
+                    on_pocket(len(comp), None, _bbox(comp), False)
+                continue
+            if clear_enclosed_min is not None:
+                if len(comp) >= clear_enclosed_min:
+                    if on_pocket:
+                        on_pocket(len(comp), None, _bbox(comp), True)
+                    for (x, y) in comp:
+                        px[x, y] = px[x, y][:3] + (0,)
+                elif on_pocket:
+                    on_pocket(len(comp), None, _bbox(comp), False)
+                continue
+
             cells = set(comp)
             fenced = total = 0
             for (x, y) in comp:
@@ -245,7 +299,11 @@ def remove_bg_and_crop(in_path, out_path, size=256, tol=20, step=6,
                     if start is not None and run <= line_max:
                         fenced += 1
                     break
-            if total and 100.0 * fenced / total >= fence:
+            pct = 100.0 * fenced / total if total else 0.0
+            cleared = bool(total) and pct >= fence
+            if on_pocket:
+                on_pocket(len(comp), pct, _bbox(comp), cleared)
+            if cleared:
                 for (x, y) in comp:
                     px[x, y] = px[x, y][:3] + (0,)
 
