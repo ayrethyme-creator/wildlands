@@ -1,0 +1,100 @@
+# Ayr's verdicts on the 172 flagged holes, 2026-09-19
+#
+# Marked by hand on the nine "flagged holes" sheets. Four colours:
+#   RED    = bitten. The remover ate part of the animal. Pixels are MISSING.
+#   BLUE   = background that should not be there. Pixels that should be GONE.
+#   GREEN  = good as it is, no edit
+#   YELLOW = something else wrong, unrelated to the hole. Needs Ayr to say what.
+#
+# Everything not listed here was left unmarked and is treated as fine.
+#
+# NOTE THE TWO FAULTS ARE OPPOSITES, and that matters for the fix:
+# a RED needs pixels put back (the drawing is incomplete), a BLUE needs pixels
+# taken away (the cut-out is incomplete). Only BLUE can be fixed without
+# generating new art.
+
+[RED - bitten]
+rimehorn
+japanesewolf
+bloodybellycombjelly
+bluebuck
+damagazelle
+eaglet
+parr
+tropicbird
+emperorpenguin
+bartailedgodwit
+cyclops
+piedavocet
+mushussu
+panda_c
+predatorytunicate
+peacockspider
+moonjelly
+goat
+honeyguide
+proboscis
+greatwhite
+greatdane
+badger_j
+scimitaroryx
+bowhead_c
+swordfish
+commersons
+ringtaillemur
+butterflyfish
+ivorybilledwoodpecker
+harpyeagle
+owl_j
+bigfinsquid
+polarbear_c
+qinglong
+npc_plain_white_t2
+banggaicardinalfish
+jormungandr
+kea
+melonhead
+barracuda
+apollobutterfly
+narwhal_c
+chupacabra
+stellerseagle
+skunk
+europeanrobin
+
+[BLUE - leftover background to remove]
+mothman
+japanesewolf
+panda_c
+antarcticseaspider
+ahuizotl
+saharancheetah
+pyrelynx
+mantis
+ringedcaecilian
+argali
+giraffe_c
+
+[YELLOW - something else wrong, awaiting Ayr's description]
+manedwolf
+predatorytunicate
+pterodactylus
+wyvern
+dunkleosteus
+baihu
+reindeer
+babirusa
+
+[GREEN - good, leave alone]
+kitsune
+pipefish
+spidermonkey
+spectacledflyingfox
+malamute
+nycterion
+blackmamba
+zebra_f
+pronghorn
+hainangibbon
+siamang
+gibbon

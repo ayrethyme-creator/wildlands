@@ -1,0 +1,83 @@
+# Ayr's verdicts on the 59 hole re-renders, 2026-09-20. "Much better overall."
+#
+# RED    = still bitten
+# BLUE   = background that should not be there
+# YELLOW = something else wrong, needs Ayr to say what
+# PURPLE = Ayr does not know what the animal should look like yet; looking it
+#          up later, together with baihu / dunkleosteus / pterodactylus
+# unmarked = approved
+
+[APPROVED - 38]
+antarcticseaspider
+apollobutterfly
+badger_j
+banggaicardinalfish
+barracuda
+bartailedgodwit
+bigfinsquid
+bowhead_c
+commersons
+eaglet
+emperorpenguin
+goat
+greatdane
+greatwhite
+harpyeagle
+honeyguide
+japanesewolf
+narwhal_c
+owl_j
+panda_c
+parr
+peacockspider
+piedavocet
+polarbear_c
+proboscis
+pyrelynx
+rimehorn
+saharancheetah
+scimitaroryx
+skunk
+stellerseagle
+swordfish
+manedwolf
+wyvern
+reindeer
+mantis
+giraffe_c
+argali
+
+[RED - still bitten - 4]
+bluebuck
+butterflyfish
+damagazelle
+moonjelly
+
+[BLUE - background still present - 7]
+chupacabra
+cyclops
+europeanrobin
+ivorybilledwoodpecker
+jormungandr
+kea
+ringedcaecilian
+
+[YELLOW - something else wrong, awaiting description - 8]
+ahuizotl
+bloodybellycombjelly
+melonhead
+mothman
+qinglong
+ringtaillemur
+tropicbird
+babirusa
+
+[PURPLE - Ayr to research the correct look - 2]
+mushussu
+predatorytunicate
+
+[DEFERRED with the purple set - fault never described]
+baihu
+dunkleosteus
+pterodactylus
+npc_plain_white_t2
