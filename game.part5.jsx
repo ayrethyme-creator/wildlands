@@ -1144,7 +1144,42 @@
       </div>
 
       <div style={{ padding: "0 10px" }}>
-        <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${W}, 1fr)`, border: "2px solid rgba(122,110,90,.6)", borderRadius: "18px 13px 20px 14px", boxShadow: "0 10px 26px -12px rgba(14,9,5,.65), inset 0 0 0 1px rgba(255,246,224,.05)", overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : (typeof DAY_FILTER !== "undefined" ? DAY_FILTER : undefined)), transition: "filter 1.2s ease" }}>
+        {/* THE CAMERA. Everything inside is unchanged; what changed is that the
+            map no longer sizes itself to the screen.
+
+            It used to be one grid of `1fr` columns, which meant the WHOLE map
+            was always on screen, squeezed to whatever width it had - a 20-wide
+            map drew smaller tiles than a 16-wide one, and the ranger was simply
+            whichever square was highlighted. Nothing scrolled because nothing
+            was ever off screen.
+
+            Now the tiles have a FIXED size and this element is a window nine of
+            them across. The map keeps its full size underneath and is slid so
+            that the ranger's tile lands dead centre, which is the Pokemon Red
+            arrangement Ayr asked for: the player does not move on screen, the
+            world moves behind her.
+
+            WHY THE GRID UNDERNEATH KEPT ITS EXACT DIMENSIONS. Seven overlays
+            inside it - footprints, fruit, weather, the ranger herself - place
+            themselves in PERCENTAGES of it, as `100/W`% wide and translated by
+            `x * 100`%. That arithmetic is only correct while the element is
+            exactly W tiles across, so the world element is still exactly W by H
+            and the camera is a separate wrapper around it. Sizing the grid to
+            the window instead would have silently moved all seven. */}
+        <div style={{ position: "relative", margin: "0 auto",
+          "--tile": `min(${CAM_TILE_MAX}px, calc((100vw - 24px) / ${CAM_W}))`,
+          width: `calc(var(--tile) * ${CAM_W})`, height: `calc(var(--tile) * ${CAM_H})`,
+          // Past the edge of a small map there is nothing to draw, so what shows
+          // is this. See the note on CAM_W in part102 for why that is accepted
+          // rather than designed away by letting the ranger drift off centre.
+          backgroundColor: "#0d0a06",
+          border: "2px solid rgba(122,110,90,.6)", borderRadius: "18px 13px 20px 14px", boxShadow: "0 10px 26px -12px rgba(14,9,5,.65), inset 0 0 0 1px rgba(255,246,224,.05)", overflow: "hidden", filter: m.dark ? undefined : (phase === "night" ? (typeof NIGHT_FILTER !== "undefined" ? NIGHT_FILTER : "brightness(.52) saturate(.7) hue-rotate(205deg)") : phase === "dusk" || phase === "dawn" ? (typeof DUSK_FILTER !== "undefined" ? DUSK_FILTER : "brightness(.72) saturate(.85) hue-rotate(210deg)") : (typeof DAY_FILTER !== "undefined" ? DAY_FILTER : undefined)), transition: "filter 1.2s ease" }}>
+        {/* Remounted per map so a warp cuts instead of sliding the length of the
+            world. Within one map the transition is what makes it read as the
+            ground moving rather than the picture jumping. */}
+        <div key={S.map} style={{ position: "absolute", left: 0, top: 0, display: "grid", gridTemplateColumns: `repeat(${W}, var(--tile))`, gridAutoRows: "var(--tile)",
+          transform: `translate(calc(var(--tile) * ${-(S.x - CAM_CX)}), calc(var(--tile) * ${-(S.y - CAM_CY)}))`,
+          transition: "transform .14s linear" }}>
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
             // Same translation part4 does: a wanderer carries their own emoji,
@@ -1322,7 +1357,11 @@
                 backgroundRepeat: (grassBgImg || artBgImg || personBg || propBgImg) ? "no-repeat" : undefined,
                 animationDelay: motion ? `${delay}s` : undefined,
                 aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: `min(${(67 / W).toFixed(2)}vw, 17px)`, lineHeight: 1,
+                // Was keyed to the map's width, because the tile size used to
+                // depend on it. A tile is now one fixed size everywhere, so the
+                // emoji follows the tile instead and stops changing between a
+                // 16-wide map and a 20-wide one.
+                fontSize: "calc(var(--tile) * .62)", lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
                 boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined,
                 position: (glow || isPlayer || stepFrom) ? "relative" : undefined,
@@ -1695,6 +1734,7 @@
               </div>
             </div>
           )}
+        </div>
         </div>
       </div>
 
