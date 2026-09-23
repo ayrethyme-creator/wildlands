@@ -194,6 +194,32 @@
          and it scales to any screen because it is generated. Fixed to the
          viewport so it reads as the paper the game is painted on rather than
          as texture sliding around on top of it. */
+      /* WHY THIS IS NOT min-height:100vh IN THE INLINE STYLE, WHERE IT USED TO
+         LIVE. On mobile Safari 100vh is the LARGE viewport - the height the
+         page would have if the URL bar were retracted - so a frame set to it
+         is always about 90px taller than what is actually on screen, and the
+         page scrolls even when the content would have fitted. Ayr: "I have to
+         move the screen down to see the top bar, because it's in a browser."
+         That is this, not the content.
+
+         100dvh is the height visible right now, which is what was meant. In a
+         packaged app - Play, the App Store, Steam - there is no URL bar and
+         the two are identical, so this costs nothing there and only ever helps
+         in a browser. The 100vh declaration before it is the fallback for
+         anything too old to know dvh; a browser that understands the second
+         discards the first. It has to be a rule rather than an inline style
+         because inline styles cannot hold the same property twice, which is
+         how that fallback works.
+
+         (No backticks in here. This whole block is a template literal, and one
+         of those ends it and takes the game down with it.) */
+      /* border-box is not decoration here. The safe-area padding is on this
+         same element, and under the default content-box it ADDS to the
+         min-height instead of fitting inside it - so on a phone with insets
+         the frame came out a full screen tall PLUS 93px, and the page scrolled
+         by exactly that much. The thing the min-height was there to prevent. */
+      .wl-paper { box-sizing: border-box; min-height: 100vh; min-height: 100dvh; }
+
       .wl-paper::after {
         content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 3;
         opacity: .055; mix-blend-mode: overlay;
@@ -486,7 +512,9 @@
     `linear-gradient(184deg, ${c} 0%, ${c} 55%, rgba(28,19,10,.22) 100%), ${c}`;
 
   const frame = {
-    maxWidth: 430, margin: "0 auto", minHeight: "100vh",
+    // min-height lives in the .wl-paper rule above, not here - see the note
+    // there on 100vh versus 100dvh. An inline minHeight would win over it.
+    maxWidth: 430, margin: "0 auto",
     // index.html asks for `viewport-fit=cover`, which lets the page run edge to
     // edge and UNDER the hardware - so on any phone with a notch or a Dynamic
     // Island the place name was sitting beneath it, and the D-pad beneath the

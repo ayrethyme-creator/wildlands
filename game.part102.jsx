@@ -30,16 +30,26 @@
  *
  * WHY THIRTEEN ROWS AND NOT EIGHTEEN. Eighteen is what fits if you measure the
  * screen and stop there. You cannot: `viewport-fit=cover` puts the page under
- * the notch and the home indicator, about 93px on a current iPhone, and the
- * frame now pads that back (see part5). Rows that fit at 15 across, with those
- * insets paid:
+ * the notch and the home indicator, and the frame now pads that back (see
+ * part5). THIS IS SIZED FOR A PACKAGED APP, NOT A BROWSER TAB - Ayr, 2026-09-23,
+ * on a store release: "I have to move the screen down to see the top bar,
+ * because it's in a browser. That won't be the case, so make sure the sizing
+ * you make accounts for that fact now." So the budget is the whole screen less
+ * the hardware insets, with nothing held back for a URL bar.
  *
- *     366x814 phone   tile 22.8px   14.2 rows
- *     393x852 phone   tile 24.6px   14.7 rows
+ * Measured in the running game, on each device with the insets that device
+ * actually has - the pairing matters, since no phone has a mini's screen and a
+ * Pro's Dynamic Island:
  *
- * So fourteen fits with about 5px to spare on the smallest, which is no margin
- * at all, and thirteen leaves a comfortable 27px. Thirteen is still three more
- * rows than Fire Red shows.
+ *     366x814  Android    24/34   tile 22.4px   73px clear
+ *     375x812  13 mini    50/34   tile 23.4px   22px clear   <- the binding one
+ *     393x852  iPhone 15  59/34   tile 24.6px   37px clear
+ *     430x932  Pro Max    59/34   tile 27.1px  117px clear
+ *
+ * None of them scroll. Thirteen is not a cautious number, it is the largest
+ * that fits every one: a fourteenth row costs 23.4px on the 13 mini, which has
+ * 22px, so fourteen misses by a pixel on the smallest screen worth shipping
+ * to. Thirteen is still three rows more than Fire Red shows.
  *
  * AN EVEN COUNT IS FINE, contrary to what this file said when it was written.
  * Fire Red's ten rows are even, so it has no true centre row and the player
