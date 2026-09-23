@@ -5,58 +5,59 @@
  * what I want my game to do."
  *
  * So the ranger is pinned to one tile of the window and never leaves it, and
- * the map slides underneath. That is the whole rule, and the part of it that
- * costs something is "at all times".
+ * the map slides underneath.
  *
- * WHY BOTH ARE ODD. An even window has no middle tile, so the ranger would sit
- * half a tile off centre forever.
+ * WHAT FIRE RED ACTUALLY DOES, measured off a screenshot Ayr sent rather than
+ * recalled. Its grass texture repeats every 288px in that image, which is one
+ * 16px tile upscaled 18x; 4320px of width is therefore EXACTLY 15 tiles and
+ * 2880px of content height exactly 10. So the window is 15x10, and the
+ * player's cap sits 8px off the centre line - three hundredths of a tile.
  *
- * WHY NINE ACROSS. The frame is 430px wide with 10px of padding and a 2px
- * border, so 406px of room. Nine tiles is 45px each, nearly twice the 25px a
- * 16-wide map used to get, and the first size at which the drawn tiles read as
- * pictures rather than icons. Eleven drops them to 36px and thirteen to 31px,
- * which is back to where this started.
+ * THE RULE IS NOT "15x10". IT IS A TILE ABOUT 4mm WIDE, FILLING THE SCREEN.
+ * The GBA screen is 61mm across and shows 15 tiles, so a tile is ~4.1mm. A
+ * phone is ~64mm across at 375 CSS px, so 15 tiles is 23px, or ~3.9mm. The
+ * same tile, physically, in the hand. That is why Fire Red's small-looking
+ * tiles never feel cramped, and why 15 across is right on a phone too.
  *
- * WHY ONLY SEVEN DOWN, WHICH IS THE PART THAT IS NOT OBVIOUS. The window is
- * deliberately not square, because the maps are not: they run 16-20 wide but
- * only 10-16 TALL, so height is the binding constraint and a square window
- * wastes it. Measured as the share of standing positions with no void on
- * screen at all, on the largest map (20x14) and the smallest (16x10):
+ * WHERE PORTRAIT DIFFERS: a GBA screen is wider than tall and a phone is much
+ * taller than wide, so the faithful portrait window is not ten rows but as
+ * many as the screen holds. Measured on a 375x812 phone with the real chrome -
+ * header 40px, party strip 48px, controls 310px - a 15x15 window ends 59px
+ * clear of the bottom. Fifteen rows, not ten. The controls were checked for
+ * space to reclaim and there is nothing worth taking: the D-pad and the button
+ * column sit SIDE BY SIDE, so the 146px of blank beside the buttons is to
+ * their left and costs no height at all.
  *
- *     7x7    40%   25%      tiles 58px - least void, but you see very little
- *     9x7    34%   20%      tiles 45px - this
- *     9x9    26%   10%      tiles 45px - the square version, two tiles worse
- *     11x9   21%    7%      tiles 36px
- *     13x11  11%    0%      tiles 31px - taller than a short map, always void
+ * AN EVEN COUNT IS FINE, contrary to what this file said when it was written.
+ * Fire Red's ten rows are even, so it has no true centre row and the player
+ * rides about half a tile low - and nobody has ever noticed. Odd is tidier,
+ * not required.
  *
- * Going from 9x9 to 9x7 costs nothing at all - the tiles stay 45px - and buys
- * back most of the vertical void. Bigger windows are worse on BOTH counts here,
- * more void AND smaller tiles, and their only gain is seeing more of a map that
- * was nearly all on screen to begin with. That stops being true once the maps
- * are larger, at which point this is one number to revisit.
+ * WHAT THIS STILL DOES NOT SOLVE, AND 15x15 MAKES LOUDER. The maps are 16-20
+ * wide by 10-16 tall, so a fifteen-tile window is the whole of most of them
+ * and then some: the ranger cannot approach an edge without the window running
+ * off the map, which draws as void. Share of standing positions with no void
+ * at all, on the largest map (20x14) and the smallest (16x10):
  *
- * WHAT THIS DOES NOT SOLVE, AND IT IS THE REAL PROBLEM. The maps are 16-20
- * wide by 10-16 tall. A nine-tile window on a sixteen-tile map is most of the
- * map, so there is barely anything to scroll into, and a ranger standing
- * anywhere near an edge puts the window off the map - four tiles past it in
- * the corners. There are only two ways to answer that:
+ *     9x7     34%   20%      tile 45px   the interim setting
+ *     15x10    8%    0%      tile 27px   Fire Red's own shape
+ *     15x15    0%    0%      tile 27px   this - taller than every map there is
  *
- *   clamp the window to the map -> the ranger drifts off centre near edges
- *   let it run off             -> she stays centred and the overflow is void
+ * That last row is not a mistake and not a regression to fix here. 15x15 is
+ * the size the game is AIMED at; it reads as void today because the maps have
+ * not been built yet. For the window to be a window rather than the whole map,
+ * maps want to be around 28x24, which is ordinary Fire Red territory - its
+ * Route 1 is 20x36 and Viridian City 40x36. Until those exist, CAM_W/CAM_H
+ * back at 9/7 is the more playable setting, and it is two numbers.
  *
- * The first is what most games do and is what Ayr ruled out by saying "at all
- * times", so this does the second and the void is drawn as flat dark ground.
- * It is not a bug to be fixed in this file. Red does not have it because Red's
- * maps are large and stitched into one continuous world; these are small rooms
- * joined by doorways that teleport, with no notion of which map lies north of
- * which. The fix is bigger maps, which is its own job.
- *
- * CAM_TILE_MAX is a ceiling, not the size: the actual tile is
- * min(CAM_TILE_MAX, (100vw - 24px) / CAM_W), so a phone narrower than the
- * frame shrinks the tiles instead of cutting the window down to eight.
+ * CAM_TILE_MAX is a ceiling, not the size. The actual tile is
+ * min(CAM_TILE_MAX, (min(430px, 100vw) - 24px) / CAM_W): the frame is capped
+ * at 430px regardless of window width, so the room comes from the FRAME and
+ * not the viewport. At CAM_W 9 that distinction never showed, because the
+ * ceiling bound first on anything wider than the frame.
  */
-const CAM_W = 9;
-const CAM_H = 7;
+const CAM_W = 15;
+const CAM_H = 15;
 const CAM_CX = (CAM_W - 1) / 2;
 const CAM_CY = (CAM_H - 1) / 2;
 const CAM_TILE_MAX = 45;

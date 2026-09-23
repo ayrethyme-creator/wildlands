@@ -1167,7 +1167,13 @@
             and the camera is a separate wrapper around it. Sizing the grid to
             the window instead would have silently moved all seven. */}
         <div style={{ position: "relative", margin: "0 auto",
-          "--tile": `min(${CAM_TILE_MAX}px, calc((100vw - 24px) / ${CAM_W}))`,
+          // The frame is capped at 430px however wide the window is, so the
+          // room available is min(430px, 100vw) less the padding and border -
+          // NOT 100vw. With nine tiles the difference never showed, because
+          // the 45px ceiling bound first on any screen wider than the frame.
+          // At fifteen it is the whole story: 100vw on a desktop would ask for
+          // 15 tiles of 45px, a 675px map inside a 430px frame.
+          "--tile": `min(${CAM_TILE_MAX}px, calc((min(430px, 100vw) - 24px) / ${CAM_W}))`,
           width: `calc(var(--tile) * ${CAM_W})`, height: `calc(var(--tile) * ${CAM_H})`,
           // Past the edge of a small map there is nothing to draw, so what shows
           // is this. See the note on CAM_W in part102 for why that is accepted
