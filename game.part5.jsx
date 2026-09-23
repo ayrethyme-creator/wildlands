@@ -487,6 +487,19 @@
 
   const frame = {
     maxWidth: 430, margin: "0 auto", minHeight: "100vh",
+    // index.html asks for `viewport-fit=cover`, which lets the page run edge to
+    // edge and UNDER the hardware - so on any phone with a notch or a Dynamic
+    // Island the place name was sitting beneath it, and the D-pad beneath the
+    // home indicator, where a thumb press is taken by the system as a swipe
+    // home. That is about 93px on a current iPhone: 59 at the top and 34 at
+    // the bottom, and nothing in the layout knew it could not use them.
+    //
+    // These pay that back. They are zero on a desktop and on any phone without
+    // insets, so nothing moves anywhere else. The camera's row count is chosen
+    // against the height that is left AFTER this, which is why it is 13 rows
+    // and not the 18 that would appear to fit.
+    paddingTop: "env(safe-area-inset-top, 0px)",
+    paddingBottom: "env(safe-area-inset-bottom, 0px)",
     // The ground was one flat near-black. Three washes laid over a warm base
     // give it somewhere to be lighter and somewhere to be deep, which is what
     // stops a screen of solid colour reading as a screen of nothing.

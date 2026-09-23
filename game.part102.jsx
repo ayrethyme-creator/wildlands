@@ -21,34 +21,45 @@
  *
  * WHERE PORTRAIT DIFFERS: a GBA screen is wider than tall and a phone is much
  * taller than wide, so the faithful portrait window is not ten rows but as
- * many as the screen holds. Measured on a 375x812 phone with the real chrome -
- * header 40px, party strip 48px, controls 310px - a 15x15 window ends 59px
- * clear of the bottom. Fifteen rows, not ten. The controls were checked for
- * space to reclaim and there is nothing worth taking: the D-pad and the button
- * column sit SIDE BY SIDE, so the 146px of blank beside the buttons is to
- * their left and costs no height at all.
+ * many as the screen holds. The chrome is 398px on every phone width measured
+ * - header 40, party strip 48, controls 310 - and does not rewrap, so the only
+ * variable is the screen. The controls were checked for space to reclaim and
+ * there is nothing worth taking: the D-pad and the button column sit SIDE BY
+ * SIDE, so the 146px of blank beside the buttons is to their left and costs no
+ * height at all.
+ *
+ * WHY THIRTEEN ROWS AND NOT EIGHTEEN. Eighteen is what fits if you measure the
+ * screen and stop there. You cannot: `viewport-fit=cover` puts the page under
+ * the notch and the home indicator, about 93px on a current iPhone, and the
+ * frame now pads that back (see part5). Rows that fit at 15 across, with those
+ * insets paid:
+ *
+ *     366x814 phone   tile 22.8px   14.2 rows
+ *     393x852 phone   tile 24.6px   14.7 rows
+ *
+ * So fourteen fits with about 5px to spare on the smallest, which is no margin
+ * at all, and thirteen leaves a comfortable 27px. Thirteen is still three more
+ * rows than Fire Red shows.
  *
  * AN EVEN COUNT IS FINE, contrary to what this file said when it was written.
  * Fire Red's ten rows are even, so it has no true centre row and the player
  * rides about half a tile low - and nobody has ever noticed. Odd is tidier,
  * not required.
  *
- * WHAT THIS STILL DOES NOT SOLVE, AND 15x15 MAKES LOUDER. The maps are 16-20
- * wide by 10-16 tall, so a fifteen-tile window is the whole of most of them
- * and then some: the ranger cannot approach an edge without the window running
- * off the map, which draws as void. Share of standing positions with no void
- * at all, on the largest map (20x14) and the smallest (16x10):
+ * THE EXISTING MAPS DO NOT FIT THIS AND ARE NOT MEANT TO. Ayr, 2026-09-23:
+ * "Don't worry about fitting the current maps. We're going to have to re do
+ * the maps anyway. Focus on what has the same feel as fire red but sized for
+ * the modern vertical phone." So this window is sized to the PHONE, and the
+ * maps are now what has to meet it.
  *
- *     9x7     34%   20%      tile 45px   the interim setting
- *     15x10    8%    0%      tile 27px   Fire Red's own shape
- *     15x15    0%    0%      tile 27px   this - taller than every map there is
- *
- * That last row is not a mistake and not a regression to fix here. 15x15 is
- * the size the game is AIMED at; it reads as void today because the maps have
- * not been built yet. For the window to be a window rather than the whole map,
- * maps want to be around 28x24, which is ordinary Fire Red territory - its
- * Route 1 is 20x36 and Viridian City 40x36. Until those exist, CAM_W/CAM_H
- * back at 9/7 is the more playable setting, and it is two numbers.
+ * WHAT THE MAPS MUST BE, since that is this file's real output. A window is
+ * only a window if the map is comfortably bigger than it in both directions.
+ * The share of standing positions showing no void is (MW-14)/MW by (MH-12)/MH,
+ * so for roughly half the map to be void-free a map wants to be about 28x24.
+ * Today's largest is 20x14 - SMALLER THAN THIS WINDOW in one direction - which
+ * is why every map currently shows void on all sides. That is expected and is
+ * not a fault in this file. For reference at the target: Fire Red's Route 1 is
+ * 20x36 and Viridian City 40x36, so 28x24 is unremarkable for the genre.
  *
  * CAM_TILE_MAX is a ceiling, not the size. The actual tile is
  * min(CAM_TILE_MAX, (min(430px, 100vw) - 24px) / CAM_W): the frame is capped
@@ -57,7 +68,7 @@
  * ceiling bound first on anything wider than the frame.
  */
 const CAM_W = 15;
-const CAM_H = 15;
+const CAM_H = 13;
 const CAM_CX = (CAM_W - 1) / 2;
 const CAM_CY = (CAM_H - 1) / 2;
 const CAM_TILE_MAX = 45;
