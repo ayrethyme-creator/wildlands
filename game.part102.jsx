@@ -8,15 +8,32 @@
  * the map slides underneath. That is the whole rule, and the part of it that
  * costs something is "at all times".
  *
- * WHY THE WINDOW IS ODD-SIZED. An even one has no middle tile, so the ranger
- * would sit half a tile off centre forever. Nine across gives a true centre at
- * index 4 with four tiles of warning in every direction.
+ * WHY BOTH ARE ODD. An even window has no middle tile, so the ranger would sit
+ * half a tile off centre forever.
  *
- * WHY NINE AND NOT MORE. The frame is 430px wide with 10px of padding and a
- * 2px border, so 406px of room. Nine tiles is 45px each, which is nearly twice
- * the 25px a 16-wide map used to get and the first size at which the drawn
- * tiles read as pictures rather than icons. Eleven would drop them back to
- * 36px and show more of a map that is already nearly all on screen.
+ * WHY NINE ACROSS. The frame is 430px wide with 10px of padding and a 2px
+ * border, so 406px of room. Nine tiles is 45px each, nearly twice the 25px a
+ * 16-wide map used to get, and the first size at which the drawn tiles read as
+ * pictures rather than icons. Eleven drops them to 36px and thirteen to 31px,
+ * which is back to where this started.
+ *
+ * WHY ONLY SEVEN DOWN, WHICH IS THE PART THAT IS NOT OBVIOUS. The window is
+ * deliberately not square, because the maps are not: they run 16-20 wide but
+ * only 10-16 TALL, so height is the binding constraint and a square window
+ * wastes it. Measured as the share of standing positions with no void on
+ * screen at all, on the largest map (20x14) and the smallest (16x10):
+ *
+ *     7x7    40%   25%      tiles 58px - least void, but you see very little
+ *     9x7    34%   20%      tiles 45px - this
+ *     9x9    26%   10%      tiles 45px - the square version, two tiles worse
+ *     11x9   21%    7%      tiles 36px
+ *     13x11  11%    0%      tiles 31px - taller than a short map, always void
+ *
+ * Going from 9x9 to 9x7 costs nothing at all - the tiles stay 45px - and buys
+ * back most of the vertical void. Bigger windows are worse on BOTH counts here,
+ * more void AND smaller tiles, and their only gain is seeing more of a map that
+ * was nearly all on screen to begin with. That stops being true once the maps
+ * are larger, at which point this is one number to revisit.
  *
  * WHAT THIS DOES NOT SOLVE, AND IT IS THE REAL PROBLEM. The maps are 16-20
  * wide by 10-16 tall. A nine-tile window on a sixteen-tile map is most of the
@@ -39,7 +56,7 @@
  * frame shrinks the tiles instead of cutting the window down to eight.
  */
 const CAM_W = 9;
-const CAM_H = 9;
+const CAM_H = 7;
 const CAM_CX = (CAM_W - 1) / 2;
 const CAM_CY = (CAM_H - 1) / 2;
 const CAM_TILE_MAX = 45;
