@@ -1227,13 +1227,16 @@
         <div key={S.map} style={{ position: "absolute", left: 0, top: 0, display: "grid", gridTemplateColumns: `repeat(${W}, var(--tile))`, gridAutoRows: "var(--tile)",
           transform: `translate(calc(var(--tile) * ${-(S.x - CAM_CX)}), calc(var(--tile) * ${-(S.y - CAM_CY)}))`,
           transition: "transform .14s linear" }}>
+          {/* What lies past the edge - the next map, or the forest - on a
+              rebuilt map. Memoised on the map, so a step does not redraw it;
+              drawn behind, so the map's own tiles always win. part103. */}
+          <MapSurround mapKey={S.map} />
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
             // Same translation part4 does: a wanderer carries their own emoji,
             // their own name and their own solved-arc redress to wherever they
             // are standing, because the key follows the person and not the tile.
-            const idKey = (typeof wanderKey === "function" && wanderKey(S.map, x, y))
-              || `${S.map}:${x},${y}`;
+            const idKey = idAt(S.map, x, y);
             if (ch === "X" && S.badges >= (GYMS[S.map]?.id ?? GYM_COUNT)) ch2 = ".";
             // Must match the walkability rule in part4 - see the note there on
             // why a chat NPC is exempt from the beaten-flag.
@@ -2756,7 +2759,7 @@
                 {TOWN_LIST.filter(([k]) => S.visited[k]).map(([k, nm]) => (
                   <button key={k} disabled={k === S.map}
                     style={{ ...btn("#5dade2"), width: "100%", marginBottom: 8, opacity: k === S.map ? 0.45 : 1 }}
-                    onClick={() => { SFX.run(); setS((p) => ({ ...p, map: k, x: 7, y: 8, swimming: false, menu: null })); }}>
+                    onClick={() => { SFX.run(); const [lx, ly] = landOf(k); setS((p) => ({ ...p, map: k, x: lx, y: ly, swimming: false, menu: null })); }}>
                     {nm}{k === S.map ? " (here)" : ""}
                   </button>
                 ))}

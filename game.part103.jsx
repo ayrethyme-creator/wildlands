@@ -1,0 +1,207 @@
+// ---------- Part 103: THE CONTINUOUS WORLD ----------
+// Ayr, 2026-09-23, choosing how the rebuilt maps join: "Continuous map".
+//
+// Until now every map was a room. You left one by stepping onto a door tile on
+// its edge and arrived somewhere else, with nothing between. Fire Red is not
+// built like that: Route 1 simply carries on into Viridian City, and walking up
+// to the top of one map shows you the bottom of the next one before you get
+// there. That is what this file adds, for maps that have been rebuilt at the
+// new size (part104 onward); every map not yet rebuilt keeps its doors.
+//
+// THREE THINGS HAVE TO BE TRUE FOR THE WORLD TO FEEL CONTINUOUS, and each one
+// is a different mechanism:
+//
+//   1. You can walk off an edge.       MAP_LINKS + crossEdge, used by part4
+//   2. You can SEE across the edge.    <MapSurround>, drawn by part5
+//   3. Nobody forgets who they are.    MAP_ALIAS + mapAlias, see below
+//
+// The third is the one that is not obvious. The game names every person by the
+// tile they stood on when they were written - TRAINERS["route1:4,4"] is Scout
+// Jabu, and so are the arc tables, the solved-text, the rematch record, and
+// the beaten-flag in every save anyone has ever made. A rebuilt map puts Jabu
+// somewhere else. If his name followed him he would lose every one of those,
+// and every existing save would un-beat him. So his NAME stays "route1:4,4"
+// and the tile he now stands on is translated back to it - exactly the rule
+// part80 already uses for townsfolk who wander: the position moves, the key
+// does not. It is why rebuilding a region needs no save migration beyond
+// moving the player's own feet.
+//
+// This file only DEFINES. part104 onward supply regions, and part105 checks
+// them against the live game and applies them - so nothing here changes the
+// world on its own.
+
+// Each rebuilt region pushes itself here: { name, maps, inbound }.
+const REBUILT_REGIONS = [];
+
+// "map:x,y" of a tile a person stands on -> the identity key they have always had.
+const MAP_ALIAS = {};
+// map -> { n|s|e|w: { map, off } }. off is where the neighbour's column 0 (for
+// n/s) or row 0 (for e/w) sits in THIS map's coordinates.
+const MAP_LINKS = {};
+// map -> [x, y]: where a new game, a blackout, a Soar, or an old save wakes up.
+const MAP_LAND = {};
+// map -> the rebuild generation it was last rebuilt in. A save made before that
+// generation, standing on that map, is standing on coordinates that no longer
+// mean what they meant, and is moved to MAP_LAND on load.
+const MAP_GEN = {};
+
+const mapAlias = (map, x, y) => MAP_ALIAS[map + ":" + x + "," + y] || null;
+
+/* The one resolution every lookup needs: who is standing on this tile? A
+   wanderer out of their home square first (part80), then a person on a rebuilt
+   map (above), then the plain coordinate as it has always been. part4, part5
+   and part80 all ask this; asking it three different ways is how the Beeloud
+   payoff ended up keyed to empty ground. */
+const idAt = (map, x, y) =>
+  (typeof wanderKey === "function" && wanderKey(map, x, y))
+  || mapAlias(map, x, y)
+  || map + ":" + x + "," + y;
+
+// [7, 8] is where every town put you before any map was rebuilt, and is still
+// right for the ones that have not been.
+const landOf = (map) => MAP_LAND[map] || [7, 8];
+
+/* Walking off the edge of `map` at (x, y) - a coordinate one step outside it.
+   Returns where that puts you, or null if nothing is there. */
+const crossEdge = (map, x, y) => {
+  const m = MAPS[map], L = MAP_LINKS[map];
+  if (!m || !L) return null;
+  const H = m.rows.length, W = m.rows[0].length;
+  const dir = y < 0 ? "n" : y >= H ? "s" : x < 0 ? "w" : x >= W ? "e" : null;
+  const link = dir && L[dir];
+  if (!link || !MAPS[link.map]) return null;
+  const n = MAPS[link.map], nH = n.rows.length, nW = n.rows[0].length;
+  const off = link.off || 0;
+  let tx, ty;
+  if (dir === "n") { tx = x - off; ty = nH - 1; }
+  else if (dir === "s") { tx = x - off; ty = 0; }
+  else if (dir === "w") { tx = nW - 1; ty = y - off; }
+  else { tx = 0; ty = y - off; }
+  if (ty < 0 || ty >= nH || tx < 0 || tx >= nW) return null;
+  return { map: link.map, x: tx, y: ty };
+};
+
+/* What a seam may be crossed onto. Deliberately narrow - plain ground, path,
+   grass, flowers and the walk-on marks - because crossing a seam skips the
+   full walk rule in part4, and it can afford to only because the maps are
+   built so a seam is only ever open ground (mapforge refuses anything
+   else, and part105 checks again). A tree or a person on a seam simply stops
+   you, which is the right answer and never a surprise. */
+const SEAM_OPEN = ".gGp*" + (typeof MAP_MARKS !== "undefined" ? MAP_MARKS : "");
+
+/* ---------------------------------------------------------------- DRAWING ---
+   THE WORLD PAST THE EDGE. The camera (part102) is a window 15 tiles across
+   that follows the ranger even to the very edge of a map, so up to seven tiles
+   of whatever lies beyond are on screen. On a room that is black, as it is in
+   Fire Red. On a rebuilt outdoor map it is one of two things:
+
+     - the next map, if one joins on that side - drawn tile for tile, so the
+       road you are about to walk onto is already there;
+     - otherwise the forest the map is set in, running on past its border, so
+       the world does not end in a painted edge.
+
+   Drawn as its own memoised component because none of it changes when you take
+   a step - only when you change map. part5's own tiles re-render every step;
+   these do not, which is what keeps a map this size cheap on a phone.
+
+   It paints BEHIND the map (z-index -1). The map's tiles are opaque and cover
+   their own area exactly, so this only ever shows where the map is not. */
+const SURROUND_RX = (typeof CAM_CX === "number" ? CAM_CX : 7) + 1;
+const SURROUND_RY = (typeof CAM_CY === "number" ? CAM_CY : 6) + 1;
+
+// One static tile, the way part5 would draw it minus the motion. Motion is
+// left out on purpose: grass swaying over the border of a map you are not on
+// would draw the eye to the one place nothing can happen.
+const surroundTile = (mm, mapKey, x, y, pal) => {
+  const ch = mm.rows[y][x];
+  const t = TILE_STYLE(ch, pal);
+  let em = t.em;
+  const bg = t.bg;
+  if (ch === "R" || ch === "V") {
+    const tr = TRAINERS[idAt(mapKey, x, y)];
+    if (tr && tr.em) em = tr.em;
+  }
+  if (ch === "¡") em = "🪵";
+  if (ch === "¦") em = "🔦";
+  const edges = (ch === "G" || ch === "g" || ch === "W") ? (() => {
+    const out = {};
+    [["n", x, y - 1], ["s", x, y + 1], ["w", x - 1, y], ["e", x + 1, y]].forEach(([side, nx, ny]) => {
+      const r = mm.rows[ny];
+      if (!r || nx < 0 || nx >= r.length) return;
+      const nb = TILE_STYLE(r[nx], pal);
+      if (!nb || nb.bg === bg) return;
+      if (ch !== "W" && r[nx] === "W") return;
+      out[side] = nb.bg;
+    });
+    return Object.keys(out).length ? out : null;
+  })() : null;
+  const img = (typeof GRASS_TILE !== "undefined" && GRASS_TILE(ch, x, y, bg, edges))
+    || (ch === "W" && typeof WATER_TILE !== "undefined" && WATER_TILE(ch, x, y, bg, edges))
+    || (typeof TILE_ART !== "undefined" && TILE_ART(ch, x, y, pal))
+    || (typeof PERSON_TILE !== "undefined" && PERSON_TILE(em, bg))
+    || (typeof PROP_TILE !== "undefined" && PROP_TILE(ch, em, bg))
+    || null;
+  return { bg, img, em: img ? "" : em };
+};
+
+const SurroundCell = ({ gx, gy, cell }) => (
+  <div aria-hidden="true" style={{
+    position: "absolute", left: `calc(var(--tile) * ${gx})`, top: `calc(var(--tile) * ${gy})`,
+    width: "var(--tile)", height: "var(--tile)", backgroundColor: cell.bg,
+    backgroundImage: cell.img || undefined, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontSize: "calc(var(--tile) * .62)", lineHeight: 1,
+  }}>{cell.em}</div>
+);
+
+const MapSurround = React.memo(function MapSurround({ mapKey }) {
+  const m = MAPS[mapKey];
+  if (!m || !MAP_LINKS[mapKey]) return null;       // not rebuilt: leave the black
+  const W = m.rows[0].length, H = m.rows.length;
+  const RX = SURROUND_RX, RY = SURROUND_RY;
+  const cells = [];
+  const taken = new Set();
+
+  // Neighbouring maps first, so where one exists it wins over the forest.
+  Object.entries(MAP_LINKS[mapKey]).forEach(([dir, link]) => {
+    const n = MAPS[link.map];
+    if (!n) return;
+    const npal = PALS[n.zone] || PALS.savanna;
+    const nW = n.rows[0].length, nH = n.rows.length, off = link.off || 0;
+    for (let ny = 0; ny < nH; ny++) {
+      for (let nx = 0; nx < nW; nx++) {
+        // this neighbour tile, in THIS map's coordinates
+        let gx, gy;
+        if (dir === "n") { gx = nx + off; gy = ny - nH; }
+        else if (dir === "s") { gx = nx + off; gy = H + ny; }
+        else if (dir === "w") { gx = nx - nW; gy = ny + off; }
+        else { gx = W + nx; gy = ny + off; }
+        if (gx < -RX || gx >= W + RX || gy < -RY || gy >= H + RY) continue;
+        const k = gx + "," + gy;
+        if (taken.has(k)) continue;
+        taken.add(k);
+        cells.push(<SurroundCell key={"n" + k} gx={gx} gy={gy} cell={surroundTile(n, link.map, nx, ny, npal)} />);
+      }
+    }
+  });
+
+  // Then the forest, everywhere else within reach of the camera.
+  const pal = PALS[m.zone] || PALS.savanna;
+  const border = m.border || "T";
+  const bcell = (gx, gy) => ({ bg: pal.ground, img: (typeof TILE_ART !== "undefined" && TILE_ART(border, gx, gy, pal)) || null, em: "" });
+  for (let gy = -RY; gy < H + RY; gy++) {
+    for (let gx = -RX; gx < W + RX; gx++) {
+      if (gx >= 0 && gx < W && gy >= 0 && gy < H) continue;
+      const k = gx + "," + gy;
+      if (taken.has(k)) continue;
+      const c = bcell(gx, gy);
+      if (!c.img) c.em = pal.tree && pal.tree.em;
+      cells.push(<SurroundCell key={"b" + k} gx={gx} gy={gy} cell={c} />);
+    }
+  }
+  return (
+    <div aria-hidden="true" style={{ position: "absolute", left: 0, top: 0, width: 0, height: 0, zIndex: -1 }}>
+      {cells}
+    </div>
+  );
+});

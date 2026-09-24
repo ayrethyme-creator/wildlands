@@ -100,7 +100,17 @@ const wanderBuild = (map) => {
     for (let x = 0; x < row.length; x++) {
       const ch = row[x];
       if (ch !== "R" && ch !== "V") continue;
-      const key = map + ":" + x + "," + y;
+      // Who lives here. On a rebuilt map that is the name they had before the
+      // rebuild, not the coordinate they stand on now (part103).
+      const key = (typeof mapAlias === "function" && mapAlias(map, x, y)) || map + ":" + x + "," + y;
+      // ZURI STAYS ON HER MARK. The five staged rival encounters are not in
+      // TRAINERS - they live in RIVAL_TILES - so wanderAllowed saw no entry,
+      // read her as scenery, and let her stroll off the road she exists to
+      // block. part84 and part100 both say her standing there IS the point of
+      // her; this file was quietly undoing it at all five stages since it was
+      // written. Found 2026-09-23 when the rebuilt Acacia Trail put her in a
+      // one-tile gap in a hedge, and a save walked straight through the gap.
+      if (typeof RIVAL_TILES !== "undefined" && RIVAL_TILES[key]) continue;
       if (!wanderAllowed(TRAINERS[key])) continue;
       WANDER[key] = { map, hx: x, hy: y, ch };
       WANDER_POS[key] = { x, y, dx: 0, dy: 0, at: 0 };

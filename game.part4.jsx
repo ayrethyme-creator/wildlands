@@ -10,7 +10,10 @@ const TOWN_LIST = [["town1", "Baobab Base"], ["town2", "Marula Town"], ["town3",
 function Wildlands() {
   const [S, setS] = useState({
     screen: "title",
-    map: "town1", x: 7, y: 8, swimming: false,
+    // Where a new ranger stands. It was 7,8 until Baobab Base was rebuilt at
+    // 28x24 (part104) - landOf is the one place that knows where a map's
+    // landing spot is now, so a new game, a blackout and a Soar all agree.
+    map: "town1", x: landOf("town1")[0], y: landOf("town1")[1], swimming: false,
     party: [], box: [],
     items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, compass: 0 },
     badges: 0, profGift: false, houseIdx: 0,
@@ -91,6 +94,9 @@ function Wildlands() {
       const payload = {
         v: 4, uid: UID, slot: n, savedAt: Date.now(),
         map: st.map, x: st.x, y: st.y, swimming: st.swimming,
+        // Which map rebuild this position belongs to. See the load side: a
+        // position from before a rebuild is moved to that map's landing spot.
+        mapsGen: MAPS_GEN,
         party: st.party, box: st.box, items: st.items,
         badges: st.badges, profGift: st.profGift, houseIdx: st.houseIdx,
         legends: st.legends, dex: st.dex, objects: st.objects, visited: st.visited,
@@ -195,10 +201,24 @@ function Wildlands() {
     UID = Math.max(UID, p.uid || 1000);
     const badges = typeof p.badges === "number" ? p.badges : (p.badge ? 1 : 0) + (p.badge2 ? 1 : 0);
     let map = MAPS[p.map] && typeof p.badges === "number" ? p.map : "town1";
-    let x = p.x ?? 7, y = p.y ?? 8, swimming = !!p.swimming;
+    let x = p.x ?? landOf(map)[0], y = p.y ?? landOf(map)[1], swimming = !!p.swimming;
+    // A SAVE MADE BEFORE THIS MAP WAS REBUILT is standing on coordinates that
+    // meant somewhere else. 12,6 on the old Acacia Trail was grass; on the new
+    // one it may be the middle of a tree, or the right tile on the wrong side of
+    // Zuri's hedge. So it wakes up on the landing spot of the map it was on -
+    // the same map, never flung back to the start.
+    //
+    // THIS IS THE WHOLE OF THE SAVE MIGRATION. Everything else in the save is
+    // still right: party, sanctuary, badges, dex, items, and which trainers you
+    // have beaten - those are keyed by who a person IS, and part103 keeps every
+    // person's name when it moves them. Only your own feet needed moving.
+    if ((MAP_GEN[map] || 0) > (p.mapsGen || 0)) {
+      [x, y] = landOf(map);
+      swimming = false;
+    }
     const ch = MAPS[map].rows[y]?.[x];
     const ok = ch && ("gGp.nsecXRVD*¦¡".includes(ch) || (ch === "W" && swimming));
-    if (!ok) { map = "town1"; x = 7; y = 8; swimming = false; }
+    if (!ok) { map = "town1"; [x, y] = landOf("town1"); swimming = false; }
     const party = (p.party || []).filter((a) => DEX[a.sp]);
     const box = (p.box || []).filter((a) => DEX[a.sp]);
     // Animals recruited before the naming change were stored without an
@@ -963,7 +983,29 @@ function Wildlands() {
     if (st.dir !== facing) setS((p) => ({ ...p, dir: facing }));
     const m = MAPS[st.map];
     const nx = st.x + dx, ny = st.y + dy;
-    if (ny < 0 || ny >= m.rows.length || nx < 0 || nx >= m.rows[0].length) return;
+    if (ny < 0 || ny >= m.rows.length || nx < 0 || nx >= m.rows[0].length) {
+      // Off the edge of a rebuilt map is the next map, not a wall (part103).
+      // A seam is only ever open ground - mapforge and part105 both refuse a
+      // region otherwise - which is why crossing one can skip the long walk
+      // rule below and still be safe: there is nothing on a seam for it to
+      // decide about. Anything that is not open ground simply stops you.
+      const to = crossEdge(st.map, nx, ny);
+      if (!to) return;
+      const tch = MAPS[to.map].rows[to.y][to.x];
+      if (SEAM_OPEN.indexOf(tch) < 0) return;
+      // No `warp` bump: that is what makes part5 replay the arrival fade, and
+      // the whole point of a seam is that you do not arrive anywhere - you are
+      // still walking. The tile just left is on another map now, so the
+      // footprint and follower layers get nothing to stand on (px/py null),
+      // exactly as a door does.
+      setS((p) => ({
+        ...p, map: to.map, x: to.x, y: to.y, px: null, py: null, swimming: false,
+        step: ((p.step || 0) + 1) % 1000, steps: (p.steps || 0) + 1,
+        visited: (to.map.startsWith("town") || TOWN_LIST.some(([k]) => k === to.map)) ? { ...p.visited, [to.map]: true } : p.visited,
+      }));
+      if (tch === "G") rollEncounter(to.map, "grass");
+      return;
+    }
     const ch = m.rows[ny][nx];
     const o = objsFor(st, st.map);
     if (o.boulders.some((bb) => bb.x === nx && bb.y === ny)) { tryPush(st, m, o, nx, ny, dx, dy); return; }
@@ -991,8 +1033,10 @@ function Wildlands() {
     // where they came FROM, and everything below - the walkability rule, the
     // trainer lookup, the arc tables, the solved-text - goes on using the home
     // coordinate it has always used. See the note at the top of part80.
-    const idKey = (typeof wanderKey === "function" && wanderKey(st.map, nx, ny))
-      || `${st.map}:${nx},${ny}`;
+    // ...and a person on a REBUILT map is still the person they were before it
+    // was rebuilt (part103). idAt asks both questions, then falls back to the
+    // plain coordinate.
+    const idKey = idAt(st.map, nx, ny);
     const walk =
       ch === "." || ch === "g" || ch === "G" || ch === "p" || ch === "*" ||
       // Tracks, hives, webs and nests are walked ONTO, not into.
@@ -1239,7 +1283,9 @@ function Wildlands() {
       const g = GYMS[st.map];
       say(`💂 Guard: "The road north opens for Badge ${g ? g.id : 8} holders. ${g ? g.leader + "'s arena is right here in town — prove yourself there first." : ""}"`);
     } else if (ch === "!") {
-      say(SIGNS[st.map + ":" + nx + "," + ny] || SIGNS[st.map] || "🪧 The letters have long worn away.");
+      // By identity first, so a sign on a rebuilt map reads its own words
+      // rather than whatever its new coordinate spells.
+      say(SIGNS[idKey] || SIGNS[st.map + ":" + nx + "," + ny] || SIGNS[st.map] || "🪧 The letters have long worn away.");
     } else if (ch === "Y") {
       const g = GYMS[st.map];
       if (!g) return;
@@ -1712,7 +1758,7 @@ function Wildlands() {
         battle: null, screen: "world",
         guidePop: guidePop || prev.guidePop || null,
         map: opts.blackout ? "town1" : prev.map,
-        x: opts.blackout ? 7 : prev.x, y: opts.blackout ? 8 : prev.y,
+        x: opts.blackout ? landOf("town1")[0] : prev.x, y: opts.blackout ? landOf("town1")[1] : prev.y,
         swimming: opts.blackout ? false : prev.swimming,
         dialog: text ? { text } : null,
       }));
