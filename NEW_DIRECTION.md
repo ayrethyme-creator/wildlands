@@ -2110,6 +2110,53 @@ A freely rotating camera would demand several angles per species, which is
 reserved for photo mode where the player is deliberately composing and a little
 flatness is acceptable — or where a handful of hero species get extra angles.
 
+### What Safari Saga learned doing exactly this (Claude note, 2026-09-23)
+
+Safari Saga got a scrolling follow camera and its first contiguous region this
+week — the savanna, Baobab Base to Marula Town, walked without a door. It was
+built in the old 2D engine, so none of the code carries over, but four of the
+findings are about phones and worlds rather than about that engine, and each
+one cost a real bug to learn. Recorded here so Terrane pays for them once.
+
+**How much world to show.** Measured off a Fire Red screenshot rather than
+recalled: its window is 15 tiles by 10. But the rule underneath is not the
+count — it is that a tile is about **4mm wide in the hand**, filling the screen.
+15 tiles on a phone held upright is 23px, 3.9mm: the same tile. Portrait only
+changes the height, and upward — Safari Saga settled on **15 across by 13
+down**. For an HD-2D camera this becomes a zoom, not a grid: a sensible
+starting point is a follow camera framed so the ground across the phone's
+width is about fifteen of the player's body-widths.
+
+**Size for the packaged app, not the browser tab — and count the notch.** Ayr
+is aiming at Play, the App Store and possibly Steam. Two things bit: the
+browser's `100vh` is the height *with the URL bar hidden*, so the page always
+scrolled; and nothing kept the controls out from under the home indicator,
+where a thumb press is read by the phone as "go home". On a current iPhone
+that is about 93px nobody can use. Godot exposes the same thing as the display
+safe area — budget the world against the screen *minus* that, from the start.
+
+**On-screen controls cost a third of the screen.** The D-pad and buttons took
+310px of an 812px phone. The GBA had physical buttons, so its world owned every
+pixel. Whether Terrane's controls sit below the world or float over it is worth
+deciding before any screen is laid out, because it decides how much world there
+is.
+
+**Give every person and object an identity that is not its position — this is
+the big one.** Safari Saga names a person by the tile they were written on:
+`route1:4,4` *is* Scout Jabu, and so is his rematch record, the story tables,
+and the "beaten" flag in every save ever made. Rebuilding a map moves him, so
+it needed an alias layer to keep him himself. Even with care, the old habit
+had already broken things quietly: a story's closing lines were keyed to
+ground its characters had since left, so they could never show. **Terrane
+should give every character, sign and finding a stable ID from day one** and
+store position as a mere property of it. It is free now and expensive later.
+
+And one practice worth keeping: Safari Saga's map tool **refuses to write a map
+it can prove is broken** — every door reachable, every seam open on both sides,
+nobody standing in the road — and the game checks each region again on load
+and falls back to the old maps rather than half-apply a bad one. A generated
+world wants exactly that gate, and it is cheap.
+
 
 ---
 
