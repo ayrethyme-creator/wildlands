@@ -40,6 +40,9 @@ DOOR = set("nsec")
 # buildings are ok, but not clues, people, or signs".
 BUMP_PERSON = set("RV!X")
 BUILDING = set("HPCYM")
+# A landmark - the great baobab, a termite mound - is one solid tile you walk up
+# to and read (part106). It is the only thing in the game written as this glyph.
+LANDMARK = "Ω"
 MARKS = set("⁂⁃⁄⁅⁌")
 
 
@@ -53,6 +56,10 @@ class Grid:
         self.gaps = {}          # "n"/"s" -> (x0, x1) open seam columns
         self.allow_block = set()  # "x,y" of the ONE person allowed to hold a road
         self.road_set = set()   # every tile painted as road - it must stay clear
+        self.marks = {}         # "x,y" -> landmark id (part106's LANDMARKS)
+        self.finds = {}         # "x,y" -> {id, item, n}: a pouch to pick up
+        self.beyond = {}        # side -> what the camera shows past a CLOSED
+                                # edge instead of forest, e.g. {"s": "W"}
         self.land = None        # where a relocated old save wakes up
 
     # ----- painting -------------------------------------------------------
@@ -125,6 +132,18 @@ class Grid:
         already have. ch is R, V, ! or X - the glyph they were written with."""
         self.g[y][x] = ch
         self.cast["%d,%d" % (x, y)] = ident
+
+    def landmark(self, x, y, ident):
+        """A feature to walk up to and read. ident is a key in part106's
+        LANDMARKS; part105 refuses the region if it is not one."""
+        self.g[y][x] = LANDMARK
+        self.marks["%d,%d" % (x, y)] = ident
+
+    def find(self, x, y, ident, item, n):
+        """A pouch lying on (x, y), picked up by walking onto it. The tile keeps
+        whatever it already is - long grass stays long grass - so ident, not the
+        position, is what the save remembers it by."""
+        self.finds["%d,%d" % (x, y)] = {"id": ident, "item": item, "n": n}
 
     def gap(self, side, x0, x1, ch="."):
         """An open seam: columns x0..x1 of the top (n) or bottom (s) edge are
@@ -201,12 +220,25 @@ def check(g):
     for y in range(g.h):
         for x in range(g.w):
             ch = g.get(x, y)
-            if ch in BUMP_PERSON or ch in BUILDING:
+            if ch in BUMP_PERSON or ch in BUILDING or ch == LANDMARK:
                 near = [(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))]
                 if not any(p in reach for p in near):
                     bad.append("%s at %d,%d has no reachable side" % (ch, x, y))
+            if ch == LANDMARK and "%d,%d" % (x, y) not in g.marks:
+                bad.append("a landmark at %d,%d with no id - what is it?" % (x, y))
             if ch in BUMP_PERSON and ch != "X" and "%d,%d" % (x, y) not in g.cast:
                 bad.append("%s at %d,%d has no identity - who is it?" % (ch, x, y))
+
+    # Pouches: on ground you can stand on and actually reach, and never on the
+    # very edge of the map, where a step would carry you across a seam instead.
+    for k, f in g.finds.items():
+        x, y = map(int, k.split(","))
+        if g.get(x, y) not in WALK:
+            bad.append("pouch %s at %s is on %r, not ground" % (f["id"], k, g.get(x, y)))
+        elif (x, y) not in reach:
+            bad.append("pouch %s at %s cannot be reached" % (f["id"], k))
+        if y in (0, g.h - 1) or x in (0, g.w - 1):
+            bad.append("pouch %s at %s is on the map's edge" % (f["id"], k))
 
     # 3. Nothing stands on the road. This is Ayr's rule from 2026-09-18 - "Water
     #    and buildings are ok, but not clues, people, or signs" - and the first
@@ -262,7 +294,10 @@ def emit_js(name, source, grids, links, inbound, gen):
         out[g.key] = {
             "rows": g.rows(),
             "cast": g.cast,
+            "marks": g.marks,
+            "finds": g.finds,
             "exits": g.exits,
+            "beyond": g.beyond,
             "land": list(g.land),
             "links": links.get(g.key, {}),
             "gen": gen,

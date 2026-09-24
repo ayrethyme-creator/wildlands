@@ -104,6 +104,18 @@
       }
       .wl-sway { animation: wlSway 4.5s ease-in-out infinite; }
 
+      /* An animal standing in a field (part87) is never quite still. Slower
+         and smaller than a person's idle, and it dips as well as rises, because
+         what it is doing between steps is grazing or watching rather than
+         standing about. On the wrapper, not the art, so it composes with the
+         transform that carries it between tiles instead of fighting it. */
+      @keyframes wlGraze {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        40%      { transform: translateY(1.5px) rotate(-1.2deg); }
+        70%      { transform: translateY(-1px) rotate(.8deg); }
+      }
+      .wl-graze { animation: wlGraze 3.8s ease-in-out infinite; }
+
       /* People: standing still is not standing frozen.
          The 1.2px breathe was tuned for the old vector figures and disappeared
          completely under the drawn ones - a 256px painting nudged by one pixel
@@ -219,6 +231,14 @@
          the frame came out a full screen tall PLUS 93px, and the page scrolled
          by exactly that much. The thing the min-height was there to prevent. */
       .wl-paper { box-sizing: border-box; min-height: 100vh; min-height: 100dvh; }
+
+      /* The seam slide (part103). Uses the separate translate property, which
+         adds to transform rather than replacing it, so an element can be
+         nudged back one step and let go without touching where it really is. */
+      @keyframes wl-seam {
+        from { translate: calc(var(--tile) * var(--sx, 0)) calc(var(--tile) * var(--sy, 0)); }
+        to { translate: 0 0; }
+      }
 
       .wl-paper::after {
         content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 3;
@@ -1144,6 +1164,22 @@
   // ---------- WORLD ----------
   const m = MAPS[S.map];
   const pal = PALS[m.zone] || PALS.savanna;
+  // One clock for everything that moves on a step - the ranger, the camera,
+  // and the seam slide - read from the same function the step loop runs on.
+  const stepMs = typeof stepDelay === "function" ? stepDelay() : 165;
+  // [dx, dy] of the step that just crossed a seam, on exactly that step and
+  // no other; null otherwise. See the world element below.
+  const seamSlide = (S.seamAt != null && S.seamAt === S.step)
+    ? ({ up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] })[S.dir] || null
+    : null;
+  // The box for things in the AIR - dust, rain, the dry storm's flash. On a
+  // rebuilt map it reaches out over the neighbouring ground the camera can
+  // see, so the rain does not stop dead at a seam. Anything positioned by map
+  // coordinates (fruit, footprints) keeps the map's own box.
+  const airBox = MAP_LINKS[S.map]
+    ? { top: `calc(var(--tile) * -${SURROUND_RY})`, bottom: `calc(var(--tile) * -${SURROUND_RY})`,
+        left: `calc(var(--tile) * -${SURROUND_RX})`, right: `calc(var(--tile) * -${SURROUND_RX})` }
+    : { inset: 0 };
   // how many species live here, and how many have you befriended?
   const areaDex = (() => {
     const here = new Set();
@@ -1208,13 +1244,10 @@
             and the camera is a separate wrapper around it. Sizing the grid to
             the window instead would have silently moved all seven. */}
         <div style={{ position: "relative", margin: "0 auto",
-          // The frame is capped at 430px however wide the window is, so the
-          // room available is min(430px, 100vw) less the padding and border -
-          // NOT 100vw. With nine tiles the difference never showed, because
-          // the 45px ceiling bound first on any screen wider than the frame.
-          // At fifteen it is the whole story: 100vw on a desktop would ask for
-          // 15 tiles of 45px, a 675px map inside a 430px frame.
-          "--tile": `min(${CAM_TILE_MAX}px, calc((min(430px, 100vw) - 24px) / ${CAM_W}))`,
+          // Whole pixels, computed in part4 from the FRAME's width (capped at
+          // 430px however wide the window is) - see tilePx there for why a
+          // fractional tile draws a grid across the ground.
+          "--tile": tilePx + "px",
           width: `calc(var(--tile) * ${CAM_W})`, height: `calc(var(--tile) * ${CAM_H})`,
           // Past the edge of a small map there is nothing to draw, so what shows
           // is this. See the note on CAM_W in part102 for why that is accepted
@@ -1226,13 +1259,31 @@
             ground moving rather than the picture jumping. */}
         <div key={S.map} style={{ position: "absolute", left: 0, top: 0, display: "grid", gridTemplateColumns: `repeat(${W}, var(--tile))`, gridAutoRows: "var(--tile)",
           transform: `translate(calc(var(--tile) * ${-(S.x - CAM_CX)}), calc(var(--tile) * ${-(S.y - CAM_CY)}))`,
-          transition: "transform .14s linear" }}>
+          // The same clock the ranger walks on (see her wrapper below). This
+          // was a fixed 140ms, and running steps take 85 - so on every stride
+          // she arrived before the world did, sat off-centre for a moment, and
+          // was hauled back. A small wobble on every single step.
+          transition: `transform ${stepMs}ms linear`,
+          // Painted under the tiles so that if a join between two of them ever
+          // shows, it shows ground rather than the black behind the map.
+          backgroundColor: pal.ground,
+          // Crossing a seam rebuilds this element in the NEW map's coordinates,
+          // which on its own is a one-step jolt: no transition, just there. So
+          // for the step that crossed, it starts shifted back by exactly that
+          // step - the same picture as the frame before, since the map just
+          // left is drawn beside this one - and slides the rest of the way.
+          // part4 marks the step (seamAt); part103 has the reasoning.
+          ...(seamSlide ? { animation: `wl-seam ${stepMs}ms linear`, "--sx": seamSlide[0], "--sy": seamSlide[1] } : null) }}>
           {/* What lies past the edge - the next map, or the forest - on a
               rebuilt map. Memoised on the map, so a step does not redraw it;
               drawn behind, so the map's own tiles always win. part103. */}
           <MapSurround mapKey={S.map} />
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
+            // An animal is standing here (part87). The TILE is still the ground
+            // it stands on - grass draws as grass, edges and all - and the animal
+            // is drawn as its own layer further down, so it can glide.
+            if (ch === ROAM_CH) ch2 = roamGround(S.map, x, y) || "G";
             // Same translation part4 does: a wanderer carries their own emoji,
             // their own name and their own solved-arc redress to wherever they
             // are standing, because the key follows the person and not the tile.
@@ -1249,6 +1300,17 @@
             if (ch === "D" && o.solved) ch2 = ".";
             const t = TILE_STYLE(ch2, pal);
             let em = t.em, bg = t.bg;
+            // A tree, a person, a lamp, a flower - anything standing on a tile
+            // - stands in whatever surrounds it, grass or earth. Only bare
+            // earth itself is always earth. See groundUnder in part106.
+            if (bg === pal.ground && ch2 !== "." && ch2 !== "p") bg = groundUnder(m.rows, x, y, pal);
+            // A landmark's own tile is plain ground: the landmark is drawn large,
+            // over it, as its own layer further down (part106).
+            const lmHere = LANDMARK_AT[idKey];
+            if (lmHere) em = "";
+            // Something lying here to pick up, if it has not been (part106).
+            const findAt = FIND_AT[S.map + ":" + x + "," + y];
+            const findHere = !!(findAt && !(S.found || {})[findAt.id]);
             if (ch2 === "R" || ch2 === "V") {
               const tr = TRAINERS[idKey];
               if (tr && tr.em) em = tr.em;
@@ -1298,9 +1360,18 @@
               const at = (nx, ny) => {
                 const r = m.rows[ny];
                 if (!r || nx < 0 || nx >= r.length) return null;
-                const nch = r[nx];
+                let nch = r[nx];
+                // A neighbour with an animal on it is still grass (part87), or
+                // the field would tear an edge against its own middle and drag a
+                // seam around after every animal that moved.
+                if (nch === ROAM_CH) nch = roamGround(S.map, nx, ny) || "G";
                 const t = TILE_STYLE(nch, pal);
-                return t ? { ch: nch, bg: t.bg } : null;
+                if (!t) return null;
+                // The neighbour's REAL ground, the same way the neighbour
+                // itself is drawn - otherwise every tree in a field gets a
+                // ragged tan fringe torn toward a box that is no longer there.
+                const nbg = (t.bg === pal.ground && nch !== "." && nch !== "p") ? groundUnder(m.rows, nx, ny, pal) : t.bg;
+                return { ch: nch, bg: nbg };
               };
               const out = {};
               [["n", x, y - 1], ["s", x, y + 1], ["w", x - 1, y], ["e", x + 1, y]]
@@ -1321,7 +1392,7 @@
             const grassBgImg = hidden
               ? null : (typeof GRASS_TILE !== "undefined" ? GRASS_TILE(ch2, x, y, bg, nbEdges) : null);
             const artBgImg = (hidden || grassBgImg)
-              ? null : (typeof TILE_ART !== "undefined" ? TILE_ART(ch2, x, y, pal) : null);
+              ? null : (lmHere ? null : (typeof TILE_ART !== "undefined" ? TILE_ART(ch2, x, y, pal, bg) : null));
             // People are read after the trainer and gym overrides above, so a
             // trainer's own emoji is what gets drawn rather than the generic
             // figure the tile would otherwise carry.
@@ -1414,13 +1485,19 @@
                 fontSize: "calc(var(--tile) * .62)", lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
                 boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined,
-                position: (glow || isPlayer || stepFrom) ? "relative" : undefined,
+                position: (glow || isPlayer || stepFrom || findHere) ? "relative" : undefined,
                 zIndex: glow ? 2 : isPlayer ? 3 : stepFrom ? 2 : undefined }}>
                 {stepFrom ? (
                   <div className={"wl-from-" + stepFrom} style={{
                     position: "absolute", inset: 0, backgroundImage: personBgImg,
                     backgroundSize: "100% 100%", backgroundRepeat: "no-repeat" }} />
                 ) : null}
+                {/* Something to pick up, lying here until it is (part106).
+                    Drawn over the tile rather than as it, so a pouch in the
+                    long grass is still IN the long grass - you wade in for it. */}
+                {findHere ? <div aria-hidden="true" style={{ position: "absolute", inset: 0,
+                  backgroundImage: FIND_IMG, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+                  pointerEvents: "none" }} /> : null}
                 {grassBgImg ? "" : em}
               </div>
             );
@@ -1574,7 +1651,7 @@
             if (!specks.length) return null;
             return (
               <div key={`amb:${S.map}:${phase}`} aria-hidden="true"
-                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
+                style={{ position: "absolute", ...airBox, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
                 {specks.map((s) => <div key={s.key} className={s.cls} style={s.style} />)}
               </div>
             );
@@ -1589,7 +1666,7 @@
             if (!drops.length) return null;
             return (
               <div key={`wx:${S.map}:${wxNow ? wxNow.key : "none"}`} aria-hidden="true"
-                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
+                style={{ position: "absolute", ...airBox, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
                 {drops.map((s) => <div key={s.key} className={s.cls} style={s.style} />)}
               </div>
             );
@@ -1650,7 +1727,7 @@
             <div key={`sky:${S.map}:${Math.floor((S.step || 0) / 9)}`} aria-hidden="true"
               className="wl-dry-storm"
               style={{
-                position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2,
+                position: "absolute", ...airBox, pointerEvents: "none", zIndex: 2,
                 animationDuration: `${Math.max(2.2, 7 - blightStorm(S, m.zone) * 1.1)}s`,
               }} />
           )}
@@ -1691,49 +1768,55 @@
             );
           })()}
 
-          {/* Mist and heat are not specks - they are what the whole scene looks
-              like through. One flat layer each, weak enough to read the map
-              through, sitting under the ranger like every other atmosphere in
-              this stack. */}
-          {wxNow && (wxNow.key === "mist" || wxNow.key === "haze") && !m.dark && (
-            <div aria-hidden="true" style={{
-              position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2,
-              background: wxNow.key === "mist"
-                ? "linear-gradient(180deg, rgba(206,216,224,.30), rgba(188,200,210,.16) 60%, rgba(188,200,210,.26))"
-                : "linear-gradient(180deg, rgba(255,214,140,.13), rgba(255,186,96,.05) 55%, rgba(255,170,80,.15))",
-              mixBlendMode: wxNow.key === "mist" ? "screen" : "overlay",
-            }} />
-          )}
+          {/* The mist/heat wash and the scene lighting used to be here, inside
+              the world, and now live on the camera instead - see just after
+              this element closes. */}
 
-          {/* ---- light on the scene ----
-              The tiles themselves are drawn well - blades, mottle, four
-              variants each - and the map still read flat, because nothing was
-              ever lit. Every cell was painted at exactly the same value from
-              corner to corner, so a screen of grass was three hundred equally
-              bright squares and the eye had nowhere to travel.
+          {/* ---- landmarks, drawn large (part106) ----
+              Twice a tile, standing on the landmark's own tile and rising over
+              the ground behind it. z-index 2: under the animals and the ranger,
+              who both pass in front of it. */}
+          {Object.keys(LANDMARK_AT).filter((k) => k.startsWith(S.map + ":")).map((k) => {
+            const [lx, ly] = k.slice(S.map.length + 1).split(",").map(Number);
+            const img = landmarkImg(LANDMARK_AT[k].kind);
+            if (!img || (dark && Math.hypot(lx - S.x, ly - S.y) > 2.4)) return null;
+            return (
+              <div key={"lm:" + k} aria-hidden="true" style={{
+                position: "absolute", pointerEvents: "none", zIndex: 2,
+                left: `calc(var(--tile) * ${lx + 0.5 - LM_SCALE_W / 2})`,
+                top: `calc(var(--tile) * ${ly + 1 - LM_SCALE_H})`,
+                width: `calc(var(--tile) * ${LM_SCALE_W})`, height: `calc(var(--tile) * ${LM_SCALE_H})`,
+                backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+              }} />
+            );
+          })}
 
-              This is one element over the whole grid: warm light falling from
-              the top left, cool shade gathering bottom right, and a vignette
-              pulling the corners down. It is deliberately weak - strong enough
-              to give the scene a direction, far too weak to hide a tile - and
-              it sits under the ranger's z-index so she is never washed over.
-
-              Screen blend for the light, multiply for the shade, so both
-              respond to whatever the day-phase filter is doing above rather
-              than sitting on top as a grey film at night. */}
-          <div aria-hidden="true" style={{
-            position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
-            background:
-              "radial-gradient(120% 95% at 14% 6%, rgba(255,232,186,.16) 0%, rgba(255,232,186,0) 55%)",
-            mixBlendMode: "screen",
-          }} />
-          <div aria-hidden="true" style={{
-            position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
-            background:
-              "radial-gradient(115% 90% at 88% 96%, rgba(46,32,18,.34) 0%, rgba(46,32,18,0) 58%)," +
-              "radial-gradient(150% 120% at 50% 50%, rgba(0,0,0,0) 52%, rgba(24,16,9,.30) 100%)",
-            mixBlendMode: "multiply",
-          }} />
+          {/* ---- the animals that are actually out there (part87) ----
+              Positioned the way the ranger is: a cell-sized box moved by
+              transform, which is what lets them GLIDE between tiles. The key is
+              the animal's own id and never its position, so React moves the
+              element it already has instead of rebuilding it somewhere else.
+              z-index 3: over the fruit and the birds, under the ranger at 4, so
+              she always passes in front. */}
+          {roamList(S.map).map((a) => {
+            // In a cave with no lantern you cannot see one until it is almost
+            // on you - the same rule the tiles use.
+            if (dark && Math.hypot(a.x - S.x, a.y - S.y) > 2.4) return null;
+            return (
+              <div key={a.key} aria-hidden="true"
+                style={{
+                  position: "absolute", left: 0, top: 0, zIndex: 3, pointerEvents: "none",
+                  width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
+                  transform: `translate(${a.x * 100}%, ${a.y * 100}%)`,
+                  transition: "transform 620ms ease-in-out",
+                  display: "flex", alignItems: "flex-end", justifyContent: "center",
+                }}>
+                <div className="wl-graze" style={{ width: "112%", marginBottom: "-5%" }}>
+                  <RoamSprite sp={a.sp} flip={a.dx > 0} />
+                </div>
+              </div>
+            );
+          })}
 
           {/* The ranger lives above the grid rather than inside a cell.
               Rendered into a tile it had to be destroyed and recreated in a
@@ -1767,7 +1850,11 @@
               // permanently behind the input, which reads as lag however
               // quickly the game actually responds. Holding shift made it
               // worse: 165ms of animation over an 85ms step.
-              transition: `transform ${typeof stepDelay === "function" ? stepDelay() : 165}ms linear`,
+              transition: `transform ${stepMs}ms linear`,
+              // ...and on the step that crossed a seam she is rebuilt too, so
+              // she gets the opposite nudge to the world's: the two cancel and
+              // she stays dead centre while the ground slides under her.
+              ...(seamSlide ? { animation: `wl-seam ${stepMs}ms linear`, "--sx": -seamSlide[0], "--sy": -seamSlide[1] } : null),
               pointerEvents: "none", zIndex: 4,
               display: "flex", alignItems: "flex-end", justifyContent: "center",
             }}>
@@ -1785,6 +1872,49 @@
             </div>
           )}
         </div>
+
+        {/* ---- light on the scene, and the weather's wash, ON THE CAMERA ----
+            The tiles themselves are drawn well - blades, mottle, four variants
+            each - and the map still read flat, because nothing was ever lit.
+            So there is warm light falling from the top left, cool shade
+            gathering bottom right, and a vignette pulling the corners down:
+            weak enough never to hide a tile, strong enough to give the scene a
+            direction. Screen blend for the light and multiply for the shade, so
+            both follow the day-phase filter instead of lying on it as a film.
+
+            THESE USED TO SIT INSIDE THE WORLD, sized to the map, which was
+            right when the whole map was on screen and wrong the moment it
+            scrolled: the vignette darkened the map's own bottom rows, the next
+            map beyond the seam was drawn unshaded, and a hard line of light
+            ran across the screen at every seam. Found 2026-09-24 as a band of
+            brighter grass exactly on the Acacia Trail's south edge. Light is a
+            property of the camera, the way it is in every game, so it lives
+            here on the viewport and moves with nothing.
+
+            Mist and heat are the same: not specks, but what the whole view
+            looks like through, so they belong to the view too. */}
+        {wxNow && (wxNow.key === "mist" || wxNow.key === "haze") && !m.dark && (
+          <div aria-hidden="true" style={{
+            position: "absolute", inset: 0, pointerEvents: "none",
+            background: wxNow.key === "mist"
+              ? "linear-gradient(180deg, rgba(206,216,224,.30), rgba(188,200,210,.16) 60%, rgba(188,200,210,.26))"
+              : "linear-gradient(180deg, rgba(255,214,140,.13), rgba(255,186,96,.05) 55%, rgba(255,170,80,.15))",
+            mixBlendMode: wxNow.key === "mist" ? "screen" : "overlay",
+          }} />
+        )}
+        <div aria-hidden="true" style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background:
+            "radial-gradient(120% 95% at 14% 6%, rgba(255,232,186,.16) 0%, rgba(255,232,186,0) 55%)",
+          mixBlendMode: "screen",
+        }} />
+        <div aria-hidden="true" style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background:
+            "radial-gradient(115% 90% at 88% 96%, rgba(46,32,18,.34) 0%, rgba(46,32,18,0) 58%)," +
+            "radial-gradient(150% 120% at 50% 50%, rgba(0,0,0,0) 52%, rgba(24,16,9,.30) 100%)",
+          mixBlendMode: "multiply",
+        }} />
         </div>
       </div>
 

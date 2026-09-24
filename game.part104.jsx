@@ -4,49 +4,62 @@
 REBUILT_REGIONS.push({ name: "savanna", maps: {
  "town1": {
   "rows": [
-   "TTTTTTTTTTTT....TTTTTTTTTTTT",
-   "TTTTTTTTTTTT....TTTTTTTTTTTT",
+   "TTggggggggggg..gggggggggggTT",
+   "TTggggggggggg..ggggggggggg^T",
+   "TTgggggggggg!..ggg*¡g*ggggTT",
+   "TTggggggggggg..ggggggg¡gggTT",
+   "TTgT....ggg¦g..g¦gggPg*gTgTT",
+   "T^g.WWW.ggggg..ggggRggg*gg^T",
+   "T^g.WWW.ggggg..gggggggHgggTT",
+   "TTT.....ggggg..gggggggggggTT",
+   "T^ggggggggggg..gggggggggggTT",
+   "TTgggggg¦..........¦ggGGGg^T",
+   "TTgggggg............ggggggTT",
+   "TTg*gggg............ggggTgTT",
+   "TTggHggg.....Ω.............e",
+   "TTgggggg..................TT",
+   "TTTgTggg............gg*ggTTT",
+   "TTTTT*gg.C........M.ggRTgTTT",
+   "TTTggggg¦..........¦g*ggTTTT",
+   "TTT*g*ggggggg..ggggggHgggTTT",
+   "TTgggRTgggg!g..gVgg*gggggTTT",
+   "TTggggggggggg..gggggggTTgTTT",
+   "TTggggggggggg..*gggggTggggTT",
    "TT........................TT",
-   "TT.......g..!.......¡T....TT",
-   "TT..¦.....g¦....¦....T....TT",
-   "TT...H.g*.........*P.¡.*..TT",
-   "TT.T..*...........R.......TT",
-   "TT.T.....H....g........¦..TT",
-   "TT..g....*................TT",
-   "TT.........*..........H...TT",
-   "TT.....*..**..............TT",
-   "TT..gWWWg.................TT",
-   "TT..gWWWg.................TT",
-   "TT..gWWWg........g.........e",
-   "TT..........g.............TT",
-   "TT.......*............R...TT",
-   "TT..¦.....C.......M.......TT",
-   "TT..............g.........TT",
-   "TT..R.....................TT",
-   "TT..*...!..¦........¦...g.TT",
-   "TT..............V.*.ggggg.TT",
-   "TT.................g......TT",
-   "TTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-   "TTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+   "WWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+   "WWWWWWWWWWWWWWWWWWWWWWWWWWWW"
   ],
   "cast": {
-   "12,3": "town1:8,2",
-   "18,6": "town1:9,2",
-   "4,18": "town1:3,8",
+   "12,2": "town1:8,2",
+   "19,5": "town1:9,2",
+   "5,18": "town1:3,8",
    "22,15": "town1:16,8",
-   "16,20": "town1:9,10",
-   "8,19": "town1:8,12"
+   "16,18": "town1:9,10",
+   "11,18": "town1:8,12"
+  },
+  "marks": {
+   "13,12": "lm_great_baobab"
+  },
+  "finds": {
+   "3,8": {
+    "id": "sav_t1_pond",
+    "item": "berries",
+    "n": 3
+   }
   },
   "exits": {
-   "27,13": {
+   "27,12": {
     "map": "archive",
     "x": 7,
     "y": 1
    }
   },
+  "beyond": {
+   "s": "W"
+  },
   "land": [
-   6,
-   19
+   13,
+   18
   ],
   "links": {
    "n": {
@@ -54,42 +67,58 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "off": 0
    }
   },
-  "gen": 1
+  "gen": 2
  },
  "route1": {
   "rows": [
-   "TTTTT....TTTTTTTTTTTTTTTTTTT",
-   "TTTTT....TTTTTTTTTTTTTTTTTTT",
-   "TT.T................T....TTT",
-   "TT.....................T..TT",
-   "TTTTTTVTTTTTTTTTTTTTTTTTTTTT",
-   "TT....*.......*..GGGGGG...TT",
-   "TT.............GGGGGGGGG..TT",
-   "TT......⁌.....GGGGGGGGGGG.TT",
-   "TTT...........GGGGGGGGGGG.TT",
-   "TT........GGGGGGGGGGGGGGG.TT",
-   "TT........GGGGGGGGGGGGGG..TT",
-   "TT*.......GGGGG.RGGGGGGT..TT",
-   "TT.¡.................T....TT",
-   "TT...*...R.........T.*...TTT",
-   "TT................*...¦T..TT",
-   "TT...........*.........T..TT",
-   "TT.............⁂.GGGGGGG..TT",
-   "TT.GGG..........GGGGGGGGG.TT",
-   "TT.GGG..........GGGGGGGGG.TT",
-   "TT.GGG....⁃.....GGGGGGGGG.TT",
-   "TT.GGG.....R.....GGGGGGG..TT",
-   "TT.GGG...*⁃............T..TT",
-   "TTTTTTTTTTTT....TTTTTTTTTTTT",
-   "TTTTTTTTTTTT....TTTTTTTTTTTT"
+   "TTTggggggg..ggggggggggggggTT",
+   "TTTggggggg..gggggggggggggg^T",
+   "TTgggggggg..ggggggTggggggTTT",
+   "TTTgggggTg..gggTgggTgggggTTT",
+   "TT^ggT^^T^.^^^^^g^gg^^ggggTT",
+   "TT^T^^T^^TV^T^^T^^T^^T^^T^TT",
+   "TTTggggggg..ggggggggggggggTT",
+   "TTgggggggg..ggggGGGGGGgggggT",
+   "TTgggggg⁌g..gggGGGGGGGGGggTT",
+   "TTggGGGggg..gggGGGGGGGGGggTT",
+   "TTTgGGGggg..gggGGGGGGGGG*TTT",
+   "TTTgGGGggg..RgggGGGGGGGgTTTT",
+   "TTT¡gTgggg..gggggggggggggTTT",
+   "TTT*g**ggg..gggΩggggTgggg^TT",
+   "TTTgTggggg..gggggggggg*gTTTT",
+   "TT^gTggggg.....*gggggggggTTT",
+   "TTTgGGGggg.....gRgGGGGGgggTT",
+   "TTTgGGGggg*gg..⁂gGGGGGGGggTT",
+   "TTggGGGgggggg..ggGGGGGGGggTT",
+   "TTggGGG*⁃gggg..ggGGGGGGGggTT",
+   "TTggGGGggRgg*..gg.GGGGGgggTT",
+   "TTgggggg⁃gggg..gg*ggggggggTT",
+   "TTggggggggggg..gggggggggggTT",
+   "TTggggggggggg..gggggggggggTT"
   ],
   "cast": {
-   "6,4": "route1:7,1",
-   "11,20": "route1:5,12",
-   "9,13": "route1:4,4",
-   "16,11": "route1:11,10"
+   "10,5": "route1:7,1",
+   "9,20": "route1:5,12",
+   "12,11": "route1:4,4",
+   "16,16": "route1:11,10"
+  },
+  "marks": {
+   "15,13": "lm_weaver_acacia"
+  },
+  "finds": {
+   "22,19": {
+    "id": "sav_r1_grass",
+    "item": "treats",
+    "n": 2
+   },
+   "4,2": {
+    "id": "sav_r1_ridge",
+    "item": "coins",
+    "n": 60
+   }
   },
   "exits": {},
+  "beyond": {},
   "land": [
    13,
    21
@@ -104,45 +133,61 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "off": 0
    }
   },
-  "gen": 1
+  "gen": 2
  },
  "seg_m1": {
   "rows": [
-   "TTTTTTTTTTTTTTTTTT....TTTTTT",
-   "TTTTTTTTTTTTTTTTTT....TTTTTT",
-   "TT*.......T...............TT",
-   "TTTggggg.........R...GGG..TT",
-   "TT.gWWWg...GGGGG....GGGGG.TT",
-   "TT.gWWWg...GGGGG....GGGGG.TT",
-   "TT.gWWWg...GGGGG....GGGGG.TT",
-   "TT..gggg...T..TT....GGGGG.TT",
-   "TT.......TT....⁂....GGGGG.TT",
-   "TT.....T.R..T....T...GGG..TT",
-   "TT.......T...........¦.T..TT",
-   "TT.T......................TT",
-   "TT........................TT",
-   "TT..T.................T...TT",
-   "TT.....................RT.TT",
-   "TT.............T.TT.......TT",
-   "TTTR......GGGGG........*..TT",
-   "TT.......GGGGGGG....T.....TT",
-   "TT..*....GGGGGGG..........TT",
-   "TT.......GGGGGGG.**...T.¡.TT",
-   "TT........⁃GGGGT..T..*....TT",
-   "TT..T....T.R..............TT",
-   "TTTTT....TTTTTTTTTTTTTTTTTTT",
-   "TTTTT....TTTTTTTTTTTTTTTTTTT"
+   "TTggggggggggggg..ggggggggTTT",
+   "TTggggggggggggg..ggggggggTTT",
+   "^gg*gggggggTggg..gggggggTTTT",
+   "TggggggggggggTg..gRGGGgggTTT",
+   "Tgg.....ggggTgg..gGGGGGggTTT",
+   "Tgg.WWW.ggggggg..gGGGGGgg^TT",
+   "TgT.WWW.ggggggg..gGGGGGgggTT",
+   "Tgg.WWW.ggggggg..ggGGGggggTT",
+   "Tgg.....ggggggg..⁂ggggggggTT",
+   "TTggggggggggRgg..gggTTggggTT",
+   "TTggggg.ggggggg..ggggggTTg^T",
+   "TTTgggTgΩgggggg..gggggggTgTT",
+   "TTTgTggggg.......ggg*ggggTTT",
+   "TTTTgggggg.......ggggggTgTTT",
+   "TTTg*gTggg..ggggggggggg*gTTT",
+   "TTgggTggg*..gggggg*gggRgggTT",
+   "TTg*Rggggg..ggggggGGGGGg*gTT",
+   "TTgggGGGgg..gggggGGGGGGGgggT",
+   "TTTggGGGgg..gggggGGGGGGGgggT",
+   "TTTggGGGgg..gggggGGGGGG¡gggT",
+   "TTTggggggg..g⁃ggTgGGGGGgggTT",
+   "TT^ggggggg..gRgggggTTgggggTT",
+   "TTTggggggg..ggggggggggggggTT",
+   "TTTggggggg..ggggggggggggggTT"
   ],
   "cast": {
-   "3,16": "seg_m1:1,5",
-   "23,14": "seg_m1:13,5",
-   "17,3": "seg_m1:6,1",
-   "9,9": "seg_m1:6,7",
-   "11,21": "seg_m1:6,10"
+   "4,16": "seg_m1:1,5",
+   "22,15": "seg_m1:13,5",
+   "18,3": "seg_m1:6,1",
+   "12,9": "seg_m1:6,7",
+   "13,21": "seg_m1:6,10"
+  },
+  "marks": {
+   "8,11": "lm_termite_mound"
+  },
+  "finds": {
+   "3,9": {
+    "id": "sav_m1_pool",
+    "item": "wakeberry",
+    "n": 1
+   },
+   "21,5": {
+    "id": "sav_m1_grass",
+    "item": "berries",
+    "n": 2
+   }
   },
   "exits": {},
+  "beyond": {},
   "land": [
-   7,
+   11,
    21
   ],
   "links": {
@@ -155,42 +200,57 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "off": 0
    }
   },
-  "gen": 1
+  "gen": 2
  },
  "seg_m2": {
   "rows": [
-   "TTTTTTTTTTT....TTTTTTTTTTTTT",
-   "TTTTTTTTTTT....TTTTTTTTTTTTT",
-   "TT..T......*.......WWW....TT",
-   "TT..GGGGGR.........WWW....TT",
-   "TT.GGGGGGG........!..GGG.*TT",
-   "TT*GGGGGGG...*......GGGGG.TT",
-   "TTTGGGGGGG.........GGGGGGGTT",
-   "TTT.GGGGG.....*....GGGGGGGTT",
-   "TT...............*.GGGGGGGTT",
-   "TT..⁃..........R...GGGGGGGTT",
-   "TT*................GGGGGGGTT",
-   "e.*.....*..........GGGGGG.TT",
-   "T..............*.....GGGG.TT",
-   "TT................**......TT",
-   "TT....T..R*.*.........R.*.TT",
-   "TT........*...............TT",
-   "TT..GGGGG.....*.*.........TT",
-   "TT.GGGGGGG..............¡.TT",
-   "TT.GGGGGGG......⁂.........TT",
-   "TT.GGGGGGG................TT",
-   "TTT*GGGGG.......GGG..*.T.TTT",
-   "TT.*..T....*.........!....TT",
-   "TTTTTTTTTTTTTTTTTT....TTTTTT",
-   "TTTTTTTTTTTTTTTTTT....TTTTTT"
+   "TTgggggggggg..ggggggggggggTT",
+   "TTgggggggggg..gggg.....gggTT",
+   "TTggggg**ggg..gggg.WWW.gggTT",
+   "TggggggggRgg..g*gΩ.WWW.gggTT",
+   "^gggGGGGGggg..gggg..GGGggTTT",
+   "TTggGGGGGg*g..gg*g!GGGGGggTT",
+   "TTg*GGGGGgg*..ggggGGGGGGGgTT",
+   "TTg*gggggggg..ggggGGGGGGGgTT",
+   "T^gggggggggg..ggggGGGGGGGgTT",
+   "TTTg⁃ggggggg..gRggGGGGGGGTTT",
+   "TTTgggg*gggg..ggggGGGGGGTgTT",
+   "e.............gggggGGGGGggTT",
+   "T.............*ggg*gGGGGTgTT",
+   "TTggggggggg*..gggggggggTTg^T",
+   "TTTggggggRgg..ggg*ggRggTgggT",
+   "TTTg*TggTggg..gggg*ggg*gggTT",
+   "TTTgGGGGGggg.....gggggggTgTT",
+   "TTgGGGGGGGgg.....ggg*gT*¡gTT",
+   "T^gGGGGGGGggggg..⁂gggg*gggTT",
+   "TTTGGGGGGGggggg..ggggg*gTg^T",
+   "TTTgGGGGGg*g*gg..gggGGGg*g^T",
+   "TTTgggg**gggggg..!ggggggggTT",
+   "TTggggggggggggg..ggggggggTTT",
+   "TTggggggggggggg..ggggggggTTT"
   ],
   "cast": {
-   "21,21": "seg_m2:7,4",
-   "18,4": "seg_m2:7,3",
+   "17,21": "seg_m2:7,4",
+   "18,5": "seg_m2:7,3",
    "15,9": "seg_m2:9,4",
    "9,14": "seg_m2:5,7",
-   "22,14": "seg_m2:9,7",
+   "20,14": "seg_m2:9,7",
    "9,3": "seg_m2:4,3"
+  },
+  "marks": {
+   "17,3": "lm_mud_wallow"
+  },
+  "finds": {
+   "4,20": {
+    "id": "sav_m2_grass",
+    "item": "treats",
+    "n": 2
+   },
+   "24,3": {
+    "id": "sav_m2_pond",
+    "item": "coins",
+    "n": 80
+   }
   },
   "exits": {
    "0,11": {
@@ -199,8 +259,9 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "y": 8
    }
   },
+  "beyond": {},
   "land": [
-   20,
+   16,
    21
   ],
   "links": {
@@ -213,42 +274,58 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "off": 0
    }
   },
-  "gen": 1
+  "gen": 2
  },
  "seg_m3": {
   "rows": [
-   "TTTT....TTTTTTTTTTTTTTTTTTTT",
-   "TTTT....TTTTTTTTTTTTTTTTTTTT",
-   "TT........................TT",
-   "TT.....*.........*...T...TTT",
-   "TT....*.......GGGGGGGG....TT",
-   "TT........⁂...GGGGGGGGGG..TT",
-   "TT...........GGGGGGGGGGGT.TT",
-   "TT............GGGGGGGGGG..TT",
-   "TT.....*.......GGGGGGG....TT",
-   "TT......R........T..TT..T.TT",
-   "TT..............R.T.......TT",
-   "TT........................TT",
-   "TT¡T¡..¡¡T¡¡T¡¡T¡¡T¡¡T¡¡T¡TT",
-   "TT..............*....T....TT",
-   "TT...............T........TT",
-   "TT....................WWW.TT",
-   "TT..*...........GGGGGGWWW.TT",
-   "TT.R...........GGGGGGGGG..TT",
-   "TT......GGG....GGGGGGGGG..TT",
-   "TT......GGG....GGGGGGGGG..TT",
-   "TT......GGG.*..⁃.GGGGGG...TT",
-   "TT.............TR..*..T...TT",
-   "TTTTTTTTTTT....TTTTTTTTTTTTT",
-   "TTTTTTTTTTT....TTTTTTTTTTTTT"
+   "TTTggggggg..gggggggggggggTTT",
+   "TTTggggggg..gggggggggggggTTT",
+   "TTTggggggg..ggggggggggggggTT",
+   "TTTTggg*g*..gggTggggggggggTT",
+   "TTT^GGGggg..gTgggGGGGGGgggTT",
+   "TTTTGGGggg..g⁂ggGGGGGGGGggTT",
+   "TTTTGGGggg..gggGGGGGGGGGggTT",
+   "TTTTgTg*gg..gggGGGGGGGGGgTTT",
+   "TTTggggggg..ggggGGGGGGggggTT",
+   "TTT*TggRgg..ggggggggggggggTT",
+   "TT^gg*gggg..gggRggggggTgggTT",
+   "TTTggggggg..gg*gggggggggggTT",
+   "TTTgTggggT..¡gg¡Ωg¡g¡Tg¡¡TTT",
+   "TTTggggggg..ggggggggggggggTT",
+   "TTTgTgTTg*....ggggggg....g^T",
+   "TTTggggggg....ggggggg.WW.gTT",
+   "TTgggggggggg..ggggGGGGWW.gTT",
+   "TTgTRggggggg..gggGGGGGGG.gTT",
+   "TgggGGGggggg..g*gGGGGGGGTgTT",
+   "TTg*GGGggggg..gggGGGGGGGTgTT",
+   "TTggGGGggggg..gg⁃^GGGGGgggTT",
+   "TTgggggggggg..gR^gggg*gggg^T",
+   "TTgggggggggg..ggggggggggggTT",
+   "TTgggggggggg..ggggggggggggTT"
   ],
   "cast": {
-   "8,9": "seg_m3:4,4",
-   "3,17": "seg_m3:3,4",
-   "16,10": "seg_m3:11,4",
-   "16,21": "seg_m3:5,10"
+   "7,9": "seg_m3:4,4",
+   "4,17": "seg_m3:3,4",
+   "15,10": "seg_m3:11,4",
+   "15,21": "seg_m3:5,10"
+  },
+  "marks": {
+   "16,12": "lm_fence_break"
+  },
+  "finds": {
+   "24,13": {
+    "id": "sav_m3_pond",
+    "item": "antidote",
+    "n": 1
+   },
+   "4,3": {
+    "id": "sav_m3_corner",
+    "item": "bigberries",
+    "n": 1
+   }
   },
   "exits": {},
+  "beyond": {},
   "land": [
    13,
    21
@@ -263,42 +340,57 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "off": 0
    }
   },
-  "gen": 1
+  "gen": 2
  },
  "seg_m4": {
   "rows": [
-   "TTTTTTTTTTTTTTTT....TTTTTTTT",
-   "TTTTTTTTTTTTTTTT....TTTTTTTT",
-   "TT...........*............TT",
-   "TT.....GGGGGGG..........^.TT",
-   "TT....GGGGGGGGR*....*....^TT",
-   "TT.^*..GGGGGGG..........*.TT",
-   "TT...................⁃....TT",
-   "TT...*...⁌........*.......TT",
-   "TT.......*.*..........R⁃..TT",
-   "e.......**..............*.TT",
-   "T..............*...*⁃.GGG.TT",
-   "TT........*..........GGGGGTT",
-   "TT......R..........*RGGGGGTT",
-   "TT.WW..*..*..........GGGGGTT",
-   "TT.WW........⁂...*...GGGGGTT",
-   "TT.................!.GGGGGTT",
-   "TT...........*...*...GGGGGTT",
-   "TT............*.....*.GGGGTT",
-   "TT.......*............GGG.TT",
-   "TT.....*GGGGR.............TT",
-   "TT.¡.*..GGGGG.*...........TT",
-   "TT......GGGGG.*.*.........TT",
-   "TTTT....TTTTTTTTTTTTTTTTTTTT",
-   "TTTT....TTTTTTTTTTTTTTTTTTTT"
+   "TTgggggggggggg..ggggggggggTT",
+   "TTgggggggggggg..ggggggggggTT",
+   "TTggggggggggg*..gg*gggTggTTT",
+   "TTgggGGGGG*Rgg..ggggggggggTT",
+   "TTg*gGGGGGgggg..ggΩgggggTgTT",
+   "TTgggGGGGGgg*g..gggggggg*TTT",
+   "TTggggggg⁌gggg..gggg⁃...gTTT",
+   "TTgggg*ggggggg..g*g....⁃TTTT",
+   "TTgggggggggggg..ggg.....*TTT",
+   "e...............ggg...R.TgTT",
+   "T...............*gg⁃...⁃ggTT",
+   "TTgT*ggggggggg..*gg*ggggggTT",
+   "TTgT...gRggggg..gg*gRgggggTT",
+   "TTg.WW.ggggggg..g**gggggggTT",
+   "T^g.WW.gT**ggg..!gggggggTg^T",
+   "TTg....gg*gg*g..*gggggggggTT",
+   "T^ggggg**g......ggggGGGGggTT",
+   "TTgTggTggg......gg*GGGGGgg^T",
+   "T^ggGGGggg..gggg⁂ggGGGGGggTT",
+   "TTTgGGGggg..Rggggg*GGGGGgTTT",
+   "TTT¡GGGggg..*ggggg*GGGGggTTT",
+   "TTT*gggg*g..gggggg^^gggggTTT",
+   "TTTggggggg..gggggggggggggTTT",
+   "TTTggggggg..gggggggggggggTTT"
   ],
   "cast": {
-   "22,8": "seg_m4:13,8",
+   "22,9": "seg_m4:13,8",
    "20,12": "seg_m4:1,3",
    "8,12": "seg_m4:1,4",
    "12,19": "seg_m4:14,4",
-   "14,4": "seg_m4:6,2",
-   "19,15": "seg_m4:7,3"
+   "11,3": "seg_m4:6,2",
+   "16,14": "seg_m4:7,3"
+  },
+  "marks": {
+   "18,4": "lm_honeyguide"
+  },
+  "finds": {
+   "24,12": {
+    "id": "sav_m4_hives",
+    "item": "berries",
+    "n": 3
+   },
+   "3,16": {
+    "id": "sav_m4_pool",
+    "item": "coins",
+    "n": 100
+   }
   },
   "exits": {
    "0,9": {
@@ -307,8 +399,9 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "y": 8
    }
   },
+  "beyond": {},
   "land": [
-   6,
+   11,
    21
   ],
   "links": {
@@ -321,44 +414,55 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "off": 0
    }
   },
-  "gen": 1
+  "gen": 2
  },
  "seg_m5": {
   "rows": [
-   "TTTTTTTTTTTT....TTTTTTTTTTTT",
-   "TTTTTTTTTTTT....TTTTTTTTTTTT",
-   "TT..g.............*...g...TT",
-   "TT...........g..!...GGGG..TT",
-   "TT..GGGGGT..........GGGGG.TT",
-   "TT..GGGGG...........GGGGG.TT",
-   "TT..GGGGG...........GGGGG.TT",
-   "TT........¡.......g..GGGG.TT",
-   "TT..........g...*....R....TT",
-   "TT....g.................g.TT",
-   "TT**T...................*.TT",
-   "TT...R..T.............T...TT",
-   "TT........................TT",
-   "TT*.................⁂.....TT",
-   "TT....GGGG.............g..TT",
-   "TT..GGGGGGGR....g.....WW..TT",
-   "TT..GGGGGGG.........*.WW..TT",
-   "TT.⁃GGGGGGG...........WW..TT",
-   "TT..GGGGGGG...............TT",
-   "TT...GGGGGG....*....T.*...TT",
-   "TT...GGGG...............T.TT",
-   "TT...............g........TT",
-   "TTTTTTTTTTTTTTTT....TTTTTTTT",
-   "TTTTTTTTTTTTTTTT....TTTTTTTT"
+   "TTggggggggggg..ggggggggggTTT",
+   "TTggggggggggg..ggggggggggTTT",
+   "TTgggggggTTgg..ggggggggggTTT",
+   "TTggggggggggg..g!gggGGGgggTT",
+   "TTTgGGGGGgggg..ggggGGGGGggTT",
+   "TTggGGGGGgggg..ggggGGGGGggTT",
+   "TTggGGGGGgggg..ggggGGGGGggTT",
+   "T^gggggggg¡gg..ggggGGGGggTTT",
+   "Tgggg*TTggggg..gg^gRgggggTTT",
+   "TTg**gg*ggggg..*ggggggggg^TT",
+   "TTgTggggggggg..ggggg....ggTT",
+   "TTggggRgggggg...gggg.WW.ggTT",
+   "^gggggggΩgggg...gggg.WW.ggTT",
+   "^ggggggggggggg..gggg....gg^T",
+   "Tgggggggg.gggg..g⁂gggg*gggTT",
+   "TTggggg*gggggg..ggggggggggTT",
+   "TgggGGGGgggRgg..ggggGGGgggTT",
+   "Tggg⁃GGGGggggg..ggggGGGgggTT",
+   "TgggGGGGGggggg..*gggGGGgggTT",
+   "TgggGGGGGggggg..ggggggggggTT",
+   "Tgg*GGGGggggg*..gggg*gggggTT",
+   "Tgggggggggg*gg..ggggTgTgggTT",
+   "TTgggggggggggg..ggggggggggTT",
+   "TTgggggggggggg..ggggggggggTT"
   ],
   "cast": {
    "16,3": "seg_m5:7,4",
-   "11,15": "seg_m5:5,8",
-   "21,8": "seg_m5:11,8",
-   "5,11": "seg_m5:3,10"
+   "11,16": "seg_m5:5,8",
+   "19,8": "seg_m5:11,8",
+   "6,11": "seg_m5:3,10"
+  },
+  "marks": {
+   "8,12": "lm_marula"
+  },
+  "finds": {
+   "7,13": {
+    "id": "sav_m5_marula",
+    "item": "treats",
+    "n": 3
+   }
   },
   "exits": {},
+  "beyond": {},
   "land": [
-   18,
+   15,
    21
   ],
   "links": {
@@ -371,41 +475,51 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "off": 0
    }
   },
-  "gen": 1
+  "gen": 2
  },
  "town2": {
   "rows": [
    "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
    "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
-   "TT..........TXT...........TT",
-   "TT...................*....TT",
-   "TT..g..*..g¦....¦......*g.TT",
-   "TT...............Y........TT",
-   "TT..............R.....g..*TT",
-   "TT.........!..............TT",
-   "TT........................TT",
-   "TT......C.................TT",
-   "TT..¦..R..............¦...TT",
-   "TT...............*........TT",
-   "e...................*.....TT",
-   "TT........................TT",
-   "TT................V.......TT",
-   "TT..¦......*g...*.*M......TT",
-   "TT...............g*.......TT",
-   "TT.*................*...*.TT",
-   "TT....H....¦....¦.........TT",
-   "TT................g.gWWWg.TT",
-   "TT.........!........gWWWg.TT",
-   "TT...*..............ggggg.TT",
-   "TTTTTTTTTTTT....TTTTTTTTTTTT",
-   "TTTTTTTTTTTT....TTTTTTTTTTTT"
+   "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
+   "TTggggggggggTXTggggggggggg^T",
+   "T^gTg*gTggggg..ggggg*gggggTT",
+   "TTggggggggg¦g..g¦ggggg^Ω^gTT",
+   "TTggggggggggg..ggYggggg^TgTT",
+   "TTgggTggggg!g..gRggggggggTTT",
+   "TTg*ggg¦............¦gggggTT",
+   "TTggggg.C............gggTgTT",
+   "TTggggg.R............ggg*gTT",
+   "e....................gggggTT",
+   "T.................V..gggggTT",
+   "TTTgTgg............M.gggggTT",
+   "TTggggg¦............¦gggggTT",
+   "TTT*ggggggggg..gg*ggggggggTT",
+   "TTTg*gggggggg..gggggggggggTT",
+   "TTgggHgggg*gg..gggggggHgTgTT",
+   "TTgggggg*ggg*..ggggg....gTTT",
+   "TggggggTggggg..ggggg.WW.gTTT",
+   "TggggggTgg!**..ggggg.WW.gTTT",
+   "Tggggggg**ggg..ggggg....gTTT",
+   "TTggggggggggg..ggggggggggTTT",
+   "TTggggggggggg..ggggggggggTTT"
   ],
   "cast": {
    "11,7": "town2:9,3",
-   "11,20": "town2:8,12",
-   "7,10": "town2:3,8",
-   "18,14": "town2:9,10",
-   "16,6": "town2:13,11"
+   "10,20": "town2:8,12",
+   "8,10": "town2:3,8",
+   "18,12": "town2:9,10",
+   "16,7": "town2:13,11"
+  },
+  "marks": {
+   "23,5": "lm_kopje"
+  },
+  "finds": {
+   "23,8": {
+    "id": "sav_t2_kopje",
+    "item": "revives",
+    "n": 1
+   }
   },
   "exits": {
    "13,0": {
@@ -413,7 +527,7 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "x": 7,
     "y": 14
    },
-   "0,12": {
+   "0,11": {
     "map": "hearthgate",
     "x": 7,
     "y": 8,
@@ -421,6 +535,7 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "reqMsg": "🏡 A breeder's gate, latched. \"Hearthside is for Champions — folks who've met enough wild animals to think properly about the tame ones. Come back after the Citadel.\""
    }
   },
+  "beyond": {},
   "land": [
    13,
    21
@@ -431,7 +546,7 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
     "off": 0
    }
   },
-  "gen": 1
+  "gen": 2
  }
 }, inbound: [
  {
@@ -439,7 +554,7 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
   "tile": "7,0",
   "map": "town1",
   "x": 26,
-  "y": 13
+  "y": 12
  },
  {
   "from": "shrine_bramwold",
@@ -460,7 +575,7 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
   "tile": "7,9",
   "map": "town2",
   "x": 1,
-  "y": 12
+  "y": 11
  },
  {
   "from": "route2",

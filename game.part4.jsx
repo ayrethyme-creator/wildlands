@@ -8,6 +8,27 @@ const TOWN_LIST = [["town1", "Baobab Base"], ["town2", "Marula Town"], ["town3",
 
 // ---------- COMPONENT ----------
 function Wildlands() {
+  /* THE TILE IS A WHOLE NUMBER OF PIXELS. Ayr, 2026-09-24: "There's a grid on
+     the ground on all of the roads". The camera sized tiles as a fraction of
+     the screen - 24.59px on an iPhone 15 - so every tile began part-way into
+     a pixel. A browser paints each tile's edge separately, a part-covered pixel
+     from each side does not add up to a covered one, and the near-black behind
+     the map showed through every join: a grid, on every plain stretch of ground.
+     Measured before the fix: no border, no shadow, just 24.59.
+
+     So the size is worked out here, in whole pixels, from the frame's real
+     width, and handed to part5. Kept in state because it has to follow a phone
+     turning sideways or a window being resized. */
+  const tilePxFor = () => {
+    const w = (typeof window !== "undefined" && window.innerWidth) || 430;
+    return Math.max(8, Math.floor(Math.min(CAM_TILE_MAX, (Math.min(430, w) - 24) / CAM_W)));
+  };
+  const [tilePx, setTilePx] = useState(tilePxFor);
+  useEffect(() => {
+    const on = () => setTilePx(tilePxFor());
+    window.addEventListener("resize", on);
+    return () => window.removeEventListener("resize", on);
+  }, []);
   const [S, setS] = useState({
     screen: "title",
     // Where a new ranger stands. It was 7,8 until Baobab Base was rebuilt at
@@ -18,6 +39,8 @@ function Wildlands() {
     items: { treats: 8, berries: 4, bigberries: 0, goldberries: 0, prismberries: 0, antidote: 0, freshair: 0, coolbalm: 0, calmbalm: 0, wakeberry: 0, revives: 1, balms: 2, honeycombs: 1, coins: 120, lantern: 0, compass: 0 },
     badges: 0, profGift: false, houseIdx: 0,
     legends: {}, dex: {}, objects: {}, visited: { town1: true }, trainersBeaten: {}, rival: "otter_j",
+    // Pouches already picked up, by id (part106). Never by position.
+    found: {},
     dialog: null, menu: null, battle: null, pick: null,
     sound: true, soundReady: false, run: true,
     slot: null, quiz: {}, dir: "down", arcs: {},
@@ -102,6 +125,7 @@ function Wildlands() {
         legends: st.legends, dex: st.dex, objects: st.objects, visited: st.visited,
         trainersBeaten: st.trainersBeaten, rival: st.rival, sound: st.sound, run: st.run,
         quiz: st.quiz, arcs: st.arcs,
+        found: st.found || {},
         /* THE WORLD THIS SAVE WAS DEALT. These two were missing, and their
            absence quietly cancelled part66.
 
@@ -289,6 +313,7 @@ function Wildlands() {
       metRival: p.metRival || {},
       buddy: p.buddy !== false,
       notes: p.notes || {},
+      found: p.found || {},
       zuriTalk: !!p.zuriTalk,
       legends: p.legends || {}, dex,
       objects: typeof p.badges === "number" ? (p.objects || {}) : {},
@@ -781,6 +806,33 @@ function Wildlands() {
     return () => clearInterval(id);
   }, []);
 
+  // ----- the field you just walked into has animals in it (part87) -----
+  // On arrival, not on a timer. A heartbeat is throttled whenever the page is
+  // not in front, so hanging the spawn off one meant a field could stay empty
+  // for as long as the browser felt like it - and part87 rightly refuses to
+  // move anything while a dialog is up, which is the state you are in when you
+  // arrive. Walking somewhere is an event, so it is treated as one - and that
+  // includes walking across a seam, which changes S.map exactly like a door.
+  useEffect(() => {
+    if (typeof roamArrive !== "function") return;
+    if (S.screen !== "world") return;
+    if (roamArrive(SR.current)) setS((p) => ({ ...p, npcTick: ((p.npcTick || 0) + 1) % 1000 }));
+  }, [S.map, S.screen]);
+
+  // ----- and so do the animals -----
+  // Its own heartbeat rather than a second job for the one above, and at a
+  // different cadence on purpose: one interval for everything alive would have
+  // the whole world stepping in time, which reads as a machine ticking rather
+  // than as a field. part87 does the deciding, including refusing any step that
+  // would seal a route; this only has to ask and tell React the map moved.
+  useEffect(() => {
+    if (typeof roamStep !== "function") return;
+    const id = setInterval(() => {
+      if (roamStep(SR.current)) setS((p) => ({ ...p, npcTick: ((p.npcTick || 0) + 1) % 1000 }));
+    }, 700);
+    return () => clearInterval(id);
+  }, []);
+
   /* ----- word reaches you -----
      An event announces itself once, when you first walk into the stretch it
      belongs to. Held in a ref rather than the save, so it also tells you what
@@ -865,37 +917,29 @@ function Wildlands() {
     const wx = (typeof weatherRate === "function") ? weatherRate(st) : 1;
     const sitting = stillRate > 0;
     const quiet = sitting ? 1 : ((SHIFT.current || st.run) ? 1 : 0.6);
-    const chance = (water ? 0.08 : 0.1) * wx * quiet * (sitting ? stillRate : 1);
-    const pool = water ? m.poolWater : (isNight() && m.poolN ? m.poolN : m.pool);
-    const lv = water ? m.lvlWater : m.lvl;
+    /* THE HIDDEN ROLL STANDS DOWN WHERE YOU CAN SEE THEM (part87).
+       If the invisible die kept rolling at the old rate on top of the animals
+       standing in the field, the field would be busier than before and the
+       whole point - that you choose your fights now - would be gone. So where
+       something is visible, the ambush rate drops to a third; work the field
+       empty and it is back to exactly the rate it has always been. There is
+       always something in the grass you did not see.
+
+       Not while you are SITTING STILL, though (part101): that is you asking the
+       animals to come, and it keeps its full rate. */
+    const seen = (typeof roamCount === "function") ? roamCount(mapKey, kind) : 0;
+    const chance = (water ? 0.08 : 0.1) * wx * quiet * (sitting ? stillRate : 1) * (seen && !sitting ? 0.34 : 1);
     if (ENC_COOL.current > 0) { ENC_COOL.current -= 1; return; }
-    if (!pool || Math.random() > chance) return;
+    /* Which species: the night pool, the Champion's Compass, part66's ecology,
+       the weather, and whatever is happening here, in that order. It all lives
+       in part87's wildPool now, because the animal you can see standing in the
+       field and the one that jumps out at you must come from the same world by
+       the same rules - and two copies of a rule is one rule waiting to go out
+       of step. (The ordering, and why each is floored so nothing is ever locked
+       out, is explained there.) */
+    const usePool = wildPool(mapKey, kind, st);
+    if (!usePool || !usePool.length || Math.random() > chance) return;
     ENC_COOL.current = 3;
-    // The Champion's Compass steers wild encounters toward species not yet
-    // in the Field Guide, but never toward an empty pool — if everything
-    // living here is already befriended, it quietly falls back to normal.
-    let usePool = pool;
-    if (st.items.compass > 0 && st.compassOn) {
-      const undiscovered = pool.filter(([sp]) => (st.dex[sp] || 0) < 2);
-      if (undiscovered.length) usePool = undiscovered;
-    }
-    // Reweighted for this save's ecology and for how hard this patch has been
-    // worked. Every species the map lists is still in the pool afterwards -
-    // part66 floors every weight - so nothing here can lock a species out.
-    if (typeof ecologyPool === "function") {
-      usePool = ecologyPool(usePool, {
-        seed: st.runSeed, pressure: st.pressure, mapKey, badges: st.badges,
-      });
-    }
-    // ...and then what the sky is doing today. After the ecology rather than
-    // before it, so weather is the last word on an afternoon while the season
-    // remains the fact about the world. part88 floors it, so this cannot take a
-    // species off the map either.
-    if (typeof weatherPool === "function") usePool = weatherPool(usePool, st);
-    // ...and last, whatever is happening here. Last because an event is the
-    // loudest fact about a place while it lasts - a river in a salmon run is
-    // not a river having an ordinary autumn.
-    if (typeof eventPool === "function") usePool = eventPool(usePool, st, mapKey);
     /* UNLESS YOU ARE ON A TRAIL, in which case none of the above applies and
        you meet what you have been following. Tracking is the one thing in this
        game you can do about wanting a particular animal, and a trail that only
@@ -908,16 +952,24 @@ function Wildlands() {
     const trail = (kind !== "water" && typeof trailLive === "function") ? trailLive(st) : null;
     const picked = trail ? trail.sp : pickPool(usePool);
     if (trail) setS((p) => ({ ...p, trail: null }));
+    beginWild(mapKey, kind, picked);
+  };
+  ROLL.current = rollEncounter;
+
+  /* One wild fight, however it started - the die in the grass, or an animal
+     you walked up to (part87). Both do the same bookkeeping, so both come here. */
+  const beginWild = (mapKey, kind, sp) => {
+    const m = MAPS[mapKey];
+    const lv = kind === "water" ? m.lvlWater : m.lvl;
     // Taking one from a patch makes that species harder to find there for a
     // while. Recorded on the roll rather than on the catch, because a fight
     // you fled from still disturbed them.
     setS((p) => ({ ...p, pressure: {
       ...(p.pressure || {}),
-      [mapKey + "|" + picked]: ((p.pressure || {})[mapKey + "|" + picked] || 0) + PRESSURE_STEP,
+      [mapKey + "|" + sp]: ((p.pressure || {})[mapKey + "|" + sp] || 0) + PRESSURE_STEP,
     } }));
-    startBattle({ kind: "wild", enemy: mk(picked, rnd(lv[0], lv[1])) });
+    startBattle({ kind: "wild", enemy: mk(sp, rnd(lv[0], lv[1])) });
   };
-  ROLL.current = rollEncounter;
 
   /* ----- sitting still (part101) -----
      Ayr, on the endgame grind: "When you are not in a town and just sitting in
@@ -1001,6 +1053,10 @@ function Wildlands() {
       setS((p) => ({
         ...p, map: to.map, x: to.x, y: to.y, px: null, py: null, swimming: false,
         step: ((p.step || 0) + 1) % 1000, steps: (p.steps || 0) + 1,
+        // Marks THIS step as the one that crossed, so part5 slides the view
+        // across the seam instead of snapping to the new map. One step only:
+        // the next step's number no longer matches.
+        seamAt: ((p.step || 0) + 1) % 1000,
         visited: (to.map.startsWith("town") || TOWN_LIST.some(([k]) => k === to.map)) ? { ...p.visited, [to.map]: true } : p.visited,
       }));
       if (tch === "G") rollEncounter(to.map, "grass");
@@ -1160,7 +1216,22 @@ function Wildlands() {
           // world is where you left it.
           steps: (p.steps || 0) + 1 };
       });
-      if (ch === "G") rollEncounter(st.map, "grass");
+      // A pouch on this tile (part106): picked up by walking onto it, once,
+      // remembered by id. The step that finds one does not also roll for an
+      // animal - a pouch in the long grass is worth wading in for, not a trap
+      // that opens a battle over the top of the thing you just found.
+      const find = FIND_AT[st.map + ":" + nx + "," + ny];
+      const gotFind = !!(find && !(st.found || {})[find.id]);
+      if (gotFind) {
+        setS((p) => ({ ...p,
+          found: { ...(p.found || {}), [find.id]: true },
+          items: { ...p.items, [find.item]: (p.items[find.item] || 0) + find.n } }));
+        const what = find.item === "coins" ? `₡${find.n}` : `${find.n} × ${findName(find.item)}`;
+        const t = setTimeout(() => say(`🎒 A ranger's pouch, left in the ${ch === "G" ? "long grass" : "open"}. Inside: ${what}.`), 120);
+        timers.current.push(t);
+      }
+      if (gotFind) { /* nothing else happens on this step */ }
+      else if (ch === "G") rollEncounter(st.map, "grass");
       else if (ch === "W") rollEncounter(st.map, "water");
       // ...and Zuri might be coming the other way. After the encounter roll, so
       // the grass gets first refusal on the step and the two can never fire on
@@ -1234,6 +1305,17 @@ function Wildlands() {
   const interact = (ch, nx, ny, idKey) => {
     const st = SR.current;
     const m = MAPS[st.map];
+    // A landmark says its one thing (part106).
+    const lm = LANDMARK_AT[idKey];
+    if (lm) { say(lm.text); return; }
+    /* You walked into an animal (part87). The species you could see standing
+       there is the species you are now facing, and it comes off the map because
+       it is in the fight rather than in the field. An animal tile is not in the
+       walkable list, so a step into one lands here the way a sign does. */
+    if (ch === ROAM_CH) {
+      const a = roamTake(st.map, nx, ny);
+      if (a) { beginWild(st.map, a.kind, a.sp); return; }
+    }
     if (ch === "C") {
       SFX.heal();
       setS((p) => ({

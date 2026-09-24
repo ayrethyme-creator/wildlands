@@ -116,7 +116,13 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
   const ch = mm.rows[y][x];
   const t = TILE_STYLE(ch, pal);
   let em = t.em;
-  const bg = t.bg;
+  // Same two rules part5 draws the map itself by (see part106): a thing
+  // stands in the ground around it, and a landmark is drawn as itself.
+  const eff = (c, cx, cy, b) => (b === pal.ground && c !== "." && c !== "p") ? groundUnder(mm.rows, cx, cy, pal) : b;
+  const bg = eff(ch, x, y, t.bg);
+  // A landmark's tile is ground; MapSurround draws the landmark itself, large.
+  const lm = LANDMARK_AT[mapKey + ":" + x + "," + y];
+  if (lm) em = "";
   if (ch === "R" || ch === "V") {
     const tr = TRAINERS[idAt(mapKey, x, y)];
     if (tr && tr.em) em = tr.em;
@@ -129,15 +135,17 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
       const r = mm.rows[ny];
       if (!r || nx < 0 || nx >= r.length) return;
       const nb = TILE_STYLE(r[nx], pal);
-      if (!nb || nb.bg === bg) return;
+      if (!nb) return;
+      const nbg = eff(r[nx], nx, ny, nb.bg);
+      if (nbg === bg) return;
       if (ch !== "W" && r[nx] === "W") return;
-      out[side] = nb.bg;
+      out[side] = nbg;
     });
     return Object.keys(out).length ? out : null;
   })() : null;
   const img = (typeof GRASS_TILE !== "undefined" && GRASS_TILE(ch, x, y, bg, edges))
     || (ch === "W" && typeof WATER_TILE !== "undefined" && WATER_TILE(ch, x, y, bg, edges))
-    || (typeof TILE_ART !== "undefined" && TILE_ART(ch, x, y, pal))
+    || (!lm && typeof TILE_ART !== "undefined" && TILE_ART(ch, x, y, pal, bg))
     || (typeof PERSON_TILE !== "undefined" && PERSON_TILE(em, bg))
     || (typeof PROP_TILE !== "undefined" && PROP_TILE(ch, em, bg))
     || null;
@@ -160,6 +168,7 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
   const W = m.rows[0].length, H = m.rows.length;
   const RX = SURROUND_RX, RY = SURROUND_RY;
   const cells = [];
+  const landmarks = [];     // drawn after every tile, so no tile covers one
   const taken = new Set();
 
   // Neighbouring maps first, so where one exists it wins over the forest.
@@ -181,14 +190,47 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
         if (taken.has(k)) continue;
         taken.add(k);
         cells.push(<SurroundCell key={"n" + k} gx={gx} gy={gy} cell={surroundTile(n, link.map, nx, ny, npal)} />);
+        // ...and a landmark on the next map is drawn at the size it will be
+        // when you get there, not shrunk to a tile until you cross.
+        const lm = LANDMARK_AT[link.map + ":" + nx + "," + ny];
+        const img = lm && landmarkImg(lm.kind);
+        if (img) landmarks.push(
+          <div key={"lm" + k} style={{
+            position: "absolute", left: `calc(var(--tile) * ${gx + 0.5 - LM_SCALE_W / 2})`,
+            top: `calc(var(--tile) * ${gy + 1 - LM_SCALE_H})`,
+            width: `calc(var(--tile) * ${LM_SCALE_W})`, height: `calc(var(--tile) * ${LM_SCALE_H})`,
+            backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+          }} />);
       }
     }
   });
 
-  // Then the forest, everywhere else within reach of the camera.
+  // Then the wild country, everywhere else within reach of the camera.
+  //
+  // It was one unbroken wall of trees, every tile the same kind, and Ayr
+  // called it out by name: "The large walls of trees is awkward." Real bush
+  // is not a hedge. So roughly one tile in eight is a rock outcrop instead,
+  // chosen by position so it never shimmers between redraws, and it all
+  // stands in the same ground the map itself is mostly made of - grass for a
+  // grassland map - rather than bare earth that stops at the map's edge.
   const pal = PALS[m.zone] || PALS.savanna;
   const border = m.border || "T";
-  const bcell = (gx, gy) => ({ bg: pal.ground, img: (typeof TILE_ART !== "undefined" && TILE_ART(border, gx, gy, pal)) || null, em: "" });
+  const flat = m.rows.join("");
+  const grassy = (flat.split("g").length - 1) + (flat.split("G").length - 1) > flat.length / 4;
+  const floor = grassy ? pal.grass2 : pal.ground;
+  // What lies past a CLOSED edge can be something other than forest - the
+  // river south of Baobab Base, say - set per side by the region (m.beyond).
+  // Only open country gets it; the corners past a side edge stay forest.
+  const beyond = m.beyond || {};
+  const sideOf = (gx, gy) => gy < 0 ? "n" : gy >= H ? "s" : gx < 0 ? "w" : "e";
+  const bcell = (gx, gy) => {
+    const b = beyond[sideOf(gx, gy)];
+    if (b === "W" && typeof WATER_TILE !== "undefined") {
+      return { bg: pal.water, img: WATER_TILE("W", gx, gy, pal.water, null), em: "" };
+    }
+    const ch = (typeof tileVariant === "function" && tileVariant(gx + 4096, gy + 4096, 8) === 0) ? "^" : border;
+    return { bg: floor, img: (typeof TILE_ART !== "undefined" && TILE_ART(ch, gx, gy, pal, floor)) || null, em: "" };
+  };
   for (let gy = -RY; gy < H + RY; gy++) {
     for (let gx = -RX; gx < W + RX; gx++) {
       if (gx >= 0 && gx < W && gy >= 0 && gy < H) continue;
@@ -202,6 +244,7 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
   return (
     <div aria-hidden="true" style={{ position: "absolute", left: 0, top: 0, width: 0, height: 0, zIndex: -1 }}>
       {cells}
+      {landmarks}
     </div>
   );
 });

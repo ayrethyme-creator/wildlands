@@ -18,7 +18,8 @@
   const WALKABLE = ".gGp*" + (typeof MAP_MARKS !== "undefined" ? MAP_MARKS : "");
   const DOORS = "nsec";
   const standable = (ch) => ch !== undefined && (WALKABLE.indexOf(ch) >= 0 || DOORS.indexOf(ch) >= 0);
-  const report = { applied: [], refused: [], problems: [], signsRestored: 0, solvedRekeyed: 0 };
+  const report = { applied: [], refused: [], problems: [], signsRestored: 0, solvedRekeyed: 0, landmarks: 0, finds: 0 };
+  const findIds = new Set();
 
   REBUILT_REGIONS.forEach((region) => {
     const P = [];
@@ -99,6 +100,23 @@
       });
 
       if (!standable([...(d.rows[d.land[1]] || "")][d.land[0]])) P.push(`${k}: landing ${d.land} is not ground`);
+
+      // Landmarks are somebody's words: the id must exist in part106.
+      Object.entries(d.marks || {}).forEach(([xy, id]) => {
+        const [x, y] = xy.split(",").map(Number);
+        if (!LANDMARKS[id]) P.push(`${k} ${xy}: landmark ${id} has no words`);
+        if ([...d.rows[y]][x] !== "Ω") P.push(`${k} ${xy}: landmark ${id} is not on a landmark tile`);
+      });
+      // Pouches hold a real item, lie on ground, and each has its own id -
+      // across the whole game, because the save remembers them by id alone.
+      Object.entries(d.finds || {}).forEach(([xy, f]) => {
+        const [x, y] = xy.split(",").map(Number);
+        if (f.item !== "coins" && !SHOP_STOCK.some((s) => s.key === f.item)) P.push(`${k} ${xy}: pouch ${f.id} holds "${f.item}", which is not an item`);
+        if (!(f.n > 0)) P.push(`${k} ${xy}: pouch ${f.id} is empty`);
+        if (!standable([...d.rows[y]][x])) P.push(`${k} ${xy}: pouch ${f.id} is not on ground`);
+        if (findIds.has(f.id)) P.push(`${k} ${xy}: pouch id ${f.id} is used twice`);
+        findIds.add(f.id);
+      });
     });
 
     // Doors elsewhere that lead in here, re-aimed at the new ground.
@@ -129,10 +147,13 @@
       m.rows = d.rows.slice();
       m.exits = d.exits;
       m.border = "T";
+      m.beyond = d.beyond || {};
       MAP_LINKS[k] = d.links;
       MAP_LAND[k] = d.land;
       MAP_GEN[k] = d.gen;
       Object.entries(d.cast).forEach(([xy, id]) => { MAP_ALIAS[k + ":" + xy] = id; });
+      Object.entries(d.marks || {}).forEach(([xy, id]) => { LANDMARK_AT[k + ":" + xy] = { ...LANDMARKS[id], id }; report.landmarks++; });
+      Object.entries(d.finds || {}).forEach(([xy, f]) => { FIND_AT[k + ":" + xy] = f; report.finds++; });
       // Rematches. part84 worked out who could stand their ground when beaten
       // on the OLD layouts. On a rebuilt map nobody stands on a road - mapforge
       // refuses the map otherwise - so every battler here can hold theirs.
@@ -178,7 +199,8 @@
   console.log(`[part105] regions applied: ${report.applied.join(", ") || "none"}`
     + (report.refused.length ? ` | REFUSED: ${report.refused.join(", ")}` : "")
     + ` | signs given back a tile: ${report.signsRestored}`
-    + ` | Beeloud after-texts re-aimed: ${report.solvedRekeyed}`);
+    + ` | Beeloud after-texts re-aimed: ${report.solvedRekeyed}`
+    + ` | landmarks: ${report.landmarks} | pouches: ${report.finds}`);
   report.problems.forEach((p) => console.warn("[part105] " + p));
 }
 

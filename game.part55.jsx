@@ -388,16 +388,21 @@ const tileArtBg = (kind, colour, v, base) => {
    position and the zone palette, get back a background image or null. Null
    means this tile has no drawn form yet and should keep rendering its emoji,
    so adding a shape later is additive and nothing has to be removed. */
-const TILE_ART = (ch, x, y, pal) => {
+const TILE_ART = (ch, x, y, pal, under) => {
   if (!pal) return null;
   const src = ch === "T" ? pal.tree : ch === "^" ? pal.mount : null;
   if (!src || !src.em) return null;
   const kind = TILE_KIND[src.em];
   if (!kind || !TILE_SHAPES[kind]) return null;
-  // Both stand on the ground the map is made of. Giving trees the short grass
-  // instead put a green square under every one of them, which is the box Ayr
-  // circled in red while circling the mountains beside them in purple.
-  const base = pal.ground;
+  // Both stand on the ground AROUND them. Giving trees the short grass put a
+  // green square under every one of them on tan earth, which is the box Ayr
+  // circled in red while circling the mountains beside them in purple - so this
+  // became the ground colour. But the rule Ayr was drawing was never "always
+  // ground", it was "no box": once the savanna became grassland (2026-09-24)
+  // the same fixed ground colour drew a tan box under every tree in the grass.
+  // So part5 now says what a tile is standing in (groundUnder, part106), and
+  // plain earth is only the answer when nothing is said.
+  const base = under || pal.ground;
   return tileArtBg(kind, src.bg, tileVariant(x, y, 4), base);
 };
 
