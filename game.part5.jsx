@@ -85,19 +85,8 @@
          layer and drags the ripples along with the highlight - which slides the
          surface off its own tile and shows the seam it was drawn to hide. The
          second pair pins the surface still. */
-      /* 2026-09-25: the glints are laid out in WORLD space (part45, waterGlint)
-         and every tile shares one clock, so a river drifts as one surface.
-         Each layer travels exactly one of its own blocks per cycle, so the
-         loop has no seam in time either. */
-      @keyframes wlWater {
-        0%   { background-position:
-                 calc(var(--wx) * var(--tile) * -1) calc(var(--wy) * var(--tile) * -1),
-                 calc(var(--wx) * var(--tile) * -1) calc(var(--wy) * var(--tile) * -1), 0 0; }
-        100% { background-position:
-                 calc(var(--wx) * var(--tile) * -1 + var(--tile) * 5) calc(var(--wy) * var(--tile) * -1 + var(--tile) * 3),
-                 calc(var(--wx) * var(--tile) * -1 - var(--tile) * 7) calc(var(--wy) * var(--tile) * -1 + var(--tile) * 4), 0 0; }
-      }
-      .wl-water { animation: wlWater 16s linear infinite; }
+      /* Water's movement is no longer a tile animation: see WaterGlint in
+         part103, one composited layer over the whole map. */
 
       /* Grass: a small lean, not a wobble. Two percent of a tile is about half
          a pixel on a phone, which is what makes it read as air moving through
@@ -1267,6 +1256,7 @@
               rebuilt map. Memoised on the map, so a step does not redraw it;
               drawn behind, so the map's own tiles always win. part103. */}
           <MapSurround mapKey={S.map} />
+          <WaterGlint mapKey={S.map} tile={tilePx} />
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
             let ch2 = ch;
             // An animal is standing here (part87). The TILE is still the ground
@@ -1400,7 +1390,7 @@
             let motion = null, delay = 0;
             if (!hidden) {
               const jitter = ((x * 7 + y * 13) % 20) / 10;
-              if (ch2 === "W") { motion = "wl-water"; }
+              if (ch2 === "W") { /* still: see WaterGlint (part103) */ }
               else if (grassBgImg) { motion = "wl-sway"; delay = jitter; }
               else if (personBgImg) {
                 motion = ["wl-idle", "wl-idle-b", "wl-idle-c"][(x * 5 + y * 11) % 3];
@@ -1414,12 +1404,10 @@
             // band painted the ripples out as it passed over them.
             const waterSurface = (!hidden && ch2 === "W" && typeof WATER_TILE !== "undefined")
               ? WATER_TILE(ch2, x, y, bg, nbEdges) : null;
-            // The old sliding band ran on its own delay in every tile, so across
-            // a whole river every tile stood out as its own square - the grid
-            // again. The glints now belong to the world (part45 waterGlint):
-            // positioned by map coordinate, one clock for every tile.
-            const waterImg = (!hidden && ch2 === "W" && typeof waterGlint === "function")
-              ? waterGlint(bg).join(", ") : null;
+            // Water tiles are still. Their movement is one layer over the whole
+            // map (part103 WaterGlint): per-tile animation first drew a grid
+            // across a river, then - done per tile again - made every step lag.
+            const waterImg = null;
             if (dark && !isPlayer && Math.hypot(x - S.x, y - S.y) > 2.4) { bg = "#0a0a12"; em = ""; }
             /* A townsperson mid-step is drawn on a LAYER OF THEIR OWN rather than
                as this tile's background, and that is not tidiness either.
@@ -1461,17 +1449,13 @@
                 // Water names both layers: the sliding band is oversized so it
                 // has somewhere to travel, the surface under it is exactly one
                 // tile and never moves.
-                backgroundSize: waterImg ? `${WATER_GLINT_SIZE}, 100% 100%`
-                  : (grassBgImg || artBgImg || personBg || propBgImg || waterSurface)
+                backgroundSize: (grassBgImg || artBgImg || personBg || propBgImg || waterSurface)
                     ? (glow ? "100% 100%, 100% 100%" : "100% 100%")
                     : undefined,
                 // Without this a shifted background wraps and a second copy of
-                // the tile slides in from the far edge. The glints are the one
-                // thing that SHOULD repeat: they are a pattern across the world.
-                backgroundRepeat: waterImg ? "repeat, repeat, no-repeat"
-                  : (grassBgImg || artBgImg || personBg || propBgImg || waterSurface) ? "no-repeat" : undefined,
-                ...(waterImg ? { "--wx": x, "--wy": y, backgroundPosition: `${WATER_GLINT_POS}, 0 0` } : null),
-                animationDelay: waterImg ? waterDelay(S.map) : motion ? `${delay}s` : undefined,
+                // the tile slides in from the far edge.
+                backgroundRepeat: (grassBgImg || artBgImg || personBg || propBgImg || waterSurface) ? "no-repeat" : undefined,
+                animationDelay: motion ? `${delay}s` : undefined,
                 aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
                 // Was keyed to the map's width, because the tile size used to
                 // depend on it. A tile is now one fixed size everywhere, so the

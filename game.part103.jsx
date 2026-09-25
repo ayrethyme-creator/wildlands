@@ -161,26 +161,15 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
    out here the ground changes from map to map, so the cells cover the gaps
    themselves. Found 2026-09-25 as a grid across the next map's ground - the
    same grid Ayr caught on the roads. */
-// Water out here moves with the water on the map (part45's glints). gx/gy are
-// already in this map's coordinates, so the pattern runs straight on across
-// the edge.
-const SurroundCell = ({ gx, gy, cell, mapKey }) => {
-  const glint = cell.water && cell.img && typeof waterGlint === "function";
-  return (
-  <div aria-hidden="true" className={glint ? "wl-water" : undefined} style={{
+const SurroundCell = ({ gx, gy, cell }) => (
+  <div aria-hidden="true" style={{
     position: "absolute", left: `calc(var(--tile) * ${gx})`, top: `calc(var(--tile) * ${gy})`,
     width: "calc(var(--tile) + 1px)", height: "calc(var(--tile) + 1px)", backgroundColor: cell.bg,
-    ...(glint ? {
-      "--wx": gx, "--wy": gy,
-      backgroundImage: `${waterGlint(cell.bg).join(", ")}, ${cell.img}`,
-      backgroundSize: `${WATER_GLINT_SIZE}, 100% 100%`, backgroundRepeat: "repeat, repeat, no-repeat",
-      backgroundPosition: `${WATER_GLINT_POS}, 0 0`, animationDelay: waterDelay(mapKey),
-    } : { backgroundImage: cell.img || undefined, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat" }),
+    backgroundImage: cell.img || undefined, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
     display: "flex", alignItems: "center", justifyContent: "center",
     fontSize: "calc(var(--tile) * .62)", lineHeight: 1,
   }}>{cell.em}</div>
-  );
-};
+);
 
 const MapSurround = React.memo(function MapSurround({ mapKey }) {
   const m = MAPS[mapKey];
@@ -209,7 +198,7 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
         const k = gx + "," + gy;
         if (taken.has(k)) continue;
         taken.add(k);
-        cells.push(<SurroundCell key={"n" + k} mapKey={mapKey} gx={gx} gy={gy} cell={surroundTile(n, link.map, nx, ny, npal)} />);
+        cells.push(<SurroundCell key={"n" + k} gx={gx} gy={gy} cell={surroundTile(n, link.map, nx, ny, npal)} />);
         // ...and a landmark on the next map is drawn at the size it will be
         // when you get there, not shrunk to a tile until you cross.
         const lm = LANDMARK_AT[link.map + ":" + nx + "," + ny];
@@ -257,7 +246,7 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
       const gx = ex + out[0] * s, gy = ey + out[1] * s, k = gx + "," + gy;
       if (taken.has(k)) break;
       taken.add(k);
-      cells.push(<SurroundCell key={"p" + k} mapKey={mapKey} gx={gx} gy={gy} cell={{ bg: pal.ground, img: null, em: "" }} />);
+      cells.push(<SurroundCell key={"p" + k} gx={gx} gy={gy} cell={{ bg: pal.ground, img: null, em: "" }} />);
     }
   });
 
@@ -276,13 +265,140 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
       if (taken.has(k)) continue;
       const c = bcell(gx, gy);
       if (!c.img) c.em = pal.tree && pal.tree.em;
-      cells.push(<SurroundCell key={"b" + k} mapKey={mapKey} gx={gx} gy={gy} cell={c} />);
+      cells.push(<SurroundCell key={"b" + k} gx={gx} gy={gy} cell={c} />);
     }
   }
   return (
     <div aria-hidden="true" style={{ position: "absolute", left: 0, top: 0, width: 0, height: 0, zIndex: -1 }}>
       {cells}
       {landmarks}
+    </div>
+  );
+});
+
+/* ---------------------------------------------------------------- WATER ---
+   MOVING WATER THAT COSTS NOTHING. Ayr, 2026-09-25: "I do want the water to
+   move somehow" - and then, once it did: "now there's a lag ... The movement
+   of the player is choppy."
+
+   The first version animated each water tile's own background. A background
+   is painted, not composited, so a hundred water tiles meant a hundred tiles
+   repainted every frame - on top of the camera sliding with every step. That
+   is the lag.
+
+   So the glints are now ONE layer over the whole map, shaped to the water by a
+   mask, and it is moved with a transform, which the phone's graphics chip does
+   on its own without repainting anything. Two sheets of glints (part45's
+   waterGlint), each drifting its own way on the same clock, laid out in world
+   coordinates so the pattern runs straight on past the map's edge and across a
+   seam. The water tiles themselves are still again - drawn once, never
+   repainted. */
+const waterCellsOf = (mapKey) => {
+  const m = MAPS[mapKey];
+  const out = [];
+  if (!m) return out;
+  const W = m.rows[0].length, H = m.rows.length;
+  m.rows.forEach((r, y) => [...r].forEach((c, x) => { if (c === "W") out.push([x, y]); }));
+  if (!MAP_LINKS[mapKey]) return out;
+  // The same precedence MapSurround draws by: next map, then road past a
+  // doorway, then whatever lies beyond a closed edge.
+  const RX = SURROUND_RX, RY = SURROUND_RY, taken = new Set();
+  Object.entries(MAP_LINKS[mapKey]).forEach(([dir, link]) => {
+    const n = MAPS[link.map];
+    if (!n) return;
+    const nW = n.rows[0].length, nH = n.rows.length, off = link.off || 0;
+    for (let ny = 0; ny < nH; ny++) for (let nx = 0; nx < nW; nx++) {
+      let gx, gy;
+      if (dir === "n") { gx = nx + off; gy = ny - nH; }
+      else if (dir === "s") { gx = nx + off; gy = H + ny; }
+      else if (dir === "w") { gx = nx - nW; gy = ny + off; }
+      else { gx = W + nx; gy = ny + off; }
+      if (gx < -RX || gx >= W + RX || gy < -RY || gy >= H + RY) continue;
+      const k = gx + "," + gy;
+      if (taken.has(k)) continue;
+      taken.add(k);
+      if ([...n.rows[ny]][nx] === "W") out.push([gx, gy]);
+    }
+  });
+  Object.keys(m.exits || {}).forEach((t) => {
+    const [ex, ey] = t.split(",").map(Number);
+    const o = ex === 0 ? [-1, 0] : ex === W - 1 ? [1, 0] : ey === 0 ? [0, -1] : ey === H - 1 ? [0, 1] : null;
+    if (o) for (let s = 1; s <= Math.max(RX, RY); s++) taken.add((ex + o[0] * s) + "," + (ey + o[1] * s));
+  });
+  const beyond = m.beyond || {};
+  if (Object.values(beyond).includes("W")) {
+    for (let gy = -RY; gy < H + RY; gy++) for (let gx = -RX; gx < W + RX; gx++) {
+      if ((gx >= 0 && gx < W && gy >= 0 && gy < H) || taken.has(gx + "," + gy)) continue;
+      const side = gy < 0 ? "n" : gy >= H ? "s" : gx < 0 ? "w" : "e";
+      if (beyond[side] === "W") out.push([gx, gy]);
+    }
+  }
+  return out;
+};
+
+const WaterGlint = React.memo(function WaterGlint({ mapKey, tile }) {
+  const m = MAPS[mapKey];
+  const refA = React.useRef(null), refB = React.useRef(null);
+  const cells = React.useMemo(() => (m && !m.dark && typeof waterGlint === "function") ? waterCellsOf(mapKey) : [], [mapKey]);
+  React.useEffect(() => {
+    if (!cells.length || !tile) return undefined;
+    if (typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const ms = WATER_GLINT_S * 1000;
+    const phase = (typeof performance !== "undefined" ? performance.now() : 0) % ms;
+    const anims = [[refA, 5, 3], [refB, -7, 4]].map(([r, dx, dy]) => {
+      if (!r.current || !r.current.animate) return null;
+      const a = r.current.animate(
+        [{ transform: "translate3d(0,0,0)" }, { transform: `translate3d(${dx * tile}px, ${dy * tile}px, 0)` }],
+        { duration: ms, iterations: Infinity });
+      // One clock for every map, so a seam never jumps the pattern.
+      a.currentTime = phase;
+      return a;
+    });
+    return () => anims.forEach((a) => a && a.cancel());
+  }, [mapKey, tile, cells.length]);
+  if (!cells.length) return null;
+
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  cells.forEach(([x, y]) => { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); });
+  const w = x1 - x0 + 1, h = y1 - y0 + 1;
+  // The mask: the water tiles, as runs along each row.
+  const rows = {};
+  cells.forEach(([x, y]) => { (rows[y] = rows[y] || []).push(x); });
+  let rects = "";
+  Object.entries(rows).forEach(([y, xs]) => {
+    xs.sort((a, b) => a - b);
+    let s = xs[0], p = xs[0];
+    xs.slice(1).concat([Infinity]).forEach((x) => {
+      if (x === p + 1) { p = x; return; }
+      rects += `<rect x="${s}" y="${y}" width="${p - s + 1}" height="1"/>`;
+      s = p = x;
+    });
+  });
+  const mask = `url("data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x0} ${y0} ${w} ${h}" preserveAspectRatio="none">` +
+    `<g fill="#fff" shape-rendering="crispEdges">${rects}</g></svg>`)}")`;
+  const pal = PALS[m.zone] || PALS.savanna;
+  const [ga, gb] = waterGlint(pal.water);
+  const T = (n) => `calc(var(--tile) * ${n})`;
+  const sheet = (ref, img, bw, bh, left, top, extraW, extraH) => (
+    <div ref={ref} style={{
+      position: "absolute", left: T(left), top: T(top),
+      width: `calc(100% + var(--tile) * ${extraW})`, height: `calc(100% + var(--tile) * ${extraH})`,
+      backgroundImage: img, backgroundSize: `${T(bw)} ${T(bh)}`, backgroundRepeat: "repeat",
+      // anchored to the world's origin, not the sheet's, so every map lines up
+      backgroundPosition: `${T(-(x0 + left))} ${T(-(y0 + top))}`,
+      willChange: "transform",
+    }} />
+  );
+  return (
+    <div aria-hidden="true" style={{
+      position: "absolute", left: T(x0), top: T(y0), width: T(w), height: T(h),
+      overflow: "hidden", pointerEvents: "none", zIndex: 1,
+      maskImage: mask, WebkitMaskImage: mask, maskSize: "100% 100%", WebkitMaskSize: "100% 100%",
+      maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat",
+    }}>
+      {sheet(refA, ga, 5, 3, -5, -3, 5, 3)}
+      {sheet(refB, gb, 7, 4, 0, -4, 7, 4)}
     </div>
   );
 });
