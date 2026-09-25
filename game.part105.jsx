@@ -101,10 +101,12 @@
 
       if (!standable([...(d.rows[d.land[1]] || "")][d.land[0]])) P.push(`${k}: landing ${d.land} is not ground`);
 
-      // Landmarks are somebody's words: the id must exist in part106.
+      // Landmarks are somebody's words: the id must exist in part106. A piece
+      // of a town ("decor:well") has no words, but must be something drawable.
       Object.entries(d.marks || {}).forEach(([xy, id]) => {
         const [x, y] = xy.split(",").map(Number);
-        if (!LANDMARKS[id]) P.push(`${k} ${xy}: landmark ${id} has no words`);
+        if (id.startsWith("decor:")) { if (!DECOR_SHAPES[id.slice(6)]) P.push(`${k} ${xy}: no such town piece ${id}`); }
+        else if (!LANDMARKS[id]) P.push(`${k} ${xy}: landmark ${id} has no words`);
         if ([...d.rows[y]][x] !== "Ω") P.push(`${k} ${xy}: landmark ${id} is not on a landmark tile`);
       });
       // Pouches hold a real item, lie on ground, and each has its own id -
@@ -152,7 +154,12 @@
       MAP_LAND[k] = d.land;
       MAP_GEN[k] = d.gen;
       Object.entries(d.cast).forEach(([xy, id]) => { MAP_ALIAS[k + ":" + xy] = id; });
-      Object.entries(d.marks || {}).forEach(([xy, id]) => { LANDMARK_AT[k + ":" + xy] = { ...LANDMARKS[id], id }; report.landmarks++; });
+      Object.entries(d.marks || {}).forEach(([xy, id]) => {
+        LANDMARK_AT[k + ":" + xy] = id.startsWith("decor:")
+          ? { id, kind: id.slice(6), decor: true }
+          : { ...LANDMARKS[id], id };
+        if (!id.startsWith("decor:")) report.landmarks++;
+      });
       Object.entries(d.finds || {}).forEach(([xy, f]) => { FIND_AT[k + ":" + xy] = f; report.finds++; });
       // Rematches. part84 worked out who could stand their ground when beaten
       // on the OLD layouts. On a rebuilt map nobody stands on a road - mapforge

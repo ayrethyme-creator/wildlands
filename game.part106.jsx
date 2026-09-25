@@ -174,6 +174,74 @@ const LM_SHAPES = {
       `<path d="M22.6,9 Q24.6,4.6 27,6.6 Q25.4,8.6 23.4,9.6" fill="#7f9a3c" stroke="${PROP_OUT}" stroke-width=".6"/>`);
   },
 };
+/* THINGS A TOWN IS MADE OF. Ayr, 2026-09-24: "The towns do need more things."
+   A town was a clinic, a shop, a hut or two and a lot of bare ground. These are
+   what a savanna village actually has lying about - a well, market stalls, a
+   granary raised off the ground against termites and rats, vegetable plots
+   fenced against goats, crates, somewhere to sit. They are scenery: solid, drawn
+   a little over a tile like everything that stands up, and they say nothing
+   when bumped, the same as a tree. Placed with mapforge's g.decor(). */
+const DECOR_SHAPES = {
+  well: (bg) => propWrap(bg,
+    `<ellipse cx="16" cy="22" rx="10" ry="4.6" fill="#8a8278" stroke="${PROP_OUT}" stroke-width="1"/>` +
+    `<path d="M6,22 L6,17 Q16,13.4 26,17 L26,22 Q16,26.6 6,22 Z" fill="#a39a8e" stroke="${PROP_OUT}" stroke-width="1"/>` +
+    `<ellipse cx="16" cy="17" rx="10" ry="3.6" fill="#2e3a44" stroke="${PROP_OUT}" stroke-width=".8"/>` +
+    `<path d="M8,17 L8,5.4 M24,17 L24,5.4" stroke="#6b5442" stroke-width="1.8"/>` +
+    `<path d="M6.4,6 L25.6,6" stroke="#6b5442" stroke-width="2.2" stroke-linecap="round"/>` +
+    `<path d="M16,6 L16,11.6" stroke="#9a9aa0" stroke-width=".7"/>` +
+    `<rect x="14" y="11.4" width="4" height="3.4" rx=".6" fill="#8a5a2e" stroke="${PROP_OUT}" stroke-width=".6"/>`),
+  stall: (bg) => propWrap(bg,
+    `<rect x="6" y="15" width="20" height="10" fill="#b08a5a" stroke="${PROP_OUT}" stroke-width="1"/>` +
+    `<path d="M6,15 L6,29 M26,15 L26,29" stroke="#6b5442" stroke-width="1.6"/>` +
+    `<path d="M3.6,11 L28.4,11 L26,15 L6,15 Z" fill="#c0392b" stroke="${PROP_OUT}" stroke-width="1" stroke-linejoin="round"/>` +
+    `<g fill="#f2ede0">` + [8.4, 14.6, 20.8].map((x) => `<path d="M${x},11 L${x + 3.1},11 L${x + 2.8},15 L${x + .6},15 Z"/>`).join("") + `</g>` +
+    `<g fill="#e3a23a" stroke="#8a5a2e" stroke-width=".4"><circle cx="10" cy="14" r="1.6"/><circle cx="13" cy="14" r="1.6"/></g>` +
+    `<g fill="#7f9a3c" stroke="#4a5e22" stroke-width=".4"><circle cx="19.4" cy="14" r="1.6"/><circle cx="22.4" cy="14" r="1.6"/></g>`),
+  granary: (bg) => propWrap(bg,
+    `<path d="M9,29 L10.4,21 M23,29 L21.6,21 M16,29 L16,21" stroke="#6b5442" stroke-width="1.6"/>` +
+    `<rect x="7.4" y="11" width="17.2" height="11" rx="3" fill="#c9a878" stroke="${PROP_OUT}" stroke-width="1"/>` +
+    `<path d="M5,12.4 L16,3.6 L27,12.4 Z" fill="#a3773c" stroke="${PROP_OUT}" stroke-width="1" stroke-linejoin="round"/>` +
+    `<path d="M9,10.4 L16,5 L23,10.4" stroke="${sh("#a3773c", -0.3)}" stroke-width=".9" fill="none"/>` +
+    `<rect x="14" y="14.4" width="4" height="4.4" rx=".8" fill="#6b4a2e"/>`),
+  garden: (bg) => propWrap(bg,
+    `<rect x="3.6" y="12" width="24.8" height="15" fill="#7a5c3a" stroke="${PROP_OUT}" stroke-width=".8"/>` +
+    `<g fill="#6f9a3a" stroke="#3f5e1e" stroke-width=".4">` +
+    [[8, 16], [14, 16], [20, 16], [25, 16], [8, 22], [14, 22], [20, 22], [25, 22]]
+      .map(([x, y]) => `<path d="M${x},${y + 2} Q${x - 2},${y} ${x},${y - 2.4} Q${x + 2},${y} ${x},${y + 2} Z"/>`).join("") + `</g>` +
+    `<g stroke="#a08466" stroke-width="1.1"><path d="M3,11.4 L29,11.4"/><path d="M3,27.6 L29,27.6"/></g>` +
+    `<g fill="#8a6a45">` + [3, 9.4, 16, 22.6, 29].map((x) => `<rect x="${x - .8}" y="9.4" width="1.6" height="19.6"/>`).join("") + `</g>`),
+  crates: (bg) => propWrap(bg,
+    `<rect x="4" y="15" width="12" height="12" fill="#b08a5a" stroke="${PROP_OUT}" stroke-width="1"/>` +
+    `<rect x="16" y="17.4" width="11" height="9.6" fill="#a07a4a" stroke="${PROP_OUT}" stroke-width="1"/>` +
+    `<rect x="8.6" y="5" width="11" height="10" fill="#c09a66" stroke="${PROP_OUT}" stroke-width="1"/>` +
+    `<g stroke="#6b5442" stroke-width=".9"><path d="M4,15 L16,27 M16,15 L4,27"/><path d="M8.6,5 L19.6,15"/><path d="M16,17.4 L27,27"/></g>`),
+  bench: (bg) => propWrap(bg,
+    `<rect x="4" y="15.4" width="24" height="3.6" rx="1" fill="#a07a4a" stroke="${PROP_OUT}" stroke-width=".9"/>` +
+    `<rect x="4" y="10" width="24" height="3.2" rx="1" fill="#b08a5a" stroke="${PROP_OUT}" stroke-width=".9"/>` +
+    `<g fill="#6b5442"><rect x="6" y="19" width="2" height="8"/><rect x="24" y="19" width="2" height="8"/>` +
+    `<rect x="6.4" y="13.2" width="1.6" height="2.2"/><rect x="24" y="13.2" width="1.6" height="2.2"/></g>`),
+};
+// How much larger than a tile each stands, and how tall. A well and a granary
+// stand up; a garden bed lies flat on its own square.
+const DECOR_SCALE = {
+  well: [1.25, 1.4], stall: [1.3, 1.35], granary: [1.2, 1.5], garden: [1.1, 1.05],
+  crates: [1.1, 1.2], bench: [1.1, 1.05],
+};
+
+/* THE GATEWAY. Ayr: the entrances to the separate areas - the shrines where
+   the legendaries are - were "not obvious enough that it's a path way". The
+   road ran to the edge of the map and the camera drew forest past it, so it
+   read as a dead end. Now every doorway on a rebuilt map gets this arch over
+   it, and part103 draws the road carrying on through the trees beyond it. */
+const GATE_IMG = `url("data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 32 32">` +
+  `<g fill="#9a9288" stroke="#f6f2e8" stroke-width="1">` +
+  `<rect x="3" y="6" width="5" height="24" rx="1"/><rect x="24" y="6" width="5" height="24" rx="1"/></g>` +
+  `<path d="M1.4,7.4 Q16,1.4 30.6,7.4 L30.6,10.6 Q16,5 1.4,10.6 Z" fill="#b0a89a" stroke="#f6f2e8" stroke-width="1"/>` +
+  `<g fill="#7a746a"><rect x="4.4" y="13" width="2.2" height="1.4"/><rect x="25.4" y="18" width="2.2" height="1.4"/></g>` +
+  `<path d="M26.6,6 Q28.6,2.6 30.4,4" stroke="#7f9a3c" stroke-width="1.2" fill="none"/>` +
+  `</svg>`)}")`;
+
 /* LANDMARKS ARE DRAWN LARGE. A landmark's trunk - the part you bump into -
    is one solid tile, but the drawing stands about twice the size of a tile,
    rising over the ground behind it, the way Fire Red's big trees stand two
@@ -183,13 +251,26 @@ const LM_SHAPES = {
    with no background of its own. */
 const LM_SCALE_W = 2.1, LM_SCALE_H = 2.3;
 const LM_IMG_CACHE = {};
+// One lookup for anything drawn over a solid tile - a landmark or a piece of a
+// town - since both are the same thing to the map: a tile you cannot walk onto,
+// with a drawing standing on it.
 const landmarkImg = (kind) => {
   if (!(kind in LM_IMG_CACHE)) {
-    const fn = LM_SHAPES[kind];
+    const fn = LM_SHAPES[kind] || DECOR_SHAPES[kind];
     LM_IMG_CACHE[kind] = fn ? `url("data:image/svg+xml,${encodeURIComponent(fn("none"))}")` : null;
   }
   return LM_IMG_CACHE[kind];
 };
+// [width, height] in tiles.
+const markScale = (kind) => DECOR_SCALE[kind] || [LM_SCALE_W, LM_SCALE_H];
+
+// The signposts at the gateways, naming where the road goes.
+Object.assign(SIGNS, {
+  "seg_m2:gate": "🪧 '⟵ THE TRAMPLED ROUND. A shrine in the trees. Something old sleeps there.'",
+  "seg_m4:gate": "🪧 '⟵ THE HOLLOW MOUND. A shrine in the trees. Something old sleeps there.'",
+  "town1:gate": "🪧 'THE NATURALIST'S ARCHIVE ⟶  Assessments, and a quiet place to read.'",
+  "town2:gate": "🪧 '⟵ HEARTHSIDE. The breeders' road. Champions only, for now.'",
+});
 
 /* A ranger's pouch - the one shape every find is drawn as, so that once you
    have picked up one you know the rest on sight, the way everyone who played

@@ -342,25 +342,6 @@
         transform-origin: top center;
       }
 
-      /* Lightning with no cloud in it (part92). Almost all of this animation is
-         nothing happening, because a sky that flashes constantly is a disco and
-         a sky that flashes twice a minute is wrong. Two strikes close together
-         - real lightning rarely goes once - and then a long wait. */
-      @keyframes wlDryStorm {
-        0%, 84%, 100% { opacity: 0; }
-        85%  { opacity: .55; }
-        87%  { opacity: .05; }
-        89%  { opacity: .42; }
-        93%  { opacity: 0; }
-      }
-      .wl-dry-storm {
-        animation-name: wlDryStorm;
-        animation-timing-function: ease-out;
-        animation-iteration-count: infinite;
-        background: linear-gradient(180deg, rgba(226,238,255,.85), rgba(198,216,255,.28) 42%, rgba(198,216,255,0) 72%);
-        mix-blend-mode: screen;
-      }
-
       /* The follower's trot (part91). Not the ranger's stride, which is a
          person's weight shifting - this is four legs and it is a small hop with
          a bit of tilt in it. Deliberately springier than anything else on the
@@ -1172,7 +1153,7 @@
   const seamSlide = (S.seamAt != null && S.seamAt === S.step)
     ? ({ up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] })[S.dir] || null
     : null;
-  // The box for things in the AIR - dust, rain, the dry storm's flash. On a
+  // The box for things in the AIR - dust, rain, snow. On a
   // rebuilt map it reaches out over the neighbouring ground the camera can
   // see, so the rain does not stop dead at a seam. Anything positioned by map
   // coordinates (fruit, footprints) keeps the map's own box.
@@ -1217,7 +1198,7 @@
               on the map rather than only in the guide. This is the tile you are
               standing on being the right place to be. */}
           {evHere ? <span title={evHere.n} style={{ marginLeft: 4 }}>{evHere.em}</span> : null}</div>
-        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have studied">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{S.badges}/{GYM_COUNT} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}{S.items.compass && S.compassOn ? " 🧭" : ""}</div>
+        <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have studied">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{badgesShown(S.badges)}/{BADGES_TOTAL} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}{S.items.compass && S.compassOn ? " 🧭" : ""}</div>
       </div>
 
       <div style={{ padding: "0 10px" }}>
@@ -1672,65 +1653,10 @@
             );
           })()}
 
-          {/* ---- THE RINGS (part92) ----
-              Grass dying in perfect circles, which is the first of the three
-              things Acacia says is wrong and the first one you can see. Drawn,
-              never in the rows, so you can walk straight through one - and you
-              should be able to, because standing in the middle of it is how the
-              size of it lands.
-
-              Under the follower and the ranger: this is something on the
-              ground, and everything alive passes over it. */}
-          {typeof blightRings === "function" && !dark && (() => {
-            const rings = blightRings(S.map, m.rows, S);
-            if (!rings.length) return null;
-            return (
-              <div aria-hidden="true"
-                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1, overflow: "hidden" }}>
-                {rings.map((g) => (
-                  <div key={g.key} style={{
-                    position: "absolute", left: 0, top: 0,
-                    width: `${(100 / W) * (g.r * 2)}%`, height: `${(100 / m.rows.length) * (g.r * 2)}%`,
-                    transform: `translate(${(g.x - g.r + 0.5) * (100 / (g.r * 2))}%, ${(g.y - g.r + 0.5) * (100 / (g.r * 2))}%)`,
-                    borderRadius: "50%",
-                    // Dead in the middle, and the edge is where it is still
-                    // dying - which is the detail that makes it read as
-                    // spreading rather than as a stain somebody painted on.
-                    background: "radial-gradient(circle, rgba(122,104,66,.62) 0%, rgba(134,116,74,.5) 58%, rgba(150,132,86,.28) 82%, rgba(150,132,86,0) 100%)",
-                    boxShadow: "inset 0 0 6px rgba(60,48,28,.4)",
-                  }} />
-                ))}
-              </div>
-            );
-          })()}
-
-          {/* ---- THE COLD EMBERS (part92) ----
-              They rise off the water, they are the wrong colour for fire, and
-              there are more of them the worse it gets. */}
-          {typeof blightSpecks === "function" && !m.dark && (() => {
-            const em = blightSpecks(m.zone, S);
-            if (!em.length) return null;
-            return (
-              <div key={`blight:${S.map}:${S.badges}`} aria-hidden="true"
-                style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, overflow: "hidden" }}>
-                {em.map((s) => <div key={s.key} className={s.cls} style={s.style} />)}
-              </div>
-            );
-          })()}
-
-          {/* ---- THE DRY STORM (part92) ----
-              Lightning out of a clear sky. One layer that flashes, keyed on the
-              step so it fires as you walk rather than on a timer nothing else
-              in this game uses. It never darkens the map: the whole horror of
-              this one is that there is no cloud. */}
-          {typeof blightStorm === "function" && !dark && blightStorm(S, m.zone) > 0 && (
-            <div key={`sky:${S.map}:${Math.floor((S.step || 0) / 9)}`} aria-hidden="true"
-              className="wl-dry-storm"
-              style={{
-                position: "absolute", ...airBox, pointerEvents: "none", zIndex: 2,
-                animationDuration: `${Math.max(2.2, 7 - blightStorm(S, m.zone) * 1.1)}s`,
-              }} />
-          )}
+          {/* The rings of dying grass, the cold embers and the dry storm were
+              drawn here (part92). Ayr, 2026-09-24: "The dying circles is not
+              good. I also don't like that plot, and it's confusing" - so the
+              sickness of the land is gone from the game (the removed part92 - see git history). */}
 
           {/* ---- somebody is following you (part91) ----
 
@@ -1778,15 +1704,32 @@
               who both pass in front of it. */}
           {Object.keys(LANDMARK_AT).filter((k) => k.startsWith(S.map + ":")).map((k) => {
             const [lx, ly] = k.slice(S.map.length + 1).split(",").map(Number);
-            const img = landmarkImg(LANDMARK_AT[k].kind);
+            const kind = LANDMARK_AT[k].kind, img = landmarkImg(kind);
             if (!img || (dark && Math.hypot(lx - S.x, ly - S.y) > 2.4)) return null;
+            const [sw, shh] = markScale(kind);
             return (
               <div key={"lm:" + k} aria-hidden="true" style={{
                 position: "absolute", pointerEvents: "none", zIndex: 2,
-                left: `calc(var(--tile) * ${lx + 0.5 - LM_SCALE_W / 2})`,
-                top: `calc(var(--tile) * ${ly + 1 - LM_SCALE_H})`,
-                width: `calc(var(--tile) * ${LM_SCALE_W})`, height: `calc(var(--tile) * ${LM_SCALE_H})`,
+                left: `calc(var(--tile) * ${lx + 0.5 - sw / 2})`,
+                top: `calc(var(--tile) * ${ly + 1 - shh})`,
+                width: `calc(var(--tile) * ${sw})`, height: `calc(var(--tile) * ${shh})`,
                 backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+              }} />
+            );
+          })}
+
+          {/* ---- a gateway over every doorway on a rebuilt map (part106) ----
+              So a road that runs to the map's edge reads as going somewhere,
+              not as a dead end into the trees. Drawn over the door tile, which
+              stays walkable - it is an arch, not a wall. */}
+          {MAP_LINKS[S.map] && Object.keys(m.exits || {}).map((t) => {
+            const [gx, gy] = t.split(",").map(Number);
+            return (
+              <div key={"gate:" + t} aria-hidden="true" style={{
+                position: "absolute", pointerEvents: "none", zIndex: 2,
+                left: `calc(var(--tile) * ${gx - 0.2})`, top: `calc(var(--tile) * ${gy - 0.55})`,
+                width: "calc(var(--tile) * 1.4)", height: "calc(var(--tile) * 1.55)",
+                backgroundImage: GATE_IMG, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
               }} />
             );
           })}

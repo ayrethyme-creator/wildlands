@@ -139,6 +139,12 @@ class Grid:
         self.g[y][x] = LANDMARK
         self.marks["%d,%d" % (x, y)] = ident
 
+    def decor(self, x, y, kind):
+        """A piece of a town - a well, a stall, a granary (part106's
+        DECOR_SHAPES). Solid scenery, drawn like a landmark but saying nothing."""
+        self.g[y][x] = LANDMARK
+        self.marks["%d,%d" % (x, y)] = "decor:" + kind
+
     def find(self, x, y, ident, item, n):
         """A pouch lying on (x, y), picked up by walking onto it. The tile keeps
         whatever it already is - long grass stays long grass - so ident, not the
@@ -220,7 +226,8 @@ def check(g):
     for y in range(g.h):
         for x in range(g.w):
             ch = g.get(x, y)
-            if ch in BUMP_PERSON or ch in BUILDING or ch == LANDMARK:
+            is_decor = str(g.marks.get("%d,%d" % (x, y), "")).startswith("decor:")
+            if (ch in BUMP_PERSON or ch in BUILDING or ch == LANDMARK) and not is_decor:
                 near = [(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))]
                 if not any(p in reach for p in near):
                     bad.append("%s at %d,%d has no reachable side" % (ch, x, y))

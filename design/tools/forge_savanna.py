@@ -175,6 +175,34 @@ def finish(g, pouches):
     return g
 
 
+def _free_near(g, x, y, r=2):
+    """The nearest tile to (x, y) that is open ground, off the road, and not
+    already holding someone - so a piece of a town or a signpost lands roughly
+    where it was meant to even if the scatter put a flower there first."""
+    for d in range(0, r + 1):
+        for dy in range(-d, d + 1):
+            for dx in range(-d, d + 1):
+                if max(abs(dx), abs(dy)) != d:
+                    continue
+                px, py = x + dx, y + dy
+                if 1 < py < H - 2 and 1 < px < W - 2 and g.get(px, py) in "g.*" \
+                        and (px, py) not in g.road_set and "%d,%d" % (px, py) not in g.cast \
+                        and "%d,%d" % (px, py) not in g.finds:
+                    return px, py
+    raise ValueError("nothing free near %d,%d" % (x, y))
+
+
+def pieces(g, spec):
+    """Place town pieces: [(x, y, kind), ...]"""
+    for x, y, kind in spec:
+        g.decor(*_free_near(g, x, y), kind)
+
+
+def signpost(g, x, y, ident):
+    """A signpost at a gateway, naming where the road goes (text in part106)."""
+    g.person(*_free_near(g, x, y), "!", ident)
+
+
 def road(g, pts):
     g.road(pts, ".", 2)
 
@@ -250,6 +278,17 @@ def town1():
     g.person(22, 15, "R", "town1:16,8")    # Nan Ifeoma
     g.person(16, 18, "V", "town1:9,10")    # Kid Tobi
     g.person(11, 18, "!", "town1:8,12")    # "Every ranger starts here"
+    # The town itself: a market on the square round the baobab, benches under
+    # it, a well, granaries by the huts, vegetable plots, crates by the post.
+    pieces(g, [
+        (10, 10, "stall"), (17, 10, "stall"), (16, 14, "stall"),
+        (11, 13, "bench"), (15, 13, "bench"),
+        (21, 10, "well"),
+        (6, 12, "granary"), (24, 6, "granary"), (23, 16, "granary"),
+        (5, 9, "garden"), (6, 9, "garden"), (23, 19, "garden"), (24, 19, "garden"),
+        (17, 16, "crates"), (8, 16, "crates"),
+    ])
+    signpost(g, 24, 11, "town1:gate")      # -> the Archive
     g.land = (13, 18)
     return finish(g, [
         (3, 8, "sav_t1_pond", "berries", 3),
@@ -333,6 +372,7 @@ def seg_m2():
     flowers(g, 26, (3, 2, 24, 21))
     g.person(17, 21, "!", "seg_m2:7,4")    # the road sign
     g.person(18, 5, "!", "seg_m2:7,3")     # the tadpole, by the pond
+    signpost(g, 3, 10, "seg_m2:gate")      # -> the Trampled Round
     g.person(15, 9, "R", "seg_m2:9,4")     # Ranger Ade
     g.person(9, 14, "R", "seg_m2:5,7")     # Watcher Pim
     g.person(20, 14, "R", "seg_m2:9,7")    # Drover Esi
@@ -402,6 +442,7 @@ def seg_m4():
     g.person(12, 19, "R", "seg_m4:14,4")   # Drover Ade
     g.person(11, 3, "R", "seg_m4:6,2")     # Ranger Uzo
     g.person(16, 14, "!", "seg_m4:7,3")    # the chrysalis
+    signpost(g, 3, 8, "seg_m4:gate")       # -> the Hollow Mound
     g.set(9, 6, "⁌")                       # a page somebody left (note 2)
     g.set(16, 18, "⁂"); g.set(3, 20, "¡")
     g.land = (11, 21)
@@ -466,6 +507,15 @@ def town2():
     g.person(8, 10, "R", "town2:3,8")      # Vet Adaeze, by the care center
     g.person(18, 12, "V", "town2:9,10")    # Trader Osk, by the post
     g.person(16, 7, "R", "town2:13,11")    # Zuri, beside the arena door
+    pieces(g, [
+        (10, 9, "stall"), (16, 9, "stall"), (16, 13, "stall"), (11, 13, "stall"),
+        (10, 11, "well"),
+        (15, 11, "bench"), (18, 8, "bench"),
+        (4, 16, "granary"), (23, 16, "granary"), (7, 17, "granary"),
+        (4, 20, "garden"), (5, 20, "garden"), (6, 20, "garden"),
+        (20, 12, "crates"), (7, 13, "crates"),
+    ])
+    signpost(g, 2, 10, "town2:gate")       # -> Hearthside
     g.land = (13, 21)
     return finish(g, [
         (24, 9, "sav_t2_kopje", "revives", 1),       # up behind the kopje

@@ -562,15 +562,20 @@ const SIGNS = {
   cave1: "🪧 Scratched into stone: 'Only steady light finds the sleeper's hollow. The jade one dreams where daylight fails — and answers only the five-badge worthy.'",
   ember: "🪧 The tablet glows faintly: 'Kindle the flames as the sun walks — East, then South, then West, then North.'",
 };
+// The guardians used to be the cause of three sicknesses of the land - the grass
+// forgetting to grow, storms circling without rain, the land holding its breath.
+// Ayr, 2026-09-24, removed that plot as confusing (the removed part92 - see git history). The guardians stay
+// as they are, legendaries asleep behind seals; these lines just no longer say
+// they are making anything ill, or that calming them heals it.
 const LORE = {
-  qilin: "🗿 The altar hums beneath your palm. 'The Qilin walks where balance holds. When its sleep grows unquiet, the grass forgets to grow.' Something vast breathes in the dark ahead.",
-  thunderbird: "🗿 Wind screams around the altar. 'The Thunderbird carries the storms where they are needed. Chained storms circle, and the sky-drum beats without rain.' Lightning flickers in a cloudless sky.",
-  phoenix: "🗿 The altar is warm as a heartbeat. 'The Phoenix burns the old to feed the new. When renewal stalls, the land holds its breath.' Embers drift upward from nothing.",
+  qilin: "🗿 The altar hums beneath your palm. 'The Qilin walks where balance holds.' Something vast breathes in the dark ahead.",
+  thunderbird: "🗿 Wind screams around the altar. 'The Thunderbird carries the storms where they are needed.' Thunder rolls somewhere above the peaks.",
+  phoenix: "🗿 The altar is warm as a heartbeat. 'The Phoenix burns the old to feed the new.' The stone is warm under your hand.",
 };
 const CALM = {
-  qilin: "🌿 The Qilin regards you, then bows its antlered head. Its hooves touch the earth without bending a single blade. As it walks into the dark, you feel the ground exhale. (Qilin: calmed)",
-  thunderbird: "⛈️ The Thunderbird spreads wings wider than the shrine and screams once — not in anger, but release. The knotted storms unravel and drift where they're needed. (Thunderbird: calmed)",
-  phoenix: "🔥 The Phoenix folds its flames and studies you with ancient eyes. Then it rises — a comet in reverse — and the land's held breath releases in warmth. (Phoenix: calmed)",
+  qilin: "🌿 The Qilin regards you, then bows its antlered head. Its hooves touch the earth without bending a single blade, and it walks on into the dark. (Qilin: calmed)",
+  thunderbird: "⛈️ The Thunderbird spreads wings wider than the shrine and screams once — not in anger, but release. Then it is gone into the cloud, and the peaks are quiet. (Thunderbird: calmed)",
+  phoenix: "🔥 The Phoenix folds its flames and studies you with ancient eyes. Then it rises — a comet in reverse — and is gone. (Phoenix: calmed)",
 };
 const BEFRIEND_LEGEND = {
   qilin: "The Qilin steps forward and presses its brow to yours. It chooses to walk beside you — balance, given freely.",

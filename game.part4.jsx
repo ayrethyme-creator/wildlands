@@ -1306,8 +1306,10 @@ function Wildlands() {
     const st = SR.current;
     const m = MAPS[st.map];
     // A landmark says its one thing (part106).
+    // (A piece of a town - a well, a stall - is drawn the same way but says
+    // nothing, the same as a tree.)
     const lm = LANDMARK_AT[idKey];
-    if (lm) { say(lm.text); return; }
+    if (lm) { if (lm.text) say(lm.text); return; }
     /* You walked into an animal (part87). The species you could see standing
        there is the species you are now facing, and it comes off the map because
        it is in the fight rather than in the field. An animal tile is not in the
@@ -1337,25 +1339,31 @@ function Wildlands() {
         setS((p) => ({
           ...p, profGift: true,
           items: { ...p.items, treats: p.items.treats + 5 },
-          dialog: { text: "⛺ Prof. Acacia: \"Good, you're here. Something is wrong with the Wildlands — grass dying in rings, storms knotted over the peaks, embers rising off the water. The old tablets speak of three guardians, and of a ranger proven in the arenas. There are twelve now — the old eight, and four the Wildlands grew into. Walk the whole trail: twelve badges, then the Summit Citadel. And take these 5 Trail Treats — you'll need friends out there.\"" },
+          // The sickness of the land is gone from the story (the removed part92 - see git history), and with
+          // it the three symptoms this speech used to open the game on. The
+          // guardians stay: they are legendaries, and they are what the Summit
+          // leads to. And there are eight arenas, not twelve (part107).
+          dialog: { text: "⛺ Prof. Acacia: \"Good, you're here. The old tablets speak of three guardians sleeping behind seals in the far corners of the Wildlands, and of a ranger proven in the arenas. There are eight on the trail. Walk the whole of it: eight badges, then the Summit Citadel. And take these 5 Trail Treats — you'll need friends out there.\"" },
         }));
       } else if (st.trainersBeaten["summit:7,1"]) {
         say(done === 3
           ? "⛺ Prof. Acacia: \"Champion — and peacemaker to all three guardians. And since your victory, the land itself has opened: a fossil canyon east of the Singing Dunes, and shimmering rifts above the Summit. Old bones and older stories are walking, ranger. Go see.\""
           : `⛺ Prof. Acacia: "Champion of the Wildlands! But the old unrest lingers — ${3 - done} guardian${done === 2 ? "" : "s"} still stir${done === 2 ? "s" : ""} behind their seals. A champion could settle them. Oh — and rangers report a fossil canyon east of the Singing Dunes, and strange rifts above the Summit. Champions only."`);
-      } else if (st.badges >= 8) {
-        say("⛺ Prof. Acacia: \"Twelve badges. The Summit Citadel is open to you — the Elite Four, and whoever waits above them. Rest, stock up, and climb, ranger.\"");
+      } else if (st.badges >= LAST_GYM_ID) {
+        // This was `>= 8` and said "Twelve badges", both left over from an older
+        // ladder: once the ladder had thirteen rungs, the eighth one got you
+        // told the Summit was open with four gyms still to go. Now it is the
+        // last real gym, and she counts the way the player does (part107).
+        say(`⛺ Prof. Acacia: "${BADGE_WORDS[BADGES_TOTAL] || "Every"} badges. The Summit Citadel is open to you — the Elite Four, and whoever waits above them. Rest, stock up, and climb, ranger."`);
       } else {
-        /* SHE TRACKS IT NOW. A professor who sends you out about three symptoms
-           and then never mentions them again is the flatness in one person, so
-           her briefing moves with the state of the land - and when all three
-           are settled she says so, which is the only ending most of this thread
-           gets. The badge directions still follow, because they are what she is
-           for. */
-        const brief = (typeof blightBriefing === "function") ? blightBriefing(st) : null;
-        const nextTown = Object.keys(GYMS).find((k) => GYMS[k].id === st.badges + 1);
-        const dir = `Badge ${st.badges + 1} waits with ${GYMS[nextTown].leader} in ${MAPS[nextTown].name}. ${done > 0 ? `${done} of 3 guardians settled — the land breathes easier. ` : "The guardians' shrines will only answer a proven ranger — badges first. "}Keep walking the trail.`;
-        say(brief ? brief + "\n\n⛺ \"" + dir + "\"" : `⛺ Prof. Acacia: "${dir}"`);
+        // The next gym the save actually has to beat - never "internal number
+        // plus one", which pointed at gyms nobody needed and, once those were
+        // removed (part107), at gyms that no longer exist. Her briefing on the
+        // sickness of the land went with the sickness itself (the removed part92 - see git history).
+        const next = nextGymAfter(st.badges);
+        const nextTown = next ? next.map : "town9";
+        const dir = `Badge ${badgesShown(st.badges) + 1} waits with ${GYMS[nextTown].leader} in ${MAPS[nextTown].name}. ${done > 0 ? `${done} of 3 guardians settled. ` : "The guardians' shrines will only answer a proven ranger — badges first. "}Keep walking the trail.`;
+        say(`⛺ Prof. Acacia: "${dir}"`);
       }
     } else if (ch === "H") {
       setS((p) => ({ ...p, houseIdx: p.houseIdx + 1, dialog: { text: "🛖 " + HOUSE_LINES[st.houseIdx % HOUSE_LINES.length] } }));
@@ -1363,7 +1371,7 @@ function Wildlands() {
       setS((p) => ({ ...p, menu: "shop" }));
     } else if (ch === "X") {
       const g = GYMS[st.map];
-      say(`💂 Guard: "The road north opens for Badge ${g ? g.id : 8} holders. ${g ? g.leader + "'s arena is right here in town — prove yourself there first." : ""}"`);
+      say(`💂 Guard: "The road north opens for Badge ${g ? badgesShown(g.id) : BADGES_TOTAL} holders. ${g ? g.leader + "'s arena is right here in town — prove yourself there first." : ""}"`);
     } else if (ch === "!") {
       // By identity first, so a sign on a rebuilt map reads its own words
       // rather than whatever its new coordinate spells.
@@ -1420,7 +1428,7 @@ function Wildlands() {
         return;
       }
       if (st.badges < LEGEND_REQ[key]) {
-        say(`🗿 The altar is cold and silent. Faint script surfaces: 'Return bearing ${LEGEND_REQ[key]} proofs of mastery.' (You carry ${st.badges} badge${st.badges === 1 ? "" : "s"}.)`);
+        say(`🗿 The altar is cold and silent. Faint script surfaces: 'Return bearing ${badgesShown(LEGEND_REQ[key])} proofs of mastery.' (You carry ${badgesShown(st.badges)} badge${badgesShown(st.badges) === 1 ? "" : "s"}.)`);
         return;
       }
       say(LORE[key], [
@@ -1470,16 +1478,10 @@ function Wildlands() {
       const isStory = tr.learns || tr.builds || tr.pitchArc || tr.station
         || (typeof beeloudSolvedText !== "undefined" && beeloudSolvedText[idKey]);
       if (!isStory && (tr.chat || !tr.team)) {
-        /* SOMETIMES THEY TALK ABOUT THE THING THAT IS HAPPENING.
-           The world already has hundreds of people reciting one fixed line
-           each, and the cheapest way to make a place feel like it is living
-           through something is for the people in it to bring it up. About one
-           in three, so it is a rumour going round rather than a village of
-           broken records - and the choice is made from the tile, so the same
-           person always says the same thing and you can go back and check. */
-        const talk = (typeof blightTalk === "function") ? blightTalk(st, m && m.zone) : null;
-        const speaks = talk && ((nx * 7 + ny * 13) % 3 === 0);
-        say(`${tr.em || "🧍"} ${tr.name}: "${speaks ? talk : tr.line}"`);
+        // One in three of these people used to talk about the sickness of the
+        // land instead of their own line. The sickness is gone (the removed part92 - see git history), so
+        // everyone says their own thing again.
+        say(`${tr.em || "🧍"} ${tr.name}: "${tr.line}"`);
         return;
       }
       // Once an arc is solved its people and places change what they say, and
@@ -2077,7 +2079,7 @@ function Wildlands() {
             items.coins = (items.coins ?? 0) + c; items.treats += 5; items.berries += 3;
             items.revives = (items.revives ?? 0) + 1; items.balms = (items.balms ?? 0) + 2; items.honeycombs = (items.honeycombs ?? 0) + 1;
             snapBusy(`${b.gym.leader}: "${b.gym.quote}"`, {}, "badge");
-            snapEnd(`🏅 BADGE ${b.gym.id} of ${GYM_COUNT} earned! (+₡${c}, +5 Treats, +3 Berries)${b.gym.perk ? " " + b.gym.perk : ""}`);
+            snapEnd(`🏅 BADGE ${badgesShown(b.gym.id)} of ${BADGES_TOTAL} earned! (+₡${c}, +5 Treats, +3 Berries)${b.gym.perk ? " " + b.gym.perk : ""}`);
           } else if (b.champion) {
             items.coins = (items.coins ?? 0) + 5000;
             const firstCompass = !items.compass;

@@ -194,11 +194,12 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
         // when you get there, not shrunk to a tile until you cross.
         const lm = LANDMARK_AT[link.map + ":" + nx + "," + ny];
         const img = lm && landmarkImg(lm.kind);
+        const [sw, shh] = lm ? markScale(lm.kind) : [1, 1];
         if (img) landmarks.push(
           <div key={"lm" + k} style={{
-            position: "absolute", left: `calc(var(--tile) * ${gx + 0.5 - LM_SCALE_W / 2})`,
-            top: `calc(var(--tile) * ${gy + 1 - LM_SCALE_H})`,
-            width: `calc(var(--tile) * ${LM_SCALE_W})`, height: `calc(var(--tile) * ${LM_SCALE_H})`,
+            position: "absolute", left: `calc(var(--tile) * ${gx + 0.5 - sw / 2})`,
+            top: `calc(var(--tile) * ${gy + 1 - shh})`,
+            width: `calc(var(--tile) * ${sw})`, height: `calc(var(--tile) * ${shh})`,
             backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
           }} />);
       }
@@ -223,6 +224,23 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
   // Only open country gets it; the corners past a side edge stay forest.
   const beyond = m.beyond || {};
   const sideOf = (gx, gy) => gy < 0 ? "n" : gy >= H ? "s" : gx < 0 ? "w" : "e";
+  // THE ROAD GOES ON PAST A DOORWAY. Ayr: the shrine entrances were "not
+  // obvious enough that it's a path way" - the road ran to the map's edge and
+  // this drew forest straight across the end of it, so a doorway read as a dead
+  // end. Now a trail runs on out through the trees from every door on an edge,
+  // as far as the camera can see, and the forest stands either side of it.
+  Object.keys(m.exits || {}).forEach((t) => {
+    const [ex, ey] = t.split(",").map(Number);
+    const out = ex === 0 ? [-1, 0] : ex === W - 1 ? [1, 0] : ey === 0 ? [0, -1] : ey === H - 1 ? [0, 1] : null;
+    if (!out) return;
+    for (let s = 1; s <= Math.max(RX, RY); s++) {
+      const gx = ex + out[0] * s, gy = ey + out[1] * s, k = gx + "," + gy;
+      if (taken.has(k)) break;
+      taken.add(k);
+      cells.push(<SurroundCell key={"p" + k} gx={gx} gy={gy} cell={{ bg: pal.ground, img: null, em: "" }} />);
+    }
+  });
+
   const bcell = (gx, gy) => {
     const b = beyond[sideOf(gx, gy)];
     if (b === "W" && typeof WATER_TILE !== "undefined") {
