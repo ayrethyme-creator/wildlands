@@ -18,8 +18,13 @@
   const WALKABLE = ".gGp*" + (typeof MAP_MARKS !== "undefined" ? MAP_MARKS : "");
   const DOORS = "nsec";
   const standable = (ch) => ch !== undefined && (WALKABLE.indexOf(ch) >= 0 || DOORS.indexOf(ch) >= 0);
-  const report = { applied: [], refused: [], problems: [], signsRestored: 0, solvedRekeyed: 0, landmarks: 0, finds: 0 };
+  const report = { applied: [], refused: [], problems: [], signsRestored: 0, solvedRekeyed: 0, landmarks: 0, finds: 0, crossSeams: 0 };
   const findIds = new Set();
+  // Every rebuilt map's data, whichever region it is in: a seam can join two
+  // regions (Marula Town's north gate onto the Reedwater Fen), and both sides
+  // of it have to be checked against each other.
+  const ALL_REBUILT = {};
+  REBUILT_REGIONS.forEach((r) => Object.entries(r.maps).forEach(([k, d]) => { ALL_REBUILT[k] = d; }));
 
   REBUILT_REGIONS.forEach((region) => {
     const P = [];
@@ -85,8 +90,8 @@
       // the full walk rule when you cross one, and can only afford to because
       // this holds.
       Object.entries(d.links).forEach(([dir, link]) => {
-        const nd = region.maps[link.map];
-        if (!nd) { P.push(`${k}: ${dir} link to ${link.map}, outside this region`); return; }
+        const nd = ALL_REBUILT[link.map];
+        if (!nd) { P.push(`${k}: ${dir} link to ${link.map}, which no region rebuilds`); return; }
         const back = { n: "s", s: "n", e: "w", w: "e" }[dir];
         if (!nd.links[back] || nd.links[back].map !== k) P.push(`${k}: ${dir} to ${link.map}, but not back`);
         if (dir === "n" || dir === "s") {
@@ -179,6 +184,32 @@
     report.applied.push(region.name);
   });
 
+  /* A SEAM INTO A REGION THAT WAS REFUSED. Checked last, once every region
+     has been applied or refused. Leaving the link would walk you off the edge
+     onto an old map's coordinates; dropping it silently would leave an open
+     edge that goes nowhere - and on the main road that is the end of the game.
+     So the link goes, and the door that was there before the rebuild comes
+     back (`fallback`, from design/tools/xseams.py). */
+  const appliedMaps = new Set();
+  REBUILT_REGIONS.forEach((r) => { if (report.applied.includes(r.name)) Object.keys(r.maps).forEach((k) => appliedMaps.add(k)); });
+  appliedMaps.forEach((k) => {
+    Object.entries(MAP_LINKS[k] || {}).forEach(([dir, link]) => {
+      if (appliedMaps.has(link.map)) {
+        // counted from the south side only, so each cross-region seam once
+        if (dir === "n" && !REBUILT_REGIONS.some((r) => r.maps[k] && r.maps[link.map])) report.crossSeams++;
+        return;
+      }
+      delete MAP_LINKS[k][dir];
+      const fb = link.fallback;
+      if (fb) {
+        const m = MAPS[k], [fx, fy] = fb.tile.split(",").map(Number);
+        const row = [...m.rows[fy]]; row[fx] = fb.ch; m.rows[fy] = row.join("");
+        m.exits = { ...m.exits, [fb.tile]: { map: fb.map, x: fb.x, y: fb.y } };
+      }
+      report.problems.push(`${k}: ${dir} seam to ${link.map} dropped - that region was refused${fb ? "; the old door is back" : ""}`);
+    });
+  });
+
   /* THE BEELOUD PAYOFF, RE-AIMED. Once Thabo's hives are on steel, five things
      in his story are meant to say something new - "Rebuilt on steel", Thabo
      shaking your hand. That after-text is keyed by where each one stood, and
@@ -207,7 +238,7 @@
     + (report.refused.length ? ` | REFUSED: ${report.refused.join(", ")}` : "")
     + ` | signs given back a tile: ${report.signsRestored}`
     + ` | Beeloud after-texts re-aimed: ${report.solvedRekeyed}`
-    + ` | landmarks: ${report.landmarks} | pouches: ${report.finds}`);
+    + ` | landmarks: ${report.landmarks} | pouches: ${report.finds} | seams between regions: ${report.crossSeams}`);
   report.problems.forEach((p) => console.warn("[part105] " + p));
 }
 

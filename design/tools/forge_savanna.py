@@ -48,10 +48,12 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from mapforge import Grid, check, check_seam, preview, emit_js, entries, _flood, WALK, DOOR  # noqa: E402
+from xseams import XSEAM, xseam_row  # noqa: E402
 
 W, H = 28, 24
 GEN = 2   # second rebuild. A save made before this, standing here, is relocated.
 CHAIN = ["town1", "route1", "seg_m1", "seg_m2", "seg_m3", "seg_m4", "seg_m5", "town2"]
+NEXT_REGION = "route2"   # the wetland (forge_wetland.py) carries on north of town2
 
 # Each seam: where the road crosses it, and how deep the forest is on each side
 # at that line. Both maps stamp the same edge row from this, so they always
@@ -68,16 +70,15 @@ SEAM = {
 
 
 def seam_row(s):
-    row = ["T"] * s["L"] + ["g"] * (W - s["L"] - s["R"]) + ["T"] * s["R"]
-    row[s["road"]] = row[s["road"] + 1] = "."
-    return row
+    return xseam_row(s, W)
 
 
 def edges_of(key):
-    """The seam spec below this map (south) and above it (north), or None."""
+    """The seam spec below this map (south) and above it (north), or None.
+    Marula Town's north edge is the seam into the next region (xseams)."""
     i = CHAIN.index(key)
     s = SEAM[(CHAIN[i - 1], key)] if i > 0 else None
-    n = SEAM[(key, CHAIN[i + 1])] if i < len(CHAIN) - 1 else None
+    n = SEAM[(key, CHAIN[i + 1])] if i < len(CHAIN) - 1 else XSEAM.get((key, NEXT_REGION))
     return s, n
 
 
@@ -87,7 +88,9 @@ def base(key, seed):
     g = Grid(key, W, H, "g", seed)
     rng = g.rng
     s, n = edges_of(key)
-    top = n or dict(L=3, R=3)       # no seam: a closed edge, handled per map
+    # No seam, or a town gate into the next region (whose wall the map draws
+    # itself): the side forest runs as it would along a closed edge.
+    top = dict(L=3, R=3) if (n is None or "fallback" in n) else n
     bot = s or dict(L=3, R=3)
     for side in ("L", "R"):
         a, b = top[side], bot[side]
@@ -482,12 +485,16 @@ def town2():
     rule as before. Zuri waits beside the arena. Hearthside's latched gate is on
     the west road, for Champions only."""
     g = base("town2", 83)
-    g.rect(0, 0, W - 1, 2, "T")                          # the north edge: a town wall of trees
-    g.set(13, 0, "."); g.set(13, 1, "."); g.set(13, 2, ".")
-    g.door(13, 0, "n", "route2", 7, 14)
-    g.set(13, 3, "X"); g.allow_block.add("13,3")
-    g.set(12, 3, "T"); g.set(14, 3, "T")
+    # The north edge: a town wall of trees with one gate in it. Since the
+    # wetland was rebuilt (2026-09-25) the gate is a seam straight onto the
+    # Reedwater Fen rather than a door, so the fen is already in view through
+    # it - but the guard still stands in it until the arena is won.
+    g.rect(0, 0, W - 1, 3, "T")
+    g.rect(11, 0, 14, 2, "g")
+    road(g, [(13, 0), (13, 1)])                        # rows 0-2: the road is 2 deep
     road(g, [(13, 4), (13, 23)])
+    g.set(13, 3, "X"); g.allow_block.add("13,3")
+    g.set(14, 3, "T")
     g.rect(7, 8, 20, 14, ".")                          # the square
     road(g, [(1, 11), (7, 11)])
     g.door(0, 11, "e", "hearthgate", 7, 8, req="champion",
@@ -543,6 +550,9 @@ def main():
     for a, b in zip(CHAIN, CHAIN[1:]):
         links.setdefault(a, {})["n"] = {"map": b, "off": 0}
         links.setdefault(b, {})["s"] = {"map": a, "off": 0}
+    # ...and on into the next region. part105 checks this seam against the
+    # wetland's own data, and if the wetland is refused, puts the old door back.
+    links["town2"]["n"] = {"map": NEXT_REGION, "off": 0, "fallback": XSEAM[("town2", NEXT_REGION)]["fallback"]}
     # Doors in OTHER maps that lead into these ones, re-aimed at the new ground.
     inbound = [
         {"from": "archive", "tile": "7,0", "map": "town1", "x": 26, "y": 12},

@@ -497,10 +497,10 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
  },
  "town2": {
   "rows": [
-   "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
-   "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
-   "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
-   "TTggggggggggTXTggggggggggg^T",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
+   "TTTTTTTTTTTTTXTTTTTTTTTTTTTT",
    "T^gTg*gTggggg..ggggg*gggggTT",
    "TTggggggggg¦g..g¦ggggg^Ω^gTT",
    "TTggggggggggg..ggYggggg^TgTT",
@@ -556,11 +556,6 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
    }
   },
   "exits": {
-   "13,0": {
-    "map": "route2",
-    "x": 7,
-    "y": 14
-   },
    "0,11": {
     "map": "hearthgate",
     "x": 7,
@@ -578,6 +573,17 @@ REBUILT_REGIONS.push({ name: "savanna", maps: {
    "s": {
     "map": "seg_m5",
     "off": 0
+   },
+   "n": {
+    "map": "route2",
+    "off": 0,
+    "fallback": {
+     "tile": "13,0",
+     "ch": "n",
+     "map": "route2",
+     "x": 7,
+     "y": 14
+    }
    }
   },
   "gen": 2

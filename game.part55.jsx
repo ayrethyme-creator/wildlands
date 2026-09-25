@@ -155,18 +155,23 @@ const TILE_SHAPES = {
       ` stroke-linecap="round" opacity=".5"/>`);
   },
   grain: (c, v, base) => {
-    // A standing tuft rather than a field printed on the tile: fewer stalks,
-    // gathered at the base, so it sits on its shadow like the props do.
-    const stalk = tsh(c, -0.36), head = tsh(c, 0.28);
-    const offs = [[-5, -1, 4], [-4, 1, 5], [-6, 0, 3], [-3, 2, 6]][v % 4];
-    return plantWrap(base,
-      offs.map((dx, i) => {
-        const tipX = 16 + dx * 1.5, tipY = 12 + (i % 2) * 2.5;
-        return `<path d="M${16 + dx * 0.4} 28 Q${16 + dx} 20 ${tipX} ${tipY + 4}"` +
-               ` stroke="${stalk}" stroke-width="1.5" fill="none" stroke-linecap="round"/>` +
-               `<path d="M${tipX} ${tipY} q3 4 0 8 q-3 -4 0 -8 Z" fill="${head}"` +
-               ` stroke="${PLANT_OUT}" stroke-width=".6" stroke-linejoin="round"/>`;
-      }).join(""));
+    // The wetland's "tree": a reed bed. It was three pale tufts on a tile,
+    // which is a fine plant but a poor edge - once the rebuilt wetland used
+    // reeds for its borders and its standing clumps (2026-09-25), a map edge
+    // read as a crop you ought to be able to walk through. Now it is a dense
+    // bed: a dark back rank, a lighter front rank, and bulrush heads standing
+    // above it, filling the tile the way a tree does.
+    const back = tsh(c, -0.18), front = tsh(c, 0.22), tip = tsh(c, 0.42), rush = "#6b4a2e";
+    const lean = [[-1, 1, 0, -1, 1, 0, 1], [1, 0, -1, 1, 0, -1, 0], [0, -1, 1, 0, 1, -1, -1], [-1, 0, 1, -1, 0, 1, 0]][v % 4];
+    const blade = (x, top, l, col, w) =>
+      `<path d="M${x} 29 Q${x + l * 1.2} ${(29 + top) / 2} ${x + l * 3} ${top}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`;
+    const backs = [5, 9, 13, 17, 21, 25, 28].map((x, i) => blade(x, 6 + (i * 5) % 7, lean[i], back, 2.4)).join("");
+    const fronts = [3, 8, 12, 16, 20, 24, 27].map((x, i) => blade(x, 11 + (i * 3) % 6, -lean[i], front, 1.8)).join("");
+    const tips = [8, 16, 24].map((x, i) => blade(x + 1, 9 + i * 2, lean[i], tip, .8)).join("");
+    const heads = [[10.6, 5.4], [19.4, 3.6], [25, 7.4]].filter((_, i) => i !== v % 3 || v === 0)
+      .map(([x, y]) => `<path d="M${x} ${y + 9} V${y + 6}" stroke="${back}" stroke-width="1"/>` +
+        `<rect x="${x - 1.3}" y="${y}" width="2.6" height="6.4" rx="1.3" fill="${rush}" stroke="${PLANT_OUT}" stroke-width=".5"/>`).join("");
+    return plantWrap(base, backs + heads + fronts + tips);
   },
   fern: (c, v, base) => {
     // Was a fern: four fronds fanning from a point. Ayr: "the ferns are weird,

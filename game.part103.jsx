@@ -152,10 +152,19 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
   return { bg, img, em: img ? "" : em };
 };
 
+/* Each cell is drawn one pixel wider and taller than a tile, overlapping its
+   neighbours to the right and below. On a phone whose pixel ratio is not a
+   whole number (2.625 is common) a whole-pixel tile still lands on fractions
+   of a device pixel, and between two absolutely placed squares that leaves a
+   hairline of whatever is behind them - here, the dark of the viewport. The
+   map itself hides the same hairlines with a ground-coloured backing (part5);
+   out here the ground changes from map to map, so the cells cover the gaps
+   themselves. Found 2026-09-25 as a grid across the next map's ground - the
+   same grid Ayr caught on the roads. */
 const SurroundCell = ({ gx, gy, cell }) => (
   <div aria-hidden="true" style={{
     position: "absolute", left: `calc(var(--tile) * ${gx})`, top: `calc(var(--tile) * ${gy})`,
-    width: "var(--tile)", height: "var(--tile)", backgroundColor: cell.bg,
+    width: "calc(var(--tile) + 1px)", height: "calc(var(--tile) + 1px)", backgroundColor: cell.bg,
     backgroundImage: cell.img || undefined, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
     display: "flex", alignItems: "center", justifyContent: "center",
     fontSize: "calc(var(--tile) * .62)", lineHeight: 1,
