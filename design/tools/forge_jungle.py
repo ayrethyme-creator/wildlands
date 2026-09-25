@@ -35,7 +35,7 @@ SEAM = {
     ("seg_j2", "seg_j3"): dict(road=11, L=2, R=3),
     ("seg_j3", "town4"): dict(road=13, L=3, R=3),
 }
-setup(Region(CHAIN, SEAM, prev="town3"))
+setup(Region(CHAIN, SEAM, prev="town3", nxt="route4"))   # the desert (forge_desert.py) is north
 
 
 def grove(g, cx, cy, n, spread=2):
@@ -191,8 +191,10 @@ def town4():
     in the north gate: the road on to the Singing Dunes goes through the arena."""
     g = base("town4", 241, rocks=0)
     g.rect(0, 0, W - 1, 2, "T")                # the north wall of palms, one gate
-    g.door(13, 0, "n", "route4", 7, 14)
-    g.set(13, 1, ".")
+    # Since the desert was rebuilt (2026-09-25) the gate is a seam onto the
+    # Singing Dunes, not a door; everything from row 3 down is as it was.
+    g.rect(11, 0, 14, 1, "g")
+    road(g, [(13, 0), (13, 0)])                # rows 0-1: the road, 2 wide
     g.set(13, 2, "X"); g.allow_block.add("13,2")
     creek(g, [(0, 17), (6, 17), (6, 20), (2, 20)])
     road(g, [(13, 3), (13, 23)])

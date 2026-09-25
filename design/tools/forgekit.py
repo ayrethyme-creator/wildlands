@@ -63,6 +63,12 @@ def setup(region):
 
 
 def seam_row(s):
+    """The shared edge row. Usually forest either side of open ground, but a
+    seam can spell its row out (`row`) - the desert meets the sea at Tidewater
+    Cove, and there the edge is water either side of a neck of land."""
+    if "row" in s:
+        assert len(s["row"]) == W, "seam row is %d wide" % len(s["row"])
+        return list(s["row"])
     return xseam_row(s, W)
 
 

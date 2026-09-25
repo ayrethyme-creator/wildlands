@@ -20,6 +20,9 @@ XSEAM = {
     # reeds, the arena's guard standing in it.
     ("town3", "route3"): dict(road=13, L=11, R=13,
                               fallback={"tile": "13,0", "ch": "n", "map": "route3", "x": 7, "y": 14}),
+    # Canopy Town's north gate onto the Singing Dunes.
+    ("town4", "route4"): dict(road=13, L=11, R=13,
+                              fallback={"tile": "13,0", "ch": "n", "map": "route4", "x": 7, "y": 14}),
 }
 
 

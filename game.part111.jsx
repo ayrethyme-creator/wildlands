@@ -301,8 +301,8 @@ REBUILT_REGIONS.push({ name: "jungle", maps: {
  },
  "town4": {
   "rows": [
-   "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
-   "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
    "TTTTTTTTTTTTTXTTTTTTTTTTTTTT",
    "TTTgggggggggg..!gggggTggTTTT",
    "TTTgggggggggg..gggggggggTTTT",
@@ -355,13 +355,7 @@ REBUILT_REGIONS.push({ name: "jungle", maps: {
     "n": 1
    }
   },
-  "exits": {
-   "13,0": {
-    "map": "route4",
-    "x": 7,
-    "y": 14
-   }
-  },
+  "exits": {},
   "beyond": {},
   "land": [
    14,
@@ -371,6 +365,17 @@ REBUILT_REGIONS.push({ name: "jungle", maps: {
    "s": {
     "map": "seg_j3",
     "off": 0
+   },
+   "n": {
+    "map": "route4",
+    "off": 0,
+    "fallback": {
+     "tile": "13,0",
+     "ch": "n",
+     "map": "route4",
+     "x": 7,
+     "y": 14
+    }
    }
   },
   "gen": 4
