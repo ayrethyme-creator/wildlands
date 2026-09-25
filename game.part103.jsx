@@ -149,7 +149,7 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
     || (typeof PERSON_TILE !== "undefined" && PERSON_TILE(em, bg))
     || (typeof PROP_TILE !== "undefined" && PROP_TILE(ch, em, bg))
     || null;
-  return { bg, img, em: img ? "" : em };
+  return { bg, img, em: img ? "" : em, water: ch === "W" };
 };
 
 /* Each cell is drawn one pixel wider and taller than a tile, overlapping its
@@ -161,15 +161,26 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
    out here the ground changes from map to map, so the cells cover the gaps
    themselves. Found 2026-09-25 as a grid across the next map's ground - the
    same grid Ayr caught on the roads. */
-const SurroundCell = ({ gx, gy, cell }) => (
-  <div aria-hidden="true" style={{
+// Water out here moves with the water on the map (part45's glints). gx/gy are
+// already in this map's coordinates, so the pattern runs straight on across
+// the edge.
+const SurroundCell = ({ gx, gy, cell, mapKey }) => {
+  const glint = cell.water && cell.img && typeof waterGlint === "function";
+  return (
+  <div aria-hidden="true" className={glint ? "wl-water" : undefined} style={{
     position: "absolute", left: `calc(var(--tile) * ${gx})`, top: `calc(var(--tile) * ${gy})`,
     width: "calc(var(--tile) + 1px)", height: "calc(var(--tile) + 1px)", backgroundColor: cell.bg,
-    backgroundImage: cell.img || undefined, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+    ...(glint ? {
+      "--wx": gx, "--wy": gy,
+      backgroundImage: `${waterGlint(cell.bg).join(", ")}, ${cell.img}`,
+      backgroundSize: `${WATER_GLINT_SIZE}, 100% 100%`, backgroundRepeat: "repeat, repeat, no-repeat",
+      backgroundPosition: `${WATER_GLINT_POS}, 0 0`, animationDelay: waterDelay(mapKey),
+    } : { backgroundImage: cell.img || undefined, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat" }),
     display: "flex", alignItems: "center", justifyContent: "center",
     fontSize: "calc(var(--tile) * .62)", lineHeight: 1,
   }}>{cell.em}</div>
-);
+  );
+};
 
 const MapSurround = React.memo(function MapSurround({ mapKey }) {
   const m = MAPS[mapKey];
@@ -198,7 +209,7 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
         const k = gx + "," + gy;
         if (taken.has(k)) continue;
         taken.add(k);
-        cells.push(<SurroundCell key={"n" + k} gx={gx} gy={gy} cell={surroundTile(n, link.map, nx, ny, npal)} />);
+        cells.push(<SurroundCell key={"n" + k} mapKey={mapKey} gx={gx} gy={gy} cell={surroundTile(n, link.map, nx, ny, npal)} />);
         // ...and a landmark on the next map is drawn at the size it will be
         // when you get there, not shrunk to a tile until you cross.
         const lm = LANDMARK_AT[link.map + ":" + nx + "," + ny];
@@ -246,14 +257,14 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
       const gx = ex + out[0] * s, gy = ey + out[1] * s, k = gx + "," + gy;
       if (taken.has(k)) break;
       taken.add(k);
-      cells.push(<SurroundCell key={"p" + k} gx={gx} gy={gy} cell={{ bg: pal.ground, img: null, em: "" }} />);
+      cells.push(<SurroundCell key={"p" + k} mapKey={mapKey} gx={gx} gy={gy} cell={{ bg: pal.ground, img: null, em: "" }} />);
     }
   });
 
   const bcell = (gx, gy) => {
     const b = beyond[sideOf(gx, gy)];
     if (b === "W" && typeof WATER_TILE !== "undefined") {
-      return { bg: pal.water, img: WATER_TILE("W", gx, gy, pal.water, null), em: "" };
+      return { bg: pal.water, img: WATER_TILE("W", gx, gy, pal.water, null), em: "", water: true };
     }
     const ch = (typeof tileVariant === "function" && tileVariant(gx + 4096, gy + 4096, 8) === 0) ? "^" : border;
     return { bg: floor, img: (typeof TILE_ART !== "undefined" && TILE_ART(ch, gx, gy, pal, floor)) || null, em: "" };
@@ -265,7 +276,7 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
       if (taken.has(k)) continue;
       const c = bcell(gx, gy);
       if (!c.img) c.em = pal.tree && pal.tree.em;
-      cells.push(<SurroundCell key={"b" + k} gx={gx} gy={gy} cell={c} />);
+      cells.push(<SurroundCell key={"b" + k} mapKey={mapKey} gx={gx} gy={gy} cell={c} />);
     }
   }
   return (

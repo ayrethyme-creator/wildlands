@@ -211,5 +211,41 @@ const WATER_TILE = (ch, x, y, bg, edges) => {
   return waterBg(bg, grassVariant(x, y), edges);
 };
 
+/* ---- moving water, as one surface ----
+   Ayr, 2026-09-25, when the per-tile shimmer was taken out: "Yes I do want
+   the water to move somehow."
+
+   What went wrong before was that every tile moved on its own: its own band,
+   its own delay, so neighbours never matched and a river read as squares.
+   The movement here belongs to the WORLD, not the tile. Two soft layers of
+   glints are laid out on a grid of blocks five and seven tiles wide, and each
+   water tile shows only the piece of that pattern that falls on it - its
+   background is positioned by its own map coordinates (--wx, --wy). Every
+   tile runs the same animation from the same moment, so the pattern drifts
+   across the whole river at once and a glint crosses from one tile into the
+   next without a join.
+
+   The block sizes divide the map height (24) evenly, so walking across a
+   seam lands on the same pattern the next map was already showing. */
+const WATER_GLINT_S = 16;   // seconds for one full drift of both layers
+const waterGlint = (bg) => [
+  `radial-gradient(ellipse 34% 16% at 50% 50%, ${sh(bg, 0.42)}b3, ${sh(bg, 0.42)}00 74%)`,
+  `radial-gradient(ellipse 26% 11% at 50% 50%, ${sh(bg, 0.36)}8c, ${sh(bg, 0.36)}00 74%)`,
+];
+const WATER_GLINT_SIZE = "calc(var(--tile) * 5) calc(var(--tile) * 3), calc(var(--tile) * 7) calc(var(--tile) * 4)";
+const WATER_GLINT_POS = "calc(var(--wx) * var(--tile) * -1) calc(var(--wy) * var(--tile) * -1), calc(var(--wx) * var(--tile) * -1) calc(var(--wy) * var(--tile) * -1)";
+// The whole visible world starts its water at one moment, taken when you
+// arrive on a map. Every tile and the view past the edge use it, so they are
+// all at the same point in the drift - and it is the same clock map to map,
+// so crossing a seam does not jump the pattern.
+let WATER_PHASE = { map: null, d: 0 };
+const waterDelay = (mapKey) => {
+  if (WATER_PHASE.map !== mapKey) {
+    const now = typeof performance !== "undefined" ? performance.now() / 1000 : 0;
+    WATER_PHASE = { map: mapKey, d: now % WATER_GLINT_S };
+  }
+  return `-${WATER_PHASE.d.toFixed(3)}s`;
+};
+
 console.log("[part45] grass and water drawn as tiles |", GRASS_VARIANTS,
   "variants | torn edges on terrain joins");
