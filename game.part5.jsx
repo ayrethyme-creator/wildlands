@@ -339,6 +339,39 @@
         transform-origin: top center;
       }
 
+      /* Rain and snow on the CAMERA (part88 weatherFall). --fall is the
+         height of the view plus a margin, so every drop crosses the whole
+         screen; --dx is its slant. Transform only, so none of it repaints. */
+      .wx-rain, .wx-snow, .wx-splash {
+        position: absolute; pointer-events: none; will-change: transform, opacity;
+        animation-iteration-count: infinite; animation-timing-function: linear;
+      }
+      @keyframes wxRain {
+        0%   { transform: translate3d(0, 0, 0) rotate(var(--rot)); }
+        100% { transform: translate3d(var(--dx), var(--fall), 0) rotate(var(--rot)); }
+      }
+      .wx-rain { animation-name: wxRain; transform-origin: 50% 100%; }
+      /* Snow sways as it falls - that swing, not the colour, is what makes a
+         white dot a snowflake. */
+      @keyframes wxSnow {
+        0%   { transform: translate3d(0, 0, 0); }
+        25%  { transform: translate3d(calc(var(--dx) * .25 + var(--sw)), calc(var(--fall) * .25), 0); }
+        50%  { transform: translate3d(calc(var(--dx) * .5 - var(--sw) * .6), calc(var(--fall) * .5), 0); }
+        75%  { transform: translate3d(calc(var(--dx) * .75 + var(--sw) * .8), calc(var(--fall) * .75), 0); }
+        100% { transform: translate3d(var(--dx), var(--fall), 0); }
+      }
+      .wx-snow { animation-name: wxSnow; }
+      /* A drop landing: a ring opens on the ground and is gone. Most of the
+         cycle is empty, so the rings come and go rather than sitting there. */
+      @keyframes wxSplash {
+        0%   { transform: scale(.2); opacity: 0; }
+        4%   { opacity: .85; }
+        26%  { transform: scale(1); opacity: 0; }
+        100% { transform: scale(1); opacity: 0; }
+      }
+      .wx-splash { animation-name: wxSplash; animation-timing-function: ease-out;
+        border: 1px solid rgba(226,240,255,.8); border-radius: 50%; }
+
       /* The follower's trot (part91). Not the ranger's stride, which is a
          person's weight shifting - this is four legs and it is a small hop with
          a bit of tilt in it. Deliberately springier than anything else on the
@@ -1847,6 +1880,23 @@
 
             Mist and heat are the same: not specks, but what the whole view
             looks like through, so they belong to the view too. */}
+        {/* Rain and snow fall through the VIEW, as weather does in Fire Red
+            (part88 weatherFall). Fixed to the screen, not the map, so a drop
+            always has the whole height of it to fall through. */}
+        {typeof weatherFall === "function" && !m.dark && (() => {
+          const fall = weatherFall(m.zone, S.runSeed);
+          if (!fall) return null;
+          return (
+            <div key={`fall:${S.map}:${fall.key}`} aria-hidden="true" style={{
+              position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden",
+              "--fall": `calc(var(--tile) * ${CAM_H + 2})`,
+              background: fall.dim ? `rgba(32,48,72,${fall.dim})` : undefined,
+            }}>
+              {fall.splashes.map((s) => <div key={s.key} className={s.cls} style={s.style} />)}
+              {fall.drops.map((s) => <div key={s.key} className={s.cls} style={s.style} />)}
+            </div>
+          );
+        })()}
         {wxNow && (wxNow.key === "mist" || wxNow.key === "haze") && !m.dark && (
           <div aria-hidden="true" style={{
             position: "absolute", inset: 0, pointerEvents: "none",

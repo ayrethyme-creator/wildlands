@@ -224,10 +224,103 @@ const WX_SPECKS = {
 
 const weatherSpecks = (zone, seed) => {
   const k = weatherKey(zone, seed);
-  const specs = k && WX_SPECKS[k];
+  // Rain and snow are no longer specks on the map: see weatherFall below.
+  const specs = k && WX_SPECKS[k] && WX_SPECKS[k].filter((s) => s.kind !== "rain" && s.kind !== "snow");
   if (!specs || !specs.length || typeof ambientSpecks !== "function") return [];
   const out = [];
   specs.forEach((spec, si) => out.push(...ambientSpecks(spec, 6101 + si * 313 + zone.length * 11)));
+  return out;
+};
+
+/* RAIN AND SNOW THAT FALL. Ayr, 2026-09-25: "The rain and snow needs to be
+   worked on. They just look like floating blue or white lines."
+
+   They were floating. Each drop was a speck on the map told to fall "120% of
+   its own height" - and a raindrop is nine pixels tall, so it sank about
+   eleven pixels over five to fourteen seconds. A short blue line, hanging.
+
+   Now they belong to the SCREEN, the way weather does in Fire Red: a layer on
+   the camera that the drops fall straight through, top to bottom, fast for
+   rain and slow and swaying for snow. Each drop has a depth - near ones are
+   longer, brighter and quicker, far ones fainter and slower - which is most of
+   what makes a sheet of rain read as rain rather than a pattern. Rain also
+   lands: small rings open and vanish on the ground. And the sky dims a little
+   under rain, more under a storm.
+
+   Everything moves by transform only, so the graphics chip carries it and a
+   downpour costs the walk nothing (see the grass sway, part5, for what
+   happens otherwise). --fall is the height of the camera plus a margin, set
+   on the layer in part5. */
+const WX_FALL = {
+  rain:     { kind: "rain", n: 46, slant: 0.16, dur: [0.52, 0.8],  splash: 14, dim: 0.12 },
+  storm:    { kind: "rain", n: 78, slant: 0.32, dur: [0.36, 0.52], splash: 24, dim: 0.22 },
+  snow:     { kind: "snow", n: 34, slant: 0.1,  dur: [5.5, 10] },
+  blizzard: { kind: "snow", n: 72, slant: 0.75, dur: [1.8, 3.2], dim: 0.06 },
+};
+
+const fallSpecks = (f, salt) => {
+  const R = (i, s) => ambSeed(i, salt + s);
+  const deg = Math.atan(f.slant) * 180 / Math.PI;
+  const drops = [];
+  for (let i = 0; i < f.n; i++) {
+    const depth = R(i, 1);                       // 0 far .. 1 near
+    const dur = f.dur[0] + (f.dur[1] - f.dur[0]) * (1 - depth) * (0.8 + 0.4 * R(i, 5));
+    // Start far enough right that the slant still carries them across the
+    // whole view, and above the top so none pops into being mid-screen.
+    const left = -4 + R(i, 2) * (104 + f.slant * 100);
+    const base = {
+      left: left.toFixed(2) + "%",
+      animationDuration: dur.toFixed(2) + "s",
+      animationDelay: (-R(i, 3) * dur).toFixed(2) + "s",
+      "--dx": `calc(var(--fall) * ${(-f.slant).toFixed(3)})`,
+    };
+    if (f.kind === "rain") {
+      const len = 0.38 + 0.4 * depth;           // in tiles
+      const a = (0.4 + 0.5 * depth).toFixed(2);
+      drops.push({ key: "r" + i, cls: "wx-rain", style: { ...base,
+        top: `calc(var(--tile) * -${(len + 0.4).toFixed(2)})`,
+        width: depth > 0.6 ? "1.6px" : "1.1px", height: `calc(var(--tile) * ${len.toFixed(2)})`,
+        background: `linear-gradient(180deg, rgba(214,232,255,0), rgba(222,238,255,${a}))`,
+        borderRadius: "1px", "--rot": deg.toFixed(1) + "deg" } });
+    } else {
+      const size = 2.2 + 4.2 * depth;           // px
+      const a = (0.55 + 0.4 * depth).toFixed(2);
+      drops.push({ key: "s" + i, cls: "wx-snow", style: { ...base,
+        top: `-${(size + 4).toFixed(1)}px`, width: size.toFixed(1) + "px", height: size.toFixed(1) + "px",
+        // A faint blue-grey rim, or a white flake over a white snowfield -
+        // the alpine maps - is not there at all.
+        background: `radial-gradient(circle, rgba(255,255,255,${a}) 36%, rgba(236,244,255,${a}) 50%, rgba(110,132,165,.45) 62%, rgba(110,132,165,0) 76%)`,
+        borderRadius: "50%", "--sw": (4 + 10 * R(i, 4)).toFixed(1) + "px" } });
+    }
+  }
+  const splashes = [];
+  for (let i = 0; i < (f.splash || 0); i++) {
+    const dur = 0.8 + 0.9 * R(i, 11);
+    splashes.push({ key: "p" + i, cls: "wx-splash", style: {
+      left: (3 + R(i, 12) * 92).toFixed(2) + "%", top: (12 + R(i, 13) * 84).toFixed(2) + "%",
+      width: "calc(var(--tile) * .34)", height: "calc(var(--tile) * .13)",
+      animationDuration: dur.toFixed(2) + "s", animationDelay: (-R(i, 14) * dur).toFixed(2) + "s" } });
+  }
+  return { drops, splashes, dim: f.dim || 0 };
+};
+
+// What is falling on this screen, if anything: the weather first, and failing
+// that the snow some zones always have (part67's alpine, tundra and the rest,
+// whose snow used to hang in the air exactly like the rain did).
+// Built once per zone and kind: part5 asks on every step, and the answer only
+// changes when the weather or the zone does.
+const WX_FALL_CACHE = {};
+const weatherFall = (zone, seed) => {
+  const k = weatherKey(zone, seed);
+  const ck = zone + "|" + (k || "");
+  if (ck in WX_FALL_CACHE) return WX_FALL_CACHE[ck];
+  let out = null;
+  if (k && WX_FALL[k]) out = { key: k, ...fallSpecks(WX_FALL[k], 7301 + zone.length * 13) };
+  else {
+    const snow = ((typeof AMBIENT !== "undefined" && AMBIENT[zone]) || []).find((s) => s.kind === "snow");
+    if (snow) out = { key: "ambsnow", ...fallSpecks({ ...WX_FALL.snow, n: Math.round(snow.n * 1.4) }, 7411 + zone.length * 13) };
+  }
+  WX_FALL_CACHE[ck] = out;
   return out;
 };
 

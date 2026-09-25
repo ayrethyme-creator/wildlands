@@ -194,6 +194,9 @@ const ambientFor = (zone, phase) => {
   const night = phase === "night";
   const out = [];
   specs.forEach((spec, si) => {
+    // Snow falls on the camera now, with the weather's rain (part88
+    // weatherFall) - as a speck on the map it only ever hung in the air.
+    if (spec.kind === "snow") return;
     if (spec.when === "night" && !night) return;
     if (spec.when === "day" && night) return;
     out.push(...ambientSpecks(spec, si * 101 + zone.length * 7));
