@@ -32,6 +32,9 @@ XSEAM = {
     # Frost Town's north gate onto the Cinder Flats.
     ("town7", "route7"): dict(road=13, L=11, R=13,
                               fallback={"tile": "13,0", "ch": "n", "map": "route7", "x": 7, "y": 14}),
+    # Cinder Town's north gate onto Gloamwood.
+    ("town8", "route8"): dict(road=13, L=11, R=13,
+                              fallback={"tile": "13,0", "ch": "n", "map": "route8", "x": 7, "y": 14}),
 }
 
 

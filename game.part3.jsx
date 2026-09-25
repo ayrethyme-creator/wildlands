@@ -143,7 +143,10 @@ const PALS = {
   highveld: { ground: "#b2a48d", grass: "#8d9765", grass2: "#a2ab7b", tree: { bg: "#6d6d63", em: "🪨" }, mount: { bg: "#7a7770", em: "⛰️" }, water: "#4a7ba8", flower: "🌾" },
   alpine: { ground: "#e2e7ec", grass: "#c6d1da", grass2: "#d5dee5", tree: { bg: "#546e62", em: "🌲" }, mount: { bg: "#dae1e8", em: "🏔️" }, water: "#82a9c4", flower: "❄️" },
   volcanic: { ground: "#87756a", grass: "#9c6049", grass2: "#a97155", tree: { bg: "#4e3c36", em: "🌋" }, mount: { bg: "#5c443c", em: "🌋" }, water: "#4a7ba8", flower: "🔥" },
-  grove: { ground: "#867a94", grass: "#5f5077", grass2: "#6f608a", tree: { bg: "#3e3357", em: "🌳" }, mount: { bg: "#4c4160", em: "⛰️" }, water: "#535f90", flower: "🍄" },
+  // The tree was #3e3357, a near-black violet, and once the rebuilt grove used
+  // trees for whole forests (2026-09-25) every one read as a dark rock. A deep
+  // moss green still belongs to a dusk forest and stands out from the violet.
+  grove: { ground: "#867a94", grass: "#5f5077", grass2: "#6f608a", tree: { bg: "#3f6a4e", em: "🌳" }, mount: { bg: "#4c4160", em: "⛰️" }, water: "#535f90", flower: "🍄" },
   summit: { ground: "#b6bcc6", grass: "#9ba3b0", grass2: "#a7aeba", tree: { bg: "#8a919e", em: "🏔️" }, mount: { bg: "#8a919e", em: "🏔️" }, water: "#82a9c4", flower: "✨" },
   cavezone: { ground: "#695f4f", grass: "#5c5446", grass2: "#6a6153", tree: { bg: "#4a4439", em: "🪨" }, mount: { bg: "#4a4439", em: "🪨" }, water: "#365d68", flower: "💎" },
 };

@@ -408,8 +408,8 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
  },
  "town8": {
   "rows": [
-   "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
-   "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
    "TTTTTTTTTTTTTXTTTTTTTTTTTTTT",
    "TTTgggggggggg..!gggggggggTTT",
    "TTTgggggggggg..ggggggggggTTT",
@@ -463,11 +463,6 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
    }
   },
   "exits": {
-   "13,0": {
-    "map": "route8",
-    "x": 7,
-    "y": 14
-   },
    "27,11": {
     "map": "shore",
     "x": 1,
@@ -483,6 +478,17 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
    "s": {
     "map": "seg_v5",
     "off": 0
+   },
+   "n": {
+    "map": "route8",
+    "off": 0,
+    "fallback": {
+     "tile": "13,0",
+     "ch": "n",
+     "map": "route8",
+     "x": 7,
+     "y": 14
+    }
    }
   },
   "gen": 8
