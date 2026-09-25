@@ -38,7 +38,7 @@ SEAM = {
     ("seg_w3", "seg_w4"): dict(road=13, L=2, R=3),
     ("seg_w4", "town3"): dict(road=13, L=3, R=2),
 }
-setup(Region(CHAIN, SEAM, prev="town2"))
+setup(Region(CHAIN, SEAM, prev="town2", nxt="route3"))   # the jungle (forge_jungle.py) is north
 
 
 # --------------------------------------------------------------- route2 ---
@@ -193,8 +193,10 @@ def town3():
     g = base("town3", 163, rocks=0)
     g.beyond["e"] = "W"; g.beyond["w"] = "W"   # the delta: water either side
     g.rect(0, 0, W - 1, 2, "T")                # the north wall of reeds, one gate
-    g.door(13, 0, "n", "route3", 7, 14)
-    g.set(13, 1, ".")
+    # Since the jungle was rebuilt (2026-09-25) the gate is a seam onto Canopy
+    # Deep, not a door; everything from row 3 down is exactly as it was.
+    g.rect(11, 0, 14, 1, "g")
+    road(g, [(13, 0), (13, 0)])                # rows 0-1: the road, 2 wide
     g.set(13, 2, "X"); g.allow_block.add("13,2")
     road(g, [(13, 3), (13, 23)])
     g.rect(0, 11, W - 1, 12, "W")              # the channel through town

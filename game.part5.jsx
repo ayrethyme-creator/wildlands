@@ -369,7 +369,9 @@
         26%  { transform: scale(1); opacity: 0; }
         100% { transform: scale(1); opacity: 0; }
       }
-      .wx-splash { animation-name: wxSplash; animation-timing-function: ease-out;
+      /* opacity 0 at rest: with motion reduced there is no animation, and a
+         ring sitting still on the ground is a mark, not a splash. */
+      .wx-splash { animation-name: wxSplash; animation-timing-function: ease-out; opacity: 0;
         border: 1px solid rgba(226,240,255,.8); border-radius: 50%; }
 
       /* The follower's trot (part91). Not the ranger's stride, which is a

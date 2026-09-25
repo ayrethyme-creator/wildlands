@@ -16,6 +16,10 @@ XSEAM = {
     # rule has always been that the road north goes through the arena.
     ("town2", "route2"): dict(road=13, L=11, R=13,
                               fallback={"tile": "13,0", "ch": "n", "map": "route2", "x": 7, "y": 14}),
+    # Delta Town's north gate onto Canopy Deep. Same shape: a gate in the
+    # reeds, the arena's guard standing in it.
+    ("town3", "route3"): dict(road=13, L=11, R=13,
+                              fallback={"tile": "13,0", "ch": "n", "map": "route3", "x": 7, "y": 14}),
 }
 
 

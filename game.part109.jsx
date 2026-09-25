@@ -349,8 +349,8 @@ REBUILT_REGIONS.push({ name: "wetland", maps: {
  },
  "town3": {
   "rows": [
-   "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
-   "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
    "TTTTTTTTTTTTTXTTTTTTTTTTTTTT",
    "TTTgggggggggg..!ggggggggTTTT",
    "TTTgHgggggg!g..ggggggggggTTT",
@@ -404,13 +404,7 @@ REBUILT_REGIONS.push({ name: "wetland", maps: {
     "n": 1
    }
   },
-  "exits": {
-   "13,0": {
-    "map": "route3",
-    "x": 7,
-    "y": 14
-   }
-  },
+  "exits": {},
   "beyond": {
    "e": "W",
    "w": "W"
@@ -423,6 +417,17 @@ REBUILT_REGIONS.push({ name: "wetland", maps: {
    "s": {
     "map": "seg_w4",
     "off": 0
+   },
+   "n": {
+    "map": "route3",
+    "off": 0,
+    "fallback": {
+     "tile": "13,0",
+     "ch": "n",
+     "map": "route3",
+     "x": 7,
+     "y": 14
+    }
    }
   },
   "gen": 3

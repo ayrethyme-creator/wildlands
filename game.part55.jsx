@@ -99,20 +99,32 @@ const TILE_SHAPES = {
       `<path d="M${16 + lean} 7 L${23 + lean} 22 L${9 + lean} 22 Z" fill="${light}" opacity=".45"/>`);
   },
   palm: (c, v, base) => {
-    // Fronds are filled wedges, not strokes. The previous version built them
-    // from a path that collapsed to a hairline and left a trunk with a dot.
-    const dark = tsh(c, -0.34), trunk = tsh(c, -0.5), light = tsh(c, 0.3);
+    // Redrawn 2026-09-25 with the jungle rebuild. The palm was straight wedges
+    // in the jungle's tree colour, which is nearly black, on a trunk darker
+    // still - and once the rebuilt jungle used palms for its groves and edges,
+    // every one read as a dead black silhouette. A palm is a lit, drooping
+    // crown of long curved fronds on a pale ringed trunk: three ranks of
+    // green, back to front, the front one catching the light.
+    // Fixed greens rather than the zone colour lightened: lightening a
+    // near-black green only greys it, and the first try came out ash-white.
+    const back = "#2c6634", mid = "#3d8a43", front = "#5aad52";
+    const trunk = "#8a6a45", ring = "#6b5238";
     const lean = [0, 2, -2, 1][v] || 0;
-    const cx = 16 + lean, cy = 12;
+    const cx = 16 + lean, cy = 11;
+    // A frond: out and down along a curve, a leaf-shaped wedge, with a rib.
     const frond = (dx, dy, fill) =>
-      `<path d="M${cx} ${cy} L${cx + dx} ${cy + dy} L${cx + dx * 0.72} ${cy + dy + 4.5} Z" fill="${fill}"/>`;
+      `<path d="M${cx} ${cy} Q${cx + dx * 0.5} ${cy + dy - 4} ${cx + dx} ${cy + dy} ` +
+      `Q${cx + dx * 0.55} ${cy + dy * 0.5 + 1.6} ${cx} ${cy + 2} Z" fill="${fill}" stroke="${PLANT_OUT}" stroke-width=".45" stroke-linejoin="round"/>` +
+      `<path d="M${cx} ${cy + 1} Q${cx + dx * 0.5} ${cy + dy - 2.4} ${cx + dx * 0.92} ${cy + dy - 0.2}" stroke="#1f4a24" stroke-width=".5" fill="none" opacity=".6"/>`;
     return svgWrap(
       `<rect width="32" height="32" fill="${base}"/>` +
-      `<path d="M${cx - 1.6} 31 q-1.5 -11 ${0.6 - lean * 0.3} -19 h3 q-1.6 8 0.4 19 Z" fill="${trunk}"/>` +
-      frond(-15, 1, dark) + frond(15, 1, dark) +
-      frond(-11, -7, c) + frond(11, -7, c) +
-      frond(-4, -11, light) + frond(5, -11, light) +
-      `<circle cx="${cx}" cy="${cy}" r="2.6" fill="${dark}"/>`);
+      `<ellipse cx="${cx}" cy="29.6" rx="6" ry="1.6" fill="#000" opacity=".2"/>` +
+      `<path d="M${cx - 1.8} 30 q-1.6 -10 ${0.8 - lean * 0.3} -18 h3 q-1.6 8 0.6 18 Z" fill="${trunk}" stroke="${PLANT_OUT}" stroke-width=".5"/>` +
+      [15, 20, 25].map((y) => `<path d="M${cx - 1.8 + lean * 0.1} ${y} h3.4" stroke="${ring}" stroke-width=".7"/>`).join("") +
+      frond(-15, 8, back) + frond(15, 8, back) +
+      frond(-15, 1, mid) + frond(15, 1, mid) +
+      frond(-10, -7, front) + frond(10, -7, front) + frond(1, -10, front) +
+      `<g fill="#6b4a2e"><circle cx="${cx - 1.4}" cy="${cy + 2.2}" r="1.3"/><circle cx="${cx + 1.4}" cy="${cy + 2.4}" r="1.3"/></g>`);
   },
   cactus: (c, v, base) => {
     /* Redrawn 2026-09-04 on Ayr's note that the cacti needed it.
