@@ -42,7 +42,7 @@ SEAM = {
     ("seg_d3", "seg_d4"): dict(road=14, L=3, R=2),
     ("seg_d4", "town5"): dict(road=13, L=3, R=3),
 }
-setup(Region(CHAIN, SEAM, prev="town4"))
+setup(Region(CHAIN, SEAM, prev="town4", nxt="route5"))   # the highveld (forge_highveld.py) is north
 
 
 def dunes(g, cx, cy, n, spread=2):
@@ -265,8 +265,10 @@ def town5():
     on to the Highveld Steps goes through the arena."""
     g = base("town5", 361, rocks=0.05)
     g.rect(0, 0, W - 1, 2, "T")                # the north wall of cactus, one gate
-    g.door(13, 0, "n", "route5", 7, 14)
-    g.set(13, 1, ".")
+    # Since the highveld was rebuilt (2026-09-25) the gate is a seam onto the
+    # Highveld Steps, not a door; everything from row 3 down is as it was.
+    g.rect(11, 0, 14, 1, "g")
+    road(g, [(13, 0), (13, 0)])                # rows 0-1: the road, 2 wide
     g.set(13, 2, "X"); g.allow_block.add("13,2")
     road(g, [(13, 3), (13, 23)])
     g.rect(7, 7, 20, 13, ".")                  # the square, round the well
