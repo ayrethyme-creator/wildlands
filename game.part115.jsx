@@ -357,8 +357,8 @@ REBUILT_REGIONS.push({ name: "highveld", maps: {
  },
  "town6": {
   "rows": [
-   "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
-   "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
    "TTTTTTTTTTTTTXTTTTTTTTTTTTTT",
    "TTTgggggggggg..!ggggggggTTTT",
    "TTgTgTggggggg..gggggggggg^TT",
@@ -412,13 +412,7 @@ REBUILT_REGIONS.push({ name: "highveld", maps: {
     "n": 1
    }
   },
-  "exits": {
-   "13,0": {
-    "map": "route6",
-    "x": 7,
-    "y": 14
-   }
-  },
+  "exits": {},
   "beyond": {},
   "land": [
    14,
@@ -428,6 +422,17 @@ REBUILT_REGIONS.push({ name: "highveld", maps: {
    "s": {
     "map": "seg_s4",
     "off": 0
+   },
+   "n": {
+    "map": "route6",
+    "off": 0,
+    "fallback": {
+     "tile": "13,0",
+     "ch": "n",
+     "map": "route6",
+     "x": 7,
+     "y": 14
+    }
    }
   },
   "gen": 6

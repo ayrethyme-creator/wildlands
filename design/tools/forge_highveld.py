@@ -37,7 +37,7 @@ SEAM = {
     ("seg_s3", "seg_s4"): dict(road=13, L=3, R=3),
     ("seg_s4", "town6"): dict(road=13, L=3, R=3),
 }
-setup(Region(CHAIN, SEAM, prev="town5"))
+setup(Region(CHAIN, SEAM, prev="town5", nxt="route6"))   # the alpine (forge_alpine.py) is north
 
 
 def outcrop(g, cx, cy, n, spread=2):
@@ -203,8 +203,10 @@ def town6():
     the arena."""
     g = base("town6", 451, rocks=0.1)
     g.rect(0, 0, W - 1, 2, "T")                # the north wall of rock, one gate
-    g.door(13, 0, "n", "route6", 7, 14)
-    g.set(13, 1, ".")
+    # Since the alpine was rebuilt (2026-09-25) the gate is a seam onto
+    # Frostmere Pass, not a door; everything from row 3 down is as it was.
+    g.rect(11, 0, 14, 1, "g")
+    road(g, [(13, 0), (13, 0)])                # rows 0-1: the road, 2 wide
     g.set(13, 2, "X"); g.allow_block.add("13,2")
     road(g, [(13, 3), (13, 23)])
     g.rect(7, 7, 20, 13, ".")                  # the square
