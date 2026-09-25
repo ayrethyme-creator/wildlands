@@ -1258,6 +1258,15 @@
           <MapSurround mapKey={S.map} />
           <WaterGlint mapKey={S.map} tile={tilePx} />
           {m.rows.map((row, y) => row.split("").map((ch, x) => {
+            /* ONLY THE TILES NEAR THE CAMERA ARE DRAWN. Ayr, 2026-09-25:
+               "Running is choppy." A rebuilt map is 28x24 - 672 tiles, three
+               and a half times the old maps - and every one of them was worked
+               out again and handed back to the browser on every step, though
+               the camera only ever shows 15x13. Past a margin of three tiles
+               (more than the camera slides in one step, or across a seam) a
+               tile is an empty cell showing the world's ground colour beneath,
+               and is drawn in full the moment you come near it. */
+            if (Math.abs(x - S.x) > CAM_CX + 3 || Math.abs(y - S.y) > CAM_CY + 3) return <div key={x + "," + y} />;
             let ch2 = ch;
             // An animal is standing here (part87). The TILE is still the ground
             // it stands on - grass draws as grass, edges and all - and the animal
@@ -1391,7 +1400,11 @@
             if (!hidden) {
               const jitter = ((x * 7 + y * 13) % 20) / 10;
               if (ch2 === "W") { /* still: see WaterGlint (part103) */ }
-              else if (grassBgImg) { motion = "wl-sway"; delay = jitter; }
+              // Only the long grass sways. The sway is a repaint, and on the
+              // rebuilt grassland maps short grass is most of the ground - five
+              // hundred tiles repainting every frame for a shift of 0.7px nobody
+              // could see, which is what made running choppy (2026-09-25).
+              else if (grassBgImg && ch2 === "G") { motion = "wl-sway"; delay = jitter; }
               else if (personBgImg) {
                 motion = ["wl-idle", "wl-idle-b", "wl-idle-c"][(x * 5 + y * 11) % 3];
                 delay = jitter * 0.6;
