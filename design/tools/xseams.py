@@ -29,6 +29,9 @@ XSEAM = {
     # Crag Town's north gate onto Frostmere Pass.
     ("town6", "route6"): dict(road=13, L=11, R=13,
                               fallback={"tile": "13,0", "ch": "n", "map": "route6", "x": 7, "y": 14}),
+    # Frost Town's north gate onto the Cinder Flats.
+    ("town7", "route7"): dict(road=13, L=11, R=13,
+                              fallback={"tile": "13,0", "ch": "n", "map": "route7", "x": 7, "y": 14}),
 }
 
 

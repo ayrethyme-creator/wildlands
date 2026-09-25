@@ -298,8 +298,8 @@ REBUILT_REGIONS.push({ name: "alpine", maps: {
  },
  "town7": {
   "rows": [
-   "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
-   "TTTTTTTTTTTTT.TTTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
+   "TTTTTTTTTTTgg..TTTTTTTTTTTTT",
    "TTTTTTTTTTTTTXTTTTTTTTTTTTTT",
    "TTggggggggggg..!gggggggggTTT",
    "TTTgTgggggggg..ggggggggTgTTT",
@@ -351,13 +351,7 @@ REBUILT_REGIONS.push({ name: "alpine", maps: {
     "n": 1
    }
   },
-  "exits": {
-   "13,0": {
-    "map": "route7",
-    "x": 7,
-    "y": 14
-   }
-  },
+  "exits": {},
   "beyond": {},
   "land": [
    14,
@@ -367,6 +361,17 @@ REBUILT_REGIONS.push({ name: "alpine", maps: {
    "s": {
     "map": "seg_a3",
     "off": 0
+   },
+   "n": {
+    "map": "route7",
+    "off": 0,
+    "fallback": {
+     "tile": "13,0",
+     "ch": "n",
+     "map": "route7",
+     "x": 7,
+     "y": 14
+    }
    }
   },
   "gen": 7
