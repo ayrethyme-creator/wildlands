@@ -29,8 +29,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from forgekit import (Region, setup, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, run, W, H)
 
-GEN = 19  # was 9; 19 when 2026-09-26, every story moved to its animal's own country (part65). A save made before this, standing here, is relocated.
-CHAIN = ["route8", "seg_g1", "seg_g2", "seg_g3", "seg_g4", "town9", "route9"]
+GEN = 20  # was 9; 19 when every story moved to its animal's country, 20 when the Victory Trail grew (2026-09-26). A save made before this, standing here, is relocated.
+CHAIN = ["route8", "seg_g1", "seg_g2", "seg_g3", "seg_g4", "town9", "route9", "seg_t1", "seg_t2", "seg_t3"]
 SEAM = {
     ("route8", "seg_g1"): dict(road=12, L=3, R=3),
     ("seg_g1", "seg_g2"): dict(road=14, L=3, R=2),
@@ -39,6 +39,10 @@ SEAM = {
     ("seg_g4", "town9"): dict(road=13, L=3, R=3),
     # Gloam Town's north gate: narrow, the arena's guard standing in it.
     ("town9", "route9"): dict(road=13, L=11, R=13),
+    # The Victory Trail's three new stretches (part138), climbing to the Citadel.
+    ("route9", "seg_t1"): dict(road=13, L=4, R=4),
+    ("seg_t1", "seg_t2"): dict(road=11, L=4, R=5),
+    ("seg_t2", "seg_t3"): dict(road=14, L=5, R=4),
 }
 setup(Region(CHAIN, SEAM, prev="town8"))
 
@@ -230,15 +234,14 @@ def route9():
     """Victory Trail. Out of Gloam Town's gate and up, out of the trees, onto
     bare rock with the Summit Citadel's door at the top. Lichen on every stone."""
     g = base("route9", 761, rocks=0.15)
-    road(g, [(13, 23), (13, 15), (12, 15), (12, 3), (13, 3), (13, 1)])
-    g.rect(0, 0, W - 1, 0, "T")                # the Citadel's wall across the top
-    g.door(13, 0, "n", "summit", 7, 13)
-    g.set(14, 0, "T")
+    # 2026-09-26: the trail goes on north now (seg_t1-3, part138); the
+    # Citadel's door is at the top of the Citadel Approach.
+    road(g, [(13, 23), (13, 15), (12, 15), (12, 3), (13, 3), (13, 0)])
     g.landmark(19, 12, "lm_lichen")
     rock(g, 20, 5, 3, 2); rock(g, 6, 7, 3, 2); rock(g, 22, 18, 2); rock(g, 6, 18, 2)
     tall(g, 6, 13, 3, 2); tall(g, 20, 8, 2, 1); tall(g, 21, 21, 2, 1)
     flowers(g, 8, (3, 2, 24, 21))
-    signpost(g, 11, 2, "route9:gate")          # -> the Summit Citadel
+    signpost(g, 11, 2, "route9:climb")         # -> the climb to the Citadel
     person(g, 9, 9, "R", "route9:4,4")         # Trailmaster Odu
     person(g, 16, 5, "R", "route9:11,10")      # Gatekeeper Ivo, near the door
     g.set(9, 19, "⁂")
@@ -249,13 +252,73 @@ def route9():
     ])
 
 
+# ----------------------------------------------- the Victory Trail climbs ---
+# Ayr, 2026-09-26: "Victory trail needs to be larger if there are animals only
+# found there." Three stretches of bare rock and lichen, higher each time,
+# with the trail's whole roster (the tiger among it) all the way up.
+def seg_t1():
+    """The Long Climb. Switchbacks up a slope of scree and old snow."""
+    g = base("seg_t1", 771, rocks=0.2)
+    road(g, [(13, 23), (13, 18), (6, 18), (6, 10), (18, 10), (18, 4), (11, 4), (11, 0)])
+    g.landmark(21, 15, "lm_high_tigers")
+    rock(g, 9, 14, 3, 2); rock(g, 22, 6, 3, 2); rock(g, 4, 5, 2); rock(g, 23, 20, 2)
+    tall(g, 12, 14, 3, 2); tall(g, 21, 11, 2, 1); tall(g, 6, 21, 2, 1); tall(g, 15, 2, 2, 1)
+    flowers(g, 6, (3, 2, 24, 21))
+    g.set(9, 7, "⁂")
+    g.land = (13, 21)
+    return finish(g, [
+        (24, 3, "grv_t1_scree", "bigberries", 1),
+        (3, 21, "grv_t1_snow", "coins", 340),
+    ])
+
+
+def seg_t2():
+    """Windbreak Ledge. A long shelf under a rock wall, out of the wind, where
+    the ibex come to lick salt from the stone."""
+    g = base("seg_t2", 781, rocks=0.2)
+    road(g, [(11, 23), (11, 16), (21, 16), (21, 7), (14, 7), (14, 0)])
+    g.rect(3, 12, 17, 12, "^")                 # the rock wall the ledge runs under
+    g.set(11, 12, "."); g.set(12, 12, ".")      # a cut through it for the road
+    g.landmark(6, 17, "lm_ibex_return")
+    rock(g, 5, 5, 3, 2); rock(g, 23, 12, 2); rock(g, 16, 20, 2); rock(g, 9, 3, 2)
+    tall(g, 6, 8, 3, 2); tall(g, 18, 3, 2, 1); tall(g, 23, 20, 2, 1)
+    flowers(g, 6, (3, 2, 24, 21))
+    g.set(18, 10, "⁂")
+    g.land = (11, 21)
+    return finish(g, [
+        (4, 21, "grv_t2_shelf", "revives", 1),
+        (24, 3, "grv_t2_wall", "coins", 360),
+    ])
+
+
+def seg_t3():
+    """The Citadel Approach. The last of the climb, the Summit Citadel's wall
+    across the top and its door in the middle of it."""
+    g = base("seg_t3", 791, rocks=0.15)
+    road(g, [(14, 23), (14, 14), (8, 14), (8, 6), (13, 6), (13, 1)])
+    g.rect(0, 0, W - 1, 0, "T")                # the Citadel's wall across the top
+    g.door(13, 0, "n", "summit", 7, 13)
+    g.set(14, 0, "T")
+    g.landmark(20, 9, "lm_peregrine")
+    rock(g, 21, 16, 3, 2); rock(g, 4, 18, 2); rock(g, 22, 4, 2); rock(g, 11, 19, 2)
+    tall(g, 17, 20, 2, 1); tall(g, 4, 10, 2, 2); tall(g, 18, 3, 2, 1)
+    flowers(g, 6, (3, 2, 24, 21))
+    signpost(g, 11, 2, "route9:gate")          # -> the Summit Citadel
+    g.set(5, 4, "⁂")
+    g.land = (14, 21)
+    return finish(g, [
+        (24, 21, "grv_t3_approach", "goldberries", 1),
+        (3, 3, "grv_t3_wall", "coins", 380),
+    ])
+
+
 def main():
-    grids = [route8(), seg_g1(), seg_g2(), seg_g3(), seg_g4(), town9(), route9()]
+    grids = [route8(), seg_g1(), seg_g2(), seg_g3(), seg_g4(), town9(), route9(), seg_t1(), seg_t2(), seg_t3()]
     inbound = [
         {"from": "taiga", "tile": "7,9", "map": "route8", "x": 1, "y": 11},
         {"from": "shrine_nyxfang", "tile": "7,9", "map": "seg_g3", "x": 1, "y": 8},
         {"from": "vigil", "tile": "7,9", "map": "town9", "x": 1, "y": 16},
-        {"from": "summit", "tile": "7,14", "map": "route9", "x": 13, "y": 1},
+        {"from": "summit", "tile": "7,14", "map": "seg_t3", "x": 13, "y": 1},
     ]
     run("grove", "forge_grove.py", grids, inbound, GEN, "game.part121.jsx")
 

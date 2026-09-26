@@ -72,7 +72,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 19
+  "gen": 20
  },
  "seg_g1": {
   "rows": [
@@ -139,7 +139,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 19
+  "gen": 20
  },
  "seg_g2": {
   "rows": [
@@ -206,7 +206,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 19
+  "gen": 20
  },
  "seg_g3": {
   "rows": [
@@ -280,7 +280,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 19
+  "gen": 20
  },
  "seg_g4": {
   "rows": [
@@ -345,7 +345,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 19
+  "gen": 20
  },
  "town9": {
   "rows": [
@@ -424,12 +424,12 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 19
+  "gen": 20
  },
  "route9": {
   "rows": [
-   "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
-   "TTTgggggggggg..ggggggggggTTT",
+   "TTTTggggggggg..gggggggggTTTT",
+   "TTTTggggggggg..gggggggggTTTT",
    "TTTTggggggg!g..ggggggg*gTTTT",
    "TTTTgggggggg...ggg^gggggTTTT",
    "TTTTgggggggg...gggggggggTTTT",
@@ -454,7 +454,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
    "TTTTTTTTTTTgg..TTTTTTTTTTTTT"
   ],
   "cast": {
-   "11,2": "route9:gate",
+   "11,2": "route9:climb",
    "9,9": "route9:4,4",
    "16,5": "route9:11,10"
   },
@@ -473,13 +473,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "n": 300
    }
   },
-  "exits": {
-   "13,0": {
-    "map": "summit",
-    "x": 7,
-    "y": 13
-   }
-  },
+  "exits": {},
   "beyond": {},
   "land": [
    13,
@@ -489,9 +483,200 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
    "s": {
     "map": "town9",
     "off": 0
+   },
+   "n": {
+    "map": "seg_t1",
+    "off": 0
    }
   },
-  "gen": 19
+  "gen": 20
+ },
+ "seg_t1": {
+  "rows": [
+   "TTTTggggggg..ggggggggggTTTTT",
+   "TTT^ggggggg..gggggggggggTTTT",
+   "TTT^ggggg*g..gGGGgggggggTTTT",
+   "TTTTggggggg..gggggggggggTTTT",
+   "TTTT^Tggggg.........*g*gTTTT",
+   "TTT^^gggggg.........^gg^TTTT",
+   "TTTTgggggggggggggg..ggggTTTT",
+   "TTTTggggg⁂gggggggg..^gggTTTT",
+   "TTT^gggggggggggggg..ggTgTTTT",
+   "TTT^gggggggggggggg..gggg^TTT",
+   "TTTTgT..............ggTgTTTT",
+   "TTT^gT..............GGGg^TTT",
+   "TTT^g*..g^ggggggggggg*Tg^TTT",
+   "TTTgTg..gg^GGGGgggggggggTTTT",
+   "TTTggg..ggGGGGGgggggggggTTTT",
+   "TTTggg..g^GGGGG*gggggΩggTTTT",
+   "TTTggg..ggggggggggggggggTTTT",
+   "TTTggg..ggggggggggggggggTTTT",
+   "TTTggg.........ggggggggg^TTT",
+   "TTTTgT.........gggggggggTTTT",
+   "TTTgggggggggg..gggggggg^TTTT",
+   "TTT^gGGGggggg..ggggggg^gTTTT",
+   "TTTTggggggggg..gggggggggTTTT",
+   "TTTTggggggggg..gggggggggTTTT"
+  ],
+  "cast": {},
+  "marks": {
+   "21,15": "lm_high_tigers"
+  },
+  "finds": {
+   "23,2": {
+    "id": "grv_t1_scree",
+    "item": "bigberries",
+    "n": 1
+   },
+   "3,20": {
+    "id": "grv_t1_snow",
+    "item": "coins",
+    "n": 340
+   }
+  },
+  "exits": {},
+  "beyond": {},
+  "land": [
+   13,
+   21
+  ],
+  "links": {
+   "s": {
+    "map": "route9",
+    "off": 0
+   },
+   "n": {
+    "map": "seg_t2",
+    "off": 0
+   }
+  },
+  "gen": 20
+ },
+ "seg_t2": {
+  "rows": [
+   "TTTTTggggggggg..ggggggggTTTT",
+   "TTTTgggggggggg..ggggggggTTTT",
+   "TTTTgggggggggg..ggggggggTTTT",
+   "TTTTgg^ggg^*gg..gGGGggggTTTT",
+   "TTTTg*gggg^ggg..gggggggg^TTT",
+   "TTTT^ggggggggg..ggggggggTTTT",
+   "TTTTgggggggggg..ggggggTgTTTT",
+   "TTTTGT^GGggggg.........gTTTT",
+   "TTTTGTGGGggggg.........gTTTT",
+   "TTT^GGGGGgggggggggggg..gTTTT",
+   "TTTTgggggggggggggg⁂gg..gTTTT",
+   "TTTTggggggggggggggggg..^TTTT",
+   "TTT^^^^^^^^..^^^^^ggg..^^TTT",
+   "TTTTggggggggggggggggg..gTTTT",
+   "TTTgggggggggggggggggg..gTTTT",
+   "TTTTggggggggggggggggg..*TTTT",
+   "TT^gggggggg............gTTTT",
+   "TTTgggΩg*gg............gTTTT",
+   "TTTgggggggg..ggggggggggg^TTT",
+   "TTTggggggg*..gg^ggggggggTTTT",
+   "TTTTggggggg..gg^ggggggGG^TTT",
+   "TTTgggggggg..gggggggg*ggTTTT",
+   "TTTTggggggg..gggggggggggTTTT",
+   "TTTTggggggg..ggggggggggTTTTT"
+  ],
+  "cast": {},
+  "marks": {
+   "6,17": "lm_ibex_return"
+  },
+  "finds": {
+   "4,21": {
+    "id": "grv_t2_shelf",
+    "item": "revives",
+    "n": 1
+   },
+   "23,2": {
+    "id": "grv_t2_wall",
+    "item": "coins",
+    "n": 360
+   }
+  },
+  "exits": {},
+  "beyond": {},
+  "land": [
+   11,
+   21
+  ],
+  "links": {
+   "s": {
+    "map": "seg_t1",
+    "off": 0
+   },
+   "n": {
+    "map": "seg_t3",
+    "off": 0
+   }
+  },
+  "gen": 20
+ },
+ "seg_t3": {
+  "rows": [
+   "TTTTTTTTTTTTTnTTTTTTTTTTTTTT",
+   "TTTgggggggggg..ggggggggggTTT",
+   "TTTgggggggg!g..gggggggggg^TT",
+   "TTT^ggggggggg..ggGGGgggggTTT",
+   "TTTgg⁂ggggggg..ggggggg^ggTTT",
+   "TTTgggggggg*g..gggggggg^gTTT",
+   "TT^ggggg.......ggggggggTgTTT",
+   "TTTggggg.......ggggggggggTTT",
+   "TTTggggg..gggggggggggggggTTT",
+   "TTgGGGgg..ggggggggggΩgggTTTT",
+   "TTgTGGgg..gggggggggggggggTTT",
+   "TTTGGGgg..gggggggggggggTgTTT",
+   "TTTggggg..gggggggggggggggTTT",
+   "TTT^gggg..ggggggggg*gggggTTT",
+   "TTTTgTgg........gggggg^^gTTT",
+   "TTTTgggg........g*gggggggTTT",
+   "TTTTgggggggggg..ggggggggTTTT",
+   "TTTTgggggggggg..ggg*gggTg^TT",
+   "TTTT^^gggggg^g..ggggg^gggTTT",
+   "TTTTgTgggg^ggg..ggggggTgTTTT",
+   "TTTTgggggggggg..GGGgggggTTTT",
+   "TTTTggggg*gggg..g*gggggg^TTT",
+   "TTTTgggggggggg..gggggggg^TTT",
+   "TTTTTggggggggg..ggggggggTTTT"
+  ],
+  "cast": {
+   "11,2": "route9:gate"
+  },
+  "marks": {
+   "20,9": "lm_peregrine"
+  },
+  "finds": {
+   "23,20": {
+    "id": "grv_t3_approach",
+    "item": "goldberries",
+    "n": 1
+   },
+   "3,2": {
+    "id": "grv_t3_wall",
+    "item": "coins",
+    "n": 380
+   }
+  },
+  "exits": {
+   "13,0": {
+    "map": "summit",
+    "x": 7,
+    "y": 13
+   }
+  },
+  "beyond": {},
+  "land": [
+   14,
+   21
+  ],
+  "links": {
+   "s": {
+    "map": "seg_t2",
+    "off": 0
+   }
+  },
+  "gen": 20
  }
 }, inbound: [
  {
@@ -518,7 +703,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
  {
   "from": "summit",
   "tile": "7,14",
-  "map": "route9",
+  "map": "seg_t3",
   "x": 13,
   "y": 1
  }
