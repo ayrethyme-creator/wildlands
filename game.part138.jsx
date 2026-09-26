@@ -14,6 +14,9 @@
 // against, emptied of people so nobody is asked for who was never there.
 {
   const r9 = MAPS.route9;
+  // 2026-09-26, Ayr: "Raise the levels". The trail was 46-50, below the
+  // Gloamwood road you arrive from (54-60). It climbs from there now.
+  r9.lvl = [58, 61];
   const clear = (rows) => rows.map((r) => r.replace(/[RV!]/g, "."));
   const lv = r9.lvl || [46, 50];
   const defs = [

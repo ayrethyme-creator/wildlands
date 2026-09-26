@@ -72,7 +72,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "seg_g1": {
   "rows": [
@@ -139,7 +139,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "seg_g2": {
   "rows": [
@@ -206,7 +206,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "seg_g3": {
   "rows": [
@@ -280,7 +280,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "seg_g4": {
   "rows": [
@@ -345,7 +345,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "town9": {
   "rows": [
@@ -424,19 +424,19 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "route9": {
   "rows": [
    "TTTTggggggggg..gggggggggTTTT",
    "TTTTggggggggg..gggggggggTTTT",
-   "TTTTggggggg!g..ggggggg*gTTTT",
+   "TTTTggggggg!g..gggg*gg*gTTTT",
    "TTTTgggggggg...ggg^gggggTTTT",
    "TTTTgggggggg...gggggggggTTTT",
    "TTTTgT^^gggg..ggRgggg^^gTTTT",
    "TTTTgggggggg..ggggggggggTTTT",
    "TTTTgggggggg..ggggggggggTTTT",
-   "TTTTgggggggg..gggggGGGggTTTT",
+   "^^^^^^^^^^^^R^^^^^^^^^^^^^^^",
    "TTT^g^gg*Rgg..ggggggg*ggTTTT",
    "TTTTgggggggg..gggggggggg^TTT",
    "TTTTgggggggg..*gggggggTgTTTT",
@@ -446,14 +446,16 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
    "TTTTgggggggg...gggggggTgTTTT",
    "TTTTg*gggggg...gggggggggTTTT",
    "TTT^g^ggggggg..gggggg^ggTTTT",
-   "TTTTgTg^gg*gg..gggggggggTTTT",
-   "TTTT*gggg⁂g*g..gggggg^ggTTTT",
+   "TTTTgTg^gg*gg..g*gggggg^TTTT",
+   "^^^^^^^^^^^^^R^^^^^^^^^^^^^^",
    "TTTTggggggggg..gggggggggTTTT",
-   "TTTTggggggggg..gggggGGGgTTTT",
+   "TTTTggggg⁂ggg..gggggGGGgTTTT",
    "TTTTggggggggg..gggggggggTTTT",
    "TTTTTTTTTTTgg..TTTTTTTTTTTTT"
   ],
   "cast": {
+   "13,19": "route9:40,1",
+   "12,8": "route9:40,2",
    "11,2": "route9:climb",
    "9,9": "route9:4,4",
    "16,5": "route9:11,10"
@@ -489,36 +491,42 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "seg_t1": {
   "rows": [
    "TTTTggggggg..ggggggggggTTTTT",
    "TTT^ggggggg..gggggggggggTTTT",
-   "TTT^ggggg*g..gGGGgggggggTTTT",
+   "TTT^ggggggg..gGRGgggggggTTTT",
    "TTTTggggggg..gggggggggggTTTT",
-   "TTTT^Tggggg.........*g*gTTTT",
-   "TTT^^gggggg.........^gg^TTTT",
+   "TTTT^Tggggg.........*gg^TTTT",
+   "TTT^g^ggg⁂g.........^gg^TTTT",
    "TTTTgggggggggggggg..ggggTTTT",
-   "TTTTggggg⁂gggggggg..^gggTTTT",
+   "^^^^^^^^^^^^^^^^^^R^^^^^^^^^",
    "TTT^gggggggggggggg..ggTgTTTT",
    "TTT^gggggggggggggg..gggg^TTT",
    "TTTTgT..............ggTgTTTT",
    "TTT^gT..............GGGg^TTT",
-   "TTT^g*..g^ggggggggggg*Tg^TTT",
-   "TTTgTg..gg^GGGGgggggggggTTTT",
-   "TTTggg..ggGGGGGgggggggggTTTT",
+   "TTT^g*..gRgggg*gggggggT*^TTT",
+   "TTTTTg..gg^^GGGgggggggggTTTT",
+   "^^^^^^R^^^^^^^^^^^^^^^^^^^^^",
    "TTTggg..g^GGGGG*gggggΩggTTTT",
-   "TTTggg..ggggggggggggggggTTTT",
+   "TTTg*g..ggggggggggggggggTTTT",
    "TTTggg..ggggggggggggggggTTTT",
    "TTTggg.........ggggggggg^TTT",
    "TTTTgT.........gggggggggTTTT",
    "TTTgggggggggg..gggggggg^TTTT",
-   "TTT^gGGGggggg..ggggggg^gTTTT",
+   "TTT^gGGGgRggg..ggggggg^gTTTT",
    "TTTTggggggggg..gggggggggTTTT",
    "TTTTggggggggg..gggggggggTTTT"
   ],
-  "cast": {},
+  "cast": {
+   "6,14": "seg_t1:40,1",
+   "18,7": "seg_t1:40,2",
+   "9,21": "seg_t1:41,1",
+   "9,12": "seg_t1:41,2",
+   "15,2": "seg_t1:41,3"
+  },
   "marks": {
    "21,15": "lm_high_tigers"
   },
@@ -550,36 +558,42 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "seg_t2": {
   "rows": [
    "TTTTTggggggggg..ggggggggTTTT",
    "TTTTgggggggggg..ggggggggTTTT",
-   "TTTTgggggggggg..ggggggggTTTT",
-   "TTTTgg^ggg^*gg..gGGGggggTTTT",
-   "TTTTg*gggg^ggg..gggggggg^TTT",
+   "TTTTggggg^gggg..ggggggggTTTT",
+   "TTTTgg^gggg*gg..gGGGggggTTTT",
+   "TTTTg*gg^ggggg..ggRggggg^TTT",
    "TTTT^ggggggggg..ggggggggTTTT",
    "TTTTgggggggggg..ggggggTgTTTT",
    "TTTTGT^GGggggg.........gTTTT",
    "TTTTGTGGGggggg.........gTTTT",
    "TTT^GGGGGgggggggggggg..gTTTT",
-   "TTTTgggggggggggggg⁂gg..gTTTT",
-   "TTTTggggggggggggggggg..^TTTT",
+   "^^^^^^^^^^^^^^^^^^^^^R^^^^^^",
+   "TTTTgggggggggggggg⁂gg..^TTTT",
    "TTT^^^^^^^^..^^^^^ggg..^^TTT",
    "TTTTggggggggggggggggg..gTTTT",
-   "TTTgggggggggggggggggg..gTTTT",
+   "TTTggggggggggggggRggg..gTTTT",
    "TTTTggggggggggggggggg..*TTTT",
    "TT^gggggggg............gTTTT",
    "TTTgggΩg*gg............gTTTT",
    "TTTgggggggg..ggggggggggg^TTT",
    "TTTggggggg*..gg^ggggggggTTTT",
-   "TTTTggggggg..gg^ggggggGG^TTT",
-   "TTTgggggggg..gggggggg*ggTTTT",
+   "^^^^^^^^^^^R^^^^^^^^^^^^^^^^",
+   "TTTgggRgggg..gggg^ggg*ggTTTT",
    "TTTTggggggg..gggggggggggTTTT",
    "TTTTggggggg..ggggggggggTTTTT"
   ],
-  "cast": {},
+  "cast": {
+   "11,20": "seg_t2:40,1",
+   "21,10": "seg_t2:40,2",
+   "6,21": "seg_t2:41,1",
+   "17,14": "seg_t2:41,2",
+   "18,4": "seg_t2:41,3"
+  },
   "marks": {
    "6,17": "lm_ibex_return"
   },
@@ -611,7 +625,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  },
  "seg_t3": {
   "rows": [
@@ -619,28 +633,33 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
    "TTTgggggggggg..ggggggggggTTT",
    "TTTgggggggg!g..gggggggggg^TT",
    "TTT^ggggggggg..ggGGGgggggTTT",
-   "TTTgg⁂ggggggg..ggggggg^ggTTT",
-   "TTTgggggggg*g..gggggggg^gTTT",
+   "TTTgg⁂ggggggg..ggRgggg^ggTTT",
+   "TTTgggggggggg..gggggggg^gTTT",
    "TT^ggggg.......ggggggggTgTTT",
-   "TTTggggg.......ggggggggggTTT",
-   "TTTggggg..gggggggggggggggTTT",
+   "TTTggggg.......gggggg*gggTTT",
+   "TTTggg*g..gggggggggggggggTTT",
    "TTgGGGgg..ggggggggggΩgggTTTT",
-   "TTgTGGgg..gggggggggggggggTTT",
+   "^^^^^^^^R^^^^^^^^^^^^^^^^^^^",
    "TTTGGGgg..gggggggggggggTgTTT",
    "TTTggggg..gggggggggggggggTTT",
-   "TTT^gggg..ggggggggg*gggggTTT",
+   "TTT^gggg..*ggggggggRgggggTTT",
    "TTTTgTgg........gggggg^^gTTT",
-   "TTTTgggg........g*gggggggTTT",
-   "TTTTgggggggggg..ggggggggTTTT",
-   "TTTTgggggggggg..ggg*gggTg^TT",
-   "TTTT^^gggggg^g..ggggg^gggTTT",
-   "TTTTgTgggg^ggg..ggggggTgTTTT",
-   "TTTTgggggggggg..GGGgggggTTTT",
-   "TTTTggggg*gggg..g*gggggg^TTT",
+   "TTTTgggg........gggggggggTTT",
+   "TTTTgggggggggg..*gggggggTTTT",
+   "TTTTgggggggggg..gggggggTg^TT",
+   "TTTT^^gggggg^g..g*ggg^gggTTT",
+   "^^^^^^^^^^^^^^R^^^^^^^^^^^^^",
+   "TTTTggggggg^gg..GGGgggggTTTT",
+   "TTTTgggggRgggg..ggggggg*^TTT",
    "TTTTgggggggggg..gggggggg^TTT",
    "TTTTTggggggggg..ggggggggTTTT"
   ],
   "cast": {
+   "14,19": "seg_t3:40,1",
+   "8,10": "seg_t3:40,2",
+   "9,21": "seg_t3:41,1",
+   "19,13": "seg_t3:41,2",
+   "17,4": "seg_t3:41,3",
    "11,2": "route9:gate"
   },
   "marks": {
@@ -676,7 +695,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 20
+  "gen": 21
  }
 }, inbound: [
  {

@@ -1317,6 +1317,7 @@
             // Must match part4's walkability rule exactly, including part84's
             // rematch hold: a trainer who stays solid has to stay VISIBLE, or
             // you would be bumping an invisible person.
+            if (ch === "R" && typeof gateOpen === "function" && gateOpen(S, idKey)) ch2 = ".";
             if ((ch === "R" || ch === "V") && S.trainersBeaten[idKey]
                 && !(TRAINERS[idKey] || {}).chat
                 && !(typeof trainerHoldsGround === "function" && trainerHoldsGround(idKey))) ch2 = ".";

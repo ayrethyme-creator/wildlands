@@ -29,7 +29,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from forgekit import (Region, setup, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, run, W, H)
 
-GEN = 20  # was 9; 19 when every story moved to its animal's country, 20 when the Victory Trail grew (2026-09-26). A save made before this, standing here, is relocated.
+GEN = 21  # 20 when the Victory Trail grew, 21 when it got its gates and trainers (2026-09-26). A save made before this, standing here, is relocated.
 CHAIN = ["route8", "seg_g1", "seg_g2", "seg_g3", "seg_g4", "town9", "route9", "seg_t1", "seg_t2", "seg_t3"]
 SEAM = {
     ("route8", "seg_g1"): dict(road=12, L=3, R=3),
@@ -53,6 +53,21 @@ def wood(g, cx, cy, n, spread=2):
 
 def rock(g, cx, cy, n, spread=1):
     clump(g, cx, cy, n, "^", spread)
+
+
+def gate(g, x, y, ident):
+    """A Victory Trail gate (part140): a stone wall right across the mountain,
+    one gap where the road runs, a gatewarden standing in it and a boulder
+    beside them. The warden steps aside once their questions are answered;
+    the boulder stays. Both may hold the road (allow_block), which is also
+    what tells the reach check that the far side is not cut off."""
+    for xx in range(W):
+        if xx not in (x, x + 1):
+            g.set(xx, y, "^")
+    g.person(x, y, "R", ident)
+    g.set(x + 1, y, "^")
+    g.allow_block.add("%d,%d" % (x, y))
+    g.allow_block.add("%d,%d" % (x + 1, y))
 
 
 # --------------------------------------------------------------- route8 ---
@@ -237,6 +252,8 @@ def route9():
     # 2026-09-26: the trail goes on north now (seg_t1-3, part138); the
     # Citadel's door is at the top of the Citadel Approach.
     road(g, [(13, 23), (13, 15), (12, 15), (12, 3), (13, 3), (13, 0)])
+    gate(g, 13, 19, "route9:40,1")             # the savanna gate
+    gate(g, 12, 8, "route9:40,2")              # the wetland gate
     g.landmark(19, 12, "lm_lichen")
     rock(g, 20, 5, 3, 2); rock(g, 6, 7, 3, 2); rock(g, 22, 18, 2); rock(g, 6, 18, 2)
     tall(g, 6, 13, 3, 2); tall(g, 20, 8, 2, 1); tall(g, 21, 21, 2, 1)
@@ -244,7 +261,7 @@ def route9():
     signpost(g, 11, 2, "route9:climb")         # -> the climb to the Citadel
     person(g, 9, 9, "R", "route9:4,4")         # Trailmaster Odu
     person(g, 16, 5, "R", "route9:11,10")      # Gatekeeper Ivo, near the door
-    g.set(9, 19, "⁂")
+    g.set(9, 21, "⁂")
     g.land = (13, 21)
     return finish(g, [
         (23, 4, "grv_r9_rocks", "revives", 1),
@@ -260,11 +277,16 @@ def seg_t1():
     """The Long Climb. Switchbacks up a slope of scree and old snow."""
     g = base("seg_t1", 771, rocks=0.2)
     road(g, [(13, 23), (13, 18), (6, 18), (6, 10), (18, 10), (18, 4), (11, 4), (11, 0)])
+    gate(g, 6, 14, "seg_t1:40,1")              # the jungle gate
+    gate(g, 18, 7, "seg_t1:40,2")              # the desert gate
+    person(g, 9, 21, "R", "seg_t1:41,1")       # Mountaineer Sione
+    person(g, 10, 11, "R", "seg_t1:41,2")      # Ridge Runner Tali
+    person(g, 15, 2, "R", "seg_t1:41,3")       # Ace Ranger Maren
     g.landmark(21, 15, "lm_high_tigers")
     rock(g, 9, 14, 3, 2); rock(g, 22, 6, 3, 2); rock(g, 4, 5, 2); rock(g, 23, 20, 2)
     tall(g, 12, 14, 3, 2); tall(g, 21, 11, 2, 1); tall(g, 6, 21, 2, 1); tall(g, 15, 2, 2, 1)
     flowers(g, 6, (3, 2, 24, 21))
-    g.set(9, 7, "⁂")
+    g.set(9, 5, "⁂")
     g.land = (13, 21)
     return finish(g, [
         (24, 3, "grv_t1_scree", "bigberries", 1),
@@ -279,11 +301,16 @@ def seg_t2():
     road(g, [(11, 23), (11, 16), (21, 16), (21, 7), (14, 7), (14, 0)])
     g.rect(3, 12, 17, 12, "^")                 # the rock wall the ledge runs under
     g.set(11, 12, "."); g.set(12, 12, ".")      # a cut through it for the road
+    gate(g, 11, 20, "seg_t2:40,1")             # the highveld gate
+    gate(g, 21, 10, "seg_t2:40,2")             # the mountain gate
+    person(g, 7, 22, "R", "seg_t2:41,1")       # Climber Ines
+    person(g, 17, 14, "R", "seg_t2:41,2")      # Veteran Ranger Oko
+    person(g, 18, 4, "R", "seg_t2:41,3")       # Ace Ranger Brand
     g.landmark(6, 17, "lm_ibex_return")
     rock(g, 5, 5, 3, 2); rock(g, 23, 12, 2); rock(g, 16, 20, 2); rock(g, 9, 3, 2)
     tall(g, 6, 8, 3, 2); tall(g, 18, 3, 2, 1); tall(g, 23, 20, 2, 1)
     flowers(g, 6, (3, 2, 24, 21))
-    g.set(18, 10, "⁂")
+    g.set(18, 11, "⁂")
     g.land = (11, 21)
     return finish(g, [
         (4, 21, "grv_t2_shelf", "revives", 1),
@@ -299,6 +326,11 @@ def seg_t3():
     g.rect(0, 0, W - 1, 0, "T")                # the Citadel's wall across the top
     g.door(13, 0, "n", "summit", 7, 13)
     g.set(14, 0, "T")
+    gate(g, 14, 19, "seg_t3:40,1")             # the fire-country gate
+    gate(g, 8, 10, "seg_t3:40,2")              # the grove gate
+    person(g, 9, 21, "R", "seg_t3:41,1")       # Summit Warden Lio
+    person(g, 19, 13, "R", "seg_t3:41,2")      # Ace Ranger Sela
+    person(g, 17, 4, "R", "seg_t3:41,3")       # Veteran Ranger Juno
     g.landmark(20, 9, "lm_peregrine")
     rock(g, 21, 16, 3, 2); rock(g, 4, 18, 2); rock(g, 22, 4, 2); rock(g, 11, 19, 2)
     tall(g, 17, 20, 2, 1); tall(g, 4, 10, 2, 2); tall(g, 18, 3, 2, 1)

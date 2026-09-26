@@ -88,6 +88,9 @@ const wanderAllowed = (tr) => {
   if (!tr) return true;                       // an R with no entry: scenery, let it walk
   if (tr.team) return false;                  // battler
   if (tr.station || tr.quizHouse) return false;
+  // A Victory Trail gatewarden (part140) IS the gate: a warden who wandered out
+  // of the gap would leave it open. Caught in the running game, 2026-09-26.
+  if (tr.gate) return false;
   return wanderIsAlive(tr.em);
 };
 

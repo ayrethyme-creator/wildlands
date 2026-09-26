@@ -456,7 +456,7 @@ function Wildlands() {
       setS((p) => ({ ...p, dialog: null, quiz: { ...(p.quiz || {}), [key]: true } }));
       return;
     }
-    setS((p) => ({ ...p, dialog: null, exam: { kind, key, title, legendKey, qs, i: 0, wrong: null } }));
+    setS((p) => ({ ...p, dialog: null, exam: { kind, key, title, legendKey, qs, i: 0, wrong: null, gymId } }));
   };
 
   const answerExam = (idx) => {
@@ -470,7 +470,9 @@ function Wildlands() {
       setS((p) => ({
         ...p, exam: null,
         quiz: { ...(p.quiz || {}), [ex.key]: true },
-        dialog: { text: "✅ Five for five. \"Then you have been looking after all. Let's begin.\"" },
+        dialog: { text: ex.kind === "gate"
+          ? "✅ Five for five. The gatewarden nods and steps out of the gap in the wall. The way up is open."
+          : "✅ Five for five. \"Then you have been looking after all. Let's begin.\"" },
       }));
       return;
     }
@@ -481,7 +483,7 @@ function Wildlands() {
   const closeExam = () => setS((p) => ({ ...p, exam: null }));
   const retryExam = () => {
     const ex = SR.current.exam; if (!ex) return;
-    const gymId = ex.kind === "gym" ? Number(ex.key.replace("gym", "")) : GYM_COUNT;
+    const gymId = ex.gymId !== undefined ? ex.gymId : ex.kind === "gym" ? Number(ex.key.replace("gym", "")) : GYM_COUNT;
     startExam(ex.kind, gymId, ex.key, ex.title, ex.legendKey);
   };
 
@@ -1121,6 +1123,8 @@ function Wildlands() {
       // part84 works out per trainer whether standing their ground would seal a
       // route and lets everybody else stay put. The rival is never held: her
       // blocking the road until she is beaten is the point of her.
+      // A Victory Trail gate whose questions are answered stands open (part140).
+      (ch === "R" && typeof gateOpen === "function" && gateOpen(st, idKey)) ||
       ((ch === "R" || ch === "V") && st.trainersBeaten[idKey]
         && !(TRAINERS[idKey] || {}).chat
         && !(typeof trainerHoldsGround === "function" && trainerHoldsGround(idKey))) ||
@@ -1472,6 +1476,17 @@ function Wildlands() {
       const tr = TRAINERS[idKey];
       if (!tr) return;
       if (tr.quizHouse) { setS((p) => ({ ...p, dialog: null, menu: "quizhouse" })); return; }
+      // A Victory Trail gatewarden (part140): five questions on one country the
+      // road has crossed, asked about that country's own maps.
+      if (tr.gate) {
+        const g = tr.gate;
+        if (typeof QUIZ_MAPS !== "undefined") QUIZ_MAPS[g.key] = g.maps;
+        say(`${tr.em} ${tr.name}: "${tr.line}"`, [
+          { label: "Answer", act: () => startExam("gate", g.key, g.key, `The ${g.region.charAt(0).toUpperCase() + g.region.slice(1)} Gate`) },
+          { label: "Later", act: () => setS((p) => ({ ...p, dialog: null })) },
+        ]);
+        return;
+      }
       // Story people are chat NPCs too, so they have to be handled BEFORE the
       // generic chat line - otherwise every one of them just recites its
       // opening speech forever and nothing can be learned, pitched or built.
