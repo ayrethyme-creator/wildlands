@@ -31,7 +31,7 @@ import forgekit as fk  # noqa: E402
 from forgekit import (Region, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, enclose, W, H)
 
-GEN = 13   # thirteenth rebuild. A save made before this, standing here, is relocated.
+GEN = 19  # was 13; 19 when 2026-09-26, every story moved to its animal's own country (part65). A save made before this, standing here, is relocated.
 MID = 13
 
 
@@ -116,14 +116,14 @@ def one(key, seed, first, last, door, route, lm, lmxy, signs, people, pools, sta
 def west():
     return [
         one("vig1", 1211, True, False, (1, 12), [(MID, 20), (MID, 0)], "lm_thylacine_film", (18, 9),
-            [((9, 8), "vig1:7,3"), ((17, 15), "vig1:7,7")], [((9, 14), "vig1:10,3")],
+            [((9, 8), "vig1:7,3"), ((17, 15), "vig1:7,7")], [],
             [(20, 17, 2, 1)], [(5, 5, 2), (22, 5, 2)], (4, 3, "vig_v1_corner", "treats", 2)),
         one("vig2", 1221, False, False, None, [(13, 23), (13, 12), (11, 12), (11, 0)], "lm_tiger_census", (18, 8),
             [((8, 8), "vig2:7,3"), ((16, 15), "vig2:7,7")],
-            [((6, 13), "vig2:3,3"), ((17, 19), "vig2:6,8"), ((21, 12), "vig2:14,8")],
+            [],
             [(6, 18, 2, 1)], [(22, 4, 2), (5, 5, 2)], (24, 21, "vig_v2_hollow", "coins", 450)),
         one("vig3", 1231, False, True, None, [(11, 23), (11, 12)], "lm_mammoth_steppe", (17, 8),
-            [((8, 9), "vig3:7,3"), ((16, 14), "vig3:7,7")], [((20, 12), "vig3:9,1"), ((7, 16), "vig3:1,8")],
+            [((8, 9), "vig3:7,3"), ((16, 14), "vig3:7,7")], [],
             [(20, 17, 3, 2)], [(5, 5, 2), (22, 4, 2)], (4, 3, "vig_v3_ice", "bigberries", 1)),
     ]
 

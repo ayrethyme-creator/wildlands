@@ -72,7 +72,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 9
+  "gen": 19
  },
  "seg_g1": {
   "rows": [
@@ -139,7 +139,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 9
+  "gen": 19
  },
  "seg_g2": {
   "rows": [
@@ -206,7 +206,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 9
+  "gen": 19
  },
  "seg_g3": {
   "rows": [
@@ -280,7 +280,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 9
+  "gen": 19
  },
  "seg_g4": {
   "rows": [
@@ -345,7 +345,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 9
+  "gen": 19
  },
  "town9": {
   "rows": [
@@ -424,7 +424,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 9
+  "gen": 19
  },
  "route9": {
   "rows": [
@@ -445,7 +445,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
    "TTT^GGGGGggg..ggggggggggTTTT",
    "TTTTgggggggg...gggggggTgTTTT",
    "TTTTg*gggggg...gggggggggTTTT",
-   "TTT^g^ggggggg..gRgggg^ggTTTT",
+   "TTT^g^ggggggg..gggggg^ggTTTT",
    "TTTTgTg^gg*gg..gggggggggTTTT",
    "TTTT*gggg⁂g*g..gggggg^ggTTTT",
    "TTTTggggggggg..gggggggggTTTT",
@@ -456,7 +456,6 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
   "cast": {
    "11,2": "route9:gate",
    "9,9": "route9:4,4",
-   "16,17": "route9:3,10",
    "16,5": "route9:11,10"
   },
   "marks": {
@@ -492,7 +491,7 @@ REBUILT_REGIONS.push({ name: "grove", maps: {
     "off": 0
    }
   },
-  "gen": 9
+  "gen": 19
  }
 }, inbound: [
  {

@@ -33,7 +33,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from forgekit import (Region, setup, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, run, enclose, W, H)
 
-GEN = 17  # was 10; 17 when the Tidewater door came out (2026-09-26). A save made before this, standing here, is relocated.
+GEN = 19  # was 17; 19 when 2026-09-26, every story moved to its animal's own country (part65). A save made before this, standing here, is relocated.
 CHAIN = ["shore", "reef", "kelp", "openocean", "polarsea", "abyss"]
 setup(Region(CHAIN, {}, standalone=True))
 
@@ -86,6 +86,8 @@ def shore():
     person(g, 10, 5, "R", "shore:2,2")         # Archie Karr, turtle man, on the beach
     person(g, 10, 13, "R", "shore:2,5")        # Isle Fisher Mko, by the jetties
     person(g, 10, 20, "R", "shore:2,10")       # Reef Rana, by the reef boat
+    person(g, 4, 18, "R", "shore:14,3")        # Skipper Rosa Delgado: the turtles in the nets
+    person(g, 9, 9, "R", "shore:2,12")         # Dr. Marisol Vega: the albatross and the hooks
     signpost(g, 11, 4, "shore:ice")
     signpost(g, 11, 8, "shore:blue")
     signpost(g, 11, 15, "shore:kelp")
@@ -132,13 +134,13 @@ def reef():
                  isle_rocks=[(17, 12, 2)])
     g.landmark(15, 10, "lm_cleaning_station")
     flowers(g, 8, (3, 2, 24, 21))
-    person(g, 5, 19, "R", "reef:1,7")          # "How they die"
+    person(g, 5, 19, "R", "reef:1,7")          # "What the boats are living on"
     person(g, 11, 16, "R", "reef:2,7")         # Dr. Eugenia Clarke
     person(g, 18, 20, "R", "reef:13,7")        # Roger Petersen
     person(g, 12, 3, "!", "reef:5,8")          # CORAL REEF SHALLOWS
-    person(g, 16, 14, "R", "reef:6,8")         # "Where it is happening"
+    person(g, 16, 14, "R", "reef:6,8")         # "How long a turtle takes to replace"
     person(g, 22, 12, "!", "reef:10,8")        # clownfish
-    person(g, 24, 4, "R", "reef:11,8")         # "What the colony is doing"
+    person(g, 24, 4, "R", "reef:11,8")         # "How many are coming up dead"
     g.land = (13, 20)
     return finish(g, [
         (4, 3, "sea_rf_corner", "treats", 3),
@@ -158,8 +160,8 @@ def kelp():
     g.landmark(12, 12, "lm_kelp_forest")
     flowers(g, 5, (3, 2, 24, 21))
     person(g, 11, 17, "R", "kelp:2,7")         # Capitaine Jacques Rousseau
-    person(g, 24, 15, "R", "kelp:14,7")        # "Why every boat does not do it already"
-    person(g, 4, 11, "R", "kelp:2,8")          # "What stops it"
+    person(g, 24, 15, "R", "kelp:14,7")        # "Why the first attempt failed"
+    person(g, 4, 11, "R", "kelp:2,8")          # "What a turtle excluder costs the catch"
     person(g, 15, 14, "!", "kelp:5,8")         # KELP CATHEDRAL
     person(g, 18, 3, "!", "kelp:10,8")         # a sea otter's fur
     g.land = (13, 20)
@@ -185,7 +187,9 @@ def openocean():
     flowers(g, 6, (3, 2, 24, 21))
     person(g, 10, 14, "R", "openocean:2,7")    # Dr. Katy Paine
     person(g, 18, 20, "R", "openocean:13,7")   # Ken Balcolm
-    person(g, 17, 9, "R", "openocean:3,8")     # Dr. Marisol Vega
+    person(g, 17, 9, "R", "openocean:3,8")     # "What the colony is doing" (Dr. Vega is on the shore now)
+    person(g, 6, 6, "R", "openocean:14,7")     # "How they die"
+    person(g, 22, 13, "R", "openocean:9,8")    # "Where it is happening"
     person(g, 11, 19, "!", "openocean:5,8")    # THE OPEN BLUE
     person(g, 16, 4, "!", "openocean:10,8")    # whale fall
     signpost(g, 21, 12, "openocean:dive")
@@ -207,11 +211,10 @@ def polarsea():
                  isle_rocks=[(20, 21, 1)])
     g.landmark(12, 11, "lm_sea_ice")
     flowers(g, 6, (3, 2, 24, 21))
-    person(g, 5, 16, "R", "polarsea:2,7")      # "Where they are coming for"
+    person(g, 5, 16, "R", "polarsea:2,7")      # "What stops it"
     person(g, 11, 3, "!", "polarsea:5,8")      # narwhal
-    person(g, 18, 13, "R", "polarsea:8,8")     # "What happens when they are flown out"
     person(g, 22, 3, "!", "polarsea:10,8")     # emperor penguins
-    person(g, 23, 17, "R", "polarsea:14,8")    # "Why they are here at all"
+    person(g, 23, 17, "R", "polarsea:14,8")    # "Why every boat does not do it already"
     g.land = (13, 20)
     return finish(g, [
         (4, 21, "sea_ps_floe", "revives", 1),
@@ -232,8 +235,6 @@ def abyss():
     g.landmark(18, 12, "lm_hydrothermal_vent")
     flowers(g, 6, (3, 2, 24, 21))
     person(g, 9, 16, "R", "abyss:2,7")         # Dr. Sylvia Earlham
-    person(g, 22, 20, "R", "abyss:13,7")       # "What the town is actually frightened of"
-    person(g, 5, 4, "R", "abyss:1,8")          # "What the town already has"
     person(g, 12, 19, "!", "abyss:5,8")        # THE MIDNIGHT ZONE
     person(g, 23, 3, "!", "abyss:10,8")        # better maps of Mars
     g.land = (13, 20)

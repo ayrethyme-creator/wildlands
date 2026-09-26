@@ -29,7 +29,7 @@ import forgekit as fk  # noqa: E402
 from forgekit import (Region, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, enclose, W, H)
 
-GEN = 15   # fifteenth rebuild. A save made before this, standing here, is relocated.
+GEN = 19  # was 15; 19 when 2026-09-26, every story moved to its animal's own country (part65). A save made before this, standing here, is relocated.
 MID, ROW = 13, 12
 
 # Where a door sits on each edge, and where you land beside it.
@@ -117,21 +117,20 @@ def hub():
         person(g, 23, 10, "!", "mythhub:11,3")  # AURORA RIFT (east)
         person(g, 4, 15, "!", "mythhub:4,7")    # HEARTH RIFT (west)
         person(g, 23, 15, "!", "mythhub:11,7")  # CELESTIAL RIFT (east)
-        person(g, 10, 20, "R", "mythhub:9,9")   # Ranger Tomas Reyes
         g.land = land_of("s")
         return finish(g, [(24, 21, "rift_hub_star", "revives", 1)])
 
     rooms = [mythhub()]
     rooms.append(room("rift1", 1611, [("e", "mythhub", (1, ROW))], "lm_cyclops", (8, 7),
-                      [((16, 9), "rift1:7,3")], [((8, 16), "rift1:14,1")], (4, 3, "rift_r1", "treats", 3)))
+                      [((16, 9), "rift1:7,3")], [], (4, 3, "rift_r1", "treats", 3)))
     rooms.append(room("rift2", 1621, [("w", "mythhub", (W - 2, ROW)), ("n1", "rift_north", land_of("s")), ("n2", "rift_isles", land_of("s"))],
-                      "lm_kraken", (18, 7), [((10, 9), "rift2:7,3")], [((18, 16), "rift2:13,2")], (24, 21, "rift_r2", "coins", 540)))
+                      "lm_kraken", (18, 7), [((10, 9), "rift2:7,3")], [], (24, 21, "rift_r2", "coins", 540)))
     rooms.append(room("rift3", 1631, [("e", "mythhub", (1, 17)), ("n1", "rift_africa", land_of("s")), ("n2", "rift_neareast", land_of("s"))],
-                      "lm_sacred_ibis", (8, 7), [((16, 9), "rift3:7,3")], [((10, 16), "rift3:8,7")], (4, 21, "rift_r3", "berries", 3)))
+                      "lm_sacred_ibis", (8, 7), [((16, 9), "rift3:7,3")], [], (4, 21, "rift_r3", "berries", 3)))
     rooms.append(room("rift4", 1641, [("w", "mythhub", (W - 2, 17)), ("n", "rift_eastasia", land_of("s"))],
-                      "lm_dragon_bones", (18, 7), [((10, 9), "rift4:7,3")], [((18, 16), "rift4:8,1")], (24, 21, "rift_r4", "antidote", 1)))
+                      "lm_dragon_bones", (18, 7), [((10, 9), "rift4:7,3")], [], (24, 21, "rift_r4", "antidote", 1)))
     rooms.append(room("rift5", 1651, [("s", "mythhub", (8, 1)), ("w", "rift_oceania", land_of("e"))],
-                      "lm_komodo", (18, 7), [((10, 9), "rift5:7,3")], [((17, 16), "rift5:6,5")], (24, 3, "rift_r5", "bigberries", 1), closed="n"))
+                      "lm_komodo", (18, 7), [((10, 9), "rift5:7,3")], [], (24, 3, "rift_r5", "bigberries", 1), closed="n"))
     # the story rooms
     for key, seed, side, back, lm, pouch in (
         ("rift_north", 1661, "s", ("rift2", (8, 1)), "lm_reindeer_eyes", ("rift_s_north", "coins", 560)),

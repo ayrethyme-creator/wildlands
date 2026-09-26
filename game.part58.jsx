@@ -16,10 +16,10 @@
 Object.assign(ARCS, {
   // ---------------- REGION 3: the fen and the water ----------------
   millrace: {
-    postgame: true,
+    // No longer post-game (2026-09-26): its story lives in main-game country now.
     region: 3,
     title: "The Millrace",
-    where: "seg_w2",
+    where: "taiga",
     blurb: "Beavers dam running water - it is not a choice, it is what they are built to do - and this family has backed the stream up over four hectares of Ada Oyelaran's pasture. That is her grazing under water and a genuine loss. The same dam is also the reason the fen downstream is holding water through the dry months for the first time in thirty years, which is why this is not simply a matter of removing a nuisance. Two real goods are in conflict here, and the interesting part is that the beavers are responding to something quite specific, if you can work out what.",
     evidence: {
       water: { label: "What the dam is holding", detail: "The pond is up about a metre, putting four hectares of pasture under water and blocking Ada's culvert solid. Get the actual number rather than an impression, because a metre is the figure any solution has to work against - and note that this is a working farm losing usable ground, not scenery being altered. Whatever gets proposed has to bring the water down, not explain why the flooding is interesting.", how: "Walk the flooded edge with Ada." },
@@ -101,7 +101,7 @@ Object.assign(ARCS, {
   tidewater: {
     region: 5,
     title: "The Weight in the Net",
-    where: "reef",
+    where: "shore",
     blurb: "Prawn trawlers drag a wide bag of net along the sea floor, and everything in its path goes in. Sea turtles breathe air, so a turtle swept into a net that stays down for hours simply drowns; it cannot get back to the surface. That is the whole mechanism, and it is nobody's intention. The six boats working this ground are not getting rich either - fuel is up, the catch is down, and a season lost is a family in trouble. So this is not a case of stopping bad people doing a bad thing. It is a case of finding the change the fleet can actually carry.",
     evidence: {
       drowned: { label: "How many are coming up dead", detail: "Eleven this month across six boats. A turtle held under for much more than forty minutes does not come back - it is not injured by the net, it drowns in it, which is why the ones that come up dead often have no marks on them at all. Counting them as they are landed is the only honest number anybody has, and it is the number every argument here has to answer to.", how: "Meet the boats coming in and count." },
@@ -140,7 +140,7 @@ Object.assign(ARCS, {
 
   // ---------------- REGION 6: the road through the canopy ----------------
   canopygap: {
-    postgame: true,
+    // No longer post-game (2026-09-26): its story lives in main-game country now.
     region: 6,
     title: "The Gap in the Trees",
     where: "canopywalk",
@@ -182,7 +182,7 @@ Object.assign(ARCS, {
 
   // ---------------- REGION 7: the panels and the burrows ----------------
   sunfield: {
-    postgame: true,
+    // No longer post-game (2026-09-26): its story lives in main-game country now.
     region: 7,
     title: "The Field of Glass",
     where: "seg_d3",
@@ -308,7 +308,7 @@ Object.assign(ARCS, {
   frostwatch: {
     region: 10,
     title: "The Bins at the Edge of Town",
-    where: "polarsea",
+    where: "tundra",
     blurb: "Polar bears hunt seals from sea ice. When the ice goes out in summer they are stuck ashore, fasting, until it comes back - and this town sits on the coast they are stuck on. Some of them have found the tip, and a bear that has once eaten human rubbish will keep coming back to where it found it, because that is exactly the behaviour that keeps a scavenging animal alive. The town is frightened, and reasonably so: the school walk goes past the east side. Nobody here wants to shoot bears, and they have shot two. Your job is to find the thing that actually breaks the pattern.",
     evidence: {
       tip: { label: "Where they are coming for", detail: "The open tip on the east side. Every single bear that has come into town this year went through it first - not past it, through it. That makes the tip the doorway rather than one problem among several: the bears are not wandering in at random and finding the houses, they are coming for a known food source and the houses are what they meet on the way. Shut the doorway and you are not managing the traffic, you are removing the reason for it.", how: "Follow the tracks back from the houses." },
@@ -388,7 +388,7 @@ Object.assign(ARCS, {
 
   // ---------------- REGION 12: the poles ----------------
   eyrie: {
-    postgame: true,
+    // No longer post-game (2026-09-26): its story lives in main-game country now.
     region: 12,
     title: "The Poles on the Ridge",
     where: "eyrie",

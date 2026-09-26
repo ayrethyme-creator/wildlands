@@ -85,7 +85,7 @@ def route4():
     signpost(g, 24, 10, "route4:gate2")        # -> Fossil Rift Camp
     person(g, 8, 8, "R", "route4:4,4")         # Dune Runner Riya
     person(g, 18, 18, "R", "route4:11,10")     # Nomad Tarek
-    person(g, 15, 3, "R", "route4:12,10")      # Skipper Rosa Delgado, heading for the cove
+    person(g, 15, 3, "R", "route4:12,10")      # Surveyor Nadia Haddad: the mole-rats under the solar field
     g.set(9, 14, "⁂"); g.set(17, 13, "¡")
     g.land = (13, 21)
     return finish(g, [
@@ -152,8 +152,8 @@ def seg_d1():
     tall(g, 6, 12, 3, 2); tall(g, 19, 13, 2, 1); tall(g, 18, 2, 2, 1)
     cacti(g, 8, 18, 2); cacti(g, 16, 10, 2)
     flowers(g, 5, (3, 2, 24, 16))
-    person(g, 6, 19, "R", "seg_d1:2,1")        # "What the boats are living on"
-    person(g, 16, 17, "R", "seg_d1:10,6")      # "How many are coming up dead"
+    person(g, 6, 19, "R", "seg_d1:2,1")        # "What is under the site"
+    person(g, 16, 17, "R", "seg_d1:10,6")      # "What the field is for"
     person(g, 8, 7, "R", "seg_d1:6,8")         # Digger Uzo
     person(g, 17, 3, "R", "seg_d1:3,10")       # Nomad Jax
     person(g, 5, 13, "R", "seg_d1:11,10")      # Prospector Ade
@@ -183,7 +183,7 @@ def seg_d2():
     flowers(g, 6, (3, 2, 24, 21))
     signpost(g, 3, 7, "seg_d2:gate")           # -> the Turned Earth
     person(g, 16, 3, "R", "seg_d2:6,1")        # Digger Fen
-    person(g, 8, 11, "R", "seg_d2:2,4")        # "How long a turtle takes to replace"
+    person(g, 8, 11, "R", "seg_d2:2,4")        # "What is next door"
     person(g, 5, 15, "R", "seg_d2:1,5")        # Nomad Uzo
     person(g, 22, 10, "R", "seg_d2:13,5")      # Prospector Jax, under the arch
     person(g, 16, 20, "R", "seg_d2:6,7")       # Waterfinder Ade
@@ -209,7 +209,7 @@ def seg_d3():
     tall(g, 6, 3, 3, 1); tall(g, 21, 14, 2, 1); tall(g, 5, 14, 2, 1)
     cacti(g, 17, 20, 2); cacti(g, 7, 10, 2); cacti(g, 19, 2, 1)
     flowers(g, 6, (3, 2, 24, 21))
-    person(g, 23, 12, "R", "seg_d3:14,1")      # "What a turtle excluder costs the catch"
+    person(g, 23, 12, "R", "seg_d3:14,1")      # "What the fence does"
     person(g, 8, 5, "R", "seg_d3:4,3")         # Digger Otto
     person(g, 13, 13, "R", "seg_d3:9,4")       # Nomad Fen, by the pool
     person(g, 6, 17, "R", "seg_d3:5,7")        # Prospector Uzo
@@ -238,7 +238,7 @@ def seg_d4():
     cacti(g, 9, 10, 2); cacti(g, 18, 20, 2); cacti(g, 17, 3, 1)
     flowers(g, 6, (3, 2, 24, 21))
     signpost(g, 3, 7, "seg_d4:gate")           # -> the Shield Wall
-    person(g, 17, 5, "R", "seg_d4:11,1")       # "Why the first attempt failed"
+    person(g, 17, 5, "R", "seg_d4:11,1")       # "What happens when you move them"
     person(g, 22, 11, "R", "seg_d4:3,4")       # Digger Zev, at the waterhole
     person(g, 8, 17, "R", "seg_d4:11,4")       # Nomad Otto
     g.set(10, 5, "⁂"); g.set(16, 18, "⁅"); g.set(5, 11, "¡")

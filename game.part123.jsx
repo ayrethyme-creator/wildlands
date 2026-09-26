@@ -13,7 +13,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "TTgggggggg....gWWWWWWWWWWWWW",
    "TTg^gggggΩ....gWWWWWWWWWWWWW",
    "TTTg^gggg..!..gWWWWWWWWWWWWW",
-   "TTTgGGGgg...............eWWW",
+   "TTTgGGGggR..............eWWW",
    "TTT!ggggg.....gWWWWWWWWWWWWW",
    "e.............gWWWWWWWWWWWWW",
    "T.............g.WWWWWWWWWWWW",
@@ -22,7 +22,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "TTTTΩTggg..!..g.WWWWWWWWWWWW",
    "TTTTgTgggΩ.....WWWWWWWWWWWWW",
    "TTTTgg........gWWWWWWWWWWWWW",
-   "TTTggg........gWWWWWWWWWWWWW",
+   "TTTgRg........gWWWWWWWWWWWWW",
    "TT^ggg..gg.!............eWWW",
    "TTTTGG..g^Rg..gWWWWWWWWWWWWW",
    "TTTggg..^TTT..gWWWWWWWWWWWWW",
@@ -33,6 +33,8 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "10,5": "shore:2,2",
    "10,13": "shore:2,5",
    "10,20": "shore:2,10",
+   "4,18": "shore:14,3",
+   "9,9": "shore:2,12",
    "11,4": "shore:ice",
    "11,8": "shore:blue",
    "11,15": "shore:kelp",
@@ -104,7 +106,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    11
   ],
   "links": {},
-  "gen": 17
+  "gen": 19
  },
  "reef": {
   "rows": [
@@ -174,7 +176,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 17
+  "gen": 19
  },
  "kelp": {
   "rows": [
@@ -242,7 +244,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 17
+  "gen": 19
  },
  "openocean": {
   "rows": [
@@ -250,15 +252,15 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "TT^T^^TTTTTT^^TTTTTTTTTTTTTT",
    "TTTggggggTTTggggTTTTTTTggTTT",
    "TTTTggggggggggΩggggggggggTTT",
-   "TTTTgggggggggggg!WWWWWWWTTTT",
+   "TTTTRggggggggggg!WWWWWWWTTTT",
    "TTTTWWWWWWWggTggWWWWWWWWWTTT",
    "TTTWWWWWWWWWggggWWWWWWWWWTTT",
    "TTTWWWWWWWWW*gTggggggggggTTT",
    "TTTWWWWWWWWWgggggggggggggTTT",
    "TTTgWWWWWWWggggggRggggggTTTT",
    "TTTggggg*gggggggggggggggg^TT",
-   "TTTggggggggggggggggg!...nTTT",
-   "TTTgGgggggggGGGgggggg....TTT",
+   "TTTgggggggggggggggggR...nTTT",
+   "TTTgGgggggggGGGggggg!....TTT",
    "TTTggggggggggggggggWWWWWgTTT",
    "TTTgggggggRgggggggWWWWWWWTTT",
    "TTT*ggggg*ggggggggWWWWWWWTTT",
@@ -275,9 +277,11 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "10,14": "openocean:2,7",
    "18,20": "openocean:13,7",
    "17,9": "openocean:3,8",
+   "4,4": "openocean:14,7",
+   "20,11": "openocean:9,8",
    "11,19": "openocean:5,8",
    "16,4": "openocean:10,8",
-   "20,11": "openocean:dive"
+   "20,12": "openocean:dive"
   },
   "marks": {
    "14,3": "lm_whale_pump"
@@ -316,7 +320,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 17
+  "gen": 19
  },
  "polarsea": {
   "rows": [
@@ -333,7 +337,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "TTTgWWWWWWWgggggggggggggggTT",
    "TTTggggggg*gΩgggggggggggTgTT",
    "TTTgggggggggggg*gggggggggg^T",
-   "TTTgggggggggggggggRgggg*TgTT",
+   "TTTgggggggggggggggggggg*TgTT",
    "TTTgggggggTgggggggggggggggTT",
    "TTTggggTgg*gggWWWWWggggTggTT",
    "TTTgTRggggggggWWWWWgggggggTT",
@@ -348,7 +352,6 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
   "cast": {
    "5,16": "polarsea:2,7",
    "11,3": "polarsea:5,8",
-   "18,13": "polarsea:8,8",
    "22,3": "polarsea:10,8",
    "23,17": "polarsea:14,8"
   },
@@ -384,7 +387,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 17
+  "gen": 19
  },
  "abyss": {
   "rows": [
@@ -392,7 +395,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "TTTTTTT^TTgTTTTTTTTTTTTTTTTT",
    "TTTggggggggggTgTTTgTgT^T^TTT",
    "TTTgggggggggggggggggggg!TTTT",
-   "TTgggRggggggGGGggggggggTTTTT",
+   "TTggggggggggGGGggggggggTTTTT",
    "TTgg*gggggggggg*gggWWWWWTTTT",
    "TTgggWWWWWggggggggWWWWWWWTTT",
    "TTTgWWWWWWWggggggggWWWWWWTTT",
@@ -408,15 +411,13 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "TTTggGGGgggggggg*gWWWWWggTTT",
    "TTTgTgggggggg..ggggggggggTTT",
    "TTgggggggggg!..ggggggggggTTT",
-   "TTTgggggg^ggg..gggggggRgTTTT",
+   "TTTgggggg^ggg..gggggggggTTTT",
    "TTTgggggggggg..gggTTggggTTTT",
    "TTTTTTTTTTTTg..TTTTTTTTggTTT",
    "TTTTTTTTTTTTTs.TTTTTTTTT^TTT"
   ],
   "cast": {
    "9,16": "abyss:2,7",
-   "22,20": "abyss:13,7",
-   "5,4": "abyss:1,8",
    "12,19": "abyss:5,8",
    "23,3": "abyss:10,8"
   },
@@ -452,7 +453,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 17
+  "gen": 19
  }
 }, inbound: [
  {

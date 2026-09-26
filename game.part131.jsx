@@ -88,7 +88,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
    20
   ],
   "links": {},
-  "gen": 14
+  "gen": 19
  },
  "cattery3": {
   "rows": [
@@ -146,7 +146,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
    21
   ],
   "links": {},
-  "gen": 14
+  "gen": 19
  },
  "cattery1": {
   "rows": [
@@ -211,7 +211,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  },
  "cattery2": {
   "rows": [
@@ -275,7 +275,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  },
  "cattery4": {
   "rows": [
@@ -334,7 +334,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  },
  "kennel1": {
   "rows": [
@@ -343,7 +343,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
    "^^^gggggggggg..ggggggggggg^^",
    "^^^gggggggggg..ggg*ggggggg^^",
    "^^^gggggΩgggg..gggggg*g^gg^^",
-   "^^^gggggggggg..gRgggggggg^^^",
+   "^^^gggggggggg..gggggggggg^^^",
    "^^^gg....gggg..ggggggggg^g^^",
    "^^ggg.....ggg..ggggggΩgggg^^",
    "^^^g^.....ggg..ggggg*gg^g^^^",
@@ -365,7 +365,6 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
   ],
   "cast": {
    "9,11": "kennel1:7,3",
-   "16,5": "kennel1:9,3",
    "17,15": "kennel1:7,7"
   },
   "marks": {
@@ -399,7 +398,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  },
  "kennel2": {
   "rows": [
@@ -413,7 +412,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
    "^^^gggggggg..ggggg*ggggg^^^^",
    "^^^gggggggg..ggggggΩgggg^^^^",
    "^^^gggggggg..gggggggggggg^^^",
-   "^^^gggRgggg..gggggggggg^g^^^",
+   "^^^gggggggg..gggggggggg^g^^^",
    "^^^gggggggg..ggggggggggg^^^^",
    "^^^g^gggggg....ggg*gggggg^^^",
    "^^^^gggg*gg....gggggggg^g^^^",
@@ -424,16 +423,13 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
    "^^^^g^gggg*gg..ggggggggggg^^",
    "^^^WWWWWWWWWW..WWWWWWWWWWg^^",
    "^^^gggggggg*g..ggggggggggg^^",
-   "^^^^gRggggggg..ggggggRgggg^^",
+   "^^^^ggggggggg..ggggggggggg^^",
    "^^^gggggggggg..gggggggggg^^^",
    "^^^gggggggggg..gggggggggg^^^"
   ],
   "cast": {
-   "6,10": "kennel2:4,3",
    "8,15": "kennel2:7,3",
-   "17,14": "kennel2:7,7",
-   "5,21": "kennel2:1,8",
-   "21,21": "kennel2:14,8"
+   "17,14": "kennel2:7,7"
   },
   "marks": {
    "19,8": "lm_scent_dogs",
@@ -463,7 +459,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  },
  "kennel3": {
   "rows": [
@@ -472,7 +468,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
    "^^ggggg^^^^^^^gggggggggg^^^^",
    "^^ggggggggggggggggggggggg^^^",
    "^^g^ggggggggg*ggggggggggg^^^",
-   "^^^gggggggggggggRggggggg^^^^",
+   "^^^ggggggggggggggggggggg^^^^",
    "^^^ggggggggggggggggggggg^^^^",
    "^^^ggggggggggggggWWWWWgg^^^^",
    "^^^ggggΩgggggg*ggWWWWWgg^^^^",
@@ -480,7 +476,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
    "^^^^g^ggggggggg!gggggggg*^^^",
    "^^^^ggggggggggg*ggggggggg^^^",
    "^^^ggΩggggg..gggggggggggg^^^",
-   "^^^gggggggg..ggggggggR^g^^^^",
+   "^^^gggggggg..ggggggggg^g^^^^",
    "^^^ggggg!gg..ggggggggg**^^^^",
    "^^^^g^ggg*g..ggggggggggg^^^^",
    "^^^g^gggggg..gggggggggggg^^^",
@@ -493,9 +489,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
    "^^^gggggggg..gggggggggggg^^^"
   ],
   "cast": {
-   "21,13": "kennel3:14,1",
    "15,10": "kennel3:7,3",
-   "16,5": "kennel3:7,5",
    "8,14": "kennel3:7,7"
   },
   "marks": {
@@ -523,7 +517,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  },
  "kennel4": {
   "rows": [
@@ -584,7 +578,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  },
  "kennel5": {
   "rows": [
@@ -647,7 +641,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  },
  "rescue": {
   "rows": [
@@ -706,7 +700,7 @@ REBUILT_REGIONS.push({ name: "hearth", maps: {
     "off": 0
    }
   },
-  "gen": 14
+  "gen": 19
  }
 }, inbound: [
  {

@@ -34,7 +34,7 @@ import forgekit as fk  # noqa: E402
 from forgekit import (Region, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, enclose, rock_edges, W, H)
 
-GEN = 14   # fourteenth rebuild. A save made before this, standing here, is relocated.
+GEN = 19  # was 14; 19 when 2026-09-26, every story moved to its animal's own country (part65). A save made before this, standing here, is relocated.
 MID = 13
 
 
@@ -174,7 +174,6 @@ def kennels():
         hedges(g, 5, 16, 2); hedges(g, 22, 4, 2)
         flowers(g, 8, (3, 2, 24, 21))
         person(g, 9, 11, "!", "kennel1:7,3")         # THE KENNELS
-        person(g, 16, 5, "R", "kennel1:9,3")         # Ada Oyelaran
         person(g, 17, 15, "!", "kennel1:7,7")        # the pug and the bulldog
         pieces(g, [(6, 20, "doghouse"), (21, 7, "doghouse"), (8, 4, "bench")])
         g.land = (MID, 21)
@@ -189,11 +188,8 @@ def kennels():
         g.landmark(19, 8, "lm_scent_dogs")
         hedges(g, 6, 5, 2); hedges(g, 22, 15, 2)
         flowers(g, 8, (3, 2, 24, 21))
-        person(g, 6, 10, "R", "kennel2:4,3")         # "What the dam is holding"
         person(g, 8, 15, "!", "kennel2:7,3")         # a border collie
         person(g, 17, 14, "!", "kennel2:7,7")        # the Dalmatian and the greyhound
-        person(g, 5, 21, "R", "kennel2:1,8")         # "How fast they rebuild"
-        person(g, 21, 21, "R", "kennel2:14,8")       # "What the flooding is doing further down"
         pieces(g, [(17, 4, "doghouse"), (7, 5, "bench")])
         g.land = (MID, 22)
         return finish(g, [(24, 3, "hth_k2_field", "coins", 520)], fill="^")
@@ -206,9 +202,7 @@ def kennels():
         g.landmark(7, 8, "lm_serum_run")
         hedges(g, 21, 18, 3); hedges(g, 5, 17, 2)
         flowers(g, 8, (3, 2, 24, 21))
-        person(g, 21, 13, "R", "kennel3:14,1")       # "Who is in the lodge"
         person(g, 15, 10, "!", "kennel3:7,3")        # THE SNOW YARD
-        person(g, 16, 5, "R", "kennel3:7,5")         # "Why they are damming here and not elsewhere"
         person(g, 8, 14, "!", "kennel3:7,7")         # Barry
         pieces(g, [(8, 18, "sled"), (15, 18, "sled"), (5, 12, "doghouse")])
         g.land = (12, 21)

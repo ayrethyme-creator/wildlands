@@ -81,7 +81,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
    13
   ],
   "links": {},
-  "gen": 12
+  "gen": 19
  },
  "dig1": {
   "rows": [
@@ -143,7 +143,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig1b": {
   "rows": [
@@ -201,7 +201,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig1c": {
   "rows": [
@@ -255,7 +255,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig2": {
   "rows": [
@@ -316,7 +316,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig2b": {
   "rows": [
@@ -377,7 +377,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig2c": {
   "rows": [
@@ -433,7 +433,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig3": {
   "rows": [
@@ -449,7 +449,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
    "^^ggggggggg..ggg.....ggggg^^",
    "^^^g^gggggg..ggg.....gggg^^^",
    "^^^gggggggg....gg....gggg^^^",
-   "^^^gggggRgg....gggggggggg^^^",
+   "^^^gggggggg....gggggggggg^^^",
    "^^^^gggggggg*..gggggggggg^^^",
    "^^^^g^ggggggg..gggggggggg^^^",
    "^^^^g^ggggggg..gggggggggg^^^",
@@ -463,7 +463,6 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
    "^^^^^^^^^^^^^s.^^^^^^^^^^^^^"
   ],
   "cast": {
-   "8,12": "dig3:2,3",
    "16,16": "dig3:8,3"
   },
   "marks": {
@@ -494,7 +493,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig3b": {
   "rows": [
@@ -502,14 +501,14 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
    "^^^gggggggggg..gggggggggg^^^",
    "^^^gggggggggg..gggg*ggggg^^^",
    "^^^gggggggggg..gggggg*gggg^^",
-   "^^^^GGGGGgggg..gRggggggggg^^",
+   "^^^^GGGGGgggg..ggggggggggg^^",
    "^^^gGGGGGgggg..ggggggggggg^^",
    "^^^gGGGGGgggg..ggggggggggg^^",
    "^^^gggggggggg..gg.....⁅gg^^^",
    "^^^gggggggggg..g...Ω...ggg^^",
    "^^^g^gggggggg..g.......gg^^^",
    "^^^^ggggg**gg..g.......gg^^^",
-   "^^^gggggRgggg..gg⁅...⁅^g^^^^",
+   "^^^gggggggggg..gg⁅...⁅^g^^^^",
    "^^^^ggggggggg..ggggggggg^^^^",
    "^^^gggggggggg..g!ggggggg^^^^",
    "^^^gggggggg....gggggggg^g^^^",
@@ -524,9 +523,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
    "^^^gggggggg..gggggggggggg^^^"
   ],
   "cast": {
-   "16,4": "dig3b:8,1",
-   "16,13": "dig3b:8,2",
-   "8,11": "dig3b:1,8"
+   "16,13": "dig3b:8,2"
   },
   "marks": {
    "19,8": "lm_maiasaura"
@@ -554,7 +551,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig3c": {
   "rows": [
@@ -572,21 +569,19 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
    "^^gggggggggg..ggggggggggg^^^",
    "^^g^gggggggg...gggggg*ggg^^^",
    "^^^ggggggggg...gggggggg^g^^^",
-   "^^^ggggggRggg..gggggggg^g^^^",
+   "^^^gggggggggg..gggggggg^g^^^",
    "^^^gggggggggg..ggg.....ggg^^",
    "^^^gggggggggg..ggg.....gg^^^",
    "^^^g^GGGGgggg..ggg....ggg^^^",
    "^^^gGGGGGgggg..gggggggggg^^^",
-   "^^^g^GGGGgggg..gggRgggggg^^^",
+   "^^^g^GGGGgggg..gggggggggg^^^",
    "^^^gggggggggg..gggggggggg^^^",
    "^^^gggggggggg..gggggggg*g^^^",
    "^^^gggggggggg..gggggggggg^^^",
    "^^^gggggggggg..gggggggggg^^^"
   ],
   "cast": {
-   "16,10": "dig3c:8,2",
-   "18,19": "dig3c:13,3",
-   "9,14": "dig3c:1,8"
+   "16,10": "dig3c:8,2"
   },
   "marks": {
    "7,7": "lm_ashfall"
@@ -614,7 +609,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  },
  "dig3d": {
   "rows": [
@@ -632,7 +627,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
    "^^^ggTggg!ggggggggggggggg^^^",
    "^^^^gggTgggg..ggggggggggg^^^",
    "^^^ggggggggg..gggggggggg^^^^",
-   "^^^ggTgggggg..gRggggggggg^^^",
+   "^^^ggTgggggg..ggggggggggg^^^",
    "^^^ggggggggg..ggggg*ggggg^^^",
    "^^^ggggggggg..ggggGGGGGg^^^^",
    "^^g*GGGGGggg..ggggGGGGGg^^^^",
@@ -644,7 +639,6 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
    "^^^ggggggggg..ggggggggggg^^^"
   ],
   "cast": {
-   "15,14": "dig3d:14,1",
    "9,11": "dig3d:7,3"
   },
   "marks": {
@@ -669,7 +663,7 @@ REBUILT_REGIONS.push({ name: "fossil", maps: {
     "off": 0
    }
   },
-  "gen": 12
+  "gen": 19
  }
 }, inbound: [
  {

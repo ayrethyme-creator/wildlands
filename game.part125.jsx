@@ -62,7 +62,7 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    12
   ],
   "links": {},
-  "gen": 11
+  "gen": 19
  },
  "canopywalk": {
   "rows": [
@@ -70,12 +70,12 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    "TTTT^TTTTTTT^TTTTTTTTTTTTTTT",
    "TTTggggggggGGTT^TTTTTTTTTTTT",
    "TTTggRgggggRgggg⁌*gggTTTTTTT",
-   "TTTgggg*ggggggggggggTTTTTTTT",
+   "TTTgRgg*ggggggggggggTTTTTTTT",
    "TTTgTggg............TTTTTTTT",
-   "TTTTgTgg............ggggTTTT",
+   "TTTTgTgg............gggRTTTT",
    "TTTggggg..ggggggg*..gggggTTT",
-   "TTTTTTgg..gggggggg..RgggTTTT",
-   "TT^TTTgg..ggTTTggg..g*gggTTT",
+   "TTTTTTgg..ggggRggg..RgggTTTT",
+   "TT^TTTgg..ggTTTggg..g*RggTTT",
    "TTTTTTgg..ggTΩTggg..gggggTTT",
    "TTTTTTgg..ggTgTggg..gggggTTT",
    "TTTTTT*g..gggggggg.........e",
@@ -85,8 +85,8 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    "TTTggggg..gggg*ggggg*gg*gTTT",
    "TTgg*ggg..........ggggggggTT",
    "TTTggggg..........gggg*gggTT",
-   "TT^gggggggg*ggggg!ggTTTTTgTT",
-   "TTTTGGgggggggggggg*gTTTTTgTT",
+   "TT^gggggggg*ggggg!gRTTTTTgTT",
+   "TTTTGGgggggRgggggg*gTTTTTgTT",
    "TTTTgggggggTTTgggg*gTTTTggTT",
    "TT^T^ggTTgTTTTTTTgTgTTTTTTTT",
    "TTTTT^^TT^TTTTTTTTTTTTTTTTTT"
@@ -97,7 +97,13 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    "20,8": "canopywalk:8,2",
    "10,15": "canopywalk:10,3",
    "22,14": "canopywalk:8,3",
-   "17,19": "canopywalk:8,8"
+   "17,19": "canopywalk:8,8",
+   "22,9": "canopywalk:14,1",
+   "4,4": "canopywalk:1,8",
+   "14,8": "canopywalk:8,5",
+   "23,6": "canopywalk:2,1",
+   "11,20": "canopywalk:13,7",
+   "19,19": "canopywalk:9,1"
   },
   "marks": {
    "13,10": "lm_canopy_fogging"
@@ -127,7 +133,7 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    12
   ],
   "links": {},
-  "gen": 11
+  "gen": 19
  },
  "outback": {
   "rows": [
@@ -189,7 +195,7 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    12
   ],
   "links": {},
-  "gen": 11
+  "gen": 19
  },
  "savanna": {
   "rows": [
@@ -256,7 +262,7 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    12
   ],
   "links": {},
-  "gen": 11
+  "gen": 19
  },
  "tundra": {
   "rows": [
@@ -264,14 +270,14 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    "TTTTTT^TTTggggggggTTTgTTTTTT",
    "TTTgggggggggggggggggggggg^TT",
    "TTTTGGGGggggggGGGggg*gggg^TT",
-   "TTTTggggggggggggggggTTgggTTT",
+   "TTTTgRggggggggggRgggTTgggTTT",
    "TTTggggggg..ggggWWWWWggggTTT",
    "TTTgTggggg..ggggWWWWWggggTTT",
    "TTTggggggg..ggggWWWWWgggggTT",
    "TTTggTgggg..gggggggg*ggg^TTT",
-   "TTTTggTggg..*gRgggg*gggg^TTT",
+   "TTTTggTggg..*gRgggg*gggR^TTT",
    "TTTTgTgggg..ggggggg¡ggggggTT",
-   "TTTTgggggg..gggggggggg!gggTT",
+   "TTTTRggggg..gggggggggg!gggTT",
    "TTTggggggg.................e",
    "TTTGGGgggg.................T",
    "TTTggggg!gggggggggggRggggTTT",
@@ -279,9 +285,9 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    "TTTgTgggggggggggggggggggggTT",
    "TT^ggWWWWWgg⁂ggggggggggggTTT",
    "TTTggWWWWWgggggggggWWWgggTTT",
-   "TTTggWWWWWg*TgTggggggggggTTT",
-   "TTTTgggggggggggggggggggggTTT",
-   "TTTTTggggg*ggggggggggggTggTT",
+   "TTTggWWWWWgRTgTggggggggggTTT",
+   "TTTTggggggggggggggggggggRTTT",
+   "TTTTTggggg*ggggggggggggTTTTT",
    "TTTTTTTTTTTTTTTgTg^gTTTTTTTT",
    "TTTTTTTTTTTTTTTTT^TTTTTTTTTT"
   ],
@@ -289,7 +295,13 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    "14,9": "tundra:7,2",
    "20,14": "tundra:10,3",
    "22,11": "tundra:8,3",
-   "8,14": "tundra:8,8"
+   "8,14": "tundra:8,8",
+   "23,9": "tundra:8,4",
+   "5,4": "tundra:1,8",
+   "16,4": "tundra:14,8",
+   "4,11": "tundra:2,1",
+   "11,19": "tundra:14,1",
+   "24,20": "tundra:5,7"
   },
   "marks": {
    "16,15": "lm_permafrost"
@@ -319,31 +331,31 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    12
   ],
   "links": {},
-  "gen": 11
+  "gen": 19
  },
  "taiga": {
   "rows": [
    "TTTTTTT^T^TTTT^TTTTTTTTTTTTT",
    "TTTTTTTggggggggTTTTTgggTTTTT",
    "TTTTgggggggggggggTggggggTTTT",
-   "TTTgGgg*ggggggggggggggg*ggTT",
+   "TTTgGgg*gRggggggggRgggg*ggTT",
    "TTTgTgTTTgggg..gggTTTTTgggTT",
    "TTgggTTTTTggg..gggTTTTTgggTT",
    "TTTggTTTTTggg..ggggTTTggggTT",
    "TTgggTTTTTggg..⁂gggggggggTTT",
    "TTggggTTTgggg..ggggg*ggggTTT",
-   "TTTgggggg*Rgg..ggΩgggggg*TTT",
+   "TTTgggggg*Rgg..ggΩgggRgg*TTT",
    "T^TTg*ggggggg..gggggGGGTgTTT",
    "TTTgggggggggg..gggg⁂gg*ggTTT",
    "TTTggg....ggg..............e",
    "TTT^gg.WW.ggg..............T",
    "TTT^gg....ggg..gggggg!gggTTT",
-   "TTTgggggggggg..ggWWWgggggTTT",
+   "TTTTRgggggggg..ggWWWgggggTTT",
    "TTTTggggGGGgg..g*ggggggggTTT",
-   "TTTTTgggggggg..ggggggggggTTT",
+   "TTTTTgggggggg..gggggggggRTTT",
    "TTTTTTTTggg*g..!gggTTTTTgTTT",
    "TTTTTTTTTgggg..ggggTTTTTggTT",
-   "TTTTTTTTTgggg..ggggTTTTTgTTT",
+   "TTTTTTTTTgggg..gRggTTTTTgTTT",
    "TTTggggggg¡gg..gT^ggggg*gg^T",
    "TTTTTTTTTTTTT^^TTTTTTTTTTTTT",
    "TTTTTTTTTTTTTTTTTTTTTTTTTTTT"
@@ -351,7 +363,13 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
   "cast": {
    "10,9": "taiga:7,2",
    "21,14": "taiga:8,3",
-   "15,18": "taiga:8,8"
+   "15,18": "taiga:8,8",
+   "21,9": "taiga:1,6",
+   "9,3": "taiga:14,1",
+   "18,3": "taiga:10,8",
+   "4,15": "taiga:7,3",
+   "16,20": "taiga:2,1",
+   "24,17": "taiga:5,7"
   },
   "marks": {
    "17,9": "lm_lynx_hare"
@@ -381,7 +399,7 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    12
   ],
   "links": {},
-  "gen": 11
+  "gen": 19
  },
  "cave1": {
   "rows": [
@@ -447,7 +465,78 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
    12
   ],
   "links": {},
-  "gen": 11
+  "gen": 19
+ },
+ "eyrie": {
+  "rows": [
+   "^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+   "^^^^^^^^^^^^^^^gggg^^^^^^^^^",
+   "^^g*^^^ggg^gggggggggGGGg^^^^",
+   "^^^gggggggggggggggggRgggg^^^",
+   "^^^g^g^gRggg*ggggggggg^g^^^^",
+   "^^gggggggggggg..........g^^^",
+   "^^^gg^g^gggggg..........g^^^",
+   "^^^gΩggggΩgggg..ggggggg^Ω^^^",
+   "^^^g*gGGGGGggg..gΩggggg^R^^^",
+   "^^^ggggggggggg..ggggggg^g^^^",
+   "^^^^g!gggggg*g..gg*gggg^g^^^",
+   "^^^ggggggggggg..ggggg^^gg^^^",
+   "e...............gggggggg^^^^",
+   "^...............gggggg^g^^^^",
+   "^^^ggggggggggg..gggg^^ggg^^^",
+   "^^^^Rggggggggg..ggg*ggggg^^^",
+   "^^^^ggggg^g^gg..ggΩggggg^^^^",
+   "^^^ggggggggggg..gggggg^g^^^^",
+   "^^^^^^gggggggg..ggggggg^g^^^",
+   "^^^ggggggggggg..........g^^^",
+   "^^ggg^gggggggg..........g^^^",
+   "^^^gggggggRggggggΩGGGgggR^^^",
+   "^^^^^^^^g^^ggg^^g^^^^^^^^^^^",
+   "^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+  ],
+  "cast": {
+   "5,10": "eyrie:7,3",
+   "4,15": "eyrie:12,5",
+   "8,4": "eyrie:1,1",
+   "20,3": "eyrie:5,8",
+   "24,8": "eyrie:8,1",
+   "10,21": "eyrie:14,1",
+   "24,21": "eyrie:14,8"
+  },
+  "marks": {
+   "18,16": "lm_golden_eagle",
+   "4,7": "decor:powerpole",
+   "9,7": "decor:powerpole",
+   "17,8": "decor:powerpole",
+   "24,7": "decor:powerpole",
+   "17,21": "decor:powerpole"
+  },
+  "finds": {
+   "24,14": {
+    "id": "side_ey_ridge",
+    "item": "revives",
+    "n": 1
+   },
+   "3,21": {
+    "id": "side_ey_scree",
+    "item": "coins",
+    "n": 320
+   }
+  },
+  "exits": {
+   "0,12": {
+    "map": "peak",
+    "x": 14,
+    "y": 3
+   }
+  },
+  "beyond": {},
+  "land": [
+   1,
+   12
+  ],
+  "links": {},
+  "gen": 19
  }
 }, inbound: [
  {
@@ -505,5 +594,12 @@ REBUILT_REGIONS.push({ name: "sides", maps: {
   "map": "cave1",
   "x": 18,
   "y": 1
+ },
+ {
+  "from": "peak",
+  "tile": "15,3",
+  "map": "eyrie",
+  "x": 1,
+  "y": 12
  }
 ] });

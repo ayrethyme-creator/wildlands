@@ -31,7 +31,7 @@ import forgekit as fk  # noqa: E402
 from forgekit import (Region, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, enclose, rock_edges, W, H)
 
-GEN = 12   # twelfth rebuild. A save made before this, standing here, is relocated.
+GEN = 19  # was 12; 19 when 2026-09-26, every story moved to its animal's own country (part65). A save made before this, standing here, is relocated.
 MID = 13   # every map's door and landing column
 
 
@@ -155,7 +155,7 @@ def jurassic():
         tall(g, 6, 6, 3, 3); tall(g, 6, 17, 3, 2); tall(g, 21, 19, 2, 1); bones(g, 22, 4, 2)
         flowers(g, 5, (3, 2, 24, 21))
         person(g, 16, 5, "!", "dig2:8,3")        # JURASSIC
-        person(g, 9, 13, "R", "dig2:4,6")        # Surveyor Nadia Haddad
+        person(g, 9, 13, "R", "dig2:4,6")        # Dr. Yusuf Karim: the fossil trade (Archaeopteryx is Jurassic)
         g.land = (MID, 21)
         return finish(g, [(4, 3, "fos_d2_ferns", "treats", 3)], fill="^")
 
@@ -168,9 +168,9 @@ def jurassic():
         tall(g, 6, 5, 3, 2); tall(g, 6, 17, 3, 2); rocks(g, 22, 16, 2); bones(g, 23, 20, 1)
         flowers(g, 5, (3, 2, 24, 21))
         person(g, 16, 14, "!", "dig2b:8,2")      # THE SKY QUARRY
-        person(g, 22, 12, "R", "dig2b:12,3")     # "What the field is for"
-        person(g, 8, 10, "R", "dig2b:6,5")       # "What is next door"
-        person(g, 9, 20, "R", "dig2b:1,8")       # "What is under the site"
+        person(g, 22, 12, "R", "dig2b:12,3")     # "What is being taken"
+        person(g, 8, 10, "R", "dig2b:6,5")       # "Who is doing the digging"
+        person(g, 9, 20, "R", "dig2b:1,8")       # "Why the rest of it mattered"
         g.land = (MID, 21)
         return finish(g, [(24, 3, "fos_d2b_quarry", "coins", 420)], fill="^")
 
@@ -183,8 +183,8 @@ def jurassic():
         tall(g, 6, 17, 3, 2); tall(g, 21, 4, 3, 1); rocks(g, 22, 20, 2)
         flowers(g, 5, (3, 2, 24, 21))
         person(g, 15, 10, "!", "dig2c:7,3")      # AMBER SEEP
-        person(g, 17, 17, "R", "dig2c:8,4")      # "What the fence does"
-        person(g, 6, 12, "R", "dig2c:1,8")       # "What happens when you move them"
+        person(g, 17, 17, "R", "dig2c:8,4")      # "Where it ends up"
+        person(g, 6, 12, "R", "dig2c:1,8")       # "What happens where digging is legal and paid"
         g.land = (12, 20)
         return finish(g, [(4, 3, "fos_d2c_resin", "antidote", 1)], fill="^")
 
@@ -201,7 +201,6 @@ def cretaceous():
         g.landmark(19, 8, "lm_ammonite")
         beds(g, 18, 10, 3, 2); tall(g, 6, 6, 3, 2); tall(g, 6, 18, 3, 2); bones(g, 22, 18, 2); rocks(g, 22, 4, 2)
         flowers(g, 5, (3, 2, 24, 21))
-        person(g, 8, 12, "R", "dig3:2,3")        # Dr. Yusuf Karim
         person(g, 16, 16, "!", "dig3:8,3")       # CRETACEOUS
         g.land = (MID, 21)
         return finish(g, [(4, 3, "fos_d3_shells", "treats", 3)], fill="^")
@@ -216,9 +215,7 @@ def cretaceous():
             g.set(x, y, "⁅")
         tall(g, 6, 5, 3, 2); tall(g, 6, 18, 3, 2); rocks(g, 22, 18, 2)
         flowers(g, 5, (3, 2, 24, 21))
-        person(g, 16, 4, "R", "dig3b:8,1")       # "What is being taken"
         person(g, 16, 13, "!", "dig3b:8,2")      # THE NESTING GROUNDS
-        person(g, 8, 11, "R", "dig3b:1,8")       # "Why the rest of it mattered"
         g.land = (12, 21)
         return finish(g, [(24, 3, "fos_d3b_nests", "berries", 3)], fill="^")
 
@@ -231,8 +228,6 @@ def cretaceous():
         bones(g, 20, 6, 3); tall(g, 21, 10, 2, 1); tall(g, 6, 18, 3, 2)
         flowers(g, 5, (3, 2, 24, 21))
         person(g, 16, 10, "!", "dig3c:8,2")      # ASHFALL BEDS
-        person(g, 18, 19, "R", "dig3c:13,3")     # "Who is doing the digging"
-        person(g, 9, 14, "R", "dig3c:1,8")       # "Where it ends up"
         g.land = (14, 21)
         return finish(g, [(24, 3, "fos_d3c_ash", "coins", 440)], fill="^")
 
@@ -247,7 +242,6 @@ def cretaceous():
         g.landmark(18, 10, "lm_kpg_boundary")
         bones(g, 7, 13, 3); tall(g, 6, 18, 3, 2); tall(g, 20, 17, 3, 2); rocks(g, 21, 4, 2)
         flowers(g, 5, (3, 2, 24, 21))
-        person(g, 15, 14, "R", "dig3d:14,1")     # "What happens where digging is legal and paid"
         person(g, 9, 11, "!", "dig3d:7,3")       # THE LAST DAY
         g.land = (13, 20)
         return finish(g, [(4, 4, "fos_d3d_last", "revives", 1)], fill="^")

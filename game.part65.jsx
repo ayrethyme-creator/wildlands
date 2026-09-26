@@ -183,29 +183,45 @@ const ARC_ANIMAL = {
 // deliberately and stand still in, not a road you are trying to walk down.
 //
 // Anything not listed here falls back to the derived placement below.
+//
+// EVERY STORY IN ITS OWN COUNTRY, 2026-09-26. Ayr: "The stories don't always
+// match up with their biome right now. Analyze all of them and make
+// suggestions" - and then, of the suggestions, "Do all of them". Six were in
+// the wrong place: sea turtles in the desert, mole-rats in the fossil beds,
+// tamarins and a canopy in the Rift, beavers in the kennels, polar bears on
+// the Victory Trail and in the deep sea, golden eagles in the Vigil. Each is
+// now where its animal actually lives, and mostly where the story was first
+// written for (part58's `where`).
+//
+// The four side areas are single maps, but at 28x24 (four old screens' worth)
+// a whole investigation fits in one: the person and all their findings on the
+// same map (SOLO_WALK, below). A side area is not a road, so the one-per-road
+// rule above still holds.
 const INTRO_AT = {
   // --- the main line: one per road, in the order you walk them ---
   beeloud:     "route1",   // honey badger and the hives
   reedwater:   "route2",   // the fen cats  (already hand-placed here by part52)
   granary:     "route3",   // the cleared pythons
-  tidewater:   "route4",   // turtles in the prawn nets
+  sunfield:    "route4",   // mole-rat burrows under the solar field - the desert road
   lowstrand:   "route5",   // pangolins and the bottom wire
   highpasture: "route6",   // wolves back on the mountain
   ashfields:   "route7",   // volcano rabbits and the burning
   nightgrove:  "route8",   // horseshoe bats and the new lights
-  frostwatch:  "route9",   // polar bears at the edge of town
 
-  // --- the four with no road, moved past the Elite Four ---
-  millrace:    "rescue",   // Hearthside: the beaver dam and the flooded pasture
-  canopygap:   "mythhub",  // Rift Crossroads: the tamarins and the severed canopy
-  sunfield:    "digsite",  // Fossil Rift: mole-rat burrows under the solar field
-  eyrie:       "vigil",    // the Vigil: golden eagles dying on the poles
+  // --- the side areas, each story whole in one map ---
+  canopygap:   "canopywalk", // Emerald Canopy Walk, off Canopy Deep: the tamarins
+  frostwatch:  "tundra",     // Hoarfrost Tundra, off Frostmere Pass: the polar bears
+  eyrie:       "eyrie",      // Windward Eyrie, off Storm Peak: the golden eagles
+  millrace:    "taiga",      // Whispering Taiga, off Gloamwood: the beavers
 
-  // --- already post-game, left where they are ---
+  // --- the sea: both people on Emberglass Shore, where the boats come in ---
+  tidewater:   "shore",    // the turtles in the prawn nets
+  longline:    "shore",    // the albatross and the hooks
+
+  // --- the champion hubs, each with the one story that belongs to it ---
   hearth:      "rescue",
   digsite:     "digsite",
   mythhub:     "mythhub",
-  longline:    "openocean",
 };
 
 (() => {
@@ -614,11 +630,16 @@ const INTRO_AT = {
   const CHAIN_HEAD = {
     hearth:   "The Cattery: Sunroom",
     millrace: "The Kennels: The Yard",
-    digsite:  "Cretaceous Beds",
-    sunfield: "Jurassic Beds",
+    // Archaeopteryx is Jurassic, and is found in the Jurassic Beds - it sat in
+    // the Cretaceous ones only while the solar field held the Jurassic line.
+    digsite:  "Jurassic Beds",
     mythhub:  "Twilight Rift",
     eyrie:    "The Roll Call",
   };
+
+  // Stories whose walk is written out below (SEA_WALK, SOLO_WALK) rather than
+  // found down a hub's corridors.
+  const OWN_WALK = new Set(["tidewater", "longline", "canopygap", "frostwatch", "eyrie", "millrace"]);
 
   const PINNED_WALK = {};
   (() => {
@@ -650,6 +671,7 @@ const INTRO_AT = {
     const byHub = {};
     arcsToPlace.forEach((a) => {
       if (ROAD_CHAIN[introOf[a]] && ROAD_CHAIN[introOf[a]].length) return;   // roads already comply
+      if (OWN_WALK.has(a)) return;
       const hub = junctionOf(introOf[a]);
       (byHub[hub] = byHub[hub] || []).push(a);
     });
@@ -730,10 +752,19 @@ const INTRO_AT = {
   // (see the block further down), so five findings across two screens go two
   // then three, in reading order, instead of the 1,4,2,5,3 wrap that made
   // the walk turn round twice.
+  // 2026-09-26: the turtles have the shallows now - the reef and the kelp are
+  // turtle country - and the albatross the open water it actually crosses.
   const SEA_WALK = {
-    frostwatch: ["polarsea", "abyss"],   // the ice, and the water under it
-    longline:   ["reef", "kelp"],        // the shallows the boats work
+    tidewater: ["reef", "kelp"],          // the turtles, and the ground the nets drag
+    longline:  ["openocean", "polarsea"], // the open ocean, and the cold southern water
   };
+  // The side-area stories: everything on the person's own map.
+  const SOLO_WALK = { canopygap: 1, frostwatch: 1, eyrie: 1, millrace: 1 };
+  arcsToPlace.forEach((a) => {
+    if (!SOLO_WALK[a]) return;
+    WALK_OF[a] = [];
+    mapClaim[introOf[a]] = a;
+  });
   arcsToPlace.forEach((a) => {
     if (WALK_OF[a] || !SEA_WALK[a]) return;   // only reached where no corridor exists
     WALK_OF[a] = SEA_WALK[a].filter((m) => MAPS[m]);
@@ -762,7 +793,7 @@ const INTRO_AT = {
   // Anything still without ground falls back to flooding outward, which is
   // worse but never leaves an arc unplaceable.
   arcsToPlace.forEach((a) => {
-    if (WALK_OF[a] && WALK_OF[a].length) return;
+    if (WALK_OF[a] && (WALK_OF[a].length || SOLO_WALK[a])) return;
     skipped.push(a + ":no-cluster-for:" + introOf[a]);
     WALK_OF[a] = neighbourhood(introOf[a], 4)
       .filter((m) => !mapClaim[m] || mapClaim[m] === a);

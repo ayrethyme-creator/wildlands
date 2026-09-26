@@ -55,7 +55,9 @@ const BADGE_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven"
   // Each door was a tile on the side area's edge. It becomes the same wall as
   // the tiles either side of it, so the edge reads as unbroken rather than as
   // a doorway that does not open.
-  const SEALED = { thicket: "apiary", canopywalk: "highstation", tundra: "frostwatch", peak: "eyrie" };
+  // Windward Eyrie is open again (2026-09-26): rebuilt as a ridge with its
+  // gym gone, it is where the golden eagles' story lives (forge_sides.py).
+  const SEALED = { thicket: "apiary", canopywalk: "highstation", tundra: "frostwatch" };
   let sealed = 0;
   Object.entries(SEALED).forEach(([from, room]) => {
     const m = MAPS[from];

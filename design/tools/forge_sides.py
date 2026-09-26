@@ -27,8 +27,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from forgekit import (Region, setup, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, run, enclose, W, H)
 
-GEN = 11   # eleventh rebuild. A save made before this, standing here, is relocated.
-CHAIN = ["thicket", "canopywalk", "outback", "savanna", "tundra", "taiga", "cave1"]
+GEN = 19  # was 11; 19 when 2026-09-26, every story moved to its animal's own country (part65). A save made before this, standing here, is relocated.
+CHAIN = ["thicket", "canopywalk", "outback", "savanna", "tundra", "taiga", "cave1", "eyrie"]
 setup(Region(CHAIN, {}, standalone=True))
 DOOR_ROW = 12
 
@@ -98,6 +98,13 @@ def canopywalk():
     person(g, 10, 15, "R", "canopywalk:10,3")   # Dr. Jane Fairbrook
     person(g, 23, 13, "!", "canopywalk:8,3")    # EMERALD CANOPY WALK
     person(g, 17, 19, "!", "canopywalk:8,8")    # macaws pair for life
+    # The Gap in the Trees, whole, where the tamarins live (2026-09-26, every story moved to its animal's own country (part65)).
+    person(g, 22, 9, "R", "canopywalk:14,1")    # Ranger Tomas Reyes
+    person(g, 4, 4, "R", "canopywalk:1,8")      # "Where they are dying"
+    person(g, 14, 8, "R", "canopywalk:8,5")     # "Why they do not use the ground"
+    person(g, 24, 5, "R", "canopywalk:2,1")     # "What the split has done to the group"
+    person(g, 11, 20, "R", "canopywalk:13,7")   # "How fast the traffic actually goes"
+    person(g, 21, 21, "R", "canopywalk:9,1")    # "How high they will cross"
     g.set(16, 3, "⁌"); g.set(6, 13, "⁂"); g.set(19, 15, "¡")
     g.land = (24, 12)
     return finish(g, [
@@ -173,6 +180,13 @@ def tundra():
     person(g, 20, 14, "R", "tundra:10,3")       # Konrad Lorentz
     person(g, 22, 11, "!", "tundra:8,3")        # HOARFROST TUNDRA
     person(g, 8, 14, "!", "tundra:8,8")         # Pallas's cats
+    # The Bins at the Edge of Town, whole, where the polar bears are (2026-09-26, every story moved to its animal's own country (part65)).
+    person(g, 23, 9, "R", "tundra:8,4")         # Mayor Silje Hansen
+    person(g, 5, 4, "R", "tundra:1,8")          # "Where they are coming for"
+    person(g, 16, 4, "R", "tundra:14,8")        # "Why they are here at all"
+    person(g, 4, 11, "R", "tundra:2,1")         # "What happens when they are flown out"
+    person(g, 11, 19, "R", "tundra:14,1")       # "What the town is actually frightened of"
+    person(g, 24, 20, "R", "tundra:5,7")        # "What the town already has"
     g.set(12, 17, "⁂"); g.set(19, 10, "¡")
     g.land = (24, 12)
     return finish(g, [
@@ -196,11 +210,53 @@ def taiga():
     person(g, 10, 9, "R", "taiga:7,2")          # Farley Mowatt
     person(g, 22, 13, "!", "taiga:8,3")         # WHISPERING TAIGA
     person(g, 15, 18, "!", "taiga:8,8")         # wolverines
+    # The Millrace, whole, in beaver country (2026-09-26, every story moved to its animal's own country (part65)).
+    person(g, 22, 10, "R", "taiga:1,6")         # Ada Oyelaran
+    person(g, 9, 3, "R", "taiga:14,1")          # "What the dam is holding"
+    person(g, 18, 3, "R", "taiga:10,8")         # "What the flooding is doing further down"
+    person(g, 4, 15, "R", "taiga:7,3")          # "How fast they rebuild"
+    person(g, 17, 21, "R", "taiga:2,1")         # "Why they are damming here and not elsewhere"
+    person(g, 24, 17, "R", "taiga:5,7")         # "Who is in the lodge"
     g.set(15, 7, "⁂"); g.set(19, 11, "⁂"); g.set(10, 21, "¡")
     g.land = (24, 12)
     return finish(g, [
         (24, 21, "side_tg_bog", "berries", 3),
         (4, 10, "side_tg_spruce", "coins", 300),
+    ])
+
+
+# ---------------------------------------------------------------- eyrie ---
+def eyrie():
+    """Windward Eyrie, off Storm Peak. It was a gym room, sealed when that gym
+    went (part107); reopened 2026-09-26 as a bare high ridge with a power line
+    across it, because this is where The Poles on the Ridge belongs - golden
+    eagles, which live on the peak, landing on the only high perches there
+    are. Zone, name and pool are set in game.part136.jsx."""
+    g = side("eyrie", 971, "peak", 14, 3, door_side="w", rocks=0.2)
+    road(g, [(1, 12), (14, 12), (14, 19), (22, 19)])
+    road(g, [(14, 12), (14, 5), (22, 5)])
+    rock(g, 6, 5, 3); rock(g, 22, 10, 3); rock(g, 5, 19, 3); rock(g, 20, 14, 2); rock(g, 10, 16, 2)
+    tall(g, 8, 8, 3, 1); tall(g, 19, 21, 2, 1); tall(g, 21, 2, 2, 1)
+    flowers(g, 6, (3, 2, 24, 21))
+    g.landmark(18, 16, "lm_golden_eagle")
+    person(g, 5, 10, "!", "eyrie:7,3")          # WINDWARD EYRIE
+    person(g, 4, 15, "R", "eyrie:12,5")         # Lineworker Dana Iyer
+    person(g, 8, 4, "R", "eyrie:1,1")           # "How they are dying"
+    person(g, 20, 3, "R", "eyrie:5,8")          # "Which poles are killing them"
+    person(g, 25, 9, "R", "eyrie:8,1")          # "Why they perch there at all"
+    person(g, 10, 21, "R", "eyrie:14,1")        # "What the population can absorb"
+    person(g, 24, 21, "R", "eyrie:14,8")        # "What a fixed pole looks like"
+    # the power line, pole after pole across the ridge
+    pieces(g, [(4, 7, "powerpole"), (9, 7, "powerpole"), (17, 8, "powerpole"),
+               (24, 7, "powerpole"), (19, 22, "powerpole")])
+    for y in range(H):                          # above the treeline: rock, not forest
+        for x in range(W):
+            if g.get(x, y) == "T":
+                g.set(x, y, "^")
+    g.land = (1, 12)
+    return finish(g, [
+        (24, 14, "side_ey_ridge", "revives", 1),
+        (3, 21, "side_ey_scree", "coins", 320),
     ])
 
 
@@ -236,7 +292,7 @@ def cave1():
 
 
 def main():
-    grids = [thicket(), canopywalk(), outback(), savanna(), tundra(), taiga(), cave1()]
+    grids = [thicket(), canopywalk(), outback(), savanna(), tundra(), taiga(), cave1(), eyrie()]
     # The routes' doors still aim at the old side areas; re-aimed here, when
     # (and only if) this region applies.
     inbound = [
@@ -248,6 +304,7 @@ def main():
         {"from": "route6", "tile": "0,11", "map": "tundra", "x": W - 2, "y": DOOR_ROW},
         {"from": "route8", "tile": "0,11", "map": "taiga", "x": W - 2, "y": DOOR_ROW},
         {"from": "shrine_qilin", "tile": "7,9", "map": "cave1", "x": 18, "y": 1},
+        {"from": "peak", "tile": "15,3", "map": "eyrie", "x": 1, "y": DOOR_ROW},
     ]
     run("sides", "forge_sides.py", grids, inbound, GEN, "game.part125.jsx")
 

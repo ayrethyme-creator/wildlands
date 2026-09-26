@@ -82,7 +82,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
    20
   ],
   "links": {},
-  "gen": 13
+  "gen": 19
  },
  "vig1": {
   "rows": [
@@ -100,7 +100,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
    "TTggggggggggg..ggggggggggTTT",
    "TTTgggggggggg..ggggggggggTTT",
    "TTTgTgggggggg..*gggggggTgTTT",
-   "TTTTgggggRggg..ggggggggggTTT",
+   "TTTTggggggggg..ggggggggggTTT",
    "TTTTggggggggg..gg!gggggTgTTT",
    "TTTTgTggggggg..gggggggggTTTT",
    "TTTgTgggggggg..ggggWWWggTTTT",
@@ -113,8 +113,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
   ],
   "cast": {
    "9,8": "vig1:7,3",
-   "17,15": "vig1:7,7",
-   "9,14": "vig1:10,3"
+   "17,15": "vig1:7,7"
   },
   "marks": {
    "18,9": "lm_thylacine_film"
@@ -144,7 +143,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig2": {
   "rows": [
@@ -160,14 +159,14 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
    "TTTTggggggg..gggggggggggTTTT",
    "TTTgggggggg..ggggggggggggTTT",
    "TTggggggggg..*gggggggggggTTT",
-   "TTTgggggggg....ggggggRggTTTT",
-   "TTTgggRgggg....gggggggggTTTT",
+   "TTTgggggggg....gggggggggTTTT",
+   "TTTgggggggg....gggggggggTTTT",
    "TTTgTgggggggg..gggggggggTTTT",
    "TTTgggggggggg..g!ggggggTgTTT",
    "TTTgTgggggggg..ggggggggggTTT",
    "TTTgggggggggg..ggggggggggTTT",
    "TTTTgWWWggggg..ggggggggggTTT",
-   "TTTTGGGGGgggg..ggRgggggggTTT",
+   "TTTTGGGGGgggg..ggggggggggTTT",
    "TTTgggggggggg..gggggggggTTTT",
    "TTTgggggggggg..gggggggggTTTT",
    "TTTgggggggggg..ggggggggggTTT",
@@ -175,10 +174,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
   ],
   "cast": {
    "8,8": "vig2:7,3",
-   "16,15": "vig2:7,7",
-   "6,13": "vig2:3,3",
-   "17,19": "vig2:6,8",
-   "21,12": "vig2:14,8"
+   "16,15": "vig2:7,7"
   },
   "marks": {
    "18,8": "lm_tiger_census"
@@ -206,7 +202,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig3": {
   "rows": [
@@ -222,11 +218,11 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
    "TTTggggg!ggggggggggggggggTTT",
    "TTTgTgggg*gggggggggggggggTTT",
    "TTTggggggggggggggggggg*ggTTT",
-   "TTggggggggg..gggggggRgggTTTT",
+   "TTggggggggg..gggggggggggTTTT",
    "TTTgTgggggg..ggggggggg*ggTTT",
    "TTTgggggggg..ggg!ggggggggTTT",
    "TTTTggggggg..gggggggggggTT^T",
-   "TTTTgggRggg..gggggWWWWWggTTT",
+   "TTTTggggggg..gggggWWWWWggTTT",
    "TTTTggggggg..gggggWWWWWggTTT",
    "TTTgggggggg..gggggWWWWWggTTT",
    "TT^gGGGGGgg..gggggggggggTTTT",
@@ -237,9 +233,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
   ],
   "cast": {
    "8,9": "vig3:7,3",
-   "16,14": "vig3:7,7",
-   "20,12": "vig3:9,1",
-   "7,16": "vig3:1,8"
+   "16,14": "vig3:7,7"
   },
   "marks": {
    "17,8": "lm_mammoth_steppe"
@@ -263,7 +257,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig4": {
   "rows": [
@@ -324,7 +318,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig5": {
   "rows": [
@@ -379,7 +373,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig6": {
   "rows": [
@@ -440,7 +434,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig7": {
   "rows": [
@@ -495,7 +489,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig8": {
   "rows": [
@@ -556,7 +550,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig9": {
   "rows": [
@@ -615,7 +609,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  },
  "vig10": {
   "rows": [
@@ -670,7 +664,7 @@ REBUILT_REGIONS.push({ name: "vigil", maps: {
     "off": 0
    }
   },
-  "gen": 13
+  "gen": 19
  }
 }, inbound: [
  {

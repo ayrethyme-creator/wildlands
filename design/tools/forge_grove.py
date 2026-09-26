@@ -29,7 +29,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from forgekit import (Region, setup, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, run, W, H)
 
-GEN = 9   # ninth rebuild. A save made before this, standing here, is relocated.
+GEN = 19  # was 9; 19 when 2026-09-26, every story moved to its animal's own country (part65). A save made before this, standing here, is relocated.
 CHAIN = ["route8", "seg_g1", "seg_g2", "seg_g3", "seg_g4", "town9", "route9"]
 SEAM = {
     ("route8", "seg_g1"): dict(road=12, L=3, R=3),
@@ -240,7 +240,6 @@ def route9():
     flowers(g, 8, (3, 2, 24, 21))
     signpost(g, 11, 2, "route9:gate")          # -> the Summit Citadel
     person(g, 9, 9, "R", "route9:4,4")         # Trailmaster Odu
-    person(g, 16, 17, "R", "route9:3,10")      # Mayor Silje Hansen
     person(g, 16, 5, "R", "route9:11,10")      # Gatekeeper Ivo, near the door
     g.set(9, 19, "⁂")
     g.land = (13, 21)

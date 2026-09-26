@@ -150,10 +150,18 @@
     // bats, the polar bears. The hub arcs follow, and every one of them is
     // flagged postgame so she does not mention them at all until the summit is
     // behind you.
+    //
+    // 2026-09-26, every story moved to its animal's own country (part65), so
+    // the order is the walk again: each road's story, with the side areas'
+    // stories slotted in beside the road they open off - the tamarins after
+    // the pythons (Canopy Deep), the polar bears and the eagles after the
+    // wolves (Frostmere Pass), the turtles at Emberglass Shore after Cinder
+    // Town, the beavers after the bats (Gloamwood). Only the albatross and
+    // the three champion hubs are still post-game.
     pitchArcs: [
-      "beeloud", "reedwater", "granary", "tidewater", "lowstrand",
-      "highpasture", "ashfields", "nightgrove", "frostwatch",
-      "millrace", "canopygap", "sunfield", "eyrie",
+      "beeloud", "reedwater", "granary", "canopygap", "sunfield", "lowstrand",
+      "highpasture", "frostwatch", "eyrie", "ashfields", "tidewater",
+      "nightgrove", "millrace",
       "longline", "hearth", "digsite", "mythhub",
     ],
   });

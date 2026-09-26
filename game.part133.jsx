@@ -24,7 +24,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "e..........................e",
    "............................",
    "TTTggg¡gggggg..^g^ggggggg^TT",
-   "TTTgggCgggRgg..Tgggg*ggggTTT",
+   "TTTgggCgggggg..Tgggg*ggggTTT",
    "TTTTggggggggg..gTTgggggggTTT",
    "TTTgggTTTTggg..TTTTTTTTgTTTT",
    "TTTT^TTTTTTTTs.TTTTTTTTTTTTT"
@@ -35,8 +35,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "4,10": "mythhub:4,3",
    "23,10": "mythhub:11,3",
    "4,15": "mythhub:4,7",
-   "23,15": "mythhub:11,7",
-   "10,20": "mythhub:9,9"
+   "23,15": "mythhub:11,7"
   },
   "marks": {
    "18,7": "lm_where_monsters_come_from"
@@ -91,7 +90,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    22
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift1": {
   "rows": [
@@ -111,7 +110,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "TTg.........................",
    "TTgggggT^gggg..¦ggggggggTTTT",
    "TTggTgggg^ggg..gggggggggTTTT",
-   "TTTgggggRgggg..gggggggTgTTTT",
+   "TTTgggggggggg..gggggggTgTTTT",
    "TTTgg*gTggggg..gGGGggggTgTTT",
    "TTTgT*ggggggg..ggggggggggTTT",
    "TT^gggggggggg..gggggggggg^TT",
@@ -121,8 +120,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "TTTTTTTTTTTTTTTTTTTTTTTTTTTT"
   ],
   "cast": {
-   "16,9": "rift1:7,3",
-   "8,16": "rift1:14,1"
+   "16,9": "rift1:7,3"
   },
   "marks": {
    "8,7": "lm_cyclops"
@@ -147,7 +145,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    12
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift2": {
   "rows": [
@@ -167,7 +165,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "..........................TT",
    "TTTgggggggggg..GggggggggTTTT",
    "TTggggggggggg..GgggggggggTTT",
-   "TTTgggggggggg..GggRgggggTTTT",
+   "TTTgggggggggg..GggggggggTTTT",
    "TTTgTgggggggg..gggggggggTTTT",
    "TTTTggg*ggggg..gggggg*ggTTTT",
    "TTT^gTggggggg..ggggggggggTTT",
@@ -177,8 +175,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "TTTTTTTTTTTTT^TTTTTTTTTTTTTT"
   ],
   "cast": {
-   "10,9": "rift2:7,3",
-   "18,16": "rift2:13,2"
+   "10,9": "rift2:7,3"
   },
   "marks": {
    "18,7": "lm_kraken"
@@ -213,7 +210,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    12
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift3": {
   "rows": [
@@ -233,7 +230,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "TTT.........................",
    "TTTTgggggTT^T..GGGggg^g^gTTT",
    "TTTTgTggTgg^g..GGGg*gggggTTT",
-   "TTTTgTggggRgg..GGGgggggggTTT",
+   "TTTTgTggggggg..GGGgggggggTTT",
    "TTTTgggTgg*gg..ggg*ggggggTTT",
    "TTTTggggggggg..ggg*ggggggTTT",
    "TTTTggggggggg..ggggggggg*TTT",
@@ -243,8 +240,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "TT^TTTTTTTTTTTTTTTTTTTTTTTTT"
   ],
   "cast": {
-   "16,9": "rift3:7,3",
-   "10,16": "rift3:8,7"
+   "16,9": "rift3:7,3"
   },
   "marks": {
    "8,7": "lm_sacred_ibis"
@@ -279,7 +275,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    12
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift4": {
   "rows": [
@@ -299,7 +295,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "..........................TT",
    "TTTTTTggggggg..gTTggggggTTTT",
    "TTTTggggggggg..ggggggggggTTT",
-   "TTTTTggggg*gg..^ggRggggggTTT",
+   "TTTTTggggg*gg..^gggggggggTTT",
    "TTTgTgggggggg..^ggg*gggggTTT",
    "TTTggggGGGGGg..ggggggggTgTTT",
    "TTTggggGGGGGg..gggggggggTTTT",
@@ -309,8 +305,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "TTTTTTTTTTTTTTTTTTTTTTTTTTTT"
   ],
   "cast": {
-   "9,8": "rift4:7,3",
-   "18,16": "rift4:8,1"
+   "9,8": "rift4:7,3"
   },
   "marks": {
    "18,7": "lm_dragon_bones"
@@ -340,7 +335,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    12
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift5": {
   "rows": [
@@ -360,7 +355,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "..........................TT",
    "TTTgTgT^g^ggg..gggggg^gggTTT",
    "T^ggggggggggg..gggg^gggggTTT",
-   "TTTgggggggggg..ggRggggggTTTT",
+   "TTTgggggggggg..gggggggggTTTT",
    "TTTg*gggggggg..gggggggggTTTT",
    "TTggggggggggg..GGGGGGGggTTTT",
    "TTTgggggggggg..GGGGGgggg^TTT",
@@ -370,8 +365,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    "TTTggggggggggs.ggggggggggTTT"
   ],
   "cast": {
-   "10,9": "rift5:7,3",
-   "17,16": "rift5:6,5"
+   "10,9": "rift5:7,3"
   },
   "marks": {
    "18,7": "lm_komodo"
@@ -401,7 +395,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    22
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift_north": {
   "rows": [
@@ -456,7 +450,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    22
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift_isles": {
   "rows": [
@@ -511,7 +505,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    22
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift_africa": {
   "rows": [
@@ -566,7 +560,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    22
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift_neareast": {
   "rows": [
@@ -621,7 +615,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    22
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift_eastasia": {
   "rows": [
@@ -676,7 +670,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    22
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift_oceania": {
   "rows": [
@@ -731,7 +725,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    12
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift_arctic": {
   "rows": [
@@ -786,7 +780,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    12
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift_americas": {
   "rows": [
@@ -841,7 +835,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
    12
   ],
   "links": {},
-  "gen": 15
+  "gen": 19
  },
  "rift6": {
   "rows": [
@@ -912,7 +906,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
     "off": 0
    }
   },
-  "gen": 15
+  "gen": 19
  },
  "rift7": {
   "rows": [
@@ -972,7 +966,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
     "off": 0
    }
   },
-  "gen": 15
+  "gen": 19
  },
  "rift8": {
   "rows": [
@@ -1031,7 +1025,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
     "off": 0
    }
   },
-  "gen": 15
+  "gen": 19
  },
  "rift9": {
   "rows": [
@@ -1090,7 +1084,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
     "off": 0
    }
   },
-  "gen": 15
+  "gen": 19
  },
  "rift10": {
   "rows": [
@@ -1144,7 +1138,7 @@ REBUILT_REGIONS.push({ name: "rift", maps: {
     "off": 0
    }
   },
-  "gen": 15
+  "gen": 19
  }
 }, inbound: [
  {
