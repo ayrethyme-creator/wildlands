@@ -66,7 +66,7 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
     "off": 0
    }
   },
-  "gen": 8
+  "gen": 18
  },
  "seg_v1": {
   "rows": [
@@ -133,7 +133,7 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
     "off": 0
    }
   },
-  "gen": 8
+  "gen": 18
  },
  "seg_v2": {
   "rows": [
@@ -200,7 +200,7 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
     "off": 0
    }
   },
-  "gen": 8
+  "gen": 18
  },
  "seg_v3": {
   "rows": [
@@ -272,7 +272,7 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
     "off": 0
    }
   },
-  "gen": 8
+  "gen": 18
  },
  "seg_v4": {
   "rows": [
@@ -339,7 +339,7 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
     "off": 0
    }
   },
-  "gen": 8
+  "gen": 18
  },
  "seg_v5": {
   "rows": [
@@ -404,7 +404,7 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
     "off": 0
    }
   },
-  "gen": 8
+  "gen": 18
  },
  "town8": {
   "rows": [
@@ -417,25 +417,26 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
    "TTTgggggggggg..ggggggggggTTT",
    "TTT*ggg¦............¦ggggTTT",
    "TTTTggg..............gggTTTT",
-   "TTTggΩg...WW...Ω.Ω...gTgTTTT",
-   "TTTgggg..............ggg!TTT",
+   "TTTggΩg...WW...Ω.Ω...g¦g!ΩgT",
+   "TTTgggg....................T",
    "TTTgggg.Ω..................e",
    "TT^gHgg..R.................T",
-   "TTTgggg¦........Ω...¦ggggTTT",
-   "TTTgggggggggg..ggVgggggHgTTT",
+   "TTTgggg¦........Ω...¦g¦g¦ΩgT",
+   "TTTgggggggggg..ggVgggggHTTTT",
    "TTggggggggggg..gggggggggTTTT",
    "TTTg.....................TTT",
    "TT^Ω.....................TTT",
    "TTTg!Ωggggg¦g..g¦ggggΩgggTTT",
    "TTTgΩgg*ggggg..ggggMgggggTTT",
-   "TTTgggΩgggHgg..g*ggggggggTTT",
+   "TTTgggΩgggHgg..!*ggggggggTTT",
    "TTTgggΩΩgggg!..ggggggggHTTTT",
    "TTTgggggggggg..ggggggggggTTT",
    "TTTgggggggggg..ggggggggggTTT"
   ],
   "cast": {
    "15,3": "town8:gate",
-   "24,10": "town8:gate2",
+   "24,9": "town8:gate2",
+   "15,20": "town8:next",
    "12,21": "town8:9,3",
    "4,18": "town8:8,12",
    "9,12": "town8:3,8",
@@ -453,7 +454,9 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
    "15,9": "decor:stall",
    "8,11": "decor:bench",
    "21,18": "decor:crates",
-   "5,9": "decor:woodpile"
+   "5,9": "decor:woodpile",
+   "25,9": "decor:seabanner",
+   "25,13": "decor:seabanner"
   },
   "finds": {
    "24,19": {
@@ -491,7 +494,7 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
     }
    }
   },
-  "gen": 8
+  "gen": 18
  }
 }, inbound: [
  {

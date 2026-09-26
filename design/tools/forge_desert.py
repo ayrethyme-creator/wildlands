@@ -30,13 +30,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from forgekit import (Region, setup, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, run, W, H)
 
-GEN = 5   # fifth rebuild. A save made before this, standing here, is relocated.
+GEN = 16  # was 5; 16 since the cove became an oasis (2026-09-26). A save made before this, standing here, is relocated.
 CHAIN = ["route4", "tidewater", "seg_d1", "seg_d2", "seg_d3", "seg_d4", "town5"]
 SEAM = {
-    # The dunes run down to the sea: water in the corners of the join.
-    ("route4", "tidewater"): dict(road=12, L=3, R=3, row="WWW" + "g" * 9 + ".." + "g" * 11 + "WWW"),
-    # The neck of land out of the cove, sea either side of it.
-    ("tidewater", "seg_d1"): dict(road=4, L=2, R=4, row="WW" + "gg" + ".." + "gg" + "W" * 20),
+    # The cove and its coast were made an oasis, 2026-09-26: no sea here now.
+    ("route4", "tidewater"): dict(road=12, L=3, R=3),
+    ("tidewater", "seg_d1"): dict(road=13, L=3, R=3),
     ("seg_d1", "seg_d2"): dict(road=13, L=3, R=3),
     ("seg_d2", "seg_d3"): dict(road=11, L=2, R=3),
     ("seg_d3", "seg_d4"): dict(road=14, L=3, R=2),
@@ -97,61 +96,55 @@ def route4():
 
 # ------------------------------------------------------------ tidewater ---
 def tidewater():
-    """Tidewater Cove. A sandy spit in the sea. The road comes up from the
-    dunes and leaves north along the neck; four piers reach out to the boats."""
-    g = base("tidewater", 311, rocks=0)
-    g.beyond["e"] = "W"; g.beyond["w"] = "W"
-    g.rect(0, 1, W - 1, H - 2, "W")            # the sea, then the land laid on it
-    g.rect(2, 9, 25, H - 2, "g")               # the beach
-    g.rect(2, 1, 7, 9, "g")                    # the neck of land north
-    for y in range(9, H - 1):                  # a ragged shoreline
-        if g.rng.random() < 0.4:
-            g.set(2 if g.rng.random() < 0.5 else 25, y, "W")
-    for x in range(8, 25):
-        if g.rng.random() < 0.4:
-            g.set(x, 9, "W")
-    road(g, [(12, 23), (12, 15), (4, 15), (4, 0)])
-    road(g, [(4, 15), (22, 15)])
-    # Fishing jetties out over the water. They used to end in the boats to
-    # the reef, the kelp forest, the open ocean and the ice floes - but those
-    # seas are level 38 to 52 and this cove is on a road of level 21 to 30.
-    # Ayr, 2026-09-25: "the ocean area is in the wrong challenge area, it
-    # needs to be further on in the game." The boats sail from Emberglass
-    # Shore now, past Cinder Town (forge_sides.py); these are just jetties.
-    g.road([(12, 14), (12, 5)], ".", 1)
-    g.road([(20, 14), (20, 5)], ".", 1)
-    g.rect(2, 17, 3, 17, "."); g.rect(22, 16, 23, 17, ".")
-    patch(g, 18, 21, 3, 1)
-    g.landmark(19, 21, "lm_turtle_nest")
-    g.set(7, 19, "C"); g.set(15, 19, "M")
-    tall(g, 8, 11, 2, 1); tall(g, 22, 12, 2, 1)
-    flowers(g, 6, (3, 10, 24, 21))
-    person(g, 14, 13, "!", "tidewater:3,2")    # the Open Blue and the Ice Floes, by their piers
-    person(g, 9, 17, "!", "tidewater:11,1")    # reef one way, kelp the other
-    person(g, 6, 12, "!", "tidewater:4,7")     # how to dive
-    person(g, 21, 19, "!", "tidewater:11,7")   # the cove rule
-    signpost(g, 11, 12, "tidewater:boats")    # the boats sail from Emberglass Shore now
+    """Tidewater Oasis. It was a cove on the sea; Ayr, 2026-09-26: "Turn tide
+    water cove into a desert oasis." A spring in the dunes: one pool, palms
+    standing round it with their feet in the damp, gardens in their shade, and
+    the road going round the water rather than through it. The town's clinic
+    and shop stay, just outside the ring of palms. (The zone and the palm
+    palette are set in game.part134.jsx.)"""
+    g = base("tidewater", 312, rocks=0.1)
+    road(g, [(12, 23), (12, 18)])
+    road(g, [(5, 18), (21, 18)])                # the road round the spring
+    road(g, [(5, 4), (5, 18)])
+    road(g, [(21, 4), (21, 18)])
+    road(g, [(5, 4), (21, 4)])
+    road(g, [(13, 0), (13, 4)])
+    mere(g, 13, 11, 5, 3, rough=0.25)           # the spring
+    for y in range(6, 18):                      # palms with their feet in the damp
+        for x in range(7, 21):
+            if g.get(x, y) != "g":
+                continue
+            d = ((x - 13) / 6.0) ** 2 + ((y - 11) / 4.6) ** 2
+            if 0.8 < d < 1.4 and g.rng.random() < 0.75:
+                g.set(x, y, "T")
+    g.landmark(17, 15, "lm_sandgrouse")
+    g.set(8, 21, "C"); g.set(17, 21, "M")
+    dunes(g, 3, 2, 2); dunes(g, 24, 2, 2); dunes(g, 24, 21, 2); dunes(g, 3, 21, 1)
+    tall(g, 9, 2, 3, 1); tall(g, 19, 2, 3, 1); tall(g, 22, 22, 2, 1)
+    cacti(g, 25, 16, 1); cacti(g, 2, 7, 1)
+    flowers(g, 5, (7, 6, 20, 17))
+    person(g, 15, 21, "!", "tidewater:3,2")     # the welcome, as you come in
+    person(g, 8, 16, "!", "tidewater:11,1")     # where the water comes from
+    person(g, 18, 7, "!", "tidewater:4,7")      # the date palm
+    person(g, 9, 7, "!", "tidewater:11,7")      # the oasis rule
+    signpost(g, 10, 21, "tidewater:boats")     # no boats here: they sail from Emberglass Shore
     pieces(g, [
-        (10, 20, "canoe"), (17, 12, "canoe"), (5, 20, "nets"), (23, 20, "nets"),
-        (14, 21, "crates"), (9, 13, "bench"),
+        (15, 16, "garden"), (16, 16, "garden"), (10, 16, "garden"),
+        (24, 8, "tent"), (24, 14, "jars"), (3, 15, "tent"), (19, 21, "jars"),
     ])
-    g.land = (12, 20)
+    g.land = (12, 21)
     return finish(g, [
-        (24, 11, "des_tw_spit", "revives", 1),        # out at the east end of the beach
+        (25, 6, "des_tw_spit", "revives", 1),        # behind the tents
     ])
 
 
 # --------------------------------------------------------------- seg_d1 ---
 def seg_d1():
-    """Scorpion Wash. Off the cove's neck and up into the dunes, where the sea
-    fog rolls in at dawn and a beetle stands on its head to drink it."""
+    """Scorpion Wash. North of the oasis and up into the dunes, where the fog
+    rolls in off the distant sea at dawn and a beetle stands on its head to
+    drink it. (Its south end was coast until the cove became an oasis.)"""
     g = base("seg_d1", 321, rocks=0.1)
-    # the coast at the south: sea either side of the neck, falling away north
-    g.rect(0, H - 4, 1, H - 2, "W")
-    g.rect(8, H - 4, W - 1, H - 2, "W")
-    g.rect(12, H - 6, W - 1, H - 5, "W")
-    g.rect(18, H - 8, W - 1, H - 7, "W")
-    road(g, [(4, 23), (4, 16), (13, 16), (13, 0)])
+    road(g, [(13, 23), (13, 0)])
     wash(g, [(3, 9), (10, 9), (10, 5), (20, 5)])
     patch(g, 20, 11, 2, 1)
     g.landmark(20, 10, "lm_fog_beetle")
@@ -159,13 +152,13 @@ def seg_d1():
     tall(g, 6, 12, 3, 2); tall(g, 19, 13, 2, 1); tall(g, 18, 2, 2, 1)
     cacti(g, 8, 18, 2); cacti(g, 16, 10, 2)
     flowers(g, 5, (3, 2, 24, 16))
-    person(g, 6, 19, "R", "seg_d1:2,1")        # "What the boats are living on", looking at the sea
+    person(g, 6, 19, "R", "seg_d1:2,1")        # "What the boats are living on"
     person(g, 16, 17, "R", "seg_d1:10,6")      # "How many are coming up dead"
     person(g, 8, 7, "R", "seg_d1:6,8")         # Digger Uzo
     person(g, 17, 3, "R", "seg_d1:3,10")       # Nomad Jax
     person(g, 5, 13, "R", "seg_d1:11,10")      # Prospector Ade
     g.set(11, 12, "⁂"); g.set(7, 14, "¡")
-    g.land = (5, 20)
+    g.land = (13, 21)
     return finish(g, [
         (23, 11, "des_d1_crest", "wakeberry", 1),    # up on the dune crest
         (3, 3, "des_d1_corner", "treats", 2),

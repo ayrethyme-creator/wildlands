@@ -150,6 +150,9 @@ const PALS = {
   summit: { ground: "#b6bcc6", grass: "#9ba3b0", grass2: "#a7aeba", tree: { bg: "#8a919e", em: "🏔️" }, mount: { bg: "#8a919e", em: "🏔️" }, water: "#82a9c4", flower: "✨" },
   cavezone: { ground: "#695f4f", grass: "#5c5446", grass2: "#6a6153", tree: { bg: "#4a4439", em: "🪨" }, mount: { bg: "#4a4439", em: "🪨" }, water: "#365d68", flower: "💎" },
 };
+// A map may name its own palette over its zone's (m.pal) - the oasis does, so
+// it keeps desert animals and weather but grows palms (part134).
+const palOf = (m) => (m && PALS[m.pal]) || (m && PALS[m.zone]) || PALS.savanna;
 const ARENA = {
   savanna: "linear-gradient(#87b26a,#c9a86a)", wetland: "linear-gradient(#7db088,#9aa86b)",
   jungle: "linear-gradient(#3c7a3c,#6b7d4a)", desert: "linear-gradient(#f2d9a3,#e0c087)",

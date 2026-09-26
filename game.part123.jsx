@@ -21,8 +21,8 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    "TTTgggggg...............eWWW",
    "TTTTΩTggg..!..g.WWWWWWWWWWWW",
    "TTTTgTgggΩ.....WWWWWWWWWWWWW",
-   "e.............gWWWWWWWWWWWWW",
-   "T.............gWWWWWWWWWWWWW",
+   "TTTTgg........gWWWWWWWWWWWWW",
+   "TTTggg........gWWWWWWWWWWWWW",
    "TT^ggg..gg.!............eWWW",
    "TTTTGG..g^Rg..gWWWWWWWWWWWWW",
    "TTTggg..^TTT..gWWWWWWWWWWWWW",
@@ -65,11 +65,6 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
     "x": 26,
     "y": 11
    },
-   "0,17": {
-    "map": "tidewater",
-    "x": 13,
-    "y": 20
-   },
    "6,23": {
     "map": "aquarium",
     "x": 7,
@@ -109,7 +104,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    11
   ],
   "links": {},
-  "gen": 10
+  "gen": 17
  },
  "reef": {
   "rows": [
@@ -179,7 +174,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 10
+  "gen": 17
  },
  "kelp": {
   "rows": [
@@ -247,7 +242,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 10
+  "gen": 17
  },
  "openocean": {
   "rows": [
@@ -321,7 +316,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 10
+  "gen": 17
  },
  "polarsea": {
   "rows": [
@@ -389,7 +384,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 10
+  "gen": 17
  },
  "abyss": {
   "rows": [
@@ -457,7 +452,7 @@ REBUILT_REGIONS.push({ name: "sea", maps: {
    20
   ],
   "links": {},
-  "gen": 10
+  "gen": 17
  }
 }, inbound: [
  {

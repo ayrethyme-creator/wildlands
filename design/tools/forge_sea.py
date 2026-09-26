@@ -33,7 +33,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from forgekit import (Region, setup, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, run, enclose, W, H)
 
-GEN = 10   # tenth rebuild. A save made before this, standing here, is relocated.
+GEN = 17  # was 10; 17 when the Tidewater door came out (2026-09-26). A save made before this, standing here, is relocated.
 CHAIN = ["shore", "reef", "kelp", "openocean", "polarsea", "abyss"]
 setup(Region(CHAIN, {}, standalone=True))
 
@@ -55,8 +55,7 @@ def rocks(g, cx, cy, n, spread=1):
 def shore():
     """Emberglass Shore. Black volcanic sand, the sea to the east, four jetties
     running out to the boats. The volcano's slope rises to the north with
-    Ember Hollow in it; the Aquarium is down the beach; Cinder Town and the
-    coast path back to Tidewater Cove are west."""
+    Ember Hollow in it; the Aquarium is down the beach; Cinder Town is west."""
     g = base("shore", 801, rocks=0.1)
     enclose(g, "ns")
     g.beyond["e"] = "W"
@@ -69,9 +68,10 @@ def shore():
     road(g, [(12, 3), (12, 21)])
     g.door(0, 11, "e", "town8", W - 2, 11)
     g.set(1, 11, "."); g.set(1, 12, "."); g.set(0, 12, "T")
-    road(g, [(1, 17), (12, 17)])
-    g.door(0, 17, "e", "tidewater", 13, 20)
-    g.set(1, 17, "."); g.set(1, 18, "."); g.set(0, 18, "T")
+    # The coast path south to Tidewater Cove is gone: the cove became a desert
+    # oasis, and Ayr, 2026-09-26: "get rid of the door that leads to it from
+    # the ocean area." The path now only runs down to the Aquarium.
+    road(g, [(6, 17), (12, 17)])
     road(g, [(6, 17), (6, 22)])
     g.door(6, H - 1, "s", "aquarium", 7, 8)
     road(g, [(5, 1), (12, 1)])

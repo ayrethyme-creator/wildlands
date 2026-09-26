@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from forgekit import (Region, setup, base, finish, road, clump, pond, mere, tall,  # noqa: E402,F401
                       patch, flowers, pieces, signpost, person, run, W, H)
 
-GEN = 8   # eighth rebuild. A save made before this, standing here, is relocated.
+GEN = 18  # was 8; 18 when Cinder Town's east gate was marked (2026-09-26). A save made before this, standing here, is relocated.
 CHAIN = ["route7", "seg_v1", "seg_v2", "seg_v3", "seg_v4", "seg_v5", "town8"]
 SEAM = {
     ("route7", "seg_v1"): dict(road=12, L=3, R=3),
@@ -228,7 +228,14 @@ def town8():
     g.set(13, 2, "X"); g.allow_block.add("13,2")
     road(g, [(13, 3), (13, 23)])
     g.rect(7, 7, 20, 13, ".")                  # the square
+    # The way on to the sea. Ayr, 2026-09-26: "make it very obvious that is
+    # the next zone and you have to go right to get to it." So: a sign where
+    # you walk in, the road east running wide from the square to the gate
+    # between lamps, and two blue sea banners at the gate - the one cold
+    # colour in a black and red town, visible from the square.
     road(g, [(20, 11), (25, 11)])
+    g.road([(20, 10), (26, 10)], ".", 1)       # three wide, square to gate
+    g.rect(22, 9, 26, 9, "g"); g.rect(22, 13, 26, 13, "g")   # room for the lamps and banners
     g.door(W - 1, 11, "e", "shore", 1, 11)
     g.set(W - 1, 12, "T")
     road(g, [(4, 16), (23, 16)])
@@ -237,11 +244,13 @@ def town8():
     g.set(18, 5, "Y")                          # the arena
     g.set(9, 5, "C"); g.set(19, 19, "M")
     g.set(4, 5, "H"); g.set(23, 5, "H"); g.set(4, 12, "H"); g.set(23, 14, "H"); g.set(10, 20, "H"); g.set(23, 21, "H")
-    for x, y in ((7, 7), (20, 7), (7, 13), (20, 13), (11, 18), (16, 18)):
+    for x, y in ((7, 7), (20, 7), (7, 13), (20, 13), (11, 18), (16, 18),
+                 (22, 9), (22, 13), (24, 13)):   # the last three light the road east
         g.set(x, y, "¦")
     flowers(g, 3, (3, 4, 24, 21))
     signpost(g, 15, 3, "town8:gate")           # -> Gloamwood, through the arena
-    signpost(g, 24, 10, "town8:gate2")         # -> Emberglass Shore
+    signpost(g, 24, 9, "town8:gate2")          # -> Emberglass Shore
+    signpost(g, 15, 20, "town8:next")          # read coming in: the way on is east
     person(g, 12, 21, "!", "town8:9,3")        # CINDER TOWN - you read it coming in
     person(g, 5, 17, "!", "town8:8,12")        # a sign worn past reading - it always was
     person(g, 9, 12, "R", "town8:3,8")         # Ventwatcher Ash, by the pool
@@ -250,6 +259,7 @@ def town8():
         (4, 18, "garden"), (5, 18, "garden"), (4, 19, "garden"), (7, 22, "garden"), (8, 22, "garden"),
         (16, 13, "forge"), (17, 9, "stall"), (15, 9, "stall"),
         (8, 11, "bench"), (21, 18, "crates"), (5, 9, "woodpile"),
+        (26, 9, "seabanner"), (26, 13, "seabanner"),
     ])
     g.land = (14, 21)
     return finish(g, [

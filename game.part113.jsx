@@ -4,7 +4,7 @@
 REBUILT_REGIONS.push({ name: "desert", maps: {
  "route4": {
   "rows": [
-   "WWWggggggggg..gggggggggggWWW",
+   "TTTggggggggg..gggggggggggTTT",
    "TTTggggggggg..gggggggggggTTT",
    "TTTg^ggggggg..gggg^ggggggTTT",
    "TTgggggggggg..gRgggggggggTTT",
@@ -80,66 +80,64 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
     "off": 0
    }
   },
-  "gen": 5
+  "gen": 16
  },
  "tidewater": {
   "rows": [
-   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
-   "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
-   "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
-   "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
-   "WWgg..ggWWgg.WWgggWg.WgWggWW",
-   "WWgg..gggggg.ggggggg.gggggWW",
-   "WWWg..gGGGgg.ggggggg.gggggWW",
-   "WWgg..!gggg!.ggggΩg*.GGGggWW",
-   "WWgg..gggΩg*.g!ggggg.gggggWW",
-   "WWgg..gggggg.ggggggg.gggggWW",
-   "WWgg....................ggWW",
-   "WWgg....................ggWW",
-   "WW..ggggg!gg..ggggg**g..ggWW",
-   "WWgg*ggggggg..ggggggggggggWW",
-   "WWgggggCgggg..gMggg*g!gggWWW",
-   "WWgggΩggggΩg..gggggggggΩggWW",
-   "WWWggggggggg..Ωg...Ω.gggggWW",
-   "WWgggggggggg..ggggggggggggWW",
-   "WWWggggggggg..gggggggggggWWW"
+   "TTTgggggggggg..ggggggggggTTT",
+   "TTTgggggggggg..ggggggggggTTT",
+   "TTTg^ggGGGGGg..ggGGGGG^ggTTT",
+   "TTTg^gggggggg..ggggggggg^TTT",
+   "TTTTg..................ggTTT",
+   "TTTgg..................TgTTT",
+   "TTTTg..g!gggTgTT*gggg..TgTTT",
+   "TTTTg..ggTTTg*ggTg!gg..ΩgTTT",
+   "TTTTg..ggTggggggggTgg..gTTTT",
+   "TTTTg..gTTWWWWWWWgTTg..gTTTT",
+   "TTTgg..TgWWWWWWWWWgTg..gTTTT",
+   "TTTgg..ggWWWWWWWWWgTT..gTTTT",
+   "TTTgg..TgWWWWWWWWWg*g..gTTTT",
+   "TTTgg..TggWWWWWWWgTgg..ΩTTTT",
+   "TTTTΩ..gTTggggggggTgg..gTTTT",
+   "TTTTg..ggTTTggΩTgΩgg*..ggTTT",
+   "TTTgg..g!gΩTgTTTΩg*gg..TgTTT",
+   "TTTgg..gggggggggggggg..ggTTT",
+   "TTTgg..................ggTTT",
+   "TTTgg..................ggTTT",
+   "TTgggggggggg..ggggggggg^g^TT",
+   "TTT^ggggCg!g..g!gMgΩggg^TTTT",
+   "TTTggggggggg..gggggggGGGgTTT",
+   "TTTggggggggg..gggggggggggTTT"
   ],
   "cast": {
-   "14,13": "tidewater:3,2",
-   "9,17": "tidewater:11,1",
-   "6,12": "tidewater:4,7",
-   "21,19": "tidewater:11,7",
-   "11,12": "tidewater:boats"
+   "15,21": "tidewater:3,2",
+   "8,16": "tidewater:11,1",
+   "18,7": "tidewater:4,7",
+   "8,6": "tidewater:11,7",
+   "10,21": "tidewater:boats"
   },
   "marks": {
-   "19,21": "lm_turtle_nest",
-   "10,20": "decor:canoe",
-   "17,12": "decor:canoe",
-   "5,20": "decor:nets",
-   "23,20": "decor:nets",
-   "14,21": "decor:crates",
-   "9,13": "decor:bench"
+   "17,15": "lm_sandgrouse",
+   "14,15": "decor:garden",
+   "16,16": "decor:garden",
+   "10,16": "decor:garden",
+   "23,7": "decor:tent",
+   "23,13": "decor:jars",
+   "4,14": "decor:tent",
+   "19,21": "decor:jars"
   },
   "finds": {
-   "24,11": {
+   "24,5": {
     "id": "des_tw_spit",
     "item": "revives",
     "n": 1
    }
   },
   "exits": {},
-  "beyond": {
-   "e": "W",
-   "w": "W"
-  },
+  "beyond": {},
   "land": [
    12,
-   20
+   21
   ],
   "links": {
    "s": {
@@ -151,7 +149,7 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
     "off": 0
    }
   },
-  "gen": 5
+  "gen": 16
  },
  "seg_d1": {
   "rows": [
@@ -160,25 +158,25 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
    "TTTgg^ggggggg..ggGGGgggggTTT",
    "TTTTggggggggg..ggRggggg^gTTT",
    "TTTTggg^ggggg..gggggg^gggTTT",
-   "TTTgggggg*............ggTTTT",
+   "TTTgggggg*............gggTTT",
    "TTTTgggggg............^ggTTT",
    "TTTgggggRg..g..g*ggggggggTTT",
    "TTTggggggg..g..ggggg^gggTTTT",
-   "TTT.........g..TgT*gggg^TTTT",
-   "TTT.........g..gggggΩgggTTTT",
-   "TTTgGGGGGgggg..gggg...gg^TTT",
-   "TTTgGGGGGgg⁂g..gggggggggTTTT",
-   "TTTgGGGGGgggg..gggGGGgggTTTT",
-   "TTggRgg¡ggggg..gggggggggTTTT",
-   "TTggggg*ggg*g..gggggggggTTTT",
-   "TTgg...........gggWWWWWWWWWW",
-   "TTgg...........gRgWWWWWWWWWW",
-   "T^gg..ggggTgWWWWWWWWWWWWWWWW",
-   "TTgT..RgggggWWWWWWWWWWWWWWWW",
-   "WWgg..gTWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWWWWWWWWWWWWWWWWWW"
+   "TTTT........g..TgT*gggg^gTTT",
+   "TTTT........g..gggggΩggggTTT",
+   "TTTTGGGGGgggg..gggg...ggg^TT",
+   "TTTgGGGGGgg⁂g..ggggggggggTTT",
+   "TTTgGGGGGgggg..gggGGGggggTTT",
+   "TTTgRgg¡ggggg..ggggggggggTTT",
+   "TTTgggg*ggg*g..gggggggggTTTT",
+   "TTTgggggggggg..gggggggggTTTT",
+   "TTTgggggggggg..gRgggggggTTTT",
+   "TT^gggggggTgg..gggggggggTTTT",
+   "TTgTggRgggggg..gggggggggTTTT",
+   "TTgggggTggggg..gggggggggTTTT",
+   "TTTgggggggggg..ggggggggggTTT",
+   "TTTgggggggggg..ggggggggggTTT",
+   "TTTgggggggggg..ggggggggggTTT"
   ],
   "cast": {
    "6,19": "seg_d1:2,1",
@@ -205,8 +203,8 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
   "exits": {},
   "beyond": {},
   "land": [
-   5,
-   20
+   13,
+   21
   ],
   "links": {
    "s": {
@@ -218,7 +216,7 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
     "off": 0
    }
   },
-  "gen": 5
+  "gen": 16
  },
  "seg_d2": {
   "rows": [
@@ -292,7 +290,7 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
     "off": 0
    }
   },
-  "gen": 5
+  "gen": 16
  },
  "seg_d3": {
   "rows": [
@@ -359,7 +357,7 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
     "off": 0
    }
   },
-  "gen": 5
+  "gen": 16
  },
  "seg_d4": {
   "rows": [
@@ -431,7 +429,7 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
     "off": 0
    }
   },
-  "gen": 5
+  "gen": 16
  },
  "town5": {
   "rows": [
@@ -513,7 +511,7 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
     }
    }
   },
-  "gen": 5
+  "gen": 16
  }
 }, inbound: [
  {

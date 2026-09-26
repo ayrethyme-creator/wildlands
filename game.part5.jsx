@@ -1176,7 +1176,7 @@
 
   // ---------- WORLD ----------
   const m = MAPS[S.map];
-  const pal = PALS[m.zone] || PALS.savanna;
+  const pal = palOf(m);
   // One clock for everything that moves on a step - the ranger, the camera,
   // and the seam slide - read from the same function the step loop runs on.
   const stepMs = typeof stepDelay === "function" ? stepDelay() : 165;

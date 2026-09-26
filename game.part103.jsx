@@ -185,7 +185,7 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
   Object.entries(MAP_LINKS[mapKey]).forEach(([dir, link]) => {
     const n = MAPS[link.map];
     if (!n) return;
-    const npal = PALS[n.zone] || PALS.savanna;
+    const npal = palOf(n);
     const nW = n.rows[0].length, nH = n.rows.length, off = link.off || 0;
     for (let ny = 0; ny < nH; ny++) {
       for (let nx = 0; nx < nW; nx++) {
@@ -224,7 +224,7 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
   // chosen by position so it never shimmers between redraws, and it all
   // stands in the same ground the map itself is mostly made of - grass for a
   // grassland map - rather than bare earth that stops at the map's edge.
-  const pal = PALS[m.zone] || PALS.savanna;
+  const pal = palOf(m);
   const border = m.border || "T";
   const flat = m.rows.join("");
   const grassy = (flat.split("g").length - 1) + (flat.split("G").length - 1) > flat.length / 4;
@@ -378,7 +378,7 @@ const WaterGlint = React.memo(function WaterGlint({ mapKey, tile }) {
   const mask = `url("data:image/svg+xml,${encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x0} ${y0} ${w} ${h}" preserveAspectRatio="none">` +
     `<g fill="#fff" shape-rendering="crispEdges">${rects}</g></svg>`)}")`;
-  const pal = PALS[m.zone] || PALS.savanna;
+  const pal = palOf(m);
   const [ga, gb] = waterGlint(pal.water);
   const T = (n) => `calc(var(--tile) * ${n})`;
   const sheet = (ref, img, bw, bh, left, top, extraW, extraH) => (
