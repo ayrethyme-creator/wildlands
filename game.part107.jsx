@@ -71,8 +71,9 @@ const BADGE_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven"
     });
   });
 
-  // ---- Tidewater Cove stays: it is the road to the reef, the kelp and the
-  // open ocean. Only its arena goes, and the ground where it stood is ground.
+  // ---- Tidewater Cove stays; only its arena goes, and the ground where it
+  // stood is ground. (Its boats to the seas moved to Emberglass Shore on
+  // 2026-09-25 - part122.)
   const cove = MAPS.tidewater;
   let arenaTiles = 0;
   if (cove) {
@@ -99,7 +100,11 @@ const BADGE_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven"
   };
   let dianeMoved = false;
   const walkway = MAPS.canopywalk;
-  if (walkway && walkway.exits && TRAINERS["highstation:10,2"]) {
+  // ...unless a rebuilt Canopy Walk has already given her a place of her own
+  // (forge_sides.py, 2026-09-25), in which case this would stamp her a second
+  // time onto a tile of the new layout.
+  const alreadyPlaced = Object.values(MAP_ALIAS).includes("highstation:10,2");
+  if (walkway && walkway.exits && TRAINERS["highstation:10,2"] && !alreadyPlaced) {
     const [ex, ey] = Object.keys(walkway.exits)[0].split(",").map(Number);
     const before = reach(walkway.rows, ex, ey);
     const H = walkway.rows.length, W = walkway.rows[0].length;

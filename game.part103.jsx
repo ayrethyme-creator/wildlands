@@ -174,6 +174,7 @@ const SurroundCell = ({ gx, gy, cell }) => (
 const MapSurround = React.memo(function MapSurround({ mapKey }) {
   const m = MAPS[mapKey];
   if (!m || !MAP_LINKS[mapKey]) return null;       // not rebuilt: leave the black
+  if (m.dark) return null;                          // a cave: past its walls is dark
   const W = m.rows[0].length, H = m.rows.length;
   const RX = SURROUND_RX, RY = SURROUND_RY;
   const cells = [];
