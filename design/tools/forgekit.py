@@ -267,6 +267,58 @@ def flowers(g, n, box):
     g.scatter("*", n, box, only_on="g", avoid=g.road_set)
 
 
+def run_regions(source, parts, gen, out_name, merge=None):
+    """Several regions in one file - a hub and the branches off it. `parts` is
+    a list of (region_name, Region, build) where build() returns the grids
+    (called with that Region set up) and inbound is given per part as the
+    fourth item. Checks everything first; writes nothing unless all pass.
+
+    With `merge`, they ship as ONE region of that name: a hub's doors lead
+    into its branches, and part105 can only check a door against the map it
+    really leads to - and apply or refuse the lot together - if they are in
+    the same region."""
+    global R
+    problems, blocks = [], []
+    all_grids, all_links, all_inbound = [], {}, []
+    for name, region, build, inbound in parts:
+        setup(region)
+        grids = build()
+        by = {g.key: g for g in grids}
+        for g in grids:
+            print("\n=== %s / %s (%dx%d) ===" % (name, g.key, g.w, g.h))
+            print(preview(g))
+            for p in check(g):
+                problems.append("%s: %s" % (g.key, p))
+        if not region.standalone:
+            for a, b in zip(region.chain, region.chain[1:]):
+                problems += check_seam(by[a], by[b])
+        blocks.append(emit_js(name, source, grids, region.links(), inbound, gen))
+        all_grids += grids
+        all_links.update(region.links())
+        all_inbound += inbound
+    if merge:
+        blocks = [emit_js(merge, source, all_grids, all_links, all_inbound, gen)]
+    if problems:
+        print("\nREFUSING TO WRITE - %d problem(s):" % len(problems))
+        for p in problems:
+            print("  " + p)
+        sys.exit(1)
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    out = os.path.join(root, out_name)
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(blocks))
+    print("\nall checks passed - wrote %s" % out)
+
+
+def rock_edges(g, ch="^"):
+    """Swap a map's tree-edges for another tile - for zones whose 'tree' would
+    make a strange wall (the fossil digs draw theirs as a giant bone)."""
+    for y in range(H):
+        for x in range(W):
+            if g.get(x, y) == "T":
+                g.set(x, y, ch)
+
+
 def run(region_name, source, grids, inbound, gen, out_name):
     """Print, check every map and every seam, and write only if all pass."""
     by = {g.key: g for g in grids}
