@@ -96,7 +96,7 @@ def route4():
 
 # ------------------------------------------------------------ tidewater ---
 def tidewater():
-    """Tidewater Oasis. It was a cove on the sea; Ayr, 2026-09-26: "Turn tide
+    """Sandgrouse Spring (map key still "tidewater"). It was a cove on the sea; Ayr, 2026-09-26: "Turn tide
     water cove into a desert oasis." A spring in the dunes: one pool, palms
     standing round it with their feet in the damp, gardens in their shade, and
     the road going round the water rather than through it. The town's clinic

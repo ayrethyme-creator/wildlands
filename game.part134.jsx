@@ -1,4 +1,4 @@
-// ---------- Part 134: TIDEWATER OASIS, AND THE WAY TO THE SEA ----------
+// ---------- Part 134: SANDGROUSE SPRING, AND THE WAY TO THE SEA ----------
 // 2026-09-26. Ayr: "Turn tide water cove into a desert oasis. And get rid of
 // the door that leads to it from the ocean area. Also, [when] you get to the
 // volcano area where the entrance to the ocean area is make it very obvious
@@ -6,22 +6,23 @@
 //
 // The maps are in the forges (forge_desert.py, forge_sea.py,
 // forge_volcanic.py; data in parts 113, 123, 119). This part is what the
-// forges cannot say: the cove's name, zone and palette, its landmark, the
+// forges cannot say: the cove's new name (Ayr: "Change the name" - it was
+// Tidewater Oasis for a day; the map key stays "tidewater"), zone and palette, its landmark, the
 // banners at Cinder Town's east gate, and the signs' new words.
 //
-// THE ZONE. The cove was "reefz", so reef animals turned up on the desert
-// road. It is "desert" now. Nothing is lost by that: every reefz animal still
-// lives on the Coral Reef Shallows and in the Aquarium, which are reefz too.
+// THE ZONE. The cove was "reefz"; it is "desert" now, for its weather, sounds
+// and look. That changes no animals: wild encounters come from a map's own
+// pools (part87 wildPool), and this map is a town stop with none.
 
 // A map may name its own palette (m.pal) over its zone's. Only the oasis does:
-// desert encounters, desert weather, but palms round the water, not cactus.
+// desert weather and sounds, but palms round the water, not cactus.
 PALS.oasis = {
   ground: "#e0cba8", grass: "#b3b87a", grass2: "#c6c690",
   tree: { bg: "#5f8a4a", em: "🌴" }, mount: { bg: "#b8956a", em: "🏜️" },
   water: "#3f8fa8", flower: "🌼",
 };
 if (MAPS.tidewater) {
-  MAPS.tidewater.name = "Tidewater Oasis";
+  MAPS.tidewater.name = "Sandgrouse Spring";
   MAPS.tidewater.zone = "desert";
   MAPS.tidewater.pal = "oasis";
 }
@@ -60,7 +61,7 @@ Object.assign(DECOR_SHAPES, {
 Object.assign(DECOR_SCALE, { seabanner: [1.5, 2.3] });
 
 Object.assign(SIGNS, {
-  "tidewater:3,2": "🪧 'TIDEWATER OASIS - a spring in the dunes, and the last sure water before the Wash. Rest, drink, fill every bottle.'",
+  "tidewater:3,2": "🪧 'SANDGROUSE SPRING - the last sure water before the Wash. Rest, drink, fill every bottle.'",
   "tidewater:11,1": "🪧 'Where the water comes from: under the Sahara lies rain that fell thousands of years ago, when the desert was green. Its oases are the places where that old water reaches the surface - and almost none of it is being refilled. Every oasis is living on savings.'",
   "tidewater:4,7": "🪧 'A date palm wants its feet in the water and its head in the fire, the saying goes. In its shade grow fruit trees, and in theirs, vegetables: three layers of garden, each keeping the sun off the next. That is how an oasis feeds a town.'",
   "tidewater:11,7": "🪧 'Oasis rule: take what you need and not a cupful more. The water here has to last everyone - and everything - that comes after you.'",
