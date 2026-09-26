@@ -1952,7 +1952,7 @@
           <button style={btnS("#2471a3")} onClick={() => setS((p) => ({ ...p, menu: "party" }))}>👥 Team</button>
           <button style={btnS("#a0522d")} onClick={() => setS((p) => ({ ...p, menu: "bag", bagSel: null }))}>🎒 Bag</button>
           <button style={btnS("#27ae60")} onClick={() => setS((p) => ({ ...p, menu: "guide" }))}>📖 Guide</button>
-          <button style={btnS("#2d7d5a")} onClick={() => setS((p) => ({ ...p, menu: "sanctuary", boxSel: null, relConfirm: null }))}>🏞️ Sanctuary</button>
+          <button style={btnS("#2d7d5a")} onClick={() => setS((p) => (p.map === "summit" && typeof leagueRun === "function" && leagueRun(p)) ? { ...p, dialog: { text: "🏞️ No swapping in fresh animals mid-way through the Elite Four. You finish with the team you walked in with." } } : ({ ...p, menu: "sanctuary", boxSel: null, relConfirm: null }))}>🏞️ Sanctuary</button>
           <button style={btnS("#5dade2")} onClick={() => {
             const st = SR.current;
             if (!canSoar(st)) say("🪽 To soar between towns you need Badge 3 and an Aerial teammate in your party.");
@@ -2351,7 +2351,7 @@
                 {S.box.length > 0 && (
                   <div style={{ marginTop: 12, borderTop: "1px solid #5c5344", paddingTop: 10 }}>
                     <button style={{ ...btn("#2d7d5a"), width: "100%", fontSize: 13 }}
-                      onClick={() => setS((p) => ({ ...p, menu: "sanctuary", boxSel: null }))}>
+                      onClick={() => setS((p) => (p.map === "summit" && typeof leagueRun === "function" && leagueRun(p)) ? { ...p, menu: null, dialog: { text: "🏞️ No swapping in fresh animals mid-way through the Elite Four. You finish with the team you walked in with." } } : ({ ...p, menu: "sanctuary", boxSel: null }))}>
                       🏞️ Sanctuary — {S.box.length} in care
                     </button>
                   </div>

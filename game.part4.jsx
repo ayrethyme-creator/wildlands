@@ -650,6 +650,21 @@ function Wildlands() {
     setS((p) => ({ ...p, guidePop: null, menu: "guide", guideSel: p.guidePop }));
   }, [S.guidePop, S.screen, S.dialog, S.menu, S.battle, S.exam, S.critQuiz]);
 
+  // ----- the Elite Four run ends if you leave the Citadel (part141) -----
+  // Walking out, Soaring or blacking out mid-run: every Elite takes their seat
+  // again. Also catches a save made mid-run and loaded somewhere else.
+  useEffect(() => {
+    const st = SR.current;
+    if (st.screen !== "world" || st.battle || st.map === "summit") return;
+    if (typeof leagueRun !== "function" || !leagueRun(st)) return;
+    const msg = "⚜️ You left the Summit Citadel before the end. The Elite Four have taken their seats again - the challenge starts over from the first.";
+    setS((p) => {
+      const tb = { ...p.trainersBeaten };
+      ELITE_SEATS.forEach((k) => { delete tb[k]; });
+      return { ...p, trainersBeaten: tb, dialog: p.dialog ? { ...p.dialog, text: p.dialog.text + "\n\n" + msg } : { text: msg } };
+    });
+  }, [S.map, S.screen, S.battle]);
+
   // ----- retroactive Champion's Compass -----
   // Saves that beat the Champion before the Compass existed had that grant
   // fire and find nothing to hand over. This catches them the next time
@@ -1323,6 +1338,14 @@ function Wildlands() {
       if (a) { beginWild(st.map, a.kind, a.sp); return; }
     }
     if (ch === "C") {
+      // Mid-way through the Elite Four the Citadel's nurse will not see you
+      // (part141): items only, as in the games this is modelled on.
+      if (st.map === "summit" && typeof leagueRun === "function" && leagueRun(st)) {
+        SFX.miss?.();
+        say("🏥 Care Center: \"Not while you are in the middle of it. Once you take the first seat, you finish on what you carried in - or you walk out and start again from the first.\"");
+        return;
+      }
+      const summitWarning = st.map === "summit" && !st.trainersBeaten["summit:7,1"];
       SFX.heal();
       setS((p) => ({
         ...p,
@@ -1333,7 +1356,8 @@ function Wildlands() {
         // burn too: a player who reads that sentence should be right.
         party: p.party.map((a) => ({ ...a, hp: a.maxHp, pp: a.moves.map((k) => maxPP(MOVES[k])),
           psn: false, slp: 0, fear: 0, chill: 0, brn: 0, para: false, guard: false })),
-        dialog: { text: "🏥 Care Center: Your team was rested, fed, and checked over. HP and PP fully restored! (Progress saved)" },
+        dialog: { text: "🏥 Care Center: Your team was rested, fed, and checked over. HP and PP fully restored! (Progress saved)"
+          + (summitWarning ? "\n\n⚜️ Last chance. Once you beat the first of the Elite Four this center closes to you until you have beaten the Champion. Heal with items. Leave the Citadel and all four take their seats again." : "") },
       }));
       const t = setTimeout(() => saveGame(true), 250);
       timers.current.push(t);

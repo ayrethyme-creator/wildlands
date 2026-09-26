@@ -103,6 +103,11 @@ const gymTeam = (type, lvls, seed) => {
 };
 
 // ---- the twelve, in ladder order ----
+// 2026-09-26, Ayr: "Yes adjust their leaders." The last three leaders were
+// weaker than the roads that lead to them (Yuki 40-43 against an alpine road
+// to 46, Moyo 46-49 against 54, Nyx 52-55 against 60). Each now tops their
+// own road by two; part84 still adds its +4 and a fourth animal on top of
+// the numbers here.
 const LADDER = [
   ["town2", 1, "Ranger Naledi", "Predator", [7, 8, 9, 10], "Magnificent! The savanna respects you.", "Aquatic teammates can now Swim with you across deep water.", "🧑🏿‍🌾"],
   ["apiary", 2, "Keeper Wren", "Bug", [12, 13, 14, 15], "You listened to the hive. Most people only hear noise.", "", "🧑‍🌾"],
@@ -111,11 +116,11 @@ const LADDER = [
   ["highstation", 5, "Arborist Kaia", "Canopy", [25, 26, 27, 28], "Up here, patience is the only tool that works.", "", "🧗🏽‍♀️"],
   ["town5", 6, "Warden Zahra", "Burrow", [28, 29, 30, 31], "The dunes remember your footprints.", "", "🧕🏽"],
   ["town6", 7, "Mason Bram", "Armor", [32, 33, 34, 35], "Stone yields to patience — and to you.", "Strong Armor or Predator teammates can now push boulders.", "🧔🏻"],
-  ["town7", 8, "Glacier Yuki", "Swift", [36, 37, 38, 39], "Swift as meltwater! Well run.", "", "🏃🏻‍♀️"],
+  ["town7", 8, "Glacier Yuki", "Swift", [41, 42, 43, 44], "Swift as meltwater! Well run.", "", "🏃🏻‍♀️"],
   ["frostwatch", 9, "Kepler Inuk", "Ice", [40, 41, 42, 43], "The cold is not cruel. It is only honest.", "", "🧑🏻‍🚀"],
-  ["town8", 10, "Kiln Moyo", "Ember", [42, 43, 44, 45], "Forged, not found. That's what you are.", "", "👨🏿‍🏭"],
+  ["town8", 10, "Kiln Moyo", "Ember", [49, 50, 51, 52], "Forged, not found. That's what you are.", "", "👨🏿‍🏭"],
   ["eyrie", 11, "Falconer Sable", "Aerial", [45, 46, 47, 48], "You gave it the sky and it came back anyway. That's the whole trick.", "", "🧑🏼‍✈️"],
-  ["town9", 12, "Nyx", "Night", [48, 49, 50, 51], "Even the dark bows tonight.", "The Summit Citadel awaits. The Elite Four are watching.", "🧛🏻"],
+  ["town9", 12, "Nyx", "Night", [55, 56, 57, 58], "Even the dark bows tonight.", "The Summit Citadel awaits. The Elite Four are watching.", "🧛🏻"],
 ];
 
 Object.keys(GYMS).forEach((k) => delete GYMS[k]);
