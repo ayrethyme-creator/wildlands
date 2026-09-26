@@ -229,7 +229,7 @@ def town8():
     road(g, [(13, 3), (13, 23)])
     g.rect(7, 7, 20, 13, ".")                  # the square
     road(g, [(20, 11), (25, 11)])
-    g.door(W - 1, 11, "e", "shore", 1, 6)
+    g.door(W - 1, 11, "e", "shore", 1, 11)
     g.set(W - 1, 12, "T")
     road(g, [(4, 16), (23, 16)])
     pond(g, 10, 9, 2, 1)                       # the hot pool
@@ -261,7 +261,6 @@ def main():
     grids = [route7(), seg_v1(), seg_v2(), seg_v3(), seg_v4(), seg_v5(), town8()]
     inbound = [
         {"from": "shrine_pyrelynx", "tile": "7,9", "map": "seg_v3", "x": 1, "y": 8},
-        {"from": "shore", "tile": "0,6", "map": "town8", "x": W - 2, "y": 11},
         {"from": "route8", "tile": "7,15", "map": "town8", "x": 13, "y": 1},
     ]
     run("volcanic", "forge_volcanic.py", grids, inbound, GEN, "game.part119.jsx")

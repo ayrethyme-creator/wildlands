@@ -26,10 +26,15 @@ class Region:
     first map's south edge / the last map's north edge, if one does (the spec
     for that seam is in xseams, shared with the other region's forge)."""
 
-    def __init__(self, chain, seam, prev=None, nxt=None):
+    def __init__(self, chain, seam, prev=None, nxt=None, standalone=False):
         self.chain, self.seam, self.prev, self.nxt = chain, seam, prev, nxt
+        # A set of side areas, each its own map reached by a door, with no
+        # neighbours: no seams, and every edge closed.
+        self.standalone = standalone
 
     def edges_of(self, key):
+        if self.standalone:
+            return None, None
         i = self.chain.index(key)
         if i > 0:
             s = self.seam[(self.chain[i - 1], key)]
@@ -42,6 +47,8 @@ class Region:
         return s, n
 
     def links(self):
+        if self.standalone:
+            return {k: {} for k in self.chain}
         out = {}
         for a, b in zip(self.chain, self.chain[1:]):
             out.setdefault(a, {})["n"] = {"map": b, "off": 0}
@@ -110,6 +117,23 @@ def base(key, seed, fill="g", rocks=0.08):
     if n:
         g.gaps["n"] = (n["road"], n["road"] + 1)
     return g
+
+
+def enclose(g, sides="ns", ch="T", rocks=0.08):
+    """Close the top and/or bottom of a stand-alone map with the same organic
+    edge base() draws down its sides - one to three deep, wandering, a rock
+    now and then. (A map in a chain gets these edges from its seams instead.)"""
+    rng = g.rng
+    for side in sides:
+        drift = 0.0
+        for x in range(W):
+            drift += rng.uniform(-0.8, 0.8)
+            drift *= 0.75
+            d = max(1, min(3, round(2 + drift)))
+            for i in range(d):
+                y = i if side == "n" else H - 1 - i
+                if g.get(x, y) in "gG.*":
+                    g.set(x, y, "^" if (i == d - 1 and rng.random() < rocks) else ch)
 
 
 def stamp_seams(g):
@@ -252,8 +276,9 @@ def run(region_name, source, grids, inbound, gen, out_name):
         print(preview(g))
         for p in check(g):
             problems.append("%s: %s" % (g.key, p))
-    for a, b in zip(R.chain, R.chain[1:]):
-        problems += check_seam(by[a], by[b])
+    if not R.standalone:
+        for a, b in zip(R.chain, R.chain[1:]):
+            problems += check_seam(by[a], by[b])
     if problems:
         print("\nREFUSING TO WRITE - %d problem(s):" % len(problems))
         for p in problems:

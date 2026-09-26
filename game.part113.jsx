@@ -86,23 +86,23 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
   "rows": [
    "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
    "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
-   "WWgg..ggWWWWnWWWWWWWnWWWWWWW",
-   "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
-   "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
+   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
+   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
+   "WWgg..ggWWWWWWWWWWWWWWWWWWWW",
    "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
    "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
    "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
    "WWgg..ggWWWW.WWWWWWW.WWWWWWW",
    "WWgg..ggWWgg.WWgggWg.WgWggWW",
    "WWgg..gggggg.ggggggg.gggggWW",
-   "WWWg..gGGGgg.ggggggg.!ggggWW",
+   "WWWg..gGGGgg.ggggggg.gggggWW",
    "WWgg..!gggg!.ggggΩg*.GGGggWW",
    "WWgg..gggΩg*.g!ggggg.gggggWW",
    "WWgg..gggggg.ggggggg.gggggWW",
    "WWgg....................ggWW",
    "WWgg....................ggWW",
-   "e...ggggg!gg..ggggg**g.....e",
-   "WWg!*ggggggg..gggggggggg!gWW",
+   "WW..ggggg!gg..ggggg**g..ggWW",
+   "WWgg*ggggggg..ggggggggggggWW",
    "WWgggggCgggg..gMggg*g!gggWWW",
    "WWgggΩggggΩg..gggggggggΩggWW",
    "WWWggggggggg..Ωg...Ω.gggggWW",
@@ -114,10 +114,7 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
    "9,17": "tidewater:11,1",
    "6,12": "tidewater:4,7",
    "21,19": "tidewater:11,7",
-   "11,12": "tidewater:blue",
-   "21,11": "tidewater:ice",
-   "3,18": "tidewater:reef",
-   "24,18": "tidewater:kelp"
+   "11,12": "tidewater:boats"
   },
   "marks": {
    "19,21": "lm_turtle_nest",
@@ -135,28 +132,7 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
     "n": 1
    }
   },
-  "exits": {
-   "12,2": {
-    "map": "openocean",
-    "x": 7,
-    "y": 8
-   },
-   "20,2": {
-    "map": "polarsea",
-    "x": 7,
-    "y": 8
-   },
-   "0,17": {
-    "map": "reef",
-    "x": 7,
-    "y": 8
-   },
-   "27,17": {
-    "map": "kelp",
-    "x": 7,
-    "y": 8
-   }
-  },
+  "exits": {},
   "beyond": {
    "e": "W",
    "w": "W"
@@ -553,41 +529,6 @@ REBUILT_REGIONS.push({ name: "desert", maps: {
   "map": "route4",
   "x": 26,
   "y": 11
- },
- {
-  "from": "reef",
-  "tile": "7,9",
-  "map": "tidewater",
-  "x": 2,
-  "y": 17
- },
- {
-  "from": "kelp",
-  "tile": "7,9",
-  "map": "tidewater",
-  "x": 24,
-  "y": 17
- },
- {
-  "from": "openocean",
-  "tile": "7,9",
-  "map": "tidewater",
-  "x": 12,
-  "y": 13
- },
- {
-  "from": "polarsea",
-  "tile": "7,9",
-  "map": "tidewater",
-  "x": 20,
-  "y": 13
- },
- {
-  "from": "shore",
-  "tile": "0,8",
-  "map": "tidewater",
-  "x": 13,
-  "y": 20
  },
  {
   "from": "shrine_bathynax",

@@ -112,11 +112,14 @@ def tidewater():
             g.set(x, 9, "W")
     road(g, [(12, 23), (12, 15), (4, 15), (4, 0)])
     road(g, [(4, 15), (22, 15)])
-    # The piers: a plank walk out over the water to a boat.
-    g.road([(12, 14), (12, 3)], ".", 1); g.door(12, 2, "n", "openocean", 7, 8)
-    g.road([(20, 14), (20, 3)], ".", 1); g.door(20, 2, "n", "polarsea", 7, 8)
-    g.road([(2, 17), (1, 17)], ".", 1);  g.door(0, 17, "e", "reef", 7, 8)
-    g.road([(24, 17), (26, 17)], ".", 1); g.door(W - 1, 17, "e", "kelp", 7, 8)
+    # Fishing jetties out over the water. They used to end in the boats to
+    # the reef, the kelp forest, the open ocean and the ice floes - but those
+    # seas are level 38 to 52 and this cove is on a road of level 21 to 30.
+    # Ayr, 2026-09-25: "the ocean area is in the wrong challenge area, it
+    # needs to be further on in the game." The boats sail from Emberglass
+    # Shore now, past Cinder Town (forge_sides.py); these are just jetties.
+    g.road([(12, 14), (12, 5)], ".", 1)
+    g.road([(20, 14), (20, 5)], ".", 1)
     g.rect(2, 17, 3, 17, "."); g.rect(22, 16, 23, 17, ".")
     patch(g, 18, 21, 3, 1)
     g.landmark(19, 21, "lm_turtle_nest")
@@ -127,10 +130,7 @@ def tidewater():
     person(g, 9, 17, "!", "tidewater:11,1")    # reef one way, kelp the other
     person(g, 6, 12, "!", "tidewater:4,7")     # how to dive
     person(g, 21, 19, "!", "tidewater:11,7")   # the cove rule
-    signpost(g, 11, 12, "tidewater:blue")
-    signpost(g, 21, 12, "tidewater:ice")
-    signpost(g, 3, 18, "tidewater:reef")
-    signpost(g, 24, 18, "tidewater:kelp")
+    signpost(g, 11, 12, "tidewater:boats")    # the boats sail from Emberglass Shore now
     pieces(g, [
         (10, 20, "canoe"), (17, 12, "canoe"), (5, 20, "nets"), (23, 20, "nets"),
         (14, 21, "crates"), (9, 13, "bench"),
@@ -304,11 +304,6 @@ def main():
     inbound = [
         {"from": "outback", "tile": "7,9", "map": "route4", "x": 1, "y": 11},
         {"from": "digsite", "tile": "0,6", "map": "route4", "x": W - 2, "y": 11},
-        {"from": "reef", "tile": "7,9", "map": "tidewater", "x": 2, "y": 17},
-        {"from": "kelp", "tile": "7,9", "map": "tidewater", "x": 24, "y": 17},
-        {"from": "openocean", "tile": "7,9", "map": "tidewater", "x": 12, "y": 13},
-        {"from": "polarsea", "tile": "7,9", "map": "tidewater", "x": 20, "y": 13},
-        {"from": "shore", "tile": "0,8", "map": "tidewater", "x": 13, "y": 20},
         {"from": "shrine_bathynax", "tile": "7,9", "map": "seg_d2", "x": 1, "y": 8},
         {"from": "shrine_glyptor", "tile": "7,9", "map": "seg_d4", "x": 1, "y": 8},
         {"from": "route5", "tile": "7,15", "map": "town5", "x": 13, "y": 1},

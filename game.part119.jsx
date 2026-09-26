@@ -466,7 +466,7 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
    "27,11": {
     "map": "shore",
     "x": 1,
-    "y": 6
+    "y": 11
    }
   },
   "beyond": {},
@@ -500,13 +500,6 @@ REBUILT_REGIONS.push({ name: "volcanic", maps: {
   "map": "seg_v3",
   "x": 1,
   "y": 8
- },
- {
-  "from": "shore",
-  "tile": "0,6",
-  "map": "town8",
-  "x": 26,
-  "y": 11
  },
  {
   "from": "route8",
