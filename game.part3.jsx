@@ -528,10 +528,15 @@ const TRAINERS = {
   "route9:4,4": { name: "Trailmaster Odu", line: "Champions walk past me. The rest walk back.", team: () => [mk("wolf", 48), mk("lion", 48), mk("cheetah", 49)], prize: 800 },
   "route9:11,10": { name: "Gatekeeper Ivo", line: "The Citadel doesn't take appointments.", team: () => [mk("croc", 48), mk("tiger", 49), mk("hyena", 48)], prize: 800 },
   "peak:7,9": { name: "Peak Guide Oru", line: "Only the strong reach the summit shrine!", team: () => [mk("boar", 34), mk("leopard", 34), mk("owl", 35)], prize: 500 },
-  "summit:7,9": { name: "Elite Talon", elite: true, line: "The sky judges first. Spread your wings — or fall.", team: () => [mk("kestrel", 49), mk("hornbill", 50), mk("vulture", 50), mk("owl", 51)], prize: 1500 },
-  "summit:7,7": { name: "Elite Bulwark", elite: true, line: "Break against me like water on stone.", team: () => [mk("turtle", 51), mk("tortoise", 52), mk("hippo", 52), mk("pangolin", 53)], prize: 1500 },
-  "summit:7,5": { name: "Elite Fang", elite: true, line: "Every trail ends in teeth.", team: () => [mk("hyena", 53), mk("wilddog", 53), mk("jaguar", 54), mk("tiger", 55)], prize: 1500 },
-  "summit:7,3": { name: "Elite Cinder", elite: true, line: "Venom and flame — the land's oldest medicines.", team: () => [mk("cobra", 54), mk("scorpion", 55), mk("monitor", 55), mk("dartfrog", 56)], prize: 1500 },
+  // The Elite Four and Zuri are the hardest fights in the main game (Ayr,
+  // 2026-09-26: "Make it so the elite 4 and Zuri are the highest main game
+  // areas"). The ceiling below them is 64 - the top of the Victory Trail
+  // (part138/140) and the last shrine warden (part12) - so they climb 66 to 71,
+  // each one step above the last, and Zuri tops out at 75. They were 49-57.
+  "summit:7,9": { name: "Elite Talon", elite: true, line: "The sky judges first. Spread your wings — or fall.", team: () => [mk("kestrel", 66), mk("hornbill", 67), mk("vulture", 67), mk("owl", 68)], prize: 2500 },
+  "summit:7,7": { name: "Elite Bulwark", elite: true, line: "Break against me like water on stone.", team: () => [mk("turtle", 67), mk("tortoise", 68), mk("hippo", 68), mk("pangolin", 69)], prize: 2500 },
+  "summit:7,5": { name: "Elite Fang", elite: true, line: "Every trail ends in teeth.", team: () => [mk("hyena", 68), mk("wilddog", 69), mk("jaguar", 69), mk("tiger", 70)], prize: 2500 },
+  "summit:7,3": { name: "Elite Cinder", elite: true, line: "Venom and flame — the land's oldest medicines.", team: () => [mk("cobra", 69), mk("scorpion", 70), mk("monitor", 70), mk("dartfrog", 71)], prize: 2500 },
 };
 
 const RIVAL_TILES = { "route1:7,1": 1, "route3:7,1": 2, "route5:7,1": 3, "route7:7,1": 4, "summit:7,1": 5 };
@@ -543,7 +548,8 @@ const rivalTeam = (stage, rival) => {
   if (stage === 2) return [mk(a, 18), mk("meerkat", 17)];
   if (stage === 3) return [mk(a, 29), mk("serval", 28), mk("hornbill", 28)];
   if (stage === 4) return [mk(a, 39), mk("wilddog", 38), mk("snowleopard", 39), mk("vulture", 38)];
-  return [mk(a, 57), mk("cheetah", 55), mk("tiger", 56), mk("hornbill", 55), mk("croc", 55), mk("lion", 56)];
+  // The Champion: the top of the whole main game (see the Elite Four above).
+  return [mk(a, 75), mk("cheetah", 73), mk("tiger", 74), mk("hornbill", 73), mk("croc", 73), mk("lion", 74)];
 };
 const RIVAL_LINES = {
   1: "🏃 Zuri: \"You got a starter too?! Well, MINE has yours beat — type advantage, look it up! Battle me, ranger!\"",
