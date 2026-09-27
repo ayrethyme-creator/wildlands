@@ -19,15 +19,55 @@ function Wildlands() {
      So the size is worked out here, in whole pixels, from the frame's real
      width, and handed to part5. Kept in state because it has to follow a phone
      turning sideways or a window being resized. */
-  const tilePxFor = () => {
-    const w = (typeof window !== "undefined" && window.innerWidth) || 430;
-    return Math.max(8, Math.floor(Math.min(CAM_TILE_MAX, (Math.min(430, w) - 24) / CAM_W)));
+  // The width actually visible. innerWidth alone was not enough: when a phone
+  // turned from landscape to portrait, the map was still its old width, the
+  // browser widened the page to fit it, and innerWidth then reported that
+  // widened page - so the tiles never shrank and the map ran off the right
+  // edge (found 2026-09-27: a 404px page on a 375px phone). index.html also
+  // stops the page widening at all (overflow-x: hidden).
+  //
+  // THE WIDE LAYOUT, 2026-09-27 (Ayr, passing on Eric: the graphics could be
+  // better, starting with the resolution). On a computer the game was a
+  // phone-shaped column 430px wide, so the map was 22-27px tiles in a small
+  // box on a mostly empty screen. On a window wide and tall enough, the team
+  // and the buttons now sit in a column beside the map, and the map takes its
+  // size from the window's HEIGHT instead - 40-45px tiles on a laptop. Phones
+  // and narrow windows keep the column exactly as it was.
+  //
+  // Kept as one string ("tile|wide") so an unchanged size is an unchanged
+  // value and React skips the render: the page's size is watched below, and it
+  // changes every time a dialog opens.
+  const layoutFor = () => {
+    if (typeof window === "undefined") return "27|0";
+    const w = Math.min(
+      window.innerWidth || 430,
+      document.documentElement.clientWidth || 430,
+      (window.visualViewport && window.visualViewport.width) || 430) || 430;
+    const h = (window.visualViewport && window.visualViewport.height) || window.innerHeight || 700;
+    if (w >= 900 && h >= 560) {
+      const t = Math.floor(Math.min(CAM_TILE_MAX, (h - 70) / CAM_H, (w - 470) / CAM_W));
+      if (t >= 30) return t + "|1";
+    }
+    return Math.max(8, Math.floor(Math.min(CAM_TILE_MAX, (Math.min(430, w) - 24) / CAM_W))) + "|0";
   };
-  const [tilePx, setTilePx] = useState(tilePxFor);
+  const [layout, setLayout] = useState(layoutFor);
+  const tilePx = Number(layout.split("|")[0]);
+  const wideLayout = layout.split("|")[1] === "1";
   useEffect(() => {
-    const on = () => setTilePx(tilePxFor());
+    const on = () => setLayout(layoutFor());
+    // A window "resize" alone can arrive before the new width has settled, or
+    // not at all when a phone rotates, so the page's own size is watched too.
     window.addEventListener("resize", on);
-    return () => window.removeEventListener("resize", on);
+    window.addEventListener("orientationchange", on);
+    if (window.visualViewport) window.visualViewport.addEventListener("resize", on);
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(on) : null;
+    if (ro) ro.observe(document.documentElement);
+    return () => {
+      window.removeEventListener("resize", on);
+      window.removeEventListener("orientationchange", on);
+      if (window.visualViewport) window.visualViewport.removeEventListener("resize", on);
+      if (ro) ro.disconnect();
+    };
   }, []);
   const [S, setS] = useState({
     screen: "title",

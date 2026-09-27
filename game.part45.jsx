@@ -12,7 +12,7 @@
 // A handful of variants, chosen by position, so a meadow does not read as one
 // stamp repeated three hundred times. Kept to four per type: enough to break
 // the pattern, few enough that the browser only ever decodes four images.
-const GRASS_VARIANTS = 4;
+const GRASS_VARIANTS = 8;
 
 // Gradient ids have to be unique per colour, or two different grass palettes on
 // one page would share a definition and one would render with the other's bed.
@@ -20,6 +20,38 @@ const hashStr = (str) => {
   let h = 0;
   for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0;
   return h;
+};
+
+/* REDRAWN 2026-09-27. Ayr, passing on Eric: the graphics could be better -
+   "the resolution... the quality of the colors and textures". Short grass
+   was four tufts in a straight row along the bottom of every tile, in four
+   fixed layouts, so a field read as rows of tick marks: wallpaper. Now each
+   of eight variants scatters its tufts anywhere in the tile, in two tones,
+   with a soft mottle of light and shade under them and a few specks of seed
+   and soil - drawn from a seeded generator, so a variant always looks the
+   same and nothing shimmers. Tall grass is two layers of blades, a dark back
+   row and a lit front row, so it stays unmistakable as the encounter grass.
+
+   The mottle is radial and fades to nothing well inside the tile, so it never
+   reaches an edge: a tone that reached the edge would draw the grid back on
+   (see the note on the flat tall-grass bed below). */
+const grassRng = (seed) => {
+  let s2 = seed >>> 0;
+  return () => { s2 = (s2 * 1664525 + 1013904223) >>> 0; return s2 / 4294967296; };
+};
+// Soft patches of light and shade, wholly inside the tile.
+const tileMottle = (base, v, idp, n, amt) => {
+  const r = grassRng(v * 7919 + 101);
+  let defs = "", body = "";
+  for (let i = 0; i < n; i++) {
+    const cx = 4 + r() * 8, cy = 4 + r() * 8, rad = 2.6 + r() * 1.6;
+    const col = i % 2 ? sh(base, amt) : sh(base, -amt);
+    const id = `${idp}${v}m${i}`;
+    defs += `<radialGradient id="${id}"><stop offset="0" stop-color="${col}" stop-opacity=".55"/>` +
+            `<stop offset="1" stop-color="${col}" stop-opacity="0"/></radialGradient>`;
+    body += `<circle cx="${cx.toFixed(2)}" cy="${cy.toFixed(2)}" r="${rad.toFixed(2)}" fill="url(#${id})"/>`;
+  }
+  return { defs, body };
 };
 
 const grassSvg = (base, blade, tall, v, edges) => {
@@ -30,54 +62,62 @@ const grassSvg = (base, blade, tall, v, edges) => {
   const torn = edges
     ? ["n", "e", "s", "w"].filter((s) => edges[s]).map((s) => tornEdge(s, edges[s], v)).join("")
     : "";
-  // Blade positions per variant. Some run off the tile edge on purpose - a
-  // blade clipped by the cell boundary is what stops the eye finding the grid.
-  const sets = [
-    [[2, 16, 1], [5, 16, -1], [8, 16, 1], [11, 16, 0], [14, 16, -1], [0, 16, 1]],
-    [[1, 16, 0], [4, 16, 1], [7, 16, -1], [10, 16, 1], [13, 16, 0], [15, 16, -1]],
-    [[3, 16, -1], [6, 16, 1], [9, 16, 0], [12, 16, -1], [15, 16, 1], [0, 16, 0]],
-    [[0, 16, 1], [3, 16, 0], [6, 16, -1], [9, 16, 1], [12, 16, 0], [15, 16, -1]],
-  ];
-  const shade = sh(base, -0.16);
+  const r = grassRng(v * 104729 + (tall ? 7 : 3));
+  const light = sh(base, 0.24);
 
   if (tall) {
     // Tall grass has to be unmistakable - it is where encounters happen, so it
-    // is a gameplay signal before it is decoration. Dense clumps rising most of
-    // the cell height, a darker bed beneath, and a lighter tip on each blade.
-    const tip = sh(base, 0.3);
-    const blades = sets[v % sets.length].map(([x, , lean], i) => {
-      const h = 10 + (i % 3) * 2;                 // 10-14 of 16, so it reads tall
-      const tx = x + lean * 2.6;
-      return `<path d="M${x} 16 Q${x + lean * 0.8} ${16 - h * 0.55} ${tx} ${16 - h}"` +
-             ` stroke="${blade}" stroke-width="2" fill="none" stroke-linecap="round"/>` +
-             `<path d="M${x + lean * 0.4} ${16 - h * 0.5} Q${x + lean * 1.4} ${16 - h * 0.8} ${tx} ${16 - h}"` +
-             ` stroke="${tip}" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".75"/>`;
-    }).join("");
+    // is a gameplay signal before it is decoration. A dark back row, then the
+    // front row in the blade colour with a lighter tip on each.
+    const back = sh(base, -0.52), tip = sh(base, 0.3);
+    let blades = "";
+    for (let layer = 0; layer < 2; layer++) {
+      for (let i = 0; i < 7; i++) {
+        const x = (i + 0.2 + r() * 0.8) * (16 / 7);
+        const lean = (r() - 0.5) * 2.2;
+        const h = layer ? 8 + r() * 5 : 10 + r() * 5;
+        const tx = x + lean * 2.4;
+        const col = layer ? blade : back;
+        blades += `<path d="M${x.toFixed(2)} 16.4 Q${(x + lean * 0.8).toFixed(2)} ${(16 - h * 0.55).toFixed(2)} ${tx.toFixed(2)} ${(16 - h).toFixed(2)}"` +
+                  ` stroke="${col}" stroke-width="${layer ? 1.7 : 1.9}" fill="none" stroke-linecap="round"/>`;
+        if (layer) blades += `<path d="M${(x + lean * 0.4).toFixed(2)} ${(16 - h * 0.5).toFixed(2)} Q${(x + lean * 1.4).toFixed(2)} ${(16 - h * 0.8).toFixed(2)} ${tx.toFixed(2)} ${(16 - h).toFixed(2)}"` +
+                  ` stroke="${tip}" stroke-width=".8" fill="none" stroke-linecap="round" opacity=".8"/>`;
+      }
+    }
     // FLAT base, deliberately. Any vertical gradient inside a cell means the
     // bottom of one tile is a different value from the top of the tile below
     // it, so every horizontal cell boundary becomes a visible seam - which is
-    // the grid reappearing, in gentler form, for the third time. The blades
-    // carry all the depth instead: a dark stroke with a lighter tip drawn over
-    // it, which reads as grass catching the light without touching the
-    // background at all.
+    // the grid reappearing, in gentler form, for the third time.
     return `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 16 16">` +
            `<rect width="16" height="16" fill="${base}"/>${torn}${blades}</svg>`;
   }
 
-  // Short grass is a texture, not a feature: a faint mottle and a few small
-  // tufts, enough that a field is not one flat fill but never enough to
-  // compete with the tall grass beside it.
-  const tufts = sets[v % sets.length].slice(0, 4).map(([x, , lean]) =>
-    `<path d="M${x} 14 q${lean * 0.8} -2 ${lean * 1.6} -3.2"` +
-    ` stroke="${blade}" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".8"/>`).join("");
-  const gid3 = "gs" + Math.abs(hashStr(base + "s")) % 100000;
+  // Short grass is a texture, not a feature: mottle, scattered small tufts in
+  // two tones, a few specks - enough that a field is never one flat fill,
+  // never enough to compete with the tall grass beside it.
+  const mot = tileMottle(base, v, "gm" + (Math.abs(hashStr(base)) % 9973), 3, 0.11);
+  let tufts = "";
+  for (let i = 0; i < 7; i++) {
+    const x = 1 + r() * 14, y = 3.5 + r() * 11.5;
+    const col = i % 3 === 2 ? light : blade;
+    const op = i % 3 === 2 ? 0.55 : 0.62;
+    const n = 2 + Math.floor(r() * 2);
+    for (let b = 0; b < n; b++) {
+      const dx = (b - (n - 1) / 2) * 0.9 + (r() - 0.5) * 0.4;
+      const h = 1.4 + r() * 1.6;
+      tufts += `<path d="M${x.toFixed(2)} ${y.toFixed(2)} q${(dx * 0.4).toFixed(2)} ${(-h * 0.6).toFixed(2)} ${dx.toFixed(2)} ${(-h).toFixed(2)}"` +
+               ` stroke="${col}" stroke-width=".6" fill="none" stroke-linecap="round" opacity="${op}"/>`;
+    }
+  }
+  let specks = "";
+  for (let i = 0; i < 5; i++) {
+    specks += `<circle cx="${(1 + r() * 14).toFixed(2)}" cy="${(1 + r() * 14).toFixed(2)}" r="${(0.22 + r() * 0.2).toFixed(2)}"` +
+              ` fill="${i % 2 ? light : sh(base, -0.3)}" opacity=".45"/>`;
+  }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 16 16">` +
-         `<defs><radialGradient id="${gid3}" cx="0.35" cy="0.62" r="0.75">` +
-         `<stop offset="0" stop-color="${shade}" stop-opacity=".2"/>` +
-         `<stop offset="1" stop-color="${shade}" stop-opacity="0"/></radialGradient></defs>` +
-         `<rect width="16" height="16" fill="${base}"/>` +
-         `<rect width="16" height="16" fill="url(%23${gid3})"/>` +
-         `${torn}${tufts}</svg>`;
+         `<defs>${mot.defs}</defs>` +
+         `<rect width="16" height="16" fill="${base}"/>${mot.body}` +
+         `${torn}${specks}${tufts}</svg>`;
 };
 
 // ---- torn edges ----

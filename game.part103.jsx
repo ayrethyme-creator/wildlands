@@ -149,7 +149,13 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
     || (typeof PERSON_TILE !== "undefined" && PERSON_TILE(em, bg))
     || (typeof PROP_TILE !== "undefined" && PROP_TILE(ch, em, bg))
     || null;
-  return { bg, img, em: img ? "" : em, water: ch === "W" };
+  // The same ground underneath as on the map itself (part142), or the
+  // texture would stop dead at every seam.
+  const isSurface = ch === "G" || ch === "g" || ch === "W";
+  const under = (!isSurface && typeof TERRAIN_UNDER === "function") ? TERRAIN_UNDER(ch, x, y, bg, pal, mm.rows) : null;
+  const top = under && img ? unfloor(img) : img;
+  const all = [top, under].filter(Boolean).join(", ") || null;
+  return { bg, img: all, em: img ? "" : em, water: ch === "W" };
 };
 
 /* Each cell is drawn one pixel wider and taller than a tile, overlapping its

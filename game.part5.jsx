@@ -1215,9 +1215,15 @@
   const learner = S.party.find((a) => a.pending?.length);
 
   return (
-    <div className="wl-paper" style={frame}>
+    <div className="wl-paper" style={wideLayout ? {
+      // The wide layout (part4, layoutFor): the map on the left sized from the
+      // window's height, the team and the buttons in a column beside it.
+      ...frame, maxWidth: tilePx * CAM_W + 24 + 420, display: "grid",
+      gridTemplateColumns: `${tilePx * CAM_W + 24}px minmax(360px, 1fr)`,
+      gridTemplateRows: "auto auto 1fr", columnGap: 12, alignContent: "start",
+    } : frame}>
       {KEYFRAMES}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", ...(wideLayout ? { gridColumn: "1 / -1" } : null) }}>
         {/* The sky, next to the place. It only ever shows when the weather is
             doing something - a clear day says nothing, because a badge that is
             always lit is furniture. Long-pressing is not a thing here, so the
@@ -1233,7 +1239,7 @@
         <div style={{ fontSize: 12 }}>{areaDex ? <span style={{ color: areaDex.got === areaDex.tot ? "#8fd94a" : "#e8c547", marginRight: 6 }} title="Species living in this area that you have studied">🐾{areaDex.got}/{areaDex.tot}</span> : null}🏅{badgesShown(S.badges)}/{BADGES_TOTAL} ₡{S.items.coins ?? 0} 🍖{S.items.treats} 🫐{S.items.berries + (S.items.bigberries ?? 0) + (S.items.goldberries ?? 0)} ✨{S.items.revives ?? 0}{S.items.lantern ? " 🏮" : ""}{S.items.compass && S.compassOn ? " 🧭" : ""}</div>
       </div>
 
-      <div style={{ padding: "0 10px" }}>
+      <div style={{ padding: "0 10px", ...(wideLayout ? { gridColumn: 1, gridRow: "2 / span 2" } : null) }}>
         {/* THE CAMERA. Everything inside is unchanged; what changed is that the
             map no longer sizes itself to the screen.
 
@@ -1422,9 +1428,12 @@
             // figure the tile would otherwise carry.
             const personBgImg = (hidden || grassBgImg || artBgImg)
               ? null : (typeof PERSON_TILE !== "undefined" ? PERSON_TILE(em, bg) : null);
-            const propBgImg = (hidden || grassBgImg || artBgImg || personBgImg)
+            // A building is drawn large, over the map, by the layer below the
+            // landmarks (part142); its own tile shows only the ground.
+            const bigBuild = !hidden && typeof BIG_BUILD !== "undefined" && BIG_BUILD.has(ch2);
+            const propBgImg = (hidden || grassBgImg || artBgImg || personBgImg || bigBuild)
               ? null : (typeof PROP_TILE !== "undefined" ? PROP_TILE(ch2, em, bg) : null);
-            if (artBgImg || personBgImg || propBgImg) em = "";
+            if (artBgImg || personBgImg || propBgImg || bigBuild) em = "";
 
             /* Which tiles move, and how much they are held back so a field does
                not move as one sheet. Water gets the longest spread because a
@@ -1473,6 +1482,15 @@
             const stepFrom = (personBgImg && typeof wanderArrival === "function")
               ? wanderArrival(S.map, x, y) : null;
             const personBg = stepFrom ? null : personBgImg;
+            /* The ground under the tile (part142): short grass under a tree in a
+               field, earth under a hut in a yard, with the drawing's own flat
+               square taken out so the texture runs on underneath it. Grass and
+               water draw their own surface and need nothing under them. */
+            const drawn = artBgImg || personBg || propBgImg;
+            const under = (!hidden && !grassBgImg && !waterSurface && !glow && typeof TERRAIN_UNDER === "function")
+              ? TERRAIN_UNDER(ch2, x, y, bg, pal, m.rows) : null;
+            const topImg = grassBgImg || (under && drawn ? unfloor(drawn) : drawn) || waterSurface;
+            const anyImg = topImg || under;
             return (
               <div key={x + "," + y + ((disturbed || wake) && grassBgImg ? ":" + (S.step || 0) : "")}
                 className={grassBgImg && !hidden
@@ -1492,18 +1510,17 @@
                 // the road. The warm centre is also actually warm now.
                 backgroundImage: [
                   waterImg,
-                  grassBgImg || artBgImg || personBg || propBgImg || waterSurface,
+                  topImg,
                   glow ? `radial-gradient(circle, rgba(255,203,120,.55) 0%, rgba(255,190,96,.22) 42%, ${bg} 76%)` : null,
+                  under,
                 ].filter(Boolean).join(", ") || undefined,
                 // Water names both layers: the sliding band is oversized so it
                 // has somewhere to travel, the surface under it is exactly one
                 // tile and never moves.
-                backgroundSize: (grassBgImg || artBgImg || personBg || propBgImg || waterSurface)
-                    ? (glow ? "100% 100%, 100% 100%" : "100% 100%")
-                    : undefined,
+                backgroundSize: anyImg ? "100% 100%" : undefined,
                 // Without this a shifted background wraps and a second copy of
                 // the tile slides in from the far edge.
-                backgroundRepeat: (grassBgImg || artBgImg || personBg || propBgImg || waterSurface) ? "no-repeat" : undefined,
+                backgroundRepeat: anyImg ? "no-repeat" : undefined,
                 animationDelay: motion ? `${delay}s` : undefined,
                 aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center",
                 // Was keyed to the map's width, because the tile size used to
@@ -1530,6 +1547,10 @@
               </div>
             );
           }))}
+          {/* Light and shade over the ground (part142). After the tiles and at
+              the ranger's tile's level, so it covers her tile too; she herself
+              is drawn above it. */}
+          {typeof TerrainShade !== "undefined" ? <TerrainShade mapKey={S.map} /> : null}
 
           {/* Keyed on the warp counter, so it remounts and replays on every
               arrival and never on an ordinary step. */}
@@ -1765,6 +1786,26 @@
             );
           })}
 
+          {/* ---- buildings, drawn large (part142) ----
+              Like the landmarks: standing on their own tile, rising over the
+              ground behind, under the ranger and the animals. */}
+          {typeof bigBuildingsOf === "function" && bigBuildingsOf(S.map).map((b) => {
+            if (Math.abs(b.x - S.x) > CAM_CX + 4 || Math.abs(b.y - S.y) > CAM_CY + 4) return null;
+            if (dark && Math.hypot(b.x - S.x, b.y - S.y) > 2.4) return null;
+            const img = typeof PROP_TILE !== "undefined" ? unfloor(PROP_TILE(b.ch, TILE_STYLE(b.ch, pal).em, pal.ground)) : null;
+            if (!img) return null;
+            const sw = b.w + 0.8, shh = b.h + 0.8;
+            return (
+              <div key={"bld:" + b.x + "," + b.y} aria-hidden="true" style={{
+                position: "absolute", pointerEvents: "none", zIndex: 2,
+                left: `calc(var(--tile) * ${b.x + b.w / 2 - sw / 2})`,
+                top: `calc(var(--tile) * ${b.y + b.h - shh})`,
+                width: `calc(var(--tile) * ${sw})`, height: `calc(var(--tile) * ${shh})`,
+                backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+              }} />
+            );
+          })}
+
           {/* ---- a gateway over every doorway on a rebuilt map (part106) ----
               So a road that runs to the map's edge reads as going somewhere,
               not as a dead end into the trees. Drawn over the door tile, which
@@ -1925,7 +1966,7 @@
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: 6, padding: "8px 12px", overflowX: "auto" }}>
+      <div style={{ display: "flex", gap: 6, padding: "8px 12px", overflowX: "auto", ...(wideLayout ? { gridColumn: 2, gridRow: 2, flexWrap: "wrap", overflowX: "visible", paddingTop: 0 } : null) }}>
         {S.party.map((a, i) => (
           <div key={a.uid} style={{ ...panel, padding: "3px 8px", fontSize: 11, borderColor: i === 0 ? "#e8c547" : "#5c5344", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 5 }}>
             <Sprite sp={a.sp} size={22} />
@@ -1934,7 +1975,7 @@
         ))}
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 16px 18px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "4px 16px 18px", ...(wideLayout ? { gridColumn: 2, gridRow: 3, alignSelf: "start", gap: 14 } : null) }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 52px)", gridTemplateRows: "repeat(3, 52px)", gap: 4 }}>
           <div />
           <button style={btn("#5c5344")} ref={dpadRef(0, -1)}>{tri("up")}</button>
