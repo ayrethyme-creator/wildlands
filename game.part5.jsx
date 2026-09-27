@@ -1552,9 +1552,6 @@
               is drawn above it. */}
           {typeof TerrainShade !== "undefined" ? <TerrainShade mapKey={S.map} /> : null}
 
-          {/* Keyed on the warp counter, so it remounts and replays on every
-              arrival and never on an ordinary step. */}
-          <div key={`arrive:${S.map}:${S.warp || 0}`} className="wl-arrive" aria-hidden="true" />
 
           {/* The tile just left, in country that holds a print. Keyed on the
               step count so each footfall remounts it and the fade replays;
@@ -1924,6 +1921,15 @@
 
             Mist and heat are the same: not specks, but what the whole view
             looks like through, so they belong to the view too. */}
+        {/* The arrival fade, for doors (part4 bumps `warp` only for a door).
+            Keyed on the warp counter ONLY, and on the camera rather than
+            inside the world: the world is rebuilt whenever the map changes,
+            and anything inside it replays. Both mistakes made walking across
+            a seam onto the next map - which is not an arrival - fade the whole
+            view in from near-black. Ayr, 2026-09-27: "When I go onto the next
+            tile, the screen flashes black." A seam needs no cover: the next
+            map is already drawn past the edge (MapSurround, part103). */}
+        <div key={`arrive:${S.warp || 0}`} className="wl-arrive" aria-hidden="true" />
         {/* Rain and snow fall through the VIEW, as weather does in Fire Red
             (part88 weatherFall). Fixed to the screen, not the map, so a drop
             always has the whole height of it to fall through. */}
