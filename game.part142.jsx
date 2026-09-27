@@ -106,16 +106,28 @@ const TerrainShade = React.memo(function TerrainShade({ mapKey }) {
   const H = m.rows.length, W = [...m.rows[0]].length;
   if (W < 10 || H < 10) return null;
   const r = grassRng(Math.abs(hashStr(mapKey)) + 17);
-  const n = Math.round((W * H) / 45);
+  /* ONE PATCH PER BLOCK, NOT A SCATTER. Ayr, 2026-09-27, the same day: "there
+     is a dark patch in the center of each town and map." The first version
+     scattered patches at random but kept every one wholly inside the map, so
+     they piled up in the middle - and two in three were shade. Every map came
+     out dark in the centre. Now the map is cut into even blocks and each
+     block holds one patch that stays inside its own block, light and shade
+     alternating like a chessboard: the same amount of each everywhere, the
+     edges as covered as the middle, and still nothing crossing a seam. */
+  const B = 7;
+  const cols = Math.max(1, Math.round(W / B)), rowsN = Math.max(1, Math.round(H / B));
+  const bw = W / cols, bh = H / rowsN;
   const layers = [];
-  for (let i = 0; i < n; i++) {
-    const rad = 3 + r() * 3.5;
-    const cx = rad + r() * (W - 2 * rad), cy = rad + r() * (H - 2 * rad);
-    const shade = i % 3 !== 0;
-    const col = shade ? "20,26,14" : "255,246,220";
-    const a = shade ? 0.13 + r() * 0.07 : 0.07 + r() * 0.05;
-    layers.push(`radial-gradient(circle calc(var(--tile) * ${rad.toFixed(2)}) at calc(var(--tile) * ${cx.toFixed(2)}) calc(var(--tile) * ${cy.toFixed(2)}), ` +
-      `rgba(${col},${a.toFixed(3)}), rgba(${col},0))`);
+  for (let by = 0; by < rowsN; by++) {
+    for (let bx = 0; bx < cols; bx++) {
+      const rad = Math.min(bw, bh) * (0.36 + r() * 0.12);
+      const cx = bx * bw + rad + r() * (bw - 2 * rad), cy = by * bh + rad + r() * (bh - 2 * rad);
+      const shade = (bx + by) % 2 === 0;
+      const col = shade ? "20,26,14" : "255,246,220";
+      const a = shade ? 0.08 + r() * 0.03 : 0.07 + r() * 0.03;
+      layers.push(`radial-gradient(circle calc(var(--tile) * ${rad.toFixed(2)}) at calc(var(--tile) * ${cx.toFixed(2)}) calc(var(--tile) * ${cy.toFixed(2)}), ` +
+        `rgba(${col},${a.toFixed(3)}), rgba(${col},0))`);
+    }
   }
   return (
     <div aria-hidden="true" style={{
