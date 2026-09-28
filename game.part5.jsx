@@ -1449,7 +1449,13 @@
               // rebuilt grassland maps short grass is most of the ground - five
               // hundred tiles repainting every frame for a shift of 0.7px nobody
               // could see, which is what made running choppy (2026-09-25).
-              else if (grassBgImg && ch2 === "G") { motion = "wl-sway"; delay = jitter; }
+              // Tall grass no longer sways. The sway moved it under a pixel by
+              // animating its background, which repaints every swaying tile on
+              // every frame - 86 of them on the Old Fence Line - and once the
+              // grass was redrawn in two layers of blades and the map had a
+              // light layer over it (part45, part142), that repaint is what made
+              // walking choppy on a phone again (Ayr, 2026-09-28: "very choppy
+              // and laggy now"). A field still rustles where you walk through it.
               else if (personBgImg) {
                 motion = ["wl-idle", "wl-idle-b", "wl-idle-c"][(x * 5 + y * 11) % 3];
                 delay = jitter * 0.6;

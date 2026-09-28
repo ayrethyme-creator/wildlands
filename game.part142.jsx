@@ -134,6 +134,10 @@ const TerrainShade = React.memo(function TerrainShade({ mapKey }) {
       position: "absolute", left: 0, top: 0,
       width: `calc(var(--tile) * ${W})`, height: `calc(var(--tile) * ${H})`,
       pointerEvents: "none", zIndex: 3, backgroundImage: layers.join(", "),
+      // Its own compositor layer, painted once. Without this every tile that
+      // changed under it - a step, a rustle - repainted a dozen soft gradients
+      // over that tile too (2026-09-28: walking had gone choppy).
+      willChange: "transform", transform: "translateZ(0)",
     }} />
   );
 });
