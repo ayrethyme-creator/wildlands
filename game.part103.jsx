@@ -147,8 +147,10 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
     || (ch === "W" && typeof WATER_TILE !== "undefined" && WATER_TILE(ch, x, y, bg, edges))
     || (!lm && typeof TILE_ART !== "undefined" && TILE_ART(ch, x, y, pal, bg))
     || (typeof PERSON_TILE !== "undefined" && PERSON_TILE(em, bg))
-    || (typeof PROP_TILE !== "undefined" && PROP_TILE(ch, em, bg))
+    || (typeof PROP_TILE !== "undefined" && !(typeof BIG_BUILD !== "undefined" && BIG_BUILD.has(ch)) && PROP_TILE(ch, em, bg))
     || null;
+  // A building is drawn large by MapSurround, as it is on the map itself.
+  if (typeof BIG_BUILD !== "undefined" && BIG_BUILD.has(ch)) em = "";
   // The same ground underneath as on the map itself (part142), or the
   // texture would stop dead at every seam.
   const isSurface = ch === "G" || ch === "g" || ch === "W";
@@ -220,6 +222,33 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
           }} />);
       }
     }
+  });
+
+  // The next map's buildings, at building size (part142) - drawn small out
+  // here they would grow the moment you crossed, which is a jump.
+  if (typeof bigBuildingsOf === "function") Object.entries(MAP_LINKS[mapKey]).forEach(([dir, link]) => {
+    const n = MAPS[link.map];
+    if (!n) return;
+    const nW = n.rows[0].length, nH = n.rows.length, off = link.off || 0;
+    const npal = palOf(n);
+    bigBuildingsOf(link.map).forEach((b) => {
+      let gx, gy;
+      if (dir === "n") { gx = b.x + off; gy = b.y - nH; }
+      else if (dir === "s") { gx = b.x + off; gy = H + b.y; }
+      else if (dir === "w") { gx = b.x - nW; gy = b.y + off; }
+      else { gx = W + b.x; gy = b.y + off; }
+      if (gx < -RX - 2 || gx >= W + RX + 2 || gy < -RY - 2 || gy >= H + RY + 2) return;
+      const img = typeof PROP_TILE !== "undefined" ? unfloor(PROP_TILE(b.ch, TILE_STYLE(b.ch, npal).em, npal.ground)) : null;
+      if (!img) return;
+      const sw = b.w + 0.8, shh = b.h + 0.8;
+      landmarks.push(
+        <div key={"bld" + gx + "," + gy} style={{
+          position: "absolute", left: `calc(var(--tile) * ${gx + b.w / 2 - sw / 2})`,
+          top: `calc(var(--tile) * ${gy + b.h - shh})`,
+          width: `calc(var(--tile) * ${sw})`, height: `calc(var(--tile) * ${shh})`,
+          backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+        }} />);
+    });
   });
 
   // Then the wild country, everywhere else within reach of the camera.

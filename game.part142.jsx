@@ -100,11 +100,13 @@ const unfloor = (img) => {
 // Broad light and shade over the whole map, seeded by the map so it is always
 // the same. Patches are placed wholly inside the map: one cut off at the edge
 // would draw a straight line across a seam.
-const TerrainShade = React.memo(function TerrainShade({ mapKey }) {
+// One map's patches, as gradients placed at (ox, oy) tiles from the layer's
+// corner.
+const shadeLayersOf = (mapKey, ox, oy) => {
   const m = MAPS[mapKey];
-  if (!m || m.dark || !m.rows || !m.rows.length) return null;
+  if (!m || m.dark || !m.rows || !m.rows.length) return [];
   const H = m.rows.length, W = [...m.rows[0]].length;
-  if (W < 10 || H < 10) return null;
+  if (W < 10 || H < 10) return [];
   const r = grassRng(Math.abs(hashStr(mapKey)) + 17);
   /* ONE PATCH PER BLOCK, NOT A SCATTER. Ayr, 2026-09-27, the same day: "there
      is a dark patch in the center of each town and map." The first version
@@ -125,14 +127,44 @@ const TerrainShade = React.memo(function TerrainShade({ mapKey }) {
       const shade = (bx + by) % 2 === 0;
       const col = shade ? "20,26,14" : "255,246,220";
       const a = shade ? 0.08 + r() * 0.03 : 0.07 + r() * 0.03;
-      layers.push(`radial-gradient(circle calc(var(--tile) * ${rad.toFixed(2)}) at calc(var(--tile) * ${cx.toFixed(2)}) calc(var(--tile) * ${cy.toFixed(2)}), ` +
+      layers.push(`radial-gradient(circle calc(var(--tile) * ${rad.toFixed(2)}) at calc(var(--tile) * ${(cx + ox).toFixed(2)}) calc(var(--tile) * ${(cy + oy).toFixed(2)}), ` +
         `rgba(${col},${a.toFixed(3)}), rgba(${col},0))`);
     }
   }
+  return layers;
+};
+
+/* THE NEXT MAPS ARE LIT TOO. Ayr, 2026-09-28, once the black flash had gone:
+   "Now there's a little screen jump instead of a flash." The light covered
+   only the map you were on, so the moment you crossed a seam the map behind
+   you lost its patches and the one ahead gained them - the lighting of half
+   the screen changed in one frame. Now the layer reaches past every edge as
+   far as the next map is drawn (MapSurround, part103), and lights each
+   neighbour with that neighbour's own patches, placed where it lies. After a
+   crossing the same patches are in the same places on screen. */
+const TerrainShade = React.memo(function TerrainShade({ mapKey }) {
+  const m = MAPS[mapKey];
+  if (!m || m.dark || !m.rows || !m.rows.length) return null;
+  const H = m.rows.length, W = [...m.rows[0]].length;
+  const RX = (typeof SURROUND_RX === "number" ? SURROUND_RX : 8) + 1;
+  const RY = (typeof SURROUND_RY === "number" ? SURROUND_RY : 7) + 1;
+  const layers = shadeLayersOf(mapKey, RX, RY);
+  Object.entries(MAP_LINKS[mapKey] || {}).forEach(([dir, link]) => {
+    const n = MAPS[link.map];
+    if (!n || !n.rows) return;
+    const nW = [...n.rows[0]].length, nH = n.rows.length, off = link.off || 0;
+    let gx, gy;
+    if (dir === "n") { gx = off; gy = -nH; }
+    else if (dir === "s") { gx = off; gy = H; }
+    else if (dir === "w") { gx = -nW; gy = off; }
+    else { gx = W; gy = off; }
+    layers.push(...shadeLayersOf(link.map, gx + RX, gy + RY));
+  });
+  if (!layers.length) return null;
   return (
     <div aria-hidden="true" style={{
-      position: "absolute", left: 0, top: 0,
-      width: `calc(var(--tile) * ${W})`, height: `calc(var(--tile) * ${H})`,
+      position: "absolute", left: `calc(var(--tile) * ${-RX})`, top: `calc(var(--tile) * ${-RY})`,
+      width: `calc(var(--tile) * ${W + 2 * RX})`, height: `calc(var(--tile) * ${H + 2 * RY})`,
       pointerEvents: "none", zIndex: 3, backgroundImage: layers.join(", "),
       // Its own compositor layer, painted once. Without this every tile that
       // changed under it - a step, a rustle - repainted a dozen soft gradients
