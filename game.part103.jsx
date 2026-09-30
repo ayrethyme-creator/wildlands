@@ -156,7 +156,8 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
   const isSurface = ch === "G" || ch === "g" || ch === "W";
   const under = (!isSurface && typeof TERRAIN_UNDER === "function") ? TERRAIN_UNDER(ch, x, y, bg, pal, mm.rows) : null;
   const top = under && img ? unfloor(img) : img;
-  const all = [top, under].filter(Boolean).join(", ") || null;
+  const sh2 = (u) => (typeof shortUrl === "function" ? shortUrl(u) : u);
+  const all = [sh2(top), sh2(under)].filter(Boolean).join(", ") || null;
   return { bg, img: all, em: img ? "" : em, water: ch === "W" };
 };
 
@@ -169,25 +170,50 @@ const surroundTile = (mm, mapKey, x, y, pal) => {
    out here the ground changes from map to map, so the cells cover the gaps
    themselves. Found 2026-09-25 as a grid across the next map's ground - the
    same grid Ayr caught on the roads. */
-const SurroundCell = ({ gx, gy, cell }) => (
+const SurroundCell = React.memo(({ gx, gy, cell }) => (
   <div aria-hidden="true" style={{
     position: "absolute", left: `calc(var(--tile) * ${gx})`, top: `calc(var(--tile) * ${gy})`,
     width: "calc(var(--tile) + 1px)", height: "calc(var(--tile) + 1px)", backgroundColor: cell.bg,
-    backgroundImage: cell.img || undefined, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+    backgroundImage: (cell.img && typeof shortUrl === "function" ? shortUrl(cell.img) : cell.img) || undefined,
+    backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
     display: "flex", alignItems: "center", justifyContent: "center",
     fontSize: "calc(var(--tile) * .62)", lineHeight: 1,
   }}>{cell.em}</div>
-);
+));
 
-const MapSurround = React.memo(function MapSurround({ mapKey }) {
+/* WHAT LIES PAST THE EDGE, WORKED OUT ONCE AND BUILT ONLY NEAR THE CAMERA.
+   Ayr, 2026-09-29: crossing onto the next map "still jumps/stalls". Measured:
+   an ordinary step is 4-5ms of work, the step that crosses a seam 30-43ms -
+   every time, not only the first - because crossing rebuilt everything past
+   all four edges from scratch: a thousand cells, most of them nowhere near
+   the ranger. On a phone that is a visible stall.
+
+   So the strip is now two halves. surroundData() works out every cell and
+   big picture past the edges ONCE per map and keeps it; MapSurround draws only
+   the ones within reach of the camera, re-cut as the ranger moves in blocks
+   of four tiles. And prewarmSurround() works out the NEXT maps' data in the
+   browser's idle time while you walk, so a crossing has nothing to compute. */
+const SURROUND_DATA = {};
+// A cell whose picture is worked out on first use and then kept: building a
+// whole map's worth at once took ~80ms on a desktop, far worse on a phone.
+const lazyCell = (k, gx, gy, make) => {
+  let got = null;
+  return { k, gx, gy, get cell() { return got || (got = make()); }, get ready() { return !!got; } };
+};
+const surroundData = (mapKey) => {
+  if (SURROUND_DATA[mapKey]) return SURROUND_DATA[mapKey];
   const m = MAPS[mapKey];
-  if (!m || !MAP_LINKS[mapKey]) return null;       // not rebuilt: leave the black
-  if (m.dark) return null;                          // a cave: past its walls is dark
+  if (!m || !MAP_LINKS[mapKey] || m.dark) return (SURROUND_DATA[mapKey] = { cells: [], pics: [] });
   const W = m.rows[0].length, H = m.rows.length;
   const RX = SURROUND_RX, RY = SURROUND_RY;
-  const cells = [];
-  const landmarks = [];     // drawn after every tile, so no tile covers one
+  const cells = [];         // {k, gx, gy, cell}
+  const pics = [];          // {k, x0, y0, x1, y1, style} - landmarks and buildings, drawn large
   const taken = new Set();
+  const big = (k, left, top, w, h, img) => pics.push({ k, x0: left, y0: top, x1: left + w, y1: top + h, img, style: {
+    position: "absolute", left: `calc(var(--tile) * ${left})`, top: `calc(var(--tile) * ${top})`,
+    width: `calc(var(--tile) * ${w})`, height: `calc(var(--tile) * ${h})`,
+    backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
+  } });
 
   // Neighbouring maps first, so where one exists it wins over the forest.
   Object.entries(MAP_LINKS[mapKey]).forEach(([dir, link]) => {
@@ -195,59 +221,36 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
     if (!n) return;
     const npal = palOf(n);
     const nW = n.rows[0].length, nH = n.rows.length, off = link.off || 0;
+    const place = (nx, ny) => dir === "n" ? [nx + off, ny - nH] : dir === "s" ? [nx + off, H + ny]
+      : dir === "w" ? [nx - nW, ny + off] : [W + nx, ny + off];
     for (let ny = 0; ny < nH; ny++) {
       for (let nx = 0; nx < nW; nx++) {
-        // this neighbour tile, in THIS map's coordinates
-        let gx, gy;
-        if (dir === "n") { gx = nx + off; gy = ny - nH; }
-        else if (dir === "s") { gx = nx + off; gy = H + ny; }
-        else if (dir === "w") { gx = nx - nW; gy = ny + off; }
-        else { gx = W + nx; gy = ny + off; }
+        const [gx, gy] = place(nx, ny);
         if (gx < -RX || gx >= W + RX || gy < -RY || gy >= H + RY) continue;
         const k = gx + "," + gy;
         if (taken.has(k)) continue;
         taken.add(k);
-        cells.push(<SurroundCell key={"n" + k} gx={gx} gy={gy} cell={surroundTile(n, link.map, nx, ny, npal)} />);
+        // Worked out the first time it is needed, not now (see lazyCell).
+        cells.push(lazyCell("n" + k, gx, gy, () => surroundTile(n, link.map, nx, ny, npal)));
         // ...and a landmark on the next map is drawn at the size it will be
         // when you get there, not shrunk to a tile until you cross.
         const lm = LANDMARK_AT[link.map + ":" + nx + "," + ny];
         const img = lm && landmarkImg(lm.kind);
-        const [sw, shh] = lm ? markScale(lm.kind) : [1, 1];
-        if (img) landmarks.push(
-          <div key={"lm" + k} style={{
-            position: "absolute", left: `calc(var(--tile) * ${gx + 0.5 - sw / 2})`,
-            top: `calc(var(--tile) * ${gy + 1 - shh})`,
-            width: `calc(var(--tile) * ${sw})`, height: `calc(var(--tile) * ${shh})`,
-            backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
-          }} />);
+        if (img) {
+          const [sw, shh] = markScale(lm.kind);
+          big("lm" + k, gx + 0.5 - sw / 2, gy + 1 - shh, sw, shh, img);
+        }
       }
     }
-  });
-
-  // The next map's buildings, at building size (part142) - drawn small out
-  // here they would grow the moment you crossed, which is a jump.
-  if (typeof bigBuildingsOf === "function") Object.entries(MAP_LINKS[mapKey]).forEach(([dir, link]) => {
-    const n = MAPS[link.map];
-    if (!n) return;
-    const nW = n.rows[0].length, nH = n.rows.length, off = link.off || 0;
-    const npal = palOf(n);
-    bigBuildingsOf(link.map).forEach((b) => {
-      let gx, gy;
-      if (dir === "n") { gx = b.x + off; gy = b.y - nH; }
-      else if (dir === "s") { gx = b.x + off; gy = H + b.y; }
-      else if (dir === "w") { gx = b.x - nW; gy = b.y + off; }
-      else { gx = W + b.x; gy = b.y + off; }
+    // The next map's buildings, at building size (part142) - drawn small out
+    // here they would grow the moment you crossed, which is a jump.
+    if (typeof bigBuildingsOf === "function") bigBuildingsOf(link.map).forEach((b) => {
+      const [gx, gy] = place(b.x, b.y);
       if (gx < -RX - 2 || gx >= W + RX + 2 || gy < -RY - 2 || gy >= H + RY + 2) return;
       const img = typeof PROP_TILE !== "undefined" ? unfloor(PROP_TILE(b.ch, TILE_STYLE(b.ch, npal).em, npal.ground)) : null;
       if (!img) return;
       const sw = b.w + 0.8, shh = b.h + 0.8;
-      landmarks.push(
-        <div key={"bld" + gx + "," + gy} style={{
-          position: "absolute", left: `calc(var(--tile) * ${gx + b.w / 2 - sw / 2})`,
-          top: `calc(var(--tile) * ${gy + b.h - shh})`,
-          width: `calc(var(--tile) * ${sw})`, height: `calc(var(--tile) * ${shh})`,
-          backgroundImage: img, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat",
-        }} />);
+      big("bld" + gx + "," + gy, gx + b.w / 2 - sw / 2, gy + b.h - shh, sw, shh, img);
     });
   });
 
@@ -278,11 +281,12 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
     const [ex, ey] = t.split(",").map(Number);
     const out = ex === 0 ? [-1, 0] : ex === W - 1 ? [1, 0] : ey === 0 ? [0, -1] : ey === H - 1 ? [0, 1] : null;
     if (!out) return;
-    for (let s = 1; s <= Math.max(RX, RY); s++) {
-      const gx = ex + out[0] * s, gy = ey + out[1] * s, k = gx + "," + gy;
+    for (let st = 1; st <= Math.max(RX, RY); st++) {
+      const gx = ex + out[0] * st, gy = ey + out[1] * st, k = gx + "," + gy;
       if (taken.has(k)) break;
       taken.add(k);
-      cells.push(<SurroundCell key={"p" + k} gx={gx} gy={gy} cell={{ bg: pal.ground, img: null, em: "" }} />);
+      const under = typeof GROUND_TILE === "function" ? GROUND_TILE(gx, gy, pal.ground, "") : null;
+      cells.push({ k: "p" + k, gx, gy, cell: { bg: pal.ground, img: under, em: "" } });
     }
   });
 
@@ -299,15 +303,55 @@ const MapSurround = React.memo(function MapSurround({ mapKey }) {
       if (gx >= 0 && gx < W && gy >= 0 && gy < H) continue;
       const k = gx + "," + gy;
       if (taken.has(k)) continue;
-      const c = bcell(gx, gy);
-      if (!c.img) c.em = pal.tree && pal.tree.em;
-      cells.push(<SurroundCell key={"b" + k} gx={gx} gy={gy} cell={c} />);
+      cells.push(lazyCell("b" + k, gx, gy, () => {
+        const c = bcell(gx, gy);
+        if (!c.img) c.em = pal.tree && pal.tree.em;
+        return c;
+      }));
     }
   }
+  return (SURROUND_DATA[mapKey] = { cells, pics });
+};
+
+// Work out the next maps' strips while the browser is idle, a few cells at a
+// time and never past the idle slot's deadline, so a key pressed meanwhile is
+// answered at once and crossing into any of them finds its pictures made.
+const prewarmSurround = (mapKey) => {
+  const next = Object.values(MAP_LINKS[mapKey] || {}).map((l) => l.map).filter(Boolean);
+  const idle = (typeof requestIdleCallback === "function") ? requestIdleCallback : (f) => setTimeout(() => f({ timeRemaining: () => 8 }), 60);
+  let mi = 0, ci = 0, cells = null;
+  const work = (deadline) => {
+    while (deadline.timeRemaining() > 3) {
+      if (!cells) {
+        if (mi >= next.length) return;
+        try { cells = surroundData(next[mi]).cells; } catch (e) { cells = []; }
+        ci = 0;
+      }
+      if (ci >= cells.length) { cells = null; mi++; continue; }
+      const c = cells[ci++];
+      if (!c.ready) { try { void c.cell; } catch (e) { /* drawn on arrival instead */ } }
+    }
+    idle(work);
+  };
+  if (next.length) idle(work);
+};
+
+// Only what the camera can reach: the ranger's position, rounded to a block of
+// four so this redraws once every few steps rather than on every one, plus a
+// margin wide enough that nothing is ever missing at the edge of the view.
+const SURROUND_BLOCK = 4;
+const MapSurround = React.memo(function MapSurround({ mapKey, bx, by }) {
+  const d = surroundData(mapKey);
+  React.useEffect(() => { prewarmSurround(mapKey); }, [mapKey]);
+  if (!d.cells.length) return null;
+  const cx = bx * SURROUND_BLOCK, cy = by * SURROUND_BLOCK;
+  const rx = CAM_CX + SURROUND_BLOCK + 3, ry = CAM_CY + SURROUND_BLOCK + 3;
+  const near = (x0, y0, x1, y1) => x1 >= cx - rx && x0 <= cx + rx && y1 >= cy - ry && y0 <= cy + ry;
   return (
     <div aria-hidden="true" style={{ position: "absolute", left: 0, top: 0, width: 0, height: 0, zIndex: -1 }}>
-      {cells}
-      {landmarks}
+      {d.cells.filter((c) => near(c.gx, c.gy, c.gx + 1, c.gy + 1)).map((c) =>
+        <SurroundCell key={c.k} gx={c.gx} gy={c.gy} cell={c.cell} />)}
+      {d.pics.filter((p) => near(p.x0, p.y0, p.x1, p.y1)).map((p) => <div key={p.k} style={p.style} />)}
     </div>
   );
 });

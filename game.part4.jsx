@@ -1921,6 +1921,8 @@ function Wildlands() {
         battle: null, screen: "world",
         guidePop: guidePop || prev.guidePop || null,
         map: opts.blackout ? "town1" : prev.map,
+        // A blackout is a jump, like a door: the world is rebuilt (part5).
+        warp: opts.blackout ? (prev.warp || 0) + 1 : prev.warp,
         x: opts.blackout ? landOf("town1")[0] : prev.x, y: opts.blackout ? landOf("town1")[1] : prev.y,
         swimming: opts.blackout ? false : prev.swimming,
         dialog: text ? { text } : null,

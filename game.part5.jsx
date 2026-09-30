@@ -236,6 +236,14 @@
         from { translate: calc(var(--tile) * var(--sx, 0)) calc(var(--tile) * var(--sy, 0)); }
         to { translate: 0 0; }
       }
+      /* The same slide under a second name. The world is no longer rebuilt at
+         a seam, and an animation only restarts when its name changes - so two
+         seams on consecutive steps alternate names, or the second would not
+         slide at all. */
+      @keyframes wl-seam-b {
+        from { translate: calc(var(--tile) * var(--sx, 0)) calc(var(--tile) * var(--sy, 0)); }
+        to { translate: 0 0; }
+      }
 
       .wl-paper::after {
         content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 3;
@@ -1182,6 +1190,8 @@
   const stepMs = typeof stepDelay === "function" ? stepDelay() : 165;
   // [dx, dy] of the step that just crossed a seam, on exactly that step and
   // no other; null otherwise. See the world element below.
+  // Where this map sits on the plane every seam-joined map shares (part142).
+  const [ox, oy] = typeof mapOrigin === "function" ? mapOrigin(S.map) : [0, 0];
   const seamSlide = (S.seamAt != null && S.seamAt === S.step)
     ? ({ up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] })[S.dir] || null
     : null;
@@ -1276,29 +1286,29 @@
         {/* Remounted per map so a warp cuts instead of sliding the length of the
             world. Within one map the transition is what makes it read as the
             ground moving rather than the picture jumping. */}
-        <div key={S.map} style={{ position: "absolute", left: 0, top: 0, display: "grid", gridTemplateColumns: `repeat(${W}, var(--tile))`, gridAutoRows: "var(--tile)",
-          transform: `translate(calc(var(--tile) * ${-(S.x - CAM_CX)}), calc(var(--tile) * ${-(S.y - CAM_CY)}))`,
+        {/* Sized explicitly, not by a grid. Each tile places itself (below),
+            so the tiles far from the camera are simply not built: the grid
+            needed all 672 of a rebuilt map, 441 of them empty, and every one
+            was thrown away and made again at each seam (2026-09-29: crossing
+            onto the next map stalled). */}
+        {/* NOT REBUILT AT A SEAM. Keyed on the jump counter (a door, a
+            Soar, a blackout), not on the map: walking across a seam onto the
+            next map now keeps these tiles and the strip past the edge, and only
+            their pictures change - rather than throwing away and remaking
+            every element, which is what made crossing stall (2026-09-29).
+            What belongs to one map alone (the ranger, animals, landmarks) is
+            still remade, in the keyed group after the tiles. */}
+        <div key={"world:" + (S.warp || 0)} style={{ position: "absolute", left: 0, top: 0,
+          // The plane every seam-joined map sits on (part142, mapOrigin). The
+          // camera follows the ranger's place on the plane, so crossing a seam
+          // moves it one step like any other step - no rebuild, no jolt.
+          transform: `translate(calc(var(--tile) * ${-(ox + S.x - CAM_CX)}), calc(var(--tile) * ${-(oy + S.y - CAM_CY)}))`,
           // The same clock the ranger walks on (see her wrapper below). This
           // was a fixed 140ms, and running steps take 85 - so on every stride
           // she arrived before the world did, sat off-centre for a moment, and
           // was hauled back. A small wobble on every single step.
-          transition: `transform ${stepMs}ms linear`,
-          // Painted under the tiles so that if a join between two of them ever
-          // shows, it shows ground rather than the black behind the map.
-          backgroundColor: pal.ground,
-          // Crossing a seam rebuilds this element in the NEW map's coordinates,
-          // which on its own is a one-step jolt: no transition, just there. So
-          // for the step that crossed, it starts shifted back by exactly that
-          // step - the same picture as the frame before, since the map just
-          // left is drawn beside this one - and slides the rest of the way.
-          // part4 marks the step (seamAt); part103 has the reasoning.
-          ...(seamSlide ? { animation: `wl-seam ${stepMs}ms linear`, "--sx": seamSlide[0], "--sy": seamSlide[1] } : null) }}>
-          {/* What lies past the edge - the next map, or the forest - on a
-              rebuilt map. Memoised on the map, so a step does not redraw it;
-              drawn behind, so the map's own tiles always win. part103. */}
-          <MapSurround mapKey={S.map} />
-          <WaterGlint mapKey={S.map} tile={tilePx} />
-          {m.rows.map((row, y) => row.split("").map((ch, x) => {
+          transition: `transform ${stepMs}ms linear` }}>
+          {[].concat(...m.rows.map((row, y) => row.split("").map((ch, x) => {
             /* ONLY THE TILES NEAR THE CAMERA ARE DRAWN. Ayr, 2026-09-25:
                "Running is choppy." A rebuilt map is 28x24 - 672 tiles, three
                and a half times the old maps - and every one of them was worked
@@ -1307,7 +1317,7 @@
                (more than the camera slides in one step, or across a seam) a
                tile is an empty cell showing the world's ground colour beneath,
                and is drawn in full the moment you come near it. */
-            if (Math.abs(x - S.x) > CAM_CX + 3 || Math.abs(y - S.y) > CAM_CY + 3) return <div key={x + "," + y} />;
+            if (Math.abs(x - S.x) > CAM_CX + 3 || Math.abs(y - S.y) > CAM_CY + 3) return null;
             let ch2 = ch;
             // An animal is standing here (part87). The TILE is still the ground
             // it stands on - grass draws as grass, edges and all - and the animal
@@ -1498,7 +1508,7 @@
             const topImg = grassBgImg || (under && drawn ? unfloor(drawn) : drawn) || waterSurface;
             const anyImg = topImg || under;
             return (
-              <div key={x + "," + y + ((disturbed || wake) && grassBgImg ? ":" + (S.step || 0) : "")}
+              <div key={"t:" + (x + ox) + "," + (y + oy) + ((disturbed || wake) && grassBgImg ? ":" + (S.step || 0) : "")}
                 className={grassBgImg && !hidden
                   ? (disturbed ? "wl-rustle" : wake ? "wl-wake" : (motion || undefined))
                   : (motion || undefined)} style={{
@@ -1516,9 +1526,9 @@
                 // the road. The warm centre is also actually warm now.
                 backgroundImage: [
                   waterImg,
-                  topImg,
+                  typeof shortUrl === "function" ? shortUrl(topImg) : topImg,
                   glow ? `radial-gradient(circle, rgba(255,203,120,.55) 0%, rgba(255,190,96,.22) 42%, ${bg} 76%)` : null,
-                  under,
+                  typeof shortUrl === "function" ? shortUrl(under) : under,
                 ].filter(Boolean).join(", ") || undefined,
                 // Water names both layers: the sliding band is oversized so it
                 // has somewhere to travel, the surface under it is exactly one
@@ -1536,7 +1546,10 @@
                 fontSize: "calc(var(--tile) * .62)", lineHeight: 1,
                 color: ch2 === "G" ? "rgba(0,0,0,.35)" : undefined,
                 boxShadow: glow ? "0 0 8px 2px rgba(255,196,92,.45)" : undefined,
-                position: (glow || isPlayer || stepFrom || findHere) ? "relative" : undefined,
+                // Each tile places itself on the map (see the world element).
+                // On the plane (part142): named and placed where it lies on it.
+                position: "absolute", left: `calc(var(--tile) * ${x + ox})`, top: `calc(var(--tile) * ${y + oy})`,
+                width: "calc(var(--tile) + 1px)", height: "calc(var(--tile) + 1px)",
                 zIndex: glow ? 2 : isPlayer ? 3 : stepFrom ? 2 : undefined }}>
                 {stepFrom ? (
                   <div className={"wl-from-" + stepFrom} style={{
@@ -1552,11 +1565,18 @@
                 {grassBgImg ? "" : em}
               </div>
             );
-          }))}
+          })), typeof beyondGround === "function" ? beyondGround(S.map, ox, oy, S.x, S.y) : [])}
+          {typeof beyondPics === "function" ? beyondPics(S.map, ox, oy, S.x, S.y) : null}
           {/* Light and shade over the ground (part142). After the tiles and at
               the ranger's tile's level, so it covers her tile too; she herself
               is drawn above it. */}
-          {typeof TerrainShade !== "undefined" ? <TerrainShade mapKey={S.map} /> : null}
+          {typeof TerrainShade !== "undefined" ? <TerrainShade mapKey={S.map} ox={ox} oy={oy} /> : null}
+          {/* Everything below belongs to this map alone, so it is remade when
+              the map changes, as the whole world used to be. */}
+          <div key={"local:" + S.map} style={{ position: "absolute",
+            left: `calc(var(--tile) * ${ox})`, top: `calc(var(--tile) * ${oy})`,
+            width: `calc(var(--tile) * ${W})`, height: `calc(var(--tile) * ${m.rows.length})` }}>
+          <WaterGlint mapKey={S.map} tile={tilePx} />
 
 
           {/* The tile just left, in country that holds a print. Keyed on the
@@ -1905,6 +1925,7 @@
               </div>
             </div>
           )}
+          </div>
         </div>
 
         {/* ---- light on the scene, and the weather's wash, ON THE CAMERA ----
@@ -2949,7 +2970,7 @@
                 {TOWN_LIST.filter(([k]) => S.visited[k]).map(([k, nm]) => (
                   <button key={k} disabled={k === S.map}
                     style={{ ...btn("#5dade2"), width: "100%", marginBottom: 8, opacity: k === S.map ? 0.45 : 1 }}
-                    onClick={() => { SFX.run(); const [lx, ly] = landOf(k); setS((p) => ({ ...p, map: k, x: lx, y: ly, swimming: false, menu: null })); }}>
+                    onClick={() => { SFX.run(); const [lx, ly] = landOf(k); setS((p) => ({ ...p, map: k, x: lx, y: ly, swimming: false, menu: null, warp: (p.warp || 0) + 1 })); }}>
                     {nm}{k === S.map ? " (here)" : ""}
                   </button>
                 ))}
