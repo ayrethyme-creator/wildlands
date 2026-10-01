@@ -1763,16 +1763,27 @@
             const f = followerOf(S);
             if (!f) return null;
             return (
-              <div aria-hidden="true" style={{
+              <div key={"follower:" + S.map + ":" + (S.warp || 0)} aria-hidden="true" style={{
                 position: "absolute", left: 0, top: 0, zIndex: 3, pointerEvents: "none",
                 width: `${100 / W}%`, height: `${100 / m.rows.length}%`,
                 transform: `translate(${f.x * 100}%, ${f.y * 100}%)`,
-                transition: `transform ${Math.round((typeof stepDelay === "function" ? stepDelay() : 165) * 1.25)}ms linear`,
+                // On the ranger's own clock. It was a quarter slower, for a
+                // following-behind lag - but steps come every stepMs, so each
+                // new step cut the slide short and restarted it from wherever it
+                // had got to: a constant stop-start catch-up. Matched, it glides
+                // one tile behind her. (2026-09-30, "needs to be smoothed out".)
+                transition: `transform ${stepMs}ms linear`,
+                // ...and across a seam it gets the ranger's own nudge back, so it
+                // slides on with her rather than appearing a tile ahead.
+                ...(seamSlide ? { animation: `wl-seam ${stepMs}ms linear`, "--sx": -seamSlide[0], "--sy": -seamSlide[1] } : null),
                 display: "flex", alignItems: "flex-end", justifyContent: "center",
               }}>
                 {/* Keyed on the step so the little hop restarts on every
                     footfall, the same way the ranger's stride does. */}
-                <div key={S.step || 0} className="wl-trot" style={{ width: "104%", marginBottom: "-4%" }}>
+                <div key={S.step || 0} className="wl-trot" style={{ width: "104%", marginBottom: "-4%",
+                  // One hop per stride: a fixed 240ms hop restarted mid-bounce on
+                  // every 85ms running step and read as a jitter.
+                  animationDuration: `${Math.max(120, stepMs)}ms` }}>
                   <FollowSprite sp={f.sp} flip={f.flip} />
                 </div>
                 {f.em ? (

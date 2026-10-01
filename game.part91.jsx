@@ -57,11 +57,16 @@ const followerOf = (st) => {
   if (st.buddy === false) return null;
   const a = st.party && st.party[0];
   if (!a || a.hp <= 0 || !DEX[a.sp]) return null;
-  if (st.px == null || st.py == null) return null;
-  if (st.px === st.x && st.py === st.y) return null;
+  // Where it walks: the tile you have just left. When there is none - the
+  // step that crossed onto a new map, or the first moment after a load - it
+  // stands one tile behind you, the way you are facing, instead of vanishing
+  // for a step and popping back (Ayr, 2026-09-30: its movement "needs to be
+  // smoothed out").
+  const behind = { up: [0, 1], down: [0, -1], left: [1, 0], right: [-1, 0] }[st.dir || "down"] || [0, -1];
+  const fresh = st.px == null || st.py == null || (st.px === st.x && st.py === st.y);
   return {
     sp: a.sp,
-    x: st.px, y: st.py,
+    x: fresh ? st.x + behind[0] : st.px, y: fresh ? st.y + behind[1] : st.py,
     // It has just walked into the tile you left, so it is heading the way you
     // are heading. Sprites are drawn facing right, so only leftward travel
     // flips; up and down keep whatever it had.
