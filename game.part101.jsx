@@ -58,6 +58,11 @@ const WAIT_RATE = 3.5;
 const waitingSpot = (st, idleMs) => {
   if (!st || st.screen !== "world") return null;
   if (st.dialog || st.menu || st.battle) return null;
+  // Champions only. Ayr, 2026-10-02: "The stopping in grass attracts animals
+  // should not happen in main game ... only introduced as part of post elite
+  // 4." It was always meant for the endgame roster-hunt (see the top of this
+  // file); in the main game it was a shortcut past the walking.
+  if (!(st.trainersBeaten || {})["summit:7,1"]) return null;
   if (idleMs < WAIT_SETTLE) return null;
 
   const key = st.map;

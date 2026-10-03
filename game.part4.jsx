@@ -2168,7 +2168,10 @@ function Wildlands() {
             snapBusy("Zuri: \"...Okay. Okay! Champion. Say it out loud. SAY IT!\"", {}, "victory");
             snapEnd("🏆 " + EPILOGUE + (firstCompass
               ? "\n\n🧭 Prof. Acacia presses something into your hand: a Champion's Compass. \"Point it anywhere and it'll pull your notice toward whatever you haven't met yet. Toggle it off whenever you'd rather the land surprise you.\""
-              : ""));
+              : "")
+              // The two things that open only now (part89, part101): said once,
+              // here, so they arrive explained rather than out of nowhere.
+              + "\n\n🌿 \"And now that you've seen all of it, it starts to move. Herds and flocks come through in their seasons - the Guide will tell you where. And out of town, if you keep still in the long grass or the water for a while, the animals stop hiding and come to you.\"");
           } else {
             const won = trainerPrize(b.team, b.prize);
             items.coins = (items.coins ?? 0) + won;

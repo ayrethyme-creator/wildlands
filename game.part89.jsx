@@ -190,6 +190,11 @@ const eventForIndex = (seed, idx) => {
 // Where the walking has got to. Null during the quiet stretch between events.
 const eventNow = (st) => {
   if (!st) return null;
+  // Champions only (Ayr, 2026-10-02: the animal events "should be only
+  // introduced as part of post elite 4"). Everything about an event - the
+  // pool, the badge on the map, the Guide's page, the announcement - asks
+  // here first, so this one line keeps all of it out of the main game.
+  if (!(st.trainersBeaten || {})["summit:7,1"]) return null;
   const steps = st.steps || 0;
   const idx = Math.floor(steps / EV_CYCLE);
   if (steps % EV_CYCLE >= EV_RUN) return null;         // the quiet between
